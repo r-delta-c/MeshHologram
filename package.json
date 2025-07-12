@@ -9,7 +9,7 @@
         "name": "DeltaField"
     },
     "license": "MIT",
-    "licenseUrl": "",
+    "licenseUrl": "https://github.com/r-delta-c/MeshHologram/blob/main/LICENSE.md",
     "dependencies": {
         "com.deltafield.shader_commons":"1.0.0"
     },
