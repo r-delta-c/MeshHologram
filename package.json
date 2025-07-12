@@ -1,0 +1,19 @@
+{
+    "name": "com.deltafield.meshhologram",
+    "displayName": "MeshHologram",
+    "version": "0.0.0",
+    "unity": "2022.3",
+    "description": "Advanced Wireframe Shader",
+    "keywords": ["shader", "material", "hlsl", "vr", "xr"],
+    "author": {
+        "name": "DeltaField"
+    },
+    "license": "MIT",
+    "licenseUrl": "",
+    "dependencies": {
+        "com.deltafield.shader_commons":"1.0.0"
+    },
+    "vpmDependencies":{
+        "com.deltafield.shader_commons":"1.0.0"
+    }
+}

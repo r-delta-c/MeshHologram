@@ -1,0 +1,244 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AL_Creeper
+  m_Shader: {fileID: 4800000, guid: 8e1a1ea0eaffb904d94d9abaccb340af, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _AUDIOLINKVUBAND_BASS
+  - _COLORINGPARTITIONTYPE_SIDE
+  - _COLORINGSOURCE_NOISE1ST
+  - _COLORSOURCE_GRADIENT
+  - _FRAGMENTSOURCE_NOISE1ST
+  - _GEOMETRYMESSYREFERENCETIME_SHADERTIME
+  - _GEOMETRYMESSYSOURCE_NOISE2ND
+  - _GEOMETRYPUSHPULLE_SCALING
+  - _GEOMETRYSOURCE_NOISE3RD
+  - _LINEFADEMODE_POWERZOOMIN
+  - _NOISE1STPHASEREFAUDIOLINK_CHRONOTENSITY
+  - _NOISE1STREFERENCETIME_SHADERTIME
+  - _NOISE1STSPACE_MODEL
+  - _NOISE2NDPHASEREFAUDIOLINK_DISABLE
+  - _NOISE2NDREFERENCETIME_SHADERTIME
+  - _NOISE2NDSPACE_MODEL
+  - _NOISE2ND_CURVE_INVERSE
+  - _NOISE3RDPHASEREFAUDIOLINK_VU
+  - _NOISE3RDREFERENCETIME_SHADERTIME
+  - _NOISE3RDSPACE_MODEL
+  - _ORBITROTATIONREFAUDIOLINK_DISABLE
+  - _PARTITIONTYPE_VERTEX
+  - _PIXELIZATIONSPACE_DISABLE
+  - _STEREOMERGEMODE_ROTATION
+  - _USE_AUDIOLINK
+  - _USE_FWIDTH
+  m_InvalidKeywords:
+  - _
+  - _ALPHATOMASK_OFF
+  - _FORCED_Z_SCALE_ZERO_ON
+  - _RENDERINGMODE_TRANSPARENT
+  - _ZCLIP_ON
+  - _ZWRITE_OFF
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap: {}
+  disabledShaderPasses:
+  - SHADOWCASTER
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AudioLinkMaskControlTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorGradientTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColoringMaskControlTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FragmentMaskControlTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GeometryMaskControlTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GeometryMessyMaskControlTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise1stMaskControlTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise2ndMaskControlTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise3rdMaskControlTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ActivateAmbientInfluence: 0
+    - _ActivateDirectionalLightInfluence: 0
+    - _ActivateLightVolumesInfluence: 0
+    - _AlphaToMask: 0
+    - _AlphaToMaskMemory: 0
+    - _AmbientInfluence: 1
+    - _AudioLinkChronoTensityBand: 0
+    - _AudioLinkChronoTensityScale: 300000
+    - _AudioLinkChronoTensityType: 0
+    - _AudioLinkMaskControl: 1
+    - _AudioLinkThemeColorBand: 0
+    - _AudioLinkVUBand: 0
+    - _AudioLinkVUGainAdd: 0
+    - _AudioLinkVUGainMul: 6
+    - _AudioLinkVUPanning: 0.5
+    - _AudioLinkVUSmooth: 6
+    - _BillboardMode: 0
+    - _BlendOp: 0
+    - _BlendOpAlpha: 0
+    - _ColorMask: 15
+    - _ColorSource: 0
+    - _ColoringMaskControl: 1
+    - _ColoringPartitionType: 1
+    - _ColoringSource: 1
+    - _ColoringValue: 0
+    - _Cull: 0
+    - _CustomRenderQueueC: 2001
+    - _CustomRenderQueueT: 3000
+    - _DirectionalLightInfluence: 1
+    - _DistanceInfluence: 1
+    - _DstBlend: 10
+    - _DstBlendAlpha: 10
+    - _Emission: 1
+    - _Fill: 0
+    - _Forced_Z_Scale_Zero: 1
+    - _FragmentMaskControl: 1
+    - _FragmentSource: 1
+    - _FragmentValue: 1
+    - _GeometryMaskControl: 1
+    - _GeometryMessyMaskControl: 1
+    - _GeometryMessyOrbitRotation: 0
+    - _GeometryMessyOrbitRotationForward: 0
+    - _GeometryMessyOrbitRotationRight: 0
+    - _GeometryMessyOrbitScaleY: 0.5
+    - _GeometryMessyOrbitScaleZ: 0.5
+    - _GeometryMessyReferenceTime: 0
+    - _GeometryMessySeed: 0
+    - _GeometryMessySource: 3
+    - _GeometryMessyToggle: 0
+    - _GeometryMessyValue: 0
+    - _GeometryPartitionBias: 0.5
+    - _GeometryPushPull: 0.25
+    - _GeometryPushPullBias: 0.5
+    - _GeometryPushPullE: 1
+    - _GeometrySource: 3
+    - _GeometryValue: 0
+    - _LightVolumesInfluence: 1
+    - _LineFadeMode: 4
+    - _LineGradientBias: -0.75
+    - _LineScale: 1
+    - _LineWidth: 5
+    - _Noise1stCurveType: 0
+    - _Noise1stMaskControl: 1
+    - _Noise1stOffsetBeforeScale: 0
+    - _Noise1stPhaseRefAudioLink: 2
+    - _Noise1stPhaseScale: 3
+    - _Noise1stReferenceTime: 0
+    - _Noise1stSeed: 0
+    - _Noise1stSpace: 1
+    - _Noise1stThresholdAdd: 0
+    - _Noise1stThresholdMul: 2
+    - _Noise1stTimeMulti: 0
+    - _Noise1stTimePhase: 0
+    - _Noise1stValueCurve: 4
+    - _Noise2ndCurveType: 1
+    - _Noise2ndMaskControl: 1
+    - _Noise2ndOffsetBeforeScale: 0
+    - _Noise2ndPhaseRefAudioLink: 0
+    - _Noise2ndPhaseScale: 3
+    - _Noise2ndReferenceTime: 0
+    - _Noise2ndSeed: 1
+    - _Noise2ndSpace: 1
+    - _Noise2ndThresholdAdd: 0
+    - _Noise2ndThresholdMul: 1
+    - _Noise2ndTimeMulti: 5
+    - _Noise2ndTimePhase: 0
+    - _Noise2ndValueCurve: 1
+    - _Noise3rdCurveType: 0
+    - _Noise3rdMaskControl: 1
+    - _Noise3rdOffsetBeforeScale: 0
+    - _Noise3rdPhaseRefAudioLink: 1
+    - _Noise3rdPhaseScale: 3
+    - _Noise3rdReferenceTime: 0
+    - _Noise3rdSeed: 2
+    - _Noise3rdSpace: 1
+    - _Noise3rdThresholdAdd: 0
+    - _Noise3rdThresholdMul: 1
+    - _Noise3rdTimeMulti: 3
+    - _Noise3rdTimePhase: 0
+    - _Noise3rdValueCurve: 3
+    - _OffsetFactor: 0
+    - _OffsetUnits: 0
+    - _OrbitRotationRefAudioLink: 0
+    - _PartitionType: 0
+    - _Pixelization: 0.02
+    - _PixelizationSpace: 0
+    - _PreviewMode: 0
+    - _RenderingMode: 0
+    - _SrcBlend: 5
+    - _SrcBlendAlpha: 5
+    - _StencilComp: 8
+    - _StencilFail: 0
+    - _StencilPass: 0
+    - _StencilReadMask: 255
+    - _StencilRef: 0
+    - _StencilWriteMask: 255
+    - _StencilZFail: 0
+    - _StereoMergeMode: 2
+    - _TriangleComp: 3
+    - _UseAudioLink: 1
+    - _UseFwidth: 1
+    - _ZClip: 1
+    - _ZTest: 4
+    - _ZWrite: 0
+    m_Colors:
+    - _Color0: {r: 0.019725561, g: 1, b: 0, a: 1}
+    - _Color1: {r: 0.8037735, g: 0.8037735, b: 0.8037735, a: 1}
+    - _GeometryMessyOrbitAudioLinkStrength: {r: 1, g: 0, b: 0, a: 1}
+    - _GeometryMessyOrbitPosition: {r: 0, g: 0, b: 0, a: 0.157}
+    - _GeometryMessyOrbitVariance: {r: 1, g: 0, b: 0, a: 1}
+    - _GeometryMessyTimeMultiplier: {r: 4, g: 2, b: 0, a: 1}
+    - _Noise1stOffset0: {r: 0, g: 0, b: 0, a: 0}
+    - _Noise1stOffset1: {r: 0, g: 0, b: 0, a: 0}
+    - _Noise1stScale0: {r: 1, g: 1, b: 1, a: 3}
+    - _Noise1stScale1: {r: 1, g: 1, b: 1, a: 1}
+    - _Noise2ndOffset0: {r: 0, g: 0, b: 0, a: 0}
+    - _Noise2ndOffset1: {r: 0, g: 0, b: 0, a: 0}
+    - _Noise2ndScale0: {r: 1, g: 1, b: 1, a: 5}
+    - _Noise2ndScale1: {r: 1, g: 1, b: 1, a: 1}
+    - _Noise3rdOffset0: {r: 0, g: 0, b: 0, a: 0}
+    - _Noise3rdOffset1: {r: 0, g: 0, b: 0, a: 0}
+    - _Noise3rdScale0: {r: 1, g: 1, b: 1, a: 5}
+    - _Noise3rdScale1: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

@@ -1,0 +1,30 @@
+label.language||Language||言語
+label.general||General||基本設定
+label.rendering||Rendering||レンダリング
+label.rendering_other||Other Rendering||その他のレンダリング設定
+label.stencil||Stencil||ステンシル
+label.audiolink||AudioLink||AudioLink
+label.main||Main||メイン
+label.fragment||Fragment||フラグメント
+label.color||Color||カラー
+label.geometry||Geometry||ジオメトリ
+
+label.color.preview||Preview||プレビュー
+label.color.export||Export||エクスポート
+
+label.messy_orbit||Messy/Orbit||Messy/Orbit
+label.noise1st_properties||Noise 1st Properties||Noise 1st プロパティ
+label.noise2nd_properties||Noise 2nd Properties||Noise 2nd プロパティ
+label.noise3rd_properties||Noise 3rd Properties||Noise 3rd プロパティ
+label.others||Others||その他
+label.remove_unused_properties||Remove Unused Properties||内部の未使用プロパティの削除
+label.texture_properties||Texture Properties||テクスチャプロパティ
+label.all_properties||All Properties||全てのプロパティ
+label.title_skin||Title Skin||タイトルスキン
+
+text.remove_texture_properties_text||Remove any unused texture properties in material.||マテリアル内部の未使用テクスチャプロパティを削除します。
+text.remove_all_properties_text||Remove any unused properties in material.||マテリアル内部の全ての未使用プロパティを削除します。
+text.remove||Remove||削除
+text.cancel||Cancel||キャンセル
+
+label.meshboundseditor.button||Open Mesh Bounds Editor||Mesh Bounds Editorを開く
