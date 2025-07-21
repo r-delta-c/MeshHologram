@@ -166,7 +166,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             Guide = GameObject.CreatePrimitive(PrimitiveType.Cube);
             Guide.name = "BoundGuide(DON'T DELETE!)";
             Guide.transform.SetParent(Target.transform);
-            Material guide_m = new Material(Shader.Find("DeltaField/shaders/MeshHologram/bounds_guide"));
+            Material guide_m = new Material(Shader.Find("DeltaField/shaders/debugs/bounds_guide"));
             guide_m.renderQueue = 3999;
             Guide.GetComponent<Renderer>().sharedMaterial = guide_m;
             Guide.transform.localPosition = bounds.center;

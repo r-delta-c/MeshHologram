@@ -1,4 +1,4 @@
-Shader "DeltaField/shaders/MeshHologram/bounds_guide"{
+Shader "DeltaField/shaders/debugs/bounds_guide"{
     Properties{}
     SubShader{
         Pass{
