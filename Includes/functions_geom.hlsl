@@ -192,21 +192,21 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             #endif
         #elif _GEOMETRYPUSHPULLE_NORMAL_EXTRUDE
             #if defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE3RD)
-                geometry_pos[0] = geometry_pos[0]+GeometryNoiseMap01(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0))*_GeometryPushPull*_GeometryPushPullBias*inp[0].normal;
-                geometry_pos[1] = geometry_pos[1]+GeometryNoiseMap01(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1))*_GeometryPushPull*_GeometryPushPullBias*inp[1].normal;
-                geometry_pos[2] = geometry_pos[2]+GeometryNoiseMap01(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2))*_GeometryPushPull*_GeometryPushPullBias*inp[2].normal;
+                geometry_pos[0] = geometry_pos[0]+GeometryNoiseMap01(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0))*_GeometryPushPull*_GeometryPushPullBias*inp[0].world_normal;
+                geometry_pos[1] = geometry_pos[1]+GeometryNoiseMap01(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1))*_GeometryPushPull*_GeometryPushPullBias*inp[1].world_normal;
+                geometry_pos[2] = geometry_pos[2]+GeometryNoiseMap01(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2))*_GeometryPushPull*_GeometryPushPullBias*inp[2].world_normal;
             #elif defined(_USE_AUDIOLINK) && _GEOMETRYSOURCE_AUDIOLINK_VU
-                geometry_pos[0] = geometry_pos[0]+AUDIOLINK_FILTERED*audiolink_mask[0]*_GeometryPushPull*_GeometryPushPullBias*inp[0].normal;
-                geometry_pos[1] = geometry_pos[1]+AUDIOLINK_FILTERED*audiolink_mask[1]*_GeometryPushPull*_GeometryPushPullBias*inp[1].normal;
-                geometry_pos[2] = geometry_pos[2]+AUDIOLINK_FILTERED*audiolink_mask[2]*_GeometryPushPull*_GeometryPushPullBias*inp[2].normal;
+                geometry_pos[0] = geometry_pos[0]+AUDIOLINK_FILTERED*audiolink_mask[0]*_GeometryPushPull*_GeometryPushPullBias*inp[0].world_normal;
+                geometry_pos[1] = geometry_pos[1]+AUDIOLINK_FILTERED*audiolink_mask[1]*_GeometryPushPull*_GeometryPushPullBias*inp[1].world_normal;
+                geometry_pos[2] = geometry_pos[2]+AUDIOLINK_FILTERED*audiolink_mask[2]*_GeometryPushPull*_GeometryPushPullBias*inp[2].world_normal;
             #elif defined(_USE_AUDIOLINK) && _GEOMETRYSOURCE_AUDIOLINK_CHRONOTENSITY
-                geometry_pos[0] = geometry_pos[0]+triloop(AUDIOLINK_CHRONOTENSITY*audiolink_mask[0])*inp[0].normal*_GeometryPushPull*_GeometryPushPullBias;
-                geometry_pos[1] = geometry_pos[1]+triloop(AUDIOLINK_CHRONOTENSITY*audiolink_mask[1])*inp[1].normal*_GeometryPushPull*_GeometryPushPullBias;
-                geometry_pos[2] = geometry_pos[2]+triloop(AUDIOLINK_CHRONOTENSITY*audiolink_mask[2])*inp[2].normal*_GeometryPushPull*_GeometryPushPullBias;
+                geometry_pos[0] = geometry_pos[0]+triloop(AUDIOLINK_CHRONOTENSITY*audiolink_mask[0])*inp[0].world_normal*_GeometryPushPull*_GeometryPushPullBias;
+                geometry_pos[1] = geometry_pos[1]+triloop(AUDIOLINK_CHRONOTENSITY*audiolink_mask[1])*inp[1].world_normal*_GeometryPushPull*_GeometryPushPullBias;
+                geometry_pos[2] = geometry_pos[2]+triloop(AUDIOLINK_CHRONOTENSITY*audiolink_mask[2])*inp[2].world_normal*_GeometryPushPull*_GeometryPushPullBias;
             #else
-                geometry_pos[0] = geometry_pos[0]+_GeometryValue*inp[0].normal*_GeometryPushPull*_GeometryPushPullBias;
-                geometry_pos[1] = geometry_pos[1]+_GeometryValue*inp[1].normal*_GeometryPushPull*_GeometryPushPullBias;
-                geometry_pos[2] = geometry_pos[2]+_GeometryValue*inp[2].normal*_GeometryPushPull*_GeometryPushPullBias;
+                geometry_pos[0] = geometry_pos[0]+_GeometryValue*inp[0].world_normal*_GeometryPushPull*_GeometryPushPullBias;
+                geometry_pos[1] = geometry_pos[1]+_GeometryValue*inp[1].world_normal*_GeometryPushPull*_GeometryPushPullBias;
+                geometry_pos[2] = geometry_pos[2]+_GeometryValue*inp[2].world_normal*_GeometryPushPull*_GeometryPushPullBias;
             #endif
         #endif
 
