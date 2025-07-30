@@ -215,7 +215,7 @@ Material:
     - _StencilWriteMask: 255
     - _StencilZFail: 0
     - _StereoMergeMode: 2
-    - _TriangleComp: 10
+    - _TriangleComp: 5
     - _UseAudioLink: 0
     - _UseFwidth: 1
     - _ZClip: 1
