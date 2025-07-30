@@ -576,6 +576,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MASK_CONTROL_TEX);
                         DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MASK_CONTROL);
                         EditorGUILayout.Space(16);
+                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PARTITION_BIAS);
+                        EditorGUILayout.Space(16);
                         DrawShaderProperty(SHADER_PROPERTY._PIXELIZATION_SPACE);
                         DrawShaderProperty(SHADER_PROPERTY._PIXELIZATION);
                         EditorGUILayout.Space(16);
