@@ -1,6 +1,6 @@
 # THIRD-PARTY-NOTICES
 
-This package includes third-party libraries that are governed by their respective licenses.
+### The following package includes third-party libraries that are governed by their respective licenses.
 
 ## AudioLink
 
@@ -56,7 +56,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-This software components was used as a reference in creating this package.
+- - -
+
+### The following software components was used as a reference in creating this package.
 
 ## lilToon
 
