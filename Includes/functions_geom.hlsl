@@ -6,6 +6,12 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(inp[1])
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(inp[2])
 
+    float3 scale = float3(
+        length(UNITY_MATRIX_M._m00_m01_m02),
+        length(UNITY_MATRIX_M._m10_m11_m12),
+        length(UNITY_MATRIX_M._m20_m21_m22)
+    );
+
     float fragment_mask[3];
     float coloring_mask[3];
     float geometry_mask[3];
@@ -274,7 +280,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         matrix_v[i] = float4x4(inp[i].matrix_v_0,inp[i].matrix_v_1,inp[i].matrix_v_2,0.0,0.0,0.0,1.0);
 
         #ifdef _PIXELIZATIONSPACE_POSTGEOMETRY
-            geometry_pos[i] = Pixelization(geometry_pos[i]);
+            geometry_pos[i] = Pixelization(geometry_pos[i],(scale));
         #endif
 
         SWITCH_SHADE_WORLDPOS_MACRO world_pos[i] = geometry_pos[i];

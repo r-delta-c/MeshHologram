@@ -125,7 +125,7 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         [KeywordEnum(Disable,Model,World,PostGeometry)]
         _PixelizationSpace("Vertex Pixelization Position Space",Int)=0
-        _Pixelization("Vertex Pixelization",Float)=0.02
+        _Pixelization("Vertex Pixelization",Vector)=(1.0,1.0,1.0,0.02)
 
 
 

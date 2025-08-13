@@ -25,11 +25,11 @@
 #endif
 
 #ifdef _PIXELIZATIONSPACE_MODEL
-    #define VERTEX_PIXELIZATION_MODEL_MACRO v.pos.xyz = Pixelization(v.pos.xyz)
+    #define VERTEX_PIXELIZATION_MODEL_MACRO v.pos.xyz = Pixelization(v.pos.xyz, float3(1.0,1.0,1.0))
     #define VERTEX_PIXELIZATION_WORLD_MACRO //
-#elif defined(_PIXELIZATIONSPACE_WORLD) || defined(_PIXELIZATIONSPACE_POSTGEOMETRY)
+#elif defined(_PIXELIZATIONSPACE_WORLD)
     #define VERTEX_PIXELIZATION_MODEL_MACRO //
-    #define VERTEX_PIXELIZATION_WORLD_MACRO o.pos.xyz = Pixelization(o.pos.xyz)
+    #define VERTEX_PIXELIZATION_WORLD_MACRO o.pos.xyz = Pixelization(o.pos.xyz, scale)
 #else
     #define VERTEX_PIXELIZATION_MODEL_MACRO
     #define VERTEX_PIXELIZATION_WORLD_MACRO

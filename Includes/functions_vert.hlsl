@@ -7,6 +7,11 @@ v2f vert (appdata v){
     o.uv = v.uv;
     o.normal = v.normal;
     float4x4 Stereo_Merge_Matrix_V = DEFINE_STEREO_MERGE_MATRIX_V;
+    float3 scale = float3(
+        length(UNITY_MATRIX_M._m00_m01_m02),
+        length(UNITY_MATRIX_M._m10_m11_m12),
+        length(UNITY_MATRIX_M._m20_m21_m22)
+    );
     #ifdef _BILLBOARD_MODE
         o.alpha = 1.0;
         float4x4 Billboard_Matrix_M = {
@@ -16,10 +21,10 @@ v2f vert (appdata v){
             0.0,0.0,0.0,1.0
         };
 
-        Billboard_Matrix_M._m00_m10_m20 = Stereo_Merge_Matrix_V[0].xyz*length(unity_ObjectToWorld._m00_m10_m20);
-        Billboard_Matrix_M._m01_m11_m21 = Stereo_Merge_Matrix_V[1].xyz*length(unity_ObjectToWorld._m01_m11_m21);
-        Billboard_Matrix_M._m02_m12_m22 = -Stereo_Merge_Matrix_V[2].xyz*length(unity_ObjectToWorld._m02_m12_m22)*(1.0-_Forced_Z_Scale_Zero);
-        Billboard_Matrix_M._m03_m13_m23 = unity_ObjectToWorld._m03_m13_m23;
+        Billboard_Matrix_M._m00_m10_m20 = Stereo_Merge_Matrix_V[0].xyz*scale.x;
+        Billboard_Matrix_M._m01_m11_m21 = Stereo_Merge_Matrix_V[1].xyz*scale.y;
+        Billboard_Matrix_M._m02_m12_m22 = -Stereo_Merge_Matrix_V[2].xyz*scale.z*(1.0-_Forced_Z_Scale_Zero);
+        Billboard_Matrix_M._m03_m13_m23 = UNITY_MATRIX_M._m03_m13_m23;
 
         VERTEX_PIXELIZATION_MODEL_MACRO;
         o.pos = mul(Billboard_Matrix_M,v.pos);
