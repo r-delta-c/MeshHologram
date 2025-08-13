@@ -224,28 +224,34 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
                 orbit_anim.xy += GeometryMessyNoiseMap01(geometrymessy_center_noise,geometrymessy_mask_offset)*_GeometryMessyOrbitVariance.xy;
                 orbit_anim.z = sin(GeometryMessyNoiseMap01(geometrymessy_center_noise,geometrymessy_mask_offset)*_GeometryMessyOrbitVariance.z+orbit_anim.z)*_GeometryMessyOrbitVariance.w;
             #elif defined(_GEOMETRYMESSYSOURCE_PRIMITIVE)
-                orbit_anim.xy += random(id+_GeometryMessySeed)*_GeometryMessyOrbitVariance.xy;
-                orbit_anim.z = sin(random(id+_GeometryMessySeed)*_GeometryMessyOrbitVariance.z+orbit_anim.z)*_GeometryMessyOrbitVariance.w;
+                orbit_anim.xyz += random(id+_GeometryMessySeed)*_GeometryMessyOrbitVariance.xyz;
             #else
                 orbit_anim.xy += _GeometryMessyOrbitVariance.xy;
                 orbit_anim.z = sin(_GeometryMessyOrbitVariance.z+orbit_anim.z)*_GeometryMessyOrbitVariance.w;
             #endif
 
-            float3 orbit_dir = cos(orbit_anim.x+dir_pi2.x)*inp[0].forward_dir*_GeometryMessyOrbitScaleZ + sin(orbit_anim.x+dir_pi2.x)*inp[0].up_dir*_GeometryMessyOrbitScaleY;
+            float3 orbit_wave = float3(
+                sin((orbit_anim.x+_GeometryMessyOrbitWaveZPhase+GEOMETRY_ORBIT_Z_TIME_MACRO)*_GeometryMessyOrbitWaveZFrequency)*_GeometryMessyOrbitWaveZStrength,
+                sin((orbit_anim.x+_GeometryMessyOrbitWaveXYPhase+GEOMETRY_ORBIT_XY_TIME_MACRO)*_GeometryMessyOrbitWaveXYFrequency)*_GeometryMessyOrbitWaveXYStrength,
+                cos((orbit_anim.x+_GeometryMessyOrbitWaveXYPhase+GEOMETRY_ORBIT_XY_TIME_MACRO)*_GeometryMessyOrbitWaveXYFrequency)*_GeometryMessyOrbitWaveXYStrength
+            );
+            orbit_anim += dir_pi2;
+
+            float3 orbit_dir = cos(orbit_anim.x)*inp[0].forward_dir*_GeometryMessyOrbitScaleZ + sin(orbit_anim.x)*inp[0].up_dir*_GeometryMessyOrbitScaleY;
+            orbit_dir *= _GeometryMessyOrbitPosition.w+scale-1.0;
+            orbit_dir += mul(UNITY_MATRIX_M,float4(orbit_wave*_GeometryMessyOrbitPosition.w,1.0));
             float3 right_dir = normalize(cross(inp[0].forward_dir,inp[0].up_dir));
-
-            float2 s = float2(sin(dir_pi2.y+orbit_anim.y),sin(dir_pi2.z+orbit_anim.z));
-            float2 c = float2(cos(dir_pi2.y+orbit_anim.y),cos(dir_pi2.z+orbit_anim.z));
-
+            
+            float3 s = float3(sin(orbit_anim.y),sin(orbit_anim.z),sin(orbit_anim.x));
+            float3 c = float3(cos(orbit_anim.y),cos(orbit_anim.z),cos(orbit_anim.x));
+            
             orbit_dir = orbit_dir*c.x + cross(inp[0].forward_dir,orbit_dir)*s.x + inp[0].forward_dir*dot(inp[0].forward_dir,orbit_dir)*(1.0-c.x);
 
             orbit_dir = orbit_dir*c.y + cross(right_dir,orbit_dir)*s.y + right_dir*dot(right_dir,orbit_dir)*(1.0-c.y);
 
-            orbit_dir *= _GeometryMessyOrbitPosition.w;
-
-            orbit[0] = orbit[0]+mul(UNITY_MATRIX_M,float4(orbit_dir,1.0));
-            orbit[1] = orbit[1]+mul(UNITY_MATRIX_M,float4(orbit_dir,1.0));
-            orbit[2] = orbit[2]+mul(UNITY_MATRIX_M,float4(orbit_dir,1.0));
+            orbit[0] = orbit[0]+orbit_dir;
+            orbit[1] = orbit[1]+orbit_dir;
+            orbit[2] = orbit[2]+orbit_dir;
 
             #if defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE3RD)
                 geometry_pos[0] = lerp(geometry_pos[0],orbit[0],GeometryNoiseMap01(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0))*geometry_messy_mask[0]);
