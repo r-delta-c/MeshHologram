@@ -77,7 +77,7 @@ float _GeometryMessyOrbitWaveZPhase;
 float _GeometryMessyOrbitWaveZTimeMultiplier;
 
 float _GeometryPartitionBias;
-float _Pixelization;
+float4 _Pixelization;
 
 #if defined(_FRAGMENTSOURCE_NOISE1ST) || defined(_COLORINGSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_GEOMETRYMESSYSOURCE_NOISE1ST)
     float3 _Noise1stOffset0;
