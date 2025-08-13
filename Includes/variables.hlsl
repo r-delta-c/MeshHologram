@@ -63,7 +63,18 @@ float4 _GeometryMessyOrbitPosition;
 float _GeometryMessyOrbitScaleY;
 float _GeometryMessyOrbitScaleZ;
 float4 _GeometryMessyOrbitVariance;
-float4 _GeometryMessyTimeMultiplier;
+
+float4 _GeometryMessyOrbitRotationPhase;
+float4 _GeometryMessyOrbitRotationTimeMultiplier;
+
+float _GeometryMessyOrbitWaveXYStrength;
+float _GeometryMessyOrbitWaveXYFrequency;
+float _GeometryMessyOrbitWaveXYPhase;
+float _GeometryMessyOrbitWaveXYTimeMultiplier;
+float _GeometryMessyOrbitWaveZStrength;
+float _GeometryMessyOrbitWaveZFrequency;
+float _GeometryMessyOrbitWaveZPhase;
+float _GeometryMessyOrbitWaveZTimeMultiplier;
 
 float _GeometryPartitionBias;
 float _Pixelization;

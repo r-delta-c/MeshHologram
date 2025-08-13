@@ -98,20 +98,31 @@ Shader "DeltaField/shaders/MeshHologram"{
         _GeometryMessyOrbitRotationForward("Messy Orbit Rotation Forward",Float)=0.0
         _GeometryMessyOrbitRotationRight("Messy Orbit Rotation Right",Float)=0.0
         _GeometryMessyOrbitPosition("Messy Orbit Position",Vector)=(0.0,0.0,0.0,0.157)
+        _GeometryMessyOrbitScale("Messy Orbit Scale",Vector)=(0.5,0.5,0.0,0.157)
         _GeometryMessyOrbitScaleY("Messy Orbit Scale Y",Range(-8.0,8.0))=0.5
         _GeometryMessyOrbitScaleZ("Messy Orbit Scale Z",Range(-8.0,8.0))=0.5
 
         _GeometryMessyOrbitVariance("Messy Orbit Variance",Vector)=(1.0,0.0,0.0,1.0)
-
-        _GeometryMessyTimeMultiplier("Orbit Rotation Time Multiplier",Vector)=(4.0,2.0,0.0,1.0)
         [KeywordEnum(ShaderTime,Manual)]
         _GeometryMessyReferenceTime("Orbit Rotation Reference Time",Int)=0
+
+        _GeometryMessyOrbitRotationPhase("Orbit Rotation Phase",Vector)=(0.0,0.0,0.0,0.0)
+        _GeometryMessyOrbitRotationTimeMultiplier("Orbit Rotation Time Multiplier",Vector)=(4.0,2.0,0.0,1.0)
+        _GeometryMessyOrbitWaveXYStrength("Orbit Wave XY Strength",Float)=0.0
+        _GeometryMessyOrbitWaveXYFrequency("Orbit Wave XY Frequency",Float)=0.0
+        _GeometryMessyOrbitWaveXYPhase("Orbit Wave XY Phase",Float)=0.0
+        _GeometryMessyOrbitWaveXYTimeMultiplier("Orbit Wave XY Time Multiplier",Float)=1.0
+        _GeometryMessyOrbitWaveZStrength("Orbit Wave Z Strength",Float)=0.0
+        _GeometryMessyOrbitWaveZFrequency("Orbit Wave Z Frequency",Float)=0.0
+        _GeometryMessyOrbitWaveZPhase("Orbit Wave Z Phase",Float)=0.0
+        _GeometryMessyOrbitWaveZTimeMultiplier("Orbit Wave Z Time Multiplier",Float)=1.0
 
         [KeywordEnum(Disable,VU,ChronoTensity)]
         _OrbitRotationRefAudioLink("Orbit Rotation Reference AudioLink",Int)=0
         _GeometryMessyOrbitAudioLinkStrength("Orbit Rotation AudioLink Strength",Vector)=(1.0,0.0,0.0,1.0)
 
         _GeometryPartitionBias("Geometry Partition Bias| Vertex <=> Center",Range(0.0,1.0))=0.5
+
         [KeywordEnum(Disable,Model,World,PostGeometry)]
         _PixelizationSpace("Vertex Pixelization Position Space",Int)=0
         _Pixelization("Vertex Pixelization",Float)=0.02
@@ -236,7 +247,6 @@ Shader "DeltaField/shaders/MeshHologram"{
         _MainTex("Fallback Texture",2D)="(1.0,1.0,1.0,0.25)" {}
     }
     SubShader{
-        Tags{"Queue"="Transparent"}
         Pass{
             Name "DepthWrite"
             Tags{ "RenderType"="Opaque" "Queue"="Geometry" "LightMode"="ShadowCaster"}
