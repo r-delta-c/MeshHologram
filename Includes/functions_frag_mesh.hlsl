@@ -6,7 +6,7 @@
 #endif
 
 #if defined(_ACTIVATE_AMBIENT_INFLUENCE) && !defined(_ACTIVATE_LIGHTVOLUMES)
-    float3 ambient = saturate(ShadeSH9(float4(i.normal,1.0)));
+    float3 ambient = saturate(ShadeSH9(float4(i.world_normal,1.0)));
 
     c.rgb += ambient*_AmbientInfluence;
 #elif defined(_ACTIVATE_LIGHTVOLUMES)
