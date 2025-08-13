@@ -1,6 +1,6 @@
 struct appdata{
     float4 pos : POSITION;
-    fixed4 color : COLOR;
+    float4 color : COLOR;
     float3 normal : NORMAL;
     float2 uv : TEXCOORD0;
 
@@ -16,8 +16,8 @@ struct v2f{
     SWITCH_SHADE_WORLDPOS_MACRO float3 world_pos : TEXCOORD4;
     float3 origin_pos : TEXCOORD5;
 
-    fixed4 vertex_color : TEXCOORD6;
-    fixed alpha : TEXCOORD7;
+    float4 vertex_color : TEXCOORD6;
+    float alpha : TEXCOORD7;
     float3 forward_dir : TEXCOORD8;
     float3 up_dir : TEXCOORD9;
 
@@ -43,8 +43,8 @@ struct g2f{
     fixed alpha :TEXCOORD7;
     float camera_distance : TEXCOORD8;
 
-    float3 normal : NORMAL0;
-    SWITCH_WORLDNORMAL_MACRO float3 world_normal : NORMAL1;
+    float3 normal : TEXCOORD9;
+    SWITCH_WORLDNORMAL_MACRO float3 world_normal : TEXCOORD10;
 
     UNITY_LIGHTING_COORDS(14,15)
 
