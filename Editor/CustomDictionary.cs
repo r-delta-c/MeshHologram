@@ -400,8 +400,35 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_VARIANCE,new ShaderPropertyState(
                     "_GeometryMessyOrbitVariance", "Messy Orbit Variance")
                 },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_TIME_MULTIPLIER,new ShaderPropertyState(
-                    "_GeometryMessyTimeMultiplier", "Orbit Rotation Time Multiplier")
+                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_ROTATION_PHASE,new ShaderPropertyState(
+                    "_GeometryMessyOrbitRotationPhase", "Orbit Rotation Phase")
+                },
+                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_ROTATION_TIME_MULTIPLIER,new ShaderPropertyState(
+                    "_GeometryMessyOrbitRotationTimeMultiplier", "Orbit Rotation Time Multiplier")
+                },
+                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_XY_STRENGTH,new ShaderPropertyState(
+                    "_GeometryMessyOrbitWaveXYStrength", "Orbit Wave XY Strength")
+                },
+                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_XY_FREQUENCY,new ShaderPropertyState(
+                    "_GeometryMessyOrbitWaveXYFrequency", "Orbit Wave XY Frequency")
+                },
+                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_XY_PHASE,new ShaderPropertyState(
+                    "_GeometryMessyOrbitWaveXYPhase", "Orbit Wave XY Phase")
+                },
+                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_XY_TIME_MULTIPLIER,new ShaderPropertyState(
+                    "_GeometryMessyOrbitWaveXYTimeMultiplier", "Orbit Wave XY Time Multiplier")
+                },
+                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_Z_STRENGTH,new ShaderPropertyState(
+                    "_GeometryMessyOrbitWaveZStrength", "Orbit Wave Z Strength")
+                },
+                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_Z_FREQUENCY,new ShaderPropertyState(
+                    "_GeometryMessyOrbitWaveZFrequency", "Orbit Wave Z Frequency")
+                },
+                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_Z_PHASE,new ShaderPropertyState(
+                    "_GeometryMessyOrbitWaveZPhase", "Orbit Wave Z Phase")
+                },
+                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_Z_TIME_MULTIPLIER,new ShaderPropertyState(
+                    "_GeometryMessyOrbitWaveZTimeMultiplier", "Orbit Wave Z Time Multiplier")
                 },
                 {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_REFERENCE_TIME,new ShaderPropertyState(
                     "_GeometryMessyReferenceTime", "Orbit Rotation Reference Time")
