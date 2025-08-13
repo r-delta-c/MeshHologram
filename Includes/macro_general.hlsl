@@ -16,6 +16,12 @@
     #define STRUCT_VERTEXCOLOR_MACRO //
 #endif
 
+#ifdef _GEOMETRYMESSYREFERENCETIME_SHADERTIME
+    #define GEOMETRY_TIME_MACRO (_Time.x*_GeometryMessyOrbitRotationTimeMultiplier.xyz*_GeometryMessyOrbitRotationTimeMultiplier.w)
+#else
+    #define GEOMETRY_TIME_MACRO 0.0
+#endif
+
 #ifdef _PIXELIZATIONSPACE_MODEL
     #define VERTEX_PIXELIZATION_MODEL_MACRO v.pos.xyz = Pixelization(v.pos.xyz)
     #define VERTEX_PIXELIZATION_WORLD_MACRO //

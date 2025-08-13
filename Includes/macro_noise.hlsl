@@ -148,14 +148,6 @@
 
 
 
-#ifdef _GEOMETRYMESSYREFERENCETIME_SHADERTIME
-    #define GEOMETRY_TIME_MACRO (_Time.x*_GeometryMessyTimeMultiplier.xyz*_GeometryMessyTimeMultiplier.w)
-#else
-    #define GEOMETRY_TIME_MACRO 0.0
-#endif
-
-
-
 #ifdef _FRAGMENTSOURCE_NOISE1ST
     #define FRAGMENT_NOISE_MACRO noise1st_pos
     #define FRAGMENT_CENTER_MACRO (inp[0].noise1st_pos+inp[1].noise1st_pos+inp[2].noise1st_pos)/3.0
