@@ -10,3 +10,7 @@ float3 VertexCenterBias(float3 v0, float3 v1, float3 v, float3 c, float t){
 float ChangeValueRange02(float n, float t){
     return n*(2.0-abs(t))+max(0.0,t);
 }
+
+float3 RodriguesRotation(float3 rot, float theta, float3 axis){
+    return rot*cos(theta) + cross(axis,rot)*sin(theta) + axis*dot(axis,rot)*(1.0-cos(theta));
+}
