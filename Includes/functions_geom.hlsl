@@ -188,40 +188,40 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
 
         #ifdef _GEOMETRY_SCALE
             #if defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE3RD)
-                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],ChangeValueRange02(GeometryNoiseMap01(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time)*_GeometryPushPull,_GeometryPushPullBias));
-                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],ChangeValueRange02(GeometryNoiseMap01(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time)*_GeometryPushPull,_GeometryPushPullBias));
-                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],ChangeValueRange02(GeometryNoiseMap01(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time)*_GeometryPushPull,_GeometryPushPullBias));
+                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],lerp(_GeometryScale0,_GeometryScale1,GeometryNoiseMap01(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time)));
+                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],lerp(_GeometryScale0,_GeometryScale1,GeometryNoiseMap01(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time)));
+                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],lerp(_GeometryScale0,_GeometryScale1,GeometryNoiseMap01(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time)));
             #elif defined(_USE_AUDIOLINK) && _GEOMETRYSOURCE_AUDIOLINK_VU
-                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],InverseBias01(audiolink_vu*audiolink_mask[0],_GeometryPushPullBias)*_GeometryPushPull);
-                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],InverseBias01(audiolink_vu*audiolink_mask[1],_GeometryPushPullBias)*_GeometryPushPull);
-                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],InverseBias01(audiolink_vu*audiolink_mask[2],_GeometryPushPullBias)*_GeometryPushPull);
+                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],lerp(_GeometryScale0,_GeometryScale1,audiolink_vu*audiolink_mask[0]));
+                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],lerp(_GeometryScale0,_GeometryScale1,audiolink_vu*audiolink_mask[1]));
+                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],lerp(_GeometryScale0,_GeometryScale1,audiolink_vu*audiolink_mask[2]));
             #elif defined(_USE_AUDIOLINK) && _GEOMETRYSOURCE_AUDIOLINK_CHRONOTENSITY
-                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],InverseBias01(triloop(audiolink_chronotensity*audiolink_mask[0]),_GeometryPushPullBias)*_GeometryPushPull);
-                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],InverseBias01(triloop(audiolink_chronotensity*audiolink_mask[1]),_GeometryPushPullBias)*_GeometryPushPull);
-                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],InverseBias01(triloop(audiolink_chronotensity*audiolink_mask[2]),_GeometryPushPullBias)*_GeometryPushPull);
+                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],lerp(_GeometryScale0,_GeometryScale1,triloop(audiolink_chronotensity*audiolink_mask[0])));
+                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],lerp(_GeometryScale0,_GeometryScale1,triloop(audiolink_chronotensity*audiolink_mask[1])));
+                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],lerp(_GeometryScale0,_GeometryScale1,triloop(audiolink_chronotensity*audiolink_mask[2])));
             #else
-                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],InverseBias01(_GeometryValue,_GeometryPushPullBias)*_GeometryPushPull);
-                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],InverseBias01(_GeometryValue,_GeometryPushPullBias)*_GeometryPushPull);
-                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],InverseBias01(_GeometryValue,_GeometryPushPullBias)*_GeometryPushPull);
+                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],lerp(_GeometryScale0,_GeometryScale1,_GeometryValue));
+                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],lerp(_GeometryScale0,_GeometryScale1,_GeometryValue));
+                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],lerp(_GeometryScale0,_GeometryScale1,_GeometryValue));
             #endif
         #endif
         #ifdef _GEOMETRY_EXTRUDE
             #if defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE3RD)
-                geometry_pos[0] = geometry_pos[0]+GeometryNoiseMap01(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time)*_GeometryPushPull*_GeometryPushPullBias*inp[0].world_normal;
-                geometry_pos[1] = geometry_pos[1]+GeometryNoiseMap01(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time)*_GeometryPushPull*_GeometryPushPullBias*inp[1].world_normal;
-                geometry_pos[2] = geometry_pos[2]+GeometryNoiseMap01(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time)*_GeometryPushPull*_GeometryPushPullBias*inp[2].world_normal;
+                geometry_pos[0] = geometry_pos[0]+lerp(_GeometryScale0,_GeometryScale1,GeometryNoiseMap01(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time))*inp[0].world_normal;
+                geometry_pos[1] = geometry_pos[1]+lerp(_GeometryScale0,_GeometryScale1,GeometryNoiseMap01(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time))*inp[1].world_normal;
+                geometry_pos[2] = geometry_pos[2]+lerp(_GeometryScale0,_GeometryScale1,GeometryNoiseMap01(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time))*inp[2].world_normal;
             #elif defined(_USE_AUDIOLINK) && _GEOMETRYSOURCE_AUDIOLINK_VU
-                geometry_pos[0] = geometry_pos[0]+audiolink_vu*audiolink_mask[0]*_GeometryPushPull*_GeometryPushPullBias*inp[0].world_normal;
-                geometry_pos[1] = geometry_pos[1]+audiolink_vu*audiolink_mask[1]*_GeometryPushPull*_GeometryPushPullBias*inp[1].world_normal;
-                geometry_pos[2] = geometry_pos[2]+audiolink_vu*audiolink_mask[2]*_GeometryPushPull*_GeometryPushPullBias*inp[2].world_normal;
+                geometry_pos[0] = geometry_pos[0]+lerp(_GeometryScale0,_GeometryScale1,audiolink_vu*audiolink_mask[0])*inp[0].world_normal;
+                geometry_pos[1] = geometry_pos[1]+lerp(_GeometryScale0,_GeometryScale1,audiolink_vu*audiolink_mask[1])*inp[1].world_normal;
+                geometry_pos[2] = geometry_pos[2]+lerp(_GeometryScale0,_GeometryScale1,audiolink_vu*audiolink_mask[2])*inp[2].world_normal;
             #elif defined(_USE_AUDIOLINK) && _GEOMETRYSOURCE_AUDIOLINK_CHRONOTENSITY
-                geometry_pos[0] = geometry_pos[0]+triloop(audiolink_chronotensity*audiolink_mask[0])*inp[0].world_normal*_GeometryPushPull*_GeometryPushPullBias;
-                geometry_pos[1] = geometry_pos[1]+triloop(audiolink_chronotensity*audiolink_mask[1])*inp[1].world_normal*_GeometryPushPull*_GeometryPushPullBias;
-                geometry_pos[2] = geometry_pos[2]+triloop(audiolink_chronotensity*audiolink_mask[2])*inp[2].world_normal*_GeometryPushPull*_GeometryPushPullBias;
+                geometry_pos[0] = geometry_pos[0]+lerp(_GeometryScale0,_GeometryScale1,triloop(audiolink_chronotensity*audiolink_mask[0]))*inp[0].world_normal;
+                geometry_pos[1] = geometry_pos[1]+lerp(_GeometryScale0,_GeometryScale1,triloop(audiolink_chronotensity*audiolink_mask[1]))*inp[1].world_normal;
+                geometry_pos[2] = geometry_pos[2]+lerp(_GeometryScale0,_GeometryScale1,triloop(audiolink_chronotensity*audiolink_mask[2]))*inp[2].world_normal;
             #else
-                geometry_pos[0] = geometry_pos[0]+_GeometryValue*inp[0].world_normal*_GeometryPushPull*_GeometryPushPullBias;
-                geometry_pos[1] = geometry_pos[1]+_GeometryValue*inp[1].world_normal*_GeometryPushPull*_GeometryPushPullBias;
-                geometry_pos[2] = geometry_pos[2]+_GeometryValue*inp[2].world_normal*_GeometryPushPull*_GeometryPushPullBias;
+                geometry_pos[0] = geometry_pos[0]+lerp(_GeometryScale0,_GeometryScale1,_GeometryValue)*inp[0].world_normal;
+                geometry_pos[1] = geometry_pos[1]+lerp(_GeometryScale0,_GeometryScale1,_GeometryValue)*inp[1].world_normal;
+                geometry_pos[2] = geometry_pos[2]+lerp(_GeometryScale0,_GeometryScale1,_GeometryValue)*inp[2].world_normal;
             #endif
         #endif
 
