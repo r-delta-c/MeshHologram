@@ -50,11 +50,13 @@
     #ifdef _COLORSOURCE_GRADIENT
         #if !defined(_COLORINGSOURCE_VALUE)
             #ifdef _COLORINGPARTITIONTYPE_SIDE
-                i.color_noise = i.color_noise * (range>0.0);
-                float side_noise = (max(max(i.color_noise.x,i.color_noise.y),i.color_noise.z));
-                c = lerp(_Color1,_Color0,side_noise);
+                float3 coloring_side = i.color_noise * (range>0.0);
+                sides = 0.0<sides;
+                float coloring_t = max(sides.x*coloring_side.x,max(sides.y*coloring_side.y,sides.z*coloring_side.z));
+                coloring_t = lerp(coloring_t,1.0,(i.color_noise.x+i.color_noise.y+i.color_noise.z)/3.0*1.1);
+                c = lerp(_Color0,_Color1,coloring_t);
             #else
-                c = lerp(_Color1,_Color0,i.color_noise);
+                c = lerp(_Color0,_Color1,i.color_noise);
             #endif
         #else
             c = lerp(_Color0,_Color1,_ColoringValue);
@@ -63,11 +65,14 @@
         c = _Color0;
     #elif _COLORSOURCE_GRADIENTTEX
         #ifdef _COLORINGPARTITIONTYPE_SIDE
-            i.color_noise = i.color_noise * (range>0.0);
-            float side_noise = (max(max(i.color_noise.x,i.color_noise.y),i.color_noise.z));
-            c = tex2Dlod(_ColorGradientTex,float4(saturate(side_noise)*0.994+0.004,0.5,0.0,0.0));
+            float3 coloring_side = i.color_noise * (range>0.0);
+            sides = 0.0<sides;
+            float coloring_t = saturate(
+                max(sides.x*coloring_side.x,max(sides.y*coloring_side.y,sides.z*coloring_side.z)));
+            coloring_t = lerp(coloring_t,1.0,(i.color_noise.x+i.color_noise.y+i.color_noise.z)/3.0*1.1);
+            c = tex2Dlod(_ColorGradientTex,float4(coloring_t*0.994+0.004,0.5,0.0,0.0));
         #else
-            c = tex2Dlod(_ColorGradientTex,float4(saturate(i.color_noise)*0.994+0.004,0.5,0.0,0.0));
+            c = tex2Dlod(_ColorGradientTex,float4(i.color_noise*0.994+0.004,0.5,0.0,0.0));
         #endif
     #elif _COLORSOURCE_VERTEXCOLOR
         c = i.vertex_color;
