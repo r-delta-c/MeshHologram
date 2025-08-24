@@ -269,9 +269,9 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             orbit[2] = orbit[2]+orbit_dir;
 
             #if defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE3RD)
-                geometry_pos[0] = lerp(geometry_pos[0],orbit[0],GeometryNoiseMap01(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0))*geometry_messy_mask[0],geometry_time);
-                geometry_pos[1] = lerp(geometry_pos[1],orbit[1],GeometryNoiseMap01(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1))*geometry_messy_mask[1],geometry_time);
-                geometry_pos[2] = lerp(geometry_pos[2],orbit[2],GeometryNoiseMap01(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2))*geometry_messy_mask[2],geometry_time);
+                geometry_pos[0] = lerp(geometry_pos[0],orbit[0],GeometryNoiseMap01(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time)*geometry_messy_mask[0]);
+                geometry_pos[1] = lerp(geometry_pos[1],orbit[1],GeometryNoiseMap01(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time)*geometry_messy_mask[1]);
+                geometry_pos[2] = lerp(geometry_pos[2],orbit[2],GeometryNoiseMap01(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time)*geometry_messy_mask[2]);
             #else
                 geometry_pos[0] = lerp(geometry_pos[0],orbit[0],_GeometryValue*geometry_messy_mask[0]);
                 geometry_pos[1] = lerp(geometry_pos[1],orbit[1],_GeometryValue*geometry_messy_mask[1]);
