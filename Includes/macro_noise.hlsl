@@ -154,9 +154,9 @@
     #define FRAGMENT_OFFSET_MACRO(n) noise1st_offset[n]
 
     #ifdef _NOISE1STREFERENCETIME_SHADERTIME
-        #define FRAGMENT_FUNC_TIME_MACRO (_Time.x*_Noise1stTimeMulti+_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
+        #define FRAGMENT_TIME_MACRO (_Time.x*_Noise1stTimeMulti+_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
     #else
-        #define FRAGMENT_FUNC_TIME_MACRO (_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
+        #define FRAGMENT_TIME_MACRO (_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
     #endif
 
     #define FRAGMENT_FUNC_SEED_MACRO _Noise1stSeed
@@ -172,9 +172,9 @@
     #define FRAGMENT_OFFSET_MACRO(n) noise2nd_offset[n]
 
     #ifdef _NOISE2NDREFERENCETIME_SHADERTIME
-        #define FRAGMENT_FUNC_TIME_MACRO (_Time.x*_Noise2ndTimeMulti+_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
+        #define FRAGMENT_TIME_MACRO (_Time.x*_Noise2ndTimeMulti+_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
     #else
-        #define FRAGMENT_FUNC_TIME_MACRO (_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
+        #define FRAGMENT_TIME_MACRO (_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
     #endif
 
     #define FRAGMENT_FUNC_SEED_MACRO _Noise2ndSeed
@@ -190,9 +190,9 @@
     #define FRAGMENT_OFFSET_MACRO(n) noise3rd_offset[n]
 
     #ifdef _NOISE3RDREFERENCETIME_SHADERTIME
-        #define FRAGMENT_FUNC_TIME_MACRO (_Time.x*_Noise3rdTimeMulti+_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
+        #define FRAGMENT_TIME_MACRO (_Time.x*_Noise3rdTimeMulti+_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
     #else
-        #define FRAGMENT_FUNC_TIME_MACRO (_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
+        #define FRAGMENT_TIME_MACRO (_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
     #endif
 
     #define FRAGMENT_FUNC_SEED_MACRO _Noise3rdSeed
@@ -211,9 +211,9 @@
     #define COLOR_OFFSET_MACRO(n) noise1st_offset[n]
 
     #ifdef _NOISE1STREFERENCETIME_SHADERTIME
-        #define COLOR_FUNC_TIME_MACRO (_Time.x*_Noise1stTimeMulti+_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
+        #define COLOR_TIME_MACRO (_Time.x*_Noise1stTimeMulti+_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
     #else
-        #define COLOR_FUNC_TIME_MACRO (_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
+        #define COLOR_TIME_MACRO (_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
     #endif
 
     #define COLOR_FUNC_SEED_MACRO _Noise1stSeed
@@ -229,9 +229,9 @@
     #define COLOR_OFFSET_MACRO(n) noise2nd_offset[n]
 
     #ifdef _NOISE2NDREFERENCETIME_SHADERTIME
-        #define COLOR_FUNC_TIME_MACRO (_Time.x*_Noise2ndTimeMulti+_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
+        #define COLOR_TIME_MACRO (_Time.x*_Noise2ndTimeMulti+_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
     #else
-        #define COLOR_FUNC_TIME_MACRO (_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
+        #define COLOR_TIME_MACRO (_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
     #endif
 
     #define COLOR_FUNC_SEED_MACRO _Noise2ndSeed
@@ -247,9 +247,9 @@
     #define COLOR_OFFSET_MACRO(n) noise3rd_offset[n]
 
     #ifdef _NOISE3RDREFERENCETIME_SHADERTIME
-        #define COLOR_FUNC_TIME_MACRO (_Time.x*_Noise3rdTimeMulti+_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
+        #define COLOR_TIME_MACRO (_Time.x*_Noise3rdTimeMulti+_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
     #else
-        #define COLOR_FUNC_TIME_MACRO (_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
+        #define COLOR_TIME_MACRO (_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
     #endif
 
     #define COLOR_FUNC_SEED_MACRO _Noise3rdSeed
@@ -268,9 +268,9 @@
     #define GEOMETRY_OFFSET_MACRO(n) noise1st_offset[n]
 
     #ifdef _NOISE1STREFERENCETIME_SHADERTIME
-        #define GEOMETRY_FUNC_TIME_MACRO (_Time.x*_Noise1stTimeMulti+_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
+        #define GEOMETRY_TIME_MACRO (_Time.x*_Noise1stTimeMulti+_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
     #else
-        #define GEOMETRY_FUNC_TIME_MACRO (_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
+        #define GEOMETRY_TIME_MACRO (_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
     #endif
 
     #define GEOMETRY_FUNC_SEED_MACRO _Noise1stSeed
@@ -286,9 +286,9 @@
     #define GEOMETRY_OFFSET_MACRO(n) noise2nd_offset[n]
 
     #ifdef _NOISE2NDREFERENCETIME_SHADERTIME
-        #define GEOMETRY_FUNC_TIME_MACRO (_Time.x*_Noise2ndTimeMulti+_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
+        #define GEOMETRY_TIME_MACRO (_Time.x*_Noise2ndTimeMulti+_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
     #else
-        #define GEOMETRY_FUNC_TIME_MACRO (_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
+        #define GEOMETRY_TIME_MACRO (_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
     #endif
 
     #define GEOMETRY_FUNC_SEED_MACRO _Noise2ndSeed
@@ -304,9 +304,9 @@
     #define GEOMETRY_OFFSET_MACRO(n) noise3rd_offset[n]
 
     #ifdef _NOISE3RDREFERENCETIME_SHADERTIME
-        #define GEOMETRY_FUNC_TIME_MACRO (_Time.x*_Noise3rdTimeMulti+_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
+        #define GEOMETRY_TIME_MACRO (_Time.x*_Noise3rdTimeMulti+_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
     #else
-        #define GEOMETRY_FUNC_TIME_MACRO (_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
+        #define GEOMETRY_TIME_MACRO (_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
     #endif
 
     #define GEOMETRY_FUNC_SEED_MACRO _Noise3rdSeed
@@ -327,9 +327,9 @@
     #define GEOMETRYMESSY_OFFSET_MACRO(n) noise1st_offset[n]
 
     #ifdef _NOISE1STREFERENCETIME_SHADERTIME
-        #define GEOMETRYMESSY_FUNC_TIME_MACRO (_Time.x*_Noise1stTimeMulti+_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
+        #define GEOMETRYMESSY_TIME_MACRO (_Time.x*_Noise1stTimeMulti+_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
     #else
-        #define GEOMETRYMESSY_FUNC_TIME_MACRO (_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
+        #define GEOMETRYMESSY_TIME_MACRO (_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
     #endif
 
     #define GEOMETRYMESSY_FUNC_SEED_MACRO _Noise1stSeed
@@ -345,9 +345,9 @@
     #define GEOMETRYMESSY_OFFSET_MACRO(n) noise2nd_offset[n]
 
     #ifdef _NOISE2NDREFERENCETIME_SHADERTIME
-        #define GEOMETRYMESSY_FUNC_TIME_MACRO (_Time.x*_Noise2ndTimeMulti+_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
+        #define GEOMETRYMESSY_TIME_MACRO (_Time.x*_Noise2ndTimeMulti+_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
     #else
-        #define GEOMETRYMESSY_FUNC_TIME_MACRO (_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
+        #define GEOMETRYMESSY_TIME_MACRO (_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
     #endif
 
     #define GEOMETRYMESSY_FUNC_SEED_MACRO _Noise2ndSeed
@@ -363,9 +363,9 @@
     #define GEOMETRYMESSY_OFFSET_MACRO(n) noise3rd_offset[n]
 
     #ifdef _NOISE3RDREFERENCETIME_SHADERTIME
-        #define GEOMETRYMESSY_FUNC_TIME_MACRO (_Time.x*_Noise3rdTimeMulti+_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
+        #define GEOMETRYMESSY_TIME_MACRO (_Time.x*_Noise3rdTimeMulti+_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
     #else
-        #define GEOMETRYMESSY_FUNC_TIME_MACRO (_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
+        #define GEOMETRYMESSY_TIME_MACRO (_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
     #endif
 
     #define GEOMETRYMESSY_FUNC_SEED_MACRO _Noise3rdSeed

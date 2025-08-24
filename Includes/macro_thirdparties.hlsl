@@ -24,45 +24,33 @@
 
 #ifdef _USE_AUDIOLINK
     #ifdef _NOISE1STPHASEREFAUDIOLINK_VU
-        #define NOISE1ST_AUDIOLINK_PHASE_MACRO AUDIOLINK_FILTERED
+        #define NOISE1ST_AUDIOLINK_PHASE_MACRO audiolink_vu
     #elif _NOISE1STPHASEREFAUDIOLINK_CHRONOTENSITY
-        #define NOISE1ST_AUDIOLINK_PHASE_MACRO AUDIOLINK_CHRONOTENSITY
+        #define NOISE1ST_AUDIOLINK_PHASE_MACRO audiolink_chronotensity
     #else
         #define NOISE1ST_AUDIOLINK_PHASE_MACRO 0.0
     #endif
 
     #ifdef _NOISE2NDPHASEREFAUDIOLINK_VU
-        #define NOISE2ND_AUDIOLINK_PHASE_MACRO AUDIOLINK_FILTERED
+        #define NOISE2ND_AUDIOLINK_PHASE_MACRO audiolink_vu
     #elif _NOISE2NDPHASEREFAUDIOLINK_CHRONOTENSITY
-        #define NOISE2ND_AUDIOLINK_PHASE_MACRO AUDIOLINK_CHRONOTENSITY
+        #define NOISE2ND_AUDIOLINK_PHASE_MACRO audiolink_chronotensity
     #else
         #define NOISE2ND_AUDIOLINK_PHASE_MACRO 0.0
     #endif
 
     #ifdef _NOISE3RDPHASEREFAUDIOLINK_VU
-        #define NOISE3RD_AUDIOLINK_PHASE_MACRO AUDIOLINK_FILTERED
+        #define NOISE3RD_AUDIOLINK_PHASE_MACRO audiolink_vu
     #elif _NOISE3RDPHASEREFAUDIOLINK_CHRONOTENSITY
-        #define NOISE3RD_AUDIOLINK_PHASE_MACRO AUDIOLINK_CHRONOTENSITY
+        #define NOISE3RD_AUDIOLINK_PHASE_MACRO audiolink_chronotensity
     #else
         #define NOISE3RD_AUDIOLINK_PHASE_MACRO 0.0
     #endif
 
-    #ifdef _AUDIOLINKVUBAND_BASS
-        #define AUDIOLINK_VUBAND_MACRO AudioLinkData(ALPASS_FILTEREDAUDIOLINK+uint2(_AudioLinkVUSmooth,0))
-    #elif _AUDIOLINKVUBAND_LOW_MID
-        #define AUDIOLINK_VUBAND_MACRO AudioLinkData(ALPASS_FILTEREDAUDIOLINK+uint2(_AudioLinkVUSmooth,1))
-    #elif _AUDIOLINKVUBAND_HIGH_MID
-        #define AUDIOLINK_VUBAND_MACRO AudioLinkData(ALPASS_FILTEREDAUDIOLINK+uint2(_AudioLinkVUSmooth,2))
-    #elif _AUDIOLINKVUBAND_TREBLE
-        #define AUDIOLINK_VUBAND_MACRO AudioLinkData(ALPASS_FILTEREDAUDIOLINK+uint2(_AudioLinkVUSmooth,3))
-    #elif _AUDIOLINKVUBAND_AVERAGE
-        #define AUDIOLINK_VUBAND_MACRO AudioLinkData(ALPASS_FILTEREDVU_INTENSITY)
-    #endif
-
     #ifdef _ORBITROTATIONREFAUDIOLINK_VU
-        #define ORBIT_ROTATION_AUDIOLINK_MACRO (float3(AUDIOLINK_FILTERED*_GeometryMessyOrbitAudioLinkStrength.x,AUDIOLINK_FILTERED*_GeometryMessyOrbitAudioLinkStrength.y,AUDIOLINK_FILTERED*_GeometryMessyOrbitAudioLinkStrength.z)*_GeometryMessyOrbitAudioLinkStrength.w)
+        #define ORBIT_ROTATION_AUDIOLINK_MACRO (float3(audiolink_vu*_GeometryMessyOrbitAudioLinkStrength.x,audiolink_vu*_GeometryMessyOrbitAudioLinkStrength.y,audiolink_vu*_GeometryMessyOrbitAudioLinkStrength.z)*_GeometryMessyOrbitAudioLinkStrength.w)
     #elif _ORBITROTATIONREFAUDIOLINK_CHRONOTENSITY
-        #define ORBIT_ROTATION_AUDIOLINK_MACRO (float3(AUDIOLINK_CHRONOTENSITY*_GeometryMessyOrbitAudioLinkStrength.x,AUDIOLINK_CHRONOTENSITY*_GeometryMessyOrbitAudioLinkStrength.y,AUDIOLINK_CHRONOTENSITY*_GeometryMessyOrbitAudioLinkStrength.z)*_GeometryMessyOrbitAudioLinkStrength.w)
+        #define ORBIT_ROTATION_AUDIOLINK_MACRO (float3(audiolink_chronotensity*_GeometryMessyOrbitAudioLinkStrength.x,audiolink_chronotensity*_GeometryMessyOrbitAudioLinkStrength.y,audiolink_chronotensity*_GeometryMessyOrbitAudioLinkStrength.z)*_GeometryMessyOrbitAudioLinkStrength.w)
     #else
         #define ORBIT_ROTATION_AUDIOLINK_MACRO 0.0
     #endif
@@ -73,8 +61,3 @@
     #define NOISE2ND_AUDIOLINK_PHASE_MACRO 0.0
     #define NOISE3RD_AUDIOLINK_PHASE_MACRO 0.0
 #endif
-
-
-
-#define AUDIOLINK_FILTERED saturate(lerp(AUDIOLINK_VUBAND_MACRO.r,AUDIOLINK_VUBAND_MACRO.b,_AudioLinkVUPanning)*_AudioLinkVUGainMul+_AudioLinkVUGainAdd)
-#define AUDIOLINK_CHRONOTENSITY (AudioLinkDecodeDataAsUInt(ALPASS_CHRONOTENSITY+uint2(_AudioLinkChronoTensityType,_AudioLinkChronoTensityBand)).r/_AudioLinkChronoTensityScale)

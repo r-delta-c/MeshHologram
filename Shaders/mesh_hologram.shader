@@ -27,7 +27,7 @@ Shader "DeltaField/shaders/MeshHologram"{
         _UseAudioLink("Use AudioLink", Int)=0
         _AudioLinkMaskControlTex("AudioLink Mask Control Tex",2D)="white"{}
         _AudioLinkMaskControl("AudioLink Mask Control Strength",Range(0.0,1.0))=1.0
-        [KeywordEnum(Bass,Low_Mid,High_Mid,Treble,Average)]
+        [Enum(Bass,0,Low_Mid,1,High_Mid,2,Treble,3,Average,4)]
         _AudioLinkVUBand("VU Band",Int)=0
         [IntRange]_AudioLinkVUSmooth("VU Smooth",Range(0,15))=0
         _AudioLinkVUPanning("VU Panning",Range(0.0,1.0))=0.5
@@ -68,6 +68,8 @@ Shader "DeltaField/shaders/MeshHologram"{
         [KeywordEnum(Value,Noise1st,Noise2nd,Noise3rd,AudioLink_VU,AudioLink_ChronoTensity)]
         _ColoringSource("Coloring Source",Int)=2
         _ColoringValue("Coloring Value",Range(0.0,1.0))=0.0
+        [Toggle(_COLORING_LINEAR)]
+        _ColoringLinear("Coloring Linear",Int)=0
         _ColoringMaskControlTex("Coloring Mask Control Tex",2D)="white"{}
         _ColoringMaskControl("Coloring Mask Control Strength",Range(0.0,1.0))=1.0
         [KeywordEnum(Vertex,Side,Mesh)]
@@ -80,10 +82,22 @@ Shader "DeltaField/shaders/MeshHologram"{
         _GeometryMaskControlTex("Geometry Mask Control Tex",2D)="white"{}
         _GeometryMaskControl("Geometry Mask Control Strength",Range(0.0,1.0))=1.0
 
-        [KeywordEnum(Disable,Scaling,Normal_Extrude)]
-        _GeometryPushPullE("Activate Push/Pull",Int)=2
+        [Toggle(_GEOMETRY_SCALE)]
+        _GeometryScale("Activate Scale",Int)=0
+        _GeometryScale0("Scale Range 0",Float)=-0.5
+        _GeometryScale1("Scale Range 1",Float)=0
         _GeometryPushPull("Strength Push/Pull",Float)=0.2
         _GeometryPushPullBias("Bias Pull<=>Push",Range(-1.0,1.0))=1.0
+
+        [Toggle(_GEOMETRY_EXTRUDE)]
+        _GeometryExtrude("Activate Extrude",Int)=1
+        _GeometryExtrude0("Extrude Range 0",Float)=-0.5
+        _GeometryExtrude1("Extrude Range 1",Float)=0
+
+        [Toggle(_GEOMETRY_ROTATION)]
+        _GeometryRotation("Activate Rotation",Int)=0
+        _GeometryRotation0("Scale Range 0",Float)=-0.5
+        _GeometryRotation1("Scale Range 1",Float)=0
 
         [Header(Geometry Messy)]
         [Toggle(_ACTIVATE_GEOMETRYMESSY)]
@@ -282,8 +296,6 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #pragma shader_feature_local _STEREOMERGEMODE_NONE _STEREOMERGEMODE_POSITION _STEREOMERGEMODE_ROTATION _STEREOMERGEMODE_POSITION_ROTATION
 
-            #pragma shader_feature_local _AUDIOLINKVUBAND_BASS _AUDIOLINKVUBAND_LOW_MID _AUDIOLINKVUBAND_HIGH_MID _AUDIOLINKVUBAND_TREBLE _AUDIOLINKVUBAND_AVERAGE
-
             #pragma shader_feature_local _LINEFADEMODE_NORMAL _LINEFADEMODE_INSTANT _LINEFADEMODE_OUTWIDE _LINEFADEMODE_OUTTHIN _LINEFADEMODE_BREAK _LINEFADEMODE_VANISHING _LINEFADEMODE_ZOOMIN _LINEFADEMODE_ZOOMOUT _LINEFADEMODE_POWERZOOMIN _LINEFADEMODE_COLLAPSE _LINEFADEMODE_JOIN1 _LINEFADEMODE_JOIN2 _LINEFADEMODE_JOIN3
 
 
@@ -293,10 +305,13 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #pragma shader_feature_local _COLORSOURCE_GRADIENT _COLORSOURCE_PRIMARY _COLORSOURCE_GRADIENTTEX _COLORSOURCE_VERTEXCOLOR _COLORSOURCE_UNIQUESIDES _COLORSOURCE_AUDIOLINK_THEMECOLOR
             #pragma shader_feature_local _COLORINGSOURCE_VALUE _COLORINGSOURCE_NOISE1ST _COLORINGSOURCE_NOISE2ND _COLORINGSOURCE_NOISE3RD _COLORINGSOURCE_AUDIOLINK_VU _COLORINGSOURCE_AUDIOLINK_CHRONOTENSITY
+            #pragma shader_feature_local _ _COLORING_LINEAR
             #pragma shader_feature_local _COLORINGPARTITIONTYPE_VERTEX _COLORINGPARTITIONTYPE_SIDE _COLORINGPARTITIONTYPE_MESH
 
             #pragma shader_feature_local _GEOMETRYSOURCE_VALUE _GEOMETRYSOURCE_NOISE1ST _GEOMETRYSOURCE_NOISE2ND _GEOMETRYSOURCE_NOISE3RD _GEOMETRYSOURCE_AUDIOLINK_VU _GEOMETRYSOURCE_AUDIOLINK_CHRONOTENSITY
-            #pragma shader_feature_local _GEOMETRYPUSHPULLE_DISABLE _GEOMETRYPUSHPULLE_SCALING _GEOMETRYPUSHPULLE_NORMAL_EXTRUDE
+            #pragma shader_feature_local _ _GEOMETRY_SCALE
+            #pragma shader_feature_local _ _GEOMETRY_EXTRUDE
+            #pragma shader_feature_local _ _GEOMETRY_ROTATION
 
             #pragma shader_feature_local _GEOMETRYMESSYSOURCE_VALUE _GEOMETRYMESSYSOURCE_PRIMITIVE _GEOMETRYMESSYSOURCE_NOISE1ST _GEOMETRYMESSYSOURCE_NOISE2ND _GEOMETRYMESSYSOURCE_NOISE3RD
             #pragma shader_feature_local _ _ACTIVATE_GEOMETRYMESSY
@@ -402,8 +417,6 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #pragma shader_feature_local _STEREOMERGEMODE_NONE _STEREOMERGEMODE_POSITION _STEREOMERGEMODE_ROTATION _STEREOMERGEMODE_POSITION_ROTATION
 
-            #pragma shader_feature_local _AUDIOLINKVUBAND_BASS _AUDIOLINKVUBAND_LOW_MID _AUDIOLINKVUBAND_HIGH_MID _AUDIOLINKVUBAND_TREBLE _AUDIOLINKVUBAND_AVERAGE
-
             #pragma shader_feature_local _LINEFADEMODE_NORMAL _LINEFADEMODE_INSTANT _LINEFADEMODE_OUTWIDE _LINEFADEMODE_OUTTHIN _LINEFADEMODE_BREAK _LINEFADEMODE_VANISHING _LINEFADEMODE_ZOOMIN _LINEFADEMODE_ZOOMOUT _LINEFADEMODE_POWERZOOMIN _LINEFADEMODE_COLLAPSE _LINEFADEMODE_JOIN1 _LINEFADEMODE_JOIN2 _LINEFADEMODE_JOIN3
 
 
@@ -413,10 +426,13 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #pragma shader_feature_local _COLORSOURCE_GRADIENT _COLORSOURCE_PRIMARY _COLORSOURCE_GRADIENTTEX _COLORSOURCE_VERTEXCOLOR _COLORSOURCE_UNIQUESIDES _COLORSOURCE_AUDIOLINK_THEMECOLOR
             #pragma shader_feature_local _COLORINGSOURCE_VALUE _COLORINGSOURCE_NOISE1ST _COLORINGSOURCE_NOISE2ND _COLORINGSOURCE_NOISE3RD _COLORINGSOURCE_AUDIOLINK_VU _COLORINGSOURCE_AUDIOLINK_CHRONOTENSITY
+            #pragma shader_feature_local _ _COLORING_LINEAR
             #pragma shader_feature_local _COLORINGPARTITIONTYPE_VERTEX _COLORINGPARTITIONTYPE_SIDE _COLORINGPARTITIONTYPE_MESH
 
             #pragma shader_feature_local _GEOMETRYSOURCE_VALUE _GEOMETRYSOURCE_NOISE1ST _GEOMETRYSOURCE_NOISE2ND _GEOMETRYSOURCE_NOISE3RD _GEOMETRYSOURCE_AUDIOLINK_VU _GEOMETRYSOURCE_AUDIOLINK_CHRONOTENSITY
-            #pragma shader_feature_local _GEOMETRYPUSHPULLE_DISABLE _GEOMETRYPUSHPULLE_SCALING _GEOMETRYPUSHPULLE_NORMAL_EXTRUDE
+            #pragma shader_feature_local _ _GEOMETRY_SCALE
+            #pragma shader_feature_local _ _GEOMETRY_EXTRUDE
+            #pragma shader_feature_local _ _GEOMETRY_ROTATION
 
             #pragma shader_feature_local _GEOMETRYMESSYSOURCE_VALUE _GEOMETRYMESSYSOURCE_PRIMITIVE _GEOMETRYMESSYSOURCE_NOISE1ST _GEOMETRYMESSYSOURCE_NOISE2ND _GEOMETRYMESSYSOURCE_NOISE3RD
             #pragma shader_feature_local _ _ACTIVATE_GEOMETRYMESSY

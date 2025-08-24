@@ -10,6 +10,7 @@ float _DistanceInfluence;
     sampler2D _AudioLinkMaskControlTex;
     float4 _AudioLinkMaskControl_ST;
     float _AudioLinkMaskControl;
+    float _AudioLinkVUBand;
     float _AudioLinkVUSmooth;
     float _AudioLinkVUPanning;
     float _AudioLinkVUGainMul;
@@ -48,9 +49,12 @@ float _Emission;
 
 float _GeometryValue;
 float _GeometryMaskControl;
-float _GeometryPushPull;
-float _GeometryPushPullBias;
-float _GeometryPolygonRotation;
+float _GeometryScale0;
+float _GeometryScale1;
+float _GeometryExtrude0;
+float _GeometryExtrude1;
+float _GeometryRotation0;
+float _GeometryRotation1;
 
 float _GeometryMessyValue;
 float _GeometryMessyMaskControl;
