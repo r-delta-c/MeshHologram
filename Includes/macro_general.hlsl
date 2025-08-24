@@ -22,6 +22,8 @@
     #define GEOMETRY_ORBIT_XY_TIME_MACRO (_Time.x*_GeometryMessyOrbitWaveXYTimeMultiplier)
 #else
     #define GEOMETRY_TIME_MACRO 0.0
+    #define GEOMETRY_ORBIT_Z_TIME_MACRO 0.0
+    #define GEOMETRY_ORBIT_XY_TIME_MACRO 0.0
 #endif
 
 #ifdef _PIXELIZATIONSPACE_MODEL
