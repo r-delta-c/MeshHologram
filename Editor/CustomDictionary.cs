@@ -39,6 +39,18 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 new List<string>(){"_","_USE_AUDIOLINK"},
                 "_UseAudioLink", "Use AudioLink")
                 },
+                {CUSTOM_PROPERTY._GEOMETRY_SCALE,new CustomPropertyState(
+                new List<string>(){"_","_GEOMETRY_SCALE"},
+                "_GeometryScale", "Activate Scale")
+                },
+                {CUSTOM_PROPERTY._GEOMETRY_EXTRUDE,new CustomPropertyState(
+                new List<string>(){"_","_GEOMETRY_EXTRUDE"},
+                "_GeometryExtrude", "Activate Extrude")
+                },
+                {CUSTOM_PROPERTY._GEOMETRY_ROTATION,new CustomPropertyState(
+                new List<string>(){"_","_GEOMETRY_ROTATION"},
+                "_GeometryRotation", "Activate Rotation")
+                },
                 {CUSTOM_PROPERTY._GEOMETRY_MESSY_TOGGLE,new CustomPropertyState(
                 new List<string>(){"_","_ACTIVATE_GEOMETRYMESSY"},
                 "_GeometryMessyToggle", "Activate Messy")
@@ -363,14 +375,23 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._GEOMETRY_VALUE,new ShaderPropertyState(
                     "_GeometryValue", "Geometry Value")
                 },
-                {SHADER_PROPERTY._GEOMETRY_PUSH_PULL_E,new ShaderPropertyState(
-                    "_GeometryPushPullE", "Activate Push/Pull")
+                {SHADER_PROPERTY._GEOMETRY_SCALE0,new ShaderPropertyState(
+                    "_GeometryScale0", "Scale Range 0")
                 },
-                {SHADER_PROPERTY._GEOMETRY_PUSH_PULL,new ShaderPropertyState(
-                    "_GeometryPushPull", "Strength Push/Pull")
+                {SHADER_PROPERTY._GEOMETRY_SCALE1,new ShaderPropertyState(
+                    "_GeometryScale1", "Scale Range 1")
                 },
-                {SHADER_PROPERTY._GEOMETRY_PUSH_PULL_BIAS,new ShaderPropertyState(
-                    "_GeometryPushPullBias", "Bias Pull<=>Push")
+                {SHADER_PROPERTY._GEOMETRY_EXTRUDE0,new ShaderPropertyState(
+                    "_GeometryExtrude0", "Extrude Range 0")
+                },
+                {SHADER_PROPERTY._GEOMETRY_EXTRUDE1,new ShaderPropertyState(
+                    "_GeometryExtrude1", "Extrude Range 1")
+                },
+                {SHADER_PROPERTY._GEOMETRY_ROTATION0,new ShaderPropertyState(
+                    "_GeometryRotation0", "Rotation Range 0")
+                },
+                {SHADER_PROPERTY._GEOMETRY_ROTATION1,new ShaderPropertyState(
+                    "_GeometryRotation1", "Rotation Range 1")
                 },
 
                 {SHADER_PROPERTY._GEOMETRY_MESSY_VALUE,new ShaderPropertyState(
