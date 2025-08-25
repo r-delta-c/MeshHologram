@@ -398,3 +398,11 @@
 #else
     #define NOISE3RDMAP01_METHOD_MACRO(i,m) EaseInOutPow(i,m)
 #endif
+
+#ifdef _COLORING_NOISE_REPEAT
+    #define COLOR_FUNC_NOISE_MACRO ColorNoiseRepeat
+    #define COLOR_FUNC_NOISE_SIDEPOS_MACRO ColorSidePosNoiseRepeat
+#else
+    #define COLOR_FUNC_NOISE_MACRO ColorNoisePingPong
+    #define COLOR_FUNC_NOISE_SIDEPOS_MACRO ColorSidePosNoisePingPong
+#endif
