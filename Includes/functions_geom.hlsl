@@ -80,9 +80,9 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         float fragment_time = FRAGMENT_TIME_MACRO;
         #ifdef _PARTITIONTYPE_VERTEX
             fragment_noise = float3(
-                FragmentNoiseMap01(inp[0].FRAGMENT_NOISE_MACRO,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO,
-                FragmentNoiseMap01(inp[1].FRAGMENT_NOISE_MACRO,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO,
-                FragmentNoiseMap01(inp[2].FRAGMENT_NOISE_MACRO,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO);
+                FragmentNoisePingPong(inp[0].FRAGMENT_NOISE_MACRO,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO,
+                FragmentNoisePingPong(inp[1].FRAGMENT_NOISE_MACRO,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO,
+                FragmentNoisePingPong(inp[2].FRAGMENT_NOISE_MACRO,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO);
             fragment_noise.x = 1.0-(fragment_noise.x)*fragment_mask[0];
             fragment_noise.y = 1.0-(fragment_noise.y)*fragment_mask[1];
             fragment_noise.z = 1.0-(fragment_noise.z)*fragment_mask[2];
@@ -92,18 +92,18 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             #define FRAGMENT_STREAM_2_MACRO float3(fragment_noise.z,fragment_noise.z,0.0)
 
         #elif _PARTITIONTYPE_SIDE
-            fragment_noise.x = FragmentSidePosNoiseMap(inp[1].FRAGMENT_NOISE_MACRO,inp[2].FRAGMENT_NOISE_MACRO,inp[0].FRAGMENT_NOISE_MACRO,fragment_center,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO;
-            fragment_noise.y = FragmentSidePosNoiseMap(inp[2].FRAGMENT_NOISE_MACRO,inp[0].FRAGMENT_NOISE_MACRO,inp[1].FRAGMENT_NOISE_MACRO,fragment_center,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO;
-            fragment_noise.z = FragmentSidePosNoiseMap(inp[0].FRAGMENT_NOISE_MACRO,inp[1].FRAGMENT_NOISE_MACRO,inp[2].FRAGMENT_NOISE_MACRO,fragment_center,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO;
+            fragment_noise.x = FragmentSidePosNoise(inp[1].FRAGMENT_NOISE_MACRO,inp[2].FRAGMENT_NOISE_MACRO,inp[0].FRAGMENT_NOISE_MACRO,fragment_center,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO;
+            fragment_noise.y = FragmentSidePosNoise(inp[2].FRAGMENT_NOISE_MACRO,inp[0].FRAGMENT_NOISE_MACRO,inp[1].FRAGMENT_NOISE_MACRO,fragment_center,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO;
+            fragment_noise.z = FragmentSidePosNoise(inp[0].FRAGMENT_NOISE_MACRO,inp[1].FRAGMENT_NOISE_MACRO,inp[2].FRAGMENT_NOISE_MACRO,fragment_center,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO;
 
             #define FRAGMENT_STREAM_0_MACRO float3(0.0,1.0-fragment_noise.y*fragment_mask[0],1.0-fragment_noise.z*fragment_mask[0])
             #define FRAGMENT_STREAM_1_MACRO float3(1.0-fragment_noise.x*fragment_mask[1],0.0,1.0-fragment_noise.z*fragment_mask[1])
             #define FRAGMENT_STREAM_2_MACRO float3(1.0-fragment_noise.x*fragment_mask[2],1.0-fragment_noise.y*fragment_mask[2],0.0)*fragment_mask[2]
 
         #elif _PARTITIONTYPE_MESH
-            #define FRAGMENT_STREAM_0_MACRO FragmentNoiseMap01(FRAGMENT_CENTER_MACRO,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO*fragment_mask[0]
-            #define FRAGMENT_STREAM_1_MACRO FragmentNoiseMap01(FRAGMENT_CENTER_MACRO,FRAGMENT_OFFSET_MACRO(1),fragment_time)LINEFADEMODE_INSTANT_MACRO*fragment_mask[1]
-            #define FRAGMENT_STREAM_2_MACRO FragmentNoiseMap01(FRAGMENT_CENTER_MACRO,FRAGMENT_OFFSET_MACRO(2),fragment_time)LINEFADEMODE_INSTANT_MACRO*fragment_mask[2]
+            #define FRAGMENT_STREAM_0_MACRO FragmentNoisePingPong(FRAGMENT_CENTER_MACRO,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO*fragment_mask[0]
+            #define FRAGMENT_STREAM_1_MACRO FragmentNoisePingPong(FRAGMENT_CENTER_MACRO,FRAGMENT_OFFSET_MACRO(1),fragment_time)LINEFADEMODE_INSTANT_MACRO*fragment_mask[1]
+            #define FRAGMENT_STREAM_2_MACRO FragmentNoisePingPong(FRAGMENT_CENTER_MACRO,FRAGMENT_OFFSET_MACRO(2),fragment_time)LINEFADEMODE_INSTANT_MACRO*fragment_mask[2]
         #endif
     #elif defined(_USE_AUDIOLINK) && _FRAGMENTSOURCE_AUDIOLINK_VU
         #define FRAGMENT_STREAM_0_MACRO audiolink_vu*audiolink_mask[0]
@@ -123,22 +123,22 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         float3 color_center = (inp[0].COLOR_NOISE_MACRO+inp[1].COLOR_NOISE_MACRO+inp[2].COLOR_NOISE_MACRO)/3.0;
         float color_time = COLOR_TIME_MACRO;
         #ifdef _COLORINGPARTITIONTYPE_VERTEX
-            #define COLOR_STREAM_0_MACRO ColorNoiseMap01(inp[0].COLOR_NOISE_MACRO,COLOR_OFFSET_MACRO(0),color_time)*coloring_mask[0]
-            #define COLOR_STREAM_1_MACRO ColorNoiseMap01(inp[1].COLOR_NOISE_MACRO,COLOR_OFFSET_MACRO(1),color_time)*coloring_mask[1]
-            #define COLOR_STREAM_2_MACRO ColorNoiseMap01(inp[2].COLOR_NOISE_MACRO,COLOR_OFFSET_MACRO(2),color_time)*coloring_mask[2]
+            #define COLOR_STREAM_0_MACRO COLOR_FUNC_NOISE_MACRO(inp[0].COLOR_NOISE_MACRO,COLOR_OFFSET_MACRO(0),color_time)*coloring_mask[0]
+            #define COLOR_STREAM_1_MACRO COLOR_FUNC_NOISE_MACRO(inp[1].COLOR_NOISE_MACRO,COLOR_OFFSET_MACRO(1),color_time)*coloring_mask[1]
+            #define COLOR_STREAM_2_MACRO COLOR_FUNC_NOISE_MACRO(inp[2].COLOR_NOISE_MACRO,COLOR_OFFSET_MACRO(2),color_time)*coloring_mask[2]
         #elif _COLORINGPARTITIONTYPE_SIDE
             float3 color_noise;
-            color_noise.x = ColorSidePosNoiseMap(inp[1].COLOR_NOISE_MACRO,inp[2].COLOR_NOISE_MACRO,inp[0].COLOR_NOISE_MACRO,color_center,COLOR_OFFSET_MACRO(0),color_time);
-            color_noise.y = ColorSidePosNoiseMap(inp[2].COLOR_NOISE_MACRO,inp[0].COLOR_NOISE_MACRO,inp[1].COLOR_NOISE_MACRO,color_center,COLOR_OFFSET_MACRO(1),color_time);
-            color_noise.z = ColorSidePosNoiseMap(inp[0].COLOR_NOISE_MACRO,inp[1].COLOR_NOISE_MACRO,inp[2].COLOR_NOISE_MACRO,color_center,COLOR_OFFSET_MACRO(2),color_time);
+            color_noise.x = COLOR_FUNC_NOISE_SIDEPOS_MACRO(inp[1].COLOR_NOISE_MACRO,inp[2].COLOR_NOISE_MACRO,inp[0].COLOR_NOISE_MACRO,color_center,COLOR_OFFSET_MACRO(0),color_time);
+            color_noise.y = COLOR_FUNC_NOISE_SIDEPOS_MACRO(inp[2].COLOR_NOISE_MACRO,inp[0].COLOR_NOISE_MACRO,inp[1].COLOR_NOISE_MACRO,color_center,COLOR_OFFSET_MACRO(1),color_time);
+            color_noise.z = COLOR_FUNC_NOISE_SIDEPOS_MACRO(inp[0].COLOR_NOISE_MACRO,inp[1].COLOR_NOISE_MACRO,inp[2].COLOR_NOISE_MACRO,color_center,COLOR_OFFSET_MACRO(2),color_time);
 
             #define COLOR_STREAM_0_MACRO float3(0.0,color_noise.y,color_noise.z)*coloring_mask[0]
             #define COLOR_STREAM_1_MACRO float3(color_noise.x,0.0,color_noise.z)*coloring_mask[1]
             #define COLOR_STREAM_2_MACRO float3(color_noise.x,color_noise.y,0.0)*coloring_mask[2]
         #elif _COLORINGPARTITIONTYPE_MESH
-            #define COLOR_STREAM_0_MACRO ColorNoiseMap01(COLOR_CENTER_MACRO,COLOR_OFFSET_MACRO(0),color_time)*coloring_mask[0]
-            #define COLOR_STREAM_1_MACRO ColorNoiseMap01(COLOR_CENTER_MACRO,COLOR_OFFSET_MACRO(1),color_time)*coloring_mask[1]
-            #define COLOR_STREAM_2_MACRO ColorNoiseMap01(COLOR_CENTER_MACRO,COLOR_OFFSET_MACRO(2),color_time)*coloring_mask[2]
+            #define COLOR_STREAM_0_MACRO COLOR_FUNC_NOISE_MACRO(COLOR_CENTER_MACRO,COLOR_OFFSET_MACRO(0),color_time)*coloring_mask[0]
+            #define COLOR_STREAM_1_MACRO COLOR_FUNC_NOISE_MACRO(COLOR_CENTER_MACRO,COLOR_OFFSET_MACRO(1),color_time)*coloring_mask[1]
+            #define COLOR_STREAM_2_MACRO COLOR_FUNC_NOISE_MACRO(COLOR_CENTER_MACRO,COLOR_OFFSET_MACRO(2),color_time)*coloring_mask[2]
         #endif
     #elif defined(_USE_AUDIOLINK) && _COLORINGSOURCE_AUDIOLINK_VU
         #define COLOR_STREAM_0_MACRO audiolink_vu*audiolink_mask[0]
@@ -188,9 +188,9 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
 
         #ifdef _GEOMETRY_SCALE
             #if defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE3RD)
-                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],lerp(_GeometryScale0,_GeometryScale1,GeometryNoiseMap01(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time)));
-                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],lerp(_GeometryScale0,_GeometryScale1,GeometryNoiseMap01(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time)));
-                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],lerp(_GeometryScale0,_GeometryScale1,GeometryNoiseMap01(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time)));
+                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],lerp(_GeometryScale0,_GeometryScale1,GeometryNoisePingPong(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time)));
+                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],lerp(_GeometryScale0,_GeometryScale1,GeometryNoisePingPong(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time)));
+                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],lerp(_GeometryScale0,_GeometryScale1,GeometryNoisePingPong(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time)));
             #elif defined(_USE_AUDIOLINK) && _GEOMETRYSOURCE_AUDIOLINK_VU
                 geometry_pos[0] = lerp(geometry_center,geometry_pos[0],lerp(_GeometryScale0,_GeometryScale1,audiolink_vu*audiolink_mask[0]));
                 geometry_pos[1] = lerp(geometry_center,geometry_pos[1],lerp(_GeometryScale0,_GeometryScale1,audiolink_vu*audiolink_mask[1]));
@@ -207,9 +207,9 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         #endif
         #ifdef _GEOMETRY_EXTRUDE
             #if defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE3RD)
-                geometry_pos[0] = geometry_pos[0]+lerp(_GeometryExtrude0,_GeometryExtrude1,GeometryNoiseMap01(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time))*inp[0].world_normal;
-                geometry_pos[1] = geometry_pos[1]+lerp(_GeometryExtrude0,_GeometryExtrude1,GeometryNoiseMap01(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time))*inp[1].world_normal;
-                geometry_pos[2] = geometry_pos[2]+lerp(_GeometryExtrude0,_GeometryExtrude1,GeometryNoiseMap01(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time))*inp[2].world_normal;
+                geometry_pos[0] = geometry_pos[0]+lerp(_GeometryExtrude0,_GeometryExtrude1,GeometryNoisePingPong(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time))*inp[0].world_normal;
+                geometry_pos[1] = geometry_pos[1]+lerp(_GeometryExtrude0,_GeometryExtrude1,GeometryNoisePingPong(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time))*inp[1].world_normal;
+                geometry_pos[2] = geometry_pos[2]+lerp(_GeometryExtrude0,_GeometryExtrude1,GeometryNoisePingPong(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time))*inp[2].world_normal;
             #elif defined(_USE_AUDIOLINK) && _GEOMETRYSOURCE_AUDIOLINK_VU
                 geometry_pos[0] = geometry_pos[0]+lerp(_GeometryExtrude0,_GeometryExtrude1,audiolink_vu*audiolink_mask[0])*inp[0].world_normal;
                 geometry_pos[1] = geometry_pos[1]+lerp(_GeometryExtrude0,_GeometryExtrude1,audiolink_vu*audiolink_mask[1])*inp[1].world_normal;
@@ -226,6 +226,10 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         #endif
 
         #ifdef _GEOMETRY_ROTATION
+            float3 normal_average = (inp[0].world_normal+inp[1].world_normal+inp[2].world_normal)/3.0;
+            geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center,GeometryNoiseRepeat(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time)*UNITY_PI*2.0,normal_average)+geometry_center;
+            geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center,GeometryNoiseRepeat(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time)*UNITY_PI*2.0,normal_average)+geometry_center;
+            geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center,GeometryNoiseRepeat(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time)*UNITY_PI*2.0,normal_average)+geometry_center;
         #endif
 
         #ifdef _ACTIVATE_GEOMETRYMESSY
@@ -234,14 +238,14 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
                 geometry_pos[1]-geometry_center+_GeometryMessyOrbitPosition.xyz,
                 geometry_pos[2]-geometry_center+_GeometryMessyOrbitPosition.xyz};
             float3 dir_pi2 = float3(_GeometryMessyOrbitRotation,_GeometryMessyOrbitRotationForward,_GeometryMessyOrbitRotationRight)*UNITY_PI*2.0;
-            float3 orbit_anim = GEOMETRY_TIME_MACRO+ORBIT_ROTATION_AUDIOLINK_MACRO;
+            float3 orbit_anim = GEOMETRYMESSY_TIME_MACRO+ORBIT_ROTATION_AUDIOLINK_MACRO;
             float geometrymessy_time = GEOMETRYMESSY_TIME_MACRO;
 
             #if defined(_GEOMETRYMESSYSOURCE_NOISE1ST) || defined(_GEOMETRYMESSYSOURCE_NOISE2ND) || defined(_GEOMETRYMESSYSOURCE_NOISE3RD)
                 float3 geometrymessy_center_noise = (inp[0].GEOMETRYMESSY_NOISE_MACRO+inp[1].GEOMETRYMESSY_NOISE_MACRO+inp[2].GEOMETRYMESSY_NOISE_MACRO)/3.0;
                 float geometrymessy_mask_offset = (GEOMETRYMESSY_OFFSET_MACRO(0)+GEOMETRYMESSY_OFFSET_MACRO(1)+GEOMETRYMESSY_OFFSET_MACRO(2))/3.0;
-                orbit_anim.xy += GeometryMessyNoiseMap01(geometrymessy_center_noise,geometrymessy_mask_offset,geometrymessy_time)*_GeometryMessyOrbitVariance.xy;
-                orbit_anim.z = sin(GeometryMessyNoiseMap01(geometrymessy_center_noise,geometrymessy_mask_offset,geometrymessy_time)*_GeometryMessyOrbitVariance.z+orbit_anim.z)*_GeometryMessyOrbitVariance.w;
+                orbit_anim.xy += GeometryMessyNoisePingPong(geometrymessy_center_noise,geometrymessy_mask_offset,geometrymessy_time)*_GeometryMessyOrbitVariance.xy;
+                orbit_anim.z = sin(GeometryMessyNoisePingPong(geometrymessy_center_noise,geometrymessy_mask_offset,geometrymessy_time)*_GeometryMessyOrbitVariance.z+orbit_anim.z)*_GeometryMessyOrbitVariance.w;
             #elif defined(_GEOMETRYMESSYSOURCE_PRIMITIVE)
                 orbit_anim.xyz += random(id+_GeometryMessySeed)*_GeometryMessyOrbitVariance.xyz;
             #else
@@ -269,9 +273,9 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             orbit[2] = orbit[2]+orbit_dir;
 
             #if defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE3RD)
-                geometry_pos[0] = lerp(geometry_pos[0],orbit[0],GeometryNoiseMap01(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time)*geometry_messy_mask[0]);
-                geometry_pos[1] = lerp(geometry_pos[1],orbit[1],GeometryNoiseMap01(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time)*geometry_messy_mask[1]);
-                geometry_pos[2] = lerp(geometry_pos[2],orbit[2],GeometryNoiseMap01(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time)*geometry_messy_mask[2]);
+                geometry_pos[0] = lerp(geometry_pos[0],orbit[0],GeometryNoisePingPong(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time)*geometry_messy_mask[0]);
+                geometry_pos[1] = lerp(geometry_pos[1],orbit[1],GeometryNoisePingPong(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time)*geometry_messy_mask[1]);
+                geometry_pos[2] = lerp(geometry_pos[2],orbit[2],GeometryNoisePingPong(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time)*geometry_messy_mask[2]);
             #else
                 geometry_pos[0] = lerp(geometry_pos[0],orbit[0],_GeometryValue*geometry_messy_mask[0]);
                 geometry_pos[1] = lerp(geometry_pos[1],orbit[1],_GeometryValue*geometry_messy_mask[1]);

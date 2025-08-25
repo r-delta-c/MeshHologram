@@ -14,3 +14,15 @@ float ChangeValueRange02(float n, float t){
 float3 RodriguesRotation(float3 rot, float theta, float3 axis){
     return rot*cos(theta) + cross(axis,rot)*sin(theta) + axis*dot(axis,rot)*(1.0-cos(theta));
 }
+
+float ThresholdFormula(float n, float mul, float add){
+    return saturate(n*mul-mul*0.5+0.5+add*(mul+sign(mul>=0.0?1.0:-1.0)));
+}
+
+float Inverse12(float x, float r){
+    return 1.0>mod(x,2.0)?r:-r+1.0;
+}
+
+float GenNoise(float3 inputs, float offset, float time, float seed, float phasescale){
+    return (ValueNoise3D(inputs,seed)+offset)*phasescale+time;
+}

@@ -569,9 +569,34 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.GEOMETRY, true);
                     if (foldout_bool)
                     {
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PUSH_PULL_E);
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PUSH_PULL);
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PUSH_PULL_BIAS);
+                        using (new EditorGUILayout.VerticalScope("HelpBox"))
+                        {
+                            DrawCustomProperty(targetMat, CUSTOM_PROPERTY._GEOMETRY_SCALE, true);
+                            if (CustomProperties[CUSTOM_PROPERTY._GEOMETRY_SCALE].value == 1)
+                            {
+                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_SCALE0);
+                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_SCALE1);
+                            }
+                        }
+                        using (new EditorGUILayout.VerticalScope("HelpBox"))
+                        {
+                            DrawCustomProperty(targetMat, CUSTOM_PROPERTY._GEOMETRY_EXTRUDE, true);
+                            if (CustomProperties[CUSTOM_PROPERTY._GEOMETRY_EXTRUDE].value == 1)
+                            {
+                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_EXTRUDE0);
+                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_EXTRUDE1);
+                            }
+                        }
+                        using (new EditorGUILayout.VerticalScope("HelpBox"))
+                        {
+                            DrawCustomProperty(targetMat, CUSTOM_PROPERTY._GEOMETRY_ROTATION, true);
+                            if (CustomProperties[CUSTOM_PROPERTY._GEOMETRY_ROTATION].value == 1)
+                            {
+                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_ROTATION0);
+                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_ROTATION1);
+                            }
+                        }
+
                         EditorGUILayout.Space(16);
                         DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MASK_CONTROL_TEX);
                         DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MASK_CONTROL);
