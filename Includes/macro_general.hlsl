@@ -1,3 +1,9 @@
+#ifdef _MANUAL_LINE_SCALING
+    #define LINE_SCALE_MACRO max(_LineScale,1e-4)
+#else
+    #define LINE_SCALE_MACRO i.model_scale
+#endif
+
 #ifdef _LINEFADEMODE_INSTANT
     #define LINEFADEMODE_INSTANT_MACRO >0.5
 #else

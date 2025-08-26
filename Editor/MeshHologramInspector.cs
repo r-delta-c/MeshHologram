@@ -471,7 +471,12 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         DrawShaderProperty(SHADER_PROPERTY._LINE_WIDTH);
                         DrawShaderProperty(SHADER_PROPERTY._LINE_GRADIENT_BIAS);
                         EditorGUILayout.Space(16);
-                        DrawShaderProperty(SHADER_PROPERTY._LINE_SCALE);
+                        DrawCustomProperty(targetMat, CUSTOM_PROPERTY._MANUAL_LINE_SCALING);
+                        using (new EditorGUI.DisabledScope(
+                            targetMat.GetInt(CustomProperties[CUSTOM_PROPERTY._MANUAL_LINE_SCALING].property) == 0))
+                        {
+                            DrawShaderProperty(SHADER_PROPERTY._LINE_SCALE);
+                        }
                         EditorGUILayout.Space(16);
                         DrawShaderProperty(SHADER_PROPERTY._LINE_FADE_MODE);
                         DrawShaderProperty(SHADER_PROPERTY._PARTITION_TYPE);

@@ -42,9 +42,10 @@ struct g2f{
     STRUCT_VERTEXCOLOR_MACRO fixed4 vertex_color : TEXCOORD6;
     fixed alpha :TEXCOORD7;
     float camera_distance : TEXCOORD8;
+    float model_scale : TEXCOORD9;
 
-    float3 normal : TEXCOORD9;
-    SWITCH_WORLDNORMAL_MACRO float3 world_normal : TEXCOORD10;
+    float3 normal : TEXCOORD10;
+    SWITCH_WORLDNORMAL_MACRO float3 world_normal : TEXCOORD11;
 
     UNITY_LIGHTING_COORDS(14,15)
 
