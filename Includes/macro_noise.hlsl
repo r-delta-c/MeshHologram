@@ -317,6 +317,7 @@
     #define GEOMETRY_METHOD_NOISEMAP_MACRO(i,m) NOISE3RDMAP01_METHOD_MACRO(i,m)
 #else
     #define GEOMETRY_NOISE_MACRO _GeometryValue
+    #define GEOMETRY_TIME_MACRO (0.0)
 #endif
 
 
@@ -399,10 +400,8 @@
     #define NOISE3RDMAP01_METHOD_MACRO(i,m) EaseInOutPow(i,m)
 #endif
 
-#ifdef _COLORING_NOISE_REPEAT
-    #define COLOR_FUNC_NOISE_MACRO ColorNoiseRepeat
-    #define COLOR_FUNC_NOISE_SIDEPOS_MACRO ColorSidePosNoiseRepeat
+#ifdef _GEOMETRY_ROTATION_NOISE_REPEAT
+    #define GEOMETRY_FUNC_NOISE_MACRO GeometryNoiseRepeat
 #else
-    #define COLOR_FUNC_NOISE_MACRO ColorNoisePingPong
-    #define COLOR_FUNC_NOISE_SIDEPOS_MACRO ColorSidePosNoisePingPong
+    #define GEOMETRY_FUNC_NOISE_MACRO GeometryNoisePingPong
 #endif

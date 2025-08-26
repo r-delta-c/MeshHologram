@@ -55,6 +55,7 @@ float _GeometryExtrude0;
 float _GeometryExtrude1;
 float _GeometryRotation0;
 float _GeometryRotation1;
+float _GeometryRotationReverse;
 
 float _GeometryMessyValue;
 float _GeometryMessyMaskControl;

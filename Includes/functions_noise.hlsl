@@ -59,36 +59,13 @@
         );
     }
 
-    float ColorRepeatNoiseRaw(float3 inputs, float offset, float time){
-        float n = GenNoise(
-            inputs,
-            offset,
-            time,
-            COLOR_FUNC_SEED_MACRO,
-            COLOR_FUNC_PHASESCALE_MACRO
-        );
-        float r = ThresholdFormula(
-            triloop(n),
-            COLOR_FUNC_THRESHOLD_MUL_MACRO,
-            COLOR_FUNC_THRESHOLD_ADD_MACRO
-        );
-        return Inverse12(n,r);
-    }
-
     float ColorNoisePingPong(float3 inputs, float offset, float time){
         return saturate(COLOR_METHOD_NOISEMAP_MACRO(ColorNoiseRaw(inputs,offset,time),COLOR_FUNC_VALUECARVE_MACRO));
-    }
-    float ColorNoiseRepeat(float3 inputs, float offset, float time){
-        return saturate(COLOR_METHOD_NOISEMAP_MACRO(ColorRepeatNoiseRaw(inputs,offset,time),COLOR_FUNC_VALUECARVE_MACRO));
     }
 
     float ColorSidePosNoisePingPong(float3 v0, float3 v1, float3 v, float3 c, float offset, float time){
         float3 side_center = (v0+v1+VertexCenterBias(v0,v1,v,c,saturate(_TriangleComp/26.0)*0.5+0.5))/3.0;
         return ColorNoisePingPong(side_center,offset,time);
-    }
-    float ColorSidePosNoiseRepeat(float3 v0, float3 v1, float3 v, float3 c, float offset, float time){
-        float3 side_center = (v0+v1+VertexCenterBias(v0,v1,v,c,saturate(_TriangleComp/26.0)*0.5+0.5))/3.0;
-        return ColorNoiseRepeat(side_center,offset,time);
     }
 
 #endif
