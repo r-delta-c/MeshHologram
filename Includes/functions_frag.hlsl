@@ -4,7 +4,7 @@
     fixed4 c = fixed4(0.0,0.0,0.0,1.0);
 
     #ifdef _USE_FWIDTH
-    float3 sides = (i.baryCentricCoords/(fwidth(i.baryCentricCoords)*0.5/lerp(1.0,max(i.camera_distance,1e-4),_DistanceInfluence))/unity_CameraProjection._m11/max(_LineScale,1e-4));
+    float3 sides = (i.baryCentricCoords/(fwidth(i.baryCentricCoords)*0.5/lerp(1.0,max(i.camera_distance,1e-4),_DistanceInfluence))/unity_CameraProjection._m11/_ScreenParams.y*1024.0/max(_LineScale,1e-4));
     #else
     float3 sides = (i.baryCentricCoords*96.0);
     #endif
@@ -70,6 +70,7 @@
             float coloring_t = saturate(
                 max(sides.x*coloring_side.x,max(sides.y*coloring_side.y,sides.z*coloring_side.z)));
             coloring_t = lerp(coloring_t,1.0,(i.color_noise.x+i.color_noise.y+i.color_noise.z)/3.0*1.1);
+            coloring_t = mod(coloring_t,1.0);
             c = tex2Dlod(_ColorGradientTex,float4(coloring_t*0.994+0.004,0.5,0.0,0.0));
         #else
             c = tex2Dlod(_ColorGradientTex,float4(i.color_noise*0.994+0.004,0.5,0.0,0.0));
