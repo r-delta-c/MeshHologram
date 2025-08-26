@@ -39,6 +39,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 new List<string>(){"_","_USE_AUDIOLINK"},
                 "_UseAudioLink", "Use AudioLink")
                 },
+                {CUSTOM_PROPERTY._MANUAL_LINE_SCALING,new CustomPropertyState(
+                new List<string>(){"_","_MANUAL_LINE_SCALING"},
+                "_ManualLineScaling", "Manual Line Scaling")
+                },
                 {CUSTOM_PROPERTY._GEOMETRY_SCALE,new CustomPropertyState(
                 new List<string>(){"_","_GEOMETRY_SCALE"},
                 "_GeometryScale", "Activate Scale")

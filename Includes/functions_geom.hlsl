@@ -318,6 +318,8 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         pos[i] = mul(UNITY_MATRIX_P,pos[i]);
     }
 
+    o.model_scale = (scale.x+scale.y+scale.z)/3.0;
+
     o.pos = pos[0];
     o.alpha = inp[0].alpha;
     o.camera_distance = camera_distance[0];

@@ -12,6 +12,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         _ACTIVATE_LIGHTVOLUMES_INFLUENCE,
         _USE_AUDIOLINK,
         _RENDERING_MODE,
+        _MANUAL_LINE_SCALING,
 
         _GEOMETRY_MESSY_TOGGLE,
 
