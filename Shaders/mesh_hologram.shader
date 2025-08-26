@@ -100,8 +100,6 @@ Shader "DeltaField/shaders/MeshHologram"{
         _GeometryRotationReverse("Rotation Reverse",Int)=0
         [Toggle(_GEOMETRY_ROTATION_NOISE_REPEAT)]
         _GeometryRotationNoiseRepeat("Rotation Noise Repeat",Int)=0
-        _GeometryRotation0("Rotation Range 0",Float)=-0.5
-        _GeometryRotation1("Rotation Range 1",Float)=0
 
         [Header(Geometry Messy)]
         [Toggle(_ACTIVATE_GEOMETRYMESSY)]

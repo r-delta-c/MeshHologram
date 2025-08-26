@@ -120,8 +120,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         _GEOMETRY_SCALE1,
         _GEOMETRY_EXTRUDE0,
         _GEOMETRY_EXTRUDE1,
-        _GEOMETRY_ROTATION0,
-        _GEOMETRY_ROTATION1,
         _GEOMETRY_ROTATION_REVERSE,
 
         _GEOMETRY_MESSY_VALUE,
