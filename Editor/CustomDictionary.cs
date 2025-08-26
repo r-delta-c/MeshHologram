@@ -51,7 +51,11 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 new List<string>(){"_","_GEOMETRY_ROTATION"},
                 "_GeometryRotation", "Activate Rotation")
                 },
-                {CUSTOM_PROPERTY._GEOMETRY_MESSY_TOGGLE,new CustomPropertyState(
+                {CUSTOM_PROPERTY._GEOMETRY_ROTATION_NOISE_REPEAT,new CustomPropertyState(
+                new List<string>(){"_","_GEOMETRY_ROTATION_NOISE_REPEAT"},
+                "_GeometryRotationNoiseRepeat", "Rotation Noise Repeat")
+                },
+                { CUSTOM_PROPERTY._GEOMETRY_MESSY_TOGGLE,new CustomPropertyState(
                 new List<string>(){"_","_ACTIVATE_GEOMETRYMESSY"},
                 "_GeometryMessyToggle", "Activate Messy")
                 },
@@ -392,6 +396,9 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 },
                 {SHADER_PROPERTY._GEOMETRY_ROTATION1,new ShaderPropertyState(
                     "_GeometryRotation1", "Rotation Range 1")
+                },
+                {SHADER_PROPERTY._GEOMETRY_ROTATION_REVERSE,new ShaderPropertyState(
+                    "_GeometryRotationReverse", "Rotation Reverse")
                 },
 
                 {SHADER_PROPERTY._GEOMETRY_MESSY_VALUE,new ShaderPropertyState(

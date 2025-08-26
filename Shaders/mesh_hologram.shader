@@ -68,8 +68,6 @@ Shader "DeltaField/shaders/MeshHologram"{
         [KeywordEnum(Value,Noise1st,Noise2nd,Noise3rd,AudioLink_VU,AudioLink_ChronoTensity)]
         _ColoringSource("Coloring Source",Int)=2
         _ColoringValue("Coloring Value",Range(0.0,1.0))=0.0
-        [Toggle(_COLORING_LINEAR)]
-        _ColoringLinear("Coloring Linear",Int)=0
         _ColoringMaskControlTex("Coloring Mask Control Tex",2D)="white"{}
         _ColoringMaskControl("Coloring Mask Control Strength",Range(0.0,1.0))=1.0
         [KeywordEnum(Vertex,Side,Mesh)]
@@ -96,8 +94,12 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         [Toggle(_GEOMETRY_ROTATION)]
         _GeometryRotation("Activate Rotation",Int)=0
-        _GeometryRotation0("Scale Range 0",Float)=-0.5
-        _GeometryRotation1("Scale Range 1",Float)=0
+        [MaterialToggle(_GEOMETRY_ROTATION_REVERSE)]
+        _GeometryRotationReverse("Rotation Reverse",Int)=0
+        [Toggle(_GEOMETRY_ROTATION_NOISE_REPEAT)]
+        _GeometryRotationNoiseRepeat("Rotation Noise Repeat",Int)=0
+        _GeometryRotation0("Rotation Range 0",Float)=-0.5
+        _GeometryRotation1("Rotation Range 1",Float)=0
 
         [Header(Geometry Messy)]
         [Toggle(_ACTIVATE_GEOMETRYMESSY)]
@@ -305,13 +307,13 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #pragma shader_feature_local _COLORSOURCE_GRADIENT _COLORSOURCE_PRIMARY _COLORSOURCE_GRADIENTTEX _COLORSOURCE_VERTEXCOLOR _COLORSOURCE_UNIQUESIDES _COLORSOURCE_AUDIOLINK_THEMECOLOR
             #pragma shader_feature_local _COLORINGSOURCE_VALUE _COLORINGSOURCE_NOISE1ST _COLORINGSOURCE_NOISE2ND _COLORINGSOURCE_NOISE3RD _COLORINGSOURCE_AUDIOLINK_VU _COLORINGSOURCE_AUDIOLINK_CHRONOTENSITY
-            #pragma shader_feature_local _ _COLORING_LINEAR
             #pragma shader_feature_local _COLORINGPARTITIONTYPE_VERTEX _COLORINGPARTITIONTYPE_SIDE _COLORINGPARTITIONTYPE_MESH
 
             #pragma shader_feature_local _GEOMETRYSOURCE_VALUE _GEOMETRYSOURCE_NOISE1ST _GEOMETRYSOURCE_NOISE2ND _GEOMETRYSOURCE_NOISE3RD _GEOMETRYSOURCE_AUDIOLINK_VU _GEOMETRYSOURCE_AUDIOLINK_CHRONOTENSITY
             #pragma shader_feature_local _ _GEOMETRY_SCALE
             #pragma shader_feature_local _ _GEOMETRY_EXTRUDE
             #pragma shader_feature_local _ _GEOMETRY_ROTATION
+            #pragma shader_feature_local _ _GEOMETRY_ROTATION_NOISE_REPEAT
 
             #pragma shader_feature_local _GEOMETRYMESSYSOURCE_VALUE _GEOMETRYMESSYSOURCE_PRIMITIVE _GEOMETRYMESSYSOURCE_NOISE1ST _GEOMETRYMESSYSOURCE_NOISE2ND _GEOMETRYMESSYSOURCE_NOISE3RD
             #pragma shader_feature_local _ _ACTIVATE_GEOMETRYMESSY
@@ -426,13 +428,13 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #pragma shader_feature_local _COLORSOURCE_GRADIENT _COLORSOURCE_PRIMARY _COLORSOURCE_GRADIENTTEX _COLORSOURCE_VERTEXCOLOR _COLORSOURCE_UNIQUESIDES _COLORSOURCE_AUDIOLINK_THEMECOLOR
             #pragma shader_feature_local _COLORINGSOURCE_VALUE _COLORINGSOURCE_NOISE1ST _COLORINGSOURCE_NOISE2ND _COLORINGSOURCE_NOISE3RD _COLORINGSOURCE_AUDIOLINK_VU _COLORINGSOURCE_AUDIOLINK_CHRONOTENSITY
-            #pragma shader_feature_local _ _COLORING_LINEAR
             #pragma shader_feature_local _COLORINGPARTITIONTYPE_VERTEX _COLORINGPARTITIONTYPE_SIDE _COLORINGPARTITIONTYPE_MESH
 
             #pragma shader_feature_local _GEOMETRYSOURCE_VALUE _GEOMETRYSOURCE_NOISE1ST _GEOMETRYSOURCE_NOISE2ND _GEOMETRYSOURCE_NOISE3RD _GEOMETRYSOURCE_AUDIOLINK_VU _GEOMETRYSOURCE_AUDIOLINK_CHRONOTENSITY
             #pragma shader_feature_local _ _GEOMETRY_SCALE
             #pragma shader_feature_local _ _GEOMETRY_EXTRUDE
             #pragma shader_feature_local _ _GEOMETRY_ROTATION
+            #pragma shader_feature_local _ _GEOMETRY_ROTATION_NOISE_REPEAT
 
             #pragma shader_feature_local _GEOMETRYMESSYSOURCE_VALUE _GEOMETRYMESSYSOURCE_PRIMITIVE _GEOMETRYMESSYSOURCE_NOISE1ST _GEOMETRYMESSYSOURCE_NOISE2ND _GEOMETRYMESSYSOURCE_NOISE3RD
             #pragma shader_feature_local _ _ACTIVATE_GEOMETRYMESSY

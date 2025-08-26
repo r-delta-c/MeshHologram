@@ -20,11 +20,11 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
         _FRAGMENT_SOURCE,
         _COLORING_SOURCE,
-        _COLORING_LINEAR,
         _GEOMETRY_SOURCE,
         _GEOMETRY_SCALE,
         _GEOMETRY_EXTRUDE,
         _GEOMETRY_ROTATION,
+        _GEOMETRY_ROTATION_NOISE_REPEAT,
         _GEOMETRY_MESSY_SOURCE,
         _NOISE1ST_SPACE,
         _NOISE2ND_SPACE,
@@ -121,6 +121,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         _GEOMETRY_EXTRUDE1,
         _GEOMETRY_ROTATION0,
         _GEOMETRY_ROTATION1,
+        _GEOMETRY_ROTATION_REVERSE,
 
         _GEOMETRY_MESSY_VALUE,
         _GEOMETRY_MESSY_SEED,
