@@ -16,7 +16,7 @@ float3 RodriguesRotation(float3 rot, float theta, float3 axis){
 }
 
 float ThresholdFormula(float n, float mul, float add){
-    return saturate(n*mul-mul*0.5+0.5+add*(mul+sign(mul>=0.0?1.0:-1.0)));
+    return saturate(n*mul-mul*0.5+0.5+add*(mul+(mul>=0.0?1.0:-1.0)));
 }
 
 float Inverse12(float x, float r){
