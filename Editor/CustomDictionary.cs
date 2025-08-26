@@ -395,12 +395,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._GEOMETRY_EXTRUDE1,new ShaderPropertyState(
                     "_GeometryExtrude1", "Extrude Range 1")
                 },
-                {SHADER_PROPERTY._GEOMETRY_ROTATION0,new ShaderPropertyState(
-                    "_GeometryRotation0", "Rotation Range 0")
-                },
-                {SHADER_PROPERTY._GEOMETRY_ROTATION1,new ShaderPropertyState(
-                    "_GeometryRotation1", "Rotation Range 1")
-                },
                 {SHADER_PROPERTY._GEOMETRY_ROTATION_REVERSE,new ShaderPropertyState(
                     "_GeometryRotationReverse", "Rotation Reverse")
                 },
