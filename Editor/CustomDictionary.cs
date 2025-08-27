@@ -112,6 +112,18 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 "_GeometryMessySource", "Messy Source")
                 },
 
+                { CUSTOM_PROPERTY._FRAGMENT_AUDIOLINK_NOISE_WAVE,new CustomPropertyState(
+                new List<string>(){"_","_FRAGMENT_AUDIOLINK_NOISE_WAVE"},
+                "_FragmentAudioLinkNoiseWave", "Fragment AudioLink Noise Wave")
+                },
+                { CUSTOM_PROPERTY._COLORING_AUDIOLINK_NOISE_WAVE,new CustomPropertyState(
+                new List<string>(){"_","_COLORING_AUDIOLINK_NOISE_WAVE"},
+                "_ColoringAudioLinkNoiseWave", "Coloring AudioLink Noise Wave")
+                },
+                { CUSTOM_PROPERTY._GEOMETRY_AUDIOLINK_NOISE_WAVE,new CustomPropertyState(
+                new List<string>(){"_","_GEOMETRY_AUDIOLINK_NOISE_WAVE"},
+                "_GeometryAudioLinkNoiseWave", "Geometry AudioLink Noise Wave")
+                },
 
 
                 { CUSTOM_PROPERTY._NOISE1ST_SPACE,new CustomPropertyState(
@@ -495,6 +507,56 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._PIXELIZATION,new ShaderPropertyState(
                     "_Pixelization", "Vertex Pixelization")
                 },
+
+
+                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_STRENGTH,new ShaderPropertyState(
+                    "_FragmentAudioLinkStrength", "Noise Wave Strength")
+                },
+                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_WAVE_MIRROR,new ShaderPropertyState(
+                    "_FragmentAudioLinkWaveMirror", "Noise Wave Mirror")
+                },
+                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_WAVE_TYPE,new ShaderPropertyState(
+                    "_FragmentAudioLinkWaveType", "Noise Wave Type")
+                },
+                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_WAVE_0,new ShaderPropertyState(
+                    "_FragmentAudioLinkWave0", "Noise Wave 0")
+                },
+                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_WAVE_1,new ShaderPropertyState(
+                    "_FragmentAudioLinkWave1", "Noise Wave 1")
+                },
+
+                {SHADER_PROPERTY._COLORING_AUDIOLINK_STRENGTH,new ShaderPropertyState(
+                    "_ColoringAudioLinkStrength", "Noise Wave Strength")
+                },
+                {SHADER_PROPERTY._COLORING_AUDIOLINK_WAVE_MIRROR,new ShaderPropertyState(
+                    "_ColoringAudioLinkWaveMirror", "Noise Wave Mirror")
+                },
+                {SHADER_PROPERTY._COLORING_AUDIOLINK_WAVE_TYPE,new ShaderPropertyState(
+                    "_ColoringAudioLinkWaveType", "Noise Wave Type")
+                },
+                {SHADER_PROPERTY._COLORING_AUDIOLINK_WAVE_0,new ShaderPropertyState(
+                    "_ColoringAudioLinkWave0", "Noise Wave 0")
+                },
+                {SHADER_PROPERTY._COLORING_AUDIOLINK_WAVE_1,new ShaderPropertyState(
+                    "_ColoringAudioLinkWave1", "Noise Wave 1")
+                },
+
+                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_STRENGTH,new ShaderPropertyState(
+                    "_GeometryAudioLinkStrength", "Noise Wave Strength")
+                },
+                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_WAVE_MIRROR,new ShaderPropertyState(
+                    "_GeometryAudioLinkWaveMirror", "Noise Wave Mirror")
+                },
+                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_WAVE_TYPE,new ShaderPropertyState(
+                    "_GeometryAudioLinkWaveType", "Noise Wave Type")
+                },
+                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_WAVE_0,new ShaderPropertyState(
+                    "_GeometryAudioLinkWave0", "Noise Wave 0")
+                },
+                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_WAVE_1,new ShaderPropertyState(
+                    "_GeometryAudioLinkWave1", "Noise Wave 1")
+                },
+
 
                 { SHADER_PROPERTY._NOISE1ST_OFFSET0,new ShaderPropertyState(
                     "_Noise1stOffset0", "Offset")

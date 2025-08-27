@@ -77,7 +77,6 @@ Shader "DeltaField/shaders/MeshHologram"{
         [KeywordEnum(Vertex,Side,Mesh)]
         _ColoringPartitionType("Coloring Partition Type",Int)=1
 
-
         [KeywordEnum(Value,Noise1st,Noise2nd,Noise3rd,AudioLink_VU,AudioLink_ChronoTensity)]
         _GeometrySource("Geometry Source",Int)=3
         _GeometryValue("Geometry Value",Range(0.0,1.0))=0.0
@@ -150,6 +149,30 @@ Shader "DeltaField/shaders/MeshHologram"{
         _PixelizationSpace("Vertex Pixelization Position Space",Int)=0
         _Pixelization("Vertex Pixelization",Vector)=(1.0,1.0,1.0,0.02)
 
+
+        [Toggle(_FRAGMENT_AUDIOLINK_NOISE_WAVE)]
+        _FragmentAudioLinkNoiseWave("Fragment AudioLink Noise Wave",Int)=0
+        _FragmentAudioLinkStrength("Strength",Float)=1.0
+        [MaterialToggle]_FragmentAudioLinkWaveMirror("Noise Wave Mirror",Int)=0.0
+        [MaterialToggle]_FragmentAudioLinkWaveType("Noise Wave Type",Int)=0.0
+        _FragmentAudioLinkWave0("Noise Wave 0",Float)=-1.0
+        _FragmentAudioLinkWave1("Noise Wave 1",Float)=1.0
+
+        [Toggle(_COLORING_AUDIOLINK_NOISE_WAVE)]
+        _ColoringAudioLinkNoiseWave("Coloring AudioLink Noise Wave",Int)=0
+        _ColoringAudioLinkStrength("Strength",Float)=1.0
+        [MaterialToggle]_ColoringAudioLinkWaveMirror("Noise Wave Mirror",Int)=0.0
+        [MaterialToggle]_ColoringAudioLinkWaveType("Noise Wave Type",Int)=0.0
+        _ColoringAudioLinkWave0("Noise Wave 0",Float)=-1.0
+        _ColoringAudioLinkWave1("Noise Wave 1",Float)=1.0
+
+        [Toggle(_GEOMETRY_AUDIOLINK_NOISE_WAVE)]
+        _GeometryAudioLinkNoiseWave("Geometry AudioLink Noise Wave",Int)=0
+        _GeometryAudioLinkStrength("Strength",Float)=1.0
+        [MaterialToggle]_GeometryAudioLinkWaveMirror("Noise Wave Mirror",Int)=0.0
+        [MaterialToggle]_GeometryAudioLinkWaveType("Noise Wave Type",Int)=0.0
+        _GeometryAudioLinkWave0("Noise Wave 0",Float)=-1.0
+        _GeometryAudioLinkWave1("Noise Wave 1",Float)=1.0
 
 
         _Noise1stOffset0("Noise 1st Offset",Vector)=(0.0,0.0,0.0,0.0)
@@ -319,6 +342,9 @@ Shader "DeltaField/shaders/MeshHologram"{
             #pragma shader_feature_local _GEOMETRYMESSYSOURCE_VALUE _GEOMETRYMESSYSOURCE_PRIMITIVE _GEOMETRYMESSYSOURCE_NOISE1ST _GEOMETRYMESSYSOURCE_NOISE2ND _GEOMETRYMESSYSOURCE_NOISE3RD
             #pragma shader_feature_local _ _ACTIVATE_GEOMETRYMESSY
 
+            #pragma shader_feature_local _ _FRAGMENT_AUDIOLINK_NOISE_WAVE
+            #pragma shader_feature_local _ _COLORING_AUDIOLINK_NOISE_WAVE
+            #pragma shader_feature_local _ _GEOMETRY_AUDIOLINK_NOISE_WAVE
 
 
             #pragma shader_feature_local _ORBITROTATIONREFAUDIOLINK_DISABLE _ORBITROTATIONREFAUDIOLINK_VU _ORBITROTATIONREFAUDIOLINK_CHRONOTENSITY
@@ -362,8 +388,8 @@ Shader "DeltaField/shaders/MeshHologram"{
             #include "Packages/com.deltafield.shader_commons/Includes/functions_stereo_merge.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/variables.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/functions_common.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/functions_noise.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/functions_thirdparties.hlsl"
+            #include "Packages/com.deltafield.meshhologram/Includes/functions_noise.hlsl"
 
             #include "Packages/com.deltafield.meshhologram/Includes/structs.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/functions_vert.hlsl"
@@ -449,6 +475,10 @@ Shader "DeltaField/shaders/MeshHologram"{
             #pragma shader_feature_local _PIXELIZATIONSPACE_DISABLE _PIXELIZATIONSPACE_MODEL _PIXELIZATIONSPACE_WORLD _PIXELIZATIONSPACE_POSTGEOMETRY
 
 
+            #pragma shader_feature_local _ _FRAGMENT_AUDIOLINK_NOISE_WAVE
+            #pragma shader_feature_local _ _COLORING_AUDIOLINK_NOISE_WAVE
+            #pragma shader_feature_local _ _GEOMETRY_AUDIOLINK_NOISE_WAVE
+
 
             #pragma shader_feature_local _NOISE1STSPACE_OFFSET _NOISE1STSPACE_MODEL _NOISE1STSPACE_WORLD _NOISE1STSPACE_ORIGIN_WORLD _NOISE1STSPACE_MODEL_WORLD _NOISE1STSPACE_VERTEXCOLOR
             #pragma shader_feature_local _ _NOISE1ST_OFFSET_BEFORE_SCALE
@@ -481,8 +511,8 @@ Shader "DeltaField/shaders/MeshHologram"{
             #include "Packages/com.deltafield.shader_commons/Includes/functions_stereo_merge.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/variables.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/functions_common.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/functions_noise.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/functions_thirdparties.hlsl"
+            #include "Packages/com.deltafield.meshhologram/Includes/functions_noise.hlsl"
 
             #include "Packages/com.deltafield.meshhologram/Includes/structs.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/functions_vert.hlsl"

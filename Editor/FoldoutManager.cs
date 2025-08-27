@@ -79,7 +79,16 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
         {
             foreach (FOLDOUT foldout in FoldoutList.Keys)
             {
-                FoldoutList[foldout].localized_text = MeshHologramInspector.LocalizationSystem.PropLangDic[FoldoutList[foldout].text];
+                string text = FoldoutList[foldout].text;
+                if (MeshHologramInspector.LocalizationSystem.PropLangDic.ContainsKey(text))
+                {
+                    FoldoutList[foldout].localized_text = MeshHologramInspector.LocalizationSystem.PropLangDic[text];
+                }
+                else
+                {
+                    Debug.LogWarning("Could not get localized text. -> " + text);
+                    FoldoutList[foldout].localized_text = text;
+                }
             }
         }
     }
