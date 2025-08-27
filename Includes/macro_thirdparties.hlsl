@@ -60,7 +60,7 @@
     #elif _ORBITWAVEREFAUDIOLINK_WAVE
         #define FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(n) max(_OrbitWaveAudioLinkWave0,min(_OrbitWaveAudioLinkWave1,MeshHAudioLinkWave(n,_OrbitWaveAudioLinkWaveType,_OrbitWaveAudioLinkWaveMirror)*_OrbitWaveAudioLinkStrength.xyz*_OrbitWaveAudioLinkStrength.w))
     #else
-        FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(n) 0.0
+        #define FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(n) 0.0
     #endif
 #else
     #define AUDIOLINK_VUBAND_MACRO 0.0
