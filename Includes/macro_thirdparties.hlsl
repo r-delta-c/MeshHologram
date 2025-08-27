@@ -54,10 +54,19 @@
     #else
         #define ORBIT_ROTATION_AUDIOLINK_MACRO 0.0
     #endif
+
+    #ifdef _ORBITWAVEREFAUDIOLINK_VU
+        #define FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(n) (audiolink_vu*_OrbitWaveAudioLinkStrength.xyz*_OrbitWaveAudioLinkStrength.w)
+    #elif _ORBITWAVEREFAUDIOLINK_WAVE
+        #define FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(n) max(_OrbitWaveAudioLinkWave0,min(_OrbitWaveAudioLinkWave1,MeshHAudioLinkWave(n,_OrbitWaveAudioLinkWaveType,_OrbitWaveAudioLinkWaveMirror)*_OrbitWaveAudioLinkStrength.xyz*_OrbitWaveAudioLinkStrength.w))
+    #else
+        FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(n) 0.0
+    #endif
 #else
     #define AUDIOLINK_VUBAND_MACRO 0.0
     #define ORBIT_ROTATION_AUDIOLINK_MACRO 0.0
     #define NOISE1ST_AUDIOLINK_PHASE_MACRO 0.0
     #define NOISE2ND_AUDIOLINK_PHASE_MACRO 0.0
     #define NOISE3RD_AUDIOLINK_PHASE_MACRO 0.0
+    #define FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(n) 0.0
 #endif

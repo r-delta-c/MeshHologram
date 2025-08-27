@@ -255,24 +255,45 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             float3 dir_pi2 = float3(_GeometryMessyOrbitRotation,_GeometryMessyOrbitRotationForward,_GeometryMessyOrbitRotationRight)*UNITY_PI*2.0;
             float3 orbit_anim = ORBIT_ROTATION_AUDIOLINK_MACRO;
             float3 geometrymessy_time = GEOMETRYMESSY_TIME_MACRO;
-
             #if defined(_GEOMETRYMESSYSOURCE_NOISE1ST) || defined(_GEOMETRYMESSYSOURCE_NOISE2ND) || defined(_GEOMETRYMESSYSOURCE_NOISE3RD)
                 float3 geometrymessy_center_noise = (inp[0].GEOMETRYMESSY_NOISE_MACRO+inp[1].GEOMETRYMESSY_NOISE_MACRO+inp[2].GEOMETRYMESSY_NOISE_MACRO)/3.0;
                 float geometrymessy_mask_offset = (GEOMETRYMESSY_OFFSET_MACRO(0)+GEOMETRYMESSY_OFFSET_MACRO(1)+GEOMETRYMESSY_OFFSET_MACRO(2))/3.0;
                 orbit_anim.xyz += GeometryMessyNoisePingPong(geometrymessy_center_noise,geometrymessy_mask_offset,geometrymessy_time)*_GeometryMessyOrbitVariance.xyz;
+                float3 audiolink_wave = FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(geometrymessy_center_noise);
             #elif defined(_GEOMETRYMESSYSOURCE_PRIMITIVE)
-                orbit_anim.xyz += random(id+_GeometryMessySeed)*_GeometryMessyOrbitVariance.xyz;
+                float random_id = random(id+_GeometryMessySeed);
+                orbit_anim.xyz += random_id*_GeometryMessyOrbitVariance.xyz;
+                float3 audiolink_wave = FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(random_id);
+
             #else
                 orbit_anim.xyz += _GeometryMessyOrbitVariance.xyz;
+                float3 audiolink_wave = FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(_GeometryValue);
             #endif
 
             float3 orbit_wave = float3(
-                sin((orbit_anim.x+_GeometryMessyOrbitWaveZPhase+GEOMETRY_ORBIT_Z_TIME_MACRO)*_GeometryMessyOrbitWaveZFrequency)*_GeometryMessyOrbitWaveZStrength,
-                sin((orbit_anim.x+_GeometryMessyOrbitWaveXYPhase+GEOMETRY_ORBIT_XY_TIME_MACRO)*_GeometryMessyOrbitWaveXYFrequency)*_GeometryMessyOrbitWaveXYStrength,
-                cos((orbit_anim.x+_GeometryMessyOrbitWaveXYPhase+GEOMETRY_ORBIT_XY_TIME_MACRO)*_GeometryMessyOrbitWaveXYFrequency)*_GeometryMessyOrbitWaveXYStrength
+                (orbit_anim.x+_GeometryMessyOrbitWaveZPhase+GEOMETRY_ORBIT_Z_TIME_MACRO),
+                (orbit_anim.x+_GeometryMessyOrbitWaveXYPhase+GEOMETRY_ORBIT_XY_TIME_MACRO),
+                (orbit_anim.x+_GeometryMessyOrbitWaveXYPhase+GEOMETRY_ORBIT_XY_TIME_MACRO)
             );
 
+            float3 orbit_wave_r = float3(
+                sin(orbit_wave.x*_GeometryMessyOrbitWaveZFrequency)*_GeometryMessyOrbitWaveZStrength,
+                sin(orbit_wave.y*_GeometryMessyOrbitWaveXYFrequency)*_GeometryMessyOrbitWaveXYStrength,
+                cos(orbit_wave.z*_GeometryMessyOrbitWaveXYFrequency)*_GeometryMessyOrbitWaveXYStrength
+            );
+
+            #ifdef _ORBITWAVEREFAUDIOLINK_VU
+                orbit_wave_r *= audiolink_wave;
+            #elif _ORBITWAVEREFAUDIOLINK_WAVE
+                orbit_wave_r += float3(
+                    audiolink_wave.x,
+                    audiolink_wave.y*sin(orbit_wave.y*_GeometryMessyOrbitWaveXYFrequency),
+                    audiolink_wave.z*cos(orbit_wave.z*_GeometryMessyOrbitWaveXYFrequency)
+                );
+            #endif
+
             orbit_anim += dir_pi2+geometrymessy_time;
+
 
             float3 orbit_dir = cos(orbit_anim.x)*inp[0].forward_dir*_GeometryMessyOrbitScaleZ + sin(orbit_anim.x)*inp[0].up_dir*_GeometryMessyOrbitScaleY;
             orbit_dir *= _GeometryMessyOrbitPosition.w+scale-1.0;
@@ -280,7 +301,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
 
             orbit_dir = RodriguesRotation(orbit_dir,orbit_anim.y,inp[0].forward_dir);
             orbit_dir = RodriguesRotation(orbit_dir,orbit_anim.z,right_dir);
-            orbit_dir += mul(UNITY_MATRIX_M,float4(orbit_wave*_GeometryMessyOrbitPosition.w,1.0));
+            orbit_dir += mul(UNITY_MATRIX_M,float4(orbit_wave_r*_GeometryMessyOrbitPosition.w,1.0));
 
             orbit[0] = orbit[0]+orbit_dir;
             orbit[1] = orbit[1]+orbit_dir;

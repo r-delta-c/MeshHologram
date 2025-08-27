@@ -19,7 +19,13 @@ float _DistanceInfluence;
     uint _AudioLinkChronoTensityType;
     uint _AudioLinkChronoTensityBand;
     uint _AudioLinkThemeColorBand;
+
     float4 _GeometryMessyOrbitAudioLinkStrength;
+    float4 _OrbitWaveAudioLinkStrength;
+    bool _OrbitWaveAudioLinkWaveMirror;
+    bool _OrbitWaveAudioLinkWaveType;
+    float _OrbitWaveAudioLinkWave0;
+    float _OrbitWaveAudioLinkWave1;
 #endif
 
 sampler2D _FragmentMaskControlTex;

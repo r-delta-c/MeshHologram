@@ -136,6 +136,13 @@ Shader "DeltaField/shaders/MeshHologram"{
         [KeywordEnum(Disable,VU,ChronoTensity)]
         _OrbitRotationRefAudioLink("Orbit Rotation Reference AudioLink",Int)=0
         _GeometryMessyOrbitAudioLinkStrength("Orbit Rotation AudioLink Strength",Vector)=(1.0,0.0,0.0,1.0)
+        [KeywordEnum(Disable,VU,Wave)]
+        _OrbitWaveRefAudioLink("Orbit Wave Reference AudioLink",Int)=0
+        _OrbitWaveAudioLinkStrength("Orbit Wave AudioLink Strength",Vector)=(1.0,1.0,1.0,1.0)
+        [MaterialToggle]_OrbitWaveAudioLinkWaveMirror("AudioLink Wave Mirror",Int)=0.0
+        [MaterialToggle]_OrbitWaveAudioLinkWaveType("AudioLink Wave Type",Int)=0.0
+        _OrbitWaveAudioLinkWave0("AudioLink Wave 0",Float)=-1.0
+        _OrbitWaveAudioLinkWave1("AudioLink Wave 1",Float)=1.0
 
         _GeometryPartitionBias("Geometry Partition Bias| Vertex <=> Center",Range(0.0,1.0))=0.5
 
@@ -323,6 +330,8 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #pragma shader_feature_local _ORBITROTATIONREFAUDIOLINK_DISABLE _ORBITROTATIONREFAUDIOLINK_VU _ORBITROTATIONREFAUDIOLINK_CHRONOTENSITY
 
+            #pragma shader_feature_local _ORBITWAVEREFAUDIOLINK_DISABLE _ORBITWAVEREFAUDIOLINK_VU _ORBITWAVEREFAUDIOLINK_WAVE
+
             #pragma shader_feature_local _PIXELIZATIONSPACE_DISABLE _PIXELIZATIONSPACE_MODEL _PIXELIZATIONSPACE_WORLD _PIXELIZATIONSPACE_POSTGEOMETRY
 
 
@@ -364,6 +373,7 @@ Shader "DeltaField/shaders/MeshHologram"{
             #include "Packages/com.deltafield.meshhologram/Includes/variables.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/functions_common.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/functions_noise.hlsl"
+            #include "Packages/com.deltafield.meshhologram/Includes/functions_thirdparties.hlsl"
 
             #include "Packages/com.deltafield.meshhologram/Includes/structs.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/functions_vert.hlsl"
@@ -444,6 +454,8 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #pragma shader_feature_local _ORBITROTATIONREFAUDIOLINK_DISABLE _ORBITROTATIONREFAUDIOLINK_VU _ORBITROTATIONREFAUDIOLINK_CHRONOTENSITY
 
+            #pragma shader_feature_local _ORBITWAVEREFAUDIOLINK_DISABLE _ORBITWAVEREFAUDIOLINK_VU _ORBITWAVEREFAUDIOLINK_WAVE
+
             #pragma shader_feature_local _PIXELIZATIONSPACE_DISABLE _PIXELIZATIONSPACE_MODEL _PIXELIZATIONSPACE_WORLD _PIXELIZATIONSPACE_POSTGEOMETRY
 
 
@@ -483,6 +495,7 @@ Shader "DeltaField/shaders/MeshHologram"{
             #include "Packages/com.deltafield.meshhologram/Includes/variables.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/functions_common.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/functions_noise.hlsl"
+            #include "Packages/com.deltafield.meshhologram/Includes/functions_thirdparties.hlsl"
 
             #include "Packages/com.deltafield.meshhologram/Includes/structs.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/functions_vert.hlsl"

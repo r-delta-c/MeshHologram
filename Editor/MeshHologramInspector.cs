@@ -685,6 +685,12 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_REF_AUDIOLINK);
                                     EditorGUILayout.Space(16);
                                     DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_AUDIOLINK_STRENGTH);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_REF_AUDIOLINK);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_STRENGTH);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_WAVE_MIRROR);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_WAVE_TYPE);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_WAVE_0);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_WAVE_1);
                                 }
                             }
                         }
