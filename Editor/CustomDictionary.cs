@@ -457,9 +457,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_Z_TIME_MULTIPLIER,new ShaderPropertyState(
                     "_GeometryMessyOrbitWaveZTimeMultiplier", "Orbit Wave Z Time Multiplier")
                 },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_REFERENCE_TIME,new ShaderPropertyState(
-                    "_GeometryMessyReferenceTime", "Orbit Rotation Reference Time")
-                },
                 {SHADER_PROPERTY._ORBIT_ROTATION_REF_AUDIOLINK,new ShaderPropertyState(
                     "_OrbitRotationRefAudioLink", "Orbit Rotation Reference AudioLink")
                 },
@@ -535,9 +532,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._NOISE1ST_PHASE_SCALE,new ShaderPropertyState(
                     "_Noise1stPhaseScale", "Phase Scale")
                 },
-                {SHADER_PROPERTY._NOISE1ST_REFERENCE_TIME,new ShaderPropertyState(
-                    "_Noise1stReferenceTime", "Reference Time")
-                },
                 {SHADER_PROPERTY._NOISE1ST_PHASE_REF_AUDIOLINK,new ShaderPropertyState(
                     "_Noise1stPhaseRefAudioLink", "Phase Reference AudioLink")
                 },
@@ -581,9 +575,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._NOISE2ND_PHASE_SCALE,new ShaderPropertyState(
                     "_Noise2ndPhaseScale", "Phase Scale")
                 },
-                {SHADER_PROPERTY._NOISE2ND_REFERENCE_TIME,new ShaderPropertyState(
-                    "_Noise2ndReferenceTime", "Reference Time")
-                },
                 {SHADER_PROPERTY._NOISE2ND_PHASE_REF_AUDIOLINK,new ShaderPropertyState(
                     "_Noise2ndPhaseRefAudioLink", "Phase Reference AudioLink")
                 },
@@ -626,9 +617,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 },
                 {SHADER_PROPERTY._NOISE3RD_PHASE_SCALE,new ShaderPropertyState(
                     "_Noise3rdPhaseScale", "Phase Scale")
-                },
-                {SHADER_PROPERTY._NOISE3RD_REFERENCE_TIME,new ShaderPropertyState(
-                    "_Noise3rdReferenceTime", "Reference Time")
                 },
                 {SHADER_PROPERTY._NOISE3RD_PHASE_REF_AUDIOLINK,new ShaderPropertyState(
                     "_Noise3rdPhaseRefAudioLink", "Phase Reference AudioLink")

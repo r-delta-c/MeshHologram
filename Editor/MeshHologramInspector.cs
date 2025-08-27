@@ -169,8 +169,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         DrawShaderProperty(SHADER_PROPERTY._NOISE1ST_TIME_MULTI);
                         DrawShaderProperty(SHADER_PROPERTY._NOISE1ST_TIME_PHASE);
                         DrawShaderProperty(SHADER_PROPERTY._NOISE1ST_PHASE_SCALE);
-                        DrawShaderProperty(SHADER_PROPERTY._NOISE1ST_REFERENCE_TIME);
-                        EditorGUILayout.Space(16);
                         DrawShaderProperty(SHADER_PROPERTY._NOISE1ST_PHASE_REF_AUDIOLINK);
                     }
                 }
@@ -215,8 +213,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         DrawShaderProperty(SHADER_PROPERTY._NOISE2ND_TIME_MULTI);
                         DrawShaderProperty(SHADER_PROPERTY._NOISE2ND_TIME_PHASE);
                         DrawShaderProperty(SHADER_PROPERTY._NOISE2ND_PHASE_SCALE);
-                        DrawShaderProperty(SHADER_PROPERTY._NOISE2ND_REFERENCE_TIME);
-                        EditorGUILayout.Space(16);
                         DrawShaderProperty(SHADER_PROPERTY._NOISE2ND_PHASE_REF_AUDIOLINK);
                     }
                 }
@@ -261,8 +257,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         DrawShaderProperty(SHADER_PROPERTY._NOISE3RD_TIME_MULTI);
                         DrawShaderProperty(SHADER_PROPERTY._NOISE3RD_TIME_PHASE);
                         DrawShaderProperty(SHADER_PROPERTY._NOISE3RD_PHASE_SCALE);
-                        DrawShaderProperty(SHADER_PROPERTY._NOISE3RD_REFERENCE_TIME);
-                        EditorGUILayout.Space(16);
                         DrawShaderProperty(SHADER_PROPERTY._NOISE3RD_PHASE_REF_AUDIOLINK);
                     }
                 }
@@ -681,7 +675,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                                     DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_Z_PHASE);
                                     DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_Z_TIME_MULTIPLIER);
                                     EditorGUILayout.Space(16);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_REFERENCE_TIME);
                                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_REF_AUDIOLINK);
                                     EditorGUILayout.Space(16);
                                     DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_AUDIOLINK_STRENGTH);

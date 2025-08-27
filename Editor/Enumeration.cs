@@ -143,7 +143,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         _GEOMETRY_MESSY_ORBIT_WAVE_Z_PHASE,
         _GEOMETRY_MESSY_ORBIT_WAVE_Z_TIME_MULTIPLIER,
 
-        _GEOMETRY_MESSY_ORBIT_REFERENCE_TIME,
         _ORBIT_ROTATION_REF_AUDIOLINK,
         _GEOMETRY_MESSY_ORBIT_AUDIOLINK_STRENGTH,
 
@@ -171,7 +170,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         _NOISE1ST_TIME_MULTI,
         _NOISE1ST_TIME_PHASE,
         _NOISE1ST_PHASE_SCALE,
-        _NOISE1ST_REFERENCE_TIME,
         _NOISE1ST_PHASE_REF_AUDIOLINK,
 
         _NOISE2ND_OFFSET0,
@@ -187,7 +185,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         _NOISE2ND_TIME_MULTI,
         _NOISE2ND_TIME_PHASE,
         _NOISE2ND_PHASE_SCALE,
-        _NOISE2ND_REFERENCE_TIME,
         _NOISE2ND_PHASE_REF_AUDIOLINK,
 
         _NOISE3RD_OFFSET0,
@@ -203,7 +200,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         _NOISE3RD_TIME_MULTI,
         _NOISE3RD_TIME_PHASE,
         _NOISE3RD_PHASE_SCALE,
-        _NOISE3RD_REFERENCE_TIME,
         _NOISE3RD_PHASE_REF_AUDIOLINK,
     }
 
