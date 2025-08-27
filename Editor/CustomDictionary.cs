@@ -463,8 +463,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._ORBIT_ROTATION_REF_AUDIOLINK,new ShaderPropertyState(
                     "_OrbitRotationRefAudioLink", "Orbit Rotation Reference AudioLink")
                 },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_AUDIOLINK_STRENGTH,new ShaderPropertyState(
-                    "_GeometryMessyOrbitAudioLinkStrength", "Orbit Rotation AudioLink Strength")
+                {SHADER_PROPERTY._ORBIT_ROTATION_AUDIOLINK_STRENGTH,new ShaderPropertyState(
+                    "_OrbitRotationAudioLinkStrength", "Orbit Rotation AudioLink Strength")
                 },
 
                 {SHADER_PROPERTY._ORBIT_WAVE_REF_AUDIOLINK,new ShaderPropertyState(
