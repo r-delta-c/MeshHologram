@@ -97,8 +97,8 @@ _Noise1stThresholdMul||Threshold(Mul)*||スレッショルド(乗算)*
 _Noise1stThresholdAdd||Threshold(Add)*||スレッショルド(加算)*
 _Noise1stTimeMulti||Time Multiplier*||時間乗算*
 _Noise1stTimePhase||Time Phase*||時間周期*
-_Noise1stMaskControlTex||Mask Control Tex*||オフセットコントロールテクスチャ*
-_Noise1stMaskControl||Strength*||強さ*
+_Noise1stOffsetControlTex||Mask Control Tex*||オフセットコントロールテクスチャ*
+_Noise1stOffsetControl||Strength*||強さ*
 _Noise1stPhaseScale||Value Phase Scale*||値の周期スケール*
 _Noise1stReferenceTime||Reference Time||時間の参照先
 _Noise1stPhaseRefAudioLink||Phase Ref AudioLink||AudioLinkの参照先
@@ -116,8 +116,8 @@ _Noise2ndThresholdMul||Threshold(Mul)*||スレッショルド(乗算)*
 _Noise2ndThresholdAdd||Threshold(Add)*||スレッショルド(加算)*
 _Noise2ndTimeMulti||Time Multiplier*||時間乗算*
 _Noise2ndTimePhase||Time Phase*||時間周期*
-_Noise2ndMaskControlTex||Mask Control Tex*||オフセットコントロールテクスチャ*
-_Noise2ndMaskControl||Strength*||強さ*
+_Noise2ndOffsetControlTex||Mask Control Tex*||オフセットコントロールテクスチャ*
+_Noise2ndOffsetControl||Strength*||強さ*
 _Noise2ndPhaseScale||Value Phase Scale*||値の周期スケール*
 _Noise2ndReferenceTime||Reference Time||時間の参照先
 _Noise2ndPhaseRefAudioLink||Phase Ref AudioLink||AudioLinkの参照先
@@ -135,8 +135,8 @@ _Noise3rdThresholdMul||Threshold(Mul)*||スレッショルド(乗算)*
 _Noise3rdThresholdAdd||Threshold(Add)*||スレッショルド(加算)*
 _Noise3rdTimeMulti||Time Multiplier*||時間乗算*
 _Noise3rdTimePhase||Time Phase*||時間周期*
-_Noise3rdMaskControlTex||Mask Control Tex*||オフセットコントロールテクスチャ*
-_Noise3rdMaskControl||Strength*||強さ*
+_Noise3rdOffsetControlTex||Mask Control Tex*||オフセットコントロールテクスチャ*
+_Noise3rdOffsetControl||Strength*||強さ*
 _Noise3rdPhaseScale||Value Phase Scale*||値の周期スケール*
 _Noise3rdReferenceTime||Reference Time||時間の参照先
 _Noise3rdPhaseRefAudioLink||Phase Ref AudioLink||AudioLinkの参照先
