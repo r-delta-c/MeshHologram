@@ -48,9 +48,9 @@
     #endif
 
     #ifdef _ORBITROTATIONREFAUDIOLINK_VU
-        #define ORBIT_ROTATION_AUDIOLINK_MACRO (float3(audiolink_vu*_GeometryMessyOrbitAudioLinkStrength.x,audiolink_vu*_GeometryMessyOrbitAudioLinkStrength.y,audiolink_vu*_GeometryMessyOrbitAudioLinkStrength.z)*_GeometryMessyOrbitAudioLinkStrength.w)
+        #define ORBIT_ROTATION_AUDIOLINK_MACRO (float3(audiolink_vu*_OrbitRotationAudioLinkStrength.x,audiolink_vu*_OrbitRotationAudioLinkStrength.y,audiolink_vu*_OrbitRotationAudioLinkStrength.z)*_OrbitRotationAudioLinkStrength.w)
     #elif _ORBITROTATIONREFAUDIOLINK_CHRONOTENSITY
-        #define ORBIT_ROTATION_AUDIOLINK_MACRO (float3(audiolink_chronotensity*_GeometryMessyOrbitAudioLinkStrength.x,audiolink_chronotensity*_GeometryMessyOrbitAudioLinkStrength.y,audiolink_chronotensity*_GeometryMessyOrbitAudioLinkStrength.z)*_GeometryMessyOrbitAudioLinkStrength.w)
+        #define ORBIT_ROTATION_AUDIOLINK_MACRO (float3(audiolink_chronotensity*_OrbitRotationAudioLinkStrength.x,audiolink_chronotensity*_OrbitRotationAudioLinkStrength.y,audiolink_chronotensity*_OrbitRotationAudioLinkStrength.z)*_OrbitRotationAudioLinkStrength.w)
     #else
         #define ORBIT_ROTATION_AUDIOLINK_MACRO 0.0
     #endif

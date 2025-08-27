@@ -20,7 +20,7 @@ float _DistanceInfluence;
     uint _AudioLinkChronoTensityBand;
     uint _AudioLinkThemeColorBand;
 
-    float4 _GeometryMessyOrbitAudioLinkStrength;
+    float4 _OrbitRotationAudioLinkStrength;
     float4 _OrbitWaveAudioLinkStrength;
     bool _OrbitWaveAudioLinkWaveMirror;
     bool _OrbitWaveAudioLinkWaveType;

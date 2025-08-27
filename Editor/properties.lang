@@ -78,7 +78,7 @@ _GeometryMessyOrbitVariance||Orbit Variance*||Orbitのバラつき*
 _GeometryMessyTimeMultiplier||Orbit Time Multiplier*||Orbit 時間乗算*
 _GeometryMessyReferenceTime||Orbit Rotation Reference Time||Orbit 時間の参照先
 _OrbitRotationRefAudioLink||Orbit Rotation Reference AudioLink||Orbit 回転 AudioLinkの参照先
-_GeometryMessyOrbitAudioLinkStrength||Orbit Rotation AudioLink*||Orbit AudioLink回転の強さ*
+_OrbitRotationAudioLinkStrength||Orbit Rotation AudioLink*||Orbit AudioLink回転の強さ*
 
 _GeometryPartitionBias||Geometry Partition Bias | Vertex<=>Center*||ジオメトリの区切りの偏り | 頂点<=>中心*
 _PixelizationSpace||Vertex Pixelization Position Space||頂点モザイク化の空間

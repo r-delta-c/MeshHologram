@@ -135,7 +135,7 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         [KeywordEnum(Disable,VU,ChronoTensity)]
         _OrbitRotationRefAudioLink("Orbit Rotation Reference AudioLink",Int)=0
-        _GeometryMessyOrbitAudioLinkStrength("Orbit Rotation AudioLink Strength",Vector)=(1.0,0.0,0.0,1.0)
+        _OrbitRotationAudioLinkStrength("Orbit Rotation AudioLink Strength",Vector)=(1.0,0.0,0.0,1.0)
         [KeywordEnum(Disable,VU,Wave)]
         _OrbitWaveRefAudioLink("Orbit Wave Reference AudioLink",Int)=0
         _OrbitWaveAudioLinkStrength("Orbit Wave AudioLink Strength",Vector)=(1.0,1.0,1.0,1.0)
