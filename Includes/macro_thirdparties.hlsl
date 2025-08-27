@@ -62,6 +62,21 @@
     #else
         #define FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(n) 0.0
     #endif
+    #ifdef _FRAGMENT_AUDIOLINK_NOISE_WAVE
+        #define FUNC_FRAGMENT_AUDIOLINK_NOISE_WAVE_MACRO(n) max(_FragmentAudioLinkWave0,min(_FragmentAudioLinkWave1,MeshHAudioLinkWave(n,_FragmentAudioLinkWaveType,_FragmentAudioLinkWaveMirror)*_FragmentAudioLinkStrength))
+    #else
+        #define FUNC_FRAGMENT_AUDIOLINK_NOISE_WAVE_MACRO(n) (n)
+    #endif
+    #ifdef _COLORING_AUDIOLINK_NOISE_WAVE
+        #define FUNC_COLORING_AUDIOLINK_NOISE_WAVE_MACRO(n) max(_ColoringAudioLinkWave0,min(_ColoringAudioLinkWave1,MeshHAudioLinkWave(n,_ColoringAudioLinkWaveType,_ColoringAudioLinkWaveMirror)*_ColoringAudioLinkStrength))
+    #else
+        #define FUNC_COLORING_AUDIOLINK_NOISE_WAVE_MACRO(n) (n)
+    #endif
+    #ifdef _GEOMETRY_AUDIOLINK_NOISE_WAVE
+        #define FUNC_GEOMETRY_AUDIOLINK_NOISE_WAVE_MACRO(n) max(_GeometryAudioLinkWave0,min(_GeometryAudioLinkWave1,MeshHAudioLinkWave(n,_GeometryAudioLinkWaveType,_GeometryAudioLinkWaveMirror)*_GeometryAudioLinkStrength))
+    #else
+        #define FUNC_GEOMETRY_AUDIOLINK_NOISE_WAVE_MACRO(n) (n)
+    #endif
 #else
     #define AUDIOLINK_VUBAND_MACRO 0.0
     #define ORBIT_ROTATION_AUDIOLINK_MACRO 0.0
@@ -69,4 +84,7 @@
     #define NOISE2ND_AUDIOLINK_PHASE_MACRO 0.0
     #define NOISE3RD_AUDIOLINK_PHASE_MACRO 0.0
     #define FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(n) 0.0
+    #define FUNC_FRAGMENT_AUDIOLINK_NOISE_WAVE_MACRO(n) (n)
+    #define FUNC_COLORING_AUDIOLINK_NOISE_WAVE_MACRO(n) (n)
+    #define FUNC_GEOMETRY_AUDIOLINK_NOISE_WAVE_MACRO(n) (n)
 #endif

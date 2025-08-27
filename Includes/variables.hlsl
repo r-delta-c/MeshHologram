@@ -88,6 +88,24 @@ float _GeometryMessyOrbitWaveZTimeMultiplier;
 float _GeometryPartitionBias;
 float4 _Pixelization;
 
+float _FragmentAudioLinkStrength;
+bool _FragmentAudioLinkWaveMirror;
+bool _FragmentAudioLinkWaveType;
+float _FragmentAudioLinkWave0;
+float _FragmentAudioLinkWave1;
+
+float _ColoringAudioLinkStrength;
+bool _ColoringAudioLinkWaveMirror;
+bool _ColoringAudioLinkWaveType;
+float _ColoringAudioLinkWave0;
+float _ColoringAudioLinkWave1;
+
+float _GeometryAudioLinkStrength;
+bool _GeometryAudioLinkWaveMirror;
+bool _GeometryAudioLinkWaveType;
+float _GeometryAudioLinkWave0;
+float _GeometryAudioLinkWave1;
+
 #if defined(_FRAGMENTSOURCE_NOISE1ST) || defined(_COLORINGSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_GEOMETRYMESSYSOURCE_NOISE1ST)
     float3 _Noise1stOffset0;
     float3 _Noise1stOffset1;

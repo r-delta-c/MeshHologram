@@ -31,7 +31,8 @@
     // }
 
     float FragmentNoisePingPong(float3 inputs, float offset, float time){
-        return saturate(FRAGMENT_METHOD_NOISEMAP_MACRO(FragmentNoiseRaw(inputs,offset,time),FRAGMENT_FUNC_VALUECARVE_MACRO));
+        float r = saturate(FRAGMENT_METHOD_NOISEMAP_MACRO(FragmentNoiseRaw(inputs,offset,time),FRAGMENT_FUNC_VALUECARVE_MACRO));
+        return FUNC_FRAGMENT_AUDIOLINK_NOISE_WAVE_MACRO(r);
     }
     // float FragmentNoiseRepeat(float3 inputs, float offset, float time){
     //     return saturate(FRAGMENT_METHOD_NOISEMAP_MACRO(FragmentRepeatNoiseRaw(inputs,offset,time),FRAGMENT_FUNC_VALUECARVE_MACRO));
@@ -39,7 +40,8 @@
 
     float FragmentSidePosNoise(float3 v0, float3 v1, float3 v, float3 c, float offset, float time){
         float3 side_center = (v0+v1+VertexCenterBias(v0,v1,v,c,saturate(_TriangleComp/26.0)*0.5+0.5))/3.0;
-        return FragmentNoiseRaw(side_center, offset, time);
+        float r = FragmentNoiseRaw(side_center, offset, time);
+        return FUNC_FRAGMENT_AUDIOLINK_NOISE_WAVE_MACRO(r);
     }
 #endif
 
@@ -60,12 +62,14 @@
     }
 
     float ColorNoisePingPong(float3 inputs, float offset, float time){
-        return saturate(COLOR_METHOD_NOISEMAP_MACRO(ColorNoiseRaw(inputs,offset,time),COLOR_FUNC_VALUECARVE_MACRO));
+        float r = saturate(COLOR_METHOD_NOISEMAP_MACRO(ColorNoiseRaw(inputs,offset,time),COLOR_FUNC_VALUECARVE_MACRO));
+        return FUNC_COLORING_AUDIOLINK_NOISE_WAVE_MACRO(r);
     }
 
     float ColorSidePosNoisePingPong(float3 v0, float3 v1, float3 v, float3 c, float offset, float time){
         float3 side_center = (v0+v1+VertexCenterBias(v0,v1,v,c,saturate(_TriangleComp/26.0)*0.5+0.5))/3.0;
-        return ColorNoisePingPong(side_center,offset,time);
+        float r = ColorNoisePingPong(side_center,offset,time);
+        return FUNC_COLORING_AUDIOLINK_NOISE_WAVE_MACRO(r);
     }
 
 #endif
@@ -103,10 +107,12 @@
     }
 
     float GeometryNoisePingPong(float3 inputs, float offset, float time){
-        return saturate(GEOMETRY_METHOD_NOISEMAP_MACRO(GeometryNoiseRaw(inputs,offset,time),GEOMETRY_FUNC_VALUECARVE_MACRO));
+        float r = saturate(GEOMETRY_METHOD_NOISEMAP_MACRO(GeometryNoiseRaw(inputs,offset,time),GEOMETRY_FUNC_VALUECARVE_MACRO));
+        return FUNC_GEOMETRY_AUDIOLINK_NOISE_WAVE_MACRO(r);
     }
     float GeometryNoiseRepeat(float3 inputs, float offset, float time){
-        return saturate(GEOMETRY_METHOD_NOISEMAP_MACRO(GeometryRepeatNoiseRaw(inputs,offset,time),GEOMETRY_FUNC_VALUECARVE_MACRO));
+        float r = saturate(GEOMETRY_METHOD_NOISEMAP_MACRO(GeometryRepeatNoiseRaw(inputs,offset,time),GEOMETRY_FUNC_VALUECARVE_MACRO));
+        return FUNC_GEOMETRY_AUDIOLINK_NOISE_WAVE_MACRO(r);
     }
 
 #endif

@@ -479,6 +479,21 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_MASK_CONTROL_TEX);
                         DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_MASK_CONTROL);
                         EditorGUILayout.Space(16);
+
+                        using (new EditorGUILayout.VerticalScope("HelpBox"))
+                        {
+                            DrawCustomProperty(targetMat, CUSTOM_PROPERTY._FRAGMENT_AUDIOLINK_NOISE_WAVE, true);
+                            if (CustomProperties[CUSTOM_PROPERTY._FRAGMENT_AUDIOLINK_NOISE_WAVE].value == 1)
+                            {
+                                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_STRENGTH);
+                                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_WAVE_MIRROR);
+                                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_WAVE_TYPE);
+                                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_WAVE_0);
+                                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_WAVE_1);
+                            }
+                        }
+
+                        EditorGUILayout.Space(16);
                         DrawCustomProperty(targetMat, CUSTOM_PROPERTY._FRAGMENT_SOURCE);
                         switch (CustomProperties[CUSTOM_PROPERTY._FRAGMENT_SOURCE].value)
                         {
@@ -546,6 +561,21 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         DrawShaderProperty(SHADER_PROPERTY._COLORING_MASK_CONTROL_TEX);
                         DrawShaderProperty(SHADER_PROPERTY._COLORING_MASK_CONTROL);
                         EditorGUILayout.Space(16);
+
+                        using (new EditorGUILayout.VerticalScope("HelpBox"))
+                        {
+                            DrawCustomProperty(targetMat, CUSTOM_PROPERTY._COLORING_AUDIOLINK_NOISE_WAVE, true);
+                            if (CustomProperties[CUSTOM_PROPERTY._COLORING_AUDIOLINK_NOISE_WAVE].value == 1)
+                            {
+                                DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_STRENGTH);
+                                DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_WAVE_MIRROR);
+                                DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_WAVE_TYPE);
+                                DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_WAVE_0);
+                                DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_WAVE_1);
+                            }
+                        }
+
+                        EditorGUILayout.Space(16);
                         DrawCustomProperty(targetMat, CUSTOM_PROPERTY._COLORING_SOURCE);
                         switch (CustomProperties[CUSTOM_PROPERTY._COLORING_SOURCE].value)
                         {
@@ -605,6 +635,21 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         EditorGUILayout.Space(16);
                         DrawShaderProperty(SHADER_PROPERTY._PIXELIZATION_SPACE);
                         DrawShaderProperty(SHADER_PROPERTY._PIXELIZATION);
+                        EditorGUILayout.Space(16);
+
+                        using (new EditorGUILayout.VerticalScope("HelpBox"))
+                        {
+                            DrawCustomProperty(targetMat, CUSTOM_PROPERTY._GEOMETRY_AUDIOLINK_NOISE_WAVE, true);
+                            if (CustomProperties[CUSTOM_PROPERTY._GEOMETRY_AUDIOLINK_NOISE_WAVE].value == 1)
+                            {
+                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_STRENGTH);
+                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_WAVE_MIRROR);
+                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_WAVE_TYPE);
+                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_WAVE_0);
+                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_WAVE_1);
+                            }
+                        }
+
                         EditorGUILayout.Space(16);
                         DrawCustomProperty(targetMat, CUSTOM_PROPERTY._GEOMETRY_SOURCE);
                         switch (CustomProperties[CUSTOM_PROPERTY._GEOMETRY_SOURCE].value)
