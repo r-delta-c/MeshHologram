@@ -198,6 +198,9 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._PREVIEW_MODE,new ShaderPropertyState(
                     "_PreviewMode", "Preview Mode")
                 },
+                {SHADER_PROPERTY._ANTI_ALIASING,new ShaderPropertyState(
+                    "_AntiAliasing", "Anti Aliasing")
+                },
 
                 {SHADER_PROPERTY._BLEND_OP,new ShaderPropertyState(
                     "_BlendOp", "Blend Operation")
@@ -287,22 +290,22 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     "_GeometryMessyMaskControl", "Messy Mask Control Strength")
                 },
                 {SHADER_PROPERTY._NOISE1ST_OFFSET_CONTROL_TEX,new ShaderPropertyState(
-                    "_Noise1stMaskControlTex", "Noise 1st Offset Control Tex")
+                    "_Noise1stOffsetControlTex", "Noise 1st Offset Control Tex")
                 },
                 {SHADER_PROPERTY._NOISE1ST_OFFSET_CONTROL,new ShaderPropertyState(
-                    "_Noise1stMaskControl", "Noise 1st Offset Control Strength")
+                    "_Noise1stOffsetControl", "Noise 1st Offset Control Strength")
                 },
                 {SHADER_PROPERTY._NOISE2ND_OFFSET_CONTROL_TEX,new ShaderPropertyState(
-                    "_Noise2ndMaskControlTex", "Noise 2nd Offset Control Tex")
+                    "_Noise2ndOffsetControlTex", "Noise 2nd Offset Control Tex")
                 },
                 {SHADER_PROPERTY._NOISE2ND_OFFSET_CONTROL,new ShaderPropertyState(
-                    "_Noise2ndMaskControl", "Noise 2nd Offset Control")
+                    "_Noise2ndOffsetControl", "Noise 2nd Offset Control")
                 },
                 {SHADER_PROPERTY._NOISE3RD_OFFSET_CONTROL_TEX,new ShaderPropertyState(
-                    "_Noise3rdMaskControlTex", "Noise 3rd Offset Control Tex")
+                    "_Noise3rdOffsetControlTex", "Noise 3rd Offset Control Tex")
                 },
                 {SHADER_PROPERTY._NOISE3RD_OFFSET_CONTROL,new ShaderPropertyState(
-                    "_Noise3rdMaskControl", "Noise 3rd Offset Control")
+                    "_Noise3rdOffsetControl", "Noise 3rd Offset Control")
                 },
 
                 {SHADER_PROPERTY._AUDIOLINK_VU_BAND,new ShaderPropertyState(

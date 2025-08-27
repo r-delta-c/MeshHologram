@@ -46,6 +46,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         _AMBIENT_INFLUENCE,
         _LIGHTVOLUMES_INFLUENCE,
         _PREVIEW_MODE,
+        _ANTI_ALIASING,
 
         _BLEND_OP,
         _SRC_BLEND,
