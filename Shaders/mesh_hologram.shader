@@ -10,6 +10,8 @@ Shader "DeltaField/shaders/MeshHologram"{
         _BillboardMode("Billboard Mode(Feature)",Int)=0
         [Toggle(_PREVIEW_MODE)]
         _PreviewMode("Preview Mode(Feature)",Int)=0
+        [Toggle(_ANTI_ALIASING)]
+        _AntiAliasing("Anti Aliasing",Int)=0
         _DistanceInfluence("Distance Influence",Range(0.0,1.0))=1.0
 
         [Toggle(_ACTIVATE_DIRECTIONALLIGHT_INFLUENCE)]
@@ -410,6 +412,7 @@ Shader "DeltaField/shaders/MeshHologram"{
             #pragma shader_feature_local _ _PREVIEW_MODE
             #pragma shader_feature_local _ _BILLBOARD_MODE
             #pragma shader_feature_local _ _USE_AUDIOLINK
+            #pragma shader_feature_local _ _ANTI_ALIASING
 
             #pragma shader_feature_local _ _ACTIVATE_DIRECTIONALLIGHT_INFLUENCE
             #pragma shader_feature_local _ _ACTIVATE_AMBIENT_INFLUENCE

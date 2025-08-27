@@ -25,7 +25,10 @@
         c.rgb = saturate(draw*c.rgb);
         c.a = 1.0;
     #else
-        c.a = saturate((saturate(draw)*i.alpha*c.a));
+        c.a = saturate(draw)*i.alpha*c.a;
+        #ifdef _ANTI_ALIASING
+            c.a = saturate(c.a+fwidth(c.a)*0.5);
+        #endif
     #endif
 
     c.rgb *= saturate(c.rgb)*(max(0.0,_Emission)+1.0);

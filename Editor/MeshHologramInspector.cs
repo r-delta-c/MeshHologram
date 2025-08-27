@@ -400,6 +400,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         EditorGUILayout.Space(16);
                         DrawShaderProperty(SHADER_PROPERTY._PREVIEW_MODE);
                         EditorGUILayout.Space(16);
+                        DrawShaderProperty(SHADER_PROPERTY._ANTI_ALIASING);
+                        EditorGUILayout.Space(16);
                         DrawShaderProperty(SHADER_PROPERTY._MAIN_TEX);
 
                     }
