@@ -432,7 +432,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_ROTATION_TIME_MULTIPLIER,new ShaderPropertyState(
                     "_GeometryMessyOrbitRotationTimeMultiplier", "Orbit Rotation Time Multiplier")
                 },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_XY_STRENGTH,new ShaderPropertyState(
+
+                { SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_XY_STRENGTH,new ShaderPropertyState(
                     "_GeometryMessyOrbitWaveXYStrength", "Orbit Wave XY Strength")
                 },
                 {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_XY_FREQUENCY,new ShaderPropertyState(
@@ -465,6 +466,26 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_AUDIOLINK_STRENGTH,new ShaderPropertyState(
                     "_GeometryMessyOrbitAudioLinkStrength", "Orbit Rotation AudioLink Strength")
                 },
+
+                {SHADER_PROPERTY._ORBIT_WAVE_REF_AUDIOLINK,new ShaderPropertyState(
+                    "_OrbitWaveRefAudioLink", "Orbit Wave Reference AudioLink")
+                },
+                {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_STRENGTH,new ShaderPropertyState(
+                    "_OrbitWaveAudioLinkStrength", "Orbit Wave AudioLink Strength")
+                },
+                {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_WAVE_MIRROR,new ShaderPropertyState(
+                    "_OrbitWaveAudioLinkWaveMirror", "AudioLink Wave Mirror")
+                },
+                {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_WAVE_TYPE,new ShaderPropertyState(
+                    "_OrbitWaveAudioLinkWaveType", "AudioLink Wave Type")
+                },
+                {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_WAVE_0,new ShaderPropertyState(
+                    "_OrbitWaveAudioLinkWave0", "AudioLink Wave 0")
+                },
+                {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_WAVE_1,new ShaderPropertyState(
+                    "_OrbitWaveAudioLinkWave1", "AudioLink Wave 1")
+                },
+
                 { SHADER_PROPERTY._GEOMETRY_PARTITION_BIAS,new ShaderPropertyState(
                     "_GeometryPartitionBias", "Geometry Partition Bias| Vertex <=> Center")
                 },
