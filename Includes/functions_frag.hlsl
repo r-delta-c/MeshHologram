@@ -70,9 +70,9 @@
             float coloring_t = saturate(
                 max(sides.x*coloring_side.x,max(sides.y*coloring_side.y,sides.z*coloring_side.z)));
             coloring_t = lerp(coloring_t,1.0,(i.color_noise.x+i.color_noise.y+i.color_noise.z)/3.0*1.1);
-            c = tex2Dlod(_ColorGradientTex,float4(coloring_t*0.994+0.004,0.5,0.0,0.0));
+            c = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColorGradientTex, _linear_repeat,float2(coloring_t*0.994+0.004,0.5),0.0);
         #else
-            c = tex2Dlod(_ColorGradientTex,float4(i.color_noise*0.994+0.004,0.5,0.0,0.0));
+            c = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColorGradientTex, _linear_repeat,float2(i.color_noise*0.994+0.004,0.5),0.0);
         #endif
     #elif _COLORSOURCE_VERTEXCOLOR
         c = i.vertex_color;

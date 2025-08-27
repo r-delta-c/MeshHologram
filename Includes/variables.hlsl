@@ -7,7 +7,7 @@ float _Forced_Z_Scale_Zero;
 float _DistanceInfluence;
 
 #ifdef _USE_AUDIOLINK
-    sampler2D _AudioLinkMaskControlTex;
+    UNITY_DECLARE_TEX2D_NOSAMPLER(_AudioLinkMaskControlTex);
     float4 _AudioLinkMaskControl_ST;
     float _AudioLinkMaskControl;
     float _AudioLinkVUBand;
@@ -28,15 +28,15 @@ float _DistanceInfluence;
     float _OrbitWaveAudioLinkWave1;
 #endif
 
-sampler2D _FragmentMaskControlTex;
+UNITY_DECLARE_TEX2D_NOSAMPLER(_FragmentMaskControlTex);
 float4 _FragmentMaskControl_ST;
-sampler2D _ColoringMaskControlTex;
+UNITY_DECLARE_TEX2D_NOSAMPLER(_ColoringMaskControlTex);
 float4 _ColoringMaskControl_ST;
-sampler2D _GeometryMaskControlTex;
+UNITY_DECLARE_TEX2D_NOSAMPLER(_GeometryMaskControlTex);
 float4 _GeometryMaskControl_ST;
-sampler2D _GeometryMessyMaskControlTex;
+UNITY_DECLARE_TEX2D_NOSAMPLER(_GeometryMessyMaskControlTex);
 float4 _GeometryMessyMaskControl_ST;
-sampler2D _ColorGradientTex;
+UNITY_DECLARE_TEX2D_NOSAMPLER(_ColorGradientTex);
 float4 _ColorGradientTex_ST;
 
 float _FragmentValue;
@@ -99,9 +99,9 @@ float4 _Pixelization;
     float _Noise1stValueCurve;
     float _Noise1stTimeMulti;
     float _Noise1stTimePhase;
-    sampler2D _Noise1stMaskControlTex;
-    float4 _Noise1stMaskControl_ST;
-    float _Noise1stMaskControl;
+    UNITY_DECLARE_TEX2D_NOSAMPLER(_Noise1stOffsetControlTex);
+    float4 _Noise1stOffsetControl_ST;
+    float _Noise1stOffsetControl;
     float _Noise1stPhaseScale;
 #endif
 
@@ -116,9 +116,9 @@ float4 _Pixelization;
     float _Noise2ndValueCurve;
     float _Noise2ndTimeMulti;
     float _Noise2ndTimePhase;
-    sampler2D _Noise2ndMaskControlTex;
-    float4 _Noise2ndMaskControl_ST;
-    float _Noise2ndMaskControl;
+    UNITY_DECLARE_TEX2D_NOSAMPLER(_Noise2ndOffsetControlTex);
+    float4 _Noise2ndOffsetControl_ST;
+    float _Noise2ndOffsetControl;
     float _Noise2ndPhaseScale;
 #endif
 
@@ -133,10 +133,13 @@ float4 _Pixelization;
     float _Noise3rdValueCurve;
     float _Noise3rdTimeMulti;
     float _Noise3rdTimePhase;
-    sampler2D _Noise3rdMaskControlTex;
-    float4 _Noise3rdMaskControl_ST;
-    float _Noise3rdMaskControl;
+    UNITY_DECLARE_TEX2D_NOSAMPLER(_Noise3rdOffsetControlTex);
+    float4 _Noise3rdOffsetControl_ST;
+    float _Noise3rdOffsetControl;
     float _Noise3rdPhaseScale;
 #endif
+
+SamplerState sampler_point_clamp;
+SamplerState sampler_linear_repeat;
 
 float4 dummy;

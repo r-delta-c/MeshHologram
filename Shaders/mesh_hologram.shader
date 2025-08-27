@@ -168,8 +168,8 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         _Noise1stTimeMulti("Noise 1st Time Multiplier",Float)=3.0
         _Noise1stTimePhase("Noise 1st Time Phase",Float)=0.0
-        _Noise1stMaskControlTex("Noise 1st Mask Control Tex",2D)="white"{}
-        _Noise1stMaskControl("Noise 1st Phase Offset Mask Control Strength",Range(0.0,1.0))=1.0
+        _Noise1stOffsetControlTex("Noise 1st Offset Control Tex",2D)="white"{}
+        _Noise1stOffsetControl("Noise 1st Phase Offset Control Strength",Range(0.0,1.0))=1.0
         _Noise1stPhaseScale("Noise 1st Phase Scale",Float)=3.0
         [KeywordEnum(Disable,VU,ChronoTensity)]
         _Noise1stPhaseRefAudioLink("Noise 1st Phase Reference AudioLink",Int)=0
@@ -193,8 +193,8 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         _Noise2ndTimeMulti("Noise 2nd Time Multiplier",Float)=5.0
         _Noise2ndTimePhase("Noise 2nd Time Phase",Float)=0.0
-        _Noise2ndMaskControlTex("Noise 2nd Mask Control Tex",2D)="white"{}
-        _Noise2ndMaskControl("Noise 2nd Phase Offset Mask Control Strength",Range(0.0,1.0))=1.0
+        _Noise2ndOffsetControlTex("Noise 2nd Offset Control Tex",2D)="white"{}
+        _Noise2ndOffsetControl("Noise 2nd Phase Offset Control Strength",Range(0.0,1.0))=1.0
         _Noise2ndPhaseScale("Noise 2nd Phase Scale",Float)=3.0
 
         [KeywordEnum(Disable,VU,ChronoTensity)]
@@ -219,8 +219,8 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         _Noise3rdTimeMulti("Noise 3rd Time Multiplier",Float)=3.0
         _Noise3rdTimePhase("Noise 3rd Time Phase",Float)=0.0
-        _Noise3rdMaskControlTex("Noise 3rd Mask Control Tex",2D)="white"{}
-        _Noise3rdMaskControl("Noise 3rd Phase Offset Mask Control Strength",Range(0.0,1.0))=1.0
+        _Noise3rdOffsetControlTex("Noise 3rd Control Tex",2D)="white"{}
+        _Noise3rdOffsetControl("Noise 3rd Phase Offset Control Strength",Range(0.0,1.0))=1.0
         _Noise3rdPhaseScale("Noise 3rd Phase Scale",Float)=3.0
 
         [KeywordEnum(Disable,VU,ChronoTensity)]
@@ -484,7 +484,7 @@ Shader "DeltaField/shaders/MeshHologram"{
             #include "Packages/com.deltafield.meshhologram/Includes/structs.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/functions_vert.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/functions_geom.hlsl"
-            fixed4 frag(g2f i):SV_Target{
+            fixed4 frag(g2f i) : SV_Target{
                 #include "Packages/com.deltafield.meshhologram/Includes/functions_frag.hlsl"
                 #include "Packages/com.deltafield.meshhologram/Includes/functions_frag_mesh.hlsl"
             }

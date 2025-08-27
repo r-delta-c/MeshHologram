@@ -20,23 +20,23 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     TEX2D_NOISE2ND_MACRO float noise2nd_offset[3];
     TEX2D_NOISE3RD_MACRO float noise3rd_offset[3];
     float audiolink_mask[3];
-    fragment_mask[0] = lerp(1.0,tex2Dlod(_FragmentMaskControlTex, float4(inp[0].uv,0.0,0.0)),_FragmentMaskControl);
-    fragment_mask[1] = lerp(1.0,tex2Dlod(_FragmentMaskControlTex, float4(inp[1].uv,0.0,0.0)),_FragmentMaskControl);
-    fragment_mask[2] = lerp(1.0,tex2Dlod(_FragmentMaskControlTex, float4(inp[2].uv,0.0,0.0)),_FragmentMaskControl);
-    coloring_mask[0] = lerp(1.0,tex2Dlod(_ColoringMaskControlTex, float4(inp[0].uv,0.0,0.0)),_ColoringMaskControl);
-    coloring_mask[1] = lerp(1.0,tex2Dlod(_ColoringMaskControlTex, float4(inp[1].uv,0.0,0.0)),_ColoringMaskControl);
-    coloring_mask[2] = lerp(1.0,tex2Dlod(_ColoringMaskControlTex, float4(inp[2].uv,0.0,0.0)),_ColoringMaskControl);
-    geometry_mask[0] = lerp(1.0,tex2Dlod(_GeometryMaskControlTex, float4(inp[0].uv,0.0,0.0)),_GeometryMaskControl);
-    geometry_mask[1] = lerp(1.0,tex2Dlod(_GeometryMaskControlTex, float4(inp[1].uv,0.0,0.0)),_GeometryMaskControl);
-    geometry_mask[2] = lerp(1.0,tex2Dlod(_GeometryMaskControlTex, float4(inp[2].uv,0.0,0.0)),_GeometryMaskControl);
-    geometry_messy_mask[0] = lerp(1.0,tex2Dlod(_GeometryMessyMaskControlTex, float4(inp[0].uv,0.0,0.0)),_GeometryMessyMaskControl);
-    geometry_messy_mask[1] = lerp(1.0,tex2Dlod(_GeometryMessyMaskControlTex, float4(inp[1].uv,0.0,0.0)),_GeometryMessyMaskControl);
-    geometry_messy_mask[2] = lerp(1.0,tex2Dlod(_GeometryMessyMaskControlTex, float4(inp[2].uv,0.0,0.0)),_GeometryMessyMaskControl);
+    fragment_mask[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_FragmentMaskControlTex,_point_clamp, inp[0].uv, 0.0),_FragmentMaskControl);
+    fragment_mask[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_FragmentMaskControlTex,_point_clamp, inp[1].uv, 0.0),_FragmentMaskControl);
+    fragment_mask[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_FragmentMaskControlTex,_point_clamp, inp[2].uv, 0.0),_FragmentMaskControl);
+    coloring_mask[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColoringMaskControlTex,_point_clamp, inp[0].uv, 0.0),_ColoringMaskControl);
+    coloring_mask[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColoringMaskControlTex,_point_clamp, inp[1].uv, 0.0),_ColoringMaskControl);
+    coloring_mask[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColoringMaskControlTex,_point_clamp, inp[2].uv, 0.0),_ColoringMaskControl);
+    geometry_mask[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_GeometryMaskControlTex,_point_clamp, inp[0].uv, 0.0),_GeometryMaskControl);
+    geometry_mask[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_GeometryMaskControlTex,_point_clamp, inp[1].uv, 0.0),_GeometryMaskControl);
+    geometry_mask[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_GeometryMaskControlTex,_point_clamp, inp[2].uv, 0.0),_GeometryMaskControl);
+    geometry_messy_mask[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_GeometryMessyMaskControlTex,_point_clamp, inp[0].uv, 0.0),_GeometryMessyMaskControl);
+    geometry_messy_mask[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_GeometryMessyMaskControlTex,_point_clamp, inp[1].uv, 0.0),_GeometryMessyMaskControl);
+    geometry_messy_mask[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_GeometryMessyMaskControlTex,_point_clamp, inp[2].uv, 0.0),_GeometryMessyMaskControl);
 
     #if defined(_FRAGMENTSOURCE_NOISE1ST) || defined(_COLORINGSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_GEOMETRYMESSYSOURCE_NOISE1ST)
-        TEX2D_NOISE1ST_MACRO noise1st_offset[0] = lerp(1.0,tex2Dlod(_Noise1stMaskControlTex, float4(inp[0].uv,0.0,0.0)),_Noise1stMaskControl);
-        TEX2D_NOISE1ST_MACRO noise1st_offset[1] = lerp(1.0,tex2Dlod(_Noise1stMaskControlTex, float4(inp[1].uv,0.0,0.0)),_Noise1stMaskControl);
-        TEX2D_NOISE1ST_MACRO noise1st_offset[2] = lerp(1.0,tex2Dlod(_Noise1stMaskControlTex, float4(inp[2].uv,0.0,0.0)),_Noise1stMaskControl);
+        TEX2D_NOISE1ST_MACRO noise1st_offset[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise1stOffsetControlTex, _point_clamp, inp[0].uv, 0.0),_Noise1stOffsetControl);
+        TEX2D_NOISE1ST_MACRO noise1st_offset[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise1stOffsetControlTex, _point_clamp, inp[1].uv, 0.0),_Noise1stOffsetControl);
+        TEX2D_NOISE1ST_MACRO noise1st_offset[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise1stOffsetControlTex, _point_clamp, inp[2].uv, 0.0),_Noise1stOffsetControl);
     #else
         noise1st_offset[0] = 1.0;
         noise1st_offset[1] = 1.0;
@@ -44,9 +44,9 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     #endif
 
     #if defined(_FRAGMENTSOURCE_NOISE2ND) || defined(_COLORINGSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_GEOMETRYMESSYSOURCE_NOISE2ND)
-        TEX2D_NOISE2ND_MACRO noise2nd_offset[0] = lerp(1.0,tex2Dlod(_Noise2ndMaskControlTex, float4(inp[0].uv,0.0,0.0)),_Noise2ndMaskControl);
-        TEX2D_NOISE2ND_MACRO noise2nd_offset[1] = lerp(1.0,tex2Dlod(_Noise2ndMaskControlTex, float4(inp[1].uv,0.0,0.0)),_Noise2ndMaskControl);
-        TEX2D_NOISE2ND_MACRO noise2nd_offset[2] = lerp(1.0,tex2Dlod(_Noise2ndMaskControlTex, float4(inp[2].uv,0.0,0.0)),_Noise2ndMaskControl);
+        TEX2D_NOISE2ND_MACRO noise2nd_offset[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise2ndOffsetControlTex, _point_clamp, inp[0].uv, 0.0),_Noise2ndOffsetControl);
+        TEX2D_NOISE2ND_MACRO noise2nd_offset[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise2ndOffsetControlTex, _point_clamp, inp[1].uv, 0.0),_Noise2ndOffsetControl);
+        TEX2D_NOISE2ND_MACRO noise2nd_offset[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise2ndOffsetControlTex, _point_clamp, inp[2].uv, 0.0),_Noise2ndOffsetControl);
     #else
         noise2nd_offset[0] = 1.0;
         noise2nd_offset[1] = 1.0;
@@ -54,9 +54,9 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     #endif
 
     #if defined(_FRAGMENTSOURCE_NOISE3RD) || defined(_COLORINGSOURCE_NOISE3RD) || defined(_GEOMETRYSOURCE_NOISE3RD) || defined(_GEOMETRYMESSYSOURCE_NOISE3RD)
-        TEX2D_NOISE3RD_MACRO noise3rd_offset[0] = lerp(1.0,tex2Dlod(_Noise3rdMaskControlTex, float4(inp[0].uv,0.0,0.0)),_Noise3rdMaskControl);
-        TEX2D_NOISE3RD_MACRO noise3rd_offset[1] = lerp(1.0,tex2Dlod(_Noise3rdMaskControlTex, float4(inp[1].uv,0.0,0.0)),_Noise3rdMaskControl);
-        TEX2D_NOISE3RD_MACRO noise3rd_offset[2] = lerp(1.0,tex2Dlod(_Noise3rdMaskControlTex, float4(inp[2].uv,0.0,0.0)),_Noise3rdMaskControl);
+        TEX2D_NOISE3RD_MACRO noise3rd_offset[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise3rdOffsetControlTex, _point_clamp, inp[0].uv, 0.0),_Noise3rdOffsetControl);
+        TEX2D_NOISE3RD_MACRO noise3rd_offset[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise3rdOffsetControlTex, _point_clamp, inp[1].uv, 0.0),_Noise3rdOffsetControl);
+        TEX2D_NOISE3RD_MACRO noise3rd_offset[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise3rdOffsetControlTex, _point_clamp, inp[2].uv, 0.0),_Noise3rdOffsetControl);
     #else
         noise3rd_offset[0] = 1.0;
         noise3rd_offset[1] = 1.0;
@@ -64,9 +64,9 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     #endif
 
     #ifdef _USE_AUDIOLINK
-        audiolink_mask[0] = lerp(1.0,tex2Dlod(_AudioLinkMaskControlTex, float4(inp[0].uv,0.0,0.0)),_AudioLinkMaskControl);
-        audiolink_mask[1] = lerp(1.0,tex2Dlod(_AudioLinkMaskControlTex, float4(inp[1].uv,0.0,0.0)),_AudioLinkMaskControl);
-        audiolink_mask[2] = lerp(1.0,tex2Dlod(_AudioLinkMaskControlTex, float4(inp[2].uv,0.0,0.0)),_AudioLinkMaskControl);
+        audiolink_mask[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_AudioLinkMaskControlTex, _point_clamp, inp[0].uv, 0.0),_AudioLinkMaskControl);
+        audiolink_mask[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_AudioLinkMaskControlTex, _point_clamp, inp[1].uv, 0.0),_AudioLinkMaskControl);
+        audiolink_mask[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_AudioLinkMaskControlTex, _point_clamp, inp[2].uv, 0.0),_AudioLinkMaskControl);
 
         float4 audiolink_vu_band = lerp(AudioLinkData(ALPASS_FILTEREDAUDIOLINK+uint2(_AudioLinkVUSmooth,_AudioLinkVUBand)),AudioLinkData(ALPASS_FILTEREDVU_INTENSITY),max(0.0,_AudioLinkVUBand-4.0));
         float audiolink_vu = saturate(lerp(audiolink_vu_band.r,audiolink_vu_band.b,_AudioLinkVUPanning)*_AudioLinkVUGainMul+_AudioLinkVUGainAdd);
