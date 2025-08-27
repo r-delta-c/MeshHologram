@@ -253,19 +253,17 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
                 geometry_pos[1]-geometry_center+_GeometryMessyOrbitPosition.xyz,
                 geometry_pos[2]-geometry_center+_GeometryMessyOrbitPosition.xyz};
             float3 dir_pi2 = float3(_GeometryMessyOrbitRotation,_GeometryMessyOrbitRotationForward,_GeometryMessyOrbitRotationRight)*UNITY_PI*2.0;
-            float3 orbit_anim = GEOMETRYMESSY_TIME_MACRO+ORBIT_ROTATION_AUDIOLINK_MACRO;
-            float geometrymessy_time = GEOMETRYMESSY_TIME_MACRO;
+            float3 orbit_anim = ORBIT_ROTATION_AUDIOLINK_MACRO;
+            float3 geometrymessy_time = GEOMETRYMESSY_TIME_MACRO;
 
             #if defined(_GEOMETRYMESSYSOURCE_NOISE1ST) || defined(_GEOMETRYMESSYSOURCE_NOISE2ND) || defined(_GEOMETRYMESSYSOURCE_NOISE3RD)
                 float3 geometrymessy_center_noise = (inp[0].GEOMETRYMESSY_NOISE_MACRO+inp[1].GEOMETRYMESSY_NOISE_MACRO+inp[2].GEOMETRYMESSY_NOISE_MACRO)/3.0;
                 float geometrymessy_mask_offset = (GEOMETRYMESSY_OFFSET_MACRO(0)+GEOMETRYMESSY_OFFSET_MACRO(1)+GEOMETRYMESSY_OFFSET_MACRO(2))/3.0;
-                orbit_anim.xy += GeometryMessyNoisePingPong(geometrymessy_center_noise,geometrymessy_mask_offset,geometrymessy_time)*_GeometryMessyOrbitVariance.xy;
-                orbit_anim.z = sin(GeometryMessyNoisePingPong(geometrymessy_center_noise,geometrymessy_mask_offset,geometrymessy_time)*_GeometryMessyOrbitVariance.z+orbit_anim.z)*_GeometryMessyOrbitVariance.w;
+                orbit_anim.xyz += GeometryMessyNoisePingPong(geometrymessy_center_noise,geometrymessy_mask_offset,geometrymessy_time)*_GeometryMessyOrbitVariance.xyz;
             #elif defined(_GEOMETRYMESSYSOURCE_PRIMITIVE)
                 orbit_anim.xyz += random(id+_GeometryMessySeed)*_GeometryMessyOrbitVariance.xyz;
             #else
-                orbit_anim.xy += _GeometryMessyOrbitVariance.xy;
-                orbit_anim.z = sin(_GeometryMessyOrbitVariance.z+orbit_anim.z)*_GeometryMessyOrbitVariance.w;
+                orbit_anim.xyz += _GeometryMessyOrbitVariance.xyz;
             #endif
 
             float3 orbit_wave = float3(
@@ -273,7 +271,8 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
                 sin((orbit_anim.x+_GeometryMessyOrbitWaveXYPhase+GEOMETRY_ORBIT_XY_TIME_MACRO)*_GeometryMessyOrbitWaveXYFrequency)*_GeometryMessyOrbitWaveXYStrength,
                 cos((orbit_anim.x+_GeometryMessyOrbitWaveXYPhase+GEOMETRY_ORBIT_XY_TIME_MACRO)*_GeometryMessyOrbitWaveXYFrequency)*_GeometryMessyOrbitWaveXYStrength
             );
-            orbit_anim += dir_pi2;
+
+            orbit_anim += dir_pi2+geometrymessy_time;
 
             float3 orbit_dir = cos(orbit_anim.x)*inp[0].forward_dir*_GeometryMessyOrbitScaleZ + sin(orbit_anim.x)*inp[0].up_dir*_GeometryMessyOrbitScaleY;
             orbit_dir *= _GeometryMessyOrbitPosition.w+scale-1.0;
