@@ -119,8 +119,6 @@ Shader "DeltaField/shaders/MeshHologram"{
         _GeometryMessyOrbitScaleZ("Messy Orbit Scale Z",Range(-8.0,8.0))=0.5
 
         _GeometryMessyOrbitVariance("Messy Orbit Variance",Vector)=(1.0,0.0,0.0,1.0)
-        [KeywordEnum(ShaderTime,Manual)]
-        _GeometryMessyReferenceTime("Orbit Rotation Reference Time",Int)=0
 
         _GeometryMessyOrbitRotationPhase("Orbit Rotation Phase",Vector)=(0.0,0.0,0.0,0.0)
         _GeometryMessyOrbitRotationTimeMultiplier("Orbit Rotation Time Multiplier",Vector)=(4.0,2.0,0.0,1.0)
@@ -173,8 +171,6 @@ Shader "DeltaField/shaders/MeshHologram"{
         _Noise1stMaskControlTex("Noise 1st Mask Control Tex",2D)="white"{}
         _Noise1stMaskControl("Noise 1st Phase Offset Mask Control Strength",Range(0.0,1.0))=1.0
         _Noise1stPhaseScale("Noise 1st Phase Scale",Float)=3.0
-        [KeywordEnum(ShaderTime,Manual)]
-        _Noise1stReferenceTime("Noise 1st Reference Time",Int)=0
         [KeywordEnum(Disable,VU,ChronoTensity)]
         _Noise1stPhaseRefAudioLink("Noise 1st Phase Reference AudioLink",Int)=0
 
@@ -200,8 +196,6 @@ Shader "DeltaField/shaders/MeshHologram"{
         _Noise2ndMaskControlTex("Noise 2nd Mask Control Tex",2D)="white"{}
         _Noise2ndMaskControl("Noise 2nd Phase Offset Mask Control Strength",Range(0.0,1.0))=1.0
         _Noise2ndPhaseScale("Noise 2nd Phase Scale",Float)=3.0
-        [KeywordEnum(ShaderTime,Manual)]
-        _Noise2ndReferenceTime("Noise 2nd Reference Time",Int)=0
 
         [KeywordEnum(Disable,VU,ChronoTensity)]
         _Noise2ndPhaseRefAudioLink("Noise 2nd Phase Reference AudioLink",Int)=0
@@ -228,8 +222,6 @@ Shader "DeltaField/shaders/MeshHologram"{
         _Noise3rdMaskControlTex("Noise 3rd Mask Control Tex",2D)="white"{}
         _Noise3rdMaskControl("Noise 3rd Phase Offset Mask Control Strength",Range(0.0,1.0))=1.0
         _Noise3rdPhaseScale("Noise 3rd Phase Scale",Float)=3.0
-        [KeywordEnum(ShaderTime,Manual)]
-        _Noise3rdReferenceTime("Noise 3rd Reference Time",Int)=0
 
         [KeywordEnum(Disable,VU,ChronoTensity)]
         _Noise3rdPhaseRefAudioLink("Noise 3rd Phase Reference AudioLink",Int)=0
@@ -324,7 +316,6 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #pragma shader_feature_local _GEOMETRYMESSYSOURCE_VALUE _GEOMETRYMESSYSOURCE_PRIMITIVE _GEOMETRYMESSYSOURCE_NOISE1ST _GEOMETRYMESSYSOURCE_NOISE2ND _GEOMETRYMESSYSOURCE_NOISE3RD
             #pragma shader_feature_local _ _ACTIVATE_GEOMETRYMESSY
-            #pragma shader_feature_local _GEOMETRYMESSYREFERENCETIME_SHADERTIME _GEOMETRYMESSYREFERENCETIME_MANUAL
 
 
 
@@ -338,17 +329,14 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #pragma shader_feature_local _NOISE1STSPACE_OFFSET _NOISE1STSPACE_MODEL _NOISE1STSPACE_WORLD _NOISE1STSPACE_ORIGIN_WORLD _NOISE1STSPACE_MODEL_WORLD _NOISE1STSPACE_VERTEXCOLOR
             #pragma shader_feature_local _ _NOISE1ST_OFFSET_BEFORE_SCALE
-            #pragma shader_feature_local _NOISE1STREFERENCETIME_SHADERTIME _NOISE1STREFERENCETIME_MANUAL
             #pragma shader_feature_local _NOISE1STPHASEREFAUDIOLINK_DISABLE _NOISE1STPHASEREFAUDIOLINK_VU _NOISE1STPHASEREFAUDIOLINK_CHRONOTENSITY
 
             #pragma shader_feature_local _NOISE2NDSPACE_OFFSET _NOISE2NDSPACE_MODEL _NOISE2NDSPACE_WORLD _NOISE2NDSPACE_ORIGIN_WORLD _NOISE2NDSPACE_MODEL_WORLD _NOISE2NDSPACE_VERTEXCOLOR
             #pragma shader_feature_local _ _NOISE2ND_OFFSET_BEFORE_SCALE
-            #pragma shader_feature_local _NOISE2NDREFERENCETIME_SHADERTIME _NOISE2NDREFERENCETIME_MANUAL
             #pragma shader_feature_local _NOISE2NDPHASEREFAUDIOLINK_DISABLE _NOISE2NDPHASEREFAUDIOLINK_VU _NOISE2NDPHASEREFAUDIOLINK_CHRONOTENSITY
 
             #pragma shader_feature_local _NOISE3RDSPACE_OFFSET _NOISE3RDSPACE_MODEL _NOISE3RDSPACE_WORLD _NOISE3RDSPACE_ORIGIN_WORLD _NOISE3RDSPACE_MODEL_WORLD _NOISE3RDSPACE_VERTEXCOLOR
             #pragma shader_feature_local _ _NOISE3RD_OFFSET_BEFORE_SCALE
-            #pragma shader_feature_local _NOISE3RDREFERENCETIME_SHADERTIME _NOISE3RDREFERENCETIME_MANUAL
             #pragma shader_feature_local _NOISE3RDPHASEREFAUDIOLINK_DISABLE _NOISE3RDPHASEREFAUDIOLINK_VU _NOISE3RDPHASEREFAUDIOLINK_CHRONOTENSITY
 
             #pragma shader_feature_local _ _NOISE1ST_CURVE_INVERSE
@@ -448,7 +436,6 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #pragma shader_feature_local _GEOMETRYMESSYSOURCE_VALUE _GEOMETRYMESSYSOURCE_PRIMITIVE _GEOMETRYMESSYSOURCE_NOISE1ST _GEOMETRYMESSYSOURCE_NOISE2ND _GEOMETRYMESSYSOURCE_NOISE3RD
             #pragma shader_feature_local _ _ACTIVATE_GEOMETRYMESSY
-            #pragma shader_feature_local _GEOMETRYMESSYREFERENCETIME_SHADERTIME _GEOMETRYMESSYREFERENCETIME_MANUAL
 
 
 
@@ -462,17 +449,14 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #pragma shader_feature_local _NOISE1STSPACE_OFFSET _NOISE1STSPACE_MODEL _NOISE1STSPACE_WORLD _NOISE1STSPACE_ORIGIN_WORLD _NOISE1STSPACE_MODEL_WORLD _NOISE1STSPACE_VERTEXCOLOR
             #pragma shader_feature_local _ _NOISE1ST_OFFSET_BEFORE_SCALE
-            #pragma shader_feature_local _NOISE1STREFERENCETIME_SHADERTIME _NOISE1STREFERENCETIME_MANUAL
             #pragma shader_feature_local _NOISE1STPHASEREFAUDIOLINK_DISABLE _NOISE1STPHASEREFAUDIOLINK_VU _NOISE1STPHASEREFAUDIOLINK_CHRONOTENSITY
 
             #pragma shader_feature_local _NOISE2NDSPACE_OFFSET _NOISE2NDSPACE_MODEL _NOISE2NDSPACE_WORLD _NOISE2NDSPACE_ORIGIN_WORLD _NOISE2NDSPACE_MODEL_WORLD _NOISE2NDSPACE_VERTEXCOLOR
             #pragma shader_feature_local _ _NOISE2ND_OFFSET_BEFORE_SCALE
-            #pragma shader_feature_local _NOISE2NDREFERENCETIME_SHADERTIME _NOISE2NDREFERENCETIME_MANUAL
             #pragma shader_feature_local _NOISE2NDPHASEREFAUDIOLINK_DISABLE _NOISE2NDPHASEREFAUDIOLINK_VU _NOISE2NDPHASEREFAUDIOLINK_CHRONOTENSITY
 
             #pragma shader_feature_local _NOISE3RDSPACE_OFFSET _NOISE3RDSPACE_MODEL _NOISE3RDSPACE_WORLD _NOISE3RDSPACE_ORIGIN_WORLD _NOISE3RDSPACE_MODEL_WORLD _NOISE3RDSPACE_VERTEXCOLOR
             #pragma shader_feature_local _ _NOISE3RD_OFFSET_BEFORE_SCALE
-            #pragma shader_feature_local _NOISE3RDREFERENCETIME_SHADERTIME _NOISE3RDREFERENCETIME_MANUAL
             #pragma shader_feature_local _NOISE3RDPHASEREFAUDIOLINK_DISABLE _NOISE3RDPHASEREFAUDIOLINK_VU _NOISE3RDPHASEREFAUDIOLINK_CHRONOTENSITY
 
             #pragma shader_feature_local _ _NOISE1ST_CURVE_INVERSE
