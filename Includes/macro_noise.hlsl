@@ -331,25 +331,9 @@
     #define GEOMETRYMESSY_NOISE_MACRO _GeometryMessyValue
 #endif
 
-
-
-#ifdef _NOISE1ST_CURVE_INVERSE
-    #define NOISE1STMAP01_METHOD_MACRO(i,m) EaseInOutPowInverse(i,m)
-#else
-    #define NOISE1STMAP01_METHOD_MACRO(i,m) EaseInOutPow(i,m)
-#endif
-
-#ifdef _NOISE2ND_CURVE_INVERSE
-    #define NOISE2NDMAP01_METHOD_MACRO(i,m) EaseInOutPowInverse(i,m)
-#else
-    #define NOISE2NDMAP01_METHOD_MACRO(i,m) EaseInOutPow(i,m)
-#endif
-
-#ifdef _NOISE3RD_CURVE_INVERSE
-    #define NOISE3RDMAP01_METHOD_MACRO(i,m) EaseInOutPowInverse(i,m)
-#else
-    #define NOISE3RDMAP01_METHOD_MACRO(i,m) EaseInOutPow(i,m)
-#endif
+#define NOISE1STMAP01_METHOD_MACRO(i,m) EaseCurveValue(i,m,_Noise1stCurveType)
+#define NOISE2NDMAP01_METHOD_MACRO(i,m) EaseCurveValue(i,m,_Noise2ndCurveType)
+#define NOISE3RDMAP01_METHOD_MACRO(i,m) EaseCurveValue(i,m,_Noise3rdCurveType)
 
 #ifdef _GEOMETRY_ROTATION_NOISE_REPEAT
     #define GEOMETRY_FUNC_NOISE_MACRO GeometryNoiseRepeat
