@@ -186,8 +186,7 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         _Noise1stSeed("Noise 1st Seed",Float)=0.0
         _Noise1stValueCurve("Noise 1st Value Curve",Float)=0.5
-        [Toggle(_NOISE1ST_CURVE_INVERSE)]
-        _Noise1stCurveType("Noise 1st Curve Type",Int)=1
+        [MaterialToggle]_Noise1stCurveType("Noise 1st Curve Type",Int)=1
         _Noise1stThresholdMul("Noise 1st Threshold(Multiple)",Float)=1.0
         _Noise1stThresholdAdd("Noise 1st Threshold(Addition)",Range(-0.5,0.5))=0.0
 
@@ -211,8 +210,7 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         _Noise2ndSeed("Noise 2nd Seed",Float)=1.0
         _Noise2ndValueCurve("Noise 2nd Value Curve",Float)=1.0
-        [Toggle(_NOISE2ND_CURVE_INVERSE)]
-        _Noise2ndCurveType("Noise 2nd Curve Type",Int)=1
+        [MaterialToggle]_Noise2ndCurveType("Noise 2nd Curve Type",Int)=1
         _Noise2ndThresholdMul("Noise 2nd Threshold(Multiple)",Float)=1.0
         _Noise2ndThresholdAdd("Noise 2nd Threshold(Addition)",Range(-0.5,0.5))=0.0
 
@@ -237,8 +235,7 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         _Noise3rdSeed("Noise 3rd Seed",Float)=2.0
         _Noise3rdValueCurve("Noise 3rd Value Curve",Float)=3.0
-        [Toggle(_NOISE3RD_CURVE_INVERSE)]
-        _Noise3rdCurveType("Noise 3rd Curve Type",Int)=0
+        [MaterialToggle]_Noise3rdCurveType("Noise 3rd Curve Type",Int)=0
         _Noise3rdThresholdMul("Noise 3rd Threshold(Multiple)",Float)=3.0
         _Noise3rdThresholdAdd("Noise 3rd Threshold(Addition)",Range(-0.5,0.5))=0.0
 
@@ -339,6 +336,8 @@ Shader "DeltaField/shaders/MeshHologram"{
             #pragma shader_feature_local _ _GEOMETRY_ROTATION
             #pragma shader_feature_local _ _GEOMETRY_ROTATION_NOISE_REPEAT
 
+            #pragma shader_feature_local _TTTT_SOURCE_VALUE _TTTT_SOURCE_NOISE1ST _TTTT_SOURCE_NOISE2ND _TTTT_SOURCE_NOISE3RD 
+
             #pragma shader_feature_local _GEOMETRYMESSYSOURCE_VALUE _GEOMETRYMESSYSOURCE_PRIMITIVE _GEOMETRYMESSYSOURCE_NOISE1ST _GEOMETRYMESSYSOURCE_NOISE2ND _GEOMETRYMESSYSOURCE_NOISE3RD
             #pragma shader_feature_local _ _ACTIVATE_GEOMETRYMESSY
 
@@ -366,10 +365,6 @@ Shader "DeltaField/shaders/MeshHologram"{
             #pragma shader_feature_local _NOISE3RDSPACE_OFFSET _NOISE3RDSPACE_MODEL _NOISE3RDSPACE_WORLD _NOISE3RDSPACE_ORIGIN_WORLD _NOISE3RDSPACE_MODEL_WORLD _NOISE3RDSPACE_VERTEXCOLOR
             #pragma shader_feature_local _ _NOISE3RD_OFFSET_BEFORE_SCALE
             #pragma shader_feature_local _NOISE3RDPHASEREFAUDIOLINK_DISABLE _NOISE3RDPHASEREFAUDIOLINK_VU _NOISE3RDPHASEREFAUDIOLINK_CHRONOTENSITY
-
-            #pragma shader_feature_local _ _NOISE1ST_CURVE_INVERSE
-            #pragma shader_feature_local _ _NOISE2ND_CURVE_INVERSE
-            #pragma shader_feature_local _ _NOISE3RD_CURVE_INVERSE
 
             #pragma shader_feature_local _ _USE_FWIDTH
 
@@ -463,6 +458,8 @@ Shader "DeltaField/shaders/MeshHologram"{
             #pragma shader_feature_local _ _GEOMETRY_ROTATION
             #pragma shader_feature_local _ _GEOMETRY_ROTATION_NOISE_REPEAT
 
+            #pragma shader_feature_local _TTTT_SOURCE_VALUE _TTTT_SOURCE_NOISE1ST _TTTT_SOURCE_NOISE2ND _TTTT_SOURCE_NOISE3RD
+
             #pragma shader_feature_local _GEOMETRYMESSYSOURCE_VALUE _GEOMETRYMESSYSOURCE_PRIMITIVE _GEOMETRYMESSYSOURCE_NOISE1ST _GEOMETRYMESSYSOURCE_NOISE2ND _GEOMETRYMESSYSOURCE_NOISE3RD
             #pragma shader_feature_local _ _ACTIVATE_GEOMETRYMESSY
 
@@ -491,10 +488,6 @@ Shader "DeltaField/shaders/MeshHologram"{
             #pragma shader_feature_local _NOISE3RDSPACE_OFFSET _NOISE3RDSPACE_MODEL _NOISE3RDSPACE_WORLD _NOISE3RDSPACE_ORIGIN_WORLD _NOISE3RDSPACE_MODEL_WORLD _NOISE3RDSPACE_VERTEXCOLOR
             #pragma shader_feature_local _ _NOISE3RD_OFFSET_BEFORE_SCALE
             #pragma shader_feature_local _NOISE3RDPHASEREFAUDIOLINK_DISABLE _NOISE3RDPHASEREFAUDIOLINK_VU _NOISE3RDPHASEREFAUDIOLINK_CHRONOTENSITY
-
-            #pragma shader_feature_local _ _NOISE1ST_CURVE_INVERSE
-            #pragma shader_feature_local _ _NOISE2ND_CURVE_INVERSE
-            #pragma shader_feature_local _ _NOISE3RD_CURVE_INVERSE
 
             #pragma shader_feature_local _ _USE_FWIDTH
 

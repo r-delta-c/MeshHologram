@@ -26,3 +26,7 @@ float Inverse12(float x, float r){
 float GenNoise(float3 inputs, float offset, float time, float seed, float phasescale){
     return (ValueNoise3D(inputs,seed)+offset)*phasescale+time;
 }
+
+float EaseCurveValue(float i, float m, bool b){
+    return b?EaseInOutPowInverse(i,m):EaseInOutPow(i,m);
+}
