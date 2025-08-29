@@ -379,6 +379,9 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._FRAGMENT_VALUE,new ShaderPropertyState(
                     "_FragmentValue", "Fragment Value")
                 },
+                {SHADER_PROPERTY._FRAGMENT_INVERSE,new ShaderPropertyState(
+                    "_FragmentInverse", "Fragment Inverse")
+                },
                 {SHADER_PROPERTY._PARTITION_TYPE,new ShaderPropertyState(
                     "_PartitionType", "Partition Type")
                 },

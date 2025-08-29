@@ -494,6 +494,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         }
 
                         EditorGUILayout.Space(16);
+                        DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_INVERSE);
                         DrawCustomProperty(targetMat, CUSTOM_PROPERTY._FRAGMENT_SOURCE);
                         switch (CustomProperties[CUSTOM_PROPERTY._FRAGMENT_SOURCE].value)
                         {
