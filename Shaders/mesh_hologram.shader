@@ -151,36 +151,36 @@ Shader "DeltaField/shaders/MeshHologram"{
         [KeywordEnum(Disable,VU,Wave)]
         _OrbitWaveRefAudioLink("Orbit Wave Reference AudioLink",Int)=0
         _OrbitWaveAudioLinkStrength("Orbit Wave AudioLink Strength",Vector)=(1.0,1.0,1.0,1.0)
-        [MaterialToggle]_OrbitWaveAudioLinkWaveMirror("AudioLink Wave Mirror",Int)=0.0
-        [MaterialToggle]_OrbitWaveAudioLinkWaveType("AudioLink Wave Type",Int)=0.0
-        _OrbitWaveAudioLinkWave0("AudioLink Wave 0",Float)=-1.0
-        _OrbitWaveAudioLinkWave1("AudioLink Wave 1",Float)=1.0
+        [MaterialToggle]_OrbitWaveAudioLinkSpectrogramMirror("AudioLink Wave Mirror",Int)=0.0
+        [MaterialToggle]_OrbitWaveAudioLinkSpectrogramType("AudioLink Wave Type",Int)=0.0
+        _OrbitWaveAudioLinkSpectrogram0("AudioLink Wave 0",Float)=-1.0
+        _OrbitWaveAudioLinkSpectrogram1("AudioLink Wave 1",Float)=1.0
 
 
 
-        [Toggle(_FRAGMENT_AUDIOLINK_NOISE_WAVE)]
-        _FragmentAudioLinkNoiseWave("Fragment AudioLink Noise Wave",Int)=0
+        [Toggle(_FRAGMENT_AUDIOLINK_NOISE_SPECTROGRAM)]
+        _FragmentAudioLinkNoiseSpectrogram("Fragment AudioLink Noise Spectrogram",Int)=0
         _FragmentAudioLinkStrength("Strength",Float)=1.0
-        [MaterialToggle]_FragmentAudioLinkWaveMirror("Noise Wave Mirror",Int)=0.0
-        [MaterialToggle]_FragmentAudioLinkWaveType("Noise Wave Type",Int)=0.0
-        _FragmentAudioLinkWave0("Noise Wave 0",Float)=-1.0
-        _FragmentAudioLinkWave1("Noise Wave 1",Float)=1.0
+        [MaterialToggle]_FragmentAudioLinkSpectrogramMirror("Noise Wave Mirror",Int)=0.0
+        [MaterialToggle]_FragmentAudioLinkSpectrogramType("Noise Wave Type",Int)=0.0
+        _FragmentAudioLinkSpectrogram0("Noise Wave 0",Float)=-1.0
+        _FragmentAudioLinkSpectrogram1("Noise Wave 1",Float)=1.0
 
-        [Toggle(_COLORING_AUDIOLINK_NOISE_WAVE)]
-        _ColoringAudioLinkNoiseWave("Coloring AudioLink Noise Wave",Int)=0
+        [Toggle(_COLORING_AUDIOLINK_NOISE_SPECTROGRAM)]
+        _ColoringAudioLinkNoiseSpectrogram("Coloring AudioLink Noise Spectrogram",Int)=0
         _ColoringAudioLinkStrength("Strength",Float)=1.0
-        [MaterialToggle]_ColoringAudioLinkWaveMirror("Noise Wave Mirror",Int)=0.0
-        [MaterialToggle]_ColoringAudioLinkWaveType("Noise Wave Type",Int)=0.0
-        _ColoringAudioLinkWave0("Noise Wave 0",Float)=-1.0
-        _ColoringAudioLinkWave1("Noise Wave 1",Float)=1.0
+        [MaterialToggle]_ColoringAudioLinkSpectrogramMirror("Noise Wave Mirror",Int)=0.0
+        [MaterialToggle]_ColoringAudioLinkSpectrogramType("Noise Wave Type",Int)=0.0
+        _ColoringAudioLinkSpectrogram0("Noise Wave 0",Float)=-1.0
+        _ColoringAudioLinkSpectrogram1("Noise Wave 1",Float)=1.0
 
-        [Toggle(_GEOMETRY_AUDIOLINK_NOISE_WAVE)]
-        _GeometryAudioLinkNoiseWave("Geometry AudioLink Noise Wave",Int)=0
+        [Toggle(_GEOMETRY_AUDIOLINK_NOISE_SPECTROGRAM)]
+        _GeometryAudioLinkNoiseSpectrogram("Geometry AudioLink Noise Spectrogram",Int)=0
         _GeometryAudioLinkStrength("Strength",Float)=1.0
-        [MaterialToggle]_GeometryAudioLinkWaveMirror("Noise Wave Mirror",Int)=0.0
-        [MaterialToggle]_GeometryAudioLinkWaveType("Noise Wave Type",Int)=0.0
-        _GeometryAudioLinkWave0("Noise Wave 0",Float)=-1.0
-        _GeometryAudioLinkWave1("Noise Wave 1",Float)=1.0
+        [MaterialToggle]_GeometryAudioLinkSpectrogramMirror("Noise Wave Mirror",Int)=0.0
+        [MaterialToggle]_GeometryAudioLinkSpectrogramType("Noise Wave Type",Int)=0.0
+        _GeometryAudioLinkSpectrogram0("Noise Wave 0",Float)=-1.0
+        _GeometryAudioLinkSpectrogram1("Noise Wave 1",Float)=1.0
 
 
         _Noise1stOffset0("Noise 1st Offset",Vector)=(0.0,0.0,0.0,0.0)
@@ -348,14 +348,14 @@ Shader "DeltaField/shaders/MeshHologram"{
             #pragma shader_feature_local _ORBITSOURCE_VALUE _ORBITSOURCE_PRIMITIVE _ORBITSOURCE_NOISE1ST _ORBITSOURCE_NOISE2ND _ORBITSOURCE_NOISE3RD
             #pragma shader_feature_local _ORBITROTATIONSOURCE_VALUE _ORBITROTATIONSOURCE_PRIMITIVE _ORBITROTATIONSOURCE_NOISE1ST _ORBITROTATIONSOURCE_NOISE2ND _ORBITROTATIONSOURCE_NOISE3RD
 
-            #pragma shader_feature_local _ _FRAGMENT_AUDIOLINK_NOISE_WAVE
-            #pragma shader_feature_local _ _COLORING_AUDIOLINK_NOISE_WAVE
-            #pragma shader_feature_local _ _GEOMETRY_AUDIOLINK_NOISE_WAVE
+            #pragma shader_feature_local _ _FRAGMENT_AUDIOLINK_NOISE_SPECTROGRAM
+            #pragma shader_feature_local _ _COLORING_AUDIOLINK_NOISE_SPECTROGRAM
+            #pragma shader_feature_local _ _GEOMETRY_AUDIOLINK_NOISE_SPECTROGRAM
 
 
             #pragma shader_feature_local _ORBITROTATIONREFAUDIOLINK_DISABLE _ORBITROTATIONREFAUDIOLINK_VU _ORBITROTATIONREFAUDIOLINK_CHRONOTENSITY
 
-            #pragma shader_feature_local _ORBITWAVEREFAUDIOLINK_DISABLE _ORBITWAVEREFAUDIOLINK_VU _ORBITWAVEREFAUDIOLINK_WAVE
+            #pragma shader_feature_local _ORBITWAVEREFAUDIOLINK_DISABLE _ORBITWAVEREFAUDIOLINK_VU _ORBITWAVEREFAUDIOLINK_SPECTROGRAM
 
             #pragma shader_feature_local _PIXELIZATIONSPACE_DISABLE _PIXELIZATIONSPACE_MODEL _PIXELIZATIONSPACE_WORLD _PIXELIZATIONSPACE_POSTGEOMETRY
 
@@ -471,14 +471,14 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #pragma shader_feature_local _ORBITROTATIONREFAUDIOLINK_DISABLE _ORBITROTATIONREFAUDIOLINK_VU _ORBITROTATIONREFAUDIOLINK_CHRONOTENSITY
 
-            #pragma shader_feature_local _ORBITWAVEREFAUDIOLINK_DISABLE _ORBITWAVEREFAUDIOLINK_VU _ORBITWAVEREFAUDIOLINK_WAVE
+            #pragma shader_feature_local _ORBITWAVEREFAUDIOLINK_DISABLE _ORBITWAVEREFAUDIOLINK_VU _ORBITWAVEREFAUDIOLINK_SPECTROGRAM
 
             #pragma shader_feature_local _PIXELIZATIONSPACE_DISABLE _PIXELIZATIONSPACE_MODEL _PIXELIZATIONSPACE_WORLD _PIXELIZATIONSPACE_POSTGEOMETRY
 
 
-            #pragma shader_feature_local _ _FRAGMENT_AUDIOLINK_NOISE_WAVE
-            #pragma shader_feature_local _ _COLORING_AUDIOLINK_NOISE_WAVE
-            #pragma shader_feature_local _ _GEOMETRY_AUDIOLINK_NOISE_WAVE
+            #pragma shader_feature_local _ _FRAGMENT_AUDIOLINK_NOISE_SPECTROGRAM
+            #pragma shader_feature_local _ _COLORING_AUDIOLINK_NOISE_SPECTROGRAM
+            #pragma shader_feature_local _ _GEOMETRY_AUDIOLINK_NOISE_SPECTROGRAM
 
 
             #pragma shader_feature_local _NOISE1STSPACE_OFFSET _NOISE1STSPACE_MODEL _NOISE1STSPACE_WORLD _NOISE1STSPACE_ORIGIN_WORLD _NOISE1STSPACE_MODEL_WORLD _NOISE1STSPACE_VERTEXCOLOR
