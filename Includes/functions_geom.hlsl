@@ -15,7 +15,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     float fragment_mask[3];
     float coloring_mask[3];
     float geometry_mask[3];
-    float geometry_messy_mask[3];
+    float orbit_mask[3];
     TEX2D_NOISE1ST_MACRO float noise1st_offset[3];
     TEX2D_NOISE2ND_MACRO float noise2nd_offset[3];
     TEX2D_NOISE3RD_MACRO float noise3rd_offset[3];
@@ -29,11 +29,11 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     geometry_mask[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_GeometryMaskControlTex,_point_clamp, inp[0].uv, 0.0),_GeometryMaskControl);
     geometry_mask[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_GeometryMaskControlTex,_point_clamp, inp[1].uv, 0.0),_GeometryMaskControl);
     geometry_mask[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_GeometryMaskControlTex,_point_clamp, inp[2].uv, 0.0),_GeometryMaskControl);
-    geometry_messy_mask[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_GeometryMessyMaskControlTex,_point_clamp, inp[0].uv, 0.0),_GeometryMessyMaskControl);
-    geometry_messy_mask[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_GeometryMessyMaskControlTex,_point_clamp, inp[1].uv, 0.0),_GeometryMessyMaskControl);
-    geometry_messy_mask[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_GeometryMessyMaskControlTex,_point_clamp, inp[2].uv, 0.0),_GeometryMessyMaskControl);
+    orbit_mask[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_OrbitMaskControlTex,_point_clamp, inp[0].uv, 0.0),_OrbitMaskControl);
+    orbit_mask[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_OrbitMaskControlTex,_point_clamp, inp[1].uv, 0.0),_OrbitMaskControl);
+    orbit_mask[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_OrbitMaskControlTex,_point_clamp, inp[2].uv, 0.0),_OrbitMaskControl);
 
-    #if defined(_FRAGMENTSOURCE_NOISE1ST) || defined(_COLORINGSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_GEOMETRYMESSYSOURCE_NOISE1ST)
+    #if defined(_FRAGMENTSOURCE_NOISE1ST) || defined(_COLORINGSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_ORBITSOURCE_NOISE1ST) || defined(_ORBITROTATIONSOURCE_NOISE1ST)
         TEX2D_NOISE1ST_MACRO noise1st_offset[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise1stOffsetControlTex, _point_clamp, inp[0].uv, 0.0),_Noise1stOffsetControl);
         TEX2D_NOISE1ST_MACRO noise1st_offset[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise1stOffsetControlTex, _point_clamp, inp[1].uv, 0.0),_Noise1stOffsetControl);
         TEX2D_NOISE1ST_MACRO noise1st_offset[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise1stOffsetControlTex, _point_clamp, inp[2].uv, 0.0),_Noise1stOffsetControl);
@@ -43,7 +43,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         noise1st_offset[2] = 1.0;
     #endif
 
-    #if defined(_FRAGMENTSOURCE_NOISE2ND) || defined(_COLORINGSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_GEOMETRYMESSYSOURCE_NOISE2ND)
+    #if defined(_FRAGMENTSOURCE_NOISE2ND) || defined(_COLORINGSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_ORBITSOURCE_NOISE2ND) || defined(_ORBITROTATIONSOURCE_NOISE2ND)
         TEX2D_NOISE2ND_MACRO noise2nd_offset[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise2ndOffsetControlTex, _point_clamp, inp[0].uv, 0.0),_Noise2ndOffsetControl);
         TEX2D_NOISE2ND_MACRO noise2nd_offset[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise2ndOffsetControlTex, _point_clamp, inp[1].uv, 0.0),_Noise2ndOffsetControl);
         TEX2D_NOISE2ND_MACRO noise2nd_offset[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise2ndOffsetControlTex, _point_clamp, inp[2].uv, 0.0),_Noise2ndOffsetControl);
@@ -53,7 +53,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         noise2nd_offset[2] = 1.0;
     #endif
 
-    #if defined(_FRAGMENTSOURCE_NOISE3RD) || defined(_COLORINGSOURCE_NOISE3RD) || defined(_GEOMETRYSOURCE_NOISE3RD) || defined(_GEOMETRYMESSYSOURCE_NOISE3RD)
+    #if defined(_FRAGMENTSOURCE_NOISE3RD) || defined(_COLORINGSOURCE_NOISE3RD) || defined(_GEOMETRYSOURCE_NOISE3RD) || defined(_ORBITSOURCE_NOISE3RD) || defined(_ORBITROTATIONSOURCE_NOISE3RD)
         TEX2D_NOISE3RD_MACRO noise3rd_offset[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise3rdOffsetControlTex, _point_clamp, inp[0].uv, 0.0),_Noise3rdOffsetControl);
         TEX2D_NOISE3RD_MACRO noise3rd_offset[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise3rdOffsetControlTex, _point_clamp, inp[1].uv, 0.0),_Noise3rdOffsetControl);
         TEX2D_NOISE3RD_MACRO noise3rd_offset[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise3rdOffsetControlTex, _point_clamp, inp[2].uv, 0.0),_Noise3rdOffsetControl);
@@ -165,7 +165,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     #endif
 
     float3 geometry_pos[3] = {inp[0].pos.xyz,inp[1].pos.xyz,inp[2].pos.xyz};
-    #if defined(_GEOMETRY_SCALE) || defined(_GEOMETRY_EXTRUDE) || defined(_GEOMETRY_ROTATION) || defined(_ACTIVATE_GEOMETRYMESSY) || !defined(_PIXELIZATIONSPACE_DISABLE)
+    #if defined(_GEOMETRY_SCALE) || defined(_GEOMETRY_EXTRUDE) || defined(_GEOMETRY_ROTATION) || defined(_ACTIVATE_ORBIT) || !defined(_PIXELIZATIONSPACE_DISABLE)
         float3 origin_pos = inp[0].origin_pos;
         float3 geometry_center = (geometry_pos[0]+geometry_pos[1]+geometry_pos[2])/3.0;
         float geometry_time = GEOMETRY_TIME_MACRO;
@@ -247,39 +247,39 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             #endif
         #endif
 
-        #ifdef _ACTIVATE_GEOMETRYMESSY
+        #ifdef _ACTIVATE_ORBIT
             float3 orbit[3] = {
-                geometry_pos[0]-geometry_center+_GeometryMessyOrbitPosition.xyz,
-                geometry_pos[1]-geometry_center+_GeometryMessyOrbitPosition.xyz,
-                geometry_pos[2]-geometry_center+_GeometryMessyOrbitPosition.xyz};
-            float3 dir_pi2 = float3(_GeometryMessyOrbitRotation,_GeometryMessyOrbitRotationForward,_GeometryMessyOrbitRotationRight)*UNITY_PI*2.0;
+                geometry_pos[0]-geometry_center+_OrbitOffset.xyz,
+                geometry_pos[1]-geometry_center+_OrbitOffset.xyz,
+                geometry_pos[2]-geometry_center+_OrbitOffset.xyz};
+            float3 dir_pi2 = float3(_OrbitRotation,_OrbitRotationForward,_OrbitRotationRight)*UNITY_PI*2.0;
             float3 orbit_anim = ORBIT_ROTATION_AUDIOLINK_MACRO;
-            float3 geometrymessy_time = GEOMETRYMESSY_TIME_MACRO;
-            #if defined(_GEOMETRYMESSYSOURCE_NOISE1ST) || defined(_GEOMETRYMESSYSOURCE_NOISE2ND) || defined(_GEOMETRYMESSYSOURCE_NOISE3RD)
-                float3 geometrymessy_center_noise = (inp[0].GEOMETRYMESSY_NOISE_MACRO+inp[1].GEOMETRYMESSY_NOISE_MACRO+inp[2].GEOMETRYMESSY_NOISE_MACRO)/3.0;
-                float geometrymessy_mask_offset = (GEOMETRYMESSY_OFFSET_MACRO(0)+GEOMETRYMESSY_OFFSET_MACRO(1)+GEOMETRYMESSY_OFFSET_MACRO(2))/3.0;
-                orbit_anim.xyz += GeometryMessyNoisePingPong(geometrymessy_center_noise,geometrymessy_mask_offset,geometrymessy_time)*_GeometryMessyOrbitVariance.xyz;
-                float3 audiolink_wave = FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(geometrymessy_center_noise);
-            #elif defined(_GEOMETRYMESSYSOURCE_PRIMITIVE)
-                float random_id = random(id+_GeometryMessySeed);
-                orbit_anim.xyz += random_id*_GeometryMessyOrbitVariance.xyz;
-                float3 audiolink_wave = FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(random_id);
+            float3 orbit_rotation_time = ORBIT_ROTATION_TIME_MACRO;
+            #if defined(_ORBITROTATIONSOURCE_NOISE1ST) || defined(_ORBITROTATIONSOURCE_NOISE2ND) || defined(_ORBITROTATIONSOURCE_NOISE3RD)
+                float3 orbit_rotation_center_noise = (inp[0].ORBITROTATION_NOISE_MACRO+inp[1].ORBITROTATION_NOISE_MACRO+inp[2].ORBITROTATION_NOISE_MACRO)/3.0;
+                float orbit_rotation_mask_offset = (ORBITROTATION_OFFSET_MACRO(0)+ORBITROTATION_OFFSET_MACRO(1)+ORBITROTATION_OFFSET_MACRO(2))/3.0;
+                orbit_anim.xyz += OrbitRotationNoisePingPong(orbit_rotation_center_noise,orbit_rotation_mask_offset,orbit_rotation_time)*_OrbitRotationVariance.xyz;
+                float3 audiolink_wave = FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(orbit_rotation_center_noise);
+            #elif defined(_ORBITROTATIONSOURCE_PRIMITIVE)
+                float orbit_rotation_random = random(id+_OrbitRotationSeed);
+                orbit_anim.xyz += orbit_rotation_random*_OrbitRotationVariance.xyz;
+                float3 audiolink_wave = FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(orbit_rotation_random);
 
             #else
-                orbit_anim.xyz += _GeometryMessyOrbitVariance.xyz;
-                float3 audiolink_wave = FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(_GeometryValue);
+                orbit_anim.xyz += _OrbitRotationVariance.xyz;
+                float3 audiolink_wave = FUNC_ORBIT_WAVE_AUDIOLINK_WAVE_MACRO(_OrbitRotationValue);
             #endif
 
             float3 orbit_wave = float3(
-                (orbit_anim.x+_GeometryMessyOrbitWaveZPhase+GEOMETRY_ORBIT_Z_TIME_MACRO),
-                (orbit_anim.x+_GeometryMessyOrbitWaveXYPhase+GEOMETRY_ORBIT_XY_TIME_MACRO),
-                (orbit_anim.x+_GeometryMessyOrbitWaveXYPhase+GEOMETRY_ORBIT_XY_TIME_MACRO)
+                (orbit_anim.x+_OrbitWaveZPhase+ORBIT_WAVE_Z_TIME_MACRO),
+                (orbit_anim.x+_OrbitWaveXYPhase+ORBIT_WAVE_XY_TIME_MACRO),
+                (orbit_anim.x+_OrbitWaveXYPhase+ORBIT_WAVE_XY_TIME_MACRO)
             );
 
             float3 orbit_wave_r = float3(
-                sin(orbit_wave.x*_GeometryMessyOrbitWaveZFrequency)*_GeometryMessyOrbitWaveZStrength,
-                sin(orbit_wave.y*_GeometryMessyOrbitWaveXYFrequency)*_GeometryMessyOrbitWaveXYStrength,
-                cos(orbit_wave.z*_GeometryMessyOrbitWaveXYFrequency)*_GeometryMessyOrbitWaveXYStrength
+                sin(orbit_wave.x*_OrbitWaveZFrequency)*_OrbitWaveZStrength,
+                sin(orbit_wave.y*_OrbitWaveXYFrequency)*_OrbitWaveXYStrength,
+                cos(orbit_wave.z*_OrbitWaveXYFrequency)*_OrbitWaveXYStrength
             );
 
             #ifdef _ORBITWAVEREFAUDIOLINK_VU
@@ -287,34 +287,40 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             #elif _ORBITWAVEREFAUDIOLINK_WAVE
                 orbit_wave_r += float3(
                     audiolink_wave.x,
-                    audiolink_wave.y*sin(orbit_wave.y*_GeometryMessyOrbitWaveXYFrequency),
-                    audiolink_wave.z*cos(orbit_wave.z*_GeometryMessyOrbitWaveXYFrequency)
+                    audiolink_wave.y*sin(orbit_wave.y*_OrbitWaveXYFrequency),
+                    audiolink_wave.z*cos(orbit_wave.z*_OrbitWaveXYFrequency)
                 );
             #endif
 
-            orbit_anim += dir_pi2+geometrymessy_time;
+            orbit_anim += dir_pi2+orbit_rotation_time;
 
 
-            float3 orbit_dir = cos(orbit_anim.x)*inp[0].forward_dir*_GeometryMessyOrbitScaleZ + sin(orbit_anim.x)*inp[0].up_dir*_GeometryMessyOrbitScaleY;
-            orbit_dir *= _GeometryMessyOrbitPosition.w+scale-1.0;
+            float3 orbit_dir = cos(orbit_anim.x)*inp[0].forward_dir*_OrbitScaleZ + sin(orbit_anim.x)*inp[0].up_dir*_OrbitScaleY;
+            orbit_dir *= _OrbitOffset.w+scale-1.0;
             float3 right_dir = normalize(cross(inp[0].forward_dir,inp[0].up_dir));
 
             orbit_dir = RodriguesRotation(orbit_dir,orbit_anim.y,inp[0].forward_dir);
             orbit_dir = RodriguesRotation(orbit_dir,orbit_anim.z,right_dir);
-            orbit_dir += mul(UNITY_MATRIX_M,float4(orbit_wave_r*_GeometryMessyOrbitPosition.w,1.0));
+            orbit_dir += mul(UNITY_MATRIX_M,float4(orbit_wave_r*_OrbitOffset.w,1.0));
 
             orbit[0] = orbit[0]+orbit_dir;
             orbit[1] = orbit[1]+orbit_dir;
             orbit[2] = orbit[2]+orbit_dir;
 
-            #if defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE3RD)
-                geometry_pos[0] = lerp(geometry_pos[0],orbit[0],GeometryNoisePingPong(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time)*geometry_messy_mask[0]);
-                geometry_pos[1] = lerp(geometry_pos[1],orbit[1],GeometryNoisePingPong(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time)*geometry_messy_mask[1]);
-                geometry_pos[2] = lerp(geometry_pos[2],orbit[2],GeometryNoisePingPong(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time)*geometry_messy_mask[2]);
+            #if defined(_ORBITSOURCE_NOISE1ST) || defined(_ORBITSOURCE_NOISE2ND) || defined(_ORBITSOURCE_NOISE3RD)
+                float orbit_time = ORBIT_TIME_MACRO;
+                geometry_pos[0] = lerp(geometry_pos[0],orbit[0],OrbitNoisePingPong(geometry_noise[0],ORBIT_OFFSET_MACRO(0),orbit_time)*orbit_mask[0]);
+                geometry_pos[1] = lerp(geometry_pos[1],orbit[1],OrbitNoisePingPong(geometry_noise[1],ORBIT_OFFSET_MACRO(1),orbit_time)*orbit_mask[1]);
+                geometry_pos[2] = lerp(geometry_pos[2],orbit[2],OrbitNoisePingPong(geometry_noise[2],ORBIT_OFFSET_MACRO(2),orbit_time)*orbit_mask[2]);
+            #elif _ORBITSOURCE_PRIMITIVE
+                float orbit_random = random(id+_OrbitRotationSeed); 
+                geometry_pos[0] = lerp(geometry_pos[0],orbit[0],orbit_random*orbit_mask[0]);
+                geometry_pos[1] = lerp(geometry_pos[1],orbit[1],orbit_random*orbit_mask[1]);
+                geometry_pos[2] = lerp(geometry_pos[2],orbit[2],orbit_random*orbit_mask[2]);
             #else
-                geometry_pos[0] = lerp(geometry_pos[0],orbit[0],_GeometryValue*geometry_messy_mask[0]);
-                geometry_pos[1] = lerp(geometry_pos[1],orbit[1],_GeometryValue*geometry_messy_mask[1]);
-                geometry_pos[2] = lerp(geometry_pos[2],orbit[2],_GeometryValue*geometry_messy_mask[2]);
+                geometry_pos[0] = lerp(geometry_pos[0],orbit[0],_OrbitValue*orbit_mask[0]);
+                geometry_pos[1] = lerp(geometry_pos[1],orbit[1],_OrbitValue*orbit_mask[1]);
+                geometry_pos[2] = lerp(geometry_pos[2],orbit[2],_OrbitValue*orbit_mask[2]);
             #endif
         #endif
     #endif

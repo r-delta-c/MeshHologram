@@ -117,43 +117,63 @@
 
 #endif
 
-#if defined(_GEOMETRYMESSYSOURCE_NOISE1ST) || defined(_GEOMETRYMESSYSOURCE_NOISE2ND) || defined(_GEOMETRYMESSYSOURCE_NOISE3RD)
-    float GeometryMessyNoiseRaw(float3 inputs, float offset, float time){
+#if defined(_ORBITSOURCE_NOISE1ST) || defined(_ORBITSOURCE_NOISE2ND) || defined(_ORBITSOURCE_NOISE3RD)
+    float OrbitNoiseRaw(float3 inputs, float offset, float time){
         float n = GenNoise(
             inputs,
             offset,
             time,
-            GEOMETRYMESSY_FUNC_SEED_MACRO,
-            GEOMETRYMESSY_FUNC_PHASESCALE_MACRO
+            ORBIT_FUNC_SEED_MACRO,
+            ORBIT_FUNC_PHASESCALE_MACRO
         );
         return ThresholdFormula(
             triloop(n),
-            GEOMETRYMESSY_FUNC_THRESHOLD_MUL_MACRO,
-            GEOMETRYMESSY_FUNC_THRESHOLD_ADD_MACRO
+            ORBIT_FUNC_THRESHOLD_MUL_MACRO,
+            ORBIT_FUNC_THRESHOLD_ADD_MACRO
         );
     }
 
-    // float GeometryMessyRepeatNoiseRaw(float3 inputs, float offset, float time){
-    //     float n = GenNoise(
-    //         inputs,
-    //         offset,
-    //         time,
-    //         GEOMETRYMESSY_FUNC_SEED_MACRO,
-    //         GEOMETRYMESSY_FUNC_PHASESCALE_MACRO
-    //     );
-    //     float r = ThresholdFormula(
-    //         triloop(n),
-    //         GEOMETRYMESSY_FUNC_THRESHOLD_MUL_MACRO,
-    //         GEOMETRYMESSY_FUNC_THRESHOLD_ADD_MACRO
-    //     );
-    //     return Inverse12(n,r);
-    // }
-
-    float GeometryMessyNoisePingPong(float3 inputs, float offset, float time){
-        return saturate(GEOMETRYMESSY_METHOD_NOISEMAP_MACRO(GeometryMessyNoiseRaw(inputs,offset,time),GEOMETRYMESSY_FUNC_VALUECARVE_MACRO));
+    float OrbitNoisePingPong(float3 inputs, float offset, float time){
+        return saturate(ORBIT_METHOD_NOISEMAP_MACRO(OrbitNoiseRaw(inputs,offset,time),ORBIT_FUNC_VALUECARVE_MACRO));
     }
-    // float GeometryMessyNoiseRepeat(float3 inputs, float offset, float time){
-    //     return saturate(GEOMETRYMESSY_METHOD_NOISEMAP_MACRO(GeometryMessyRepeatNoiseRaw(inputs,offset,time),GEOMETRYMESSY_FUNC_VALUECARVE_MACRO));
-    // }
+#endif
 
+#if defined(_ORBITROTATIONSOURCE_NOISE1ST) || defined(_ORBITROTATIONSOURCE_NOISE2ND) || defined(_ORBITROTATIONSOURCE_NOISE3RD)
+    float OrbitRotationNoiseRaw(float3 inputs, float offset, float time){
+        float n = GenNoise(
+            inputs,
+            offset,
+            time,
+            ORBITROTATION_FUNC_SEED_MACRO,
+            ORBITROTATION_FUNC_PHASESCALE_MACRO
+        );
+        return ThresholdFormula(
+            triloop(n),
+            ORBITROTATION_FUNC_THRESHOLD_MUL_MACRO,
+            ORBITROTATION_FUNC_THRESHOLD_ADD_MACRO
+        );
+    }
+
+    float OrbitRotationRepeatNoiseRaw(float3 inputs, float offset, float time){
+        float n = GenNoise(
+            inputs,
+            offset,
+            time,
+            ORBITROTATION_FUNC_SEED_MACRO,
+            ORBITROTATION_FUNC_PHASESCALE_MACRO
+        );
+        float r = ThresholdFormula(
+            triloop(n),
+            ORBITROTATION_FUNC_THRESHOLD_MUL_MACRO,
+            ORBITROTATION_FUNC_THRESHOLD_ADD_MACRO
+        );
+        return Inverse12(n,r);
+    }
+
+    float OrbitRotationNoisePingPong(float3 inputs, float offset, float time){
+        return saturate(ORBITROTATION_METHOD_NOISEMAP_MACRO(OrbitRotationNoiseRaw(inputs,offset,time),ORBITROTATION_FUNC_VALUECARVE_MACRO));
+    }
+    float OrbitRotationNoiseRepeat(float3 inputs, float offset, float time){
+        return saturate(ORBITROTATION_METHOD_NOISEMAP_MACRO(OrbitRotationRepeatNoiseRaw(inputs,offset,time),ORBITROTATION_FUNC_VALUECARVE_MACRO));
+    }
 #endif
