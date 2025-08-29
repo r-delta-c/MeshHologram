@@ -34,8 +34,8 @@ UNITY_DECLARE_TEX2D_NOSAMPLER(_ColoringMaskControlTex);
 float4 _ColoringMaskControl_ST;
 UNITY_DECLARE_TEX2D_NOSAMPLER(_GeometryMaskControlTex);
 float4 _GeometryMaskControl_ST;
-UNITY_DECLARE_TEX2D_NOSAMPLER(_GeometryMessyMaskControlTex);
-float4 _GeometryMessyMaskControl_ST;
+UNITY_DECLARE_TEX2D_NOSAMPLER(_OrbitMaskControlTex);
+float4 _OrbitMaskControl_ST;
 UNITY_DECLARE_TEX2D_NOSAMPLER(_ColorGradientTex);
 float4 _ColorGradientTex_ST;
 
@@ -61,32 +61,38 @@ float _GeometryExtrude0;
 float _GeometryExtrude1;
 float _GeometryRotationReverse;
 
-float _GeometryMessyValue;
-float _GeometryMessyMaskControl;
-float _GeometryMessySeed;
-
-float _GeometryMessyOrbitRotation;
-float _GeometryMessyOrbitRotationForward;
-float _GeometryMessyOrbitRotationRight;
-float4 _GeometryMessyOrbitPosition;
-float _GeometryMessyOrbitScaleY;
-float _GeometryMessyOrbitScaleZ;
-float4 _GeometryMessyOrbitVariance;
-
-float4 _GeometryMessyOrbitRotationPhase;
-float4 _GeometryMessyOrbitRotationTimeMultiplier;
-
-float _GeometryMessyOrbitWaveXYStrength;
-float _GeometryMessyOrbitWaveXYFrequency;
-float _GeometryMessyOrbitWaveXYPhase;
-float _GeometryMessyOrbitWaveXYTimeMultiplier;
-float _GeometryMessyOrbitWaveZStrength;
-float _GeometryMessyOrbitWaveZFrequency;
-float _GeometryMessyOrbitWaveZPhase;
-float _GeometryMessyOrbitWaveZTimeMultiplier;
-
 float _GeometryPartitionBias;
 float4 _Pixelization;
+
+float _OrbitValue;
+float _OrbitSeed;
+float _OrbitMaskControl;
+
+float _OrbitRotationValue;
+float _OrbitRotationSeed;
+float _OrbitRotation;
+float _OrbitRotationForward;
+float _OrbitRotationRight;
+
+float4 _OrbitRotationPhase;
+float4 _OrbitRotationTimeMultiplier;
+
+float4 _OrbitRotationVariance;
+
+float4 _OrbitOffset;
+float _OrbitScaleY;
+float _OrbitScaleZ;
+
+
+float _OrbitWaveXYStrength;
+float _OrbitWaveXYFrequency;
+float _OrbitWaveXYPhase;
+float _OrbitWaveXYTimeMultiplier;
+float _OrbitWaveZStrength;
+float _OrbitWaveZFrequency;
+float _OrbitWaveZPhase;
+float _OrbitWaveZTimeMultiplier;
+
 
 float _FragmentAudioLinkStrength;
 bool _FragmentAudioLinkWaveMirror;
@@ -106,7 +112,7 @@ bool _GeometryAudioLinkWaveType;
 float _GeometryAudioLinkWave0;
 float _GeometryAudioLinkWave1;
 
-#if defined(_FRAGMENTSOURCE_NOISE1ST) || defined(_COLORINGSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_GEOMETRYMESSYSOURCE_NOISE1ST)
+#if defined(_FRAGMENTSOURCE_NOISE1ST) || defined(_COLORINGSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_ORBITSOURCE_NOISE1ST) || defined(_ORBITROTATIONSOURCE_NOISE1ST)
     float3 _Noise1stOffset0;
     float3 _Noise1stOffset1;
     float4 _Noise1stScale0;
@@ -124,7 +130,7 @@ float _GeometryAudioLinkWave1;
     float _Noise1stPhaseScale;
 #endif
 
-#if defined(_FRAGMENTSOURCE_NOISE2ND) || defined(_COLORINGSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_GEOMETRYMESSYSOURCE_NOISE2ND)
+#if defined(_FRAGMENTSOURCE_NOISE2ND) || defined(_COLORINGSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_ORBITSOURCE_NOISE2ND) || defined(_ORBITROTATIONSOURCE_NOISE2ND)
     float3 _Noise2ndOffset0;
     float3 _Noise2ndOffset1;
     float4 _Noise2ndScale0;
@@ -142,7 +148,7 @@ float _GeometryAudioLinkWave1;
     float _Noise2ndPhaseScale;
 #endif
 
-#if defined(_FRAGMENTSOURCE_NOISE3RD) || defined(_COLORINGSOURCE_NOISE3RD) || defined(_GEOMETRYSOURCE_NOISE3RD) || defined(_GEOMETRYMESSYSOURCE_NOISE3RD)
+#if defined(_FRAGMENTSOURCE_NOISE3RD) || defined(_COLORINGSOURCE_NOISE3RD) || defined(_GEOMETRYSOURCE_NOISE3RD) || defined(_ORBITSOURCE_NOISE3RD) || defined(_ORBITROTATIONSOURCE_NOISE3RD)
     float3 _Noise3rdOffset0;
     float3 _Noise3rdOffset1;
     float4 _Noise3rdScale0;

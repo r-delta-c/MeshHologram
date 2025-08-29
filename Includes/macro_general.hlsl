@@ -22,9 +22,9 @@
     #define STRUCT_VERTEXCOLOR_MACRO //
 #endif
 
-#define GEOMETRYMESSY_TIME_MACRO (_Time.x*_GeometryMessyOrbitRotationTimeMultiplier.xyz*_GeometryMessyOrbitRotationTimeMultiplier.w)
-#define GEOMETRY_ORBIT_Z_TIME_MACRO (_Time.x*_GeometryMessyOrbitWaveZTimeMultiplier)
-#define GEOMETRY_ORBIT_XY_TIME_MACRO (_Time.x*_GeometryMessyOrbitWaveXYTimeMultiplier)
+#define ORBIT_ROTATION_TIME_MACRO (_Time.x*_OrbitRotationTimeMultiplier.xyz*_OrbitRotationTimeMultiplier.w)
+#define ORBIT_WAVE_Z_TIME_MACRO (_Time.x*_OrbitWaveZTimeMultiplier)
+#define ORBIT_WAVE_XY_TIME_MACRO (_Time.x*_OrbitWaveXYTimeMultiplier)
 
 #ifdef _PIXELIZATIONSPACE_MODEL
     #define VERTEX_PIXELIZATION_MODEL_MACRO v.pos.xyz = Pixelization(v.pos.xyz, float3(1.0,1.0,1.0))

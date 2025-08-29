@@ -102,39 +102,51 @@ Shader "DeltaField/shaders/MeshHologram"{
         [Toggle(_GEOMETRY_ROTATION_NOISE_REPEAT)]
         _GeometryRotationNoiseRepeat("Rotation Noise Repeat",Int)=0
 
-        [Header(Geometry Messy)]
-        [Toggle(_ACTIVATE_GEOMETRYMESSY)]
-        _GeometryMessyToggle("Activate Messy",Int)=0
+        _GeometryPartitionBias("Geometry Partition Bias| Vertex <=> Center",Range(0.0,1.0))=0.5
+        [KeywordEnum(Disable,Model,World,PostGeometry)]
+        _PixelizationSpace("Vertex Pixelization Position Space",Int)=0
+        _Pixelization("Vertex Pixelization",Vector)=(1.0,1.0,1.0,0.02)
+
+        [Header(Geometry Orbit)]
+        [Toggle(_ACTIVATE_ORBIT)]
+        _ActivateOrbit("Activate Orbit",Int)=0
         [KeywordEnum(Value,Primitive,Noise1st,Noise2nd,Noise3rd)]
-        _GeometryMessySource("Messy Source",Int)=3
-        _GeometryMessyValue("Messy Value",Range(0.0,1.0))=0.0
-        _GeometryMessyMaskControlTex("Messy Mask Control Tex",2D)="white"{}
-        _GeometryMessyMaskControl("GeometryMessy Mask Control Strength",Range(0.0,1.0))=1.0
-        _GeometryMessySeed("Messy Primitive Seed",Float)=0.0
-        _GeometryMessyOrbitRotation("Messy Orbit Rotation",Float)=0.0
-        _GeometryMessyOrbitRotationForward("Messy Orbit Rotation Forward",Float)=0.0
-        _GeometryMessyOrbitRotationRight("Messy Orbit Rotation Right",Float)=0.0
-        _GeometryMessyOrbitPosition("Messy Orbit Position",Vector)=(0.0,0.0,0.0,0.157)
-        _GeometryMessyOrbitScale("Messy Orbit Scale",Vector)=(0.5,0.5,0.0,0.157)
-        _GeometryMessyOrbitScaleY("Messy Orbit Scale Y",Range(-8.0,8.0))=0.5
-        _GeometryMessyOrbitScaleZ("Messy Orbit Scale Z",Range(-8.0,8.0))=0.5
+        _OrbitSource("Orbit Source",Int)=3
+        _OrbitValue("Orbit Value",Range(0.0,1.0))=0.0
+        _OrbitSeed("Orbit Seed",Float)=0.0
+        _OrbitMaskControlTex("Orbit Mask Control Tex",2D)="white"{}
+        _OrbitMaskControl("Orbit Mask Control Strength",Range(0.0,1.0))=1.0
 
-        _GeometryMessyOrbitVariance("Messy Orbit Variance",Vector)=(1.0,0.0,0.0,1.0)
+        [KeywordEnum(Value,Primitive,Noise1st,Noise2nd,Noise3rd)]
+        _OrbitRotationSource("Orbit Rotation Source",Int)=1
+        _OrbitRotationValue("Orbit Rotation Value",Range(0.0,1.0))=0.0
+        _OrbitRotationSeed("Orbit Rotation Seed",Float)=0.0
+        _OrbitRotation("Orbit Rotation",Float)=0.0
+        _OrbitRotationForward("Orbit Rotation Forward",Float)=0.0
+        _OrbitRotationRight("Orbit Rotation Right",Float)=0.0
 
-        _GeometryMessyOrbitRotationPhase("Orbit Rotation Phase",Vector)=(0.0,0.0,0.0,0.0)
-        _GeometryMessyOrbitRotationTimeMultiplier("Orbit Rotation Time Multiplier",Vector)=(4.0,2.0,0.0,1.0)
-        _GeometryMessyOrbitWaveXYStrength("Orbit Wave XY Strength",Float)=0.0
-        _GeometryMessyOrbitWaveXYFrequency("Orbit Wave XY Frequency",Float)=0.0
-        _GeometryMessyOrbitWaveXYPhase("Orbit Wave XY Phase",Float)=0.0
-        _GeometryMessyOrbitWaveXYTimeMultiplier("Orbit Wave XY Time Multiplier",Float)=1.0
-        _GeometryMessyOrbitWaveZStrength("Orbit Wave Z Strength",Float)=0.0
-        _GeometryMessyOrbitWaveZFrequency("Orbit Wave Z Frequency",Float)=0.0
-        _GeometryMessyOrbitWaveZPhase("Orbit Wave Z Phase",Float)=0.0
-        _GeometryMessyOrbitWaveZTimeMultiplier("Orbit Wave Z Time Multiplier",Float)=1.0
+        _OrbitRotationPhase("Orbit Rotation Phase",Vector)=(0.0,0.0,0.0,0.0)
+        _OrbitRotationTimeMultiplier("Orbit Rotation Time Multiplier",Vector)=(4.0,2.0,0.0,1.0)
+
+        _OrbitRotationVariance("Orbit Rotation Variance",Vector)=(1.0,0.0,0.0,1.0)
 
         [KeywordEnum(Disable,VU,ChronoTensity)]
         _OrbitRotationRefAudioLink("Orbit Rotation Reference AudioLink",Int)=0
         _OrbitRotationAudioLinkStrength("Orbit Rotation AudioLink Strength",Vector)=(1.0,0.0,0.0,1.0)
+
+        _OrbitOffset("Orbit Offset",Vector)=(0.0,0.0,0.0,0.157)
+        _OrbitScaleY("Orbit Scale Y",Range(-8.0,8.0))=0.5
+        _OrbitScaleZ("Orbit Scale Z",Range(-8.0,8.0))=0.5
+
+        _OrbitWaveXYStrength("Orbit Wave XY Strength",Float)=0.0
+        _OrbitWaveXYFrequency("Orbit Wave XY Frequency",Float)=0.0
+        _OrbitWaveXYPhase("Orbit Wave XY Phase",Float)=0.0
+        _OrbitWaveXYTimeMultiplier("Orbit Wave XY Time Multiplier",Float)=1.0
+        _OrbitWaveZStrength("Orbit Wave Z Strength",Float)=0.0
+        _OrbitWaveZFrequency("Orbit Wave Z Frequency",Float)=0.0
+        _OrbitWaveZPhase("Orbit Wave Z Phase",Float)=0.0
+        _OrbitWaveZTimeMultiplier("Orbit Wave Z Time Multiplier",Float)=1.0
+
         [KeywordEnum(Disable,VU,Wave)]
         _OrbitWaveRefAudioLink("Orbit Wave Reference AudioLink",Int)=0
         _OrbitWaveAudioLinkStrength("Orbit Wave AudioLink Strength",Vector)=(1.0,1.0,1.0,1.0)
@@ -143,11 +155,6 @@ Shader "DeltaField/shaders/MeshHologram"{
         _OrbitWaveAudioLinkWave0("AudioLink Wave 0",Float)=-1.0
         _OrbitWaveAudioLinkWave1("AudioLink Wave 1",Float)=1.0
 
-        _GeometryPartitionBias("Geometry Partition Bias| Vertex <=> Center",Range(0.0,1.0))=0.5
-
-        [KeywordEnum(Disable,Model,World,PostGeometry)]
-        _PixelizationSpace("Vertex Pixelization Position Space",Int)=0
-        _Pixelization("Vertex Pixelization",Vector)=(1.0,1.0,1.0,0.02)
 
 
         [Toggle(_FRAGMENT_AUDIOLINK_NOISE_WAVE)]
@@ -336,10 +343,9 @@ Shader "DeltaField/shaders/MeshHologram"{
             #pragma shader_feature_local _ _GEOMETRY_ROTATION
             #pragma shader_feature_local _ _GEOMETRY_ROTATION_NOISE_REPEAT
 
-            #pragma shader_feature_local _TTTT_SOURCE_VALUE _TTTT_SOURCE_NOISE1ST _TTTT_SOURCE_NOISE2ND _TTTT_SOURCE_NOISE3RD 
-
-            #pragma shader_feature_local _GEOMETRYMESSYSOURCE_VALUE _GEOMETRYMESSYSOURCE_PRIMITIVE _GEOMETRYMESSYSOURCE_NOISE1ST _GEOMETRYMESSYSOURCE_NOISE2ND _GEOMETRYMESSYSOURCE_NOISE3RD
-            #pragma shader_feature_local _ _ACTIVATE_GEOMETRYMESSY
+            #pragma shader_feature_local _ _ACTIVATE_ORBIT
+            #pragma shader_feature_local _ORBITSOURCE_VALUE _ORBITSOURCE_PRIMITIVE _ORBITSOURCE_NOISE1ST _ORBITSOURCE_NOISE2ND _ORBITSOURCE_NOISE3RD
+            #pragma shader_feature_local _ORBITROTATIONSOURCE_VALUE _ORBITROTATIONSOURCE_PRIMITIVE _ORBITROTATIONSOURCE_NOISE1ST _ORBITROTATIONSOURCE_NOISE2ND _ORBITROTATIONSOURCE_NOISE3RD
 
             #pragma shader_feature_local _ _FRAGMENT_AUDIOLINK_NOISE_WAVE
             #pragma shader_feature_local _ _COLORING_AUDIOLINK_NOISE_WAVE
@@ -458,12 +464,9 @@ Shader "DeltaField/shaders/MeshHologram"{
             #pragma shader_feature_local _ _GEOMETRY_ROTATION
             #pragma shader_feature_local _ _GEOMETRY_ROTATION_NOISE_REPEAT
 
-            #pragma shader_feature_local _TTTT_SOURCE_VALUE _TTTT_SOURCE_NOISE1ST _TTTT_SOURCE_NOISE2ND _TTTT_SOURCE_NOISE3RD
-
-            #pragma shader_feature_local _GEOMETRYMESSYSOURCE_VALUE _GEOMETRYMESSYSOURCE_PRIMITIVE _GEOMETRYMESSYSOURCE_NOISE1ST _GEOMETRYMESSYSOURCE_NOISE2ND _GEOMETRYMESSYSOURCE_NOISE3RD
-            #pragma shader_feature_local _ _ACTIVATE_GEOMETRYMESSY
-
-
+            #pragma shader_feature_local _ _ACTIVATE_ORBIT
+            #pragma shader_feature_local _ORBITSOURCE_VALUE _ORBITSOURCE_PRIMITIVE _ORBITSOURCE_NOISE1ST _ORBITSOURCE_NOISE2ND _ORBITSOURCE_NOISE3RD
+            #pragma shader_feature_local _ORBITROTATIONSOURCE_VALUE _ORBITROTATIONSOURCE_PRIMITIVE _ORBITROTATIONSOURCE_NOISE1ST _ORBITROTATIONSOURCE_NOISE2ND _ORBITROTATIONSOURCE_NOISE3RD
 
             #pragma shader_feature_local _ORBITROTATIONREFAUDIOLINK_DISABLE _ORBITROTATIONREFAUDIOLINK_VU _ORBITROTATIONREFAUDIOLINK_CHRONOTENSITY
 

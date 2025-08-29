@@ -1,4 +1,4 @@
-#if defined(_FRAGMENTSOURCE_NOISE1ST) || defined(_COLORINGSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_GEOMETRYMESSYSOURCE_NOISE1ST)
+#if defined(_FRAGMENTSOURCE_NOISE1ST) || defined(_COLORINGSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_ORBITSOURCE_NOISE1ST) || defined(_ORBITROTATIONSOURCE_NOISE1ST)
     #define NOISE1ST_MACRO o.noise1st_pos = NOISE1ST_POS_MACRO
     #define STRUCT_NOISE1ST_MACRO
     #define TEX2D_NOISE1ST_MACRO
@@ -43,7 +43,7 @@
 
 
 
-#if defined(_FRAGMENTSOURCE_NOISE2ND) || defined(_COLORINGSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_GEOMETRYMESSYSOURCE_NOISE2ND)
+#if defined(_FRAGMENTSOURCE_NOISE2ND) || defined(_COLORINGSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_ORBITSOURCE_NOISE2ND) || defined(_ORBITROTATIONSOURCE_NOISE2ND)
     #define NOISE2ND_MACRO o.noise2nd_pos = NOISE2ND_POS_MACRO
     #define STRUCT_NOISE2ND_MACRO
     #define TEX2D_NOISE2ND_MACRO
@@ -88,7 +88,7 @@
 
 
 
-#if defined(_FRAGMENTSOURCE_NOISE3RD) || defined(_COLORINGSOURCE_NOISE3RD) || defined(_GEOMETRYSOURCE_NOISE3RD) || defined(_GEOMETRYMESSYSOURCE_NOISE3RD)
+#if defined(_FRAGMENTSOURCE_NOISE3RD) || defined(_COLORINGSOURCE_NOISE3RD) || defined(_GEOMETRYSOURCE_NOISE3RD) || defined(_ORBITSOURCE_NOISE3RD) || defined(_ORBITROTATIONSOURCE_NOISE3RD)
     #define NOISE3RD_MACRO o.noise3rd_pos = NOISE3RD_POS_MACRO
     #define STRUCT_NOISE3RD_MACRO
     #define TEX2D_NOISE3RD_MACRO
@@ -285,50 +285,96 @@
 
 
 
-#ifdef _GEOMETRYMESSYSOURCE_NOISE1ST
-    #define GEOMETRYMESSY_NOISE_MACRO noise1st_pos
-    #define GEOMETRYMESSY_CENTER_MACRO (inp[0].noise1st_pos+inp[1].noise1st_pos+inp[2].noise1st_pos)/3.0
-    #define GEOMETRYMESSY_OFFSET_MACRO(n) noise1st_offset[n]
+#ifdef _ORBITSOURCE_NOISE1ST
+    #define ORBIT_NOISE_MACRO noise1st_pos
+    #define ORBIT_CENTER_MACRO (inp[0].noise1st_pos+inp[1].noise1st_pos+inp[2].noise1st_pos)/3.0
+    #define ORBIT_OFFSET_MACRO(n) noise1st_offset[n]
 
-    #define GEOMETRYMESSY_TIME_MACRO (_Time.x*_Noise1stTimeMulti+_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
+    #define ORBIT_TIME_MACRO (_Time.x*_Noise1stTimeMulti+_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
 
-    #define GEOMETRYMESSY_FUNC_SEED_MACRO _Noise1stSeed
-    #define GEOMETRYMESSY_FUNC_VALUECARVE_MACRO _Noise1stValueCurve
-    #define GEOMETRYMESSY_FUNC_THRESHOLD_MUL_MACRO _Noise1stThresholdMul
-    #define GEOMETRYMESSY_FUNC_THRESHOLD_ADD_MACRO _Noise1stThresholdAdd
-    #define GEOMETRYMESSY_FUNC_PHASESCALE_MACRO _Noise1stPhaseScale
-    #define GEOMETRYMESSY_METHOD_NOISEMAP_MACRO(i,m) NOISE1STMAP01_METHOD_MACRO(i,m)
+    #define ORBIT_FUNC_SEED_MACRO _Noise1stSeed
+    #define ORBIT_FUNC_VALUECARVE_MACRO _Noise1stValueCurve
+    #define ORBIT_FUNC_THRESHOLD_MUL_MACRO _Noise1stThresholdMul
+    #define ORBIT_FUNC_THRESHOLD_ADD_MACRO _Noise1stThresholdAdd
+    #define ORBIT_FUNC_PHASESCALE_MACRO _Noise1stPhaseScale
+    #define ORBIT_METHOD_NOISEMAP_MACRO(i,m) NOISE1STMAP01_METHOD_MACRO(i,m)
 
-#elif _GEOMETRYMESSYSOURCE_NOISE2ND
-    #define GEOMETRYMESSY_NOISE_MACRO noise2nd_pos
-    #define GEOMETRYMESSY_CENTER_MACRO (inp[0].noise2nd_pos+inp[1].noise2nd_pos+inp[2].noise2nd_pos)/3.0
-    #define GEOMETRYMESSY_OFFSET_MACRO(n) noise2nd_offset[n]
+#elif _ORBITSOURCE_NOISE2ND
+    #define ORBIT_NOISE_MACRO noise2nd_pos
+    #define ORBIT_CENTER_MACRO (inp[0].noise2nd_pos+inp[1].noise2nd_pos+inp[2].noise2nd_pos)/3.0
+    #define ORBIT_OFFSET_MACRO(n) noise2nd_offset[n]
 
-    #define GEOMETRYMESSY_TIME_MACRO (_Time.x*_Noise2ndTimeMulti+_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
+    #define ORBIT_TIME_MACRO (_Time.x*_Noise2ndTimeMulti+_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
 
-    #define GEOMETRYMESSY_FUNC_SEED_MACRO _Noise2ndSeed
-    #define GEOMETRYMESSY_FUNC_VALUECARVE_MACRO _Noise2ndValueCurve
-    #define GEOMETRYMESSY_FUNC_THRESHOLD_MUL_MACRO _Noise2ndThresholdMul
-    #define GEOMETRYMESSY_FUNC_THRESHOLD_ADD_MACRO _Noise2ndThresholdAdd
-    #define GEOMETRYMESSY_FUNC_PHASESCALE_MACRO _Noise2ndPhaseScale
-    #define GEOMETRYMESSY_METHOD_NOISEMAP_MACRO(i,m) NOISE2NDMAP01_METHOD_MACRO(i,m)
+    #define ORBIT_FUNC_SEED_MACRO _Noise2ndSeed
+    #define ORBIT_FUNC_VALUECARVE_MACRO _Noise2ndValueCurve
+    #define ORBIT_FUNC_THRESHOLD_MUL_MACRO _Noise2ndThresholdMul
+    #define ORBIT_FUNC_THRESHOLD_ADD_MACRO _Noise2ndThresholdAdd
+    #define ORBIT_FUNC_PHASESCALE_MACRO _Noise2ndPhaseScale
+    #define ORBIT_METHOD_NOISEMAP_MACRO(i,m) NOISE2NDMAP01_METHOD_MACRO(i,m)
 
-#elif _GEOMETRYMESSYSOURCE_NOISE3RD
-    #define GEOMETRYMESSY_NOISE_MACRO noise3rd_pos
-    #define GEOMETRYMESSY_CENTER_MACRO (inp[0].noise3rd_pos+inp[1].noise3rd_pos+inp[2].noise3rd_pos)/3.0
-    #define GEOMETRYMESSY_OFFSET_MACRO(n) noise3rd_offset[n]
+#elif _ORBITSOURCE_NOISE3RD
+    #define ORBIT_NOISE_MACRO noise3rd_pos
+    #define ORBIT_CENTER_MACRO (inp[0].noise3rd_pos+inp[1].noise3rd_pos+inp[2].noise3rd_pos)/3.0
+    #define ORBIT_OFFSET_MACRO(n) noise3rd_offset[n]
 
-    #define GEOMETRYMESSY_TIME_MACRO (_Time.x*_Noise3rdTimeMulti+_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
+    #define ORBIT_TIME_MACRO (_Time.x*_Noise3rdTimeMulti+_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
 
-    #define GEOMETRYMESSY_FUNC_SEED_MACRO _Noise3rdSeed
-    #define GEOMETRYMESSY_FUNC_VALUECARVE_MACRO _Noise3rdValueCurve
-    #define GEOMETRYMESSY_FUNC_THRESHOLD_MUL_MACRO _Noise3rdThresholdMul
-    #define GEOMETRYMESSY_FUNC_THRESHOLD_ADD_MACRO _Noise3rdThresholdAdd
-    #define GEOMETRYMESSY_FUNC_PHASESCALE_MACRO _Noise3rdPhaseScale
-    #define GEOMETRYMESSY_METHOD_NOISEMAP_MACRO(i,m) NOISE3RDMAP01_METHOD_MACRO(i,m)
+    #define ORBIT_FUNC_SEED_MACRO _Noise3rdSeed
+    #define ORBIT_FUNC_VALUECARVE_MACRO _Noise3rdValueCurve
+    #define ORBIT_FUNC_THRESHOLD_MUL_MACRO _Noise3rdThresholdMul
+    #define ORBIT_FUNC_THRESHOLD_ADD_MACRO _Noise3rdThresholdAdd
+    #define ORBIT_FUNC_PHASESCALE_MACRO _Noise3rdPhaseScale
+    #define ORBIT_METHOD_NOISEMAP_MACRO(i,m) NOISE3RDMAP01_METHOD_MACRO(i,m)
 #else
-    #define GEOMETRYMESSY_TIME_MACRO 0.0
-    #define GEOMETRYMESSY_NOISE_MACRO _GeometryMessyValue
+    #define ORBIT_TIME_MACRO 0.0
+    #define ORBIT_NOISE_MACRO _GeometryMessyValue
+#endif
+
+#ifdef _ORBITROTATIONSOURCE_NOISE1ST
+    #define ORBITROTATION_NOISE_MACRO noise1st_pos
+    #define ORBITROTATION_CENTER_MACRO (inp[0].noise1st_pos+inp[1].noise1st_pos+inp[2].noise1st_pos)/3.0
+    #define ORBITROTATION_OFFSET_MACRO(n) noise1st_offset[n]
+
+    #define ORBITROTATION_TIME_MACRO (_Time.x*_Noise1stTimeMulti+_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
+
+    #define ORBITROTATION_FUNC_SEED_MACRO _Noise1stSeed
+    #define ORBITROTATION_FUNC_VALUECARVE_MACRO _Noise1stValueCurve
+    #define ORBITROTATION_FUNC_THRESHOLD_MUL_MACRO _Noise1stThresholdMul
+    #define ORBITROTATION_FUNC_THRESHOLD_ADD_MACRO _Noise1stThresholdAdd
+    #define ORBITROTATION_FUNC_PHASESCALE_MACRO _Noise1stPhaseScale
+    #define ORBITROTATION_METHOD_NOISEMAP_MACRO(i,m) NOISE1STMAP01_METHOD_MACRO(i,m)
+
+#elif _ORBITROTATIONSOURCE_NOISE2ND
+    #define ORBITROTATION_NOISE_MACRO noise2nd_pos
+    #define ORBITROTATION_CENTER_MACRO (inp[0].noise2nd_pos+inp[1].noise2nd_pos+inp[2].noise2nd_pos)/3.0
+    #define ORBITROTATION_OFFSET_MACRO(n) noise2nd_offset[n]
+
+    #define ORBITROTATION_TIME_MACRO (_Time.x*_Noise2ndTimeMulti+_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
+
+    #define ORBITROTATION_FUNC_SEED_MACRO _Noise2ndSeed
+    #define ORBITROTATION_FUNC_VALUECARVE_MACRO _Noise2ndValueCurve
+    #define ORBITROTATION_FUNC_THRESHOLD_MUL_MACRO _Noise2ndThresholdMul
+    #define ORBITROTATION_FUNC_THRESHOLD_ADD_MACRO _Noise2ndThresholdAdd
+    #define ORBITROTATION_FUNC_PHASESCALE_MACRO _Noise2ndPhaseScale
+    #define ORBITROTATION_METHOD_NOISEMAP_MACRO(i,m) NOISE2NDMAP01_METHOD_MACRO(i,m)
+
+#elif _ORBITROTATIONSOURCE_NOISE3RD
+    #define ORBITROTATION_NOISE_MACRO noise3rd_pos
+    #define ORBITROTATION_CENTER_MACRO (inp[0].noise3rd_pos+inp[1].noise3rd_pos+inp[2].noise3rd_pos)/3.0
+    #define ORBITROTATION_OFFSET_MACRO(n) noise3rd_offset[n]
+
+    #define ORBITROTATION_TIME_MACRO (_Time.x*_Noise3rdTimeMulti+_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)
+
+    #define ORBITROTATION_FUNC_SEED_MACRO _Noise3rdSeed
+    #define ORBITROTATION_FUNC_VALUECARVE_MACRO _Noise3rdValueCurve
+    #define ORBITROTATION_FUNC_THRESHOLD_MUL_MACRO _Noise3rdThresholdMul
+    #define ORBITROTATION_FUNC_THRESHOLD_ADD_MACRO _Noise3rdThresholdAdd
+    #define ORBITROTATION_FUNC_PHASESCALE_MACRO _Noise3rdPhaseScale
+    #define ORBITROTATION_METHOD_NOISEMAP_MACRO(i,m) NOISE3RDMAP01_METHOD_MACRO(i,m)
+#else
+    #define ORBITROTATION_TIME_MACRO 0.0
+    #define ORBITROTATION_NOISE_MACRO _GeometryMessyORBITValue
 #endif
 
 #define NOISE1STMAP01_METHOD_MACRO(i,m) EaseCurveValue(i,m,_Noise1stCurveType)

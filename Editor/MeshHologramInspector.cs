@@ -669,57 +669,76 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         }
                         using (new EditorGUILayout.VerticalScope("HelpBox"))
                         {
-                        foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.MESSY_ORBIT, false);
+                        foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.ORBIT, false);
                         if (foldout_bool)
                             {
-                                DrawCustomProperty(targetMat, CUSTOM_PROPERTY._GEOMETRY_MESSY_TOGGLE, true);
-                                if (CustomProperties[CUSTOM_PROPERTY._GEOMETRY_MESSY_TOGGLE].value == 1)
+                                DrawCustomProperty(targetMat, CUSTOM_PROPERTY._ACTIVATE_ORBIT, true);
+                                if (CustomProperties[CUSTOM_PROPERTY._ACTIVATE_ORBIT].value == 1)
                                 {
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_MASK_CONTROL_TEX);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_MASK_CONTROL);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_MASK_CONTROL_TEX);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_MASK_CONTROL);
                                     EditorGUILayout.Space(16);
-                                    DrawCustomProperty(targetMat, CUSTOM_PROPERTY._GEOMETRY_MESSY_SOURCE);
-                                    if (CustomProperties[CUSTOM_PROPERTY._GEOMETRY_MESSY_TOGGLE].value == 1)
+
+                                    DrawCustomProperty(targetMat, CUSTOM_PROPERTY._ORBIT_SOURCE);
+                                    switch (CustomProperties[CUSTOM_PROPERTY._ORBIT_SOURCE].value)
                                     {
-                                        switch (CustomProperties[CUSTOM_PROPERTY._GEOMETRY_MESSY_SOURCE].value)
-                                        {
-                                            case 0:
-                                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_VALUE);
-                                                break;
-                                            case 1:
-                                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_SEED);
-                                                break;
-                                            case 2:
-                                                InsertNoise1stProps(3);
-                                                break;
-                                            case 3:
-                                                InsertNoise2ndProps(3);
-                                                break;
-                                            case 4:
-                                                InsertNoise3rdProps(3);
-                                                break;
-                                        }
+                                        case 0:
+                                            DrawShaderProperty(SHADER_PROPERTY._ORBIT_VALUE);
+                                            break;
+                                        case 1:
+                                            DrawShaderProperty(SHADER_PROPERTY._ORBIT_SEED);
+                                            break;
+                                        case 2:
+                                            InsertNoise1stProps(3);
+                                            break;
+                                        case 3:
+                                            InsertNoise2ndProps(3);
+                                            break;
+                                        case 4:
+                                            InsertNoise3rdProps(3);
+                                            break;
                                     }
+
+                                    DrawCustomProperty(targetMat, CUSTOM_PROPERTY._ORBIT_ROTATION_SOURCE);
+                                    switch (CustomProperties[CUSTOM_PROPERTY._ORBIT_ROTATION_SOURCE].value)
+                                    {
+                                        case 0:
+                                            DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_VALUE);
+                                            break;
+                                        case 1:
+                                            DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_SEED);
+                                            break;
+                                        case 2:
+                                            InsertNoise1stProps(4);
+                                            break;
+                                        case 3:
+                                            InsertNoise2ndProps(4);
+                                            break;
+                                        case 4:
+                                            InsertNoise3rdProps(4);
+                                            break;
+                                    }
+
                                     EditorGUILayout.Space(16);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_ROTATION);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_ROTATION_FORWARD);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_ROTATION_RIGHT);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_POSITION);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_SCALE_Y);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_SCALE_Z);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_VARIANCE);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_FORWARD);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_RIGHT);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_PHASE);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_TIME_MULTIPLIER);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_VARIANCE);
                                     EditorGUILayout.Space(16);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_ROTATION_PHASE);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_ROTATION_TIME_MULTIPLIER);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_OFFSET);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_SCALE_Y);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_SCALE_Z);
                                     EditorGUILayout.Space(16);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_XY_STRENGTH);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_XY_FREQUENCY);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_XY_PHASE);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_XY_TIME_MULTIPLIER);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_Z_STRENGTH);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_Z_FREQUENCY);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_Z_PHASE);
-                                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_Z_TIME_MULTIPLIER);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_XY_STRENGTH);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_XY_FREQUENCY);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_XY_PHASE);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_XY_TIME_MULTIPLIER);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_Z_STRENGTH);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_Z_FREQUENCY);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_Z_PHASE);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_Z_TIME_MULTIPLIER);
                                     EditorGUILayout.Space(16);
                                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_REF_AUDIOLINK);
                                     EditorGUILayout.Space(16);
@@ -734,7 +753,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                             }
                         }
                     }
-
                 }
 
                 using (new EditorGUILayout.VerticalScope("HelpBox"))

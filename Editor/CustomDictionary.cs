@@ -59,9 +59,9 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 new List<string>(){"_","_GEOMETRY_ROTATION_NOISE_REPEAT"},
                 "_GeometryRotationNoiseRepeat", "Rotation Noise Repeat")
                 },
-                { CUSTOM_PROPERTY._GEOMETRY_MESSY_TOGGLE,new CustomPropertyState(
-                new List<string>(){"_","_ACTIVATE_GEOMETRYMESSY"},
-                "_GeometryMessyToggle", "Activate Messy")
+                { CUSTOM_PROPERTY._ACTIVATE_ORBIT,new CustomPropertyState(
+                new List<string>(){"_","_ACTIVATE_ORBIT"},
+                "_ActivateOrbit", "Activate Orbit")
                 },
 
                 { CUSTOM_PROPERTY._FRAGMENT_SOURCE,new CustomPropertyState(
@@ -100,16 +100,26 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 "_GeometrySource", "Geometry Source")
                 },
 
-                { CUSTOM_PROPERTY._GEOMETRY_MESSY_SOURCE,new CustomPropertyState(
+                { CUSTOM_PROPERTY._ORBIT_SOURCE,new CustomPropertyState(
                 new List<string>(){
-                    "_GEOMETRYMESSYSOURCE_VALUE",
-                    "_GEOMETRYMESSYSOURCE_NOISE1ST",
-                    "_GEOMETRYMESSYSOURCE_NOISE2ND",
-                    "_GEOMETRYMESSYSOURCE_NOISE3RD",
-                    "_GEOMETRYMESSYSOURCE_AUDIOLINK_VU",
-                    "_GEOMETRYMESSYSOURCE_AUDIOLINK_CHRONOTENSITY",
+                    "_ORBITSOURCE_VALUE",
+                    "_ORBITSOURCE_PRIMITIVE",
+                    "_ORBITSOURCE_NOISE1ST",
+                    "_ORBITSOURCE_NOISE2ND",
+                    "_ORBITSOURCE_NOISE3RD"
                 },
-                "_GeometryMessySource", "Messy Source")
+                "_OrbitSource", "Orbit Source")
+                },
+
+                { CUSTOM_PROPERTY._ORBIT_ROTATION_SOURCE,new CustomPropertyState(
+                new List<string>(){
+                    "ORBITROTATIONSOURCE_VALUE",
+                    "ORBITROTATIONSOURCE_PRIMITIVE",
+                    "ORBITROTATIONSOURCE_NOISE1ST",
+                    "ORBITROTATIONSOURCE_NOISE2ND",
+                    "ORBITROTATIONSOURCE_NOISE3RD"
+                },
+                "_OrbitRotationSource", "Orbit Rotation Source")
                 },
 
                 { CUSTOM_PROPERTY._FRAGMENT_AUDIOLINK_NOISE_WAVE,new CustomPropertyState(
@@ -295,11 +305,11 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._GEOMETRY_MASK_CONTROL,new ShaderPropertyState(
                     "_GeometryMaskControl", "Geometry Mask Control Strength")
                 },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_MASK_CONTROL_TEX,new ShaderPropertyState(
-                    "_GeometryMessyMaskControlTex", "Messy Mask Control Tex")
+                {SHADER_PROPERTY._ORBIT_MASK_CONTROL_TEX,new ShaderPropertyState(
+                    "_OrbitMaskControlTex", "Orbit Control Tex")
                 },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_MASK_CONTROL,new ShaderPropertyState(
-                    "_GeometryMessyMaskControl", "Messy Mask Control Strength")
+                {SHADER_PROPERTY._ORBIT_MASK_CONTROL,new ShaderPropertyState(
+                    "_OrbitMaskControl", "Orbit Control Strength")
                 },
                 {SHADER_PROPERTY._NOISE1ST_OFFSET_CONTROL_TEX,new ShaderPropertyState(
                     "_Noise1stOffsetControlTex", "Noise 1st Offset Control Tex")
@@ -414,63 +424,80 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     "_GeometryRotationReverse", "Rotation Reverse")
                 },
 
-                {SHADER_PROPERTY._GEOMETRY_MESSY_VALUE,new ShaderPropertyState(
-                    "_GeometryMessyValue", "Messy Value")
+                {SHADER_PROPERTY._GEOMETRY_PARTITION_BIAS,new ShaderPropertyState(
+                    "_GeometryPartitionBias", "Geometry Partition Bias| Vertex <=> Center")
                 },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_SEED,new ShaderPropertyState(
-                    "_GeometryMessySeed", "Messy Primitive Seed")
+                {SHADER_PROPERTY._PIXELIZATION_SPACE,new ShaderPropertyState(
+                    "_PixelizationSpace", "Vertex Pixelization Position Space")
                 },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_ROTATION,new ShaderPropertyState(
-                    "_GeometryMessyOrbitRotation", "Messy Orbit Rotation")
-                },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_ROTATION_FORWARD,new ShaderPropertyState(
-                    "_GeometryMessyOrbitRotationForward", "Messy Orbit Rotation Forward")
-                },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_ROTATION_RIGHT,new ShaderPropertyState(
-                    "_GeometryMessyOrbitRotationRight", "Messy Orbit Rotation Right")
-                },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_POSITION,new ShaderPropertyState(
-                    "_GeometryMessyOrbitPosition", "Messy Orbit Position")
-                },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_SCALE_Y,new ShaderPropertyState(
-                    "_GeometryMessyOrbitScaleY", "Messy Orbit Scale Y")
-                },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_SCALE_Z,new ShaderPropertyState(
-                    "_GeometryMessyOrbitScaleZ", "Messy Orbit Scale Z")
-                },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_VARIANCE,new ShaderPropertyState(
-                    "_GeometryMessyOrbitVariance", "Messy Orbit Variance")
-                },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_ROTATION_PHASE,new ShaderPropertyState(
-                    "_GeometryMessyOrbitRotationPhase", "Orbit Rotation Phase")
-                },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_ROTATION_TIME_MULTIPLIER,new ShaderPropertyState(
-                    "_GeometryMessyOrbitRotationTimeMultiplier", "Orbit Rotation Time Multiplier")
+                {SHADER_PROPERTY._PIXELIZATION,new ShaderPropertyState(
+                    "_Pixelization", "Vertex Pixelization")
                 },
 
-                { SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_XY_STRENGTH,new ShaderPropertyState(
-                    "_GeometryMessyOrbitWaveXYStrength", "Orbit Wave XY Strength")
+                {SHADER_PROPERTY._ORBIT_VALUE,new ShaderPropertyState(
+                    "_OrbitValue", "Orbit Value")
                 },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_XY_FREQUENCY,new ShaderPropertyState(
-                    "_GeometryMessyOrbitWaveXYFrequency", "Orbit Wave XY Frequency")
+                {SHADER_PROPERTY._ORBIT_SEED,new ShaderPropertyState(
+                    "_OrbitSeed", "Orbit Seed")
                 },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_XY_PHASE,new ShaderPropertyState(
-                    "_GeometryMessyOrbitWaveXYPhase", "Orbit Wave XY Phase")
+                {SHADER_PROPERTY._ORBIT_ROTATION_VALUE,new ShaderPropertyState(
+                    "_OrbitRotationValue", "Orbit Rotation Value")
                 },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_XY_TIME_MULTIPLIER,new ShaderPropertyState(
-                    "_GeometryMessyOrbitWaveXYTimeMultiplier", "Orbit Wave XY Time Multiplier")
+                {SHADER_PROPERTY._ORBIT_ROTATION_SEED,new ShaderPropertyState(
+                    "_OrbitRotationSeed", "Orbit Rotation Seed")
                 },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_Z_STRENGTH,new ShaderPropertyState(
-                    "_GeometryMessyOrbitWaveZStrength", "Orbit Wave Z Strength")
+                {SHADER_PROPERTY._ORBIT_ROTATION,new ShaderPropertyState(
+                    "_OrbitRotation", "Orbit Rotation")
                 },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_Z_FREQUENCY,new ShaderPropertyState(
-                    "_GeometryMessyOrbitWaveZFrequency", "Orbit Wave Z Frequency")
+                {SHADER_PROPERTY._ORBIT_ROTATION_FORWARD,new ShaderPropertyState(
+                    "_OrbitRotationForward", "Orbit Rotation Forward")
                 },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_Z_PHASE,new ShaderPropertyState(
-                    "_GeometryMessyOrbitWaveZPhase", "Orbit Wave Z Phase")
+                {SHADER_PROPERTY._ORBIT_ROTATION_RIGHT,new ShaderPropertyState(
+                    "_OrbitRotationRight", "Orbit Rotation Right")
                 },
-                {SHADER_PROPERTY._GEOMETRY_MESSY_ORBIT_WAVE_Z_TIME_MULTIPLIER,new ShaderPropertyState(
-                    "_GeometryMessyOrbitWaveZTimeMultiplier", "Orbit Wave Z Time Multiplier")
+                {SHADER_PROPERTY._ORBIT_ROTATION_PHASE,new ShaderPropertyState(
+                    "_OrbitRotationPhase", "Orbit Rotation Phase")
+                },
+                {SHADER_PROPERTY._ORBIT_ROTATION_TIME_MULTIPLIER,new ShaderPropertyState(
+                    "_OrbitRotationTimeMultiplier", "Orbit Rotation Time Multiplier")
+                },
+                {SHADER_PROPERTY._ORBIT_ROTATION_VARIANCE,new ShaderPropertyState(
+                    "_OrbitRotationVariance", "Orbit Rotation Variance")
+                },
+
+                {SHADER_PROPERTY._ORBIT_OFFSET,new ShaderPropertyState(
+                    "_OrbitOffset", "Orbit Offset")
+                },
+                {SHADER_PROPERTY._ORBIT_SCALE_Y,new ShaderPropertyState(
+                    "_OrbitScaleY", "Orbit Scale Y")
+                },
+                {SHADER_PROPERTY._ORBIT_SCALE_Z,new ShaderPropertyState(
+                    "_OrbitScaleZ", "Orbit Scale Z")
+                },
+
+                {SHADER_PROPERTY._ORBIT_WAVE_XY_STRENGTH,new ShaderPropertyState(
+                    "_OrbitWaveXYStrength", "Orbit Wave XY Strength")
+                },
+                {SHADER_PROPERTY._ORBIT_WAVE_XY_FREQUENCY,new ShaderPropertyState(
+                    "_OrbitWaveXYFrequency", "Orbit Wave XY Frequency")
+                },
+                {SHADER_PROPERTY._ORBIT_WAVE_XY_PHASE,new ShaderPropertyState(
+                    "_OrbitWaveXYPhase", "Orbit Wave XY Phase")
+                },
+                {SHADER_PROPERTY._ORBIT_WAVE_XY_TIME_MULTIPLIER,new ShaderPropertyState(
+                    "_OrbitWaveXYTimeMultiplier", "Orbit Wave XY Time Multiplier")
+                },
+                {SHADER_PROPERTY._ORBIT_WAVE_Z_STRENGTH,new ShaderPropertyState(
+                    "_OrbitWaveZStrength", "Orbit Wave Z Strength")
+                },
+                {SHADER_PROPERTY._ORBIT_WAVE_Z_FREQUENCY,new ShaderPropertyState(
+                    "_OrbitWaveZFrequency", "Orbit Wave Z Frequency")
+                },
+                {SHADER_PROPERTY._ORBIT_WAVE_Z_PHASE,new ShaderPropertyState(
+                    "_OrbitWaveZPhase", "Orbit Wave Z Phase")
+                },
+                {SHADER_PROPERTY._ORBIT_WAVE_Z_TIME_MULTIPLIER,new ShaderPropertyState(
+                    "_OrbitWaveZTimeMultiplier", "Orbit Wave Z Time Multiplier")
                 },
                 {SHADER_PROPERTY._ORBIT_ROTATION_REF_AUDIOLINK,new ShaderPropertyState(
                     "_OrbitRotationRefAudioLink", "Orbit Rotation Reference AudioLink")
@@ -498,15 +525,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     "_OrbitWaveAudioLinkWave1", "AudioLink Wave 1")
                 },
 
-                { SHADER_PROPERTY._GEOMETRY_PARTITION_BIAS,new ShaderPropertyState(
-                    "_GeometryPartitionBias", "Geometry Partition Bias| Vertex <=> Center")
-                },
-                {SHADER_PROPERTY._PIXELIZATION_SPACE,new ShaderPropertyState(
-                    "_PixelizationSpace", "Vertex Pixelization Position Space")
-                },
-                {SHADER_PROPERTY._PIXELIZATION,new ShaderPropertyState(
-                    "_Pixelization", "Vertex Pixelization")
-                },
 
 
                 {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_STRENGTH,new ShaderPropertyState(
