@@ -74,6 +74,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
 
         #endif
 
+    float3 fragment_stream[3];
     #if defined(_FRAGMENTSOURCE_NOISE1ST) || defined(_FRAGMENTSOURCE_NOISE2ND) || defined(_FRAGMENTSOURCE_NOISE3RD)
         float3 fragment_noise;
         float3 fragment_center = (inp[0].FRAGMENT_NOISE_MACRO+inp[1].FRAGMENT_NOISE_MACRO+inp[2].FRAGMENT_NOISE_MACRO)/3.0;
@@ -87,71 +88,76 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             fragment_noise.y = 1.0-(fragment_noise.y)*fragment_mask[1];
             fragment_noise.z = 1.0-(fragment_noise.z)*fragment_mask[2];
 
-            #define FRAGMENT_STREAM_0_MACRO float3(0.0,fragment_noise.x,fragment_noise.x)
-            #define FRAGMENT_STREAM_1_MACRO float3(fragment_noise.y,0.0,fragment_noise.y)
-            #define FRAGMENT_STREAM_2_MACRO float3(fragment_noise.z,fragment_noise.z,0.0)
+            fragment_stream[0] = float3(0.0,fragment_noise.x,fragment_noise.x);
+            fragment_stream[1] = float3(fragment_noise.y,0.0,fragment_noise.y);
+            fragment_stream[2] = float3(fragment_noise.z,fragment_noise.z,0.0);
 
         #elif _PARTITIONTYPE_SIDE
             fragment_noise.x = FragmentSidePosNoise(inp[1].FRAGMENT_NOISE_MACRO,inp[2].FRAGMENT_NOISE_MACRO,inp[0].FRAGMENT_NOISE_MACRO,fragment_center,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO;
             fragment_noise.y = FragmentSidePosNoise(inp[2].FRAGMENT_NOISE_MACRO,inp[0].FRAGMENT_NOISE_MACRO,inp[1].FRAGMENT_NOISE_MACRO,fragment_center,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO;
             fragment_noise.z = FragmentSidePosNoise(inp[0].FRAGMENT_NOISE_MACRO,inp[1].FRAGMENT_NOISE_MACRO,inp[2].FRAGMENT_NOISE_MACRO,fragment_center,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO;
 
-            #define FRAGMENT_STREAM_0_MACRO float3(0.0,1.0-fragment_noise.y*fragment_mask[0],1.0-fragment_noise.z*fragment_mask[0])
-            #define FRAGMENT_STREAM_1_MACRO float3(1.0-fragment_noise.x*fragment_mask[1],0.0,1.0-fragment_noise.z*fragment_mask[1])
-            #define FRAGMENT_STREAM_2_MACRO float3(1.0-fragment_noise.x*fragment_mask[2],1.0-fragment_noise.y*fragment_mask[2],0.0)*fragment_mask[2]
+            fragment_stream[0] = float3(0.0,1.0-fragment_noise.y*fragment_mask[0],1.0-fragment_noise.z*fragment_mask[0])*fragment_mask[0];
+            fragment_stream[1] = float3(1.0-fragment_noise.x*fragment_mask[1],0.0,1.0-fragment_noise.z*fragment_mask[1])*fragment_mask[1];
+            fragment_stream[2] = float3(1.0-fragment_noise.x*fragment_mask[2],1.0-fragment_noise.y*fragment_mask[2],0.0)*fragment_mask[2];
 
         #elif _PARTITIONTYPE_MESH
-            #define FRAGMENT_STREAM_0_MACRO FragmentNoisePingPong(FRAGMENT_CENTER_MACRO,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO*fragment_mask[0]
-            #define FRAGMENT_STREAM_1_MACRO FragmentNoisePingPong(FRAGMENT_CENTER_MACRO,FRAGMENT_OFFSET_MACRO(1),fragment_time)LINEFADEMODE_INSTANT_MACRO*fragment_mask[1]
-            #define FRAGMENT_STREAM_2_MACRO FragmentNoisePingPong(FRAGMENT_CENTER_MACRO,FRAGMENT_OFFSET_MACRO(2),fragment_time)LINEFADEMODE_INSTANT_MACRO*fragment_mask[2]
+            fragment_stream[0] = FragmentNoisePingPong(FRAGMENT_CENTER_MACRO,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO*fragment_mask[0];
+            fragment_stream[1] = FragmentNoisePingPong(FRAGMENT_CENTER_MACRO,FRAGMENT_OFFSET_MACRO(1),fragment_time)LINEFADEMODE_INSTANT_MACRO*fragment_mask[1];
+            fragment_stream[2] = FragmentNoisePingPong(FRAGMENT_CENTER_MACRO,FRAGMENT_OFFSET_MACRO(2),fragment_time)LINEFADEMODE_INSTANT_MACRO*fragment_mask[2];
         #endif
     #elif defined(_USE_AUDIOLINK) && _FRAGMENTSOURCE_AUDIOLINK_VU
-        #define FRAGMENT_STREAM_0_MACRO audiolink_vu*audiolink_mask[0]
-        #define FRAGMENT_STREAM_1_MACRO audiolink_vu*audiolink_mask[1]
-        #define FRAGMENT_STREAM_2_MACRO audiolink_vu*audiolink_mask[2]
+        fragment_stream[0] = audiolink_vu*audiolink_mask[0];
+        fragment_stream[1] = audiolink_vu*audiolink_mask[1];
+        fragment_stream[2] = audiolink_vu*audiolink_mask[2];
     #elif defined(_USE_AUDIOLINK) && _FRAGMENTSOURCE_AUDIOLINK_CHRONOTENSITY
-        #define FRAGMENT_STREAM_0_MACRO triloop(audiolink_chronotensity*audiolink_mask[0])
-        #define FRAGMENT_STREAM_1_MACRO triloop(audiolink_chronotensity*audiolink_mask[1])
-        #define FRAGMENT_STREAM_2_MACRO triloop(audiolink_chronotensity*audiolink_mask[2])
+        fragment_stream[0] = triloop(audiolink_chronotensity*audiolink_mask[0]);
+        fragment_stream[1] = triloop(audiolink_chronotensity*audiolink_mask[1]);
+        fragment_stream[2] = triloop(audiolink_chronotensity*audiolink_mask[2]);
     #else
-        #define FRAGMENT_STREAM_0_MACRO _FragmentValue*fragment_mask[0]
-        #define FRAGMENT_STREAM_1_MACRO _FragmentValue*fragment_mask[1]
-        #define FRAGMENT_STREAM_2_MACRO _FragmentValue*fragment_mask[2]
+        fragment_stream[0] = _FragmentValue*fragment_mask[0];
+        fragment_stream[1] = _FragmentValue*fragment_mask[1];
+        fragment_stream[2] = _FragmentValue*fragment_mask[2];
     #endif
 
+    fragment_stream[0] = saturate(lerp(fragment_stream[0],1.0-fragment_stream[0],_FragmentInverse));
+    fragment_stream[1] = saturate(lerp(fragment_stream[1],1.0-fragment_stream[1],_FragmentInverse));
+    fragment_stream[2] = saturate(lerp(fragment_stream[2],1.0-fragment_stream[2],_FragmentInverse));
+
+    float3 color_stream[3];
     #if defined(_COLORINGSOURCE_NOISE1ST) || defined(_COLORINGSOURCE_NOISE2ND) || defined(_COLORINGSOURCE_NOISE3RD)
         float3 color_center = (inp[0].COLOR_NOISE_MACRO+inp[1].COLOR_NOISE_MACRO+inp[2].COLOR_NOISE_MACRO)/3.0;
         float color_time = COLOR_TIME_MACRO;
         #ifdef _COLORINGPARTITIONTYPE_VERTEX
-            #define COLOR_STREAM_0_MACRO ColorNoisePingPong(inp[0].COLOR_NOISE_MACRO,COLOR_OFFSET_MACRO(0),color_time)*coloring_mask[0]
-            #define COLOR_STREAM_1_MACRO ColorNoisePingPong(inp[1].COLOR_NOISE_MACRO,COLOR_OFFSET_MACRO(1),color_time)*coloring_mask[1]
-            #define COLOR_STREAM_2_MACRO ColorNoisePingPong(inp[2].COLOR_NOISE_MACRO,COLOR_OFFSET_MACRO(2),color_time)*coloring_mask[2]
+            color_stream[0] = ColorNoisePingPong(inp[0].COLOR_NOISE_MACRO,COLOR_OFFSET_MACRO(0),color_time)*coloring_mask[0];
+            color_stream[1] = ColorNoisePingPong(inp[1].COLOR_NOISE_MACRO,COLOR_OFFSET_MACRO(1),color_time)*coloring_mask[1];
+            color_stream[2] = ColorNoisePingPong(inp[2].COLOR_NOISE_MACRO,COLOR_OFFSET_MACRO(2),color_time)*coloring_mask[2];
         #elif _COLORINGPARTITIONTYPE_SIDE
             float3 color_noise;
             color_noise.x = ColorSidePosNoisePingPong(inp[1].COLOR_NOISE_MACRO,inp[2].COLOR_NOISE_MACRO,inp[0].COLOR_NOISE_MACRO,color_center,COLOR_OFFSET_MACRO(0),color_time);
             color_noise.y = ColorSidePosNoisePingPong(inp[2].COLOR_NOISE_MACRO,inp[0].COLOR_NOISE_MACRO,inp[1].COLOR_NOISE_MACRO,color_center,COLOR_OFFSET_MACRO(1),color_time);
             color_noise.z = ColorSidePosNoisePingPong(inp[0].COLOR_NOISE_MACRO,inp[1].COLOR_NOISE_MACRO,inp[2].COLOR_NOISE_MACRO,color_center,COLOR_OFFSET_MACRO(2),color_time);
 
-            #define COLOR_STREAM_0_MACRO float3(0.0,color_noise.y,color_noise.z)*coloring_mask[0]
-            #define COLOR_STREAM_1_MACRO float3(color_noise.x,0.0,color_noise.z)*coloring_mask[1]
-            #define COLOR_STREAM_2_MACRO float3(color_noise.x,color_noise.y,0.0)*coloring_mask[2]
+            color_stream[0] = float3(0.0,color_noise.y,color_noise.z)*coloring_mask[0];
+            color_stream[1] = float3(color_noise.x,0.0,color_noise.z)*coloring_mask[1];
+            color_stream[2] = float3(color_noise.x,color_noise.y,0.0)*coloring_mask[2];
         #elif _COLORINGPARTITIONTYPE_MESH
-            #define COLOR_STREAM_0_MACRO ColorNoisePingPong(COLOR_CENTER_MACRO,COLOR_OFFSET_MACRO(0),color_time)*coloring_mask[0]
-            #define COLOR_STREAM_1_MACRO ColorNoisePingPong(COLOR_CENTER_MACRO,COLOR_OFFSET_MACRO(1),color_time)*coloring_mask[1]
-            #define COLOR_STREAM_2_MACRO ColorNoisePingPong(COLOR_CENTER_MACRO,COLOR_OFFSET_MACRO(2),color_time)*coloring_mask[2]
+            color_stream[0] = ColorNoisePingPong(COLOR_CENTER_MACRO,COLOR_OFFSET_MACRO(0),color_time)*coloring_mask[0];
+            color_stream[1] = ColorNoisePingPong(COLOR_CENTER_MACRO,COLOR_OFFSET_MACRO(1),color_time)*coloring_mask[1];
+            color_stream[2] = ColorNoisePingPong(COLOR_CENTER_MACRO,COLOR_OFFSET_MACRO(2),color_time)*coloring_mask[2];
         #endif
     #elif defined(_USE_AUDIOLINK) && _COLORINGSOURCE_AUDIOLINK_VU
-        #define COLOR_STREAM_0_MACRO audiolink_vu*audiolink_mask[0]
-        #define COLOR_STREAM_1_MACRO audiolink_vu*audiolink_mask[1]
-        #define COLOR_STREAM_2_MACRO audiolink_vu*audiolink_mask[2]
+        color_stream[0] = audiolink_vu*audiolink_mask[0];
+        color_stream[1] = audiolink_vu*audiolink_mask[1];
+        color_stream[2] = audiolink_vu*audiolink_mask[2];
     #elif defined(_USE_AUDIOLINK) && _COLORINGSOURCE_AUDIOLINK_CHRONOTENSITY
-        #define COLOR_STREAM_0_MACRO triloop(audiolink_chronotensity*audiolink_mask[0])
-        #define COLOR_STREAM_1_MACRO triloop(audiolink_chronotensity*audiolink_mask[1])
-        #define COLOR_STREAM_2_MACRO triloop(audiolink_chronotensity*audiolink_mask[2])
+        color_stream[0] = triloop(audiolink_chronotensity*audiolink_mask[0]);
+        color_stream[1] = triloop(audiolink_chronotensity*audiolink_mask[1]);
+        color_stream[2] = triloop(audiolink_chronotensity*audiolink_mask[2]);
     #else
-        #define COLOR_STREAM_0_MACRO _ColoringValue*coloring_mask[0]
-        #define COLOR_STREAM_1_MACRO _ColoringValue*coloring_mask[1]
-        #define COLOR_STREAM_2_MACRO _ColoringValue*coloring_mask[2]
+        color_stream[0] = _ColoringValue*coloring_mask[0];
+        color_stream[1] = _ColoringValue*coloring_mask[1];
+        color_stream[2] = _ColoringValue*coloring_mask[2];
     #endif
 
     #ifdef _COLORSOURCE_VERTEXCOLOR
@@ -350,8 +356,8 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     o.alpha = inp[0].alpha;
     o.camera_distance = camera_distance[0];
     o.baryCentricCoords = float3(1.0,0.0,0.0);
-    o.fragment_noise = FRAGMENT_STREAM_0_MACRO;
-    o.color_noise = COLOR_STREAM_0_MACRO;
+    o.fragment_noise = fragment_stream[0];
+    o.color_noise = color_stream[0];
     STREAM_VERTEXCOLOR_0_MACRO o.vertex_color = inp[0].vertex_color;
     o.normal = inp[0].normal;
     SWITCH_SHADE_WORLDPOS_MACRO o.world_pos = world_pos[0];
@@ -365,8 +371,8 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     o.alpha = inp[1].alpha;
     o.camera_distance = camera_distance[1];
     o.baryCentricCoords = float3(0.0,1.0,0.0);
-    o.fragment_noise = FRAGMENT_STREAM_1_MACRO;
-    o.color_noise = COLOR_STREAM_1_MACRO;
+    o.fragment_noise = fragment_stream[1];
+    o.color_noise = color_stream[1];
     STREAM_VERTEXCOLOR_1_MACRO o.vertex_color = inp[1].vertex_color;
     o.normal = inp[1].normal;
     SWITCH_SHADE_WORLDPOS_MACRO o.world_pos = world_pos[1];
@@ -380,8 +386,8 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     o.alpha = inp[2].alpha;
     o.camera_distance = camera_distance[2];
     o.baryCentricCoords = float3(0.0,0.0,1.0);
-    o.fragment_noise = FRAGMENT_STREAM_2_MACRO;
-    o.color_noise = COLOR_STREAM_2_MACRO;
+    o.fragment_noise = fragment_stream[2];
+    o.color_noise = color_stream[2];
     STREAM_VERTEXCOLOR_2_MACRO o.vertex_color = inp[2].vertex_color;
     o.normal = inp[2].normal;
     SWITCH_SHADE_WORLDPOS_MACRO o.world_pos = world_pos[2];

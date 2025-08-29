@@ -113,6 +113,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         _LINE_SCALE,
         _LINE_FADE_MODE,
         _FRAGMENT_VALUE,
+        _FRAGMENT_INVERSE,
         _PARTITION_TYPE,
 
         _COLOR0,

@@ -40,6 +40,7 @@ UNITY_DECLARE_TEX2D_NOSAMPLER(_ColorGradientTex);
 float4 _ColorGradientTex_ST;
 
 float _FragmentValue;
+bool _FragmentInverse;
 float _FragmentMaskControl;
 float _TriangleComp;
 float _Fill;

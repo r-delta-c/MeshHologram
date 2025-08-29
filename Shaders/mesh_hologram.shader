@@ -55,6 +55,7 @@ Shader "DeltaField/shaders/MeshHologram"{
         [KeywordEnum(Value,Noise1st,Noise2nd,Noise3rd,AudioLink_VU,AudioLink_ChronoTensity)]
         _FragmentSource("Fragment Source",Int)=1
         _FragmentValue("Fragment Value",Range(0.0,1.0))=1.0
+        [MaterialToggle]_FragmentInverse("Fragment Inverse",Int)=0
         _FragmentMaskControlTex("Fragment Mask Control Tex",2D)="white"{}
         _FragmentMaskControl("Fragment Mask Control Strength",Range(0.0,1.0))=1.0
         [KeywordEnum(Vertex,Side,Mesh)]
