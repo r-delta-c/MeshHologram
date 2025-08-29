@@ -84,9 +84,12 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
                 FragmentNoisePingPong(inp[0].FRAGMENT_NOISE_MACRO,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO,
                 FragmentNoisePingPong(inp[1].FRAGMENT_NOISE_MACRO,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO,
                 FragmentNoisePingPong(inp[2].FRAGMENT_NOISE_MACRO,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO);
-            fragment_noise.x = 1.0-(fragment_noise.x)*fragment_mask[0];
-            fragment_noise.y = 1.0-(fragment_noise.y)*fragment_mask[1];
-            fragment_noise.z = 1.0-(fragment_noise.z)*fragment_mask[2];
+            fragment_noise.x = fragment_noise.x*fragment_mask[0];
+            fragment_noise.y = fragment_noise.y*fragment_mask[1];
+            fragment_noise.z = fragment_noise.z*fragment_mask[2];
+            fragment_noise.x = lerp(fragment_noise.x,1.0-fragment_noise.x,_FragmentInverse);
+            fragment_noise.y = lerp(fragment_noise.y,1.0-fragment_noise.y,_FragmentInverse);
+            fragment_noise.z = lerp(fragment_noise.z,1.0-fragment_noise.z,_FragmentInverse);
 
             fragment_stream[0] = float3(0.0,fragment_noise.x,fragment_noise.x);
             fragment_stream[1] = float3(fragment_noise.y,0.0,fragment_noise.y);
@@ -96,6 +99,10 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             fragment_noise.x = FragmentSidePosNoise(inp[1].FRAGMENT_NOISE_MACRO,inp[2].FRAGMENT_NOISE_MACRO,inp[0].FRAGMENT_NOISE_MACRO,fragment_center,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO;
             fragment_noise.y = FragmentSidePosNoise(inp[2].FRAGMENT_NOISE_MACRO,inp[0].FRAGMENT_NOISE_MACRO,inp[1].FRAGMENT_NOISE_MACRO,fragment_center,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO;
             fragment_noise.z = FragmentSidePosNoise(inp[0].FRAGMENT_NOISE_MACRO,inp[1].FRAGMENT_NOISE_MACRO,inp[2].FRAGMENT_NOISE_MACRO,fragment_center,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO;
+
+            fragment_noise.x = lerp(1.0-fragment_noise.x,fragment_noise.x,_FragmentInverse);
+            fragment_noise.y = lerp(1.0-fragment_noise.y,fragment_noise.y,_FragmentInverse);
+            fragment_noise.z = lerp(1.0-fragment_noise.z,fragment_noise.z,_FragmentInverse);
 
             fragment_stream[0] = float3(0.0,1.0-fragment_noise.y*fragment_mask[0],1.0-fragment_noise.z*fragment_mask[0])*fragment_mask[0];
             fragment_stream[1] = float3(1.0-fragment_noise.x*fragment_mask[1],0.0,1.0-fragment_noise.z*fragment_mask[1])*fragment_mask[1];
