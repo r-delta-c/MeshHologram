@@ -482,14 +482,14 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
 
                         using (new EditorGUILayout.VerticalScope("HelpBox"))
                         {
-                            DrawCustomProperty(targetMat, CUSTOM_PROPERTY._FRAGMENT_AUDIOLINK_NOISE_WAVE, true);
-                            if (CustomProperties[CUSTOM_PROPERTY._FRAGMENT_AUDIOLINK_NOISE_WAVE].value == 1)
+                            DrawCustomProperty(targetMat, CUSTOM_PROPERTY._FRAGMENT_AUDIOLINK_NOISE_SPECTROGRAM, true);
+                            if (CustomProperties[CUSTOM_PROPERTY._FRAGMENT_AUDIOLINK_NOISE_SPECTROGRAM].value == 1)
                             {
                                 DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_STRENGTH);
-                                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_WAVE_MIRROR);
-                                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_WAVE_TYPE);
-                                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_WAVE_0);
-                                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_WAVE_1);
+                                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTROGRAM_MIRROR);
+                                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTROGRAM_TYPE);
+                                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTROGRAM_0);
+                                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTROGRAM_1);
                             }
                         }
 
@@ -565,14 +565,14 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
 
                         using (new EditorGUILayout.VerticalScope("HelpBox"))
                         {
-                            DrawCustomProperty(targetMat, CUSTOM_PROPERTY._COLORING_AUDIOLINK_NOISE_WAVE, true);
-                            if (CustomProperties[CUSTOM_PROPERTY._COLORING_AUDIOLINK_NOISE_WAVE].value == 1)
+                            DrawCustomProperty(targetMat, CUSTOM_PROPERTY._COLORING_AUDIOLINK_NOISE_SPECTROGRAM, true);
+                            if (CustomProperties[CUSTOM_PROPERTY._COLORING_AUDIOLINK_NOISE_SPECTROGRAM].value == 1)
                             {
                                 DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_STRENGTH);
-                                DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_WAVE_MIRROR);
-                                DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_WAVE_TYPE);
-                                DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_WAVE_0);
-                                DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_WAVE_1);
+                                DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTROGRAM_MIRROR);
+                                DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTROGRAM_TYPE);
+                                DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTROGRAM_0);
+                                DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTROGRAM_1);
                             }
                         }
 
@@ -640,14 +640,14 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
 
                         using (new EditorGUILayout.VerticalScope("HelpBox"))
                         {
-                            DrawCustomProperty(targetMat, CUSTOM_PROPERTY._GEOMETRY_AUDIOLINK_NOISE_WAVE, true);
-                            if (CustomProperties[CUSTOM_PROPERTY._GEOMETRY_AUDIOLINK_NOISE_WAVE].value == 1)
+                            DrawCustomProperty(targetMat, CUSTOM_PROPERTY._GEOMETRY_AUDIOLINK_NOISE_SPECTROGRAM, true);
+                            if (CustomProperties[CUSTOM_PROPERTY._GEOMETRY_AUDIOLINK_NOISE_SPECTROGRAM].value == 1)
                             {
                                 DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_STRENGTH);
-                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_WAVE_MIRROR);
-                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_WAVE_TYPE);
-                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_WAVE_0);
-                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_WAVE_1);
+                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTROGRAM_MIRROR);
+                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTROGRAM_TYPE);
+                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTROGRAM_0);
+                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTROGRAM_1);
                             }
                         }
 
@@ -746,10 +746,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_AUDIOLINK_STRENGTH);
                                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_REF_AUDIOLINK);
                                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_STRENGTH);
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_WAVE_MIRROR);
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_WAVE_TYPE);
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_WAVE_0);
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_WAVE_1);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTROGRAM_MIRROR);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTROGRAM_TYPE);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTROGRAM_0);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTROGRAM_1);
                                 }
                             }
                         }
