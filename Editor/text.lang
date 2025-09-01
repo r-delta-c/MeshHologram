@@ -12,7 +12,7 @@ label.geometry||Geometry||ジオメトリ
 label.color.preview||Preview||プレビュー
 label.color.export||Export||エクスポート
 
-label.messy_orbit||Messy/Orbit||Messy/Orbit
+label.messy_orbit||Orbit||Orbit
 label.noise1st_properties||Noise 1st Properties||Noise 1st プロパティ
 label.noise2nd_properties||Noise 2nd Properties||Noise 2nd プロパティ
 label.noise3rd_properties||Noise 3rd Properties||Noise 3rd プロパティ

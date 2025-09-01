@@ -21,7 +21,7 @@ _PreviewMode||Preview Mode||プレビューモード
 _UseAudioLink||Use AudioLink||AudioLinkを有効にする
 _AudioLinkMaskControlTex||AudioLink Mask Control Tex*||AudioLink マスクコントロールテクスチャ*
 _AudioLinkMaskControl||Strength*||強さ*
-_AudioLinkVUBand||VU Band||VU 帯域
+_AudioLinkVUBand||VU Band*||VU 帯域*
 _AudioLinkVUSmooth||VU Smooth*||VU 滑らかさ*
 _AudioLinkVUPanning||VU Panning*||VU L/R*
 _AudioLinkVUGainMul||VU Gain (Mul)*||VU 出力(乗算)*
@@ -35,10 +35,12 @@ _TriangleComp||Triangle Compression*||三角形の縮小*
 _Fill||Fill*||塗りつぶす*
 _LineWidth||Line Width*||線の太さ*
 _LineGradientBias||Line Gradient Bias*||線幅のグラデーションカーブ*
+_ManualLineScaling||Manual Line Scaling||線のスケールの手動操作
 _LineScale||Line Scale*||線の全体スケール*
 _LineFadeMode||Line Fade Mode||線のフェードタイプ
 _FragmentSource||Fragment Source||フラグメントの参照先
 _FragmentValue||Fragment Value*||フラグメントの値*
+_FragmentInverse||Fragment Value Inverse*||フラグメントの値の反転*
 _FragmentMaskControlTex||Fragment Mask Control Tex*||フラグメント マスクコントロールテクスチャ*
 _FragmentMaskControl||Strength*||強さ*
 _PartitionType||Partition Type||区切り
@@ -58,31 +60,82 @@ _GeometrySource||Geometry Source||ジオメトリの参照先
 _GeometryValue||Geometry Value*||ジオメトリの値*
 _GeometryMaskControlTex||Geometry Mask Control Tex*||ジオメトリ マスクコントロールテクスチャ*
 _GeometryMaskControl||Strength*||強さ*
-_GeometryPushPullE||Activate Push/Pull||Push/Pullの有効
-_GeometryPushPull||Strength Push/Pull*||Push/Pullの強さ*
-_GeometryPushPullBias||Bias Pull<=>Push*||偏り具合 Pull<=>Push*
 
-_GeometryMessyToggle||Activate Messy||Messyの有効
-_GeometryMessySource||Messy Source||Messyの参照先
-_GeometryMessyValue||Messy Value*||Messyの値*
-_GeometryMessyMaskControlTex||Messy Mask Control Tex*||Messy マスクコントロールテクスチャ*
-_GeometryMessyMaskControl||Strength*||強さ*
-_GeometryMessySeed||Messy Primitive Seed*||メッシュごとのシード値*
-_GeometryMessyOrbitRotation||Orbit Rotation*||Orbit 回転*
-_GeometryMessyOrbitRotationForward||Orbit Rotation Forward*||Orbit Forward 回転*
-_GeometryMessyOrbitRotationRight||Orbit Rotation Right*||Orbit Right 回転*
-_GeometryMessyOrbitPosition||Orbit Position*||Orbitの位置*
-_GeometryMessyOrbitScaleY||Orbit Scale Y*||Orbit Y スケール*
-_GeometryMessyOrbitScaleZ||Orbit Scale Z*||Orbit Z スケール*
-_GeometryMessyOrbitVariance||Orbit Variance*||Orbitのバラつき*
-_GeometryMessyTimeMultiplier||Orbit Time Multiplier*||Orbit 時間乗算*
-_GeometryMessyReferenceTime||Orbit Rotation Reference Time||Orbit 時間の参照先
-_OrbitRotationRefAudioLink||Orbit Rotation Reference AudioLink||Orbit 回転 AudioLinkの参照先
-_OrbitRotationAudioLinkStrength||Orbit Rotation AudioLink*||Orbit AudioLink回転の強さ*
+_GeometryScale||Activate Scale||スケールの有効
+_GeometryScale0||Scale Range*/A/B||スケールの範囲*/A/B
+
+_GeometryExtrude||Activate Extrude||押し出しの有効
+_GeometryExtrude0||Extrude Range*/A/B||押し出しの範囲*/A/B
+
+_GeometryRotation||Activate Rotation||回転の有効
+_GeometryRotationReverse||Rotation Reverse*||逆回転*
+_GeometryRotationNoiseRepeat||One-way Rotation||一方向回転
 
 _GeometryPartitionBias||Geometry Partition Bias | Vertex<=>Center*||ジオメトリの区切りの偏り | 頂点<=>中心*
 _PixelizationSpace||Vertex Pixelization Position Space||頂点モザイク化の空間
-_Pixelization||Vertex Pixelization*||頂点モザイク化*
+_Pixelization||Vertex Pixelization*/X/Y/Z/Scale||頂点モザイク化*/X/Y/Z/スケール
+
+
+_ActivateOrbit||Activate Orbit||Orbitの有効
+_OrbitSource||Orbit Source||Orbitの参照先
+_OrbitValue||Orbit Value*||Orbitの値*
+_OrbitMaskControlTex||Orbit Mask Control Tex*||Orbit マスクコントロールテクスチャ*
+_OrbitMaskControl||Strength*||強さ*
+_OrbitSeed||Orbit Seed*||Orbitのシード値*
+
+_OrbitRotationSource||Orbit Rotation Source||Orbitの回転の参照先
+_OrbitRotationValue||Orbit Rotation Value||Orbitの回転の値
+_OrbitRotation||Orbit Rotation*||Orbitの回転*
+_OrbitRotationForward||Orbit Rotation Forward*||OrbitのForward回転*
+_OrbitRotationRight||Orbit Rotation Right*||OrbitのRight回転*
+_OrbitRotationPhase||Orbit Rotation Phase*||Orbitの回転周期*
+_OrbitRotationTimeMultiplier||Orbit Rotation Time Multiplier*||Orbitの回転時間乗算*
+
+_OrbitRotationVariance||Orbit Rotation Variance*||Orbitの回転のバラつき*
+
+_OrbitRotationRefAudioLink||Orbit Rotation Reference AudioLink||Orbitの回転 AudioLinkの参照先
+_OrbitRotationAudioLinkStrength||Orbit Rotation AudioLink Strength*||Orbit AudioLink回転の強さ*
+
+_OrbitOffset||Orbit Offset*||Orbitの座標オフセット*
+_OrbitScaleY||Orbit Scale Y*||Orbit Y スケール*
+_OrbitScaleZ||Orbit Scale Z*||Orbit Z スケール*
+
+_OrbitWaveXYStrength||Orbit Wave XY Strength||Orbit Waveの強さ
+_OrbitWaveXYFrequency||Orbit Wave XY Frequency||Orbit Wave周波頻度
+_OrbitWaveXYPhase||Orbit Wave XY Phase||Orbit Waveの周期
+_OrbitWaveXYTimeMultiplier||Orbit Wave XY Time Multiplier||Orbit Waveの時間乗算
+_OrbitWaveZStrength||Orbit Wave Z Strength||Orbit Waveの強さ
+_OrbitWaveZFrequency||Orbit Wave Z Frequency||Orbit Wave周波頻度
+_OrbitWaveZPhase||Orbit Wave Z Phase||Orbit Waveの周期
+_OrbitWaveZTimeMultiplier||Orbit Wave Z Time Multiplier||Orbit Waveの時間乗算
+
+_OrbitWaveRefAudioLink||Reference AudioLink||AudioLinkの参照先
+_OrbitWaveAudioLinkStrength||AudioLink Strength||AudioLinkの強さ
+_OrbitWaveAudioLinkSpectrogramMirror||AudioLink Spectrogram Mirror||AudioLink Spectrogram ミラー
+_OrbitWaveAudioLinkSpectrogramType||AudioLink Spectrogram Type||AudioLink Spectrogram 種類
+_OrbitWaveAudioLinkSpectrogram0||AudioLink Spectrogram 0||AudioLink Spectrogram 0
+_OrbitWaveAudioLinkSpectrogram1||AudioLink Spectrogram 1||AudioLink Spectrogram 1
+
+_FragmentAudioLinkNoiseSpectrogram||Activate Fragment Spectrogram||フラグメントのSpectrogramを有効にする
+_FragmentAudioLinkStrength||AudioLink Strength||AudioLinkの強さ
+_FragmentAudioLinkSpectrogramMirror||AudioLink Spectrogram Mirror||AudioLink Spectrogram ミラー
+_FragmentAudioLinkSpectrogramType||AudioLink Spectrogram Type||AudioLink Spectrogram 種類
+_FragmentAudioLinkSpectrogram0||AudioLink Spectrogram 0||AudioLink Spectrogram 0
+_FragmentAudioLinkSpectrogram1||AudioLink Spectrogram 1||AudioLink Spectrogram 1
+
+_ColoringAudioLinkNoiseSpectrogram||Activate Coloring Spectrogram||着色のSpectrogramを有効にする
+_ColoringAudioLinkStrength||AudioLink Strength||AudioLinkの強さ
+_ColoringAudioLinkSpectrogramMirror||AudioLink Spectrogram Mirror||AudioLink Spectrogram ミラー
+_ColoringAudioLinkSpectrogramType||AudioLink Spectrogram Type||AudioLink Spectrogram 種類
+_ColoringAudioLinkSpectrogram0||AudioLink Spectrogram 0||AudioLink Spectrogram 0
+_ColoringAudioLinkSpectrogram1||AudioLink Spectrogram 1||AudioLink Spectrogram 1
+
+_GeometryAudioLinkNoiseSpectrogram||Activate Geometry Spectrogram||ジオメトリのSpectrogramを有効にする
+_GeometryAudioLinkStrength||AudioLink Strength||AudioLinkの強さ
+_GeometryAudioLinkSpectrogramMirror||AudioLink Spectrogram Mirror||AudioLink Spectrogram ミラー
+_GeometryAudioLinkSpectrogramType||AudioLink Spectrogram Type||AudioLink Spectrogram 種類
+_GeometryAudioLinkSpectrogram0||AudioLink Spectrogram 0||AudioLink Spectrogram 0
+_GeometryAudioLinkSpectrogram1||AudioLink Spectrogram 1||AudioLink Spectrogram 1
 
 _Noise1stOffset0||Offset*||オフセット*
 _Noise1stScale0||Scale*||スケール*
@@ -100,7 +153,6 @@ _Noise1stTimePhase||Time Phase*||時間周期*
 _Noise1stOffsetControlTex||Mask Control Tex*||オフセットコントロールテクスチャ*
 _Noise1stOffsetControl||Strength*||強さ*
 _Noise1stPhaseScale||Value Phase Scale*||値の周期スケール*
-_Noise1stReferenceTime||Reference Time||時間の参照先
 _Noise1stPhaseRefAudioLink||Phase Ref AudioLink||AudioLinkの参照先
 
 _Noise2ndOffset0||Offset*||オフセット*
@@ -119,7 +171,6 @@ _Noise2ndTimePhase||Time Phase*||時間周期*
 _Noise2ndOffsetControlTex||Mask Control Tex*||オフセットコントロールテクスチャ*
 _Noise2ndOffsetControl||Strength*||強さ*
 _Noise2ndPhaseScale||Value Phase Scale*||値の周期スケール*
-_Noise2ndReferenceTime||Reference Time||時間の参照先
 _Noise2ndPhaseRefAudioLink||Phase Ref AudioLink||AudioLinkの参照先
 
 _Noise3rdOffset0||Offset*||オフセット*
@@ -138,7 +189,6 @@ _Noise3rdTimePhase||Time Phase*||時間周期*
 _Noise3rdOffsetControlTex||Mask Control Tex*||オフセットコントロールテクスチャ*
 _Noise3rdOffsetControl||Strength*||強さ*
 _Noise3rdPhaseScale||Value Phase Scale*||値の周期スケール*
-_Noise3rdReferenceTime||Reference Time||時間の参照先
 _Noise3rdPhaseRefAudioLink||Phase Ref AudioLink||AudioLinkの参照先
 
 

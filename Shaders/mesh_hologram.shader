@@ -1,34 +1,70 @@
 Shader "DeltaField/shaders/MeshHologram"{
     Properties{
+        [KeywordEnum(Transparent,Cutout,DepthOnly)]
+        _RenderingMode("Rendering Mode",Int)=0
         [Enum(UnityEngine.Rendering.CullMode)]
         _Cull("Culling Mode",Int)=0
         [KeywordEnum(Off,On)]
         _ZWrite("Z Write",Int)=0
 
+        [IntRange]_CustomRenderQueueT("Transparent Render Queue",Range(3000,5000))=3000
+        [IntRange]_CustomRenderQueueC("Cutout Render Queue",Range(2001,2499))=2001
+
         [MaterialToggle]_Forced_Z_Scale_Zero("Forced Z Scale Zero",Float)=1.0
         [Toggle(_BILLBOARD_MODE)]
         _BillboardMode("Billboard Mode(Feature)",Int)=0
+        _DistanceInfluence("Distance Influence",Range(0.0,1.0))=1.0
+        [KeywordEnum(None,Position,Rotation,Position_Rotation)]
+        _StereoMergeMode("Stereo Merge Mode(Feature)",Int)=2
+        [Toggle(_USE_FWIDTH)]
+        _UseFwidth("Use fwidth()",Int)=1
+
+        [DFToggle(_ACTIVATE_DIRECTIONALLIGHT_INFLUENCE,1)]
+        _ActivateDirectionalLightInfluence("Activate Directional Light Influence",Int)=0
+        _DirectionalLightInfluence("Directional Light Influence",Range(0.0,1.0))=1.0
+        [DFToggle(_ACTIVATE_AMBIENT_INFLUENCE,1)]
+        _ActivateAmbientInfluence("Activate Ambient Influence",Int)=0.0
+        _AmbientInfluence("Ambient Influence",Range(0.0,1.0))=1.0
+        [DFToggle(_ACTIVATE_LIGHTVOLUMES,1)]
+        _ActivateLightVolumesInfluence("Activate LightVolumes",Int)=0.0
+        _LightVolumesInfluence("LightVolumes Influence",Range(0.0,1.0))=1.0
+
         [Toggle(_PREVIEW_MODE)]
         _PreviewMode("Preview Mode(Feature)",Int)=0
         [Toggle(_ANTI_ALIASING)]
         _AntiAliasing("Anti Aliasing",Int)=0
-        _DistanceInfluence("Distance Influence",Range(0.0,1.0))=1.0
 
-        [Toggle(_ACTIVATE_DIRECTIONALLIGHT_INFLUENCE)]
-        _ActivateDirectionalLightInfluence("Activate Directional Light Influence",Int)=0
-        _DirectionalLightInfluence("Directional Light Influence",Range(0.0,1.0))=1.0
-        [Toggle(_ACTIVATE_AMBIENT_INFLUENCE)]
-        _ActivateAmbientInfluence("Activate Ambient Influence",Int)=0.0
-        _AmbientInfluence("Ambient Influence",Range(0.0,1.0))=1.0
-        [Toggle(_ACTIVATE_LIGHTVOLUMES)]
-        _ActivateLightVolumesInfluence("Activate LightVolumes",Int)=0.0
-        _LightVolumesInfluence("LightVolumes Influence",Range(0.0,1.0))=1.0
+        _MainTex("Fallback Texture",2D)="(1.0,1.0,1.0,0.25)" {}
 
 
-        [Toggle(_USE_AUDIOLINK)]
+        [MaterialToggle]_ZClip("Z Clip",Int)=1
+        [Enum(UnityEngine.Rendering.CompareFunction)]_ZTest("Z Test",Int)=4
+        [DFColorMask]_ColorMask("Color Mask",Int)=15
+        _OffsetFactor("Offset Factor",Range(-1.0,1.0))=0.0
+        _OffsetUnits("Offset Factor",Range(-1.0,1.0))=0.0
+        _AlphaToMask("Alpha To Mask",Int)=0
+        [MaterialToggle]_AlphaToMaskMemory("Alpha To Mask",Int)=0
+
+        [Enum(UnityEngine.Rendering.BlendOp)]_BlendOp("Blend Operation", Int)=0
+        [Enum(UnityEngine.Rendering.BlendMode)]_SrcBlend("Blend Mode Source", Int)=5
+        [Enum(UnityEngine.Rendering.BlendMode)]_DstBlend("Blend Mode Destination", Int)=10
+
+        [Enum(UnityEngine.Rendering.BlendOp)]_BlendOpAlpha("Alpha Blend Operation", Int)=0
+        [Enum(UnityEngine.Rendering.BlendMode)]_SrcBlendAlpha("Alpha Blend Mode Source", Int)=5
+        [Enum(UnityEngine.Rendering.BlendMode)]_DstBlendAlpha("Alpha Blend Mode Destination", Int)=10
+
+
+        [IntRange]_StencilRef("Stencil Ref",Range(0,255))=0
+        [IntRange]_StencilReadMask("Stencil Read Mask",Range(0,255))=255
+        [IntRange]_StencilWriteMask("Stencil Write Mask",Range(0,255))=255
+        [Enum(UnityEngine.Rendering.CompareFunction)]_StencilComp("Stencil Comp",Int)=8
+        [Enum(UnityEngine.Rendering.StencilOp)]_StencilPass("Stencil Pass",Int)=0
+        [Enum(UnityEngine.Rendering.StencilOp)]_StencilFail("Stencil Fail",Int)=0
+        [Enum(UnityEngine.Rendering.StencilOp)]_StencilZFail("Stencil ZFail",Int)=0
+
+
+        [DFToggle(_USE_AUDIOLINK,1)]
         _UseAudioLink("Use AudioLink", Int)=0
-        _AudioLinkMaskControlTex("AudioLink Mask Control Tex",2D)="white"{}
-        _AudioLinkMaskControl("AudioLink Mask Control Strength",Range(0.0,1.0))=1.0
         [Enum(Bass,0,Low_Mid,1,High_Mid,2,Treble,3,Average,4)]
         _AudioLinkVUBand("VU Band",Int)=0
         [IntRange]_AudioLinkVUSmooth("VU Smooth",Range(0,15))=0
@@ -43,6 +79,7 @@ Shader "DeltaField/shaders/MeshHologram"{
         [Enum(Bass,0,Low_Mid,1,High_Mid,2,Treble,3)]
         _AudioLinkThemeColorBand("Theme Color Band",Int)=0
 
+
         _TriangleComp("Triangle Compression",Float)=5.0
         [MaterialToggle]_Fill("Fill",Float)=0.0
         _LineWidth("Line Width",Float)=2.0
@@ -56,12 +93,8 @@ Shader "DeltaField/shaders/MeshHologram"{
         _FragmentSource("Fragment Source",Int)=1
         _FragmentValue("Fragment Value",Range(0.0,1.0))=1.0
         [MaterialToggle]_FragmentInverse("Fragment Inverse",Int)=0
-        _FragmentMaskControlTex("Fragment Mask Control Tex",2D)="white"{}
-        _FragmentMaskControl("Fragment Mask Control Strength",Range(0.0,1.0))=1.0
         [KeywordEnum(Vertex,Side,Mesh)]
         _PartitionType("Partition Type",Int)=1
-        [Toggle(_USE_FWIDTH)]
-        _UseFwidth("Use fwidth Method",Int)=1
 
 
         _Color0("Primary Color",Color)=(1.0,1.0,1.0,1.0)
@@ -73,30 +106,25 @@ Shader "DeltaField/shaders/MeshHologram"{
         [KeywordEnum(Value,Noise1st,Noise2nd,Noise3rd,AudioLink_VU,AudioLink_ChronoTensity)]
         _ColoringSource("Coloring Source",Int)=2
         _ColoringValue("Coloring Value",Range(0.0,1.0))=0.0
-        _ColoringMaskControlTex("Coloring Mask Control Tex",2D)="white"{}
-        _ColoringMaskControl("Coloring Mask Control Strength",Range(0.0,1.0))=1.0
         [KeywordEnum(Vertex,Side,Mesh)]
         _ColoringPartitionType("Coloring Partition Type",Int)=1
+
 
         [KeywordEnum(Value,Noise1st,Noise2nd,Noise3rd,AudioLink_VU,AudioLink_ChronoTensity)]
         _GeometrySource("Geometry Source",Int)=3
         _GeometryValue("Geometry Value",Range(0.0,1.0))=0.0
-        _GeometryMaskControlTex("Geometry Mask Control Tex",2D)="white"{}
-        _GeometryMaskControl("Geometry Mask Control Strength",Range(0.0,1.0))=1.0
 
-        [Toggle(_GEOMETRY_SCALE)]
+        [DFToggle(_GEOMETRY_SCALE,1)]
         _GeometryScale("Activate Scale",Int)=0
         _GeometryScale0("Scale Range 0",Float)=-0.5
         _GeometryScale1("Scale Range 1",Float)=0
-        _GeometryPushPull("Strength Push/Pull",Float)=0.2
-        _GeometryPushPullBias("Bias Pull<=>Push",Range(-1.0,1.0))=1.0
 
-        [Toggle(_GEOMETRY_EXTRUDE)]
+        [DFToggle(_GEOMETRY_EXTRUDE,1)]
         _GeometryExtrude("Activate Extrude",Int)=1
         _GeometryExtrude0("Extrude Range 0",Float)=-0.5
         _GeometryExtrude1("Extrude Range 1",Float)=0
 
-        [Toggle(_GEOMETRY_ROTATION)]
+        [DFToggle(_GEOMETRY_ROTATION,1)]
         _GeometryRotation("Activate Rotation",Int)=0
         [MaterialToggle(_GEOMETRY_ROTATION_REVERSE)]
         _GeometryRotationReverse("Rotation Reverse",Int)=0
@@ -106,17 +134,14 @@ Shader "DeltaField/shaders/MeshHologram"{
         _GeometryPartitionBias("Geometry Partition Bias| Vertex <=> Center",Range(0.0,1.0))=0.5
         [KeywordEnum(Disable,Model,World,PostGeometry)]
         _PixelizationSpace("Vertex Pixelization Position Space",Int)=0
-        _Pixelization("Vertex Pixelization",Vector)=(1.0,1.0,1.0,0.02)
+        [DFVector(3,1)]_Pixelization("Vertex Pixelization",Vector)=(1.0,1.0,1.0,0.02)
 
-        [Header(Geometry Orbit)]
-        [Toggle(_ACTIVATE_ORBIT)]
+        [DFToggle(_ACTIVATE_ORBIT,1)]
         _ActivateOrbit("Activate Orbit",Int)=0
         [KeywordEnum(Value,Primitive,Noise1st,Noise2nd,Noise3rd)]
         _OrbitSource("Orbit Source",Int)=3
         _OrbitValue("Orbit Value",Range(0.0,1.0))=0.0
         _OrbitSeed("Orbit Seed",Float)=0.0
-        _OrbitMaskControlTex("Orbit Mask Control Tex",2D)="white"{}
-        _OrbitMaskControl("Orbit Mask Control Strength",Range(0.0,1.0))=1.0
 
         [KeywordEnum(Value,Primitive,Noise1st,Noise2nd,Noise3rd)]
         _OrbitRotationSource("Orbit Rotation Source",Int)=1
@@ -157,8 +182,26 @@ Shader "DeltaField/shaders/MeshHologram"{
         _OrbitWaveAudioLinkSpectrogram1("AudioLink Wave 1",Float)=1.0
 
 
+        _AudioLinkMaskControlTex("AudioLink Mask Control Tex",2D)="white"{}
+        _AudioLinkMaskControl("AudioLink Mask Control Strength",Range(0.0,1.0))=1.0
+        _FragmentMaskControlTex("Fragment Mask Control Tex",2D)="white"{}
+        _FragmentMaskControl("Fragment Mask Control Strength",Range(0.0,1.0))=1.0
+        _ColoringMaskControlTex("Coloring Mask Control Tex",2D)="white"{}
+        _ColoringMaskControl("Coloring Mask Control Strength",Range(0.0,1.0))=1.0
+        _GeometryMaskControlTex("Geometry Mask Control Tex",2D)="white"{}
+        _GeometryMaskControl("Geometry Mask Control Strength",Range(0.0,1.0))=1.0
+        _OrbitMaskControlTex("Orbit Mask Control Tex",2D)="white"{}
+        _OrbitMaskControl("Orbit Mask Control Strength",Range(0.0,1.0))=1.0
+        _Noise1stOffsetControlTex("Noise 1st Offset Control Tex",2D)="white"{}
+        _Noise1stOffsetControl("Noise 1st Phase Offset Control Strength",Range(0.0,1.0))=1.0
+        _Noise2ndOffsetControlTex("Noise 2nd Offset Control Tex",2D)="white"{}
+        _Noise2ndOffsetControl("Noise 2nd Phase Offset Control Strength",Range(0.0,1.0))=1.0
+        _Noise3rdOffsetControlTex("Noise 3rd Control Tex",2D)="white"{}
+        _Noise3rdOffsetControl("Noise 3rd Phase Offset Control Strength",Range(0.0,1.0))=1.0
 
-        [Toggle(_FRAGMENT_AUDIOLINK_NOISE_SPECTROGRAM)]
+
+
+        [DFToggle(_FRAGMENT_AUDIOLINK_NOISE_SPECTROGRAM,1)]
         _FragmentAudioLinkNoiseSpectrogram("Fragment AudioLink Noise Spectrogram",Int)=0
         _FragmentAudioLinkStrength("Strength",Float)=1.0
         [MaterialToggle]_FragmentAudioLinkSpectrogramMirror("Noise Wave Mirror",Int)=0.0
@@ -166,7 +209,7 @@ Shader "DeltaField/shaders/MeshHologram"{
         _FragmentAudioLinkSpectrogram0("Noise Wave 0",Float)=-1.0
         _FragmentAudioLinkSpectrogram1("Noise Wave 1",Float)=1.0
 
-        [Toggle(_COLORING_AUDIOLINK_NOISE_SPECTROGRAM)]
+        [DFToggle(_COLORING_AUDIOLINK_NOISE_SPECTROGRAM,1)]
         _ColoringAudioLinkNoiseSpectrogram("Coloring AudioLink Noise Spectrogram",Int)=0
         _ColoringAudioLinkStrength("Strength",Float)=1.0
         [MaterialToggle]_ColoringAudioLinkSpectrogramMirror("Noise Wave Mirror",Int)=0.0
@@ -174,7 +217,7 @@ Shader "DeltaField/shaders/MeshHologram"{
         _ColoringAudioLinkSpectrogram0("Noise Wave 0",Float)=-1.0
         _ColoringAudioLinkSpectrogram1("Noise Wave 1",Float)=1.0
 
-        [Toggle(_GEOMETRY_AUDIOLINK_NOISE_SPECTROGRAM)]
+        [DFToggle(_GEOMETRY_AUDIOLINK_NOISE_SPECTROGRAM,1)]
         _GeometryAudioLinkNoiseSpectrogram("Geometry AudioLink Noise Spectrogram",Int)=0
         _GeometryAudioLinkStrength("Strength",Float)=1.0
         [MaterialToggle]_GeometryAudioLinkSpectrogramMirror("Noise Wave Mirror",Int)=0.0
@@ -200,8 +243,6 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         _Noise1stTimeMulti("Noise 1st Time Multiplier",Float)=3.0
         _Noise1stTimePhase("Noise 1st Time Phase",Float)=0.0
-        _Noise1stOffsetControlTex("Noise 1st Offset Control Tex",2D)="white"{}
-        _Noise1stOffsetControl("Noise 1st Phase Offset Control Strength",Range(0.0,1.0))=1.0
         _Noise1stPhaseScale("Noise 1st Phase Scale",Float)=3.0
         [KeywordEnum(Disable,VU,ChronoTensity)]
         _Noise1stPhaseRefAudioLink("Noise 1st Phase Reference AudioLink",Int)=0
@@ -224,8 +265,6 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         _Noise2ndTimeMulti("Noise 2nd Time Multiplier",Float)=5.0
         _Noise2ndTimePhase("Noise 2nd Time Phase",Float)=0.0
-        _Noise2ndOffsetControlTex("Noise 2nd Offset Control Tex",2D)="white"{}
-        _Noise2ndOffsetControl("Noise 2nd Phase Offset Control Strength",Range(0.0,1.0))=1.0
         _Noise2ndPhaseScale("Noise 2nd Phase Scale",Float)=3.0
 
         [KeywordEnum(Disable,VU,ChronoTensity)]
@@ -249,47 +288,10 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         _Noise3rdTimeMulti("Noise 3rd Time Multiplier",Float)=3.0
         _Noise3rdTimePhase("Noise 3rd Time Phase",Float)=0.0
-        _Noise3rdOffsetControlTex("Noise 3rd Control Tex",2D)="white"{}
-        _Noise3rdOffsetControl("Noise 3rd Phase Offset Control Strength",Range(0.0,1.0))=1.0
         _Noise3rdPhaseScale("Noise 3rd Phase Scale",Float)=3.0
 
         [KeywordEnum(Disable,VU,ChronoTensity)]
         _Noise3rdPhaseRefAudioLink("Noise 3rd Phase Reference AudioLink",Int)=0
-
-
-        [KeywordEnum(None,Position,Rotation,Position_Rotation)]
-        _StereoMergeMode("Stereo Merge Mode(Feature)",Int)=2
-
-        [Enum(UnityEngine.Rendering.BlendOp)]_BlendOp("Blend Operation", Int)=0
-        [Enum(UnityEngine.Rendering.BlendMode)]_SrcBlend("Blend Mode Source", Int)=5
-        [Enum(UnityEngine.Rendering.BlendMode)]_DstBlend("Blend Mode Destination", Int)=10
-
-        [Enum(UnityEngine.Rendering.BlendOp)]_BlendOpAlpha("Alpha Blend Operation", Int)=0
-        [Enum(UnityEngine.Rendering.BlendMode)]_SrcBlendAlpha("Alpha Blend Mode Source", Int)=5
-        [Enum(UnityEngine.Rendering.BlendMode)]_DstBlendAlpha("Alpha Blend Mode Destination", Int)=10
-
-        [KeywordEnum(Off,On)]_ZClip("Z Clip",Int)=1
-        [Enum(UnityEngine.Rendering.CompareFunction)]_ZTest("Z Test",Int)=4
-        [Enum(UnityEngine.Rendering.ColorWriteMask)]_ColorMask("Color Mask",Int)=15
-        _OffsetFactor("Offset Factor",Range(-1.0,1.0))=0.0
-        _OffsetUnits("Offset Factor",Range(-1.0,1.0))=0.0
-        [KeywordEnum(Off,On)]_AlphaToMask("Alpha To Mask",Int)=0
-        _AlphaToMaskMemory("Alpha To Mask",Int)=0
-
-        [IntRange]_StencilRef("Stencil Ref",Range(0,255))=0
-        [IntRange]_StencilReadMask("Stencil Read Mask",Range(0,255))=255
-        [IntRange]_StencilWriteMask("Stencil Write Mask",Range(0,255))=255
-        [Enum(UnityEngine.Rendering.CompareFunction)]_StencilComp("Stencil Comp",Int)=8
-        [Enum(UnityEngine.Rendering.StencilOp)]_StencilPass("Stencil Pass",Int)=0
-        [Enum(UnityEngine.Rendering.StencilOp)]_StencilFail("Stencil Fail",Int)=0
-        [Enum(UnityEngine.Rendering.StencilOp)]_StencilZFail("Stencil ZFail",Int)=0
-
-        [KeywordEnum(Transparent,Cutout,DepthOnly)]
-        _RenderingMode("Rendering Mode",Int)=0
-        [IntRange]_CustomRenderQueueT("Transparent Render Queue",Range(3000,5000))=3000
-        [IntRange]_CustomRenderQueueC("Cutout Render Queue",Range(2001,2499))=2001
-
-        _MainTex("Fallback Texture",2D)="(1.0,1.0,1.0,0.25)" {}
     }
     SubShader{
         Pass{
@@ -424,7 +426,6 @@ Shader "DeltaField/shaders/MeshHologram"{
                 Fail [_StencilFail]
                 ZFail [_StencilZFail]
             }
-
 
             HLSLPROGRAM
 
