@@ -24,7 +24,7 @@ float _DistanceInfluence;
     float4 _OrbitWaveAudioLinkStrength;
     bool _OrbitWaveAudioLinkSpectrumMirror;
     bool _OrbitWaveAudioLinkSpectrumType;
-    float _OrbitWaveAudioLinkSpectrumRange;
+    float2 _OrbitWaveAudioLinkSpectrumRange;
 #endif
 
 UNITY_DECLARE_TEX2D_NOSAMPLER(_FragmentMaskControlTex);
@@ -71,7 +71,7 @@ float _OrbitRotationSeed;
 float3 _OrbitRotation;
 float4 _OrbitRotationTimeMultiplier;
 
-float4 _OrbitRotationVariance;
+float3 _OrbitRotationVariance;
 
 float3 _OrbitOffset;
 float3 _OrbitScale;

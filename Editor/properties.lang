@@ -104,9 +104,9 @@ _OrbitRotationValue||Orbit Rotation Value||Orbitの回転の値
 _OrbitRotation||Orbit Rotation*//Forward/Right||Orbitの回転*//Forward/Right
 _OrbitRotationForward||Orbit Rotation Forward*||OrbitのForward回転*
 _OrbitRotationRight||Orbit Rotation Right*||OrbitのRight回転*
-_OrbitRotationTimeMultiplier||Orbit Rotation Time Multiplier*||Orbitの回転時間乗算*
+_OrbitRotationTimeMultiplier||Orbit Rotation Time Multiplier*/X/Y/Z/W||Orbitの回転時間乗算*/X/Y/Z/W
 
-_OrbitRotationVariance||Orbit Rotation Variance*||Orbitの回転のバラつき*
+_OrbitRotationVariance||Orbit Rotation Variance*/X/Y/Z||Orbitの回転のバラつき*/X/Y/Z
 
 _OrbitWaveXYStrength||Orbit Wave XY Strength||Orbit Waveの強さ
 _OrbitWaveXYFrequency||Orbit Wave XY Frequency||Orbit Wave周波頻度
@@ -118,7 +118,7 @@ _OrbitWaveZPhase||Orbit Wave Z Phase||Orbit Waveの周期
 _OrbitWaveZTimeMultiplier||Orbit Wave Z Time Multiplier||Orbit Waveの時間乗算
 
 _OrbitRotationRefAudioLink||Orbit Rotation Reference||Orbit 回転の参照先
-_OrbitRotationAudioLinkStrength||Strength*||強さ*
+_OrbitRotationAudioLinkStrength||Strength*/X/Y/Z/W||強さ*/X/Y/Z/W
 
 
 _AudioLinkMaskControlTex||Mask Control*||マスクコントロール*
@@ -142,28 +142,28 @@ _Noise3rdOffsetControl||Strength*||強さ*
 
 
 _OrbitWaveRefAudioLink||AudioLink Reference||AudioLinkの参照先
-_OrbitWaveAudioLinkStrength||Strength||強さ
-_OrbitWaveAudioLinkSpectrumMirror||Mirror||ミラー
-_OrbitWaveAudioLinkSpectrumType||Use AutoCorrelator||AutoCorrelatorを使う
-_OrbitWaveAudioLinkSpectrumRange||Spectrum Range/A/B||スペクトラムの範囲/A/B
+_OrbitWaveAudioLinkStrength||Strength*/X/Y/Z/W||強さ*/X/Y/Z/W
+_OrbitWaveAudioLinkSpectrumMirror||Mirror*||ミラー*
+_OrbitWaveAudioLinkSpectrumType||Use AutoCorrelator*||AutoCorrelatorを使う*
+_OrbitWaveAudioLinkSpectrumRange||Spectrum Range*/A/B||スペクトラムの範囲*/A/B
 
 _FragmentAudioLinkNoiseSpectrum||Activate Fragment Spectrum (Only Noise)||フラグメントのスペクトラムを有効にする (ノイズのみ)
-_FragmentAudioLinkStrength||Strength||強さ
-_FragmentAudioLinkSpectrumMirror||Mirror||ミラー
-_FragmentAudioLinkSpectrumType||Use AutoCorrelator||AutoCorrelatorを使う
-_FragmentAudioLinkSpectrumRange||Spectrum Range/A/B||スペクトラムの範囲/A/B
+_FragmentAudioLinkStrength||Strength*/X/Y/Z/W||強さ*/X/Y/Z/W
+_FragmentAudioLinkSpectrumMirror||Mirror*||ミラー*
+_FragmentAudioLinkSpectrumType||Use AutoCorrelator*||AutoCorrelatorを使う*
+_FragmentAudioLinkSpectrumRange||Spectrum Range*/A/B||スペクトラムの範囲*/A/B
 
 _ColoringAudioLinkNoiseSpectrum||Activate Coloring Spectrum (Only Noise)||着色のスペクトラムを有効にする (ノイズのみ)
-_ColoringAudioLinkStrength||Strength||強さ
-_ColoringAudioLinkSpectrumMirror||Mirror||ミラー
-_ColoringAudioLinkSpectrumType||Use AutoCorrelator||AutoCorrelatorを使う
-_ColoringAudioLinkSpectrumRange||Spectrum Range/A/B||スペクトラムの範囲/A/B
+_ColoringAudioLinkStrength||Strength*/X/Y/Z/W||強さ*/X/Y/Z/W
+_ColoringAudioLinkSpectrumMirror||Mirror*||ミラー*
+_ColoringAudioLinkSpectrumType||Use AutoCorrelator*||AutoCorrelatorを使う*
+_ColoringAudioLinkSpectrumRange||Spectrum Range*/A/B||スペクトラムの範囲*/A/B
 
 _GeometryAudioLinkNoiseSpectrum||Activate Geometry Spectrum (Only Noise)||ジオメトリのスペクトラムを有効にする (ノイズのみ)
-_GeometryAudioLinkStrength||Strength||強さ
-_GeometryAudioLinkSpectrumMirror||Mirror||ミラー
-_GeometryAudioLinkSpectrumType||Use AutoCorrelator||AutoCorrelatorを使う
-_GeometryAudioLinkSpectrumRange||Spectrum Range/A/B||スペクトラムの範囲/A/B
+_GeometryAudioLinkStrength||Strength*/X/Y/Z/W||強さ*/X/Y/Z/W
+_GeometryAudioLinkSpectrumMirror||Mirror*||ミラー*
+_GeometryAudioLinkSpectrumType||Use AutoCorrelator*||AutoCorrelatorを使う*
+_GeometryAudioLinkSpectrumRange||Spectrum Range*/A/B||スペクトラムの範囲*/A/B
 
 _Noise1stOffset0||Offset*/X/Y/Z||オフセット*/X/Y/Z
 _Noise1stScale0||Scale*/X/Y/Z/W||スケール*/X/Y/Z/W

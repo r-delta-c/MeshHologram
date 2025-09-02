@@ -149,9 +149,9 @@ Shader "DeltaField/shaders/MeshHologram"{
         [DFVector(2,1)]_OrbitScale("Orbit Scale",Vector)=(1.0,1.0,1.0)
         [DFVector(1,2)]_OrbitRotation("Orbit Rotation",Vector)=(0.0,0.0,0.0,0.0)
 
-        _OrbitRotationTimeMultiplier("Orbit Rotation Time Multiplier",Vector)=(4.0,2.0,0.0,1.0)
+        [DFVector(3,1)]_OrbitRotationTimeMultiplier("Orbit Rotation Time Multiplier",Vector)=(4.0,2.0,0.0,1.0)
 
-        _OrbitRotationVariance("Orbit Rotation Variance",Vector)=(1.0,0.0,0.0,1.0)
+        [DFVector(3)]_OrbitRotationVariance("Orbit Rotation Variance",Vector)=(1.0,0.0,0.0,0.0)
 
         _OrbitWaveXYStrength("Orbit Wave XY Strength",Float)=0.0
         _OrbitWaveXYFrequency("Orbit Wave XY Frequency",Float)=0.0
@@ -164,11 +164,11 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         [KeywordEnum(Disable,VU,ChronoTensity)]
         _OrbitRotationRefAudioLink("Orbit Rotation Reference AudioLink",Int)=0
-        _OrbitRotationAudioLinkStrength("Orbit Rotation AudioLink Strength",Vector)=(1.0,0.0,0.0,1.0)
+        [DFVector(3,1)]_OrbitRotationAudioLinkStrength("Orbit Rotation AudioLink Strength",Vector)=(1.0,0.0,0.0,1.0)
 
-        [KeywordEnum(Disable,VU,Wave)]
+        [KeywordEnum(Disable,VU,Spectrum)]
         _OrbitWaveRefAudioLink("Orbit Wave Reference AudioLink",Int)=0
-        _OrbitWaveAudioLinkStrength("Orbit Wave AudioLink Strength",Vector)=(1.0,1.0,1.0,1.0)
+        [DFVector(3)]_OrbitWaveAudioLinkStrength("Orbit Wave AudioLink Strength",Vector)=(1.0,1.0,1.0,1.0)
         [MaterialToggle]_OrbitWaveAudioLinkSpectrumMirror("AudioLink Wave Mirror",Int)=0.0
         [MaterialToggle]_OrbitWaveAudioLinkSpectrumType("AudioLink Wave Type",Int)=0.0
         [DFVector(2)]_OrbitWaveAudioLinkSpectrumRange("AudioLink Wave Range",Vector)=(-1.0,1.0,0.0,0.0)
