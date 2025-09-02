@@ -147,29 +147,25 @@ _OrbitWaveRefAudioLink||AudioLink Reference||AudioLinkの参照先
 _OrbitWaveAudioLinkStrength||Strength||強さ
 _OrbitWaveAudioLinkSpectrumMirror||Mirror||ミラー
 _OrbitWaveAudioLinkSpectrumType||Use AutoCorrelator||AutoCorrelatorを使う
-_OrbitWaveAudioLinkSpectrum0||AudioLink Spectrum 0||AudioLink Spectrum 0
-_OrbitWaveAudioLinkSpectrum1||AudioLink Spectrum 1||AudioLink Spectrum 1
+_OrbitWaveAudioLinkSpectrumRange||Spectrum Range/A/B||スペクトラムの範囲/A/B
 
-_FragmentAudioLinkNoiseSpectrum||Activate Fragment Spectrum||フラグメントのスペクトラムを有効にする
+_FragmentAudioLinkNoiseSpectrum||Activate Fragment Spectrum (Only Noise)||フラグメントのスペクトラムを有効にする (ノイズのみ)
 _FragmentAudioLinkStrength||Strength||強さ
-_FragmentAudioLinkSpectrumMirror||AudioLink Mirror||ミラー
+_FragmentAudioLinkSpectrumMirror||Mirror||ミラー
 _FragmentAudioLinkSpectrumType||Use AutoCorrelator||AutoCorrelatorを使う
-_FragmentAudioLinkSpectrum0||AudioLink Spectrum 0||AudioLink Spectrum 0
-_FragmentAudioLinkSpectrum1||AudioLink Spectrum 1||AudioLink Spectrum 1
+_FragmentAudioLinkSpectrumRange||Spectrum Range/A/B||スペクトラムの範囲/A/B
 
-_ColoringAudioLinkNoiseSpectrum||Activate Coloring Spectrum||着色のスペクトラムを有効にする
+_ColoringAudioLinkNoiseSpectrum||Activate Coloring Spectrum (Only Noise)||着色のスペクトラムを有効にする (ノイズのみ)
 _ColoringAudioLinkStrength||Strength||強さ
-_ColoringAudioLinkSpectrumMirror||AudioLink Mirror||ミラー
+_ColoringAudioLinkSpectrumMirror||Mirror||ミラー
 _ColoringAudioLinkSpectrumType||Use AutoCorrelator||AutoCorrelatorを使う
-_ColoringAudioLinkSpectrum0||AudioLink Spectrum 0||AudioLink Spectrum 0
-_ColoringAudioLinkSpectrum1||AudioLink Spectrum 1||AudioLink Spectrum 1
+_ColoringAudioLinkSpectrumRange||Spectrum Range/A/B||スペクトラムの範囲/A/B
 
-_GeometryAudioLinkNoiseSpectrum||Activate Geometry Spectrum||ジオメトリのスペクトラムを有効にする
+_GeometryAudioLinkNoiseSpectrum||Activate Geometry Spectrum (Only Noise)||ジオメトリのスペクトラムを有効にする (ノイズのみ)
 _GeometryAudioLinkStrength||Strength||強さ
-_GeometryAudioLinkSpectrumMirror||AudioLink Mirror||ミラー
+_GeometryAudioLinkSpectrumMirror||Mirror||ミラー
 _GeometryAudioLinkSpectrumType||Use AutoCorrelator||AutoCorrelatorを使う
-_GeometryAudioLinkSpectrum0||AudioLink Spectrum 0||AudioLink Spectrum 0
-_GeometryAudioLinkSpectrum1||AudioLink Spectrum 1||AudioLink Spectrum 1
+_GeometryAudioLinkSpectrumRange||Spectrum Range/A/B||スペクトラムの範囲/A/B
 
 _Noise1stOffset0||Offset*||オフセット*
 _Noise1stScale0||Scale*||スケール*

@@ -58,22 +58,22 @@
     #ifdef _ORBITWAVEREFAUDIOLINK_VU
         #define FUNC_ORBIT_WAVE_AUDIOLINK_SPECTRUM_MACRO(n) (audiolink_vu*_OrbitWaveAudioLinkStrength.xyz*_OrbitWaveAudioLinkStrength.w)
     #elif _ORBITWAVEREFAUDIOLINK_SPECTRUM
-        #define FUNC_ORBIT_WAVE_AUDIOLINK_SPECTRUM_MACRO(n) max(_OrbitWaveAudioLinkSpectrum0,min(_OrbitWaveAudioLinkSpectrum1,MeshHAudioLinkSpectrum(n,_OrbitWaveAudioLinkSpectrumType,_OrbitWaveAudioLinkSpectrumMirror)*_OrbitWaveAudioLinkStrength.xyz*_OrbitWaveAudioLinkStrength.w))
+        #define FUNC_ORBIT_WAVE_AUDIOLINK_SPECTRUM_MACRO(n) max(_OrbitWaveAudioLinkSpectrumRange.x,min(_OrbitWaveAudioLinkSpectrumRange.y,MeshHAudioLinkSpectrum(n,_OrbitWaveAudioLinkSpectrumType,_OrbitWaveAudioLinkSpectrumMirror)*_OrbitWaveAudioLinkStrength.xyz*_OrbitWaveAudioLinkStrength.w))
     #else
         #define FUNC_ORBIT_WAVE_AUDIOLINK_SPECTRUM_MACRO(n) 0.0
     #endif
     #ifdef _FRAGMENT_AUDIOLINK_NOISE_SPECTRUM
-        #define FUNC_FRAGMENT_AUDIOLINK_NOISE_SPECTRUM_MACRO(n) max(_FragmentAudioLinkSpectrum0,min(_FragmentAudioLinkSpectrum1,MeshHAudioLinkSpectrum(n,_FragmentAudioLinkSpectrumType,_FragmentAudioLinkSpectrumMirror)*_FragmentAudioLinkStrength))
+        #define FUNC_FRAGMENT_AUDIOLINK_NOISE_SPECTRUM_MACRO(n) max(_FragmentAudioLinkSpectrumRange.x,min(_FragmentAudioLinkSpectrumRange.y,MeshHAudioLinkSpectrum(n,_FragmentAudioLinkSpectrumType,_FragmentAudioLinkSpectrumMirror)*_FragmentAudioLinkStrength))
     #else
         #define FUNC_FRAGMENT_AUDIOLINK_NOISE_SPECTRUM_MACRO(n) (n)
     #endif
     #ifdef _COLORING_AUDIOLINK_NOISE_SPECTRUM
-        #define FUNC_COLORING_AUDIOLINK_NOISE_SPECTRUM_MACRO(n) max(_ColoringAudioLinkSpectrum0,min(_ColoringAudioLinkSpectrum1,MeshHAudioLinkSpectrum(n,_ColoringAudioLinkSpectrumType,_ColoringAudioLinkSpectrumMirror)*_ColoringAudioLinkStrength))
+        #define FUNC_COLORING_AUDIOLINK_NOISE_SPECTRUM_MACRO(n) max(_ColoringAudioLinkSpectrumRange.x,min(_ColoringAudioLinkSpectrumRange.y,MeshHAudioLinkSpectrum(n,_ColoringAudioLinkSpectrumType,_ColoringAudioLinkSpectrumMirror)*_ColoringAudioLinkStrength))
     #else
         #define FUNC_COLORING_AUDIOLINK_NOISE_SPECTRUM_MACRO(n) (n)
     #endif
     #ifdef _GEOMETRY_AUDIOLINK_NOISE_SPECTRUM
-        #define FUNC_GEOMETRY_AUDIOLINK_NOISE_SPECTRUM_MACRO(n) max(_GeometryAudioLinkSpectrum0,min(_GeometryAudioLinkSpectrum1,MeshHAudioLinkSpectrum(n,_GeometryAudioLinkSpectrumType,_GeometryAudioLinkSpectrumMirror)*_GeometryAudioLinkStrength))
+        #define FUNC_GEOMETRY_AUDIOLINK_NOISE_SPECTRUM_MACRO(n) max(_GeometryAudioLinkSpectrumRange.x,min(_GeometryAudioLinkSpectrumRange.y,MeshHAudioLinkSpectrum(n,_GeometryAudioLinkSpectrumType,_GeometryAudioLinkSpectrumMirror)*_GeometryAudioLinkStrength))
     #else
         #define FUNC_GEOMETRY_AUDIOLINK_NOISE_SPECTRUM_MACRO(n) (n)
     #endif

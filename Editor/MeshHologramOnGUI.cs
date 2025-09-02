@@ -223,8 +223,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_STRENGTH);
                         DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_MIRROR);
                         DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_TYPE);
-                        DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_0);
-                        DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_1);
+                        DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_RANGE);
                     }
                 }
 
@@ -307,8 +306,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_STRENGTH);
                         DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_MIRROR);
                         DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_TYPE);
-                        DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_0);
-                        DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_1);
+                        DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_RANGE);
                     }
                 }
 
@@ -383,8 +381,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_STRENGTH);
                         DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_MIRROR);
                         DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_TYPE);
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_0);
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_1);
+                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_RANGE);
                     }
                 }
 
@@ -493,8 +490,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     if (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_WAVE_REF_AUDIOLINK)==2) {
                         DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_MIRROR);
                         DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_TYPE);
-                        DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_0);
-                        DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_1);
+                        DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_RANGE);
                     }
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_REF_AUDIOLINK);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_AUDIOLINK_STRENGTH);

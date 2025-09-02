@@ -350,13 +350,9 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_TYPE,new ShaderPropertyState(
                     "_OrbitWaveAudioLinkSpectrumType", "AudioLink Spectrum Type")
                 },
-                {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_0,new ShaderPropertyState(
-                    "_OrbitWaveAudioLinkSpectrum0", "AudioLink Spectrum 0")
+                {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_RANGE,new ShaderPropertyState(
+                    "_OrbitWaveAudioLinkSpectrumRange", "AudioLink Spectrum Range")
                 },
-                {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_1,new ShaderPropertyState(
-                    "_OrbitWaveAudioLinkSpectrum1", "AudioLink Spectrum 1")
-                },
-
 
                 {SHADER_PROPERTY._FRAGMENT_SOURCE,new ShaderPropertyState(
                     "_FragmentSource", "Fragment Source")
@@ -444,11 +440,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_TYPE,new ShaderPropertyState(
                     "_FragmentAudioLinkSpectrumType", "Noise Spectrum Type")
                 },
-                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_0,new ShaderPropertyState(
-                    "_FragmentAudioLinkSpectrum0", "Noise Spectrum 0")
-                },
-                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_1,new ShaderPropertyState(
-                    "_FragmentAudioLinkSpectrum1", "Noise Spectrum 1")
+                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_RANGE,new ShaderPropertyState(
+                    "_FragmentAudioLinkSpectrumRange", "Noise Spectrum Range")
                 },
 
                 {SHADER_PROPERTY._COLORING_AUDIOLINK_STRENGTH,new ShaderPropertyState(
@@ -460,11 +453,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_TYPE,new ShaderPropertyState(
                     "_ColoringAudioLinkSpectrumType", "Noise Spectrum Type")
                 },
-                {SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_0,new ShaderPropertyState(
-                    "_ColoringAudioLinkSpectrum0", "Noise Spectrum 0")
-                },
-                {SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_1,new ShaderPropertyState(
-                    "_ColoringAudioLinkSpectrum1", "Noise Spectrum 1")
+                {SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_RANGE,new ShaderPropertyState(
+                    "_ColoringAudioLinkSpectrumRange", "Noise Spectrum Range")
                 },
 
                 {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_STRENGTH,new ShaderPropertyState(
@@ -476,11 +466,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_TYPE,new ShaderPropertyState(
                     "_GeometryAudioLinkSpectrumType", "Noise Spectrume Type")
                 },
-                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_0,new ShaderPropertyState(
-                    "_GeometryAudioLinkSpectrum0", "Noise Spectrum 0")
-                },
-                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_1,new ShaderPropertyState(
-                    "_GeometryAudioLinkSpectrum1", "Noise Spectrum 1")
+                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_RANGE,new ShaderPropertyState(
+                    "_GeometryAudioLinkSpectrumRange", "Noise Spectrum Range")
                 },
 
 

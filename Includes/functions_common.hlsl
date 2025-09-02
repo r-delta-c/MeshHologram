@@ -1,5 +1,5 @@
 float3 Pixelization(float3 inputs, float3 scale){
-    float3 n = _Pixelization.xyz*_Pixelization.w*scale;
+    float3 n = (_Pixelization.xyz+_Pixelization.w)*scale;
     return n > 0.0 ? floor((inputs+0.5*n)/n)*n : inputs;
 }
 

@@ -178,8 +178,7 @@ Shader "DeltaField/shaders/MeshHologram"{
         _OrbitWaveAudioLinkStrength("Orbit Wave AudioLink Strength",Vector)=(1.0,1.0,1.0,1.0)
         [MaterialToggle]_OrbitWaveAudioLinkSpectrumMirror("AudioLink Wave Mirror",Int)=0.0
         [MaterialToggle]_OrbitWaveAudioLinkSpectrumType("AudioLink Wave Type",Int)=0.0
-        _OrbitWaveAudioLinkSpectrum0("AudioLink Wave 0",Float)=-1.0
-        _OrbitWaveAudioLinkSpectrum1("AudioLink Wave 1",Float)=1.0
+        [DFVector(2)]_OrbitWaveAudioLinkSpectrumRange("AudioLink Wave Range",Vector)=(-1.0,1.0,0.0,0.0)
 
 
         _AudioLinkMaskControlTex("AudioLink Mask Control Tex",2D)="white"{}
@@ -206,24 +205,21 @@ Shader "DeltaField/shaders/MeshHologram"{
         _FragmentAudioLinkStrength("Strength",Float)=1.0
         [MaterialToggle]_FragmentAudioLinkSpectrumMirror("Noise Wave Mirror",Int)=0.0
         [MaterialToggle]_FragmentAudioLinkSpectrumType("Noise Wave Type",Int)=0.0
-        _FragmentAudioLinkSpectrum0("Noise Wave 0",Float)=-1.0
-        _FragmentAudioLinkSpectrum1("Noise Wave 1",Float)=1.0
+        [DFVector(2)]_FragmentAudioLinkSpectrumRange("Noise Wave Range",Vector)=(-1.0,1.0,0.0,0.0)
 
         [DFToggle(_COLORING_AUDIOLINK_NOISE_SPECTRUM,1)]
         _ColoringAudioLinkNoiseSpectrum("Coloring AudioLink Noise Spectrum",Int)=0
         _ColoringAudioLinkStrength("Strength",Float)=1.0
         [MaterialToggle]_ColoringAudioLinkSpectrumMirror("Noise Wave Mirror",Int)=0.0
         [MaterialToggle]_ColoringAudioLinkSpectrumType("Noise Wave Type",Int)=0.0
-        _ColoringAudioLinkSpectrum0("Noise Wave 0",Float)=-1.0
-        _ColoringAudioLinkSpectrum1("Noise Wave 1",Float)=1.0
+        [DFVector(2)]_ColoringAudioLinkSpectrumRange("Noise Wave Range",Vector)=(-1.0,1.0,0.0,0.0)
 
         [DFToggle(_GEOMETRY_AUDIOLINK_NOISE_SPECTRUM,1)]
         _GeometryAudioLinkNoiseSpectrum("Geometry AudioLink Noise Spectrum",Int)=0
         _GeometryAudioLinkStrength("Strength",Float)=1.0
         [MaterialToggle]_GeometryAudioLinkSpectrumMirror("Noise Wave Mirror",Int)=0.0
         [MaterialToggle]_GeometryAudioLinkSpectrumType("Noise Wave Type",Int)=0.0
-        _GeometryAudioLinkSpectrum0("Noise Wave 0",Float)=-1.0
-        _GeometryAudioLinkSpectrum1("Noise Wave 1",Float)=1.0
+        [DFVector(2)]_GeometryAudioLinkSpectrumRange("Noise Wave Range",Vector)=(-1.0,1.0,0.0,0.0)
 
 
         _Noise1stOffset0("Noise 1st Offset",Vector)=(0.0,0.0,0.0,0.0)

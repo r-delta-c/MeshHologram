@@ -24,8 +24,7 @@ float _DistanceInfluence;
     float4 _OrbitWaveAudioLinkStrength;
     bool _OrbitWaveAudioLinkSpectrumMirror;
     bool _OrbitWaveAudioLinkSpectrumType;
-    float _OrbitWaveAudioLinkSpectrum0;
-    float _OrbitWaveAudioLinkSpectrum1;
+    float _OrbitWaveAudioLinkSpectrumRange;
 #endif
 
 UNITY_DECLARE_TEX2D_NOSAMPLER(_FragmentMaskControlTex);
@@ -98,20 +97,17 @@ float _OrbitWaveZTimeMultiplier;
 float _FragmentAudioLinkStrength;
 bool _FragmentAudioLinkSpectrumMirror;
 bool _FragmentAudioLinkSpectrumType;
-float _FragmentAudioLinkSpectrum0;
-float _FragmentAudioLinkSpectrum1;
+float _FragmentAudioLinkSpectrumRange;
 
 float _ColoringAudioLinkStrength;
 bool _ColoringAudioLinkSpectrumMirror;
 bool _ColoringAudioLinkSpectrumType;
-float _ColoringAudioLinkSpectrum0;
-float _ColoringAudioLinkSpectrum1;
+float _ColoringAudioLinkSpectrumRange;
 
 float _GeometryAudioLinkStrength;
 bool _GeometryAudioLinkSpectrumMirror;
 bool _GeometryAudioLinkSpectrumType;
-float _GeometryAudioLinkSpectrum0;
-float _GeometryAudioLinkSpectrum1;
+float _GeometryAudioLinkSpectrumRange;
 
 #if defined(_FRAGMENTSOURCE_NOISE1ST) || defined(_COLORINGSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_ORBITSOURCE_NOISE1ST) || defined(_ORBITROTATIONSOURCE_NOISE1ST)
     float3 _Noise1stOffset0;
