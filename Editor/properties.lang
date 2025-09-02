@@ -78,10 +78,10 @@ _GeometrySource||Geometry Source||ジオメトリの参照先
 _GeometryValue||Geometry Value*||ジオメトリの値*
 
 _GeometryScale||Activate Scale||スケールの有効
-_GeometryScale0||Scale Range*/A/B||スケールの範囲*/A/B
+_GeometryScaleRange||Scale Range*/A/B||スケールの範囲*/A/B
 
 _GeometryExtrude||Activate Extrude||押し出しの有効
-_GeometryExtrude0||Extrude Range*/A/B||押し出しの範囲*/A/B
+_GeometryExtrudeRange||Extrude Range*/A/B||押し出しの範囲*/A/B
 
 _GeometryRotation||Activate Rotation||回転の有効
 _GeometryRotationReverse||Rotation Reverse*||逆回転*
@@ -96,9 +96,8 @@ _ActivateOrbit||Activate Orbit||Orbitの有効
 _OrbitSource||Orbit Source||Orbitの参照先
 _OrbitValue||Orbit Value*||Orbitの値*
 _OrbitSeed||Orbit Seed*||Orbitのシード値*
-_OrbitOffset||Orbit Offset*||Orbitの座標オフセット*
-_OrbitScaleY||Orbit Scale Y*||Orbit Y スケール*
-_OrbitScaleZ||Orbit Scale Z*||Orbit Z スケール*
+_OrbitOffset||Orbit Offset*/X/Y/Z||Orbitの座標オフセット*/X/Y/Z
+_OrbitScale||Orbit Scale*/Y/Z/Scale||Orbit スケール*/Y/Z/スケール
 
 _OrbitRotationSource||Orbit Rotation Source||Orbitの回転の参照先
 _OrbitRotationValue||Orbit Rotation Value||Orbitの回転の値
@@ -167,15 +166,15 @@ _GeometryAudioLinkSpectrumMirror||Mirror||ミラー
 _GeometryAudioLinkSpectrumType||Use AutoCorrelator||AutoCorrelatorを使う
 _GeometryAudioLinkSpectrumRange||Spectrum Range/A/B||スペクトラムの範囲/A/B
 
-_Noise1stOffset0||Offset*||オフセット*
-_Noise1stScale0||Scale*||スケール*
-_Noise1stOffset1||Offset Sub*||サブ オフセット*
-_Noise1stScale1||Scale Sub*||サブ オフセット*
+_Noise1stOffset0||Offset*/X/Y/Z||オフセット*/X/Y/Z
+_Noise1stScale0||Scale*/X/Y/Z/W||スケール*/X/Y/Z/W
+_Noise1stOffset1||Offset Sub*/X/Y/Z||サブ オフセット*/X/Y/Z
+_Noise1stScale1||Scale Sub*/X/Y/Z/W||サブ スケール*/X/Y/Z/W
 _Noise1stOffsetBeforeScale||Before Scale||スケーリングを後にする
 _Noise1stSpace||Position Space||座標空間
 _Noise1stSeed||Seed*||シード値*
 _Noise1stValueCurve||Value Curve*||ノイズ値のカーブ*
-_Noise1stCurveType||Curve Type||カーブタイプ
+_Noise1stCurveType||Curve Type*||カーブタイプ*
 _Noise1stThresholdMul||Threshold(Mul)*||スレッショルド(乗算)*
 _Noise1stThresholdAdd||Threshold(Add)*||スレッショルド(加算)*
 _Noise1stTimeMulti||Time Multiplier*||時間乗算*
@@ -183,15 +182,15 @@ _Noise1stTimePhase||Time Phase*||時間周期*
 _Noise1stPhaseScale||Value Phase Scale*||値の周期スケール*
 _Noise1stPhaseRefAudioLink||Phase Ref AudioLink||AudioLinkの参照先
 
-_Noise2ndOffset0||Offset*||オフセット*
-_Noise2ndScale0||Scale*||スケール*
-_Noise2ndOffset1||Offset Sub*||サブ オフセット*
-_Noise2ndScale1||Scale Sub*||サブ オフセット*
+_Noise2ndOffset0||Offset*/X/Y/Z||オフセット*/X/Y/Z
+_Noise2ndScale0||Scale*/X/Y/Z/W||スケール*/X/Y/Z/W
+_Noise2ndOffset1||Offset Sub*/X/Y/Z||サブ オフセット*/X/Y/Z
+_Noise2ndScale1||Scale Sub*/X/Y/Z/W||サブ スケール*/X/Y/Z/W
 _Noise2ndOffsetBeforeScale||Before Scale||スケーリングを後にする
 _Noise2ndSpace||Position Space||座標空間
 _Noise2ndSeed||Seed*||シード値*
 _Noise2ndValueCurve||Value Curve*||ノイズ値のカーブ*
-_Noise2ndCurveType||Curve Type||カーブタイプ
+_Noise2ndCurveType||Curve Type*||カーブタイプ*
 _Noise2ndThresholdMul||Threshold(Mul)*||スレッショルド(乗算)*
 _Noise2ndThresholdAdd||Threshold(Add)*||スレッショルド(加算)*
 _Noise2ndTimeMulti||Time Multiplier*||時間乗算*
@@ -199,15 +198,15 @@ _Noise2ndTimePhase||Time Phase*||時間周期*
 _Noise2ndPhaseScale||Value Phase Scale*||値の周期スケール*
 _Noise2ndPhaseRefAudioLink||Phase Ref AudioLink||AudioLinkの参照先
 
-_Noise3rdOffset0||Offset*||オフセット*
-_Noise3rdScale0||Scale*||スケール*
-_Noise3rdOffset1||Offset Sub*||サブ オフセット*
-_Noise3rdScale1||Scale Sub*||サブ オフセット*
+_Noise3rdOffset0||Offset*/X/Y/Z||オフセット*/X/Y/Z
+_Noise3rdScale0||Scale*/X/Y/Z/W||スケール*/X/Y/Z/W
+_Noise3rdOffset1||Offset Sub*/X/Y/Z||サブ オフセット*/X/Y/Z
+_Noise3rdScale1||Scale Sub*/X/Y/Z/W||サブ スケール*/X/Y/Z/W
 _Noise3rdOffsetBeforeScale||Before Scale||スケーリングを後にする
 _Noise3rdSpace||Position Space||座標空間
 _Noise3rdSeed||Seed*||シード値*
 _Noise3rdValueCurve||Value Curve*||ノイズ値のカーブ*
-_Noise3rdCurveType||Curve Type||カーブタイプ
+_Noise3rdCurveType||Curve Type*||カーブタイプ*
 _Noise3rdThresholdMul||Threshold(Mul)*||スレッショルド(乗算)*
 _Noise3rdThresholdAdd||Threshold(Add)*||スレッショルド(加算)*
 _Noise3rdTimeMulti||Time Multiplier*||時間乗算*

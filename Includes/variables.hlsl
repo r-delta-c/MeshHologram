@@ -55,10 +55,8 @@ float _Emission;
 
 float _GeometryValue;
 float _GeometryMaskControl;
-float _GeometryScale0;
-float _GeometryScale1;
-float _GeometryExtrude0;
-float _GeometryExtrude1;
+float2 _GeometryScaleRange;
+float2 _GeometryExtrudeRange;
 float _GeometryRotationReverse;
 
 float _GeometryPartitionBias;
@@ -79,10 +77,8 @@ float4 _OrbitRotationTimeMultiplier;
 
 float4 _OrbitRotationVariance;
 
-float4 _OrbitOffset;
-float _OrbitScaleY;
-float _OrbitScaleZ;
-
+float3 _OrbitOffset;
+float3 _OrbitScale;
 
 float _OrbitWaveXYStrength;
 float _OrbitWaveXYFrequency;
@@ -97,17 +93,17 @@ float _OrbitWaveZTimeMultiplier;
 float _FragmentAudioLinkStrength;
 bool _FragmentAudioLinkSpectrumMirror;
 bool _FragmentAudioLinkSpectrumType;
-float _FragmentAudioLinkSpectrumRange;
+float2 _FragmentAudioLinkSpectrumRange;
 
 float _ColoringAudioLinkStrength;
 bool _ColoringAudioLinkSpectrumMirror;
 bool _ColoringAudioLinkSpectrumType;
-float _ColoringAudioLinkSpectrumRange;
+float2 _ColoringAudioLinkSpectrumRange;
 
 float _GeometryAudioLinkStrength;
 bool _GeometryAudioLinkSpectrumMirror;
 bool _GeometryAudioLinkSpectrumType;
-float _GeometryAudioLinkSpectrumRange;
+float2 _GeometryAudioLinkSpectrumRange;
 
 #if defined(_FRAGMENTSOURCE_NOISE1ST) || defined(_COLORINGSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_ORBITSOURCE_NOISE1ST) || defined(_ORBITROTATIONSOURCE_NOISE1ST)
     float3 _Noise1stOffset0;

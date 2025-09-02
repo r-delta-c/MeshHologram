@@ -91,12 +91,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         _GEOMETRY_VALUE,
 
         _GEOMETRY_SCALE,
-        _GEOMETRY_SCALE0,
-        _GEOMETRY_SCALE1,
+        _GEOMETRY_SCALE_RANGE,
 
         _GEOMETRY_EXTRUDE,
-        _GEOMETRY_EXTRUDE0,
-        _GEOMETRY_EXTRUDE1,
+        _GEOMETRY_EXTRUDE_RANGE,
 
         _GEOMETRY_ROTATION,
         _GEOMETRY_ROTATION_REVERSE,
@@ -112,8 +110,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         _ORBIT_VALUE,
         _ORBIT_SEED,
         _ORBIT_OFFSET,
-        _ORBIT_SCALE_Y,
-        _ORBIT_SCALE_Z,
+        _ORBIT_SCALE,
 
         _ORBIT_ROTATION_VALUE,
         _ORBIT_ROTATION_SEED,

@@ -225,20 +225,14 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._GEOMETRY_SCALE,new ShaderPropertyState(
                     "_GeometryScale", "Activate Scale")
                 },
-                {SHADER_PROPERTY._GEOMETRY_SCALE0,new ShaderPropertyState(
-                    "_GeometryScale0", "Scale Range 0")
-                },
-                {SHADER_PROPERTY._GEOMETRY_SCALE1,new ShaderPropertyState(
-                    "_GeometryScale1", "Scale Range 1")
+                {SHADER_PROPERTY._GEOMETRY_SCALE_RANGE,new ShaderPropertyState(
+                    "_GeometryScaleRange", "Scale Range")
                 },
                 {SHADER_PROPERTY._GEOMETRY_EXTRUDE,new ShaderPropertyState(
                     "_GeometryExtrude", "Activate Extrude")
                 },
-                {SHADER_PROPERTY._GEOMETRY_EXTRUDE0,new ShaderPropertyState(
-                    "_GeometryExtrude0", "Extrude Range 0")
-                },
-                {SHADER_PROPERTY._GEOMETRY_EXTRUDE1,new ShaderPropertyState(
-                    "_GeometryExtrude1", "Extrude Range 1")
+                {SHADER_PROPERTY._GEOMETRY_EXTRUDE_RANGE,new ShaderPropertyState(
+                    "_GeometryExtrudeRange", "Extrude Range")
                 },
                 {SHADER_PROPERTY._GEOMETRY_ROTATION,new ShaderPropertyState(
                     "_GeometryRotation", "Activate Rotation")
@@ -306,11 +300,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._ORBIT_OFFSET,new ShaderPropertyState(
                     "_OrbitOffset", "Orbit Offset")
                 },
-                {SHADER_PROPERTY._ORBIT_SCALE_Y,new ShaderPropertyState(
-                    "_OrbitScaleY", "Orbit Scale Y")
-                },
-                {SHADER_PROPERTY._ORBIT_SCALE_Z,new ShaderPropertyState(
-                    "_OrbitScaleZ", "Orbit Scale Z")
+                {SHADER_PROPERTY._ORBIT_SCALE,new ShaderPropertyState(
+                    "_OrbitScale", "Orbit Scale")
                 },
 
                 {SHADER_PROPERTY._ORBIT_WAVE_XY_STRENGTH,new ShaderPropertyState(

@@ -340,8 +340,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_SCALE);
                     if (GetPropertyFloat(targetMat, SHADER_PROPERTY._GEOMETRY_SCALE) == 1)
                     {
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_SCALE0);
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_SCALE1);
+                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_SCALE_RANGE);
                     }
                 }
                 using (new EditorGUILayout.VerticalScope("HelpBox"))
@@ -349,8 +348,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_EXTRUDE);
                     if (GetPropertyFloat(targetMat, SHADER_PROPERTY._GEOMETRY_EXTRUDE) == 1)
                     {
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_EXTRUDE0);
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_EXTRUDE1);
+                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_EXTRUDE_RANGE);
                     }
                 }
                 using (new EditorGUILayout.VerticalScope("HelpBox"))
@@ -441,8 +439,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                             break;
                     }
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_OFFSET);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_SCALE_Y);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_SCALE_Z);
+                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_SCALE);
 
                     DrawPartitionLine(8);
                     DrawHeaderLabel(LocalizationSystem.PropLangDic["label.orbit_rotation"],CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
