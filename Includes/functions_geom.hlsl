@@ -265,7 +265,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
                 geometry_pos[0]-geometry_center+_OrbitOffset.xyz,
                 geometry_pos[1]-geometry_center+_OrbitOffset.xyz,
                 geometry_pos[2]-geometry_center+_OrbitOffset.xyz};
-            float3 dir_pi2 = float3(_OrbitRotation,_OrbitRotationForward,_OrbitRotationRight)*UNITY_PI*2.0;
+            float3 dir_pi2 = float3(_OrbitRotation.x,_OrbitRotation.y,_OrbitRotation.z)*UNITY_PI*2.0;
             float3 orbit_anim = ORBIT_ROTATION_AUDIOLINK_MACRO;
             float3 orbit_rotation_time = ORBIT_ROTATION_TIME_MACRO;
             #if defined(_ORBITROTATIONSOURCE_NOISE1ST) || defined(_ORBITROTATIONSOURCE_NOISE2ND) || defined(_ORBITROTATIONSOURCE_NOISE3RD)
@@ -326,7 +326,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
                 geometry_pos[1] = lerp(geometry_pos[1],orbit[1],OrbitNoisePingPong(geometry_noise[1],ORBIT_OFFSET_MACRO(1),orbit_time)*orbit_mask[1]);
                 geometry_pos[2] = lerp(geometry_pos[2],orbit[2],OrbitNoisePingPong(geometry_noise[2],ORBIT_OFFSET_MACRO(2),orbit_time)*orbit_mask[2]);
             #elif _ORBITSOURCE_PRIMITIVE
-                float orbit_random = random(id+_OrbitRotationSeed); 
+                float orbit_random = random(id+_OrbitRotationSeed);
                 geometry_pos[0] = lerp(geometry_pos[0],orbit[0],orbit_random*orbit_mask[0]);
                 geometry_pos[1] = lerp(geometry_pos[1],orbit[1],orbit_random*orbit_mask[1]);
                 geometry_pos[2] = lerp(geometry_pos[2],orbit[2],orbit_random*orbit_mask[2]);

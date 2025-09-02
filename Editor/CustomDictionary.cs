@@ -274,15 +274,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._ORBIT_ROTATION,new ShaderPropertyState(
                     "_OrbitRotation", "Orbit Rotation")
                 },
-                {SHADER_PROPERTY._ORBIT_ROTATION_FORWARD,new ShaderPropertyState(
-                    "_OrbitRotationForward", "Orbit Rotation Forward")
-                },
-                {SHADER_PROPERTY._ORBIT_ROTATION_RIGHT,new ShaderPropertyState(
-                    "_OrbitRotationRight", "Orbit Rotation Right")
-                },
-                {SHADER_PROPERTY._ORBIT_ROTATION_PHASE,new ShaderPropertyState(
-                    "_OrbitRotationPhase", "Orbit Rotation Phase")
-                },
                 {SHADER_PROPERTY._ORBIT_ROTATION_TIME_MULTIPLIER,new ShaderPropertyState(
                     "_OrbitRotationTimeMultiplier", "Orbit Rotation Time Multiplier")
                 },

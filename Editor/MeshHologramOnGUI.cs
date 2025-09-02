@@ -465,9 +465,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
 
                     EditorGUILayout.Space(16);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_FORWARD);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_RIGHT);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_PHASE);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_TIME_MULTIPLIER);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_VARIANCE);
                     DrawPartitionLine(8);

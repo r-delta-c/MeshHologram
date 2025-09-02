@@ -68,11 +68,7 @@ float _OrbitMaskControl;
 
 float _OrbitRotationValue;
 float _OrbitRotationSeed;
-float _OrbitRotation;
-float _OrbitRotationForward;
-float _OrbitRotationRight;
-
-float4 _OrbitRotationPhase;
+float3 _OrbitRotation;
 float4 _OrbitRotationTimeMultiplier;
 
 float4 _OrbitRotationVariance;

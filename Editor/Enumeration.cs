@@ -115,10 +115,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         _ORBIT_ROTATION_VALUE,
         _ORBIT_ROTATION_SEED,
         _ORBIT_ROTATION,
-        _ORBIT_ROTATION_FORWARD,
-        _ORBIT_ROTATION_RIGHT,
-
-        _ORBIT_ROTATION_PHASE,
         _ORBIT_ROTATION_TIME_MULTIPLIER,
 
         _ORBIT_ROTATION_VARIANCE,

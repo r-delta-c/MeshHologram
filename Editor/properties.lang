@@ -101,10 +101,9 @@ _OrbitScale||Orbit Scale*/Y/Z/Scale||Orbit スケール*/Y/Z/スケール
 
 _OrbitRotationSource||Orbit Rotation Source||Orbitの回転の参照先
 _OrbitRotationValue||Orbit Rotation Value||Orbitの回転の値
-_OrbitRotation||Orbit Rotation*||Orbitの回転*
+_OrbitRotation||Orbit Rotation*//Forward/Right||Orbitの回転*//Forward/Right
 _OrbitRotationForward||Orbit Rotation Forward*||OrbitのForward回転*
 _OrbitRotationRight||Orbit Rotation Right*||OrbitのRight回転*
-_OrbitRotationPhase||Orbit Rotation Phase*||Orbitの回転周期*
 _OrbitRotationTimeMultiplier||Orbit Rotation Time Multiplier*||Orbitの回転時間乗算*
 
 _OrbitRotationVariance||Orbit Rotation Variance*||Orbitの回転のバラつき*
