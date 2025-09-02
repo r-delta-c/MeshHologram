@@ -1,9 +1,12 @@
 label.language||Language||言語
 label.general||General||基本設定
 label.rendering||Rendering||レンダリング
-label.rendering_other||Other Rendering||その他のレンダリング設定
+label.other_renderings||Other Renderings||その他のレンダリング設定
 label.stencil||Stencil||ステンシル
 label.audiolink||AudioLink||AudioLink
+label.vu||VU||VU
+label.chronotensity||ChronoTensity||ChronoTensity
+label.theme_color||Theme Color||Theme Color
 label.main||Main||メイン
 label.fragment||Fragment||フラグメント
 label.color||Color||カラー
@@ -12,7 +15,10 @@ label.geometry||Geometry||ジオメトリ
 label.color.preview||Preview||プレビュー
 label.color.export||Export||エクスポート
 
-label.messy_orbit||Orbit||Orbit
+label.orbit||Orbit||Orbit
+label.orbit_rotation||Orbit Rotation||Orbit 回転
+label.orbit_wave||Orbit Wave||Orbit Wave
+label.orbit_audiolink||Orbit AudioLink||Orbit AudioLink
 label.noise1st_properties||Noise 1st Properties||Noise 1st プロパティ
 label.noise2nd_properties||Noise 2nd Properties||Noise 2nd プロパティ
 label.noise3rd_properties||Noise 3rd Properties||Noise 3rd プロパティ
@@ -27,4 +33,4 @@ text.remove_all_properties_text||Remove any unused properties in material.||マ�
 text.remove||Remove||削除
 text.cancel||Cancel||キャンセル
 
-label.meshboundseditor.button||Open Mesh Bounds Editor||Mesh Bounds Editorを開く
+label.mesh_bounds_editor.button||Open Mesh Bounds Editor||Mesh Bounds Editorを開く

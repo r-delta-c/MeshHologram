@@ -272,15 +272,15 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
                 float3 orbit_rotation_center_noise = (inp[0].ORBITROTATION_NOISE_MACRO+inp[1].ORBITROTATION_NOISE_MACRO+inp[2].ORBITROTATION_NOISE_MACRO)/3.0;
                 float orbit_rotation_mask_offset = (ORBITROTATION_OFFSET_MACRO(0)+ORBITROTATION_OFFSET_MACRO(1)+ORBITROTATION_OFFSET_MACRO(2))/3.0;
                 orbit_anim.xyz += OrbitRotationNoisePingPong(orbit_rotation_center_noise,orbit_rotation_mask_offset,orbit_rotation_time)*_OrbitRotationVariance.xyz;
-                float3 audiolink_spectrogram = FUNC_ORBIT_WAVE_AUDIOLINK_SPECTROGRAM_MACRO(orbit_rotation_center_noise);
+                float3 audiolink_spectrum = FUNC_ORBIT_WAVE_AUDIOLINK_SPECTRUM_MACRO(orbit_rotation_center_noise);
             #elif defined(_ORBITROTATIONSOURCE_PRIMITIVE)
                 float orbit_rotation_random = random(id+_OrbitRotationSeed);
                 orbit_anim.xyz += orbit_rotation_random*_OrbitRotationVariance.xyz;
-                float3 audiolink_spectrogram = FUNC_ORBIT_WAVE_AUDIOLINK_SPECTROGRAM_MACRO(orbit_rotation_random);
+                float3 audiolink_spectrum = FUNC_ORBIT_WAVE_AUDIOLINK_SPECTRUM_MACRO(orbit_rotation_random);
 
             #else
                 orbit_anim.xyz += _OrbitRotationVariance.xyz;
-                float3 audiolink_spectrogram = FUNC_ORBIT_WAVE_AUDIOLINK_SPECTROGRAM_MACRO(_OrbitRotationValue);
+                float3 audiolink_spectrum = FUNC_ORBIT_WAVE_AUDIOLINK_SPECTRUM_MACRO(_OrbitRotationValue);
             #endif
 
             float3 orbit_wave = float3(
@@ -296,12 +296,12 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             );
 
             #ifdef _ORBITWAVEREFAUDIOLINK_VU
-                orbit_wave_r *= audiolink_spectrogram;
-            #elif _ORBITWAVEREFAUDIOLINK_SPECTROGRAM
+                orbit_wave_r *= audiolink_spectrum;
+            #elif _ORBITWAVEREFAUDIOLINK_SPECTRUM
                 orbit_wave_r += float3(
-                    audiolink_spectrogram.x,
-                    audiolink_spectrogram.y*sin(orbit_wave.y*_OrbitWaveXYFrequency),
-                    audiolink_spectrogram.z*cos(orbit_wave.z*_OrbitWaveXYFrequency)
+                    audiolink_spectrum.x,
+                    audiolink_spectrum.y*sin(orbit_wave.y*_OrbitWaveXYFrequency),
+                    audiolink_spectrum.z*cos(orbit_wave.z*_OrbitWaveXYFrequency)
                 );
             #endif
 

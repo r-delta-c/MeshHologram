@@ -4,18 +4,20 @@ using System.IO;
 using UnityEngine;
 
 namespace DeltaField.Shaders.MeshHologram.Editor{
-    public class LocalizationManager
+    internal class LocalizationManager
     {
-        public Dictionary<string, string> PropLangDic;
-        public LocalizationManager()
+        private string resolve_path;
+        internal Dictionary<string, string> PropLangDic;
+        internal LocalizationManager(string resolve_path)
         {
+            this.resolve_path = resolve_path;
         }
         public void LoadLangFiles(LANG lang = LANG.ENGLISH)
         {
             int index = (int)lang;
             PropLangDic = new Dictionary<string, string>();
-            LoadText(MeshHologramInspector.info.resolvedPath + "/Editor/", "text.lang");
-            LoadText(MeshHologramInspector.info.resolvedPath + "/Editor/", "properties.lang");
+            LoadText(resolve_path + "/Editor/", "text.lang");
+            LoadText(resolve_path + "/Editor/", "properties.lang");
 
             void LoadText(string path, string file_name)
             {

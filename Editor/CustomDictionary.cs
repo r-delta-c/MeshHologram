@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace DeltaField.Shaders.MeshHologram.Editor
 {
-    public class CustomDictionary
+    internal class CustomDictionary
     {
-        public Dictionary<SHADER_PROPERTY, ShaderPropertyState> GetShaderProperties()
+        internal Dictionary<SHADER_PROPERTY, ShaderPropertyState> GetShaderProperties()
         {
             return new Dictionary<SHADER_PROPERTY, ShaderPropertyState>
             {
@@ -344,17 +344,17 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_STRENGTH,new ShaderPropertyState(
                     "_OrbitWaveAudioLinkStrength", "Orbit Wave AudioLink Strength")
                 },
-                {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTROGRAM_MIRROR,new ShaderPropertyState(
-                    "_OrbitWaveAudioLinkSpectrogramMirror", "AudioLink Spectrogram Mirror")
+                {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_MIRROR,new ShaderPropertyState(
+                    "_OrbitWaveAudioLinkSpectrumMirror", "AudioLink Spectrum Mirror")
                 },
-                {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTROGRAM_TYPE,new ShaderPropertyState(
-                    "_OrbitWaveAudioLinkSpectrogramType", "AudioLink Spectrogram Type")
+                {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_TYPE,new ShaderPropertyState(
+                    "_OrbitWaveAudioLinkSpectrumType", "AudioLink Spectrum Type")
                 },
-                {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTROGRAM_0,new ShaderPropertyState(
-                    "_OrbitWaveAudioLinkSpectrogram0", "AudioLink Spectrogram 0")
+                {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_0,new ShaderPropertyState(
+                    "_OrbitWaveAudioLinkSpectrum0", "AudioLink Spectrum 0")
                 },
-                {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTROGRAM_1,new ShaderPropertyState(
-                    "_OrbitWaveAudioLinkSpectrogram1", "AudioLink Spectrogram 1")
+                {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_1,new ShaderPropertyState(
+                    "_OrbitWaveAudioLinkSpectrum1", "AudioLink Spectrum 1")
                 },
 
 
@@ -425,62 +425,62 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 },
 
 
-                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_NOISE_SPECTROGRAM,new ShaderPropertyState(
-                    "_FragmentAudioLinkNoiseSpectrogram", "Fragment AudioLink Noise Spectrogram")
+                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_NOISE_SPECTRUM,new ShaderPropertyState(
+                    "_FragmentAudioLinkNoiseSpectrum", "Fragment AudioLink Noise Spectrum")
                 },
-                {SHADER_PROPERTY._COLORING_AUDIOLINK_NOISE_SPECTROGRAM,new ShaderPropertyState(
-                    "_ColoringAudioLinkNoiseSpectrogram", "Coloring AudioLink Noise Spectrogram")
+                {SHADER_PROPERTY._COLORING_AUDIOLINK_NOISE_SPECTRUM,new ShaderPropertyState(
+                    "_ColoringAudioLinkNoiseSpectrum", "Coloring AudioLink Noise Spectrum")
                 },
-                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_NOISE_SPECTROGRAM,new ShaderPropertyState(
-                    "_GeometryAudioLinkNoiseSpectrogram", "Geometry AudioLink Noise Spectrogram")
+                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_NOISE_SPECTRUM,new ShaderPropertyState(
+                    "_GeometryAudioLinkNoiseSpectrum", "Geometry AudioLink Noise Spectrum")
                 },
 
                 {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_STRENGTH,new ShaderPropertyState(
-                    "_FragmentAudioLinkStrength", "Noise Spectrogram Strength")
+                    "_FragmentAudioLinkStrength", "Noise Spectrum Strength")
                 },
-                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTROGRAM_MIRROR,new ShaderPropertyState(
-                    "_FragmentAudioLinkSpectrogramMirror", "Noise Spectrogram Mirror")
+                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_MIRROR,new ShaderPropertyState(
+                    "_FragmentAudioLinkSpectrumMirror", "Noise Spectrum Mirror")
                 },
-                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTROGRAM_TYPE,new ShaderPropertyState(
-                    "_FragmentAudioLinkSpectrogramType", "Noise Spectrogram Type")
+                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_TYPE,new ShaderPropertyState(
+                    "_FragmentAudioLinkSpectrumType", "Noise Spectrum Type")
                 },
-                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTROGRAM_0,new ShaderPropertyState(
-                    "_FragmentAudioLinkSpectrogram0", "Noise Spectrogram 0")
+                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_0,new ShaderPropertyState(
+                    "_FragmentAudioLinkSpectrum0", "Noise Spectrum 0")
                 },
-                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTROGRAM_1,new ShaderPropertyState(
-                    "_FragmentAudioLinkSpectrogram1", "Noise Spectrogram 1")
+                {SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_1,new ShaderPropertyState(
+                    "_FragmentAudioLinkSpectrum1", "Noise Spectrum 1")
                 },
 
                 {SHADER_PROPERTY._COLORING_AUDIOLINK_STRENGTH,new ShaderPropertyState(
-                    "_ColoringAudioLinkStrength", "Noise Spectrogram Strength")
+                    "_ColoringAudioLinkStrength", "Noise Spectrum Strength")
                 },
-                {SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTROGRAM_MIRROR,new ShaderPropertyState(
-                    "_ColoringAudioLinkSpectrogramMirror", "Noise Spectrogram Mirror")
+                {SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_MIRROR,new ShaderPropertyState(
+                    "_ColoringAudioLinkSpectrumMirror", "Noise Spectrum Mirror")
                 },
-                {SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTROGRAM_TYPE,new ShaderPropertyState(
-                    "_ColoringAudioLinkSpectrogramType", "Noise Spectrogram Type")
+                {SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_TYPE,new ShaderPropertyState(
+                    "_ColoringAudioLinkSpectrumType", "Noise Spectrum Type")
                 },
-                {SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTROGRAM_0,new ShaderPropertyState(
-                    "_ColoringAudioLinkSpectrogram0", "Noise Spectrogram 0")
+                {SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_0,new ShaderPropertyState(
+                    "_ColoringAudioLinkSpectrum0", "Noise Spectrum 0")
                 },
-                {SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTROGRAM_1,new ShaderPropertyState(
-                    "_ColoringAudioLinkSpectrogram1", "Noise Spectrogram 1")
+                {SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_1,new ShaderPropertyState(
+                    "_ColoringAudioLinkSpectrum1", "Noise Spectrum 1")
                 },
 
                 {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_STRENGTH,new ShaderPropertyState(
-                    "_GeometryAudioLinkStrength", "Noise Spectrogram Strength")
+                    "_GeometryAudioLinkStrength", "Noise Spectrum Strength")
                 },
-                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTROGRAM_MIRROR,new ShaderPropertyState(
-                    "_GeometryAudioLinkSpectrogramMirror", "Noise Spectrogram Mirror")
+                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_MIRROR,new ShaderPropertyState(
+                    "_GeometryAudioLinkSpectrumMirror", "Noise Spectrum Mirror")
                 },
-                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTROGRAM_TYPE,new ShaderPropertyState(
-                    "_GeometryAudioLinkSpectrogramType", "Noise Spectrograme Type")
+                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_TYPE,new ShaderPropertyState(
+                    "_GeometryAudioLinkSpectrumType", "Noise Spectrume Type")
                 },
-                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTROGRAM_0,new ShaderPropertyState(
-                    "_GeometryAudioLinkSpectrogram0", "Noise Spectrogram 0")
+                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_0,new ShaderPropertyState(
+                    "_GeometryAudioLinkSpectrum0", "Noise Spectrum 0")
                 },
-                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTROGRAM_1,new ShaderPropertyState(
-                    "_GeometryAudioLinkSpectrogram1", "Noise Spectrogram 1")
+                {SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_1,new ShaderPropertyState(
+                    "_GeometryAudioLinkSpectrum1", "Noise Spectrum 1")
                 },
 
 
@@ -624,7 +624,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 }
             };
         }
-        public static Dictionary<CUSTOM_GUI, GUIStyle> gui = new Dictionary<CUSTOM_GUI, GUIStyle> {
+        internal static Dictionary<CUSTOM_GUI, GUIStyle> gui = new Dictionary<CUSTOM_GUI, GUIStyle> {
             {CUSTOM_GUI.PLAIN,new GUIStyle(){
 
             }},
@@ -635,11 +635,14 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 richText = true, alignment = TextAnchor.UpperCenter, fontSize = 24
             }},
             {CUSTOM_GUI.HEADER0,new GUIStyle(){
-                richText = true, alignment = TextAnchor.UpperLeft, fontSize = 16
+                richText = true, alignment = TextAnchor.UpperLeft, fontSize = 16, fontStyle=FontStyle.Bold
+            }},
+            {CUSTOM_GUI.HEADER1,new GUIStyle(){
+                richText = true, alignment = TextAnchor.UpperLeft, fontSize = 12, fontStyle=FontStyle.Bold
             }}
         };
     }
-    public class ShaderPropertyState
+    internal class ShaderPropertyState
     {
         public MaterialProperty var;
         readonly public string property;
