@@ -64,6 +64,7 @@ float4 _Pixelization;
 
 float _OrbitValue;
 float _OrbitSeed;
+float _OrbitPrimitiveThreshold;
 float _OrbitMaskControl;
 
 float _OrbitRotationValue;

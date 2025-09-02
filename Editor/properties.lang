@@ -96,6 +96,7 @@ _ActivateOrbit||Activate Orbit||Orbitの有効
 _OrbitSource||Orbit Source||Orbitの参照先
 _OrbitValue||Orbit Value*||Orbitの値*
 _OrbitSeed||Orbit Seed*||Orbitのシード値*
+_OrbitPrimitiveThreshold||Orbit Primitive Threshold*||Orbit Primitive 閾値*
 _OrbitOffset||Orbit Offset*/X/Y/Z||Orbitの座標オフセット*/X/Y/Z
 _OrbitScale||Orbit Scale*/Y/Z/Scale||Orbit スケール*/Y/Z/スケール
 

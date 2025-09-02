@@ -326,7 +326,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
                 geometry_pos[1] = lerp(geometry_pos[1],orbit[1],OrbitNoisePingPong(geometry_noise[1],ORBIT_OFFSET_MACRO(1),orbit_time)*orbit_mask[1]);
                 geometry_pos[2] = lerp(geometry_pos[2],orbit[2],OrbitNoisePingPong(geometry_noise[2],ORBIT_OFFSET_MACRO(2),orbit_time)*orbit_mask[2]);
             #elif _ORBITSOURCE_PRIMITIVE
-                float orbit_random = random(id+_OrbitRotationSeed);
+                float orbit_random = random(id+_OrbitSeed)>_OrbitPrimitiveThreshold;
                 geometry_pos[0] = lerp(geometry_pos[0],orbit[0],orbit_random*orbit_mask[0]);
                 geometry_pos[1] = lerp(geometry_pos[1],orbit[1],orbit_random*orbit_mask[1]);
                 geometry_pos[2] = lerp(geometry_pos[2],orbit[2],orbit_random*orbit_mask[2]);

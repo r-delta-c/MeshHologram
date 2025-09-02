@@ -140,11 +140,12 @@ Shader "DeltaField/shaders/MeshHologram"{
         _OrbitSource("Orbit Source",Int)=3
         _OrbitValue("Orbit Value",Range(0.0,1.0))=0.0
         _OrbitSeed("Orbit Seed",Float)=0.0
+        _OrbitPrimitiveThreshold("Orbit Primitive Threshold",Range(0.0,1.0))=0.5
 
         [KeywordEnum(Value,Primitive,Noise1st,Noise2nd,Noise3rd)]
         _OrbitRotationSource("Orbit Rotation Source",Int)=1
         _OrbitRotationValue("Orbit Rotation Value",Range(0.0,1.0))=0.0
-        _OrbitRotationSeed("Orbit Rotation Seed",Float)=0.0
+        _OrbitRotationSeed("Orbit Rotation Seed",Float)=1.0
         [DFVector(3)]_OrbitOffset("Orbit Offset",Vector)=(0.0,0.0,0.0,0.0)
         [DFVector(2,1)]_OrbitScale("Orbit Scale",Vector)=(1.0,1.0,1.0)
         [DFVector(1,2)]_OrbitRotation("Orbit Rotation",Vector)=(0.0,0.0,0.0,0.0)

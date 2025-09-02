@@ -427,6 +427,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                             break;
                         case 1:
                             DrawShaderProperty(SHADER_PROPERTY._ORBIT_SEED);
+                            DrawShaderProperty(SHADER_PROPERTY._ORBIT_PRIMITIVE_THRESHOLD);
                             break;
                         case 2:
                             InsertNoise1stProps(3);

@@ -109,6 +109,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
         _ORBIT_VALUE,
         _ORBIT_SEED,
+        _ORBIT_PRIMITIVE_THRESHOLD,
         _ORBIT_OFFSET,
         _ORBIT_SCALE,
 

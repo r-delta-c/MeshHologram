@@ -265,6 +265,9 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._ORBIT_SEED,new ShaderPropertyState(
                     "_OrbitSeed", "Orbit Seed")
                 },
+                {SHADER_PROPERTY._ORBIT_PRIMITIVE_THRESHOLD,new ShaderPropertyState(
+                    "_OrbitPrimitiveThreshold", "Orbit Primitive Threshold")
+                },
                 {SHADER_PROPERTY._ORBIT_ROTATION_VALUE,new ShaderPropertyState(
                     "_OrbitRotationValue", "Orbit Rotation Value")
                 },
