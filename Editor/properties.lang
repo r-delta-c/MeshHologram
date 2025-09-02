@@ -108,14 +108,10 @@ _OrbitRotationTimeMultiplier||Orbit Rotation Time Multiplier*/X/Y/Z/W||Orbitの�
 
 _OrbitRotationVariance||Orbit Rotation Variance*/X/Y/Z||Orbitの回転のバラつき*/X/Y/Z
 
-_OrbitWaveXYStrength||Orbit Wave XY Strength||Orbit Waveの強さ
-_OrbitWaveXYFrequency||Orbit Wave XY Frequency||Orbit Wave周波頻度
-_OrbitWaveXYPhase||Orbit Wave XY Phase||Orbit Waveの周期
-_OrbitWaveXYTimeMultiplier||Orbit Wave XY Time Multiplier||Orbit Waveの時間乗算
-_OrbitWaveZStrength||Orbit Wave Z Strength||Orbit Waveの強さ
-_OrbitWaveZFrequency||Orbit Wave Z Frequency||Orbit Wave周波頻度
-_OrbitWaveZPhase||Orbit Wave Z Phase||Orbit Waveの周期
-_OrbitWaveZTimeMultiplier||Orbit Wave Z Time Multiplier||Orbit Waveの時間乗算
+_OrbitWaveStrength||Orbit Wave Strength/YZ/X//||強さ/YZ/X//
+_OrbitWaveFrequency||Orbit Wave Frequency/YZ/X//||周波頻度/YZ/X//
+_OrbitWavePhase||Orbit Wave Phase/YZ/X//||周期/YZ/X//
+_OrbitWaveTimeMultiplier||Orbit Wave Time Multiplier/YZ/X//||時間乗算/YZ/X//
 
 _OrbitRotationRefAudioLink||Orbit Rotation Reference||Orbit 回転の参照先
 _OrbitRotationAudioLinkStrength||Strength*/X/Y/Z/W||強さ*/X/Y/Z/W

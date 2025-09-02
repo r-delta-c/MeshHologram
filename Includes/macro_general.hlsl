@@ -23,8 +23,8 @@
 #endif
 
 #define ORBIT_ROTATION_TIME_MACRO (_Time.x*_OrbitRotationTimeMultiplier.xyz*_OrbitRotationTimeMultiplier.w)
-#define ORBIT_WAVE_Z_TIME_MACRO (_Time.x*_OrbitWaveZTimeMultiplier)
-#define ORBIT_WAVE_XY_TIME_MACRO (_Time.x*_OrbitWaveXYTimeMultiplier)
+#define ORBIT_WAVE_Z_TIME_MACRO (_Time.x*_OrbitWaveTimeMultiplier.y)
+#define ORBIT_WAVE_XY_TIME_MACRO (_Time.x*_OrbitWaveTimeMultiplier.x)
 
 #ifdef _PIXELIZATIONSPACE_MODEL
     #define VERTEX_PIXELIZATION_MODEL_MACRO v.pos.xyz = Pixelization(v.pos.xyz, float3(1.0,1.0,1.0))

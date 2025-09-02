@@ -469,14 +469,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_VARIANCE);
                     DrawPartitionLine(8);
                     DrawHeaderLabel(LocalizationSystem.PropLangDic["label.orbit_wave"],CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_XY_STRENGTH);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_XY_FREQUENCY);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_XY_PHASE);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_XY_TIME_MULTIPLIER);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_Z_STRENGTH);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_Z_FREQUENCY);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_Z_PHASE);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_Z_TIME_MULTIPLIER);
+                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_STRENGTH);
+                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_FREQUENCY);
+                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_PHASE);
+                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_TIME_MULTIPLIER);
                     DrawPartitionLine(8);
                     DrawHeaderLabel(LocalizationSystem.PropLangDic["label.orbit_audiolink"],CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_REF_AUDIOLINK);
@@ -486,6 +482,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_TYPE);
                         DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_RANGE);
                     }
+                    EditorGUILayout.Space(16);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_REF_AUDIOLINK);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_AUDIOLINK_STRENGTH);
                 }

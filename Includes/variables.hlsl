@@ -76,14 +76,10 @@ float3 _OrbitRotationVariance;
 float3 _OrbitOffset;
 float3 _OrbitScale;
 
-float _OrbitWaveXYStrength;
-float _OrbitWaveXYFrequency;
-float _OrbitWaveXYPhase;
-float _OrbitWaveXYTimeMultiplier;
-float _OrbitWaveZStrength;
-float _OrbitWaveZFrequency;
-float _OrbitWaveZPhase;
-float _OrbitWaveZTimeMultiplier;
+float3 _OrbitWaveStrength;
+float3 _OrbitWaveFrequency;
+float3 _OrbitWavePhase;
+float3 _OrbitWaveTimeMultiplier;
 
 
 float _FragmentAudioLinkStrength;

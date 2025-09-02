@@ -284,15 +284,15 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             #endif
 
             float3 orbit_wave = float3(
-                (orbit_anim.x+_OrbitWaveZPhase+ORBIT_WAVE_Z_TIME_MACRO),
-                (orbit_anim.x+_OrbitWaveXYPhase+ORBIT_WAVE_XY_TIME_MACRO),
-                (orbit_anim.x+_OrbitWaveXYPhase+ORBIT_WAVE_XY_TIME_MACRO)
+                (orbit_anim.x+_OrbitWavePhase.y+ORBIT_WAVE_Z_TIME_MACRO),
+                (orbit_anim.x+_OrbitWavePhase.x+ORBIT_WAVE_XY_TIME_MACRO),
+                (orbit_anim.x+_OrbitWavePhase.x+ORBIT_WAVE_XY_TIME_MACRO)
             );
 
             float3 orbit_wave_r = float3(
-                sin(orbit_wave.x*_OrbitWaveZFrequency)*_OrbitWaveZStrength,
-                sin(orbit_wave.y*_OrbitWaveXYFrequency)*_OrbitWaveXYStrength,
-                cos(orbit_wave.z*_OrbitWaveXYFrequency)*_OrbitWaveXYStrength
+                sin(orbit_wave.x*_OrbitWaveFrequency.y)*_OrbitWaveStrength.y,
+                sin(orbit_wave.y*_OrbitWaveFrequency.x)*_OrbitWaveStrength.x,
+                cos(orbit_wave.z*_OrbitWaveFrequency.x)*_OrbitWaveStrength.x
             );
 
             #ifdef _ORBITWAVEREFAUDIOLINK_VU
@@ -300,8 +300,8 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             #elif _ORBITWAVEREFAUDIOLINK_SPECTRUM
                 orbit_wave_r += float3(
                     audiolink_spectrum.x,
-                    audiolink_spectrum.y*sin(orbit_wave.y*_OrbitWaveXYFrequency),
-                    audiolink_spectrum.z*cos(orbit_wave.z*_OrbitWaveXYFrequency)
+                    audiolink_spectrum.y*sin(orbit_wave.y*_OrbitWaveFrequency.x),
+                    audiolink_spectrum.z*cos(orbit_wave.z*_OrbitWaveFrequency.x)
                 );
             #endif
 

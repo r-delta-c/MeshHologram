@@ -153,14 +153,10 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         [DFVector(3)]_OrbitRotationVariance("Orbit Rotation Variance",Vector)=(1.0,0.0,0.0,0.0)
 
-        _OrbitWaveXYStrength("Orbit Wave XY Strength",Float)=0.0
-        _OrbitWaveXYFrequency("Orbit Wave XY Frequency",Float)=0.0
-        _OrbitWaveXYPhase("Orbit Wave XY Phase",Float)=0.0
-        _OrbitWaveXYTimeMultiplier("Orbit Wave XY Time Multiplier",Float)=1.0
-        _OrbitWaveZStrength("Orbit Wave Z Strength",Float)=0.0
-        _OrbitWaveZFrequency("Orbit Wave Z Frequency",Float)=0.0
-        _OrbitWaveZPhase("Orbit Wave Z Phase",Float)=0.0
-        _OrbitWaveZTimeMultiplier("Orbit Wave Z Time Multiplier",Float)=1.0
+        [DFVector(2)]_OrbitWaveStrength("Orbit Wave Strength",Vector)=(0.0,0.1,0.0,0.0)
+        [DFVector(2)]_OrbitWaveFrequency("Orbit Wave Frequency",Vector)=(5.0,5.0,0.0,0.0)
+        [DFVector(2)]_OrbitWavePhase("Orbit Wave Phase",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(2)]_OrbitWaveTimeMultiplier("Orbit Wave Time Multiplier",Vector)=(1.0,5.0,0.0,0.0)
 
         [KeywordEnum(Disable,VU,ChronoTensity)]
         _OrbitRotationRefAudioLink("Orbit Rotation Reference AudioLink",Int)=0

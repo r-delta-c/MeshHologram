@@ -295,29 +295,17 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     "_OrbitScale", "Orbit Scale")
                 },
 
-                {SHADER_PROPERTY._ORBIT_WAVE_XY_STRENGTH,new ShaderPropertyState(
-                    "_OrbitWaveXYStrength", "Orbit Wave XY Strength")
+                {SHADER_PROPERTY._ORBIT_WAVE_STRENGTH,new ShaderPropertyState(
+                    "_OrbitWaveStrength", "Orbit Wave Strength")
                 },
-                {SHADER_PROPERTY._ORBIT_WAVE_XY_FREQUENCY,new ShaderPropertyState(
-                    "_OrbitWaveXYFrequency", "Orbit Wave XY Frequency")
+                {SHADER_PROPERTY._ORBIT_WAVE_FREQUENCY,new ShaderPropertyState(
+                    "_OrbitWaveFrequency", "Orbit Wave Frequency")
                 },
-                {SHADER_PROPERTY._ORBIT_WAVE_XY_PHASE,new ShaderPropertyState(
-                    "_OrbitWaveXYPhase", "Orbit Wave XY Phase")
+                {SHADER_PROPERTY._ORBIT_WAVE_PHASE,new ShaderPropertyState(
+                    "_OrbitWavePhase", "Orbit Wave Phase")
                 },
-                {SHADER_PROPERTY._ORBIT_WAVE_XY_TIME_MULTIPLIER,new ShaderPropertyState(
-                    "_OrbitWaveXYTimeMultiplier", "Orbit Wave XY Time Multiplier")
-                },
-                {SHADER_PROPERTY._ORBIT_WAVE_Z_STRENGTH,new ShaderPropertyState(
-                    "_OrbitWaveZStrength", "Orbit Wave Z Strength")
-                },
-                {SHADER_PROPERTY._ORBIT_WAVE_Z_FREQUENCY,new ShaderPropertyState(
-                    "_OrbitWaveZFrequency", "Orbit Wave Z Frequency")
-                },
-                {SHADER_PROPERTY._ORBIT_WAVE_Z_PHASE,new ShaderPropertyState(
-                    "_OrbitWaveZPhase", "Orbit Wave Z Phase")
-                },
-                {SHADER_PROPERTY._ORBIT_WAVE_Z_TIME_MULTIPLIER,new ShaderPropertyState(
-                    "_OrbitWaveZTimeMultiplier", "Orbit Wave Z Time Multiplier")
+                {SHADER_PROPERTY._ORBIT_WAVE_TIME_MULTIPLIER,new ShaderPropertyState(
+                    "_OrbitWaveTimeMultiplier", "Orbit Wave Time Multiplier")
                 },
 
                 {SHADER_PROPERTY._ORBIT_WAVE_REF_AUDIOLINK,new ShaderPropertyState(
