@@ -30,18 +30,27 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                 {
                     using (StreamReader reader = new StreamReader(path))
                     {
+                        int column = 0;
                         while (!reader.EndOfStream)
                         {
+                            column++;
                             string line = reader.ReadLine();
                             if (line == "") continue;
                             string[] values = line.Split("||");
                             if (values.Length >= index + 1)
                             {
-                                PropLangDic.Add(values[0], values[index]);
+                                if (PropLangDic.ContainsKey(values[0]))
+                                {
+                                    Debug.LogWarning("There are multiple localized text. -> Column:" + column + " - " + line);
+                                }
+                                else
+                                {
+                                    PropLangDic.Add(values[0], values[index]);
+                                }
                             }
                             else
                             {
-                                Debug.LogWarning("Could not get localized text. -> " + line);
+                                Debug.LogWarning("Could not get localized text. -> Column:" + column + " | " + line);
                             }
                         }
                     }
