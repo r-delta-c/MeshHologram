@@ -12,36 +12,42 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _ACTIVATE_GEOMETRYMESSY
-  - _AUDIOLINKVUBAND_BASS
+  - _ACTIVATE_ORBIT
   - _COLORINGPARTITIONTYPE_VERTEX
   - _COLORINGSOURCE_NOISE1ST
   - _COLORSOURCE_GRADIENT
   - _FRAGMENTSOURCE_VALUE
-  - _GEOMETRYMESSYREFERENCETIME_SHADERTIME
-  - _GEOMETRYMESSYSOURCE_PRIMITIVE
-  - _GEOMETRYPUSHPULLE_DISABLE
-  - _GEOMETRYSOURCE_VALUE
+  - _GEOMETRYSOURCE_AUDIOLINK_VU
+  - _GEOMETRY_EXTRUDE
   - _LINEFADEMODE_NORMAL
   - _NOISE1STPHASEREFAUDIOLINK_DISABLE
-  - _NOISE1STREFERENCETIME_SHADERTIME
   - _NOISE1STSPACE_MODEL
   - _NOISE2NDPHASEREFAUDIOLINK_DISABLE
-  - _NOISE2NDREFERENCETIME_SHADERTIME
   - _NOISE2NDSPACE_MODEL
-  - _NOISE2ND_CURVE_INVERSE
   - _NOISE3RDPHASEREFAUDIOLINK_VU
-  - _NOISE3RDREFERENCETIME_SHADERTIME
   - _NOISE3RDSPACE_MODEL
   - _ORBITROTATIONREFAUDIOLINK_CHRONOTENSITY
+  - _ORBITROTATIONSOURCE_PRIMITIVE
+  - _ORBITSOURCE_PRIMITIVE
+  - _ORBITWAVEREFAUDIOLINK_DISABLE
   - _PARTITIONTYPE_SIDE
   - _PIXELIZATIONSPACE_DISABLE
   - _STEREOMERGEMODE_ROTATION
   - _USE_AUDIOLINK
   - _USE_FWIDTH
   m_InvalidKeywords:
+  - _ACTIVATE_GEOMETRYMESSY
   - _ALPHATOMASK_OFF
+  - _AUDIOLINKVUBAND_BASS
   - _FORCED_Z_SCALE_ZERO_ON
+  - _GEOMETRYMESSYREFERENCETIME_SHADERTIME
+  - _GEOMETRYMESSYSOURCE_PRIMITIVE
+  - _GEOMETRYPUSHPULLE_DISABLE
+  - _NOISE1STREFERENCETIME_SHADERTIME
+  - _NOISE2NDCURVETYPE_ON
+  - _NOISE2NDREFERENCETIME_SHADERTIME
+  - _NOISE2ND_CURVE_INVERSE
+  - _NOISE3RDREFERENCETIME_SHADERTIME
   - _RENDERINGMODE_TRANSPARENT
   - _ZCLIP_ON
   - _ZWRITE_OFF
@@ -88,11 +94,27 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Noise1stOffsetControlTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Noise2ndMaskControlTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Noise2ndOffsetControlTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Noise3rdMaskControlTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise3rdOffsetControlTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OrbitMaskControlTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -101,9 +123,11 @@ Material:
     - _ActivateAmbientInfluence: 0
     - _ActivateDirectionalLightInfluence: 0
     - _ActivateLightVolumesInfluence: 0
+    - _ActivateOrbit: 1
     - _AlphaToMask: 0
     - _AlphaToMaskMemory: 0
     - _AmbientInfluence: 1
+    - _AntiAliasing: 0
     - _AudioLinkChronoTensityBand: 0
     - _AudioLinkChronoTensityScale: 300000
     - _AudioLinkChronoTensityType: 1
@@ -119,6 +143,10 @@ Material:
     - _BlendOpAlpha: 0
     - _ColorMask: 15
     - _ColorSource: 0
+    - _ColoringAudioLinkNoiseSpectrum: 0
+    - _ColoringAudioLinkSpectrumMirror: 0
+    - _ColoringAudioLinkSpectrumType: 0
+    - _ColoringAudioLinkStrength: 1
     - _ColoringMaskControl: 1
     - _ColoringPartitionType: 0
     - _ColoringSource: 1
@@ -133,9 +161,19 @@ Material:
     - _Emission: 0
     - _Fill: 0
     - _Forced_Z_Scale_Zero: 1
+    - _FragmentAudioLinkNoiseSpectrum: 0
+    - _FragmentAudioLinkSpectrumMirror: 0
+    - _FragmentAudioLinkSpectrumType: 0
+    - _FragmentAudioLinkStrength: 1
+    - _FragmentInverse: 0
     - _FragmentMaskControl: 1
     - _FragmentSource: 0
     - _FragmentValue: 1
+    - _GeometryAudioLinkNoiseSpectrum: 0
+    - _GeometryAudioLinkSpectrumMirror: 0
+    - _GeometryAudioLinkSpectrumType: 0
+    - _GeometryAudioLinkStrength: 1
+    - _GeometryExtrude: 1
     - _GeometryMaskControl: 1
     - _GeometryMessyMaskControl: 1
     - _GeometryMessyOrbitRotation: 0
@@ -152,16 +190,23 @@ Material:
     - _GeometryPushPull: 0.05
     - _GeometryPushPullBias: -1
     - _GeometryPushPullE: 0
-    - _GeometrySource: 0
+    - _GeometryRotation: 0
+    - _GeometryRotationInfluence: 1
+    - _GeometryRotationNoiseRepeat: 0
+    - _GeometryRotationReverse: 0
+    - _GeometryScale: 0
+    - _GeometrySource: 4
     - _GeometryValue: 1
     - _LightVolumesInfluence: 1
     - _LineFadeMode: 0
     - _LineGradientBias: 0
     - _LineScale: 1
     - _LineWidth: 2
+    - _ManualLineScaling: 0
     - _Noise1stCurveType: 0
     - _Noise1stMaskControl: 1
     - _Noise1stOffsetBeforeScale: 0
+    - _Noise1stOffsetControl: 1
     - _Noise1stPhaseRefAudioLink: 0
     - _Noise1stPhaseScale: 3
     - _Noise1stReferenceTime: 0
@@ -175,6 +220,7 @@ Material:
     - _Noise2ndCurveType: 1
     - _Noise2ndMaskControl: 1
     - _Noise2ndOffsetBeforeScale: 0
+    - _Noise2ndOffsetControl: 1
     - _Noise2ndPhaseRefAudioLink: 0
     - _Noise2ndPhaseScale: 3
     - _Noise2ndReferenceTime: 0
@@ -188,6 +234,7 @@ Material:
     - _Noise3rdCurveType: 0
     - _Noise3rdMaskControl: 1
     - _Noise3rdOffsetBeforeScale: 0
+    - _Noise3rdOffsetControl: 1
     - _Noise3rdPhaseRefAudioLink: 1
     - _Noise3rdPhaseScale: 3
     - _Noise3rdReferenceTime: 0
@@ -200,7 +247,18 @@ Material:
     - _Noise3rdValueCurve: 3
     - _OffsetFactor: 0
     - _OffsetUnits: 0
+    - _OrbitMaskControl: 1
+    - _OrbitPrimitiveThreshold: 0.5
     - _OrbitRotationRefAudioLink: 2
+    - _OrbitRotationSeed: 1
+    - _OrbitRotationSource: 1
+    - _OrbitRotationValue: 0
+    - _OrbitSeed: 0
+    - _OrbitSource: 1
+    - _OrbitValue: 0
+    - _OrbitWaveAudioLinkSpectrumMirror: 0
+    - _OrbitWaveAudioLinkSpectrumType: 0
+    - _OrbitWaveRefAudioLink: 0
     - _PartitionType: 1
     - _Pixelization: 0.02
     - _PixelizationSpace: 0
@@ -225,10 +283,15 @@ Material:
     m_Colors:
     - _Color0: {r: 0.9774013, g: 1, b: 0.65471697, a: 1}
     - _Color1: {r: 0.7905661, g: 1, b: 0.9871776, a: 1}
+    - _ColoringAudioLinkSpectrumRange: {r: -1, g: 1, b: 0, a: 0}
+    - _FragmentAudioLinkSpectrumRange: {r: -1, g: 1, b: 0, a: 0}
+    - _GeometryAudioLinkSpectrumRange: {r: -1, g: 1, b: 0, a: 0}
+    - _GeometryExtrudeRange: {r: 0, g: -0.05, b: 0, a: 0}
     - _GeometryMessyOrbitAudioLinkStrength: {r: 1, g: 0, b: 0, a: 1}
     - _GeometryMessyOrbitPosition: {r: 0, g: 0, b: 0, a: 1}
     - _GeometryMessyOrbitVariance: {r: 6.28, g: 0, b: 12.68, a: 0.2}
     - _GeometryMessyTimeMultiplier: {r: 4, g: 2, b: 5, a: 1}
+    - _GeometryScaleRange: {r: 0.5, g: 0, b: 0, a: 0}
     - _Noise1stOffset0: {r: 0, g: 0, b: 0, a: 0}
     - _Noise1stOffset1: {r: 0, g: 0, b: 0, a: 0}
     - _Noise1stScale0: {r: 1, g: 1, b: 1, a: 3}
@@ -241,4 +304,17 @@ Material:
     - _Noise3rdOffset1: {r: 0, g: 0, b: 0, a: 0}
     - _Noise3rdScale0: {r: 1, g: 1, b: 1, a: 5}
     - _Noise3rdScale1: {r: 1, g: 1, b: 1, a: 1}
+    - _OrbitOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _OrbitRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _OrbitRotationAudioLinkStrength: {r: 1, g: 0, b: 0, a: 1}
+    - _OrbitRotationTimeMultiplier: {r: 4, g: 2, b: 0, a: 1}
+    - _OrbitRotationVariance: {r: 6.28, g: 0, b: 0, a: 0}
+    - _OrbitScale: {r: 1, g: 1, b: 0.75, a: 1}
+    - _OrbitWaveAudioLinkSpectrumRange: {r: -1, g: 1, b: 0, a: 0}
+    - _OrbitWaveAudioLinkStrength: {r: 1, g: 1, b: 1, a: 1}
+    - _OrbitWaveFrequency: {r: 5, g: 3, b: 0, a: 0}
+    - _OrbitWavePhase: {r: 0, g: 0, b: 0, a: 0}
+    - _OrbitWaveStrength: {r: 0, g: 0.1, b: 0, a: 0}
+    - _OrbitWaveTimeMultiplier: {r: 1, g: 5, b: 0, a: 0}
+    - _Pixelization: {r: 1, g: 1, b: 1, a: 0.02}
   m_BuildTextureStacks: []
