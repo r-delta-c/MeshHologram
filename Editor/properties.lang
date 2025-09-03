@@ -84,6 +84,7 @@ _GeometryExtrude||Activate Extrude||押し出しの有効
 _GeometryExtrudeRange||Extrude Range*/A/B||押し出しの範囲*/A/B
 
 _GeometryRotation||Activate Rotation||回転の有効
+_GeometryRotationInfluence||Influence*||影響量*
 _GeometryRotationReverse||Rotation Reverse*||逆回転*
 _GeometryRotationNoiseRepeat||One-way Rotation||一方向回転
 
@@ -100,8 +101,9 @@ _OrbitPrimitiveThreshold||Orbit Primitive Threshold*||Orbit Primitive 閾値*
 _OrbitOffset||Orbit Offset*/X/Y/Z||Orbitの座標オフセット*/X/Y/Z
 _OrbitScale||Orbit Scale*/Y/Z/Scale||Orbit スケール*/Y/Z/スケール
 
-_OrbitRotationSource||Orbit Rotation Source||Orbitの回転の参照先
-_OrbitRotationValue||Orbit Rotation Value||Orbitの回転の値
+_OrbitRotationSource||Orbit Rotation Source||Orbit 回転の参照先
+_OrbitRotationValue||Orbit Rotation Value*||Orbit 回転の値*
+_OrbitRotationSeed||Orbit Rotation Seed*||Orbit 回転のシード値*
 _OrbitRotation||Orbit Rotation*/Rotation/Forward/Right||Orbitの回転*/回転/Forward/Right
 _OrbitRotationForward||Orbit Rotation Forward*||OrbitのForward回転*
 _OrbitRotationRight||Orbit Rotation Right*||OrbitのRight回転*
@@ -109,10 +111,10 @@ _OrbitRotationTimeMultiplier||Orbit Rotation Time Multiplier*/X/Y/Z/W||Orbitの�
 
 _OrbitRotationVariance||Orbit Rotation Variance*/X/Y/Z||Orbitの回転のバラつき*/X/Y/Z
 
-_OrbitWaveStrength||Strength/YZ/X//||強さ/YZ/X//
-_OrbitWaveFrequency||Frequency/YZ/X//||周波頻度/YZ/X//
-_OrbitWavePhase||Phase/YZ/X//||周期/YZ/X//
-_OrbitWaveTimeMultiplier||Time Multiplier/YZ/X//||時間乗算/YZ/X//
+_OrbitWaveStrength||Strength*/YZ/X//||強さ*/YZ/X//
+_OrbitWaveFrequency||Frequency*/YZ/X//||周波頻度*/YZ/X//
+_OrbitWavePhase||Phase*/YZ/X//||周期*/YZ/X//
+_OrbitWaveTimeMultiplier||Time Multiplier*/YZ/X//||時間乗算*/YZ/X//
 
 _OrbitRotationRefAudioLink||Orbit Rotation Reference||Orbit 回転の参照先
 _OrbitRotationAudioLinkStrength||Strength*/X/Y/Z/W||強さ*/X/Y/Z/W
@@ -138,29 +140,29 @@ _Noise3rdOffsetControl||Strength*||強さ*
 
 
 
-_OrbitWaveRefAudioLink||AudioLink Reference||AudioLinkの参照先
-_OrbitWaveAudioLinkStrength||Strength*/X/Y/Z/W||強さ*/X/Y/Z/W
+_OrbitWaveRefAudioLink||Orbit Wave Reference||Orbit Waveの参照先
+_OrbitWaveAudioLinkStrength||Strength*/X/Y/Z||強さ*/X/Y/Z
 _OrbitWaveAudioLinkSpectrumMirror||Mirror*||ミラー*
 _OrbitWaveAudioLinkSpectrumType||Use AutoCorrelator*||AutoCorrelatorを使う*
 _OrbitWaveAudioLinkSpectrumRange||Spectrum Range*/A/B||スペクトラムの範囲*/A/B
 
 _FragmentAudioLinkNoiseSpectrum||Activate Fragment Spectrum (Only Noise)||フラグメントのスペクトラムを有効にする (ノイズのみ)
-_FragmentAudioLinkStrength||Strength*/X/Y/Z/W||強さ*/X/Y/Z/W
+_FragmentAudioLinkStrength||Strength*||強さ*
 _FragmentAudioLinkSpectrumMirror||Mirror*||ミラー*
 _FragmentAudioLinkSpectrumType||Use AutoCorrelator*||AutoCorrelatorを使う*
-_FragmentAudioLinkSpectrumRange||Spectrum Range*/A/B||スペクトラムの範囲*/A/B
+_FragmentAudioLinkSpectrumRange||Spectrum Range*/Min/Max||スペクトラムの範囲*/Min/Max
 
 _ColoringAudioLinkNoiseSpectrum||Activate Coloring Spectrum (Only Noise)||着色のスペクトラムを有効にする (ノイズのみ)
-_ColoringAudioLinkStrength||Strength*/X/Y/Z/W||強さ*/X/Y/Z/W
+_ColoringAudioLinkStrength||Strength*||強さ*
 _ColoringAudioLinkSpectrumMirror||Mirror*||ミラー*
 _ColoringAudioLinkSpectrumType||Use AutoCorrelator*||AutoCorrelatorを使う*
-_ColoringAudioLinkSpectrumRange||Spectrum Range*/A/B||スペクトラムの範囲*/A/B
+_ColoringAudioLinkSpectrumRange||Spectrum Range*/Min/Max||スペクトラムの範囲*/Min/Max
 
 _GeometryAudioLinkNoiseSpectrum||Activate Geometry Spectrum (Only Noise)||ジオメトリのスペクトラムを有効にする (ノイズのみ)
-_GeometryAudioLinkStrength||Strength*/X/Y/Z/W||強さ*/X/Y/Z/W
+_GeometryAudioLinkStrength||Strength*||強さ*
 _GeometryAudioLinkSpectrumMirror||Mirror*||ミラー*
 _GeometryAudioLinkSpectrumType||Use AutoCorrelator*||AutoCorrelatorを使う*
-_GeometryAudioLinkSpectrumRange||Spectrum Range*/A/B||スペクトラムの範囲*/A/B
+_GeometryAudioLinkSpectrumRange||Spectrum Range*/Min/Max||スペクトラムの範囲*/Min/Max
 
 _Noise1stOffset0||Offset*/X/Y/Z||オフセット*/X/Y/Z
 _Noise1stScale0||Scale*/X/Y/Z/W||スケール*/X/Y/Z/W

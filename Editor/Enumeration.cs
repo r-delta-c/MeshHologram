@@ -97,6 +97,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         _GEOMETRY_EXTRUDE_RANGE,
 
         _GEOMETRY_ROTATION,
+        _GEOMETRY_ROTATION_INFLUENCE,
         _GEOMETRY_ROTATION_REVERSE,
         _GEOMETRY_ROTATION_NOISE_REPEAT,
 

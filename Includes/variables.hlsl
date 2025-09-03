@@ -57,6 +57,7 @@ float _GeometryValue;
 float _GeometryMaskControl;
 float2 _GeometryScaleRange;
 float2 _GeometryExtrudeRange;
+float _GeometryRotationInfluence;
 float _GeometryRotationReverse;
 
 float _GeometryPartitionBias;

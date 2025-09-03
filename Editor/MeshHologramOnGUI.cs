@@ -356,6 +356,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_ROTATION);
                     if (GetPropertyFloat(targetMat, SHADER_PROPERTY._GEOMETRY_ROTATION) == 1)
                     {
+                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_ROTATION_INFLUENCE);
                         DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_ROTATION_REVERSE);
                         DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_ROTATION_NOISE_REPEAT);
                     }

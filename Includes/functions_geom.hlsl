@@ -242,21 +242,21 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             float3 normal_average = (inp[0].world_normal+inp[1].world_normal+inp[2].world_normal)/3.0;
             float rotation_sign = sign(_GeometryRotationReverse*2.0-1.0);
             #if defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE3RD)
-                geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center,rotation_sign*GEOMETRY_FUNC_NOISE_MACRO(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time)*UNITY_PI*2.0,normal_average)+geometry_center;
-                geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center,rotation_sign*GEOMETRY_FUNC_NOISE_MACRO(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time)*UNITY_PI*2.0,normal_average)+geometry_center;
-                geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center,rotation_sign*GEOMETRY_FUNC_NOISE_MACRO(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time)*UNITY_PI*2.0,normal_average)+geometry_center;
+                geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center,rotation_sign*GEOMETRY_FUNC_NOISE_MACRO(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time)*DF_PI2_MACRO*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center,rotation_sign*GEOMETRY_FUNC_NOISE_MACRO(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time)*DF_PI2_MACRO*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center,rotation_sign*GEOMETRY_FUNC_NOISE_MACRO(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time)*DF_PI2_MACRO*_GeometryRotationInfluence,normal_average)+geometry_center;
             #elif defined(_USE_AUDIOLINK) && _GEOMETRYSOURCE_AUDIOLINK_VU
-                geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center,rotation_sign*audiolink_vu*audiolink_mask[0]*UNITY_PI*2.0,normal_average)+geometry_center;
-                geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center,rotation_sign*audiolink_vu*audiolink_mask[1]*UNITY_PI*2.0,normal_average)+geometry_center;
-                geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center,rotation_sign*audiolink_vu*audiolink_mask[2]*UNITY_PI*2.0,normal_average)+geometry_center;
+                geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center,rotation_sign*audiolink_vu*audiolink_mask[0]*DF_PI2_MACRO*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center,rotation_sign*audiolink_vu*audiolink_mask[1]*DF_PI2_MACRO*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center,rotation_sign*audiolink_vu*audiolink_mask[2]*DF_PI2_MACRO*_GeometryRotationInfluence,normal_average)+geometry_center;
             #elif defined(_USE_AUDIOLINK) && _GEOMETRYSOURCE_AUDIOLINK_CHRONOTENSITY
-                geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center,rotation_sign*audiolink_chronotensity*audiolink_mask[0]*UNITY_PI*2.0,normal_average)+geometry_center;
-                geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center,rotation_sign*audiolink_chronotensity*audiolink_mask[1]*UNITY_PI*2.0,normal_average)+geometry_center;
-                geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center,rotation_sign*audiolink_chronotensity*audiolink_mask[2]*UNITY_PI*2.0,normal_average)+geometry_center;
+                geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center,rotation_sign*audiolink_chronotensity*audiolink_mask[0]*DF_PI2_MACRO*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center,rotation_sign*audiolink_chronotensity*audiolink_mask[1]*DF_PI2_MACRO*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center,rotation_sign*audiolink_chronotensity*audiolink_mask[2]*DF_PI2_MACRO*_GeometryRotationInfluence,normal_average)+geometry_center;
             #else
-                geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center,rotation_sign*_GeometryValue*UNITY_PI*2.0,normal_average)+geometry_center;
-                geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center,rotation_sign*_GeometryValue*UNITY_PI*2.0,normal_average)+geometry_center;
-                geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center,rotation_sign*_GeometryValue*UNITY_PI*2.0,normal_average)+geometry_center;
+                geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center,rotation_sign*_GeometryValue*DF_PI2_MACRO*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center,rotation_sign*_GeometryValue*DF_PI2_MACRO*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center,rotation_sign*_GeometryValue*DF_PI2_MACRO*_GeometryRotationInfluence,normal_average)+geometry_center;
             #endif
         #endif
 
@@ -265,7 +265,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
                 geometry_pos[0]-geometry_center+_OrbitOffset.xyz,
                 geometry_pos[1]-geometry_center+_OrbitOffset.xyz,
                 geometry_pos[2]-geometry_center+_OrbitOffset.xyz};
-            float3 dir_pi2 = float3(_OrbitRotation.x,_OrbitRotation.y,_OrbitRotation.z)*UNITY_PI*2.0;
+            float3 dir_pi2 = float3(_OrbitRotation.x,_OrbitRotation.y,_OrbitRotation.z)*DF_PI2_MACRO;
             float3 orbit_anim = ORBIT_ROTATION_AUDIOLINK_MACRO;
             float3 orbit_rotation_time = ORBIT_ROTATION_TIME_MACRO;
             #if defined(_ORBITROTATIONSOURCE_NOISE1ST) || defined(_ORBITROTATIONSOURCE_NOISE2ND) || defined(_ORBITROTATIONSOURCE_NOISE3RD)

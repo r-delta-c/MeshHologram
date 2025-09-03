@@ -1,3 +1,5 @@
+#define DF_PI2_MACRO UNITY_PI*2.0
+
 #ifdef _MANUAL_LINE_SCALING
     #define LINE_SCALE_MACRO max(_LineScale,1e-4)
 #else

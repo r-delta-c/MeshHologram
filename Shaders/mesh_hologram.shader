@@ -124,6 +124,7 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         [DFToggle(_GEOMETRY_ROTATION,1)]
         _GeometryRotation("Activate Rotation",Int)=0
+        _GeometryRotationInfluence("Rotation Influence",Range(0.0,1.0))=1.0
         [MaterialToggle(_GEOMETRY_ROTATION_REVERSE)]
         _GeometryRotationReverse("Rotation Reverse",Int)=0
         [Toggle(_GEOMETRY_ROTATION_NOISE_REPEAT)]
