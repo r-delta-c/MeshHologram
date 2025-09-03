@@ -401,16 +401,12 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         InsertNoise3rdProps(2);
                         break;
                 }
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    DrawOrbit();
-                }
             }
         }
 
         private void DrawOrbit()
         {
-            foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.ORBIT, false);
+            foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.ORBIT, true);
             if (foldout_bool)
             {
                 DrawShaderProperty(SHADER_PROPERTY._ACTIVATE_ORBIT);
@@ -586,6 +582,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     DrawColor();
                     DrawLine();
                     DrawGeometry();
+                    DrawLine();
+                    DrawOrbit();
                 }
 
                 using (new EditorGUILayout.VerticalScope("HelpBox"))
