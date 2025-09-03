@@ -6,7 +6,7 @@
 #endif
 
 #if defined(_ACTIVATE_AMBIENT_INFLUENCE) && !defined(_ACTIVATE_LIGHTVOLUMES)
-    float3 ambient = saturate(ShadeSH9(float4(i.normal,1.0)));
+    float3 ambient = saturate(ShadeSH9(float4(i.world_normal,1.0)));
 
     c.rgb += ambient*_AmbientInfluence;
 #elif defined(_ACTIVATE_LIGHTVOLUMES)
@@ -25,7 +25,10 @@
         c.rgb = saturate(draw*c.rgb);
         c.a = 1.0;
     #else
-        c.a = saturate((saturate(draw)*i.alpha*c.a));
+        c.a = saturate(draw)*i.alpha*c.a;
+        #ifdef _ANTI_ALIASING
+            c.a = saturate(c.a+fwidth(c.a)*0.5);
+        #endif
     #endif
 
     c.rgb *= saturate(c.rgb)*(max(0.0,_Emission)+1.0);

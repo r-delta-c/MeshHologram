@@ -5,27 +5,27 @@ using UnityEditor;
 using UnityEngine;
 
 namespace DeltaField.Shaders.MeshHologram.Editor {
-    public class FoldoutManager
+    internal class FoldoutManager
     {
-        public Dictionary<FOLDOUT, FoldoutState> FoldoutList = new Dictionary<FOLDOUT, FoldoutState>();
-        public FoldoutManager()
+        private Dictionary<FOLDOUT, FoldoutState> FoldoutList = new Dictionary<FOLDOUT, FoldoutState>();
+        internal FoldoutManager()
         {
             FoldoutList.Add(FOLDOUT.RENDERING, new FoldoutState("label.rendering"));
-            FoldoutList.Add(FOLDOUT.RENDERING_OTHER, new FoldoutState("label.rendering_other"));
+            FoldoutList.Add(FOLDOUT.RENDERING_OTHER, new FoldoutState("label.other_renderings"));
             FoldoutList.Add(FOLDOUT.STENCIL, new FoldoutState("label.stencil"));
             FoldoutList.Add(FOLDOUT.AUDIOLINK, new FoldoutState("label.audiolink"));
             FoldoutList.Add(FOLDOUT.FRAGMENT, new FoldoutState("label.fragment"));
             FoldoutList.Add(FOLDOUT.COLOR, new FoldoutState("label.color"));
             FoldoutList.Add(FOLDOUT.GEOMETRY, new FoldoutState("label.geometry"));
-            FoldoutList.Add(FOLDOUT.MESSY_ORBIT, new FoldoutState("label.messy_orbit"));
-            FoldoutList.Add(FOLDOUT.NOISE1ST, new FoldoutState("label.noise1st_properties", 4));
-            FoldoutList.Add(FOLDOUT.NOISE2ND, new FoldoutState("label.noise2nd_properties", 4));
-            FoldoutList.Add(FOLDOUT.NOISE3RD, new FoldoutState("label.noise3rd_properties", 4));
+            FoldoutList.Add(FOLDOUT.ORBIT, new FoldoutState("label.orbit"));
+            FoldoutList.Add(FOLDOUT.NOISE1ST, new FoldoutState("label.noise1st_properties", 5));
+            FoldoutList.Add(FOLDOUT.NOISE2ND, new FoldoutState("label.noise2nd_properties", 5));
+            FoldoutList.Add(FOLDOUT.NOISE3RD, new FoldoutState("label.noise3rd_properties", 5));
             FoldoutList.Add(FOLDOUT.OTHERS, new FoldoutState("label.others"));
             UpdateLocalization();
         }
 
-        public bool MenuFoldout(FOLDOUT foldout, bool bold = true, int owner = 0)
+        internal bool MenuFoldout(FOLDOUT foldout, bool bold = true, int owner = 0)
         {
             string AttributeText(string text)
             {
@@ -75,11 +75,20 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
             GUI.Label(rec, AttributeText(FoldoutList[foldout].localized_text), style);
             return b;
         }
-        public void UpdateLocalization()
+        internal void UpdateLocalization()
         {
             foreach (FOLDOUT foldout in FoldoutList.Keys)
             {
-                FoldoutList[foldout].localized_text = MeshHologramInspector.LocalizationSystem.PropLangDic[FoldoutList[foldout].text];
+                string text = FoldoutList[foldout].text;
+                if (MeshHologramInspector.LocalizationSystem.PropLangDic.ContainsKey(text))
+                {
+                    FoldoutList[foldout].localized_text = MeshHologramInspector.LocalizationSystem.PropLangDic[text];
+                }
+                else
+                {
+                    Debug.LogWarning("Could not get localized text. -> " + text);
+                    FoldoutList[foldout].localized_text = text;
+                }
             }
         }
     }

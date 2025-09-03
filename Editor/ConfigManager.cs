@@ -8,8 +8,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
         private string path;
         private string lang_key = "[LANGUAGE]|";
         private string title_skin_key = "[TITLESKIN]|";
-        public ConfigManager(){
-            path = MeshHologramInspector.info.resolvedPath + "/Editor/config.ini";
+        public ConfigManager(string resolve_path){
+            path = resolve_path + "/Editor/config.ini";
             if (!File.Exists(path))
             {
                 SaveConfig();

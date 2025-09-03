@@ -4,7 +4,7 @@
     fixed4 c = fixed4(0.0,0.0,0.0,1.0);
 
     #ifdef _USE_FWIDTH
-    float3 sides = (i.baryCentricCoords/(fwidth(i.baryCentricCoords)*0.5/lerp(1.0,max(i.camera_distance,1e-4),_DistanceInfluence))/unity_CameraProjection._m11/max(_LineScale,1e-4));
+    float3 sides = (i.baryCentricCoords/(fwidth(i.baryCentricCoords)*0.5/lerp(1.0,max(i.camera_distance,1e-4),_DistanceInfluence))/unity_CameraProjection._m11/_ScreenParams.y*1024.0/LINE_SCALE_MACRO);
     #else
     float3 sides = (i.baryCentricCoords*96.0);
     #endif
@@ -50,11 +50,13 @@
     #ifdef _COLORSOURCE_GRADIENT
         #if !defined(_COLORINGSOURCE_VALUE)
             #ifdef _COLORINGPARTITIONTYPE_SIDE
-                i.color_noise = i.color_noise * (range>0.0);
-                float side_noise = (max(max(i.color_noise.x,i.color_noise.y),i.color_noise.z));
-                c = lerp(_Color1,_Color0,side_noise);
+                float3 coloring_side = i.color_noise * (range>0.0);
+                sides = 0.0<sides;
+                float coloring_t = max(sides.x*coloring_side.x,max(sides.y*coloring_side.y,sides.z*coloring_side.z));
+                coloring_t = lerp(coloring_t,1.0,(i.color_noise.x+i.color_noise.y+i.color_noise.z)/3.0*1.1);
+                c = lerp(_Color0,_Color1,coloring_t);
             #else
-                c = lerp(_Color1,_Color0,i.color_noise);
+                c = lerp(_Color0,_Color1,i.color_noise);
             #endif
         #else
             c = lerp(_Color0,_Color1,_ColoringValue);
@@ -63,11 +65,14 @@
         c = _Color0;
     #elif _COLORSOURCE_GRADIENTTEX
         #ifdef _COLORINGPARTITIONTYPE_SIDE
-            i.color_noise = i.color_noise * (range>0.0);
-            float side_noise = (max(max(i.color_noise.x,i.color_noise.y),i.color_noise.z));
-            c = tex2Dlod(_ColorGradientTex,float4(saturate(side_noise)*0.994+0.004,0.5,0.0,0.0));
+            float3 coloring_side = i.color_noise * (range>0.0);
+            sides = 0.0<sides;
+            float coloring_t = saturate(
+                max(sides.x*coloring_side.x,max(sides.y*coloring_side.y,sides.z*coloring_side.z)));
+            coloring_t = lerp(coloring_t,1.0,(i.color_noise.x+i.color_noise.y+i.color_noise.z)/3.0*1.1);
+            c = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColorGradientTex, _linear_repeat,float2(coloring_t*0.994+0.004,0.5),0.0);
         #else
-            c = tex2Dlod(_ColorGradientTex,float4(saturate(i.color_noise)*0.994+0.004,0.5,0.0,0.0));
+            c = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColorGradientTex, _linear_repeat,float2(i.color_noise*0.994+0.004,0.5),0.0);
         #endif
     #elif _COLORSOURCE_VERTEXCOLOR
         c = i.vertex_color;
