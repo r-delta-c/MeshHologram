@@ -18,8 +18,6 @@ struct v2f{
 
     float4 vertex_color : TEXCOORD6;
     float alpha : TEXCOORD7;
-    float3 forward_dir : TEXCOORD8;
-    float3 up_dir : TEXCOORD9;
 
     float4 matrix_v_0:TEXCOORD11;
     float4 matrix_v_1:TEXCOORD12;

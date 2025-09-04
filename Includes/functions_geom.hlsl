@@ -307,13 +307,13 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
                 );
             #endif
 
-            float3 orbit_dir = cos(orbit_anim.x)*inp[0].forward_dir*_OrbitScale.x + sin(orbit_anim.x)*inp[0].up_dir*_OrbitScale.y;
+            float3 orbit_dir = cos(orbit_anim.x)*float3(0.0,1.0,0.0)*_OrbitScale.x + sin(orbit_anim.x)*float3(0.0,0.0,1.0)*_OrbitScale.y;
             orbit_dir *= _OrbitScale.z+scale-1.0;
-            float3 right_dir = normalize(cross(inp[0].forward_dir,inp[0].up_dir));
 
-            orbit_dir = RodriguesRotation(orbit_dir,orbit_anim.y,inp[0].forward_dir);
-            orbit_dir = RodriguesRotation(orbit_dir,orbit_anim.z,right_dir);
-            orbit_dir += mul(UNITY_MATRIX_M,float4(orbit_wave_r*_OrbitScale.z,1.0));
+            orbit_dir += orbit_wave_r*_OrbitScale.z;
+            orbit_dir = RodriguesRotation(orbit_dir,orbit_anim.y,float3(0.0,1.0,0.0));
+            orbit_dir = RodriguesRotation(orbit_dir,orbit_anim.z,float3(0.0,0.0,1.0));
+            orbit_dir = mul(UNITY_MATRIX_M,float4(orbit_dir,1.0));
 
             orbit[0] = orbit[0]+orbit_dir;
             orbit[1] = orbit[1]+orbit_dir;

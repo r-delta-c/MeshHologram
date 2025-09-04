@@ -39,8 +39,6 @@ v2f vert (appdata v){
     NOISE1ST_MACRO;
     NOISE2ND_MACRO;
     NOISE3RD_MACRO;
-    o.forward_dir = normalize(unity_WorldToObject._m20_m21_m22);
-    o.up_dir = normalize(unity_WorldToObject._m10_m11_m12);
     SWITCH_SHADE_WORLDPOS_MACRO o.world_pos = o.pos;
     o.origin_pos = unity_ObjectToWorld._m03_m13_m23;
     SWITCH_WORLDNORMAL_MACRO o.world_normal = UnityObjectToWorldNormal(v.normal);
