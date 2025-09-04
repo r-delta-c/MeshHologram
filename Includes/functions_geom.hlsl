@@ -284,29 +284,28 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             #endif
 
             float3 orbit_wave = float3(
-                (orbit_anim.x+_OrbitWavePhase.y+ORBIT_WAVE_Z_TIME_MACRO),
-                (orbit_anim.x+_OrbitWavePhase.x+ORBIT_WAVE_XY_TIME_MACRO),
-                (orbit_anim.x+_OrbitWavePhase.x+ORBIT_WAVE_XY_TIME_MACRO)
+                (orbit_anim.x+_OrbitWavePhase.y+ORBIT_WAVE_Z_TIME_MACRO)*_OrbitWaveFrequency.y,
+                (orbit_anim.x+_OrbitWavePhase.x+ORBIT_WAVE_XY_TIME_MACRO)*_OrbitWaveFrequency.x,
+                (orbit_anim.x+_OrbitWavePhase.x+ORBIT_WAVE_XY_TIME_MACRO)*_OrbitWaveFrequency.x
             );
 
             float3 orbit_wave_r = float3(
-                sin(orbit_wave.x*_OrbitWaveFrequency.y)*_OrbitWaveStrength.y,
-                sin(orbit_wave.y*_OrbitWaveFrequency.x)*_OrbitWaveStrength.x,
-                cos(orbit_wave.z*_OrbitWaveFrequency.x)*_OrbitWaveStrength.x
+                sin(orbit_wave.x)*_OrbitWaveStrength.y,
+                sin(orbit_anim.x)*sin(orbit_wave.y)*_OrbitWaveStrength.x,
+                cos(orbit_anim.x)*sin(orbit_wave.z)*_OrbitWaveStrength.x
             );
+
+            orbit_anim += dir_pi2+orbit_rotation_time;
 
             #ifdef _ORBITWAVEREFAUDIOLINK_VU
                 orbit_wave_r *= audiolink_spectrum;
             #elif _ORBITWAVEREFAUDIOLINK_SPECTRUM
                 orbit_wave_r += float3(
                     audiolink_spectrum.x,
-                    audiolink_spectrum.y*sin(orbit_wave.y*_OrbitWaveFrequency.x),
-                    audiolink_spectrum.z*cos(orbit_wave.z*_OrbitWaveFrequency.x)
+                    sin(orbit_anim.x)*audiolink_spectrum.y,
+                    cos(orbit_anim.x)*audiolink_spectrum.z
                 );
             #endif
-
-            orbit_anim += dir_pi2+orbit_rotation_time;
-
 
             float3 orbit_dir = cos(orbit_anim.x)*inp[0].forward_dir*_OrbitScale.x + sin(orbit_anim.x)*inp[0].up_dir*_OrbitScale.y;
             orbit_dir *= _OrbitScale.z+scale-1.0;
