@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.1] 2025/09/04
+### Changed
+- `Orbit Wave YZ`の表現が想定されていたものに変更。
+    - 旧: 回転位置に応じて更に回転が加わるような処理になっていました。イメージとしては丸みのあるデコボコができており、花のように見えます。
+    - 新: `Orbit Wave X`と同じ波のような形状になりました。
+- `ノイズの参照先`の`Model_World`は現状維持の方針を取ることになりました。
+
+### Fixed
+- `Orbit`が、`Orbit Rotation`、トランスフォームの回転等に対応する処理が正しく行われていない問題を修正。
+- `Orbit Source`の`Primitive`にて、`_OrbitPrimitiveThreshold`を`0`にしてもOrbitになり切らない不具合を修正。
+
 ## [0.1.0] 2025/09/03
 ### Added
 - 新機能、`Orbit Wave`を追加。
@@ -83,6 +94,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - マテリアルのインスペクターから、MeshHologramが選択できない不具合を修正。
     - MeshBoundsEditorで使用しているシェーダーのパスを変更することで対処。
 
+[0.1.1]: https://github.com/r-delta-c/MeshHologram/compare/0.1.0...0.1.1
+[0.1.0]: https://github.com/r-delta-c/MeshHologram/compare/0.0.2...0.1.0
+[0.0.2]: https://github.com/r-delta-c/MeshHologram/compare/0.0.1...0.0.2
 [0.0.1]: https://github.com/r-delta-c/MeshHologram/compare/0.0.0...0.0.1
 
 <!--
