@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.2] 2025/09/07
+### Fixed
+- `Orbit`のスケーリング計算が誤っていた不具合を修正。
+
 ## [0.1.1] 2025/09/04
 ### Changed
 - `Orbit Wave YZ`の表現が想定されていたものに変更。
