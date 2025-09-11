@@ -286,7 +286,7 @@
 
 
 #ifdef _ORBITSOURCE_NOISE1ST
-    #define ORBIT_NOISE_MACRO noise1st_pos
+    #define ORBIT_NOISE_MACRO(n) inp[n].noise1st_pos
     #define ORBIT_CENTER_MACRO (inp[0].noise1st_pos+inp[1].noise1st_pos+inp[2].noise1st_pos)/3.0
     #define ORBIT_OFFSET_MACRO(n) noise1st_offset[n]
 
@@ -300,7 +300,7 @@
     #define ORBIT_METHOD_NOISEMAP_MACRO(i,m) NOISE1STMAP01_METHOD_MACRO(i,m)
 
 #elif _ORBITSOURCE_NOISE2ND
-    #define ORBIT_NOISE_MACRO noise2nd_pos
+    #define ORBIT_NOISE_MACRO(n) inp[n].noise2nd_pos
     #define ORBIT_CENTER_MACRO (inp[0].noise2nd_pos+inp[1].noise2nd_pos+inp[2].noise2nd_pos)/3.0
     #define ORBIT_OFFSET_MACRO(n) noise2nd_offset[n]
 
@@ -314,7 +314,7 @@
     #define ORBIT_METHOD_NOISEMAP_MACRO(i,m) NOISE2NDMAP01_METHOD_MACRO(i,m)
 
 #elif _ORBITSOURCE_NOISE3RD
-    #define ORBIT_NOISE_MACRO noise3rd_pos
+    #define ORBIT_NOISE_MACRO(n) inp[n].noise3rd_pos
     #define ORBIT_CENTER_MACRO (inp[0].noise3rd_pos+inp[1].noise3rd_pos+inp[2].noise3rd_pos)/3.0
     #define ORBIT_OFFSET_MACRO(n) noise3rd_offset[n]
 
@@ -328,7 +328,7 @@
     #define ORBIT_METHOD_NOISEMAP_MACRO(i,m) NOISE3RDMAP01_METHOD_MACRO(i,m)
 #else
     #define ORBIT_TIME_MACRO 0.0
-    #define ORBIT_NOISE_MACRO _GeometryMessyValue
+    #define ORBIT_NOISE_MACRO _OrbitValue
 #endif
 
 #ifdef _ORBITROTATIONSOURCE_NOISE1ST
@@ -374,7 +374,7 @@
     #define ORBITROTATION_METHOD_NOISEMAP_MACRO(i,m) NOISE3RDMAP01_METHOD_MACRO(i,m)
 #else
     #define ORBITROTATION_TIME_MACRO 0.0
-    #define ORBITROTATION_NOISE_MACRO _GeometryMessyORBITValue
+    #define ORBITROTATION_NOISE_MACRO _OrbitRotationValue
 #endif
 
 #define NOISE1STMAP01_METHOD_MACRO(i,m) EaseCurveValue(i,m,_Noise1stCurveType)
