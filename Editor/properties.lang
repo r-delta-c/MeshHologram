@@ -90,7 +90,7 @@ _GeometryRotationNoiseRepeat||One-way Rotation||一方向回転
 
 _GeometryPartitionBias||Geometry Partition Bias | Vertex<=>Center*||ジオメトリの区切りの偏り | 頂点<=>中心*
 _PixelizationSpace||Vertex Pixelization Position Space||頂点モザイク化の空間
-_Pixelization||Vertex Pixelization*/X/Y/Z/Scale||頂点モザイク化*/X/Y/Z/スケール
+_Pixelization||Vertex Pixelization*/X/Y/Z/All||頂点モザイク化*/X/Y/Z/All
 
 
 _ActivateOrbit||Activate Orbit||Orbitの有効
