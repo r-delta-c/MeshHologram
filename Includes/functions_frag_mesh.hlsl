@@ -27,7 +27,8 @@
     #else
         c.a = saturate(draw)*i.alpha*c.a;
         #ifdef _ANTI_ALIASING
-            c.a = saturate(c.a+fwidth(c.a)*0.5);
+            float diff_pixel = fwidth(c.a)*0.5;
+            c.a = lerp(c.a,saturate(c.a+diff_pixel),diff_pixel);
         #endif
     #endif
 
