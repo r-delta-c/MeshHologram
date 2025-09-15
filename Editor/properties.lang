@@ -32,7 +32,7 @@ _SrcBlendAlpha||Src Blend Alpha*||Src Blend Alpha*
 _DstBlendAlpha||Dst Blend Alpha*||Dst Blend Alpha*
 
 _PreviewMode||Preview Mode||プレビューモード
-_AntiAliasing||Activate AntiAliasing||アンチエイリアスを有効にする
+_AntiAliasing||Activate Anti-Aliasing||アンチエイリアスを有効にする
 
 _StencilRef|| Ref*||Ref値*
 _StencilReadMask|| ReadMask*||ReadMask*

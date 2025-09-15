@@ -3,6 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.3] 2025/09/15
+### Added
+- `Orbit Wave`の`Spectrum`のプロパティに`Spectrum Frequency Offset(スペクトラムの周波域オフセット)`を追加。
+
+### Changed
+- `Vertex Pixelization(頂点のモザイク化)`の`Scale(スケール)`のラベル表記を`All`へ変更。
+- プロパティのデフォルト値の変更。
+- アンチエイリアスの描写を改善。
+
+### Fixed
+- `Orbit Source(Orbitの参照先)`でノイズを選択していた際に誤った値を参照している不具合を修正。
+
+### Removed
+- `Orbit Rotation Value(Orbit 回転の値)`を削除。
+
 ## [0.1.2] 2025/09/07
 ### Fixed
 - `Orbit`のスケーリング計算が誤っていた不具合を修正。
@@ -98,6 +113,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - マテリアルのインスペクターから、MeshHologramが選択できない不具合を修正。
     - MeshBoundsEditorで使用しているシェーダーのパスを変更することで対処。
 
+[0.1.3]: https://github.com/r-delta-c/MeshHologram/compare/0.1.2...0.1.3
+[0.1.2]: https://github.com/r-delta-c/MeshHologram/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/r-delta-c/MeshHologram/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/r-delta-c/MeshHologram/compare/0.0.2...0.1.0
 [0.0.2]: https://github.com/r-delta-c/MeshHologram/compare/0.0.1...0.0.2
