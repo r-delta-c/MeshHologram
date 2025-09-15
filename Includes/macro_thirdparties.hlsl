@@ -14,10 +14,10 @@
 
 #if defined(_ACTIVATE_LIGHTVOLUMES_) || defined(_ACTIVATE_DIRECTIONALLIGHT_INFLUENCE)
     #define SWITCH_WORLDNORMAL_MACRO 
-    #define DEFINE_WORLDNORMAL_MACRO UnityObjectToWorldNormal(v.normal)
+    #define REPLACE_WORLDNORMAL_MACRO UnityObjectToWorldNormal(v.normal)
 #else
     #define SWITCH_WORLDNORMAL_MACRO //
-    #define DEFINE_WORLDNORMAL_MACRO o.world_normal
+    #define REPLACE_WORLDNORMAL_MACRO o.world_normal
 #endif
 
 

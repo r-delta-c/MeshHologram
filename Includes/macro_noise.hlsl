@@ -1,34 +1,34 @@
-#if defined(_FRAGMENTSOURCE_NOISE1ST) || defined(_COLORINGSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_ORBITSOURCE_NOISE1ST) || defined(_ORBITROTATIONSOURCE_NOISE1ST)
+#ifdef _DEFINED_NOISE1ST
     #define NOISE1ST_MACRO o.noise1st_pos = NOISE1ST_POS_MACRO
     #define STRUCT_NOISE1ST_MACRO
     #define TEX2D_NOISE1ST_MACRO
 
     #ifdef _NOISE1STSPACE_OFFSET
-        #define NOISE1ST_POS_MACRO DEFINE_SPACE_OFFSET_MACRO(_Noise1stOffset0,_Noise1stScale0)
+        #define NOISE1ST_POS_MACRO REPLACE_SPACE_OFFSET_MACRO(_Noise1stOffset0,_Noise1stScale0)
     #elif _NOISE1STSPACE_ORIGIN_WORLD
-        #define NOISE1ST_POS_MACRO DEFINE_SPACE_ORIGIN_WORLD_MACRO(_Noise1stOffset0,_Noise1stScale0)
+        #define NOISE1ST_POS_MACRO REPLACE_SPACE_ORIGIN_WORLD_MACRO(_Noise1stOffset0,_Noise1stScale0)
     #else
         #ifdef _NOISE1ST_OFFSET_BEFORE_SCALE
             #ifdef _NOISE1STSPACE_MODEL
-                #define NOISE1ST_POS_MACRO DEFINE_SPACE_MODEL_1_MACRO(_Noise1stOffset0,_Noise1stScale0)
+                #define NOISE1ST_POS_MACRO REPLACE_SPACE_MODEL_1_MACRO(_Noise1stOffset0,_Noise1stScale0)
             #elif _NOISE1STSPACE_WORLD
-                #define NOISE1ST_POS_MACRO DEFINE_SPACE_WORLD_1_MACRO(_Noise1stOffset0,_Noise1stScale0)
+                #define NOISE1ST_POS_MACRO REPLACE_SPACE_WORLD_1_MACRO(_Noise1stOffset0,_Noise1stScale0)
             #elif _NOISE1STSPACE_MODEL_WORLD
-                #define NOISE1ST_POS_MACRO DEFINE_SPACE_MODEL_WORLD_1_MACRO(_Noise1stOffset0,_Noise1stScale0,_Noise1stOffset1,_Noise1stScale1)
+                #define NOISE1ST_POS_MACRO REPLACE_SPACE_MODEL_WORLD_1_MACRO(_Noise1stOffset0,_Noise1stScale0,_Noise1stOffset1,_Noise1stScale1)
             #elif _NOISE1STSPACE_VERTEXCOLOR
-                #define NOISE1ST_POS_MACRO DEFINE_SPACE_VERTEXCOLOR_1_MACRO(_Noise1stOffset0,_Noise1stScale0)
+                #define NOISE1ST_POS_MACRO REPLACE_SPACE_VERTEXCOLOR_1_MACRO(_Noise1stOffset0,_Noise1stScale0)
             #else
                 #define NOISE1ST_POS_MACRO 0.0
             #endif
         #else
             #ifdef _NOISE1STSPACE_MODEL
-                #define NOISE1ST_POS_MACRO DEFINE_SPACE_MODEL_0_MACRO(_Noise1stOffset0,_Noise1stScale0)
+                #define NOISE1ST_POS_MACRO REPLACE_SPACE_MODEL_0_MACRO(_Noise1stOffset0,_Noise1stScale0)
             #elif _NOISE1STSPACE_WORLD
-                #define NOISE1ST_POS_MACRO DEFINE_SPACE_WORLD_0_MACRO(_Noise1stOffset0,_Noise1stScale0)
+                #define NOISE1ST_POS_MACRO REPLACE_SPACE_WORLD_0_MACRO(_Noise1stOffset0,_Noise1stScale0)
             #elif _NOISE1STSPACE_MODEL_WORLD
-                #define NOISE1ST_POS_MACRO DEFINE_SPACE_MODEL_WORLD_0_MACRO(_Noise1stOffset0,_Noise1stScale0,_Noise1stOffset1,_Noise1stScale1)
+                #define NOISE1ST_POS_MACRO REPLACE_SPACE_MODEL_WORLD_0_MACRO(_Noise1stOffset0,_Noise1stScale0,_Noise1stOffset1,_Noise1stScale1)
             #elif _NOISE1STSPACE_VERTEXCOLOR
-                #define NOISE1ST_POS_MACRO DEFINE_SPACE_VERTEXCOLOR_0_MACRO(_Noise1stOffset0,_Noise1stScale0)
+                #define NOISE1ST_POS_MACRO REPLACE_SPACE_VERTEXCOLOR_0_MACRO(_Noise1stOffset0,_Noise1stScale0)
             #else
                 #define NOISE1ST_POS_MACRO 0.0
             #endif
@@ -43,37 +43,37 @@
 
 
 
-#if defined(_FRAGMENTSOURCE_NOISE2ND) || defined(_COLORINGSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_ORBITSOURCE_NOISE2ND) || defined(_ORBITROTATIONSOURCE_NOISE2ND)
+#ifdef _DEFINED_NOISE2ND
     #define NOISE2ND_MACRO o.noise2nd_pos = NOISE2ND_POS_MACRO
     #define STRUCT_NOISE2ND_MACRO
     #define TEX2D_NOISE2ND_MACRO
 
     #ifdef _NOISE2NDSPACE_OFFSET
-        #define NOISE2ND_POS_MACRO DEFINE_SPACE_OFFSET_MACRO(_Noise2ndOffset0,_Noise2ndScale0)
+        #define NOISE2ND_POS_MACRO REPLACE_SPACE_OFFSET_MACRO(_Noise2ndOffset0,_Noise2ndScale0)
     #elif _NOISE2NDSPACE_ORIGIN_WORLD
-        #define NOISE2ND_POS_MACRO DEFINE_SPACE_ORIGIN_WORLD_MACRO(_Noise2ndOffset0,_Noise2ndScale0)
+        #define NOISE2ND_POS_MACRO REPLACE_SPACE_ORIGIN_WORLD_MACRO(_Noise2ndOffset0,_Noise2ndScale0)
     #else
         #ifdef _NOISE2ND_OFFSET_BEFORE_SCALE
             #ifdef _NOISE2NDSPACE_MODEL
-                #define NOISE2ND_POS_MACRO DEFINE_SPACE_MODEL_1_MACRO(_Noise2ndOffset0,_Noise2ndScale0)
+                #define NOISE2ND_POS_MACRO REPLACE_SPACE_MODEL_1_MACRO(_Noise2ndOffset0,_Noise2ndScale0)
             #elif _NOISE2NDSPACE_WORLD
-                #define NOISE2ND_POS_MACRO DEFINE_SPACE_WORLD_1_MACRO(_Noise2ndOffset0,_Noise2ndScale0)
+                #define NOISE2ND_POS_MACRO REPLACE_SPACE_WORLD_1_MACRO(_Noise2ndOffset0,_Noise2ndScale0)
             #elif _NOISE2NDSPACE_MODEL_WORLD
-                #define NOISE2ND_POS_MACRO DEFINE_SPACE_MODEL_WORLD_1_MACRO(_Noise2ndOffset0,_Noise2ndScale0,_Noise2ndOffset1,_Noise2ndScale1)
+                #define NOISE2ND_POS_MACRO REPLACE_SPACE_MODEL_WORLD_1_MACRO(_Noise2ndOffset0,_Noise2ndScale0,_Noise2ndOffset1,_Noise2ndScale1)
             #elif _NOISE2NDSPACE_VERTEXCOLOR
-                #define NOISE2ND_POS_MACRO DEFINE_SPACE_VERTEXCOLOR_1_MACRO(_Noise2ndOffset0,_Noise2ndScale0)
+                #define NOISE2ND_POS_MACRO REPLACE_SPACE_VERTEXCOLOR_1_MACRO(_Noise2ndOffset0,_Noise2ndScale0)
             #else
                 #define NOISE2ND_POS_MACRO 0.0
             #endif
         #else
             #ifdef _NOISE2NDSPACE_MODEL
-                #define NOISE2ND_POS_MACRO DEFINE_SPACE_MODEL_0_MACRO(_Noise2ndOffset0,_Noise2ndScale0)
+                #define NOISE2ND_POS_MACRO REPLACE_SPACE_MODEL_0_MACRO(_Noise2ndOffset0,_Noise2ndScale0)
             #elif _NOISE2NDSPACE_WORLD
-                #define NOISE2ND_POS_MACRO DEFINE_SPACE_WORLD_0_MACRO(_Noise2ndOffset0,_Noise2ndScale0)
+                #define NOISE2ND_POS_MACRO REPLACE_SPACE_WORLD_0_MACRO(_Noise2ndOffset0,_Noise2ndScale0)
             #elif _NOISE2NDSPACE_MODEL_WORLD
-                #define NOISE2ND_POS_MACRO DEFINE_SPACE_MODEL_WORLD_0_MACRO(_Noise2ndOffset0,_Noise2ndScale0,_Noise2ndOffset1,_Noise2ndScale1)
+                #define NOISE2ND_POS_MACRO REPLACE_SPACE_MODEL_WORLD_0_MACRO(_Noise2ndOffset0,_Noise2ndScale0,_Noise2ndOffset1,_Noise2ndScale1)
             #elif _NOISE2NDSPACE_VERTEXCOLOR
-                #define NOISE2ND_POS_MACRO DEFINE_SPACE_VERTEXCOLOR_0_MACRO(_Noise2ndOffset0,_Noise2ndScale0)
+                #define NOISE2ND_POS_MACRO REPLACE_SPACE_VERTEXCOLOR_0_MACRO(_Noise2ndOffset0,_Noise2ndScale0)
             #else
                 #define NOISE2ND_POS_MACRO 0.0
             #endif
@@ -88,37 +88,37 @@
 
 
 
-#if defined(_FRAGMENTSOURCE_NOISE3RD) || defined(_COLORINGSOURCE_NOISE3RD) || defined(_GEOMETRYSOURCE_NOISE3RD) || defined(_ORBITSOURCE_NOISE3RD) || defined(_ORBITROTATIONSOURCE_NOISE3RD)
+#ifdef _DEFINED_NOISE3RD
     #define NOISE3RD_MACRO o.noise3rd_pos = NOISE3RD_POS_MACRO
     #define STRUCT_NOISE3RD_MACRO
     #define TEX2D_NOISE3RD_MACRO
 
     #ifdef _NOISE3RDSPACE_OFFSET
-        #define NOISE3RD_POS_MACRO DEFINE_SPACE_OFFSET_MACRO(_Noise3rdOffset0,_Noise3rdScale0)
+        #define NOISE3RD_POS_MACRO REPLACE_SPACE_OFFSET_MACRO(_Noise3rdOffset0,_Noise3rdScale0)
     #elif _NOISE3RDSPACE_ORIGIN_WORLD
-        #define NOISE3RD_POS_MACRO DEFINE_SPACE_ORIGIN_WORLD_MACRO(_Noise3rdOffset0,_Noise3rdScale0)
+        #define NOISE3RD_POS_MACRO REPLACE_SPACE_ORIGIN_WORLD_MACRO(_Noise3rdOffset0,_Noise3rdScale0)
     #else
         #ifdef _NOISE3RD_OFFSET_BEFORE_SCALE
             #ifdef _NOISE3RDSPACE_MODEL
-                #define NOISE3RD_POS_MACRO DEFINE_SPACE_MODEL_1_MACRO(_Noise3rdOffset0,_Noise3rdScale0)
+                #define NOISE3RD_POS_MACRO REPLACE_SPACE_MODEL_1_MACRO(_Noise3rdOffset0,_Noise3rdScale0)
             #elif _NOISE3RDSPACE_WORLD
-                #define NOISE3RD_POS_MACRO DEFINE_SPACE_WORLD_1_MACRO(_Noise3rdOffset0,_Noise3rdScale0)
+                #define NOISE3RD_POS_MACRO REPLACE_SPACE_WORLD_1_MACRO(_Noise3rdOffset0,_Noise3rdScale0)
             #elif _NOISE3RDSPACE_MODEL_WORLD
-                #define NOISE3RD_POS_MACRO DEFINE_SPACE_MODEL_WORLD_1_MACRO(_Noise3rdOffset0,_Noise3rdScale0,_Noise3rdOffset1,_Noise3rdScale1)
+                #define NOISE3RD_POS_MACRO REPLACE_SPACE_MODEL_WORLD_1_MACRO(_Noise3rdOffset0,_Noise3rdScale0,_Noise3rdOffset1,_Noise3rdScale1)
             #elif _NOISE3RDSPACE_VERTEXCOLOR
-                #define NOISE3RD_POS_MACRO DEFINE_SPACE_VERTEXCOLOR_1_MACRO(_Noise3rdOffset0,_Noise3rdScale0)
+                #define NOISE3RD_POS_MACRO REPLACE_SPACE_VERTEXCOLOR_1_MACRO(_Noise3rdOffset0,_Noise3rdScale0)
             #else
                 #define NOISE3RD_POS_MACRO 0.0
             #endif
         #else
             #ifdef _NOISE3RDSPACE_MODEL
-                #define NOISE3RD_POS_MACRO DEFINE_SPACE_MODEL_0_MACRO(_Noise3rdOffset0,_Noise3rdScale0)
+                #define NOISE3RD_POS_MACRO REPLACE_SPACE_MODEL_0_MACRO(_Noise3rdOffset0,_Noise3rdScale0)
             #elif _NOISE3RDSPACE_WORLD
-                #define NOISE3RD_POS_MACRO DEFINE_SPACE_WORLD_0_MACRO(_Noise3rdOffset0,_Noise3rdScale0)
+                #define NOISE3RD_POS_MACRO REPLACE_SPACE_WORLD_0_MACRO(_Noise3rdOffset0,_Noise3rdScale0)
             #elif _NOISE3RDSPACE_MODEL_WORLD
-                #define NOISE3RD_POS_MACRO DEFINE_SPACE_MODEL_WORLD_0_MACRO(_Noise3rdOffset0,_Noise3rdScale0,_Noise3rdOffset1,_Noise3rdScale1)
+                #define NOISE3RD_POS_MACRO REPLACE_SPACE_MODEL_WORLD_0_MACRO(_Noise3rdOffset0,_Noise3rdScale0,_Noise3rdOffset1,_Noise3rdScale1)
             #elif _NOISE3RDSPACE_VERTEXCOLOR
-                #define NOISE3RD_POS_MACRO DEFINE_SPACE_VERTEXCOLOR_0_MACRO(_Noise3rdOffset0,_Noise3rdScale0)
+                #define NOISE3RD_POS_MACRO REPLACE_SPACE_VERTEXCOLOR_0_MACRO(_Noise3rdOffset0,_Noise3rdScale0)
             #else
                 #define NOISE3RD_POS_MACRO 0.0
             #endif
@@ -133,18 +133,18 @@
 
 
 
-#define DEFINE_SPACE_MODEL_0_MACRO(t,s) ((v.pos.xyz+t)*s.xyz*s.w)
-#define DEFINE_SPACE_WORLD_0_MACRO(t,s) ((o.pos.xyz+t)*s.xyz*s.w)
-#define DEFINE_SPACE_MODEL_WORLD_0_MACRO(t0,s0,t1,s1) ((v.pos.xyz+t0.xyz)*s0.xyz*s0.w+(o.pos.xyz+t1.xyz)*s1.xyz*s1.w)
-#define DEFINE_SPACE_VERTEXCOLOR_0_MACRO(t,s) ((v.color.xyz+t.xyz)*s.xyz*s.w)
+#define REPLACE_SPACE_MODEL_0_MACRO(t,s) ((v.pos.xyz+t)*s.xyz*s.w)
+#define REPLACE_SPACE_WORLD_0_MACRO(t,s) ((o.pos.xyz+t)*s.xyz*s.w)
+#define REPLACE_SPACE_MODEL_WORLD_0_MACRO(t0,s0,t1,s1) ((v.pos.xyz+t0.xyz)*s0.xyz*s0.w+(o.pos.xyz+t1.xyz)*s1.xyz*s1.w)
+#define REPLACE_SPACE_VERTEXCOLOR_0_MACRO(t,s) ((v.color.xyz+t.xyz)*s.xyz*s.w)
 
-#define DEFINE_SPACE_MODEL_1_MACRO(t,s) (v.pos.xyz*s.xyz*s.w+t)
-#define DEFINE_SPACE_WORLD_1_MACRO(t,s) (o.pos.xyz*s.xyz*s.w+t)
-#define DEFINE_SPACE_MODEL_WORLD_1_MACRO(t0,s0,t1,s1) ((v.pos.xyz*s0.xyz*s0.w+t0.xyz)+(o.pos.xyz*s1.xyz*s1.w+t1.xyz))
-#define DEFINE_SPACE_VERTEXCOLOR_1_MACRO(t,s) (v.color.xyz*s.xyz*s.w+t.xyz)
+#define REPLACE_SPACE_MODEL_1_MACRO(t,s) (v.pos.xyz*s.xyz*s.w+t)
+#define REPLACE_SPACE_WORLD_1_MACRO(t,s) (o.pos.xyz*s.xyz*s.w+t)
+#define REPLACE_SPACE_MODEL_WORLD_1_MACRO(t0,s0,t1,s1) ((v.pos.xyz*s0.xyz*s0.w+t0.xyz)+(o.pos.xyz*s1.xyz*s1.w+t1.xyz))
+#define REPLACE_SPACE_VERTEXCOLOR_1_MACRO(t,s) (v.color.xyz*s.xyz*s.w+t.xyz)
 
-#define DEFINE_SPACE_OFFSET_MACRO(t,s) (t*s.xyz*s.w)
-#define DEFINE_SPACE_ORIGIN_WORLD_MACRO(t,s) (mul(UNITY_MATRIX_M,float4(t.xyz,1.0)).xyz*s.xyz*s.w)
+#define REPLACE_SPACE_OFFSET_MACRO(t,s) (t*s.xyz*s.w)
+#define REPLACE_SPACE_ORIGIN_WORLD_MACRO(t,s) (mul(UNITY_MATRIX_M,float4(t.xyz,1.0)).xyz*s.xyz*s.w)
 
 
 
@@ -286,8 +286,7 @@
 
 
 #ifdef _ORBITSOURCE_NOISE1ST
-    #define ORBIT_NOISE_MACRO(n) inp[n].noise1st_pos
-    #define ORBIT_CENTER_MACRO (inp[0].noise1st_pos+inp[1].noise1st_pos+inp[2].noise1st_pos)/3.0
+    #define ORBIT_NOISE_MACRO noise1st_pos
     #define ORBIT_OFFSET_MACRO(n) noise1st_offset[n]
 
     #define ORBIT_TIME_MACRO (_Time.x*_Noise1stTimeMulti+_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO)
@@ -300,8 +299,7 @@
     #define ORBIT_METHOD_NOISEMAP_MACRO(i,m) NOISE1STMAP01_METHOD_MACRO(i,m)
 
 #elif _ORBITSOURCE_NOISE2ND
-    #define ORBIT_NOISE_MACRO(n) inp[n].noise2nd_pos
-    #define ORBIT_CENTER_MACRO (inp[0].noise2nd_pos+inp[1].noise2nd_pos+inp[2].noise2nd_pos)/3.0
+    #define ORBIT_NOISE_MACRO noise2nd_pos
     #define ORBIT_OFFSET_MACRO(n) noise2nd_offset[n]
 
     #define ORBIT_TIME_MACRO (_Time.x*_Noise2ndTimeMulti+_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO)
@@ -314,8 +312,7 @@
     #define ORBIT_METHOD_NOISEMAP_MACRO(i,m) NOISE2NDMAP01_METHOD_MACRO(i,m)
 
 #elif _ORBITSOURCE_NOISE3RD
-    #define ORBIT_NOISE_MACRO(n) inp[n].noise3rd_pos
-    #define ORBIT_CENTER_MACRO (inp[0].noise3rd_pos+inp[1].noise3rd_pos+inp[2].noise3rd_pos)/3.0
+    #define ORBIT_NOISE_MACRO noise3rd_pos
     #define ORBIT_OFFSET_MACRO(n) noise3rd_offset[n]
 
     #define ORBIT_TIME_MACRO (_Time.x*_Noise3rdTimeMulti+_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO)

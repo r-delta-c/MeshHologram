@@ -368,9 +368,9 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #include "AutoLight.cginc"
 
+            #include "Packages/com.deltafield.meshhologram/Includes/macro_general.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/macro_noise.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/macro_thirdparties.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/macro_general.hlsl"
             #include "Packages/com.deltafield.shader_commons/Includes/macro_stereo_merge.hlsl"
             
             #include "Packages/com.deltafield.shader_commons/Includes/functions_math.hlsl"
@@ -485,9 +485,9 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #pragma shader_feature_local _ _RENDERINGMODE_CUTOUT
 
+            #include "Packages/com.deltafield.meshhologram/Includes/macro_general.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/macro_noise.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/macro_thirdparties.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/macro_general.hlsl"
             #include "Packages/com.deltafield.shader_commons/Includes/macro_stereo_merge.hlsl"
 
             #include "Packages/com.deltafield.shader_commons/Includes/functions_math.hlsl"

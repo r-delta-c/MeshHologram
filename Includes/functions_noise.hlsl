@@ -1,4 +1,4 @@
-#if defined(_FRAGMENTSOURCE_NOISE1ST) || defined(_FRAGMENTSOURCE_NOISE2ND) || defined(_FRAGMENTSOURCE_NOISE3RD)
+#ifdef _DEFINED_FRAGMENT_NOISE
     float FragmentNoiseRaw(float3 inputs, float offset, float time){
         float n = GenNoise(
             inputs,
@@ -14,29 +14,10 @@
         );
     }
 
-    // float FragmentRepeatNoiseRaw(float3 inputs, float offset, float time){
-    //     float n = GenNoise(
-    //         inputs,
-    //         offset,
-    //         time,
-    //         FRAGMENT_FUNC_SEED_MACRO,
-    //         FRAGMENT_FUNC_PHASESCALE_MACRO
-    //     );
-    //     float r = ThresholdFormula(
-    //         triloop(n),
-    //         FRAGMENT_FUNC_THRESHOLD_MUL_MACRO,
-    //         FRAGMENT_FUNC_THRESHOLD_ADD_MACRO
-    //     );
-    //     return Inverse12(n,r);
-    // }
-
     float FragmentNoisePingPong(float3 inputs, float offset, float time){
         float r = saturate(FRAGMENT_METHOD_NOISEMAP_MACRO(FragmentNoiseRaw(inputs,offset,time),FRAGMENT_FUNC_VALUECARVE_MACRO));
         return FUNC_FRAGMENT_AUDIOLINK_NOISE_SPECTRUM_MACRO(r);
     }
-    // float FragmentNoiseRepeat(float3 inputs, float offset, float time){
-    //     return saturate(FRAGMENT_METHOD_NOISEMAP_MACRO(FragmentRepeatNoiseRaw(inputs,offset,time),FRAGMENT_FUNC_VALUECARVE_MACRO));
-    // }
 
     float FragmentSidePosNoisePingPong(float3 v0, float3 v1, float3 v, float3 c, float offset, float time){
         float3 side_center = (v0+v1+VertexCenterBias(v0,v1,v,c,saturate(_TriangleComp/26.0)*0.5+0.5))/3.0;
@@ -45,7 +26,7 @@
     }
 #endif
 
-#if defined(_COLORINGSOURCE_NOISE1ST) || defined(_COLORINGSOURCE_NOISE2ND) || defined(_COLORINGSOURCE_NOISE3RD)
+#ifdef _DEFINED_COLORING_NOISE
     float ColorNoiseRaw(float3 inputs, float offset, float time){
         float n = GenNoise(
             inputs,
@@ -74,7 +55,7 @@
 
 #endif
 
-#if defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE3RD)
+#ifdef _DEFINED_GEOMETRY_NOISE
     float GeometryNoiseRaw(float3 inputs, float offset, float time){
         float n = GenNoise(
             inputs,
@@ -117,7 +98,7 @@
 
 #endif
 
-#if defined(_ORBITSOURCE_NOISE1ST) || defined(_ORBITSOURCE_NOISE2ND) || defined(_ORBITSOURCE_NOISE3RD)
+#ifdef _DEFINED_ORBIT_NOISE
     float OrbitNoiseRaw(float3 inputs, float offset, float time){
         float n = GenNoise(
             inputs,
@@ -138,7 +119,7 @@
     }
 #endif
 
-#if defined(_ORBITROTATIONSOURCE_NOISE1ST) || defined(_ORBITROTATIONSOURCE_NOISE2ND) || defined(_ORBITROTATIONSOURCE_NOISE3RD)
+#ifdef _DEFINED_ORBITROTATION_NOISE
     float OrbitRotationNoiseRaw(float3 inputs, float offset, float time){
         float n = GenNoise(
             inputs,

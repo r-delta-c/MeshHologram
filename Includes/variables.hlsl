@@ -99,7 +99,7 @@ bool _GeometryAudioLinkSpectrumMirror;
 bool _GeometryAudioLinkSpectrumType;
 float2 _GeometryAudioLinkSpectrumRange;
 
-#if defined(_FRAGMENTSOURCE_NOISE1ST) || defined(_COLORINGSOURCE_NOISE1ST) || defined(_GEOMETRYSOURCE_NOISE1ST) || defined(_ORBITSOURCE_NOISE1ST) || defined(_ORBITROTATIONSOURCE_NOISE1ST)
+#ifdef _DEFINED_NOISE1ST
     float3 _Noise1stOffset0;
     float3 _Noise1stOffset1;
     float4 _Noise1stScale0;
@@ -117,7 +117,7 @@ float2 _GeometryAudioLinkSpectrumRange;
     float _Noise1stPhaseScale;
 #endif
 
-#if defined(_FRAGMENTSOURCE_NOISE2ND) || defined(_COLORINGSOURCE_NOISE2ND) || defined(_GEOMETRYSOURCE_NOISE2ND) || defined(_ORBITSOURCE_NOISE2ND) || defined(_ORBITROTATIONSOURCE_NOISE2ND)
+#ifdef _DEFINED_NOISE2ND
     float3 _Noise2ndOffset0;
     float3 _Noise2ndOffset1;
     float4 _Noise2ndScale0;
@@ -135,7 +135,7 @@ float2 _GeometryAudioLinkSpectrumRange;
     float _Noise2ndPhaseScale;
 #endif
 
-#if defined(_FRAGMENTSOURCE_NOISE3RD) || defined(_COLORINGSOURCE_NOISE3RD) || defined(_GEOMETRYSOURCE_NOISE3RD) || defined(_ORBITSOURCE_NOISE3RD) || defined(_ORBITROTATIONSOURCE_NOISE3RD)
+#ifdef _DEFINED_NOISE3RD
     float3 _Noise3rdOffset0;
     float3 _Noise3rdOffset1;
     float4 _Noise3rdScale0;
