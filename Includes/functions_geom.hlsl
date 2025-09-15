@@ -280,7 +280,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
 
             #else
                 orbit_anim.xyz += _OrbitRotationVariance.xyz;
-                float3 audiolink_spectrum = FUNC_ORBIT_WAVE_AUDIOLINK_SPECTRUM_MACRO(_OrbitRotationValue);
+                float3 audiolink_spectrum = FUNC_ORBIT_WAVE_AUDIOLINK_SPECTRUM_MACRO(0.0);
             #endif
 
             float3 orbit_wave = float3(

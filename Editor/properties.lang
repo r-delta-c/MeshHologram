@@ -102,7 +102,6 @@ _OrbitOffset||Orbit Offset*/X/Y/Z||Orbitの座標オフセット*/X/Y/Z
 _OrbitScale||Orbit Scale*/Y/Z/Scale||Orbit スケール*/Y/Z/スケール
 
 _OrbitRotationSource||Orbit Rotation Source||Orbit 回転の参照先
-_OrbitRotationValue||Orbit Rotation Value*||Orbit 回転の値*
 _OrbitRotationSeed||Orbit Rotation Seed*||Orbit 回転のシード値*
 _OrbitRotation||Orbit Rotation*/X/Y/Z||Orbitの回転*/X/Y/Z
 _OrbitRotationForward||Orbit Rotation Forward*||OrbitのForward回転*
@@ -145,6 +144,7 @@ _OrbitWaveAudioLinkStrength||Strength*/X/Y/Z||強さ*/X/Y/Z
 _OrbitWaveAudioLinkSpectrumMirror||Mirror*||ミラー*
 _OrbitWaveAudioLinkSpectrumType||Use AutoCorrelator*||AutoCorrelatorを使う*
 _OrbitWaveAudioLinkSpectrumRange||Spectrum Range*/A/B||スペクトラムの範囲*/A/B
+_OrbitWaveAudioLinkSpectrumFrequencyOffset||Spectrum Frequency Offset*||スペクトラムの周波域オフセット*
 
 _FragmentAudioLinkNoiseSpectrum||Activate Fragment Spectrum (Only Noise)||フラグメントのスペクトラムを有効にする (ノイズのみ)
 _FragmentAudioLinkStrength||Strength*||強さ*

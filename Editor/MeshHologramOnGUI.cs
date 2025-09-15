@@ -445,7 +445,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_ROTATION_SOURCE))
                     {
                         case 0:
-                            DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_VALUE);
                             break;
                         case 1:
                             DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_SEED);
@@ -479,6 +478,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_MIRROR);
                         DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_TYPE);
                         DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_RANGE);
+                        DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_FREQUENCY_OFFSET);
                     }
                     EditorGUILayout.Space(16);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_REF_AUDIOLINK);

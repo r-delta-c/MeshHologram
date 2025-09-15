@@ -145,7 +145,6 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         [KeywordEnum(Value,Primitive,Noise1st,Noise2nd,Noise3rd)]
         _OrbitRotationSource("Orbit Rotation Source",Int)=1
-        _OrbitRotationValue("Orbit Rotation Value",Range(0.0,1.0))=0.0
         _OrbitRotationSeed("Orbit Rotation Seed",Float)=1.0
         [DFVector(3)]_OrbitOffset("Orbit Offset",Vector)=(0.0,0.0,0.0,0.0)
         [DFVector(2,1)]_OrbitScale("Orbit Scale",Vector)=(1.0,1.0,1.0)
@@ -170,6 +169,7 @@ Shader "DeltaField/shaders/MeshHologram"{
         [MaterialToggle]_OrbitWaveAudioLinkSpectrumMirror("AudioLink Wave Mirror",Int)=0.0
         [MaterialToggle]_OrbitWaveAudioLinkSpectrumType("AudioLink Wave Type",Int)=0.0
         [DFVector(2)]_OrbitWaveAudioLinkSpectrumRange("AudioLink Wave Range",Vector)=(-1.0,1.0,0.0,0.0)
+        _OrbitWaveAudioLinkSpectrumFrequencyOffset("Spectrum Frequency Offset",Range(0.0,1.0))=0.0
 
 
         _AudioLinkMaskControlTex("AudioLink Mask Control Tex",2D)="white"{}

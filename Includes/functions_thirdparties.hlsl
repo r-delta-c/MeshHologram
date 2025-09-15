@@ -1,7 +1,7 @@
 #ifdef _USE_AUDIOLINK
 
 float MeshHAudioLinkSpectrum(float n, float type, float mirror){
-    n = lerp(n,abs(n*2.0-1.0),mirror);
+    n = mod(lerp(n,abs(n*2.0-1.0),mirror)+_OrbitWaveAudioLinkSpectrumFrequencyOffset,1.0);
     return lerp(
         AudioLinkLerpMultiline(ALPASS_DFT+float2(n*AUDIOLINK_ETOTALBINS,0.0)).b,
         AudioLinkLerp(ALPASS_AUTOCORRELATOR+float2(n*AUDIOLINK_WIDTH,0.0)).r*0.25,

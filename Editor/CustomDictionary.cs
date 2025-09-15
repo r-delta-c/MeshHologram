@@ -271,9 +271,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._ORBIT_PRIMITIVE_THRESHOLD,new ShaderPropertyState(
                     "_OrbitPrimitiveThreshold", "Orbit Primitive Threshold")
                 },
-                {SHADER_PROPERTY._ORBIT_ROTATION_VALUE,new ShaderPropertyState(
-                    "_OrbitRotationValue", "Orbit Rotation Value")
-                },
                 {SHADER_PROPERTY._ORBIT_ROTATION_SEED,new ShaderPropertyState(
                     "_OrbitRotationSeed", "Orbit Rotation Seed")
                 },
@@ -329,7 +326,9 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_RANGE,new ShaderPropertyState(
                     "_OrbitWaveAudioLinkSpectrumRange", "AudioLink Spectrum Range")
                 },
-
+                {SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_FREQUENCY_OFFSET, new ShaderPropertyState(
+                    "_OrbitWaveAudioLinkSpectrumFrequencyOffset", "Spectrum Frequency Offset")
+                },
                 {SHADER_PROPERTY._FRAGMENT_SOURCE,new ShaderPropertyState(
                     "_FragmentSource", "Fragment Source")
                 },

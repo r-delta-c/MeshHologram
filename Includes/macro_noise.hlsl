@@ -371,7 +371,7 @@
     #define ORBITROTATION_METHOD_NOISEMAP_MACRO(i,m) NOISE3RDMAP01_METHOD_MACRO(i,m)
 #else
     #define ORBITROTATION_TIME_MACRO 0.0
-    #define ORBITROTATION_NOISE_MACRO _OrbitRotationValue
+    #define ORBITROTATION_NOISE_MACRO 0.0
 #endif
 
 #define NOISE1STMAP01_METHOD_MACRO(i,m) EaseCurveValue(i,m,_Noise1stCurveType)

@@ -114,7 +114,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         _ORBIT_OFFSET,
         _ORBIT_SCALE,
 
-        _ORBIT_ROTATION_VALUE,
         _ORBIT_ROTATION_SEED,
         _ORBIT_ROTATION,
         _ORBIT_ROTATION_TIME_MULTIPLIER,
@@ -134,6 +133,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         _ORBIT_WAVE_AUDIOLINK_SPECTRUM_MIRROR,
         _ORBIT_WAVE_AUDIOLINK_SPECTRUM_TYPE,
         _ORBIT_WAVE_AUDIOLINK_SPECTRUM_RANGE,
+        _ORBIT_WAVE_AUDIOLINK_SPECTRUM_FREQUENCY_OFFSET,
 
 
         _FRAGMENT_SOURCE,
