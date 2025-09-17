@@ -116,11 +116,11 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         [DFToggle(_GEOMETRY_SCALE,1)]
         _GeometryScale("Activate Scale",Int)=0
-        [DFVector(2)]_GeometryScaleRange("Scale Range",Vector)=(0.5,0.0,0.0,0.0)
+        [DFVector(1,1)]_GeometryScaleRange("Scale Range",Vector)=(0.5,0.0,0.0,0.0)
 
         [DFToggle(_GEOMETRY_EXTRUDE,1)]
         _GeometryExtrude("Activate Extrude",Int)=1
-        [DFVector(2)]_GeometryExtrudeRange("Extrude Range",Vector)=(-0.15,0.0,0.0,0.0)
+        [DFVector(1,1)]_GeometryExtrudeRange("Extrude Range",Vector)=(-0.15,0.0,0.0,0.0)
 
         [DFToggle(_GEOMETRY_ROTATION,1)]
         _GeometryRotation("Activate Rotation",Int)=0
@@ -133,7 +133,7 @@ Shader "DeltaField/shaders/MeshHologram"{
         _GeometryPartitionBias("Geometry Partition Bias| Vertex <=> Center",Range(0.0,1.0))=0.5
         [KeywordEnum(Disable,Model,World,PostGeometry)]
         _PixelizationSpace("Vertex Pixelization Position Space",Int)=0
-        [DFVector(3,1)]_Pixelization("Vertex Pixelization",Vector)=(1.0,1.0,1.0,0.02)
+        [DFVector(1,1,1,2)]_Pixelization("Vertex Pixelization",Vector)=(1.0,1.0,1.0,0.02)
 
         [DFToggle(_ACTIVATE_ORBIT,1)]
         _ActivateOrbit("Activate Orbit",Int)=0
@@ -146,29 +146,29 @@ Shader "DeltaField/shaders/MeshHologram"{
         [KeywordEnum(Value,Primitive,Noise1st,Noise2nd,Noise3rd)]
         _OrbitRotationSource("Orbit Rotation Source",Int)=1
         _OrbitRotationSeed("Orbit Rotation Seed",Float)=1.0
-        [DFVector(3)]_OrbitOffset("Orbit Offset",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(2,1)]_OrbitScale("Orbit Scale",Vector)=(1.0,1.0,1.0)
-        [DFVector(1,2)]_OrbitRotation("Orbit Rotation",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1)]_OrbitOffset("Orbit Offset",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(0,1,1,2)]_OrbitScale("Orbit Scale",Vector)=(1.0,1.0,1.0,1.0)
+        [DFVector(1,2,2)]_OrbitRotation("Orbit Rotation",Vector)=(0.0,0.0,0.0,0.0)
 
-        [DFVector(3,1)]_OrbitRotationTimeMultiplier("Orbit Rotation Time Multiplier",Vector)=(4.0,0.0,0.0,1.0)
+        [DFVector(1,1,1,2)]_OrbitRotationTimeMultiplier("Orbit Rotation Time Multiplier",Vector)=(4.0,0.0,0.0,1.0)
 
-        [DFVector(3)]_OrbitRotationVariance("Orbit Rotation Variance",Vector)=(1.0,0.0,0.0,0.0)
+        [DFVector(1,1,1)]_OrbitRotationVariance("Orbit Rotation Variance",Vector)=(1.0,0.0,0.0,0.0)
 
-        [DFVector(2)]_OrbitWaveStrength("Orbit Wave Strength",Vector)=(0.0,0.1,0.0,0.0)
-        [DFVector(2)]_OrbitWaveFrequency("Orbit Wave Frequency",Vector)=(5.0,5.0,0.0,0.0)
-        [DFVector(2)]_OrbitWavePhase("Orbit Wave Phase",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(2)]_OrbitWaveTimeMultiplier("Orbit Wave Time Multiplier",Vector)=(1.0,5.0,0.0,0.0)
+        [DFVector(1,1)]_OrbitWaveStrength("Orbit Wave Strength",Vector)=(0.0,0.1,0.0,0.0)
+        [DFVector(1,1)]_OrbitWaveFrequency("Orbit Wave Frequency",Vector)=(5.0,5.0,0.0,0.0)
+        [DFVector(1,1)]_OrbitWavePhase("Orbit Wave Phase",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1)]_OrbitWaveTimeMultiplier("Orbit Wave Time Multiplier",Vector)=(1.0,5.0,0.0,0.0)
 
         [KeywordEnum(Disable,VU,ChronoTensity)]
         _OrbitRotationRefAudioLink("Orbit Rotation Reference AudioLink",Int)=0
-        [DFVector(3,1)]_OrbitRotationAudioLinkStrength("Orbit Rotation AudioLink Strength",Vector)=(1.0,0.0,0.0,1.0)
+        [DFVector(1,1,1,2)]_OrbitRotationAudioLinkStrength("Orbit Rotation AudioLink Strength",Vector)=(1.0,0.0,0.0,1.0)
 
         [KeywordEnum(Disable,VU,Spectrum)]
         _OrbitWaveRefAudioLink("Orbit Wave Reference AudioLink",Int)=0
-        [DFVector(3)]_OrbitWaveAudioLinkStrength("Orbit Wave AudioLink Strength",Vector)=(1.0,1.0,1.0,1.0)
+        [DFVector(1,1,1)]_OrbitWaveAudioLinkStrength("Orbit Wave AudioLink Strength",Vector)=(1.0,1.0,1.0,1.0)
         [MaterialToggle]_OrbitWaveAudioLinkSpectrumMirror("AudioLink Wave Mirror",Int)=0.0
         [MaterialToggle]_OrbitWaveAudioLinkSpectrumType("AudioLink Wave Type",Int)=0.0
-        [DFVector(2)]_OrbitWaveAudioLinkSpectrumRange("AudioLink Wave Range",Vector)=(-1.0,1.0,0.0,0.0)
+        [DFVector(1,1)]_OrbitWaveAudioLinkSpectrumRange("AudioLink Wave Range",Vector)=(-1.0,1.0,0.0,0.0)
         _OrbitWaveAudioLinkSpectrumFrequencyOffset("Spectrum Frequency Offset",Range(0.0,1.0))=0.0
 
 
@@ -196,27 +196,27 @@ Shader "DeltaField/shaders/MeshHologram"{
         _FragmentAudioLinkStrength("Strength",Float)=1.0
         [MaterialToggle]_FragmentAudioLinkSpectrumMirror("Noise Wave Mirror",Int)=0.0
         [MaterialToggle]_FragmentAudioLinkSpectrumType("Noise Wave Type",Int)=0.0
-        [DFVector(2)]_FragmentAudioLinkSpectrumRange("Noise Wave Range",Vector)=(-1.0,1.0,0.0,0.0)
+        [DFVector(1,1)]_FragmentAudioLinkSpectrumRange("Noise Wave Range",Vector)=(-1.0,1.0,0.0,0.0)
 
         [DFToggle(_COLORING_AUDIOLINK_NOISE_SPECTRUM,1)]
         _ColoringAudioLinkNoiseSpectrum("Coloring AudioLink Noise Spectrum",Int)=0
         _ColoringAudioLinkStrength("Strength",Float)=1.0
         [MaterialToggle]_ColoringAudioLinkSpectrumMirror("Noise Wave Mirror",Int)=0.0
         [MaterialToggle]_ColoringAudioLinkSpectrumType("Noise Wave Type",Int)=0.0
-        [DFVector(2)]_ColoringAudioLinkSpectrumRange("Noise Wave Range",Vector)=(-1.0,1.0,0.0,0.0)
+        [DFVector(1,1)]_ColoringAudioLinkSpectrumRange("Noise Wave Range",Vector)=(-1.0,1.0,0.0,0.0)
 
         [DFToggle(_GEOMETRY_AUDIOLINK_NOISE_SPECTRUM,1)]
         _GeometryAudioLinkNoiseSpectrum("Geometry AudioLink Noise Spectrum",Int)=0
         _GeometryAudioLinkStrength("Strength",Float)=1.0
         [MaterialToggle]_GeometryAudioLinkSpectrumMirror("Noise Wave Mirror",Int)=0.0
         [MaterialToggle]_GeometryAudioLinkSpectrumType("Noise Wave Type",Int)=0.0
-        [DFVector(2)]_GeometryAudioLinkSpectrumRange("Noise Wave Range",Vector)=(-1.0,1.0,0.0,0.0)
+        [DFVector(1,1)]_GeometryAudioLinkSpectrumRange("Noise Wave Range",Vector)=(-1.0,1.0,0.0,0.0)
 
 
-        [DFVector(3)]_Noise1stOffset0("Noise 1st Offset",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(3,1)]_Noise1stScale0("Noise 1st Scale",Vector)=(1.0,1.0,1.0,3.0)
-        [DFVector(3)]_Noise1stOffset1("Noise 1st Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(3,1)]_Noise1stScale1("Noise 1st Scale Sub",Vector)=(1.0,1.0,1.0,1.0)
+        [DFVector(1,1,1)]_Noise1stOffset0("Noise 1st Offset",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_Noise1stScale0("Noise 1st Scale",Vector)=(1.0,1.0,1.0,3.0)
+        [DFVector(1,1,1)]_Noise1stOffset1("Noise 1st Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_Noise1stScale1("Noise 1st Scale Sub",Vector)=(1.0,1.0,1.0,1.0)
         [Toggle(_NOISE1ST_OFFSET_BEFORE_SCALE)]
         _Noise1stOffsetBeforeScale("Noise 1st Offset before Scale",Int)=0
         [KeywordEnum(Offset,Model,World,Origin_World,Model_World,VertexColor)]
@@ -235,10 +235,10 @@ Shader "DeltaField/shaders/MeshHologram"{
         _Noise1stPhaseRefAudioLink("Noise 1st Phase Reference AudioLink",Int)=0
 
 
-        [DFVector(3)]_Noise2ndOffset0("Noise 2nd Offset",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(3,1)]_Noise2ndScale0("Noise 2nd Scale",Vector)=(1.0,1.0,1.0,5.0)
-        [DFVector(3)]_Noise2ndOffset1("Noise 2nd Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(3,1)]_Noise2ndScale1("Noise 2nd Scale",Vector)=(1.0,1.0,1.0,1.0)
+        [DFVector(1,1,1)]_Noise2ndOffset0("Noise 2nd Offset",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_Noise2ndScale0("Noise 2nd Scale",Vector)=(1.0,1.0,1.0,5.0)
+        [DFVector(1,1,1)]_Noise2ndOffset1("Noise 2nd Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_Noise2ndScale1("Noise 2nd Scale",Vector)=(1.0,1.0,1.0,1.0)
         [Toggle(_NOISE2ND_OFFSET_BEFORE_SCALE)]
         _Noise2ndOffsetBeforeScale("Noise 2nd Offset before Scale",Int)=0
         [KeywordEnum(Offset,Model,World,Origin_World,Model_World,VertexColor)]
@@ -258,10 +258,10 @@ Shader "DeltaField/shaders/MeshHologram"{
         _Noise2ndPhaseRefAudioLink("Noise 2nd Phase Reference AudioLink",Int)=0
 
 
-        [DFVector(3)]_Noise3rdOffset0("Noise 3rd Offset",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(3,1)]_Noise3rdScale0("Noise 3rd Scale",Vector)=(1.0,1.0,1.0,5.0)
-        [DFVector(3)]_Noise3rdOffset1("Noise 3rd Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(3,1)]_Noise3rdScale1("Noise 3rd Scale",Vector)=(1.0,1.0,1.0,1.0)
+        [DFVector(1,1,1)]_Noise3rdOffset0("Noise 3rd Offset",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_Noise3rdScale0("Noise 3rd Scale",Vector)=(1.0,1.0,1.0,5.0)
+        [DFVector(1,1,1)]_Noise3rdOffset1("Noise 3rd Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_Noise3rdScale1("Noise 3rd Scale",Vector)=(1.0,1.0,1.0,1.0)
         [Toggle(_NOISE3RD_OFFSET_BEFORE_SCALE)]
         _Noise3rdOffsetBeforeScale("Noise 3rd Offset before Scale",Int)=0
         [KeywordEnum(Offset,Model,World,Origin_World,Model_World,VertexColor)]

@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -14,75 +15,80 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         private string[] labels;
         private GUIContent[] label_contents;
         private uint[] vertical_field0, vertical_field1, vertical_field2, vertical_field3;
+        private Rect field_rect;
+        private int drawing_count;
         public DFVectorDrawer()
         {
-            Init(new int[] { 4 });
+            Init(new uint[] { 1, 1, 1, 1 });
         }
         public DFVectorDrawer(float c0)
         {
-            Init(new int[] { (int)c0 });
+            Init(new uint[] { (uint)c0 });
         }
         public DFVectorDrawer(float c0, float c1)
         {
-            Init(new int[] { (int)c0, (int)c1 });
+            Init(new uint[] { (uint)c0, (uint)c1 });
         }
         public DFVectorDrawer(float c0, float c1, float c2)
         {
-            Init(new int[] { (int)c0, (int)c1, (int)c2 });
+            Init(new uint[] { (uint)c0, (uint)c1, (uint)c2 });
         }
         public DFVectorDrawer(float c0, float c1, float c2, float c3)
         {
-            Init(new int[] { (int)c0, (int)c1, (int)c2, (int)c3 });
+            Init(new uint[] { (uint)c0, (uint)c1, (uint)c2, (uint)c3 });
         }
 
-        private void Init(int[] ints)
+        private void Init(uint[] ints)
         {
-            int t = 0;
-            foreach (int i in ints)
-            {
-                t += Mathf.Clamp(i, 0, 4);
-            }
-            total = t;
-            if (4 < total)
-            {
-                Debug.LogWarning("The attribute argument is out of range of the Vector sum element.");
-                total = Mathf.Clamp(total, 0, 4);
-            }
-            if (0 < ints.Length) vertical_field0 = new uint[ints[0]];
-            if (1 < ints.Length) vertical_field1 = new uint[ints[1]];
-            if (2 < ints.Length) vertical_field2 = new uint[ints[2]];
-            if (3 < ints.Length) vertical_field3 = new uint[ints[3]];
+            vertical_field0 = ExtractEqualRow(ints,1);
+            vertical_field1 = ExtractEqualRow(ints,2);
+            vertical_field2 = ExtractEqualRow(ints,3);
+            vertical_field3 = ExtractEqualRow(ints,4);
         }
 
-        private float[] VerticalFieldDraw(uint[] vertical_field, int count, Rect position)
+        private uint[] ExtractEqualRow(uint[] ints, uint row)
         {
-            if (vertical_field == null) return null;
-            if (0 < count) EditorGUILayout.Space(24);
+            uint[] r = new uint[0];
+            for (uint i = 0; i < ints.Length; i++)
+            {
+                if (ints[i] == row)
+                {
+                    Array.Resize(ref r, r.Length + 1);
+                    r[r.Length - 1] = i;
+                }
+            }
+            return r;
+        }
+
+        private float[] VerticalFieldDraw(uint[] vertical_field)
+        {
+            if (drawing_count == 0)
+            {
+                EditorGUILayout.Space(4);
+                field_rect.y += 4;
+            }
+            else
+            {
+                EditorGUILayout.Space(24);
+                field_rect.y += 24;
+            }
+            drawing_count++;
             using (new EditorGUILayout.HorizontalScope())
             {
-                int row = vertical_field.Length;
                 float[] field_values = new float[vertical_field.Length];
                 GUIContent[] contents = new GUIContent[vertical_field.Length];
                 for (int i = 0; i < vertical_field.Length; i++)
                 {
-                    field_values[i] = values[i + count];
-                    contents[i] = label_contents[i + count];
+                    field_values[i] = values[vertical_field[i]];
+                    contents[i] = label_contents[vertical_field[i]];
                 }
-                EditorGUI.MultiFloatField(position, contents, field_values);
+                EditorGUI.MultiFloatField(field_rect, contents, field_values);
+                for (int i = 0; i < vertical_field.Length; i++)
+                {
+                    values[vertical_field[i]] = field_values[i];
+                }
                 return field_values;
             }
-        }
-
-        private int AssignValues(float[] source, int count)
-        {
-            if (source == null) return count;
-            int count_r = count;
-            for (int i = 0; i < source.Length; i++)
-            {
-                values[i + count] = source[i];
-                count_r++;
-            }
-            return count_r;
         }
 
         public override void OnGUI(Rect position, MaterialProperty prop, string label, MaterialEditor editor)
@@ -120,19 +126,16 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     {
                         Rect label_rect = new Rect(position);
                         label_rect.width = EditorGUIUtility.labelWidth;
-                        Rect field_rect = EditorGUI.PrefixLabel(label_rect, new GUIContent(labels[0]));
+                        field_rect = EditorGUI.PrefixLabel(label_rect, new GUIContent(labels[0]));
                         field_rect.width += position.width - label_rect.width;
                         using (new EditorGUILayout.VerticalScope())
                         {
+                            drawing_count = 0;
                             EditorGUI.showMixedValue = prop.hasMixedValue;
-                            int count = 0;
-                            count = AssignValues(VerticalFieldDraw(vertical_field0, count, field_rect), count);
-                            field_rect.y += 24;
-                            count = AssignValues(VerticalFieldDraw(vertical_field1, count, field_rect), count);
-                            field_rect.y += 24;
-                            count = AssignValues(VerticalFieldDraw(vertical_field2, count, field_rect), count);
-                            field_rect.y += 24;
-                            count = AssignValues(VerticalFieldDraw(vertical_field3, count, field_rect), count);
+                            if (0 < vertical_field0.Length) VerticalFieldDraw(vertical_field0);
+                            if (0 < vertical_field1.Length) VerticalFieldDraw(vertical_field1);
+                            if (0 < vertical_field2.Length) VerticalFieldDraw(vertical_field2);
+                            if (0 < vertical_field3.Length) VerticalFieldDraw(vertical_field3);
                             EditorGUI.showMixedValue = false;
                         }
                     }
