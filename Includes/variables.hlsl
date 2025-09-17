@@ -76,7 +76,7 @@ float4 _OrbitRotationTimeMultiplier;
 float3 _OrbitRotationVariance;
 
 float3 _OrbitOffset;
-float3 _OrbitScale;
+float4 _OrbitScale;
 
 float3 _OrbitWaveStrength;
 float3 _OrbitWaveFrequency;
