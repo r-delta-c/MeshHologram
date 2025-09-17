@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.4] 2025/09/18
+### Changed
+- `Orbit Scale(Orbit スケール)`のプロパティが持つ要素が変更されました。
+    - この変更は、プロパティが持つ機能と、実際に割り当てられるベクトルの要素(x,y,z,w)が一致しないことによる混乱を回避することを目的としています。
+    - `Y(x),Z(y),Scale(z)` -> `Y(y),Z(z),Scale(w)`
+
 ## [0.1.3] 2025/09/15
 ### Added
 - `Orbit Wave`の`Spectrum`のプロパティに`Spectrum Frequency Offset(スペクトラムの周波域オフセット)`を追加。
@@ -113,6 +119,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - マテリアルのインスペクターから、MeshHologramが選択できない不具合を修正。
     - MeshBoundsEditorで使用しているシェーダーのパスを変更することで対処。
 
+[0.1.4]: https://github.com/r-delta-c/MeshHologram/compare/0.1.3...0.1.4
 [0.1.3]: https://github.com/r-delta-c/MeshHologram/compare/0.1.2...0.1.3
 [0.1.2]: https://github.com/r-delta-c/MeshHologram/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/r-delta-c/MeshHologram/compare/0.1.0...0.1.1
