@@ -3,9 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.5] 2025/09/19
+### CHanged
+- `Orbit Wave`のプロパティが持つ要素の変更。
+    - `Orbit Wave`に関連する以下のプロパティが対象となります。
+        - `_OrbitWaveStrength`
+        - `_OrbitWaveFrequency`
+        - `_OrbitWavePhase`
+        - `_OrbitWaveTimeMultiplier`
+    - この変更は、プロパティが持つ機能と、実際に割り当てられるベクトルの要素(x,y,z,w)が一致しないことによる混乱を回避することを目的としています。
+    - `YZ(x),X(y)` -> `X(x),YZ(y)`
+    - またインスペクター上の表示順も`YZ,X`から`X,YZ`へ変更しました。
+
+### Fixed
+- `Orbit Wave YZ`の描写がおかしい問題を修正。
+
 ## [0.1.4] 2025/09/18
 ### Changed
-- `Orbit Scale(Orbit スケール)`のプロパティが持つ要素が変更されました。
+- `Orbit Scale(Orbit スケール)`のプロパティが持つ要素の変更。
     - この変更は、プロパティが持つ機能と、実際に割り当てられるベクトルの要素(x,y,z,w)が一致しないことによる混乱を回避することを目的としています。
     - `Y(x),Z(y),Scale(z)` -> `Y(y),Z(z),Scale(w)`
 
@@ -119,6 +134,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - マテリアルのインスペクターから、MeshHologramが選択できない不具合を修正。
     - MeshBoundsEditorで使用しているシェーダーのパスを変更することで対処。
 
+[0.1.5]: https://github.com/r-delta-c/MeshHologram/compare/0.1.4...0.1.5
 [0.1.4]: https://github.com/r-delta-c/MeshHologram/compare/0.1.3...0.1.4
 [0.1.3]: https://github.com/r-delta-c/MeshHologram/compare/0.1.2...0.1.3
 [0.1.2]: https://github.com/r-delta-c/MeshHologram/compare/0.1.1...0.1.2
