@@ -255,6 +255,7 @@ Material:
     - _OrbitSeed: 0
     - _OrbitSource: 1
     - _OrbitValue: 0
+    - _OrbitWaveAudioLinkSpectrumFrequencyOffset: 0
     - _OrbitWaveAudioLinkSpectrumMirror: 0
     - _OrbitWaveAudioLinkSpectrumType: 0
     - _OrbitWaveRefAudioLink: 0
@@ -308,7 +309,7 @@ Material:
     - _OrbitRotationAudioLinkStrength: {r: 1, g: 0, b: 0, a: 1}
     - _OrbitRotationTimeMultiplier: {r: 3, g: 6, b: 6, a: 1}
     - _OrbitRotationVariance: {r: 6.28, g: 6.28, b: 0, a: 0}
-    - _OrbitScale: {r: 1, g: 1, b: 0.33, a: 1}
+    - _OrbitScale: {r: 1, g: 1, b: 1, a: 0.33}
     - _OrbitWaveAudioLinkSpectrumRange: {r: -1, g: 1, b: 0, a: 0}
     - _OrbitWaveAudioLinkStrength: {r: 1, g: 1, b: 1, a: 1}
     - _OrbitWaveFrequency: {r: 1, g: 2, b: 0, a: 0}

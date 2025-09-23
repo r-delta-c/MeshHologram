@@ -3,6 +3,10 @@ float3 Pixelization(float3 inputs, float3 scale){
     return n > 0.0 ? floor((inputs+0.5*n)/n)*n : inputs;
 }
 
+float2 VertexCenterBias(float2 uv0, float2 uv1, float2 uv, float2 c, float t){
+    return lerp(lerp(uv,c,min(0.5,t)*2.0),(uv0+uv1)*0.5,max(0.0,((t-0.5)*2.0)));
+}
+
 float3 VertexCenterBias(float3 v0, float3 v1, float3 v, float3 c, float t){
     return lerp(lerp(v,c,min(0.5,t)*2.0),(v0+v1)*0.5,max(0.0,((t-0.5)*2.0)));
 }
@@ -29,4 +33,12 @@ float GenNoise(float3 inputs, float offset, float time, float seed, float phases
 
 float EaseCurveValue(float i, float m, bool b){
     return b?EaseInOutPowInverse(i,m):EaseInOutPow(i,m);
+}
+
+float2 SideCenterPos(float2 uv0, float2 uv1, float2 uv, float2 c){
+    return (uv0+uv1+VertexCenterBias(uv0,uv1,uv,c,saturate(_TriangleComp/26.0)*0.5+0.5))/3.0;
+}
+
+float3 SideCenterPos(float3 v0, float3 v1, float3 v, float3 c){
+    return (v0+v1+VertexCenterBias(v0,v1,v,c,saturate(_TriangleComp/26.0)*0.5+0.5))/3.0;
 }

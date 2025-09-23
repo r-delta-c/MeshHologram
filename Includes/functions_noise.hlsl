@@ -20,8 +20,7 @@
     }
 
     float FragmentSidePosNoisePingPong(float3 v0, float3 v1, float3 v, float3 c, float offset, float time){
-        float3 side_center = (v0+v1+VertexCenterBias(v0,v1,v,c,saturate(_TriangleComp/26.0)*0.5+0.5))/3.0;
-        float r = FragmentNoisePingPong(side_center, offset, time);
+        float r = FragmentNoisePingPong(SideCenterPos(v0,v1,v,c), offset, time);
         return FUNC_FRAGMENT_AUDIOLINK_NOISE_SPECTRUM_MACRO(r);
     }
 #endif
@@ -48,8 +47,7 @@
     }
 
     float ColorSidePosNoisePingPong(float3 v0, float3 v1, float3 v, float3 c, float offset, float time){
-        float3 side_center = (v0+v1+VertexCenterBias(v0,v1,v,c,saturate(_TriangleComp/26.0)*0.5+0.5))/3.0;
-        float r = ColorNoisePingPong(side_center,offset,time);
+        float r = ColorNoisePingPong(SideCenterPos(v0,v1,v,c),offset,time);
         return FUNC_COLORING_AUDIOLINK_NOISE_SPECTRUM_MACRO(r);
     }
 

@@ -67,7 +67,7 @@ Shader "DeltaField/shaders/MeshHologram"{
         _UseAudioLink("Use AudioLink", Int)=0
         [Enum(Bass,0,Low_Mid,1,High_Mid,2,Treble,3,Average,4)]
         _AudioLinkVUBand("VU Band",Int)=0
-        [IntRange]_AudioLinkVUSmooth("VU Smooth",Range(0,15))=0
+        [IntRange]_AudioLinkVUSmooth("VU Smooth",Range(0,15))=8
         _AudioLinkVUPanning("VU Panning",Range(0.0,1.0))=0.5
         _AudioLinkVUGainMul("VU Gain(Mul)",Float)=1.0
         _AudioLinkVUGainAdd("VU Gain(Add)",Range(0.0,1.0))=0.0
@@ -172,8 +172,6 @@ Shader "DeltaField/shaders/MeshHologram"{
         _OrbitWaveAudioLinkSpectrumFrequencyOffset("Spectrum Frequency Offset",Range(0.0,1.0))=0.0
 
 
-        _AudioLinkMaskControlTex("AudioLink Mask Control Tex",2D)="white"{}
-        _AudioLinkMaskControl("AudioLink Mask Control Strength",Range(0.0,1.0))=1.0
         _FragmentMaskControlTex("Fragment Mask Control Tex",2D)="white"{}
         _FragmentMaskControl("Fragment Mask Control Strength",Range(0.0,1.0))=1.0
         _ColoringMaskControlTex("Coloring Mask Control Tex",2D)="white"{}
@@ -186,9 +184,17 @@ Shader "DeltaField/shaders/MeshHologram"{
         _Noise1stOffsetControl("Noise 1st Phase Offset Control Strength",Range(0.0,1.0))=1.0
         _Noise2ndOffsetControlTex("Noise 2nd Offset Control Tex",2D)="white"{}
         _Noise2ndOffsetControl("Noise 2nd Phase Offset Control Strength",Range(0.0,1.0))=1.0
-        _Noise3rdOffsetControlTex("Noise 3rd Control Tex",2D)="white"{}
+        _Noise3rdOffsetControlTex("Noise 3rd Offset Control Tex",2D)="white"{}
         _Noise3rdOffsetControl("Noise 3rd Phase Offset Control Strength",Range(0.0,1.0))=1.0
 
+        _OrbitRotationALMaskControlTex("AudioLink Mask Control Tex",2D)="white"{}
+        _OrbitRotationALMaskControl("AudioLink Mask Control Strength",Range(0.0,1.0))=1.0
+        _Noise1stALMaskControlTex("Noise 1st AudioLink Mask Control Tex",2D)="white"{}
+        _Noise1stALMaskControl("Noise 1st Phase AudioLink Mask Control Strength",Range(0.0,1.0))=1.0
+        _Noise2ndALMaskControlTex("Noise 2nd AudioLink Mask Control Tex",2D)="white"{}
+        _Noise2ndALMaskControl("Noise 2nd Phase AudioLink Mask Control Strength",Range(0.0,1.0))=1.0
+        _Noise3rdALMaskControlTex("Noise 3rd AudioLink Mask Control Tex",2D)="white"{}
+        _Noise3rdALMaskControl("Noise 3rd Phase AudioLink Mask Control Strength",Range(0.0,1.0))=1.0
 
 
         [DFToggle(_FRAGMENT_AUDIOLINK_NOISE_SPECTRUM,1)]
@@ -370,6 +376,7 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #include "Packages/com.deltafield.meshhologram/Includes/macro_general.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/macro_noise.hlsl"
+            #include "Packages/com.deltafield.meshhologram/Includes/macro_uv.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/macro_thirdparties.hlsl"
             #include "Packages/com.deltafield.shader_commons/Includes/macro_stereo_merge.hlsl"
             
@@ -487,6 +494,7 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #include "Packages/com.deltafield.meshhologram/Includes/macro_general.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/macro_noise.hlsl"
+            #include "Packages/com.deltafield.meshhologram/Includes/macro_uv.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/macro_thirdparties.hlsl"
             #include "Packages/com.deltafield.shader_commons/Includes/macro_stereo_merge.hlsl"
 

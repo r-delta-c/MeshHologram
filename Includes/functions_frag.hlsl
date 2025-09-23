@@ -48,18 +48,14 @@
     float draw = EaseBias(max(max(range.x,range.y),range.z),_LineGradientBias);
 
     #ifdef _COLORSOURCE_GRADIENT
-        #if !defined(_COLORINGSOURCE_VALUE)
-            #ifdef _COLORINGPARTITIONTYPE_SIDE
-                float3 coloring_side = i.color_noise * (range>0.0);
-                sides = 0.0<sides;
-                float coloring_t = max(sides.x*coloring_side.x,max(sides.y*coloring_side.y,sides.z*coloring_side.z));
-                coloring_t = lerp(coloring_t,1.0,(i.color_noise.x+i.color_noise.y+i.color_noise.z)/3.0*1.1);
-                c = lerp(_Color0,_Color1,coloring_t);
-            #else
-                c = lerp(_Color0,_Color1,i.color_noise);
-            #endif
+        #ifdef _COLORINGPARTITIONTYPE_SIDE
+            float3 coloring_side = i.color_noise * (range>0.0);
+            sides = 0.0<sides;
+            float coloring_t = max(sides.x*coloring_side.x,max(sides.y*coloring_side.y,sides.z*coloring_side.z));
+            coloring_t = lerp(coloring_t,1.0,(i.color_noise.x+i.color_noise.y+i.color_noise.z)/3.0*1.1);
+            c = lerp(_Color0,_Color1,coloring_t);
         #else
-            c = lerp(_Color0,_Color1,_ColoringValue);
+            c = lerp(_Color0,_Color1,i.color_noise);
         #endif
     #elif _COLORSOURCE_PRIMARY
         c = _Color0;

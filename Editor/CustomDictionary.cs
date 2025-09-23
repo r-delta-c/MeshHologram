@@ -346,12 +346,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 },
 
 
-                {SHADER_PROPERTY._AUDIOLINK_MASK_CONTROL_TEX,new ShaderPropertyState(
-                    "_AudioLinkMaskControlTex", "AudioLink Mask Control Tex")
-                },
-                {SHADER_PROPERTY._AUDIOLINK_MASK_CONTROL,new ShaderPropertyState(
-                    "_AudioLinkMaskControl", "AudioLink Mask Control Strength")
-                },
                 {SHADER_PROPERTY._FRAGMENT_MASK_CONTROL_TEX,new ShaderPropertyState(
                     "_FragmentMaskControlTex", "Fragment Mask Control Tex")
                 },
@@ -371,10 +365,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     "_GeometryMaskControl", "Geometry Mask Control Strength")
                 },
                 {SHADER_PROPERTY._ORBIT_MASK_CONTROL_TEX,new ShaderPropertyState(
-                    "_OrbitMaskControlTex", "Orbit Control Tex")
+                    "_OrbitMaskControlTex", "Orbit Mask Control Tex")
                 },
                 {SHADER_PROPERTY._ORBIT_MASK_CONTROL,new ShaderPropertyState(
-                    "_OrbitMaskControl", "Orbit Control Strength")
+                    "_OrbitMaskControl", "Orbit Mask Control Strength")
                 },
                 {SHADER_PROPERTY._NOISE1ST_OFFSET_CONTROL_TEX,new ShaderPropertyState(
                     "_Noise1stOffsetControlTex", "Noise 1st Offset Control Tex")
@@ -393,6 +387,31 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 },
                 {SHADER_PROPERTY._NOISE3RD_OFFSET_CONTROL,new ShaderPropertyState(
                     "_Noise3rdOffsetControl", "Noise 3rd Offset Control")
+                },
+
+                {SHADER_PROPERTY._ORBIT_ROTATION_AL_MASK_CONTROL_TEX,new ShaderPropertyState(
+                    "_OrbitRotationALMaskControlTex", "AudioLink Mask Control Tex")
+                },
+                {SHADER_PROPERTY._ORBIT_ROTATION_AL_MASK_CONTROL,new ShaderPropertyState(
+                    "_OrbitRotationALMaskControl", "AudioLink Mask Control Strength")
+                },
+                {SHADER_PROPERTY._NOISE1ST_AL_MASK_CONTROL_TEX,new ShaderPropertyState(
+                    "_Noise1stALMaskControlTex", "Noise 1st AudioLink Mask Control Tex")
+                },
+                {SHADER_PROPERTY._NOISE1ST_AL_MASK_CONTROL,new ShaderPropertyState(
+                    "_Noise1stALMaskControl", "Noise 1st AudioLink Mask Control Strength")
+                },
+                {SHADER_PROPERTY._NOISE2ND_AL_MASK_CONTROL_TEX,new ShaderPropertyState(
+                    "_Noise2ndALMaskControlTex", "Noise 2nd AudioLink Mask Control Tex")
+                },
+                {SHADER_PROPERTY._NOISE2ND_AL_MASK_CONTROL,new ShaderPropertyState(
+                    "_Noise2ndALMaskControl", "Noise 2nd AudioLink Mask Control")
+                },
+                {SHADER_PROPERTY._NOISE3RD_AL_MASK_CONTROL_TEX,new ShaderPropertyState(
+                    "_Noise3rdALMaskControlTex", "Noise 3rd AudioLink Mask Control Tex")
+                },
+                {SHADER_PROPERTY._NOISE3RD_AL_MASK_CONTROL,new ShaderPropertyState(
+                    "_Noise3rdALMaskControl", "Noise 3rd AudioLink Mask Control")
                 },
 
 

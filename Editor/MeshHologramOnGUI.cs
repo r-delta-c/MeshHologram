@@ -166,10 +166,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     DrawShaderProperty(SHADER_PROPERTY._USE_AUDIOLINK);
                     if (GetPropertyFloat(targetMat, SHADER_PROPERTY._USE_AUDIOLINK) == 1)
                     {
-                        DrawControlTex(
-                            SHADER_PROPERTY._AUDIOLINK_MASK_CONTROL_TEX,
-                            SHADER_PROPERTY._AUDIOLINK_MASK_CONTROL
-                        );
                         DrawPartitionLine(4);
                         DrawHeaderLabel(LocalizationSystem.PropLangDic["label.vu"],CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
                         DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_VU_BAND);
@@ -211,8 +207,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 DrawShaderProperty(SHADER_PROPERTY._LINE_FADE_MODE);
                 DrawShaderProperty(SHADER_PROPERTY._PARTITION_TYPE);
                 EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_MASK_CONTROL_TEX);
-                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_MASK_CONTROL);
+                DrawControlTex(
+                    SHADER_PROPERTY._FRAGMENT_MASK_CONTROL_TEX,
+                    SHADER_PROPERTY._FRAGMENT_MASK_CONTROL
+                );
                 EditorGUILayout.Space(16);
 
                 using (new EditorGUILayout.VerticalScope("HelpBox"))
@@ -294,8 +292,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 DrawShaderProperty(SHADER_PROPERTY._EMISSION);
                 DrawShaderProperty(SHADER_PROPERTY._COLORING_PARTITION_TYPE);
                 EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._COLORING_MASK_CONTROL_TEX);
-                DrawShaderProperty(SHADER_PROPERTY._COLORING_MASK_CONTROL);
+                DrawControlTex(
+                    SHADER_PROPERTY._COLORING_MASK_CONTROL_TEX,
+                    SHADER_PROPERTY._COLORING_MASK_CONTROL
+                );
                 EditorGUILayout.Space(16);
 
                 using (new EditorGUILayout.VerticalScope("HelpBox"))
@@ -363,8 +363,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 }
 
                 EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MASK_CONTROL_TEX);
-                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_MASK_CONTROL);
+                DrawControlTex(
+                    SHADER_PROPERTY._GEOMETRY_MASK_CONTROL_TEX,
+                    SHADER_PROPERTY._GEOMETRY_MASK_CONTROL
+                );
                 EditorGUILayout.Space(16);
                 DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PARTITION_BIAS);
                 EditorGUILayout.Space(16);
@@ -412,8 +414,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 DrawShaderProperty(SHADER_PROPERTY._ACTIVATE_ORBIT);
                 if (GetPropertyFloat(targetMat, SHADER_PROPERTY._ACTIVATE_ORBIT) == 1)
                 {
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_MASK_CONTROL_TEX);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_MASK_CONTROL);
+                    DrawControlTex(
+                        SHADER_PROPERTY._ORBIT_MASK_CONTROL_TEX,
+                        SHADER_PROPERTY._ORBIT_MASK_CONTROL
+                    );
                     EditorGUILayout.Space(16);
 
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_SOURCE);
@@ -472,6 +476,11 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_TIME_MULTIPLIER);
                     DrawPartitionLine(8);
                     DrawHeaderLabel(LocalizationSystem.PropLangDic["label.orbit_audiolink"],CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
+                    DrawControlTex(
+                        SHADER_PROPERTY._ORBIT_ROTATION_AL_MASK_CONTROL_TEX,
+                        SHADER_PROPERTY._ORBIT_ROTATION_AL_MASK_CONTROL
+                    );
+                    EditorGUILayout.Space(16);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_REF_AUDIOLINK);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_STRENGTH);
                     if (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_WAVE_REF_AUDIOLINK)==2) {
@@ -481,6 +490,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_FREQUENCY_OFFSET);
                     }
                     EditorGUILayout.Space(16);
+                    
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_REF_AUDIOLINK);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_AUDIOLINK_STRENGTH);
                 }

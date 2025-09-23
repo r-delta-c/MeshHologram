@@ -26,6 +26,14 @@
     #define _DEFINED_ORBITROTATION_NOISE
 #endif
 
+#if defined(_PARTITIONTYPE_VERTEX) || defined(_COLORINGPARTITIONTYPE_VERTEX)
+    #define _DEFINED_REF_UV_VERTEX
+#endif
+#if defined(_PARTITIONTYPE_SIDE) || defined(_COLORINGPARTITIONTYPE_SIDE)
+    #define _DEFINED_REF_UV_SIDE
+#endif
+
+
 
 #ifdef _MANUAL_LINE_SCALING
     #define LINE_SCALE_MACRO max(_LineScale,1e-4)

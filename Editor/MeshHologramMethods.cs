@@ -62,8 +62,24 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
         private void DrawControlTex(SHADER_PROPERTY tex, SHADER_PROPERTY strength)
         {
-            DrawShaderProperty(tex);
-            DrawShaderProperty(strength);
+            using (new EditorGUILayout.VerticalScope("HelpBox"))
+            {
+                DrawShaderProperty(tex);
+                DrawShaderProperty(strength);
+            }
+        }
+
+        private void DrawControlTex(SHADER_PROPERTY tex, SHADER_PROPERTY strength, SHADER_PROPERTY al_mask_tex, SHADER_PROPERTY al_mask_strength)
+        {
+            using (new EditorGUILayout.VerticalScope("HelpBox"))
+            {
+                DrawShaderProperty(tex);
+                DrawShaderProperty(strength);
+                DrawPartitionLine(4);
+                DrawShaderProperty(al_mask_tex);
+                DrawShaderProperty(al_mask_strength);
+                EditorGUILayout.Space(4);
+            }
         }
 
         private void DrawNoiseProps(
@@ -71,6 +87,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             FOLDOUT foldout,
             SHADER_PROPERTY OFFSET_CONTROL_TEX,
             SHADER_PROPERTY OFFSET_CONTROL,
+            SHADER_PROPERTY AL_MASK_CONTROL_TEX,
+            SHADER_PROPERTY AL_MASK_CONTROL,
             SHADER_PROPERTY OFFSET0,
             SHADER_PROPERTY SCALE0,
             SHADER_PROPERTY OFFSET1,
@@ -91,8 +109,12 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             foldout_bool = FoldoutList.MenuFoldout(foldout, false, order);
             if (foldout_bool)
             {
-                DrawShaderProperty(OFFSET_CONTROL_TEX);
-                DrawShaderProperty(OFFSET_CONTROL);
+                DrawControlTex(
+                    OFFSET_CONTROL_TEX,
+                    OFFSET_CONTROL,
+                    AL_MASK_CONTROL_TEX,
+                    AL_MASK_CONTROL
+                );
                 EditorGUILayout.Space(16);
                 DrawShaderProperty(OFFSET0);
                 DrawShaderProperty(SCALE0);
@@ -136,6 +158,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     FOLDOUT.NOISE1ST,
                     SHADER_PROPERTY._NOISE1ST_OFFSET_CONTROL_TEX,
                     SHADER_PROPERTY._NOISE1ST_OFFSET_CONTROL,
+                    SHADER_PROPERTY._NOISE1ST_AL_MASK_CONTROL_TEX,
+                    SHADER_PROPERTY._NOISE1ST_AL_MASK_CONTROL,
                     SHADER_PROPERTY._NOISE1ST_OFFSET0,
                     SHADER_PROPERTY._NOISE1ST_SCALE0,
                     SHADER_PROPERTY._NOISE1ST_OFFSET1,
@@ -167,6 +191,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     FOLDOUT.NOISE2ND,
                     SHADER_PROPERTY._NOISE2ND_OFFSET_CONTROL_TEX,
                     SHADER_PROPERTY._NOISE2ND_OFFSET_CONTROL,
+                    SHADER_PROPERTY._NOISE2ND_AL_MASK_CONTROL_TEX,
+                    SHADER_PROPERTY._NOISE2ND_AL_MASK_CONTROL,
                     SHADER_PROPERTY._NOISE2ND_OFFSET0,
                     SHADER_PROPERTY._NOISE2ND_SCALE0,
                     SHADER_PROPERTY._NOISE2ND_OFFSET1,
@@ -198,6 +224,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     FOLDOUT.NOISE3RD,
                     SHADER_PROPERTY._NOISE3RD_OFFSET_CONTROL_TEX,
                     SHADER_PROPERTY._NOISE3RD_OFFSET_CONTROL,
+                    SHADER_PROPERTY._NOISE3RD_AL_MASK_CONTROL_TEX,
+                    SHADER_PROPERTY._NOISE3RD_AL_MASK_CONTROL,
                     SHADER_PROPERTY._NOISE3RD_OFFSET0,
                     SHADER_PROPERTY._NOISE3RD_SCALE0,
                     SHADER_PROPERTY._NOISE3RD_OFFSET1,

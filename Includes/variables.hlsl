@@ -26,22 +26,33 @@ float _DistanceInfluence;
     bool _OrbitWaveAudioLinkSpectrumType;
     float2 _OrbitWaveAudioLinkSpectrumRange;
     float _OrbitWaveAudioLinkSpectrumFrequencyOffset;
+
+    UNITY_DECLARE_TEX2D_NOSAMPLER(_FragmentALMaskControlTex);
+    float4 _FragmentALMaskControlTex_ST;
+    UNITY_DECLARE_TEX2D_NOSAMPLER(_ColoringALMaskControlTex);
+    float4 _ColoringALMaskControlTex_ST;
+    UNITY_DECLARE_TEX2D_NOSAMPLER(_GeometryALMaskControlTex);
+    float4 _GeometryALMaskControlTex_ST;
+    UNITY_DECLARE_TEX2D_NOSAMPLER(_OrbitRotationALMaskControlTex);
+    float4 _OrbitRotationALMaskControlTex_ST;
+
 #endif
 
 UNITY_DECLARE_TEX2D_NOSAMPLER(_FragmentMaskControlTex);
-float4 _FragmentMaskControl_ST;
+float4 _FragmentMaskControlTex_ST;
 UNITY_DECLARE_TEX2D_NOSAMPLER(_ColoringMaskControlTex);
-float4 _ColoringMaskControl_ST;
+float4 _ColoringMaskControlTex_ST;
 UNITY_DECLARE_TEX2D_NOSAMPLER(_GeometryMaskControlTex);
-float4 _GeometryMaskControl_ST;
+float4 _GeometryMaskControlTex_ST;
 UNITY_DECLARE_TEX2D_NOSAMPLER(_OrbitMaskControlTex);
-float4 _OrbitMaskControl_ST;
+float4 _OrbitMaskControlTex_ST;
 UNITY_DECLARE_TEX2D_NOSAMPLER(_ColorGradientTex);
 float4 _ColorGradientTex_ST;
 
 float _FragmentValue;
 bool _FragmentInverse;
 float _FragmentMaskControl;
+float _FragmentALMaskControl;
 float _TriangleComp;
 float _Fill;
 float _LineWidth;
@@ -50,12 +61,14 @@ float _LineScale;
 
 float _ColoringValue;
 float _ColoringMaskControl;
+float _ColoringALMaskControl;
 fixed4 _Color0;
 fixed4 _Color1;
 float _Emission;
 
 float _GeometryValue;
 float _GeometryMaskControl;
+float _GeometryALMaskControl;
 float2 _GeometryScaleRange;
 float2 _GeometryExtrudeRange;
 float _GeometryRotationInfluence;
@@ -83,6 +96,7 @@ float3 _OrbitWaveFrequency;
 float3 _OrbitWavePhase;
 float3 _OrbitWaveTimeMultiplier;
 
+float _OrbitRotationALMaskControl;
 
 float _FragmentAudioLinkStrength;
 bool _FragmentAudioLinkSpectrumMirror;
@@ -112,8 +126,11 @@ float2 _GeometryAudioLinkSpectrumRange;
     float _Noise1stTimeMulti;
     float _Noise1stTimePhase;
     UNITY_DECLARE_TEX2D_NOSAMPLER(_Noise1stOffsetControlTex);
-    float4 _Noise1stOffsetControl_ST;
+    float4 _Noise1stOffsetControlTex_ST;
     float _Noise1stOffsetControl;
+    UNITY_DECLARE_TEX2D_NOSAMPLER(_Noise1stALMaskControlTex);
+    float4 _Noise1stALMaskControlTex_ST;
+    float _Noise1stALMaskControl;
     float _Noise1stPhaseScale;
 #endif
 
@@ -130,8 +147,11 @@ float2 _GeometryAudioLinkSpectrumRange;
     float _Noise2ndTimeMulti;
     float _Noise2ndTimePhase;
     UNITY_DECLARE_TEX2D_NOSAMPLER(_Noise2ndOffsetControlTex);
-    float4 _Noise2ndOffsetControl_ST;
+    float4 _Noise2ndOffsetControlTex_ST;
     float _Noise2ndOffsetControl;
+    UNITY_DECLARE_TEX2D_NOSAMPLER(_Noise2ndALMaskControlTex);
+    float4 _Noise2ndALMaskControlTex_ST;
+    float _Noise2ndALMaskControl;
     float _Noise2ndPhaseScale;
 #endif
 
@@ -148,12 +168,15 @@ float2 _GeometryAudioLinkSpectrumRange;
     float _Noise3rdTimeMulti;
     float _Noise3rdTimePhase;
     UNITY_DECLARE_TEX2D_NOSAMPLER(_Noise3rdOffsetControlTex);
-    float4 _Noise3rdOffsetControl_ST;
+    float4 _Noise3rdOffsetControlTex_ST;
     float _Noise3rdOffsetControl;
+    UNITY_DECLARE_TEX2D_NOSAMPLER(_Noise3rdALMaskControlTex);
+    float4 _Noise3rdALMaskControlTex_ST;
+    float _Noise3rdALMaskControl;
     float _Noise3rdPhaseScale;
 #endif
 
-SamplerState sampler_point_clamp;
+SamplerState sampler_point_repeat;
 SamplerState sampler_linear_repeat;
 
 float4 dummy;

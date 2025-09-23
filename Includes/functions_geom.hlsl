@@ -12,159 +12,350 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         length(UNITY_MATRIX_M._m20_m21_m22)
     );
 
-    float fragment_mask[3];
-    float coloring_mask[3];
-    float geometry_mask[3];
-    float orbit_mask[3];
-    TEX2D_NOISE1ST_MACRO float noise1st_offset[3];
-    TEX2D_NOISE2ND_MACRO float noise2nd_offset[3];
-    TEX2D_NOISE3RD_MACRO float noise3rd_offset[3];
-    float audiolink_mask[3];
-    fragment_mask[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_FragmentMaskControlTex,_point_clamp, inp[0].uv, 0.0),_FragmentMaskControl);
-    fragment_mask[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_FragmentMaskControlTex,_point_clamp, inp[1].uv, 0.0),_FragmentMaskControl);
-    fragment_mask[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_FragmentMaskControlTex,_point_clamp, inp[2].uv, 0.0),_FragmentMaskControl);
-    coloring_mask[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColoringMaskControlTex,_point_clamp, inp[0].uv, 0.0),_ColoringMaskControl);
-    coloring_mask[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColoringMaskControlTex,_point_clamp, inp[1].uv, 0.0),_ColoringMaskControl);
-    coloring_mask[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColoringMaskControlTex,_point_clamp, inp[2].uv, 0.0),_ColoringMaskControl);
-    geometry_mask[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_GeometryMaskControlTex,_point_clamp, inp[0].uv, 0.0),_GeometryMaskControl);
-    geometry_mask[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_GeometryMaskControlTex,_point_clamp, inp[1].uv, 0.0),_GeometryMaskControl);
-    geometry_mask[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_GeometryMaskControlTex,_point_clamp, inp[2].uv, 0.0),_GeometryMaskControl);
-    orbit_mask[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_OrbitMaskControlTex,_point_clamp, inp[0].uv, 0.0),_OrbitMaskControl);
-    orbit_mask[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_OrbitMaskControlTex,_point_clamp, inp[1].uv, 0.0),_OrbitMaskControl);
-    orbit_mask[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_OrbitMaskControlTex,_point_clamp, inp[2].uv, 0.0),_OrbitMaskControl);
+    float2 transform_uv[3];
+    float2 uv_mesh;
+    float2 uv_side[3];
 
-    #ifdef _DEFINED_NOISE1ST
-        TEX2D_NOISE1ST_MACRO noise1st_offset[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise1stOffsetControlTex, _point_clamp, inp[0].uv, 0.0),_Noise1stOffsetControl);
-        TEX2D_NOISE1ST_MACRO noise1st_offset[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise1stOffsetControlTex, _point_clamp, inp[1].uv, 0.0),_Noise1stOffsetControl);
-        TEX2D_NOISE1ST_MACRO noise1st_offset[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise1stOffsetControlTex, _point_clamp, inp[2].uv, 0.0),_Noise1stOffsetControl);
-    #else
-        noise1st_offset[0] = 1.0;
-        noise1st_offset[1] = 1.0;
-        noise1st_offset[2] = 1.0;
+    #ifdef _PARTITIONTYPE_VERTEX
+        CONTROL_VERTEX_MACRO(_FragmentMaskControlTex);
+        float fragment_mask[3] = CONTROL_MACRO3(
+            _FragmentMaskControlTex,_point_repeat,_FragmentMaskControl,transform_uv[0],transform_uv[1],transform_uv[2]);
+        #ifdef _FRAGMENTSOURCE_NOISE1ST
+            CONTROL_VERTEX_MACRO(_Noise1stOffsetControlTex);
+            float fragment_offset[3] = NOISE1ST_OFFSET_CONTROL_VERTEX_MACRO;
+            CONTROL_VERTEX_MACRO(_Noise1stALMaskControlTex)
+            float fragment_noise_al_mask[3] = NOISE1ST_AL_MASK_CONTROL_VERTEX_MACRO;
+        #elif _FRAGMENTSOURCE_NOISE2ND
+            CONTROL_VERTEX_MACRO(_Noise2ndOffsetControlTex);
+            float fragment_offset[3] = NOISE2ND_OFFSET_CONTROL_VERTEX_MACRO;
+            CONTROL_VERTEX_MACRO(_Noise2ndALMaskControlTex)
+            float fragment_noise_al_mask[3] = NOISE2ND_AL_MASK_CONTROL_VERTEX_MACRO;
+        #elif _FRAGMENTSOURCE_NOISE3RD
+            CONTROL_VERTEX_MACRO(_Noise3rdOffsetControlTex);
+            float fragment_offset[3] = NOISE3RD_OFFSET_CONTROL_VERTEX_MACRO;
+            CONTROL_VERTEX_MACRO(_Noise3rdALMaskControlTex)
+            float fragment_noise_al_mask[3] = NOISE3RD_AL_MASK_CONTROL_VERTEX_MACRO;
+        #endif
+
+        #define FRAGMENT_NOISE_AL_MASK_MACRO float3(fragment_noise_al_mask[0],fragment_noise_al_mask[1],fragment_noise_al_mask[2])
+
+    #elif _PARTITIONTYPE_SIDE
+        CONTROL_SIDE_MACRO(_FragmentMaskControlTex);
+        float fragment_mask[3] = CONTROL_MACRO3(
+            _FragmentMaskControlTex,_point_repeat,_FragmentMaskControl,uv_side[0],uv_side[1],uv_side[2]);
+        #ifdef _FRAGMENTSOURCE_NOISE1ST
+            CONTROL_SIDE_MACRO(_Noise1stOffsetControlTex);
+            float fragment_offset[3] = NOISE1ST_OFFSET_CONTROL_SIDE_MACRO;
+            CONTROL_SIDE_MACRO(_Noise1stALMaskControlTex)
+            float fragment_noise_al_mask[3] = NOISE1ST_AL_MASK_CONTROL_SIDE_MACRO;
+        #elif _FRAGMENTSOURCE_NOISE2ND
+            CONTROL_SIDE_MACRO(_Noise2ndOffsetControlTex);
+            float fragment_offset[3] = NOISE2ND_OFFSET_CONTROL_SIDE_MACRO;
+            CONTROL_SIDE_MACRO(_Noise2ndALMaskControlTex)
+            float fragment_noise_al_mask[3] = NOISE2ND_AL_MASK_CONTROL_SIDE_MACRO;
+        #elif _FRAGMENTSOURCE_NOISE3RD
+            CONTROL_SIDE_MACRO(_Noise3rdOffsetControlTex);
+            float fragment_offset[3] = NOISE3RD_OFFSET_CONTROL_SIDE_MACRO;
+            CONTROL_SIDE_MACRO(_Noise3rdALMaskControlTex)
+            float fragment_noise_al_mask[3] = NOISE3RD_AL_MASK_CONTROL_SIDE_MACRO;
+        #endif
+
+        #define FRAGMENT_NOISE_AL_MASK_MACRO float3(fragment_noise_al_mask[0],fragment_noise_al_mask[1],fragment_noise_al_mask[2])
+
+    #elif _PARTITIONTYPE_MESH
+        CONTROL_MESH_MACRO(_FragmentMaskControlTex);
+        float fragment_mask = CONTROL_MACRO(_FragmentMaskControlTex,_point_repeat,_FragmentMaskControl,uv_mesh);
+        #ifdef _FRAGMENTSOURCE_NOISE1ST
+            CONTROL_MESH_MACRO(_Noise1stOffsetControlTex);
+            float fragment_offset = NOISE1ST_OFFSET_CONTROL_MESH_MACRO;
+            CONTROL_MESH_MACRO(_Noise1stALMaskControlTex)
+            float fragment_noise_al_mask = NOISE1ST_AL_MASK_CONTROL_MESH_MACRO;
+        #elif _FRAGMENTSOURCE_NOISE2ND
+            CONTROL_MESH_MACRO(_Noise2ndOffsetControlTex);
+            float fragment_offset = NOISE2ND_OFFSET_CONTROL_MESH_MACRO;
+            CONTROL_MESH_MACRO(_Noise2ndALMaskControlTex)
+            float fragment_noise_al_mask = NOISE2ND_AL_MASK_CONTROL_MESH_MACRO;
+        #elif _FRAGMENTSOURCE_NOISE3RD
+            CONTROL_MESH_MACRO(_Noise3rdOffsetControlTex);
+            float fragment_offset = NOISE3RD_OFFSET_CONTROL_MESH_MACRO;
+            CONTROL_MESH_MACRO(_Noise3rdALMaskControlTex)
+            float fragment_noise_al_mask = NOISE3RD_AL_MASK_CONTROL_MESH_MACRO;
+        #endif
+
+        #define FRAGMENT_NOISE_AL_MASK_MACRO fragment_noise_al_mask
+
     #endif
 
-    #ifdef _DEFINED_NOISE2ND
-        TEX2D_NOISE2ND_MACRO noise2nd_offset[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise2ndOffsetControlTex, _point_clamp, inp[0].uv, 0.0),_Noise2ndOffsetControl);
-        TEX2D_NOISE2ND_MACRO noise2nd_offset[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise2ndOffsetControlTex, _point_clamp, inp[1].uv, 0.0),_Noise2ndOffsetControl);
-        TEX2D_NOISE2ND_MACRO noise2nd_offset[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise2ndOffsetControlTex, _point_clamp, inp[2].uv, 0.0),_Noise2ndOffsetControl);
-    #else
-        noise2nd_offset[0] = 1.0;
-        noise2nd_offset[1] = 1.0;
-        noise2nd_offset[2] = 1.0;
+    #ifdef _COLORINGPARTITIONTYPE_VERTEX
+        CONTROL_VERTEX_MACRO(_ColoringMaskControlTex);
+        float coloring_mask[3] = CONTROL_MACRO3(
+            _ColoringMaskControlTex,_point_repeat,_ColoringMaskControl,transform_uv[0],transform_uv[1],transform_uv[2]);
+        #ifdef _COLORINGSOURCE_NOISE1ST
+            CONTROL_VERTEX_MACRO(_Noise1stOffsetControlTex);
+            float coloring_offset[3] = NOISE1ST_OFFSET_CONTROL_VERTEX_MACRO;
+            CONTROL_VERTEX_MACRO(_Noise1stALMaskControlTex);
+            float coloring_noise_al_mask[3] = NOISE1ST_AL_MASK_CONTROL_VERTEX_MACRO;
+        #elif _COLORINGSOURCE_NOISE2ND
+            CONTROL_VERTEX_MACRO(_Noise2ndOffsetControlTex);
+            float coloring_offset[3] = NOISE2ND_OFFSET_CONTROL_VERTEX_MACRO;
+            CONTROL_VERTEX_MACRO(_Noise2ndALMaskControlTex);
+            float coloring_noise_al_mask[3] = NOISE2ND_AL_MASK_CONTROL_VERTEX_MACRO;
+        #elif _COLORINGSOURCE_NOISE3RD
+            CONTROL_VERTEX_MACRO(_Noise3rdOffsetControlTex);
+            float coloring_offset[3] = NOISE3RD_OFFSET_CONTROL_VERTEX_MACRO;
+            CONTROL_VERTEX_MACRO(_Noise3rdALMaskControlTex);
+            float coloring_noise_al_mask[3] = NOISE3RD_AL_MASK_CONTROL_VERTEX_MACRO;
+        #endif
+
+        #define COLORING_MASK_MACRO float3(coloring_mask[0],coloring_mask[1],coloring_mask[2])
+        #define COLORING_NOISE_AL_MASK_MACRO float3(coloring_noise_al_mask[0],coloring_noise_al_mask[1],coloring_noise_al_mask[2])
+
+    #elif _COLORINGPARTITIONTYPE_SIDE
+        CONTROL_SIDE_MACRO(_ColoringMaskControlTex);
+        float coloring_mask[3] = CONTROL_MACRO3(
+            _ColoringMaskControlTex,_point_repeat,_ColoringMaskControl,uv_side[0],uv_side[1],uv_side[2]);
+        #ifdef _COLORINGSOURCE_NOISE1ST
+            CONTROL_SIDE_MACRO(_Noise1stOffsetControlTex);
+            float coloring_offset[3] = NOISE1ST_OFFSET_CONTROL_SIDE_MACRO;
+            CONTROL_SIDE_MACRO(_Noise1stALMaskControlTex);
+            float coloring_noise_al_mask[3] = NOISE1ST_AL_MASK_CONTROL_SIDE_MACRO;
+        #elif _COLORINGSOURCE_NOISE2ND
+            CONTROL_SIDE_MACRO(_Noise2ndOffsetControlTex);
+            float coloring_offset[3] = NOISE2ND_OFFSET_CONTROL_SIDE_MACRO;
+            CONTROL_SIDE_MACRO(_Noise2ndALMaskControlTex);
+            float coloring_noise_al_mask[3] = NOISE2ND_AL_MASK_CONTROL_SIDE_MACRO;
+        #elif _COLORINGSOURCE_NOISE3RD
+            CONTROL_SIDE_MACRO(_Noise3rdOffsetControlTex);
+            float coloring_offset[3] = NOISE3RD_OFFSET_CONTROL_SIDE_MACRO;
+            CONTROL_SIDE_MACRO(_Noise3rdALMaskControlTex);
+            float coloring_noise_al_mask[3] = NOISE3RD_AL_MASK_CONTROL_SIDE_MACRO;
+        #endif
+
+        #define COLORING_MASK_MACRO float3(coloring_mask[0],coloring_mask[1],coloring_mask[2])
+        #define COLORING_NOISE_AL_MASK_MACRO float3(coloring_noise_al_mask[0],coloring_noise_al_mask[1],coloring_noise_al_mask[2])
+
+    #elif _COLORINGPARTITIONTYPE_MESH
+        CONTROL_MESH_MACRO(_ColoringMaskControlTex);
+        float coloring_mask = CONTROL_MACRO(_ColoringMaskControlTex,_point_repeat,_ColoringMaskControl,uv_mesh);
+        #ifdef _COLORINGSOURCE_NOISE1ST
+            CONTROL_MESH_MACRO(_Noise1stOffsetControlTex);
+            float coloring_offset = NOISE1ST_OFFSET_CONTROL_MESH_MACRO;
+            CONTROL_MESH_MACRO(_Noise1stALMaskControlTex);
+            float coloring_noise_al_mask = NOISE1ST_AL_MASK_CONTROL_MESH_MACRO;
+        #elif _COLORINGSOURCE_NOISE2ND
+            CONTROL_MESH_MACRO(_Noise2ndOffsetControlTex);
+            float coloring_offset = NOISE2ND_OFFSET_CONTROL_MESH_MACRO;
+            CONTROL_MESH_MACRO(_Noise2ndALMaskControlTex);
+            float coloring_noise_al_mask = NOISE2ND_AL_MASK_CONTROL_MESH_MACRO;
+        #elif _COLORINGSOURCE_NOISE3RD
+            CONTROL_MESH_MACRO(_Noise3rdOffsetControlTex);
+            float coloring_offset = NOISE3RD_OFFSET_CONTROL_MESH_MACRO;
+            CONTROL_MESH_MACRO(_Noise3rdALMaskControlTex);
+            float coloring_noise_al_mask = NOISE3RD_AL_MASK_CONTROL_MESH_MACRO;
+        #endif
+
+        #define COLORING_MASK_MACRO coloring_mask
+        #define COLORING_NOISE_AL_MASK_MACRO coloring_noise_al_mask
+
     #endif
 
-    #ifdef _DEFINED_NOISE3RD
-        TEX2D_NOISE3RD_MACRO noise3rd_offset[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise3rdOffsetControlTex, _point_clamp, inp[0].uv, 0.0),_Noise3rdOffsetControl);
-        TEX2D_NOISE3RD_MACRO noise3rd_offset[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise3rdOffsetControlTex, _point_clamp, inp[1].uv, 0.0),_Noise3rdOffsetControl);
-        TEX2D_NOISE3RD_MACRO noise3rd_offset[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_Noise3rdOffsetControlTex, _point_clamp, inp[2].uv, 0.0),_Noise3rdOffsetControl);
+    CONTROL_MESH_MACRO(_GeometryMaskControlTex);
+    float geometry_mask = CONTROL_MACRO(_GeometryMaskControlTex,_point_repeat,_GeometryMaskControl,uv_mesh);
+
+    float2 geometry_uv[3];
+    geometry_uv[0] = VertexCenterBias(transform_uv[1],transform_uv[2],transform_uv[0],uv_mesh,_GeometryPartitionBias);
+    geometry_uv[1] = VertexCenterBias(transform_uv[2],transform_uv[0],transform_uv[1],uv_mesh,_GeometryPartitionBias);
+    geometry_uv[2] = VertexCenterBias(transform_uv[0],transform_uv[1],transform_uv[2],uv_mesh,_GeometryPartitionBias);
+    float geometry_pushpull_mask[3] = CONTROL_MACRO3(
+            _GeometryMaskControlTex,_point_repeat,_GeometryALMaskControl,geometry_uv[0],geometry_uv[1],geometry_uv[2]);
+
+    #ifdef _GEOMETRYSOURCE_NOISE1ST
+        CONTROL_MESH_MACRO(_Noise1stOffsetControlTex);
+        float geometry_offset = NOISE1ST_OFFSET_CONTROL_MESH_MACRO;
+        CONTROL_MESH_MACRO(_Noise1stALMaskControlTex);
+        float geometry_al_mask = NOISE1ST_AL_MASK_CONTROL_MESH_MACRO;
+        geometry_uv[0] = VertexCenterBias(transform_uv[1],transform_uv[2],transform_uv[0],uv_mesh,_GeometryPartitionBias);
+        geometry_uv[1] = VertexCenterBias(transform_uv[2],transform_uv[0],transform_uv[1],uv_mesh,_GeometryPartitionBias);
+        geometry_uv[2] = VertexCenterBias(transform_uv[0],transform_uv[1],transform_uv[2],uv_mesh,_GeometryPartitionBias);
+        float geometry_pushpull_offset[3] = CONTROL_MACRO3(
+            _Noise1stOffsetControlTex,_point_repeat,_Noise1stOffsetControl,geometry_uv[0],geometry_uv[1],geometry_uv[2]);
+        float geometry_pushpull_al_mask[3] = CONTROL_MACRO3(
+            _Noise1stALMaskControlTex,_point_repeat,_Noise1stALMaskControl,geometry_uv[0],geometry_uv[1],geometry_uv[2]);
+        #define GEOMETRY_PUSHPULL_AL_MASK_MACRO(n) geometry_pushpull_al_mask[n]
+    #elif _GEOMETRYSOURCE_NOISE2ND
+        CONTROL_MESH_MACRO(_Noise2ndOffsetControlTex);
+        float geometry_offset = NOISE2ND_OFFSET_CONTROL_MESH_MACRO;
+        CONTROL_MESH_MACRO(_Noise2ndALMaskControlTex);
+        float geometry_al_mask = NOISE2ND_AL_MASK_CONTROL_MESH_MACRO;
+        geometry_uv[0] = VertexCenterBias(transform_uv[1],transform_uv[2],transform_uv[0],uv_mesh,_GeometryPartitionBias);
+        geometry_uv[1] = VertexCenterBias(transform_uv[2],transform_uv[0],transform_uv[1],uv_mesh,_GeometryPartitionBias);
+        geometry_uv[2] = VertexCenterBias(transform_uv[0],transform_uv[1],transform_uv[2],uv_mesh,_GeometryPartitionBias);
+        float geometry_pushpull_offset[3] = CONTROL_MACRO3(
+            _Noise2ndOffsetControlTex,_point_repeat,_Noise2ndOffsetControl,geometry_uv[0],geometry_uv[1],geometry_uv[2]);
+        float geometry_pushpull_al_mask[3] = CONTROL_MACRO3(
+            _Noise2ndALMaskControlTex,_point_repeat,_Noise2ndALMaskControl,geometry_uv[0],geometry_uv[1],geometry_uv[2]);
+        #define GEOMETRY_PUSHPULL_AL_MASK_MACRO(n) geometry_pushpull_al_mask[n]
+    #elif _GEOMETRYSOURCE_NOISE3RD
+        CONTROL_MESH_MACRO(_Noise3rdOffsetControlTex);
+        float geometry_offset = NOISE3RD_OFFSET_CONTROL_MESH_MACRO;
+        CONTROL_MESH_MACRO(_Noise3rdALMaskControlTex);
+        float geometry_al_mask = NOISE3RD_AL_MASK_CONTROL_MESH_MACRO;
+        geometry_uv[0] = VertexCenterBias(transform_uv[1],transform_uv[2],transform_uv[0],uv_mesh,_GeometryPartitionBias);
+        geometry_uv[1] = VertexCenterBias(transform_uv[2],transform_uv[0],transform_uv[1],uv_mesh,_GeometryPartitionBias);
+        geometry_uv[2] = VertexCenterBias(transform_uv[0],transform_uv[1],transform_uv[2],uv_mesh,_GeometryPartitionBias);
+        float geometry_pushpull_offset[3] = CONTROL_MACRO3(
+            _Noise3rdOffsetControlTex,_point_repeat,_Noise3rdOffsetControl,geometry_uv[0],geometry_uv[1],geometry_uv[2]);
+        float geometry_pushpull_al_mask[3] = CONTROL_MACRO3(
+            _Noise3rdALMaskControlTex,_point_repeat,_Noise3rdALMaskControl,geometry_uv[0],geometry_uv[1],geometry_uv[2]);
+        #define GEOMETRY_PUSHPULL_AL_MASK_MACRO(n) geometry_pushpull_al_mask[n]
     #else
-        noise3rd_offset[0] = 1.0;
-        noise3rd_offset[1] = 1.0;
-        noise3rd_offset[2] = 1.0;
+        float geometry_al_mask = 1.0;
+        float geometry_pushpull_al_mask = 1.0;
+        #define GEOMETRY_PUSHPULL_AL_MASK_MACRO(n) geometry_pushpull_al_mask
+    #endif
+
+    CONTROL_MESH_MACRO(_OrbitMaskControlTex);
+    float orbit_mask = CONTROL_MACRO(_OrbitMaskControlTex,_point_repeat,_OrbitMaskControl,uv_mesh);
+    #ifdef _ORBITSOURCE_NOISE1ST
+        CONTROL_MESH_MACRO(_Noise1stOffsetControlTex);
+        float orbit_offset = NOISE1ST_OFFSET_CONTROL_MESH_MACRO;
+    #elif _ORBITSOURCE_NOISE2ND
+        CONTROL_MESH_MACRO(_Noise2ndOffsetControlTex);
+        float orbit_offset = NOISE2ND_OFFSET_CONTROL_MESH_MACRO;
+    #elif _ORBITSOURCE_NOISE3RD
+        CONTROL_MESH_MACRO(_Noise3rdOffsetControlTex);
+        float orbit_offset = NOISE3RD_OFFSET_CONTROL_MESH_MACRO;
+    #endif
+
+    float orbit_rotation_al_mesh = 1.0;
+    #ifdef _ORBITROTATIONSOURCE_NOISE1ST
+        CONTROL_MESH_MACRO(_Noise1stOffsetControlTex);
+        float orbit_rotation_offset = NOISE1ST_OFFSET_CONTROL_MESH_MACRO;
+        #ifdef _USE_AUDIOLINK
+            orbit_rotation_al_mesh = NOISE1ST_AL_MASK_CONTROL_MESH_MACRO;
+        #endif
+    #elif _ORBITROTATIONSOURCE_NOISE2ND
+        CONTROL_MESH_MACRO(_Noise2ndOffsetControlTex);
+        float orbit_rotation_offset = NOISE2ND_OFFSET_CONTROL_MESH_MACRO;
+        #ifdef _USE_AUDIOLINK
+            orbit_rotation_al_mesh = NOISE2ND_AL_MASK_CONTROL_MESH_MACRO;
+        #endif
+    #elif _ORBITROTATIONSOURCE_NOISE3RD
+        CONTROL_MESH_MACRO(_Noise3rdOffsetControlTex);
+        float orbit_rotation_offset = NOISE3RD_OFFSET_CONTROL_MESH_MACRO;
+        #ifdef _USE_AUDIOLINK
+            orbit_rotation_al_mesh = NOISE3RD_AL_MASK_CONTROL_MESH_MACRO;
+        #endif
     #endif
 
     #ifdef _USE_AUDIOLINK
-        audiolink_mask[0] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_AudioLinkMaskControlTex, _point_clamp, inp[0].uv, 0.0),_AudioLinkMaskControl);
-        audiolink_mask[1] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_AudioLinkMaskControlTex, _point_clamp, inp[1].uv, 0.0),_AudioLinkMaskControl);
-        audiolink_mask[2] = lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_AudioLinkMaskControlTex, _point_clamp, inp[2].uv, 0.0),_AudioLinkMaskControl);
-
-        float4 audiolink_vu_band = lerp(AudioLinkData(ALPASS_FILTEREDAUDIOLINK+uint2(_AudioLinkVUSmooth,_AudioLinkVUBand)),AudioLinkData(ALPASS_FILTEREDVU_INTENSITY),max(0.0,_AudioLinkVUBand-4.0));
+        float4 audiolink_vu_band = lerp(AudioLinkData(ALPASS_FILTEREDAUDIOLINK+uint2(_AudioLinkVUSmooth,_AudioLinkVUBand)),AudioLinkData(ALPASS_FILTEREDVU_INTENSITY),max(0.0,_AudioLinkVUBand-3.0));
         float audiolink_vu = saturate(lerp(audiolink_vu_band.r,audiolink_vu_band.b,_AudioLinkVUPanning)*_AudioLinkVUGainMul+_AudioLinkVUGainAdd);
         float audiolink_chronotensity = (AudioLinkDecodeDataAsUInt(ALPASS_CHRONOTENSITY+uint2(_AudioLinkChronoTensityType,_AudioLinkChronoTensityBand)).r/_AudioLinkChronoTensityScale);
-
-        #endif
-
-    float3 fragment_stream[3];
-    #ifdef _DEFINED_FRAGMENT_NOISE
-        float3 fragment_noise;
-        float3 fragment_center = (inp[0].FRAGMENT_NOISE_MACRO+inp[1].FRAGMENT_NOISE_MACRO+inp[2].FRAGMENT_NOISE_MACRO)/3.0;
-        float fragment_time = FRAGMENT_TIME_MACRO;
-        #ifdef _PARTITIONTYPE_VERTEX
-            fragment_noise = float3(
-                FragmentNoisePingPong(inp[0].FRAGMENT_NOISE_MACRO,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO,
-                FragmentNoisePingPong(inp[1].FRAGMENT_NOISE_MACRO,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO,
-                FragmentNoisePingPong(inp[2].FRAGMENT_NOISE_MACRO,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO);
-            fragment_noise.x = fragment_noise.x*fragment_mask[0];
-            fragment_noise.y = fragment_noise.y*fragment_mask[1];
-            fragment_noise.z = fragment_noise.z*fragment_mask[2];
-            fragment_noise.x = lerp(fragment_noise.x,1.0-fragment_noise.x,_FragmentInverse);
-            fragment_noise.y = lerp(fragment_noise.y,1.0-fragment_noise.y,_FragmentInverse);
-            fragment_noise.z = lerp(fragment_noise.z,1.0-fragment_noise.z,_FragmentInverse);
-
-            fragment_stream[0] = float3(0.0,fragment_noise.x,fragment_noise.x);
-            fragment_stream[1] = float3(fragment_noise.y,0.0,fragment_noise.y);
-            fragment_stream[2] = float3(fragment_noise.z,fragment_noise.z,0.0);
-
-        #elif _PARTITIONTYPE_SIDE
-            fragment_noise.x = FragmentSidePosNoisePingPong(inp[1].FRAGMENT_NOISE_MACRO,inp[2].FRAGMENT_NOISE_MACRO,inp[0].FRAGMENT_NOISE_MACRO,fragment_center,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO;
-            fragment_noise.y = FragmentSidePosNoisePingPong(inp[2].FRAGMENT_NOISE_MACRO,inp[0].FRAGMENT_NOISE_MACRO,inp[1].FRAGMENT_NOISE_MACRO,fragment_center,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO;
-            fragment_noise.z = FragmentSidePosNoisePingPong(inp[0].FRAGMENT_NOISE_MACRO,inp[1].FRAGMENT_NOISE_MACRO,inp[2].FRAGMENT_NOISE_MACRO,fragment_center,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO;
-
-            fragment_noise.x = lerp(1.0-fragment_noise.x,fragment_noise.x,_FragmentInverse);
-            fragment_noise.y = lerp(1.0-fragment_noise.y,fragment_noise.y,_FragmentInverse);
-            fragment_noise.z = lerp(1.0-fragment_noise.z,fragment_noise.z,_FragmentInverse);
-
-            fragment_stream[0] = float3(0.0,1.0-fragment_noise.y*fragment_mask[0],1.0-fragment_noise.z*fragment_mask[0])*fragment_mask[0];
-            fragment_stream[1] = float3(1.0-fragment_noise.x*fragment_mask[1],0.0,1.0-fragment_noise.z*fragment_mask[1])*fragment_mask[1];
-            fragment_stream[2] = float3(1.0-fragment_noise.x*fragment_mask[2],1.0-fragment_noise.y*fragment_mask[2],0.0)*fragment_mask[2];
-
-        #elif _PARTITIONTYPE_MESH
-            fragment_stream[0] = FragmentNoisePingPong(FRAGMENT_CENTER_MACRO,FRAGMENT_OFFSET_MACRO(0),fragment_time)LINEFADEMODE_INSTANT_MACRO*fragment_mask[0];
-            fragment_stream[1] = FragmentNoisePingPong(FRAGMENT_CENTER_MACRO,FRAGMENT_OFFSET_MACRO(1),fragment_time)LINEFADEMODE_INSTANT_MACRO*fragment_mask[1];
-            fragment_stream[2] = FragmentNoisePingPong(FRAGMENT_CENTER_MACRO,FRAGMENT_OFFSET_MACRO(2),fragment_time)LINEFADEMODE_INSTANT_MACRO*fragment_mask[2];
-        #endif
-    #elif defined(_USE_AUDIOLINK) && _FRAGMENTSOURCE_AUDIOLINK_VU
-        fragment_stream[0] = audiolink_vu*audiolink_mask[0];
-        fragment_stream[1] = audiolink_vu*audiolink_mask[1];
-        fragment_stream[2] = audiolink_vu*audiolink_mask[2];
-    #elif defined(_USE_AUDIOLINK) && _FRAGMENTSOURCE_AUDIOLINK_CHRONOTENSITY
-        fragment_stream[0] = triloop(audiolink_chronotensity*audiolink_mask[0]);
-        fragment_stream[1] = triloop(audiolink_chronotensity*audiolink_mask[1]);
-        fragment_stream[2] = triloop(audiolink_chronotensity*audiolink_mask[2]);
-    #else
-        fragment_stream[0] = _FragmentValue*fragment_mask[0];
-        fragment_stream[1] = _FragmentValue*fragment_mask[1];
-        fragment_stream[2] = _FragmentValue*fragment_mask[2];
     #endif
 
+    float3 fragment_stream[3];
+    float3 fragment_value;
+    #ifdef _DEFINED_FRAGMENT_NOISE
+        float fragment_center = (inp[0].FRAGMENT_NOISE_MACRO+inp[1].FRAGMENT_NOISE_MACRO+inp[2].FRAGMENT_NOISE_MACRO)/3.0;
+        float3 fragment_time = FRAGMENT_TIME_MACRO;
+        #ifdef _PARTITIONTYPE_VERTEX
+            fragment_value = float3(
+                FragmentNoisePingPong(inp[0].FRAGMENT_NOISE_MACRO,fragment_offset[0],fragment_time.x)LINEFADEMODE_INSTANT_MACRO,
+                FragmentNoisePingPong(inp[1].FRAGMENT_NOISE_MACRO,fragment_offset[1],fragment_time.y)LINEFADEMODE_INSTANT_MACRO,
+                FragmentNoisePingPong(inp[2].FRAGMENT_NOISE_MACRO,fragment_offset[2],fragment_time.z)LINEFADEMODE_INSTANT_MACRO);
+        #elif _PARTITIONTYPE_SIDE
+            fragment_value = float3(
+            FragmentSidePosNoisePingPong(inp[1].FRAGMENT_NOISE_MACRO,inp[2].FRAGMENT_NOISE_MACRO,inp[0].FRAGMENT_NOISE_MACRO,fragment_center,fragment_offset[0],fragment_time.x)LINEFADEMODE_INSTANT_MACRO,
+            FragmentSidePosNoisePingPong(inp[2].FRAGMENT_NOISE_MACRO,inp[0].FRAGMENT_NOISE_MACRO,inp[1].FRAGMENT_NOISE_MACRO,fragment_center,fragment_offset[1],fragment_time.y)LINEFADEMODE_INSTANT_MACRO,
+            FragmentSidePosNoisePingPong(inp[0].FRAGMENT_NOISE_MACRO,inp[1].FRAGMENT_NOISE_MACRO,inp[2].FRAGMENT_NOISE_MACRO,fragment_center,fragment_offset[2],fragment_time.z)LINEFADEMODE_INSTANT_MACRO
+            );
+        #elif _PARTITIONTYPE_MESH
+            fragment_value = float3(
+                FragmentNoisePingPong(FRAGMENT_CENTER_MACRO,fragment_offset,fragment_time.x)LINEFADEMODE_INSTANT_MACRO,
+                FragmentNoisePingPong(FRAGMENT_CENTER_MACRO,fragment_offset,fragment_time.y)LINEFADEMODE_INSTANT_MACRO,
+                FragmentNoisePingPong(FRAGMENT_CENTER_MACRO,fragment_offset,fragment_time.z)LINEFADEMODE_INSTANT_MACRO
+            );
+        #endif
+    #else
+        fragment_value = _FragmentValue;
+    #endif
+
+    #if defined(_USE_AUDIOLINK) && defined(_FRAGMENTSOURCE_AUDIOLINK_VU)
+        fragment_value *= audiolink_vu;
+    #elif defined(_USE_AUDIOLINK) && defined(_FRAGMENTSOURCE_AUDIOLINK_CHRONOTENSITY)
+        fragment_value.x *= triloop(audiolink_chronotensity);
+        fragment_value.y *= triloop(audiolink_chronotensity);
+        fragment_value.z *= triloop(audiolink_chronotensity);
+    #endif
+
+    #ifdef _PARTITIONTYPE_VERTEX
+        fragment_stream[0] = float3(0.0,fragment_value.x,fragment_value.x);
+        fragment_stream[1] = float3(fragment_value.y,0.0,fragment_value.y);
+        fragment_stream[2] = float3(fragment_value.z,fragment_value.z,0.0);
+    #elif _PARTITIONTYPE_SIDE
+        fragment_stream[0] = float3(0.0,fragment_value.y,fragment_value.z);
+        fragment_stream[1] = float3(fragment_value.x,0.0,fragment_value.z);
+        fragment_stream[2] = float3(fragment_value.x,fragment_value.y,0.0);
+    #else
+        fragment_stream[0] = fragment_value.x;
+        fragment_stream[1] = fragment_value.y;
+        fragment_stream[2] = fragment_value.z;
+    #endif
     fragment_stream[0] = saturate(lerp(fragment_stream[0],1.0-fragment_stream[0],_FragmentInverse));
     fragment_stream[1] = saturate(lerp(fragment_stream[1],1.0-fragment_stream[1],_FragmentInverse));
     fragment_stream[2] = saturate(lerp(fragment_stream[2],1.0-fragment_stream[2],_FragmentInverse));
 
     float3 color_stream[3];
+    float3 coloring_value;
     #ifdef _DEFINED_COLORING_NOISE
         float3 color_center = (inp[0].COLOR_NOISE_MACRO+inp[1].COLOR_NOISE_MACRO+inp[2].COLOR_NOISE_MACRO)/3.0;
-        float color_time = COLOR_TIME_MACRO;
+        float3 color_time = COLOR_TIME_MACRO;
         #ifdef _COLORINGPARTITIONTYPE_VERTEX
-            color_stream[0] = ColorNoisePingPong(inp[0].COLOR_NOISE_MACRO,COLOR_OFFSET_MACRO(0),color_time)*coloring_mask[0];
-            color_stream[1] = ColorNoisePingPong(inp[1].COLOR_NOISE_MACRO,COLOR_OFFSET_MACRO(1),color_time)*coloring_mask[1];
-            color_stream[2] = ColorNoisePingPong(inp[2].COLOR_NOISE_MACRO,COLOR_OFFSET_MACRO(2),color_time)*coloring_mask[2];
+            coloring_value = float3(
+                ColorNoisePingPong(inp[0].COLOR_NOISE_MACRO,coloring_offset[0],color_time.x),
+                ColorNoisePingPong(inp[1].COLOR_NOISE_MACRO,coloring_offset[1],color_time.y),
+                ColorNoisePingPong(inp[2].COLOR_NOISE_MACRO,coloring_offset[2],color_time.z)
+            );
         #elif _COLORINGPARTITIONTYPE_SIDE
-            float3 color_noise;
-            color_noise.x = ColorSidePosNoisePingPong(inp[1].COLOR_NOISE_MACRO,inp[2].COLOR_NOISE_MACRO,inp[0].COLOR_NOISE_MACRO,color_center,COLOR_OFFSET_MACRO(0),color_time);
-            color_noise.y = ColorSidePosNoisePingPong(inp[2].COLOR_NOISE_MACRO,inp[0].COLOR_NOISE_MACRO,inp[1].COLOR_NOISE_MACRO,color_center,COLOR_OFFSET_MACRO(1),color_time);
-            color_noise.z = ColorSidePosNoisePingPong(inp[0].COLOR_NOISE_MACRO,inp[1].COLOR_NOISE_MACRO,inp[2].COLOR_NOISE_MACRO,color_center,COLOR_OFFSET_MACRO(2),color_time);
-
-            color_stream[0] = float3(0.0,color_noise.y,color_noise.z)*coloring_mask[0];
-            color_stream[1] = float3(color_noise.x,0.0,color_noise.z)*coloring_mask[1];
-            color_stream[2] = float3(color_noise.x,color_noise.y,0.0)*coloring_mask[2];
+            coloring_value = float3(
+                ColorSidePosNoisePingPong(inp[1].COLOR_NOISE_MACRO,inp[2].COLOR_NOISE_MACRO,inp[0].COLOR_NOISE_MACRO,color_center,coloring_offset[0],color_time.x),
+                ColorSidePosNoisePingPong(inp[2].COLOR_NOISE_MACRO,inp[0].COLOR_NOISE_MACRO,inp[1].COLOR_NOISE_MACRO,color_center,coloring_offset[1],color_time.y),
+                ColorSidePosNoisePingPong(inp[0].COLOR_NOISE_MACRO,inp[1].COLOR_NOISE_MACRO,inp[2].COLOR_NOISE_MACRO,color_center,coloring_offset[2],color_time.z)
+            );
         #elif _COLORINGPARTITIONTYPE_MESH
-            color_stream[0] = ColorNoisePingPong(COLOR_CENTER_MACRO,COLOR_OFFSET_MACRO(0),color_time)*coloring_mask[0];
-            color_stream[1] = ColorNoisePingPong(COLOR_CENTER_MACRO,COLOR_OFFSET_MACRO(1),color_time)*coloring_mask[1];
-            color_stream[2] = ColorNoisePingPong(COLOR_CENTER_MACRO,COLOR_OFFSET_MACRO(2),color_time)*coloring_mask[2];
+            coloring_value = float3(
+                ColorNoisePingPong(COLOR_CENTER_MACRO,coloring_offset,color_time.x),
+                ColorNoisePingPong(COLOR_CENTER_MACRO,coloring_offset,color_time.y),
+                ColorNoisePingPong(COLOR_CENTER_MACRO,coloring_offset,color_time.z)
+            );
         #endif
-    #elif defined(_USE_AUDIOLINK) && _COLORINGSOURCE_AUDIOLINK_VU
-        color_stream[0] = audiolink_vu*audiolink_mask[0];
-        color_stream[1] = audiolink_vu*audiolink_mask[1];
-        color_stream[2] = audiolink_vu*audiolink_mask[2];
-    #elif defined(_USE_AUDIOLINK) && _COLORINGSOURCE_AUDIOLINK_CHRONOTENSITY
-        color_stream[0] = triloop(audiolink_chronotensity*audiolink_mask[0]);
-        color_stream[1] = triloop(audiolink_chronotensity*audiolink_mask[1]);
-        color_stream[2] = triloop(audiolink_chronotensity*audiolink_mask[2]);
     #else
-        color_stream[0] = _ColoringValue*coloring_mask[0];
-        color_stream[1] = _ColoringValue*coloring_mask[1];
-        color_stream[2] = _ColoringValue*coloring_mask[2];
+        coloring_value = _ColoringValue;
+    #endif
+
+    #if defined(_USE_AUDIOLINK) && _COLORINGSOURCE_AUDIOLINK_VU
+        coloring_value *= audiolink_vu;
+    #elif defined(_USE_AUDIOLINK) && _COLORINGSOURCE_AUDIOLINK_CHRONOTENSITY
+        coloring_value.x *= triloop(audiolink_chronotensity);
+        coloring_value.y *= triloop(audiolink_chronotensity);
+        coloring_value.z *= triloop(audiolink_chronotensity);
+    #endif
+
+    coloring_value *= COLORING_MASK_MACRO;
+
+    #ifdef _COLORINGPARTITIONTYPE_VERTEX
+        color_stream[0] = coloring_value.x;
+        color_stream[1] = coloring_value.y;
+        color_stream[2] = coloring_value.z;
+    #elif _COLORINGPARTITIONTYPE_SIDE
+        color_stream[0] = float3(0.0,coloring_value.y,coloring_value.z);
+        color_stream[1] = float3(coloring_value.x,0.0,coloring_value.z);
+        color_stream[2] = float3(coloring_value.x,coloring_value.y,0.0);
+    #else
+        color_stream[0] = coloring_value.x;
+        color_stream[1] = coloring_value.y;
+        color_stream[2] = coloring_value.z;
     #endif
 
     #ifdef _COLORSOURCE_VERTEXCOLOR
@@ -181,82 +372,98 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     #if defined(_GEOMETRY_SCALE) || defined(_GEOMETRY_EXTRUDE) || defined(_GEOMETRY_ROTATION) || defined(_ACTIVATE_ORBIT)
         float3 origin_pos = inp[0].origin_pos;
         float3 geometry_center = (geometry_pos[0]+geometry_pos[1]+geometry_pos[2])/3.0;
-        float geometry_time = GEOMETRY_TIME_MACRO;
+        float geometry_time_raw = GEOMETRY_TIME_MACRO;
+        #if defined(_GEOMETRY_SCALE) || defined(_GEOMETRY_ROTATION)
+            float geometry_time = geometry_time_raw+GEOMETRY_AUDIOLINK_PHASE_MACRO*geometry_al_mask;
+        #endif
+        #if defined(_GEOMETRY_EXTRUDE)
+            float geometry_pushpull_time[3] = {
+                geometry_time_raw+GEOMETRY_AUDIOLINK_PHASE_MACRO*GEOMETRY_PUSHPULL_AL_MASK_MACRO(0),
+                geometry_time_raw+GEOMETRY_AUDIOLINK_PHASE_MACRO*GEOMETRY_PUSHPULL_AL_MASK_MACRO(1),
+                geometry_time_raw+GEOMETRY_AUDIOLINK_PHASE_MACRO*GEOMETRY_PUSHPULL_AL_MASK_MACRO(2),
+            };
+        #endif
+        float3 geometry_noise[3];
         #ifdef _DEFINED_GEOMETRY_NOISE
-            float3 geometry_center_noise = (inp[0].GEOMETRY_NOISE_MACRO+inp[1].GEOMETRY_NOISE_MACRO+inp[2].GEOMETRY_NOISE_MACRO)/3.0;
-            float3 geometry_noise[3];
-            geometry_noise[0] = VertexCenterBias(inp[1].GEOMETRY_NOISE_MACRO,inp[2].GEOMETRY_NOISE_MACRO,inp[0].GEOMETRY_NOISE_MACRO,geometry_center_noise,_GeometryPartitionBias);
-            geometry_noise[1] = VertexCenterBias(inp[2].GEOMETRY_NOISE_MACRO,inp[0].GEOMETRY_NOISE_MACRO,inp[1].GEOMETRY_NOISE_MACRO,geometry_center_noise,_GeometryPartitionBias);
-            geometry_noise[2] = VertexCenterBias(inp[0].GEOMETRY_NOISE_MACRO,inp[1].GEOMETRY_NOISE_MACRO,inp[2].GEOMETRY_NOISE_MACRO,geometry_center_noise,_GeometryPartitionBias);
-            geometry_noise[0] *= geometry_mask[0];
-            geometry_noise[1] *= geometry_mask[1];
-            geometry_noise[2] *= geometry_mask[2];
+            float3 geometry_center_pos = (inp[0].GEOMETRY_NOISE_MACRO+inp[1].GEOMETRY_NOISE_MACRO+inp[2].GEOMETRY_NOISE_MACRO)/3.0;
+            geometry_noise[0] = VertexCenterBias(inp[1].GEOMETRY_NOISE_MACRO,inp[2].GEOMETRY_NOISE_MACRO,inp[0].GEOMETRY_NOISE_MACRO,geometry_center_pos,_GeometryPartitionBias);
+            geometry_noise[1] = VertexCenterBias(inp[2].GEOMETRY_NOISE_MACRO,inp[0].GEOMETRY_NOISE_MACRO,inp[1].GEOMETRY_NOISE_MACRO,geometry_center_pos,_GeometryPartitionBias);
+            geometry_noise[2] = VertexCenterBias(inp[0].GEOMETRY_NOISE_MACRO,inp[1].GEOMETRY_NOISE_MACRO,inp[2].GEOMETRY_NOISE_MACRO,geometry_center_pos,_GeometryPartitionBias);
+
+            float3 geometry_pushpull_noise[3] = {geometry_noise[0],geometry_noise[1],geometry_noise[2]};
+            geometry_noise[0] *= geometry_mask;
+            geometry_noise[1] *= geometry_mask;
+            geometry_noise[2] *= geometry_mask;
+            geometry_pushpull_noise[0] *= geometry_pushpull_mask[0];
+            geometry_pushpull_noise[1] *= geometry_pushpull_mask[1];
+            geometry_pushpull_noise[2] *= geometry_pushpull_mask[2];
         #else
-            float3 geometry_center_noise = 0.0;
-            float3 geometry_noise[3];
-            geometry_noise[0] = GEOMETRY_NOISE_MACRO*geometry_mask[0];
-            geometry_noise[1] = GEOMETRY_NOISE_MACRO*geometry_mask[1];
-            geometry_noise[2] = GEOMETRY_NOISE_MACRO*geometry_mask[2];
+            float3 geometry_pushpull_noise[3] = {geometry_noise[0],geometry_noise[1],geometry_noise[2]};
+            geometry_noise[0] = GEOMETRY_NOISE_MACRO*geometry_mask;
+            geometry_noise[1] = GEOMETRY_NOISE_MACRO*geometry_mask;
+            geometry_noise[2] = GEOMETRY_NOISE_MACRO*geometry_mask;
+            geometry_pushpull_noise[0] = GEOMETRY_NOISE_MACRO*geometry_pushpull_mask[0];
+            geometry_pushpull_noise[1] = GEOMETRY_NOISE_MACRO*geometry_pushpull_mask[1];
+            geometry_pushpull_noise[2] = GEOMETRY_NOISE_MACRO*geometry_pushpull_mask[2];
         #endif
 
         #ifdef _GEOMETRY_SCALE
             #ifdef _DEFINED_GEOMETRY_NOISE
-                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,GeometryNoisePingPong(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time)));
-                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,GeometryNoisePingPong(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time)));
-                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,GeometryNoisePingPong(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time)));
+                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,GeometryNoisePingPong(geometry_noise[0],geometry_offset,geometry_time)));
+                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,GeometryNoisePingPong(geometry_noise[1],geometry_offset,geometry_time)));
+                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,GeometryNoisePingPong(geometry_noise[2],geometry_offset,geometry_time)));
             #elif defined(_USE_AUDIOLINK) && _GEOMETRYSOURCE_AUDIOLINK_VU
-                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,audiolink_vu*audiolink_mask[0]));
-                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,audiolink_vu*audiolink_mask[1]));
-                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,audiolink_vu*audiolink_mask[2]));
+                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,audiolink_vu*geometry_mask));
+                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,audiolink_vu*geometry_mask));
+                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,audiolink_vu*geometry_mask));
             #elif defined(_USE_AUDIOLINK) && _GEOMETRYSOURCE_AUDIOLINK_CHRONOTENSITY
-                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,triloop(audiolink_chronotensity*audiolink_mask[0])));
-                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,triloop(audiolink_chronotensity*audiolink_mask[1])));
-                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,triloop(audiolink_chronotensity*audiolink_mask[2])));
+                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,triloop(audiolink_chronotensity*geometry_mask)));
+                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,triloop(audiolink_chronotensity*geometry_mask)));
+                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,triloop(audiolink_chronotensity*geometry_mask)));
             #else
-                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,_GeometryValue));
-                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,_GeometryValue));
-                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,_GeometryValue));
+                geometry_pos[0] = lerp(geometry_center,geometry_pos[0],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,geometry_noise[0]));
+                geometry_pos[1] = lerp(geometry_center,geometry_pos[1],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,geometry_noise[1]));
+                geometry_pos[2] = lerp(geometry_center,geometry_pos[2],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,geometry_noise[2]));
             #endif
         #endif
         #ifdef _GEOMETRY_EXTRUDE
             #ifdef _DEFINED_GEOMETRY_NOISE
-                geometry_pos[0] = geometry_pos[0]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,GeometryNoisePingPong(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time))*inp[0].world_normal;
-                geometry_pos[1] = geometry_pos[1]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,GeometryNoisePingPong(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time))*inp[1].world_normal;
-                geometry_pos[2] = geometry_pos[2]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,GeometryNoisePingPong(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time))*inp[2].world_normal;
+                geometry_pos[0] = geometry_pos[0]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,GeometryNoisePingPong(geometry_pushpull_noise[0],geometry_pushpull_offset[0],geometry_pushpull_time[0]))*inp[0].world_normal;
+                geometry_pos[1] = geometry_pos[1]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,GeometryNoisePingPong(geometry_pushpull_noise[1],geometry_pushpull_offset[1],geometry_pushpull_time[1]))*inp[1].world_normal;
+                geometry_pos[2] = geometry_pos[2]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,GeometryNoisePingPong(geometry_pushpull_noise[2],geometry_pushpull_offset[2],geometry_pushpull_time[2]))*inp[2].world_normal;
             #elif defined(_USE_AUDIOLINK) && _GEOMETRYSOURCE_AUDIOLINK_VU
-                geometry_pos[0] = geometry_pos[0]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,audiolink_vu*audiolink_mask[0])*inp[0].world_normal;
-                geometry_pos[1] = geometry_pos[1]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,audiolink_vu*audiolink_mask[1])*inp[1].world_normal;
-                geometry_pos[2] = geometry_pos[2]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,audiolink_vu*audiolink_mask[2])*inp[2].world_normal;
+                geometry_pos[0] = geometry_pos[0]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,audiolink_vu*geometry_pushpull_mask[0])*inp[0].world_normal;
+                geometry_pos[1] = geometry_pos[1]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,audiolink_vu*geometry_pushpull_mask[1])*inp[1].world_normal;
+                geometry_pos[2] = geometry_pos[2]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,audiolink_vu*geometry_pushpull_mask[2])*inp[2].world_normal;
             #elif defined(_USE_AUDIOLINK) && _GEOMETRYSOURCE_AUDIOLINK_CHRONOTENSITY
-                geometry_pos[0] = geometry_pos[0]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,triloop(audiolink_chronotensity*audiolink_mask[0]))*inp[0].world_normal;
-                geometry_pos[1] = geometry_pos[1]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,triloop(audiolink_chronotensity*audiolink_mask[1]))*inp[1].world_normal;
-                geometry_pos[2] = geometry_pos[2]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,triloop(audiolink_chronotensity*audiolink_mask[2]))*inp[2].world_normal;
+                geometry_pos[0] = geometry_pos[0]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,triloop(audiolink_chronotensity*geometry_pushpull_mask[0]))*inp[0].world_normal;
+                geometry_pos[1] = geometry_pos[1]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,triloop(audiolink_chronotensity*geometry_pushpull_mask[1]))*inp[1].world_normal;
+                geometry_pos[2] = geometry_pos[2]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,triloop(audiolink_chronotensity*geometry_pushpull_mask[2]))*inp[2].world_normal;
             #else
-                geometry_pos[0] = geometry_pos[0]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,_GeometryValue)*inp[0].world_normal;
-                geometry_pos[1] = geometry_pos[1]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,_GeometryValue)*inp[1].world_normal;
-                geometry_pos[2] = geometry_pos[2]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,_GeometryValue)*inp[2].world_normal;
+                geometry_pos[0] = geometry_pos[0]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,geometry_pushpull_noise[0])*inp[0].world_normal;
+                geometry_pos[1] = geometry_pos[1]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,geometry_pushpull_noise[1])*inp[1].world_normal;
+                geometry_pos[2] = geometry_pos[2]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,geometry_pushpull_noise[2])*inp[2].world_normal;
             #endif
         #endif
-
         #ifdef _GEOMETRY_ROTATION
             float3 normal_average = (inp[0].world_normal+inp[1].world_normal+inp[2].world_normal)/3.0;
             float rotation_sign = sign(_GeometryRotationReverse*2.0-1.0);
             #ifdef _DEFINED_GEOMETRY_NOISE
-                geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center,rotation_sign*GEOMETRY_FUNC_NOISE_MACRO(geometry_noise[0],GEOMETRY_OFFSET_MACRO(0),geometry_time)*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
-                geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center,rotation_sign*GEOMETRY_FUNC_NOISE_MACRO(geometry_noise[1],GEOMETRY_OFFSET_MACRO(1),geometry_time)*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
-                geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center,rotation_sign*GEOMETRY_FUNC_NOISE_MACRO(geometry_noise[2],GEOMETRY_OFFSET_MACRO(2),geometry_time)*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center,rotation_sign*GEOMETRY_FUNC_NOISE_MACRO(geometry_noise[0],geometry_offset,geometry_time)*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center,rotation_sign*GEOMETRY_FUNC_NOISE_MACRO(geometry_noise[1],geometry_offset,geometry_time)*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center,rotation_sign*GEOMETRY_FUNC_NOISE_MACRO(geometry_noise[2],geometry_offset,geometry_time)*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
             #elif defined(_USE_AUDIOLINK) && _GEOMETRYSOURCE_AUDIOLINK_VU
-                geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center,rotation_sign*audiolink_vu*audiolink_mask[0]*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
-                geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center,rotation_sign*audiolink_vu*audiolink_mask[1]*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
-                geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center,rotation_sign*audiolink_vu*audiolink_mask[2]*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center,rotation_sign*audiolink_vu*geometry_mask*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center,rotation_sign*audiolink_vu*geometry_mask*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center,rotation_sign*audiolink_vu*geometry_mask*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
             #elif defined(_USE_AUDIOLINK) && _GEOMETRYSOURCE_AUDIOLINK_CHRONOTENSITY
-                geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center,rotation_sign*audiolink_chronotensity*audiolink_mask[0]*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
-                geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center,rotation_sign*audiolink_chronotensity*audiolink_mask[1]*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
-                geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center,rotation_sign*audiolink_chronotensity*audiolink_mask[2]*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center,rotation_sign*audiolink_chronotensity*geometry_mask*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center,rotation_sign*audiolink_chronotensity*geometry_mask*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center,rotation_sign*audiolink_chronotensity*geometry_mask*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
             #else
-                geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center,rotation_sign*_GeometryValue*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
-                geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center,rotation_sign*_GeometryValue*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
-                geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center,rotation_sign*_GeometryValue*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center,rotation_sign*geometry_noise[0]*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center,rotation_sign*geometry_noise[1]*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
+                geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center,rotation_sign*geometry_noise[2]*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center;
             #endif
         #endif
 
@@ -266,12 +473,11 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
                 geometry_pos[1]-geometry_center+_OrbitOffset.xyz,
                 geometry_pos[2]-geometry_center+_OrbitOffset.xyz};
             float3 dir_pi2 = float3(_OrbitRotation.x,_OrbitRotation.y,_OrbitRotation.z)*UNITY_TWO_PI;
-            float3 orbit_anim = ORBIT_ROTATION_AUDIOLINK_MACRO;
+            float3 orbit_anim = ORBIT_ROTATION_AUDIOLINK_MACRO*orbit_rotation_al_mesh;
             float3 orbit_rotation_time = ORBIT_ROTATION_TIME_MACRO;
             #ifdef _DEFINED_ORBITROTATION_NOISE
                 float3 orbit_rotation_center_noise = (inp[0].ORBITROTATION_NOISE_MACRO+inp[1].ORBITROTATION_NOISE_MACRO+inp[2].ORBITROTATION_NOISE_MACRO)/3.0;
-                float orbit_rotation_mask_offset = (ORBITROTATION_OFFSET_MACRO(0)+ORBITROTATION_OFFSET_MACRO(1)+ORBITROTATION_OFFSET_MACRO(2))/3.0;
-                orbit_anim.xyz += OrbitRotationNoisePingPong(orbit_rotation_center_noise,orbit_rotation_mask_offset,orbit_rotation_time)*_OrbitRotationVariance.xyz;
+                orbit_anim.xyz += OrbitRotationNoisePingPong(orbit_rotation_center_noise,orbit_rotation_offset,orbit_rotation_time)*_OrbitRotationVariance.xyz;
                 float3 audiolink_spectrum = FUNC_ORBIT_WAVE_AUDIOLINK_SPECTRUM_MACRO(orbit_rotation_center_noise);
             #elif defined(_ORBITROTATIONSOURCE_PRIMITIVE)
                 float orbit_rotation_random = random(id+_OrbitRotationSeed);
@@ -292,9 +498,9 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             orbit_anim += dir_pi2+orbit_rotation_time;
 
             float3 orbit_wave_r = float3(
-                sin(orbit_wave.x)*_OrbitWaveStrength.x,
-                cos(orbit_anim.x)*sin(orbit_wave.y)*_OrbitWaveStrength.y,
-                sin(orbit_anim.x)*sin(orbit_wave.z)*_OrbitWaveStrength.y
+                sin(orbit_wave.x)*_OrbitWaveStrength.x*orbit_rotation_al_mesh,
+                cos(orbit_anim.x)*sin(orbit_wave.y)*_OrbitWaveStrength.y*orbit_rotation_al_mesh,
+                sin(orbit_anim.x)*sin(orbit_wave.z)*_OrbitWaveStrength.y*orbit_rotation_al_mesh
             );
 
             #ifdef _ORBITWAVEREFAUDIOLINK_VU
@@ -322,18 +528,18 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             #ifdef _DEFINED_ORBIT_NOISE
                 float orbit_time = ORBIT_TIME_MACRO;
                 float3 orbit_noise = (inp[0].ORBIT_NOISE_MACRO+inp[1].ORBIT_NOISE_MACRO+inp[2].ORBIT_NOISE_MACRO)/3.0;
-                geometry_pos[0] = lerp(geometry_pos[0],orbit[0],OrbitNoisePingPong(orbit_noise,ORBIT_OFFSET_MACRO(0),orbit_time)*orbit_mask[0]);
-                geometry_pos[1] = lerp(geometry_pos[1],orbit[1],OrbitNoisePingPong(orbit_noise,ORBIT_OFFSET_MACRO(1),orbit_time)*orbit_mask[1]);
-                geometry_pos[2] = lerp(geometry_pos[2],orbit[2],OrbitNoisePingPong(orbit_noise,ORBIT_OFFSET_MACRO(2),orbit_time)*orbit_mask[2]);
+                geometry_pos[0] = lerp(geometry_pos[0],orbit[0],OrbitNoisePingPong(orbit_noise,orbit_offset,orbit_time)*orbit_mask);
+                geometry_pos[1] = lerp(geometry_pos[1],orbit[1],OrbitNoisePingPong(orbit_noise,orbit_offset,orbit_time)*orbit_mask);
+                geometry_pos[2] = lerp(geometry_pos[2],orbit[2],OrbitNoisePingPong(orbit_noise,orbit_offset,orbit_time)*orbit_mask);
             #elif _ORBITSOURCE_PRIMITIVE
                 float orbit_random = random(id+_OrbitSeed)>=_OrbitPrimitiveThreshold;
-                geometry_pos[0] = lerp(geometry_pos[0],orbit[0],orbit_random*orbit_mask[0]);
-                geometry_pos[1] = lerp(geometry_pos[1],orbit[1],orbit_random*orbit_mask[1]);
-                geometry_pos[2] = lerp(geometry_pos[2],orbit[2],orbit_random*orbit_mask[2]);
+                geometry_pos[0] = lerp(geometry_pos[0],orbit[0],orbit_random*orbit_mask);
+                geometry_pos[1] = lerp(geometry_pos[1],orbit[1],orbit_random*orbit_mask);
+                geometry_pos[2] = lerp(geometry_pos[2],orbit[2],orbit_random*orbit_mask);
             #else
-                geometry_pos[0] = lerp(geometry_pos[0],orbit[0],_OrbitValue*orbit_mask[0]);
-                geometry_pos[1] = lerp(geometry_pos[1],orbit[1],_OrbitValue*orbit_mask[1]);
-                geometry_pos[2] = lerp(geometry_pos[2],orbit[2],_OrbitValue*orbit_mask[2]);
+                geometry_pos[0] = lerp(geometry_pos[0],orbit[0],_OrbitValue*orbit_mask);
+                geometry_pos[1] = lerp(geometry_pos[1],orbit[1],_OrbitValue*orbit_mask);
+                geometry_pos[2] = lerp(geometry_pos[2],orbit[2],_OrbitValue*orbit_mask);
             #endif
         #endif
     #endif
