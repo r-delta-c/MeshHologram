@@ -47,12 +47,15 @@
 
     float draw = EaseBias(max(max(range.x,range.y),range.z),_LineGradientBias);
 
+    #ifdef _COLORINGPARTITIONTYPE_SIDE
+        float3 coloring_side = i.color_noise * (range>0.0);
+        sides = 0.0<sides;
+        float coloring_t = max(sides.x*coloring_side.x,max(sides.y*coloring_side.y,sides.z*coloring_side.z));
+        coloring_t = lerp(coloring_t,1.0,(i.color_noise.x+i.color_noise.y+i.color_noise.z)/3.0*1.1);
+    #endif
+
     #ifdef _COLORSOURCE_GRADIENT
         #ifdef _COLORINGPARTITIONTYPE_SIDE
-            float3 coloring_side = i.color_noise * (range>0.0);
-            sides = 0.0<sides;
-            float coloring_t = max(sides.x*coloring_side.x,max(sides.y*coloring_side.y,sides.z*coloring_side.z));
-            coloring_t = lerp(coloring_t,1.0,(i.color_noise.x+i.color_noise.y+i.color_noise.z)/3.0*1.1);
             c = lerp(_Color0,_Color1,coloring_t);
         #else
             c = lerp(_Color0,_Color1,i.color_noise);
@@ -61,11 +64,6 @@
         c = _Color0;
     #elif _COLORSOURCE_GRADIENTTEX
         #ifdef _COLORINGPARTITIONTYPE_SIDE
-            float3 coloring_side = i.color_noise * (range>0.0);
-            sides = 0.0<sides;
-            float coloring_t = saturate(
-                max(sides.x*coloring_side.x,max(sides.y*coloring_side.y,sides.z*coloring_side.z)));
-            coloring_t = lerp(coloring_t,1.0,(i.color_noise.x+i.color_noise.y+i.color_noise.z)/3.0*1.1);
             c = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColorGradientTex, _linear_repeat,float2(coloring_t*0.994+0.004,0.5),0.0);
         #else
             c = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColorGradientTex, _linear_repeat,float2(i.color_noise*0.994+0.004,0.5),0.0);
@@ -75,6 +73,11 @@
     #elif _COLORSOURCE_UNIQUESIDES
         c.rgb = lerp(i.baryCentricCoords,1.0-i.baryCentricCoords,i.color_noise);
     #elif _COLORSOURCE_AUDIOLINK_THEMECOLOR
-        c.rgb = AudioLinkData(ALPASS_CCCOLORS+uint2(_AudioLinkThemeColorBand,0)).rgb;
+        float coloring_value = AudioLinkData(ALPASS_CCCOLORS+uint2(_AudioLinkThemeColorBand,0)).rgb;
+        #ifdef _COLORINGPARTITIONTYPE_SIDE
+            c.rgb = lerp(coloring_value,1.0-coloring_value,coloring_t);
+        #else
+            c.rgb = lerp(coloring_value,1.0-coloring_value,i.color_noise);
+        #endif
     #endif
 
