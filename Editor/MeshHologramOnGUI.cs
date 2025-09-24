@@ -349,6 +349,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     if (GetPropertyFloat(targetMat, SHADER_PROPERTY._GEOMETRY_EXTRUDE) == 1)
                     {
                         DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_EXTRUDE_RANGE);
+                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PARTITION_BIAS);
                     }
                 }
                 using (new EditorGUILayout.VerticalScope("HelpBox"))
@@ -368,7 +369,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     SHADER_PROPERTY._GEOMETRY_MASK_CONTROL
                 );
                 EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PARTITION_BIAS);
                 EditorGUILayout.Space(16);
                 DrawShaderProperty(SHADER_PROPERTY._PIXELIZATION_SPACE);
                 DrawShaderProperty(SHADER_PROPERTY._PIXELIZATION);

@@ -88,7 +88,7 @@ _GeometryRotationInfluence||Influence*||影響量*
 _GeometryRotationReverse||Rotation Reverse*||逆回転*
 _GeometryRotationNoiseRepeat||One-way Rotation||一方向回転
 
-_GeometryPartitionBias||Geometry Partition Bias | Vertex<=>Center*||ジオメトリの区切りの偏り | 頂点<=>中心*
+_GeometryPartitionBias||Partition Bias | Vertex-Center-Side*||区切りの偏り | 頂点-中心-辺*
 _PixelizationSpace||Vertex Pixelization Position Space||頂点モザイク化の空間
 _Pixelization||Vertex Pixelization*/X/Y/Z/All||頂点モザイク化*/X/Y/Z/All
 
@@ -135,6 +135,15 @@ _Noise2ndOffsetControlTex||Offset Control*||オフセットコントロール*
 _Noise2ndOffsetControl||Strength*||強さ*
 _Noise3rdOffsetControlTex||Offset Control*||オフセットコントロール*
 _Noise3rdOffsetControl||Strength*||強さ*
+
+_OrbitRotationALMaskControlTex||AudioLink Mask Control*||AudioLink マスクコントロール
+_OrbitRotationALMaskControl||Strength*||強さ*
+_Noise1stALMaskControlTex||AudioLink Mask Control*||AudioLink マスクコントロール
+_Noise1stALMaskControl||Strength*||強さ*
+_Noise2ndALMaskControlTex||AudioLink Mask Control*||AudioLink マスクコントロール
+_Noise2ndALMaskControl||Strength*||強さ*
+_Noise3rdALMaskControlTex||AudioLink Mask Control*||AudioLink マスクコントロール
+_Noise3rdALMaskControl||Strength*||強さ*
 
 
 
