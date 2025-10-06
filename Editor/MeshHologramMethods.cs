@@ -208,7 +208,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             SHADER_PROPERTY SPACE,
             SHADER_PROPERTY SEED,
             SHADER_PROPERTY TIME_MULTI,
-            SHADER_PROPERTY TIME_PHASE
+            SHADER_PROPERTY TIME_PHASE,
+            SHADER_PROPERTY PHASE_SCALE
             )
         {
             foldout_bool = FoldoutList.MenuFoldout(foldout, false, order);
@@ -228,6 +229,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 EditorGUILayout.Space(16);
                 DrawShaderProperty(TIME_MULTI);
                 DrawShaderProperty(TIME_PHASE);
+                DrawShaderProperty(PHASE_SCALE);
             }
         }
 
@@ -249,7 +251,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     SHADER_PROPERTY._NOISE1ST_SPACE,
                     SHADER_PROPERTY._NOISE1ST_SEED,
                     SHADER_PROPERTY._NOISE1ST_TIME_MULTI,
-                    SHADER_PROPERTY._NOISE1ST_TIME_PHASE
+                    SHADER_PROPERTY._NOISE1ST_TIME_PHASE,
+                    SHADER_PROPERTY._NOISE1ST_PHASE_SCALE
                 );
             }
         }
@@ -272,7 +275,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     SHADER_PROPERTY._NOISE2ND_SPACE,
                     SHADER_PROPERTY._NOISE2ND_SEED,
                     SHADER_PROPERTY._NOISE2ND_TIME_MULTI,
-                    SHADER_PROPERTY._NOISE2ND_TIME_PHASE
+                    SHADER_PROPERTY._NOISE2ND_TIME_PHASE,
+                    SHADER_PROPERTY._NOISE2ND_PHASE_SCALE
                 );
             }
         }
@@ -295,7 +299,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     SHADER_PROPERTY._NOISE3RD_SPACE,
                     SHADER_PROPERTY._NOISE3RD_SEED,
                     SHADER_PROPERTY._NOISE3RD_TIME_MULTI,
-                    SHADER_PROPERTY._NOISE3RD_TIME_PHASE
+                    SHADER_PROPERTY._NOISE3RD_TIME_PHASE,
+                    SHADER_PROPERTY._NOISE3RD_PHASE_SCALE
                 );
             }
         }

@@ -334,18 +334,10 @@ Shader "DeltaField/shaders/MeshHologram"{
         _Noise1stOffsetBeforeScale("Noise 1st Offset before Scale",Int)=0
         [KeywordEnum(Offset,Model,World,Origin_World,Model_World,VertexColor)]
         _Noise1stSpace("Noise 1st Position Space",Int)=1
-
         _Noise1stSeed("Noise 1st Seed",Float)=0.0
-        _Noise1stValueCurve("Noise 1st Value Curve",Float)=0.5
-        [MaterialToggle]_Noise1stCurveType("Noise 1st Curve Type",Int)=1
-        _Noise1stThresholdMul("Noise 1st Threshold(Multiple)",Float)=1.0
-        _Noise1stThresholdAdd("Noise 1st Threshold(Addition)",Range(-0.5,0.5))=0.0
-
         _Noise1stTimeMulti("Noise 1st Time Multiplier",Float)=3.0
         _Noise1stTimePhase("Noise 1st Time Phase",Float)=0.0
-        _Noise1stPhaseScale("Noise 1st Phase Scale",Float)=3.0
-        [KeywordEnum(Disable,VU,ChronoTensity)]
-        _Noise1stPhaseRefAudioLink("Noise 1st Phase Reference AudioLink",Int)=0
+        _Noise1stPhaseScale("Noise 1st Phase Scale",Float)=0.0
 
 
         [DFVector(1,1,1)]_Noise2ndOffset0("Noise 2nd Offset",Vector)=(0.0,0.0,0.0,0.0)
@@ -356,19 +348,10 @@ Shader "DeltaField/shaders/MeshHologram"{
         _Noise2ndOffsetBeforeScale("Noise 2nd Offset before Scale",Int)=0
         [KeywordEnum(Offset,Model,World,Origin_World,Model_World,VertexColor)]
         _Noise2ndSpace("Noise 2nd Position Space",Int)=1
-
         _Noise2ndSeed("Noise 2nd Seed",Float)=1.0
-        _Noise2ndValueCurve("Noise 2nd Value Curve",Float)=1.0
-        [MaterialToggle]_Noise2ndCurveType("Noise 2nd Curve Type",Int)=1
-        _Noise2ndThresholdMul("Noise 2nd Threshold(Multiple)",Float)=1.0
-        _Noise2ndThresholdAdd("Noise 2nd Threshold(Addition)",Range(-0.5,0.5))=0.0
-
         _Noise2ndTimeMulti("Noise 2nd Time Multiplier",Float)=5.0
         _Noise2ndTimePhase("Noise 2nd Time Phase",Float)=0.0
-        _Noise2ndPhaseScale("Noise 2nd Phase Scale",Float)=3.0
-
-        [KeywordEnum(Disable,VU,ChronoTensity)]
-        _Noise2ndPhaseRefAudioLink("Noise 2nd Phase Reference AudioLink",Int)=0
+        _Noise2ndPhaseScale("Noise 2nd Phase Scale",Float)=0.0
 
 
         [DFVector(1,1,1)]_Noise3rdOffset0("Noise 3rd Offset",Vector)=(0.0,0.0,0.0,0.0)
@@ -379,19 +362,11 @@ Shader "DeltaField/shaders/MeshHologram"{
         _Noise3rdOffsetBeforeScale("Noise 3rd Offset before Scale",Int)=0
         [KeywordEnum(Offset,Model,World,Origin_World,Model_World,VertexColor)]
         _Noise3rdSpace("Noise 3rd Position Space",Int)=1
-
         _Noise3rdSeed("Noise 3rd Seed",Float)=2.0
-        _Noise3rdValueCurve("Noise 3rd Value Curve",Float)=3.0
-        [MaterialToggle]_Noise3rdCurveType("Noise 3rd Curve Type",Int)=0
-        _Noise3rdThresholdMul("Noise 3rd Threshold(Multiple)",Float)=3.0
-        _Noise3rdThresholdAdd("Noise 3rd Threshold(Addition)",Range(-0.5,0.5))=0.0
-
         _Noise3rdTimeMulti("Noise 3rd Time Multiplier",Float)=3.0
         _Noise3rdTimePhase("Noise 3rd Time Phase",Float)=0.0
-        _Noise3rdPhaseScale("Noise 3rd Phase Scale",Float)=3.0
+        _Noise3rdPhaseScale("Noise 3rd Phase Scale",Float)=0.0
 
-        [KeywordEnum(Disable,VU,ChronoTensity)]
-        _Noise3rdPhaseRefAudioLink("Noise 3rd Phase Reference AudioLink",Int)=0
 
 
     }
@@ -447,31 +422,18 @@ Shader "DeltaField/shaders/MeshHologram"{
             #pragma shader_feature_local _ _GEOMETRY_ROTATION_NOISE_REPEAT
 
             #pragma shader_feature_local _ _ACTIVATE_ORBIT
-
-            #pragma shader_feature_local _ _FRAGMENT_AUDIOLINK_NOISE_SPECTRUM
-            #pragma shader_feature_local _ _COLORING_AUDIOLINK_NOISE_SPECTRUM
-            #pragma shader_feature_local _ _GEOMETRY_AUDIOLINK_NOISE_SPECTRUM
-
-
-            #pragma shader_feature_local _ORBITROTATIONREFAUDIOLINK_DISABLE _ORBITROTATIONREFAUDIOLINK_VU _ORBITROTATIONREFAUDIOLINK_CHRONOTENSITY
-
-            #pragma shader_feature_local _ORBITWAVEREFAUDIOLINK_DISABLE _ORBITWAVEREFAUDIOLINK_VU _ORBITWAVEREFAUDIOLINK_SPECTRUM
-
             #pragma shader_feature_local _PIXELIZATIONSPACE_DISABLE _PIXELIZATIONSPACE_MODEL _PIXELIZATIONSPACE_WORLD _PIXELIZATIONSPACE_POSTGEOMETRY
 
 
 
             #pragma shader_feature_local _NOISE1STSPACE_OFFSET _NOISE1STSPACE_MODEL _NOISE1STSPACE_WORLD _NOISE1STSPACE_ORIGIN_WORLD _NOISE1STSPACE_MODEL_WORLD _NOISE1STSPACE_VERTEXCOLOR
             #pragma shader_feature_local _ _NOISE1ST_OFFSET_BEFORE_SCALE
-            #pragma shader_feature_local _NOISE1STPHASEREFAUDIOLINK_DISABLE _NOISE1STPHASEREFAUDIOLINK_VU _NOISE1STPHASEREFAUDIOLINK_CHRONOTENSITY
 
             #pragma shader_feature_local _NOISE2NDSPACE_OFFSET _NOISE2NDSPACE_MODEL _NOISE2NDSPACE_WORLD _NOISE2NDSPACE_ORIGIN_WORLD _NOISE2NDSPACE_MODEL_WORLD _NOISE2NDSPACE_VERTEXCOLOR
             #pragma shader_feature_local _ _NOISE2ND_OFFSET_BEFORE_SCALE
-            #pragma shader_feature_local _NOISE2NDPHASEREFAUDIOLINK_DISABLE _NOISE2NDPHASEREFAUDIOLINK_VU _NOISE2NDPHASEREFAUDIOLINK_CHRONOTENSITY
 
             #pragma shader_feature_local _NOISE3RDSPACE_OFFSET _NOISE3RDSPACE_MODEL _NOISE3RDSPACE_WORLD _NOISE3RDSPACE_ORIGIN_WORLD _NOISE3RDSPACE_MODEL_WORLD _NOISE3RDSPACE_VERTEXCOLOR
             #pragma shader_feature_local _ _NOISE3RD_OFFSET_BEFORE_SCALE
-            #pragma shader_feature_local _NOISE3RDPHASEREFAUDIOLINK_DISABLE _NOISE3RDPHASEREFAUDIOLINK_VU _NOISE3RDPHASEREFAUDIOLINK_CHRONOTENSITY
 
             #pragma shader_feature_local _ _USE_FWIDTH
 
@@ -564,30 +526,18 @@ Shader "DeltaField/shaders/MeshHologram"{
             #pragma shader_feature_local _ _GEOMETRY_ROTATION_NOISE_REPEAT
 
             #pragma shader_feature_local _ _ACTIVATE_ORBIT
-
-            #pragma shader_feature_local _ORBITROTATIONREFAUDIOLINK_DISABLE _ORBITROTATIONREFAUDIOLINK_VU _ORBITROTATIONREFAUDIOLINK_CHRONOTENSITY
-
-            #pragma shader_feature_local _ORBITWAVEREFAUDIOLINK_DISABLE _ORBITWAVEREFAUDIOLINK_VU _ORBITWAVEREFAUDIOLINK_SPECTRUM
-
             #pragma shader_feature_local _PIXELIZATIONSPACE_DISABLE _PIXELIZATIONSPACE_MODEL _PIXELIZATIONSPACE_WORLD _PIXELIZATIONSPACE_POSTGEOMETRY
 
-
-            #pragma shader_feature_local _ _FRAGMENT_AUDIOLINK_NOISE_SPECTRUM
-            #pragma shader_feature_local _ _COLORING_AUDIOLINK_NOISE_SPECTRUM
-            #pragma shader_feature_local _ _GEOMETRY_AUDIOLINK_NOISE_SPECTRUM
 
 
             #pragma shader_feature_local _NOISE1STSPACE_OFFSET _NOISE1STSPACE_MODEL _NOISE1STSPACE_WORLD _NOISE1STSPACE_ORIGIN_WORLD _NOISE1STSPACE_MODEL_WORLD _NOISE1STSPACE_VERTEXCOLOR
             #pragma shader_feature_local _ _NOISE1ST_OFFSET_BEFORE_SCALE
-            #pragma shader_feature_local _NOISE1STPHASEREFAUDIOLINK_DISABLE _NOISE1STPHASEREFAUDIOLINK_VU _NOISE1STPHASEREFAUDIOLINK_CHRONOTENSITY
 
             #pragma shader_feature_local _NOISE2NDSPACE_OFFSET _NOISE2NDSPACE_MODEL _NOISE2NDSPACE_WORLD _NOISE2NDSPACE_ORIGIN_WORLD _NOISE2NDSPACE_MODEL_WORLD _NOISE2NDSPACE_VERTEXCOLOR
             #pragma shader_feature_local _ _NOISE2ND_OFFSET_BEFORE_SCALE
-            #pragma shader_feature_local _NOISE2NDPHASEREFAUDIOLINK_DISABLE _NOISE2NDPHASEREFAUDIOLINK_VU _NOISE2NDPHASEREFAUDIOLINK_CHRONOTENSITY
 
             #pragma shader_feature_local _NOISE3RDSPACE_OFFSET _NOISE3RDSPACE_MODEL _NOISE3RDSPACE_WORLD _NOISE3RDSPACE_ORIGIN_WORLD _NOISE3RDSPACE_MODEL_WORLD _NOISE3RDSPACE_VERTEXCOLOR
             #pragma shader_feature_local _ _NOISE3RD_OFFSET_BEFORE_SCALE
-            #pragma shader_feature_local _NOISE3RDPHASEREFAUDIOLINK_DISABLE _NOISE3RDPHASEREFAUDIOLINK_VU _NOISE3RDPHASEREFAUDIOLINK_CHRONOTENSITY
 
             #pragma shader_feature_local _ _USE_FWIDTH
 

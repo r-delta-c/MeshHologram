@@ -215,14 +215,9 @@ float3 _Noise1stOffset1;
 float4 _Noise1stScale0;
 float4 _Noise1stScale1;
 float _Noise1stSeed;
-float _Noise1stThresholdMul;
-float _Noise1stThresholdAdd;
-float _Noise1stValueCurve;
-float _Noise1stCurveType;
 float _Noise1stTimeMulti;
 float _Noise1stTimePhase;
 float _Noise1stPhaseScale;
-
 
 
 float3 _Noise2ndOffset0;
@@ -230,10 +225,6 @@ float3 _Noise2ndOffset1;
 float4 _Noise2ndScale0;
 float4 _Noise2ndScale1;
 float _Noise2ndSeed;
-float _Noise2ndThresholdMul;
-float _Noise2ndThresholdAdd;
-float _Noise2ndValueCurve;
-float _Noise2ndCurveType;
 float _Noise2ndTimeMulti;
 float _Noise2ndTimePhase;
 float _Noise2ndPhaseScale;
@@ -245,10 +236,6 @@ float3 _Noise3rdOffset1;
 float4 _Noise3rdScale0;
 float4 _Noise3rdScale1;
 float _Noise3rdSeed;
-float _Noise3rdThresholdMul;
-float _Noise3rdThresholdAdd;
-float _Noise3rdValueCurve;
-float _Noise3rdCurveType;
 float _Noise3rdTimeMulti;
 float _Noise3rdTimePhase;
 float _Noise3rdPhaseScale;
