@@ -3,12 +3,16 @@ float3 Pixelization(float3 inputs, float3 scale){
     return n > 0.0 ? floor((inputs+0.5*n)/n)*n : inputs;
 }
 
+float VertexCenterBias(float n0, float n1, float n, float c, float t){
+    return lerp(lerp(n,c,min(0.5,t)*2.0),(n0+n1)*0.5,max(0.0,((t-0.5)*2.0)));
+}
+
 float2 VertexCenterBias(float2 uv0, float2 uv1, float2 uv, float2 c, float t){
     return lerp(lerp(uv,c,min(0.5,t)*2.0),(uv0+uv1)*0.5,max(0.0,((t-0.5)*2.0)));
 }
 
-float3 VertexCenterBias(float3 v0, float3 v1, float3 v, float3 c, float t){
-    return lerp(lerp(v,c,min(0.5,t)*2.0),(v0+v1)*0.5,max(0.0,((t-0.5)*2.0)));
+float3 VertexCenterBias(float3 p0, float3 p1, float3 p, float3 c, float t){
+    return lerp(lerp(p,c,min(0.5,t)*2.0),(p0+p1)*0.5,max(0.0,((t-0.5)*2.0)));
 }
 
 float ChangeValueRange02(float n, float t){
@@ -31,14 +35,33 @@ float GenNoise(float3 inputs, float offset, float time, float seed, float phases
     return (ValueNoise3D(inputs,seed)+offset)*phasescale+time;
 }
 
-float EaseCurveValue(float i, float m, bool b){
-    return b?EaseInOutPowInverse(i,m):EaseInOutPow(i,m);
+
+float EasingSelector(float i, float m, uint b){
+    float r = 0.0;
+    r += pow(i,m)*SELECTOR_MACRO(b,0);
+    r += (1.0-pow(1.0-i,m))*SELECTOR_MACRO(b,1);
+    r += EaseInOutPow(i,m)*SELECTOR_MACRO(b,2);
+    r += EaseInOutPowInverse(i,m)*SELECTOR_MACRO(b,3);
+    return r;
+}
+
+float3 EasingSelector(float3 i, float m, uint b){
+    float3 r = 0.0;
+    r += pow(i,m)*SELECTOR_MACRO(b,0);
+    r += (1.0-pow(1.0-i,m))*SELECTOR_MACRO(b,1);
+    r += EaseInOutPow(i,m)*SELECTOR_MACRO(b,2);
+    r += EaseInOutPowInverse(i,m)*SELECTOR_MACRO(b,3);
+    return r;
+}
+
+float SideCenterPos(float n0, float n1, float n, float2 c){
+    return (n0+n1+VertexCenterBias(n0,n1,n,c,saturate(_TriangleComp/26.0)*0.5+0.5))/3.0;
 }
 
 float2 SideCenterPos(float2 uv0, float2 uv1, float2 uv, float2 c){
     return (uv0+uv1+VertexCenterBias(uv0,uv1,uv,c,saturate(_TriangleComp/26.0)*0.5+0.5))/3.0;
 }
 
-float3 SideCenterPos(float3 v0, float3 v1, float3 v, float3 c){
-    return (v0+v1+VertexCenterBias(v0,v1,v,c,saturate(_TriangleComp/26.0)*0.5+0.5))/3.0;
+float3 SideCenterPos(float3 p0, float3 p1, float3 p, float3 c){
+    return (p0+p1+VertexCenterBias(p0,p1,p,c,saturate(_TriangleComp/26.0)*0.5+0.5))/3.0;
 }

@@ -205,44 +205,40 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 }
                 EditorGUILayout.Space(16);
                 DrawShaderProperty(SHADER_PROPERTY._LINE_FADE_MODE);
-                DrawShaderProperty(SHADER_PROPERTY._PARTITION_TYPE);
+                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_PARTITION_TYPE);
                 EditorGUILayout.Space(16);
-                DrawControlTex(
-                    SHADER_PROPERTY._FRAGMENT_MASK_CONTROL_TEX,
-                    SHADER_PROPERTY._FRAGMENT_MASK_CONTROL
+                DrawSource(
+                    0,
+                    SHADER_PROPERTY._FRAGMENT_SOURCE,
+                    SHADER_PROPERTY._FRAGMENT_VALUE
                 );
-                EditorGUILayout.Space(16);
-
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_NOISE_SPECTRUM);
-                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._FRAGMENT_AUDIOLINK_NOISE_SPECTRUM) == 1)
-                    {
-                        DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_STRENGTH);
-                        DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_MIRROR);
-                        DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_TYPE);
-                        DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_RANGE);
-                    }
-                }
-
-                EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_INVERSE);
-                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_SOURCE);
-                switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._FRAGMENT_SOURCE))
-                {
-                    case 0:
-                        DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_VALUE);
-                        break;
-                    case 1:
-                        InsertNoise1stProps(0);
-                        break;
-                    case 2:
-                        InsertNoise2ndProps(0);
-                        break;
-                    case 3:
-                        InsertNoise3rdProps(0);
-                        break;
-                }
+                DrawAudioLinkSource(
+                    0,
+                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SOURCE,
+                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_VU_STRENGTH,
+                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
+                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_STRENGTH,
+                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_MIRROR,
+                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_TYPE
+                );
+                DrawControlTex(
+                    0,
+                    SHADER_PROPERTY._FRAGMENT_MASK_CONTROL_TEX,
+                    SHADER_PROPERTY._FRAGMENT_MASK_CONTROL,
+                    SHADER_PROPERTY._FRAGMENT_OFFSET_CONTROL_TEX,
+                    SHADER_PROPERTY._FRAGMENT_OFFSET_CONTROL,
+                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_MASK_CONTROL_TEX,
+                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_MASK_CONTROL
+                );
+                DrawModifier(
+                    0,
+                    SHADER_PROPERTY._FRAGMENT_PHASE_SCALE,
+                    SHADER_PROPERTY._FRAGMENT_LOOP_MODE,
+                    SHADER_PROPERTY._FRAGMENT_THRESHOLD_MUL,
+                    SHADER_PROPERTY._FRAGMENT_THRESHOLD_ADD,
+                    SHADER_PROPERTY._FRAGMENT_EASE_MODE,
+                    SHADER_PROPERTY._FRAGMENT_EASE_CURVE
+                );
             }
         }
 
@@ -292,41 +288,38 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 DrawShaderProperty(SHADER_PROPERTY._EMISSION);
                 DrawShaderProperty(SHADER_PROPERTY._COLORING_PARTITION_TYPE);
                 EditorGUILayout.Space(16);
-                DrawControlTex(
-                    SHADER_PROPERTY._COLORING_MASK_CONTROL_TEX,
-                    SHADER_PROPERTY._COLORING_MASK_CONTROL
+                DrawSource(
+                    1,
+                    SHADER_PROPERTY._COLORING_SOURCE,
+                    SHADER_PROPERTY._COLORING_VALUE
                 );
-                EditorGUILayout.Space(16);
-
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_NOISE_SPECTRUM);
-                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._COLORING_AUDIOLINK_NOISE_SPECTRUM) == 1)
-                    {
-                        DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_STRENGTH);
-                        DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_MIRROR);
-                        DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_TYPE);
-                        DrawShaderProperty(SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_RANGE);
-                    }
-                }
-
-                EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._COLORING_SOURCE);
-                switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._COLORING_SOURCE))
-                {
-                    case 0:
-                        DrawShaderProperty(SHADER_PROPERTY._COLOR_VALUE);
-                        break;
-                    case 1:
-                        InsertNoise1stProps(1);
-                        break;
-                    case 2:
-                        InsertNoise2ndProps(1);
-                        break;
-                    case 3:
-                        InsertNoise3rdProps(1);
-                        break;
-                }
+                DrawAudioLinkSource(
+                    1,
+                    SHADER_PROPERTY._COLORING_AUDIOLINK_SOURCE,
+                    SHADER_PROPERTY._COLORING_AUDIOLINK_VU_STRENGTH,
+                    SHADER_PROPERTY._COLORING_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
+                    SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_STRENGTH,
+                    SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_MIRROR,
+                    SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_TYPE
+                );
+                DrawControlTex(
+                    1,
+                    SHADER_PROPERTY._COLORING_MASK_CONTROL_TEX,
+                    SHADER_PROPERTY._COLORING_MASK_CONTROL,
+                    SHADER_PROPERTY._COLORING_OFFSET_CONTROL_TEX,
+                    SHADER_PROPERTY._COLORING_OFFSET_CONTROL,
+                    SHADER_PROPERTY._COLORING_AUDIOLINK_MASK_CONTROL_TEX,
+                    SHADER_PROPERTY._COLORING_AUDIOLINK_MASK_CONTROL
+                );
+                DrawModifier(
+                    1,
+                    SHADER_PROPERTY._COLORING_PHASE_SCALE,
+                    SHADER_PROPERTY._COLORING_LOOP_MODE,
+                    SHADER_PROPERTY._COLORING_THRESHOLD_MUL,
+                    SHADER_PROPERTY._COLORING_THRESHOLD_ADD,
+                    SHADER_PROPERTY._COLORING_EASE_MODE,
+                    SHADER_PROPERTY._COLORING_EASE_CURVE
+                );
             }
         }
 
@@ -364,45 +357,42 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 }
 
                 EditorGUILayout.Space(16);
-                DrawControlTex(
-                    SHADER_PROPERTY._GEOMETRY_MASK_CONTROL_TEX,
-                    SHADER_PROPERTY._GEOMETRY_MASK_CONTROL
-                );
-                EditorGUILayout.Space(16);
-                EditorGUILayout.Space(16);
                 DrawShaderProperty(SHADER_PROPERTY._PIXELIZATION_SPACE);
                 DrawShaderProperty(SHADER_PROPERTY._PIXELIZATION);
                 EditorGUILayout.Space(16);
 
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_NOISE_SPECTRUM);
-                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._GEOMETRY_AUDIOLINK_NOISE_SPECTRUM) == 1)
-                    {
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_STRENGTH);
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_MIRROR);
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_TYPE);
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_RANGE);
-                    }
-                }
-
-                EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_SOURCE);
-                switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._GEOMETRY_SOURCE))
-                {
-                    case 0:
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_VALUE);
-                        break;
-                    case 1:
-                        InsertNoise1stProps(2);
-                        break;
-                    case 2:
-                        InsertNoise2ndProps(2);
-                        break;
-                    case 3:
-                        InsertNoise3rdProps(2);
-                        break;
-                }
+                DrawSource(
+                    2,
+                    SHADER_PROPERTY._GEOMETRY_SOURCE,
+                    SHADER_PROPERTY._GEOMETRY_VALUE
+                );
+                DrawAudioLinkSource(
+                    2,
+                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SOURCE,
+                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_VU_STRENGTH,
+                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
+                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_STRENGTH,
+                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_MIRROR,
+                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_TYPE
+                );
+                DrawControlTex(
+                    2,
+                    SHADER_PROPERTY._GEOMETRY_MASK_CONTROL_TEX,
+                    SHADER_PROPERTY._GEOMETRY_MASK_CONTROL,
+                    SHADER_PROPERTY._GEOMETRY_OFFSET_CONTROL_TEX,
+                    SHADER_PROPERTY._GEOMETRY_OFFSET_CONTROL,
+                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_MASK_CONTROL_TEX,
+                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_MASK_CONTROL
+                );
+                DrawModifier(
+                    2,
+                    SHADER_PROPERTY._GEOMETRY_PHASE_SCALE,
+                    SHADER_PROPERTY._GEOMETRY_LOOP_MODE,
+                    SHADER_PROPERTY._GEOMETRY_THRESHOLD_MUL,
+                    SHADER_PROPERTY._GEOMETRY_THRESHOLD_ADD,
+                    SHADER_PROPERTY._GEOMETRY_EASE_MODE,
+                    SHADER_PROPERTY._GEOMETRY_EASE_CURVE
+                );
             }
         }
 
@@ -414,85 +404,158 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 DrawShaderProperty(SHADER_PROPERTY._ACTIVATE_ORBIT);
                 if (GetPropertyFloat(targetMat, SHADER_PROPERTY._ACTIVATE_ORBIT) == 1)
                 {
-                    DrawControlTex(
-                        SHADER_PROPERTY._ORBIT_MASK_CONTROL_TEX,
-                        SHADER_PROPERTY._ORBIT_MASK_CONTROL
-                    );
-                    EditorGUILayout.Space(16);
-
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_SOURCE);
-                    switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_SOURCE))
-                    {
-                        case 0:
-                            DrawShaderProperty(SHADER_PROPERTY._ORBIT_VALUE);
-                            break;
-                        case 1:
-                            DrawShaderProperty(SHADER_PROPERTY._ORBIT_SEED);
-                            DrawShaderProperty(SHADER_PROPERTY._ORBIT_PRIMITIVE_THRESHOLD);
-                            break;
-                        case 2:
-                            InsertNoise1stProps(3);
-                            break;
-                        case 3:
-                            InsertNoise2ndProps(3);
-                            break;
-                        case 4:
-                            InsertNoise3rdProps(3);
-                            break;
-                    }
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_OFFSET);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_SCALE);
+                    using (new EditorGUILayout.VerticalScope("HelpBox"))
+                    {
+                        foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.SOURCE, false, 3);
+                        if (foldout_bool)
+                        {
+                            DrawShaderProperty(SHADER_PROPERTY._ORBIT_SOURCE);
+                            switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_SOURCE))
+                            {
+                                case 0:
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_VALUE);
+                                    break;
+                                case 1:
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_SEED);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_PRIMITIVE_THRESHOLD);
+                                    break;
+                                case 2:
+                                    InsertNoise1stProps(3);
+                                    break;
+                                case 3:
+                                    InsertNoise2ndProps(3);
+                                    break;
+                                case 4:
+                                    InsertNoise3rdProps(3);
+                                    break;
+                            }
+                        }
+                    }
+                    DrawAudioLinkSource(
+                        3,
+                        SHADER_PROPERTY._ORBIT_AUDIOLINK_SOURCE,
+                        SHADER_PROPERTY._ORBIT_AUDIOLINK_VU_STRENGTH,
+                        SHADER_PROPERTY._ORBIT_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
+                        SHADER_PROPERTY._ORBIT_AUDIOLINK_SPECTRUM_STRENGTH,
+                        SHADER_PROPERTY._ORBIT_AUDIOLINK_SPECTRUM_MIRROR,
+                        SHADER_PROPERTY._ORBIT_AUDIOLINK_SPECTRUM_TYPE
+                    );
+                    DrawControlTex(
+                        3,
+                        SHADER_PROPERTY._ORBIT_MASK_CONTROL_TEX,
+                        SHADER_PROPERTY._ORBIT_MASK_CONTROL,
+                        SHADER_PROPERTY._ORBIT_OFFSET_CONTROL_TEX,
+                        SHADER_PROPERTY._ORBIT_OFFSET_CONTROL,
+                        SHADER_PROPERTY._ORBIT_AUDIOLINK_MASK_CONTROL_TEX,
+                        SHADER_PROPERTY._ORBIT_AUDIOLINK_MASK_CONTROL
+                    );
+                    DrawModifier(
+                        3,
+                        SHADER_PROPERTY._ORBIT_PHASE_SCALE,
+                        SHADER_PROPERTY._ORBIT_LOOP_MODE,
+                        SHADER_PROPERTY._ORBIT_THRESHOLD_MUL,
+                        SHADER_PROPERTY._ORBIT_THRESHOLD_ADD,
+                        SHADER_PROPERTY._ORBIT_EASE_MODE,
+                        SHADER_PROPERTY._ORBIT_EASE_CURVE
+                    );
 
                     DrawPartitionLine(8);
-                    DrawHeaderLabel(LocalizationSystem.PropLangDic["label.orbit_rotation"],CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_SOURCE);
-                    switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_ROTATION_SOURCE))
-                    {
-                        case 0:
-                            break;
-                        case 1:
-                            DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_SEED);
-                            break;
-                        case 2:
-                            InsertNoise1stProps(4);
-                            break;
-                        case 3:
-                            InsertNoise2ndProps(4);
-                            break;
-                        case 4:
-                            InsertNoise3rdProps(4);
-                            break;
-                    }
-
-                    EditorGUILayout.Space(16);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_TIME_MULTIPLIER);
+                    DrawHeaderLabel(LocalizationSystem.GetLocalizeText("label.orbit_rotation"),CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_VARIANCE);
+                    using (new EditorGUILayout.VerticalScope("HelpBox"))
+                    {
+                        foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.SOURCE, false, 4);
+                        if (foldout_bool)
+                        {
+                            DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_SOURCE);
+                            switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_ROTATION_SOURCE))
+                            {
+                                case 0:
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_VALUE);
+                                    break;
+                                case 1:
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_SEED);
+                                    break;
+                                case 2:
+                                    InsertNoise1stProps(4);
+                                    break;
+                                case 3:
+                                    InsertNoise2ndProps(4);
+                                    break;
+                                case 4:
+                                    InsertNoise3rdProps(4);
+                                    break;
+                            }
+                        }
+                    }
+                    DrawControlTex(
+                        4,
+                        SHADER_PROPERTY._ORBIT_ROTATION_MASK_CONTROL_TEX,
+                        SHADER_PROPERTY._ORBIT_ROTATION_MASK_CONTROL,
+                        SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_CONTROL_TEX,
+                        SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_CONTROL
+                    );
+
                     DrawPartitionLine(8);
                     DrawHeaderLabel(LocalizationSystem.PropLangDic["label.orbit_wave"],CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_STRENGTH);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_FREQUENCY);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_PHASE);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_TIME_MULTIPLIER);
-                    DrawPartitionLine(8);
-                    DrawHeaderLabel(LocalizationSystem.PropLangDic["label.orbit_audiolink"],CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
-                    DrawControlTex(
-                        SHADER_PROPERTY._ORBIT_ROTATION_AL_MASK_CONTROL_TEX,
-                        SHADER_PROPERTY._ORBIT_ROTATION_AL_MASK_CONTROL
-                    );
-                    EditorGUILayout.Space(16);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_REF_AUDIOLINK);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_STRENGTH);
-                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_WAVE_REF_AUDIOLINK)==2) {
-                        DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_MIRROR);
-                        DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_TYPE);
-                        DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_RANGE);
-                        DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_FREQUENCY_OFFSET);
+                    using (new EditorGUILayout.VerticalScope("HelpBox"))
+                    {
+                        DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SOURCE);
+                        switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SOURCE))
+                        {
+                            case 1:
+                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_VU_STRENGTH);
+                                break;
+                            case 2:
+                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_CHRONOTENSITY_STRENGTH);
+                                break;
+                            case 3:
+                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_STRENGTH);
+                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_MIRROR);
+                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_TYPE);
+                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_RANGE);
+                                break;
+                            default:
+                                break;
+                        }
                     }
-                    EditorGUILayout.Space(16);
-                    
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_REF_AUDIOLINK);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_AUDIOLINK_STRENGTH);
+
+                    DrawPartitionLine(8);
+                    DrawHeaderLabel(LocalizationSystem.GetLocalizeText("label.orbit_rotation_offset"),CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
+                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION);
+                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_TIME_MULTIPLIER);
+                    using (new EditorGUILayout.VerticalScope("HelpBox"))
+                    {
+                        foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.AUDIOLINK_SOURCE, false, 5);
+                        if (foldout_bool)
+                        {
+                            DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_SOURCE);
+                            switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_SOURCE))
+                            {
+                                case 1:
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_VU_STRENGTH);
+                                    break;
+                                case 2:
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_CHRONO_TENSITY_STRENGTH);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                    DrawControlTex(
+                        5,
+                        SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_MASK_CONTROL_TEX,
+                        SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_MASK_CONTROL,
+                        SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_MASK_CONTROL_TEX,
+                        SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_MASK_CONTROL
+                    );
                 }
             }
         }
@@ -514,6 +577,16 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 EditorGUILayout.Space(16);
                 current_title_skin = (TITLE_SKINS)EditorGUILayout.EnumPopup(LocalizationSystem.PropLangDic["label.title_skin"], current_title_skin);
             }
+        }
+
+        private void DrawEasterEgg()
+        {
+            GUIStyle style = new GUIStyle();
+            style.alignment = TextAnchor.MiddleCenter;
+            style.richText = true;
+            style.wordWrap = true;
+            string text = "<color=#ffffff><size=12><i>" + LocalizationSystem.PropLangDic["label.easter_egg_text"] + "</i></size></color>";
+            EditorGUILayout.LabelField(text, style);
         }
 
         public override void OnGUI(MaterialEditor editor, MaterialProperty[] Properties)
@@ -638,6 +711,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     }
                 }
             }
+            EditorGUILayout.Space(640);
+            DrawEasterEgg();
         }
     }
 }

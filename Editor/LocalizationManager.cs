@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 namespace DeltaField.Shaders.MeshHologram.Editor{
@@ -12,7 +13,18 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
         {
             this.resolve_path = resolve_path;
         }
-        public void LoadLangFiles(LANG lang = LANG.ENGLISH)
+        internal string GetLocalizeText(string key)
+        {
+            if (PropLangDic.ContainsKey(key))
+            {
+                return PropLangDic[key];
+            }
+            else
+            {
+                return key;
+            }
+        }
+        internal void LoadLangFiles(LANG lang = LANG.ENGLISH)
         {
             int index = (int)lang;
             PropLangDic = new Dictionary<string, string>();
@@ -24,7 +36,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                 path += file_name;
                 if (!File.Exists(path))
                 {
-                    Debug.LogWarning(file_name+" does not exist.");
+                    Debug.LogWarning(file_name + " does not exist.");
                 }
                 else
                 {

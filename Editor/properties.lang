@@ -34,13 +34,13 @@ _DstBlendAlpha||Dst Blend Alpha*||Dst Blend Alpha*
 _PreviewMode||Preview Mode||プレビューモード
 _AntiAliasing||Activate Anti-Aliasing||アンチエイリアスを有効にする
 
-_StencilRef|| Ref*||Ref値*
-_StencilReadMask|| ReadMask*||ReadMask*
-_StencilWriteMask|| WriteMask*||WriteMask*
-_StencilComp|| Comp*||Comp*
-_StencilPass|| Pass*||Pass*
-_StencilFail|| Fail*||Fail*
-_StencilZFail|| Fail*||Z Fail*
+_StencilRef||Ref*||Ref値*
+_StencilReadMask||ReadMask*||ReadMask*
+_StencilWriteMask||WriteMask*||WriteMask*
+_StencilComp||Comp*||Comp*
+_StencilPass||Pass*||Pass*
+_StencilFail||Fail*||Fail*
+_StencilZFail||Fail*||Z Fail*
 
 _UseAudioLink||Use AudioLink||AudioLinkを有効にする
 _AudioLinkVUBand||Band*||帯域*
@@ -119,31 +119,31 @@ _OrbitRotationRefAudioLink||Orbit Rotation Reference||Orbit 回転の参照先
 _OrbitRotationAudioLinkStrength||Strength*/X/Y/Z/W||強さ*/X/Y/Z/W
 
 
-_AudioLinkMaskControlTex||Mask Control*||マスクコントロール*
-_AudioLinkMaskControl||Strength*||強さ*
-_FragmentMaskControlTex||Mask Control*||マスクコントロール*
-_FragmentMaskControl||Strength*||強さ*
-_GeometryMaskControlTex||Mask Control*||マスクコントロール*
-_GeometryMaskControl||Strength*||強さ*
-_ColoringMaskControlTex||Mask Control*||マスクコントロール*
-_ColoringMaskControl||Strength*||強さ*
-_OrbitMaskControlTex||Mask Control*||マスクコントロール*
-_OrbitMaskControl||Strength*||強さ*
-_Noise1stOffsetControlTex||Offset Control*||オフセットコントロール*
-_Noise1stOffsetControl||Strength*||強さ*
-_Noise2ndOffsetControlTex||Offset Control*||オフセットコントロール*
-_Noise2ndOffsetControl||Strength*||強さ*
-_Noise3rdOffsetControlTex||Offset Control*||オフセットコントロール*
-_Noise3rdOffsetControl||Strength*||強さ*
+_AudioLinkMaskMap||Mask Control*||マスクコントロール*
+_AudioLinkMaskMapStrength||Strength*||強さ*
+_FragmentMaskMap||Mask Control*||マスクコントロール*
+_FragmentMaskMapStrength||Strength*||強さ*
+_GeometryMaskMap||Mask Control*||マスクコントロール*
+_GeometryMaskMapStrength||Strength*||強さ*
+_ColoringMaskMap||Mask Control*||マスクコントロール*
+_ColoringMaskMapStrength||Strength*||強さ*
+_OrbitMaskMap||Mask Control*||マスクコントロール*
+_OrbitMaskMapStrength||Strength*||強さ*
+_Noise1stMap||Offset Control*||オフセットコントロール*
+_Noise1stMapStrength||Strength*||強さ*
+_Noise2ndMap||Offset Control*||オフセットコントロール*
+_Noise2ndMapStrength||Strength*||強さ*
+_Noise3rdMap||Offset Control*||オフセットコントロール*
+_Noise3rdMapStrength||Strength*||強さ*
 
-_OrbitRotationALMaskControlTex||AudioLink Mask Control*||AudioLink マスクコントロール
-_OrbitRotationALMaskControl||Strength*||強さ*
-_Noise1stALMaskControlTex||AudioLink Mask Control*||AudioLink マスクコントロール
-_Noise1stALMaskControl||Strength*||強さ*
-_Noise2ndALMaskControlTex||AudioLink Mask Control*||AudioLink マスクコントロール
-_Noise2ndALMaskControl||Strength*||強さ*
-_Noise3rdALMaskControlTex||AudioLink Mask Control*||AudioLink マスクコントロール
-_Noise3rdALMaskControl||Strength*||強さ*
+_OrbitRotationALMaskMap||AudioLink Mask Control*||AudioLink マスクコントロール
+_OrbitRotationALMaskMapStrength||Strength*||強さ*
+_Noise1stALMaskMap||AudioLink Mask Control*||AudioLink マスクコントロール
+_Noise1stALMaskMapStrength||Strength*||強さ*
+_Noise2ndALMaskMap||AudioLink Mask Control*||AudioLink マスクコントロール
+_Noise2ndALMaskMapStrength||Strength*||強さ*
+_Noise3rdALMaskMap||AudioLink Mask Control*||AudioLink マスクコントロール
+_Noise3rdALMaskMapStrength||Strength*||強さ*
 
 
 

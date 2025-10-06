@@ -4,7 +4,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.5] 2025/09/19
-### CHanged
+### Changed
 - `Orbit Wave`のプロパティが持つ要素の変更。
     - `Orbit Wave`に関連する以下のプロパティが対象となります。
         - `_OrbitWaveStrength`
@@ -102,8 +102,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - `_GeometryMessyToggle`
     - `_GeometryMessySource`
     - `_GeometryMessyValue`
-    - `_GeometryMessyMaskControlTex`
-    - `_GeometryMessyMaskControl`
+    - `_GeometryMessyMaskMap`
+    - `_GeometryMessyMaskMapStrength`
     - `_GeometryMessySeed`
     - `_GeometryMessyOrbitRotation`
     - `_GeometryMessyOrbitPosition`

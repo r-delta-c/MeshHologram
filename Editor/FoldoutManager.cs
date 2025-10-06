@@ -10,19 +10,50 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
         private Dictionary<FOLDOUT, FoldoutState> FoldoutList = new Dictionary<FOLDOUT, FoldoutState>();
         internal FoldoutManager()
         {
-            FoldoutList.Add(FOLDOUT.RENDERING, new FoldoutState("label.rendering"));
-            FoldoutList.Add(FOLDOUT.RENDERING_OTHER, new FoldoutState("label.other_renderings"));
-            FoldoutList.Add(FOLDOUT.STENCIL, new FoldoutState("label.stencil"));
-            FoldoutList.Add(FOLDOUT.AUDIOLINK, new FoldoutState("label.audiolink"));
-            FoldoutList.Add(FOLDOUT.FRAGMENT, new FoldoutState("label.fragment"));
-            FoldoutList.Add(FOLDOUT.COLOR, new FoldoutState("label.color"));
-            FoldoutList.Add(FOLDOUT.GEOMETRY, new FoldoutState("label.geometry"));
-            FoldoutList.Add(FOLDOUT.ORBIT, new FoldoutState("label.orbit"));
-            FoldoutList.Add(FOLDOUT.NOISE1ST, new FoldoutState("label.noise1st_properties", 5));
-            FoldoutList.Add(FOLDOUT.NOISE2ND, new FoldoutState("label.noise2nd_properties", 5));
-            FoldoutList.Add(FOLDOUT.NOISE3RD, new FoldoutState("label.noise3rd_properties", 5));
-            FoldoutList.Add(FOLDOUT.OTHERS, new FoldoutState("label.others"));
-            UpdateLocalization();
+            FoldoutList.Add(FOLDOUT.RENDERING, new FoldoutState(new string[1] { "label.rendering" }));
+            FoldoutList.Add(FOLDOUT.RENDERING_OTHER, new FoldoutState(new string[1] { "label.other_renderings" }));
+            FoldoutList.Add(FOLDOUT.STENCIL, new FoldoutState(new string[1] { "label.stencil" }));
+            FoldoutList.Add(FOLDOUT.AUDIOLINK, new FoldoutState(new string[1] { "label.audiolink" }));
+            FoldoutList.Add(FOLDOUT.FRAGMENT, new FoldoutState(new string[1] { "label.fragment" }));
+            FoldoutList.Add(FOLDOUT.COLOR, new FoldoutState(new string[1] { "label.color" }));
+            FoldoutList.Add(FOLDOUT.GEOMETRY, new FoldoutState(new string[1] { "label.geometry" }));
+            FoldoutList.Add(FOLDOUT.ORBIT, new FoldoutState(new string[1] { "label.orbit" }));
+            FoldoutList.Add(FOLDOUT.NOISE1ST, new FoldoutState(new string[1] { "label.noise1st_properties" }, 5));
+            FoldoutList.Add(FOLDOUT.NOISE2ND, new FoldoutState(new string[1] { "label.noise2nd_properties" }, 5));
+            FoldoutList.Add(FOLDOUT.NOISE3RD, new FoldoutState(new string[1] { "label.noise3rd_properties" }, 5));
+            FoldoutList.Add(FOLDOUT.CONTROL, new FoldoutState(new string[6]{
+                "label.fragment.control",
+                "label.coloring.control",
+                "label.geometry.control",
+                "label.orbit.control",
+                "label.orbit_rotation.control",
+                "label.orbit_rotation_offset.control"
+            }, 6));
+            FoldoutList.Add(FOLDOUT.SOURCE, new FoldoutState(new string[6]{
+                "label.fragment.source",
+                "label.coloring.source",
+                "label.geometry.source",
+                "label.orbit.source",
+                "label.orbit_rotation.source",
+                "label.orbit_rotation_offset.source"
+            }, 6));
+            FoldoutList.Add(FOLDOUT.AUDIOLINK_SOURCE, new FoldoutState(new string[6]{
+                "label.fragment.audiolink_source",
+                "label.coloring.audiolink_source",
+                "label.geometry.audiolink_source",
+                "label.orbit.audiolink_source",
+                "label.orbit_rotation.audiolink_source",
+                "label.orbit_rotation_offset.audiolink_source"
+            }, 6));
+            FoldoutList.Add(FOLDOUT.MODIFIER, new FoldoutState(new string[6]{
+                "label.fragment.modifier",
+                "label.coloring.modifier",
+                "label.geometry.modifier",
+                "label.orbit.modifier",
+                "label.orbit_rotation.modifier",
+                "label.orbit_rotation_offset.modifier"
+            }, 6));
+            FoldoutList.Add(FOLDOUT.OTHERS, new FoldoutState(new string[1] { "label.others" }));
         }
 
         internal bool MenuFoldout(FOLDOUT foldout, bool bold = true, int owner = 0)
@@ -72,37 +103,55 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
             GUI.Label(rec, "<color=#ffffff>" + head + "</color>", style);
             style.fontSize = 12;
             style.padding = new RectOffset(18, 0, 0, 0);
-            GUI.Label(rec, AttributeText(FoldoutList[foldout].localized_text), style);
+            GUI.Label(rec, AttributeText(FoldoutList[foldout].display[owner]), style);
             return b;
         }
         internal void UpdateLocalization()
         {
-            foreach (FOLDOUT foldout in FoldoutList.Keys)
+            foreach (KeyValuePair<FOLDOUT,FoldoutState> f in FoldoutList)
             {
-                string text = FoldoutList[foldout].text;
+                f.Value.UpdateLocalization();
+            }
+        }
+    }
+    internal class FoldoutState
+    {
+        internal string[] display;
+        internal readonly List<string> localized_text = new List<string>();
+        internal List<bool> is_open = new List<bool>();
+        internal FoldoutState(string[] t, int order = 1)
+        {
+            for (int i = 0; i < order; i++)
+            {
+                is_open.Add(false);
+                int text_index;
+                if (i < t.Length)
+                {
+                    text_index = i;
+                }
+                else
+                {
+                    text_index = t.Length - 1;
+                }
+                localized_text.Add(t[text_index]);
+            }
+            display = new string[localized_text.Count];
+            UpdateLocalization();
+        }
+        internal void UpdateLocalization()
+        {
+            for (int i = 0; i < localized_text.Count; i++)
+            {
+                string text = localized_text[i];
                 if (MeshHologramInspector.LocalizationSystem.PropLangDic.ContainsKey(text))
                 {
-                    FoldoutList[foldout].localized_text = MeshHologramInspector.LocalizationSystem.PropLangDic[text];
+                    display[i] = MeshHologramInspector.LocalizationSystem.PropLangDic[text];
                 }
                 else
                 {
                     Debug.LogWarning("Could not get localized text. -> " + text);
-                    FoldoutList[foldout].localized_text = text;
+                    display[i] = text;
                 }
-            }
-        }
-    }
-    public class FoldoutState
-    {
-        public readonly string text;
-        public string localized_text;
-        public List<bool> is_open = new List<bool>();
-        public FoldoutState(string t, int order = 1)
-        {
-            text = t;
-            for (int i = 0; i < order; i++)
-            {
-                is_open.Add(false);
             }
         }
     }

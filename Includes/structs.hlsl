@@ -9,9 +9,9 @@ struct appdata{
 struct v2f{
     float4 pos : SV_POSITION;
     float2 uv : TEXCOORD0;
-    STRUCT_NOISE1ST_MACRO float3 noise1st_pos:TEXCOORD1;
-    STRUCT_NOISE2ND_MACRO float3 noise2nd_pos:TEXCOORD2;
-    STRUCT_NOISE3RD_MACRO float3 noise3rd_pos:TEXCOORD3;
+    float3 noise1st_pos:TEXCOORD1;
+    float3 noise2nd_pos:TEXCOORD2;
+    float3 noise3rd_pos:TEXCOORD3;
 
     SWITCH_SHADE_WORLDPOS_MACRO float3 world_pos : TEXCOORD4;
     float3 origin_pos : TEXCOORD5;

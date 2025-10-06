@@ -34,3 +34,5 @@ text.remove||Remove||削除
 text.cancel||Cancel||キャンセル
 
 label.mesh_bounds_editor.button||Open Mesh Bounds Editor||Mesh Bounds Editorを開く
+
+label.easter_egg_text||Isn’t it nicer when the window doesn’t jump around as you close a tab?||タブを閉じて、勝手にスクロールされないウィンドウの方がお好みでしょう？

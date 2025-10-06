@@ -10,12 +10,12 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
         private int width;
         private int height;
         public Texture2D preview_tex;
-        public PreviewGraph(float mul, float add, float curve, bool curve_type, int w = 128, int h = 128)
+        public PreviewGraph(float phase_scale, uint loop_mode, float mul, float add, float curve, uint curve_mode, int w = 128, int h = 128)
         {
             width = w;
             height = h;
             preview_tex = new Texture2D(width, height) { wrapMode = TextureWrapMode.Clamp };
-            Draw(mul,add,curve,curve_type);
+            Draw(phase_scale,loop_mode,mul,add,curve,curve_mode);
             Rect rect = GUILayoutUtility.GetRect(width, height);
             Rect graph_rect = new Rect(rect) { x = rect.x+48, width = rect.width-48 };
             GUI.DrawTexture(graph_rect, preview_tex, ScaleMode.StretchToFill);
@@ -43,7 +43,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
             texture.Apply();
             return texture;
         }
-        public void Draw(float mul, float add, float curve, bool curve_type)
+        public void Draw(float phase_scale, uint loop_mode, float mul, float add, float curve, uint ease_mode)
         {
             NativeArray<Color32> pixel = preview_tex.GetPixelData<Color32>(0);
             for (int i = 0; i < pixel.Length; i++)
@@ -61,16 +61,38 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                 c.b = guide_y_b>0?(byte)55:c.b;
 
                 res_y = res_y*1.7f-0.350f;
-                float value_x = res_x*mul-mul*0.5f+0.5f+add*(mul+(mul>=0.0f?1.0f:-1.0f))*0.76f;
-                value_x = value_x * 1.3f - 0.15f;
-                if (curve_type)
+                float value_x = res_x * 1.3f - 0.15f;
+                value_x *= phase_scale;
+                switch (loop_mode)
                 {
-                    value_x = value_x > 0.5f ? Mathf.Pow(value_x * 2.0f - 1.0f, curve) * 0.5f + 0.5f : 1.0f - Mathf.Pow(-value_x * 2.0f + 1.0f, curve) * 0.5f-0.5f;
+                    case 0:
+                        value_x = Mathf.Clamp01(value_x);
+                        break;
+                    case 1:
+                        value_x = Mathf.Abs((value_x - 1.0f * Mathf.Floor(value_x / 1.0f)));
+                        break;
+                    case 2:
+                        value_x = Mathf.Abs((value_x - 1.0f - 2.0f * Mathf.Floor((value_x - 1.0f) / 2.0f)) - 1.0f);
+                        break;
                 }
-                else
+                switch (ease_mode)
                 {
-                    value_x = value_x < 0.5f ? Mathf.Pow(Mathf.Clamp01(value_x * 2.0f), curve) * 0.5f : 1.0f - Mathf.Pow(Mathf.Clamp01(value_x * -2.0f + 2.0f), curve) * 0.5f;
+                    case 0:
+                        value_x = Mathf.Pow(Mathf.Max(0.0f, value_x), curve);
+                        break;
+                    case 1:
+                        value_x = 1.0f - Mathf.Pow(1.0f - Mathf.Min(1.0f, value_x), curve);
+                        break;
+                    case 2:
+                        value_x = value_x < 0.5f ? Mathf.Pow(Mathf.Clamp01(value_x * 2.0f), curve) * 0.5f : 1.0f - Mathf.Pow(Mathf.Clamp01(value_x * -2.0f + 2.0f), curve) * 0.5f;
+                        break;
+                    case 3:
+                        value_x = value_x > 0.5f ? Mathf.Pow(value_x * 2.0f - 1.0f, curve) * 0.5f + 0.5f : 1.0f - Mathf.Pow(-value_x * 2.0f + 1.0f, curve) * 0.5f - 0.5f;
+                        break;
                 }
+
+                value_x = value_x*mul-mul*0.5f+0.5f+add*(mul+(mul>=0.0f?1.0f:-1.0f));
+
 
                 float guide_x = Mathf.Abs(Mathf.Abs(-res_x*1.3f+0.15f) % 1.0f * 2.0f - 1.0f);
                 byte guide_x_b = (byte)(smoothstep(0.94f,1.00f,guide_x)*1.1f);

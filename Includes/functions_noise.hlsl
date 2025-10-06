@@ -1,3 +1,4 @@
+/*
 #ifdef _DEFINED_FRAGMENT_NOISE
     float FragmentNoiseRaw(float3 inputs, float offset, float time){
         float n = GenNoise(
@@ -156,3 +157,5 @@
         return saturate(ORBITROTATION_METHOD_NOISEMAP_MACRO(OrbitRotationRepeatNoiseRaw(inputs,offset,time),ORBITROTATION_FUNC_VALUECARVE_MACRO));
     }
 #endif
+
+*/

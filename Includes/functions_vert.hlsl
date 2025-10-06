@@ -36,9 +36,9 @@ v2f vert (appdata v){
         VERTEX_PIXELIZATION_WORLD_MACRO;
     #endif
 
-    NOISE1ST_MACRO;
-    NOISE2ND_MACRO;
-    NOISE3RD_MACRO;
+    o.noise1st_pos = NOISE1ST_POS_MACRO;
+    o.noise2nd_pos = NOISE2ND_POS_MACRO;
+    o.noise3rd_pos = NOISE3RD_POS_MACRO;
     SWITCH_SHADE_WORLDPOS_MACRO o.world_pos = o.pos;
     o.origin_pos = unity_ObjectToWorld._m03_m13_m23;
     SWITCH_WORLDNORMAL_MACRO o.world_normal = UnityObjectToWorldNormal(v.normal);

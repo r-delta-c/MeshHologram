@@ -29,11 +29,11 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             return mat.GetFloat(Shader.PropertyToID(ShaderProperties[key].property));
         }
 
-        private void PreviewNoiseGraph(float mul, float add, float curve, bool curve_type)
+        private void PreviewNoiseGraph(float phase_scale, uint loop_mode, float mul, float add, float curve, uint ease_mode)
         {
             using (new EditorGUILayout.VerticalScope("HelpBox"))
             {
-                PreviewGraph0 = new PreviewGraph(mul, add, curve, curve_type);
+                PreviewGraph0 = new PreviewGraph(phase_scale, loop_mode, mul, add, curve, ease_mode);
             }
         }
 
@@ -60,35 +60,146 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             EditorGUILayout.LabelField("<color=silver>" + label + "</color>", style);
         }
 
-        private void DrawControlTex(SHADER_PROPERTY tex, SHADER_PROPERTY strength)
+        private void DrawControlTex(int owner, SHADER_PROPERTY tex0, SHADER_PROPERTY strength0, SHADER_PROPERTY tex1, SHADER_PROPERTY strength1)
         {
             using (new EditorGUILayout.VerticalScope("HelpBox"))
             {
-                DrawShaderProperty(tex);
-                DrawShaderProperty(strength);
+                foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.CONTROL, false, owner);
+                if (foldout_bool)
+                {
+                    DrawShaderProperty(tex0);
+                    DrawShaderProperty(strength0);
+                    DrawPartitionLine(4);
+                    DrawShaderProperty(tex1);
+                    DrawShaderProperty(strength1);
+                    EditorGUILayout.Space(4);
+                }
             }
         }
 
-        private void DrawControlTex(SHADER_PROPERTY tex, SHADER_PROPERTY strength, SHADER_PROPERTY al_mask_tex, SHADER_PROPERTY al_mask_strength)
+        private void DrawControlTex(int owner, SHADER_PROPERTY tex0, SHADER_PROPERTY strength0, SHADER_PROPERTY tex1, SHADER_PROPERTY strength1, SHADER_PROPERTY tex2, SHADER_PROPERTY strength2)
         {
             using (new EditorGUILayout.VerticalScope("HelpBox"))
             {
-                DrawShaderProperty(tex);
-                DrawShaderProperty(strength);
-                DrawPartitionLine(4);
-                DrawShaderProperty(al_mask_tex);
-                DrawShaderProperty(al_mask_strength);
-                EditorGUILayout.Space(4);
+                foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.CONTROL, false, owner);
+                if (foldout_bool)
+                {
+                    DrawShaderProperty(tex0);
+                    DrawShaderProperty(strength0);
+                    DrawPartitionLine(4);
+                    DrawShaderProperty(tex1);
+                    DrawShaderProperty(strength1);
+                    DrawPartitionLine(4);
+                    DrawShaderProperty(tex2);
+                    DrawShaderProperty(strength2);
+                    EditorGUILayout.Space(4);
+                }
+            }
+        }
+
+        private void DrawSource(int owner,SHADER_PROPERTY SOURCE,SHADER_PROPERTY VALUE)
+        {
+            using (new EditorGUILayout.VerticalScope("HelpBox"))
+            {
+                foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.SOURCE, false, owner);
+                if (foldout_bool)
+                {
+                    DrawShaderProperty(SOURCE);
+                    switch (GetPropertyFloat(targetMat, SOURCE))
+                    {
+                        case 0:
+                            DrawShaderProperty(VALUE);
+                            break;
+                        case 1:
+                            InsertNoise1stProps(owner);
+                            break;
+                        case 2:
+                            InsertNoise2ndProps(owner);
+                            break;
+                        case 3:
+                            InsertNoise3rdProps(owner);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+        private void DrawAudioLinkSource(
+            int owner,
+            SHADER_PROPERTY SOURCE,
+            SHADER_PROPERTY VU_ADD,
+            SHADER_PROPERTY CHRONO,
+            SHADER_PROPERTY SPECTRUM,
+            SHADER_PROPERTY MIRROR,
+            SHADER_PROPERTY TYPE
+        )
+        {
+            using (new EditorGUILayout.VerticalScope("HelpBox"))
+            {
+                foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.AUDIOLINK_SOURCE, false, owner);
+                if (foldout_bool)
+                {
+                    DrawShaderProperty(SOURCE);
+                    switch (GetPropertyFloat(targetMat, SOURCE))
+                    {
+                        case 1:
+                            DrawShaderProperty(VU_ADD);
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            DrawShaderProperty(CHRONO);
+                            break;
+                        case 4:
+                            DrawShaderProperty(SPECTRUM);
+                            DrawShaderProperty(MIRROR);
+                            DrawShaderProperty(TYPE);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+        private void DrawModifier(
+            int owner,
+            SHADER_PROPERTY PHASE_SCALE,
+            SHADER_PROPERTY LOOP_MODE,
+            SHADER_PROPERTY THRESHOLD_MUL,
+            SHADER_PROPERTY THRESHOLD_ADD,
+            SHADER_PROPERTY EASE_MODE,
+            SHADER_PROPERTY EASE_CURVE
+        )
+        {
+            using (new EditorGUILayout.VerticalScope("HelpBox"))
+            {
+                foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.MODIFIER, false, owner);
+                if (foldout_bool)
+                {
+                    DrawShaderProperty(PHASE_SCALE);
+                    DrawShaderProperty(LOOP_MODE);
+                    DrawShaderProperty(THRESHOLD_MUL);
+                    DrawShaderProperty(THRESHOLD_ADD);
+                    DrawShaderProperty(EASE_MODE);
+                    DrawShaderProperty(EASE_CURVE);
+                    PreviewNoiseGraph(
+                        GetPropertyFloat(targetMat, PHASE_SCALE),
+                        (uint)GetPropertyFloat(targetMat, LOOP_MODE),
+                        GetPropertyFloat(targetMat, THRESHOLD_MUL),
+                        GetPropertyFloat(targetMat, THRESHOLD_ADD),
+                        GetPropertyFloat(targetMat, EASE_CURVE),
+                        (uint)GetPropertyFloat(targetMat, EASE_MODE)
+                    );
+                }
             }
         }
 
         private void DrawNoiseProps(
             int order,
             FOLDOUT foldout,
-            SHADER_PROPERTY OFFSET_CONTROL_TEX,
-            SHADER_PROPERTY OFFSET_CONTROL,
-            SHADER_PROPERTY AL_MASK_CONTROL_TEX,
-            SHADER_PROPERTY AL_MASK_CONTROL,
             SHADER_PROPERTY OFFSET0,
             SHADER_PROPERTY SCALE0,
             SHADER_PROPERTY OFFSET1,
@@ -96,26 +207,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             SHADER_PROPERTY OFFSET_BEFORE_SCALE,
             SHADER_PROPERTY SPACE,
             SHADER_PROPERTY SEED,
-            SHADER_PROPERTY VALUE_CURVE,
-            SHADER_PROPERTY CURVE_TYPE,
-            SHADER_PROPERTY THRESHOLD_MUL,
-            SHADER_PROPERTY THRESHOLD_ADD,
             SHADER_PROPERTY TIME_MULTI,
-            SHADER_PROPERTY TIME_PHASE,
-            SHADER_PROPERTY PHASE_SCALE,
-            SHADER_PROPERTY PHASE_REF_AUDIOLINK
+            SHADER_PROPERTY TIME_PHASE
             )
         {
             foldout_bool = FoldoutList.MenuFoldout(foldout, false, order);
             if (foldout_bool)
             {
-                DrawControlTex(
-                    OFFSET_CONTROL_TEX,
-                    OFFSET_CONTROL,
-                    AL_MASK_CONTROL_TEX,
-                    AL_MASK_CONTROL
-                );
-                EditorGUILayout.Space(16);
                 DrawShaderProperty(OFFSET0);
                 DrawShaderProperty(SCALE0);
                 if (GetPropertyFloat(targetMat, SPACE) == 4)
@@ -127,22 +225,9 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 DrawShaderProperty(SPACE);
                 EditorGUILayout.Space(16);
                 DrawShaderProperty(SEED);
-                DrawShaderProperty(VALUE_CURVE);
-                DrawShaderProperty(CURVE_TYPE);
-                DrawShaderProperty(THRESHOLD_MUL);
-                DrawShaderProperty(THRESHOLD_ADD);
-                EditorGUILayout.Space(16);
-                PreviewNoiseGraph(
-                    GetPropertyFloat(targetMat, THRESHOLD_MUL),
-                    GetPropertyFloat(targetMat, THRESHOLD_ADD),
-                    GetPropertyFloat(targetMat, VALUE_CURVE),
-                    Convert.ToBoolean(GetPropertyFloat(targetMat, CURVE_TYPE))
-                    );
                 EditorGUILayout.Space(16);
                 DrawShaderProperty(TIME_MULTI);
                 DrawShaderProperty(TIME_PHASE);
-                DrawShaderProperty(PHASE_SCALE);
-                DrawShaderProperty(PHASE_REF_AUDIOLINK);
             }
         }
 
@@ -156,10 +241,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 DrawNoiseProps(
                     order,
                     FOLDOUT.NOISE1ST,
-                    SHADER_PROPERTY._NOISE1ST_OFFSET_CONTROL_TEX,
-                    SHADER_PROPERTY._NOISE1ST_OFFSET_CONTROL,
-                    SHADER_PROPERTY._NOISE1ST_AL_MASK_CONTROL_TEX,
-                    SHADER_PROPERTY._NOISE1ST_AL_MASK_CONTROL,
                     SHADER_PROPERTY._NOISE1ST_OFFSET0,
                     SHADER_PROPERTY._NOISE1ST_SCALE0,
                     SHADER_PROPERTY._NOISE1ST_OFFSET1,
@@ -167,14 +248,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     SHADER_PROPERTY._NOISE1ST_OFFSET_BEFORE_SCALE,
                     SHADER_PROPERTY._NOISE1ST_SPACE,
                     SHADER_PROPERTY._NOISE1ST_SEED,
-                    SHADER_PROPERTY._NOISE1ST_VALUE_CURVE,
-                    SHADER_PROPERTY._NOISE1ST_CURVE_TYPE,
-                    SHADER_PROPERTY._NOISE1ST_THRESHOLD_MUL,
-                    SHADER_PROPERTY._NOISE1ST_THRESHOLD_ADD,
                     SHADER_PROPERTY._NOISE1ST_TIME_MULTI,
-                    SHADER_PROPERTY._NOISE1ST_TIME_PHASE,
-                    SHADER_PROPERTY._NOISE1ST_PHASE_SCALE,
-                    SHADER_PROPERTY._NOISE1ST_PHASE_REF_AUDIOLINK
+                    SHADER_PROPERTY._NOISE1ST_TIME_PHASE
                 );
             }
         }
@@ -189,10 +264,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 DrawNoiseProps(
                     order,
                     FOLDOUT.NOISE2ND,
-                    SHADER_PROPERTY._NOISE2ND_OFFSET_CONTROL_TEX,
-                    SHADER_PROPERTY._NOISE2ND_OFFSET_CONTROL,
-                    SHADER_PROPERTY._NOISE2ND_AL_MASK_CONTROL_TEX,
-                    SHADER_PROPERTY._NOISE2ND_AL_MASK_CONTROL,
                     SHADER_PROPERTY._NOISE2ND_OFFSET0,
                     SHADER_PROPERTY._NOISE2ND_SCALE0,
                     SHADER_PROPERTY._NOISE2ND_OFFSET1,
@@ -200,14 +271,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     SHADER_PROPERTY._NOISE2ND_OFFSET_BEFORE_SCALE,
                     SHADER_PROPERTY._NOISE2ND_SPACE,
                     SHADER_PROPERTY._NOISE2ND_SEED,
-                    SHADER_PROPERTY._NOISE2ND_VALUE_CURVE,
-                    SHADER_PROPERTY._NOISE2ND_CURVE_TYPE,
-                    SHADER_PROPERTY._NOISE2ND_THRESHOLD_MUL,
-                    SHADER_PROPERTY._NOISE2ND_THRESHOLD_ADD,
                     SHADER_PROPERTY._NOISE2ND_TIME_MULTI,
-                    SHADER_PROPERTY._NOISE2ND_TIME_PHASE,
-                    SHADER_PROPERTY._NOISE2ND_PHASE_SCALE,
-                    SHADER_PROPERTY._NOISE2ND_PHASE_REF_AUDIOLINK
+                    SHADER_PROPERTY._NOISE2ND_TIME_PHASE
                 );
             }
         }
@@ -222,10 +287,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 DrawNoiseProps(
                     order,
                     FOLDOUT.NOISE3RD,
-                    SHADER_PROPERTY._NOISE3RD_OFFSET_CONTROL_TEX,
-                    SHADER_PROPERTY._NOISE3RD_OFFSET_CONTROL,
-                    SHADER_PROPERTY._NOISE3RD_AL_MASK_CONTROL_TEX,
-                    SHADER_PROPERTY._NOISE3RD_AL_MASK_CONTROL,
                     SHADER_PROPERTY._NOISE3RD_OFFSET0,
                     SHADER_PROPERTY._NOISE3RD_SCALE0,
                     SHADER_PROPERTY._NOISE3RD_OFFSET1,
@@ -233,14 +294,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     SHADER_PROPERTY._NOISE3RD_OFFSET_BEFORE_SCALE,
                     SHADER_PROPERTY._NOISE3RD_SPACE,
                     SHADER_PROPERTY._NOISE3RD_SEED,
-                    SHADER_PROPERTY._NOISE3RD_VALUE_CURVE,
-                    SHADER_PROPERTY._NOISE3RD_CURVE_TYPE,
-                    SHADER_PROPERTY._NOISE3RD_THRESHOLD_MUL,
-                    SHADER_PROPERTY._NOISE3RD_THRESHOLD_ADD,
                     SHADER_PROPERTY._NOISE3RD_TIME_MULTI,
-                    SHADER_PROPERTY._NOISE3RD_TIME_PHASE,
-                    SHADER_PROPERTY._NOISE3RD_PHASE_SCALE,
-                    SHADER_PROPERTY._NOISE3RD_PHASE_REF_AUDIOLINK
+                    SHADER_PROPERTY._NOISE3RD_TIME_PHASE
                 );
             }
         }

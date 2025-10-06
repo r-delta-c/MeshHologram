@@ -22,9 +22,24 @@
     uv_side[1] = SideCenterPos(transform_uv[2],transform_uv[0],transform_uv[1],uv_mesh); \
     uv_side[2] = SideCenterPos(transform_uv[0],transform_uv[1],transform_uv[2],uv_mesh);
 
-#define CONTROL_MACRO(tex,state,control,uv) lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex,state,uv,0.0).x,control)
-#define CONTROL_MACRO3(tex,state,control,uv0,uv1,uv2) { \
-    lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex,state,uv0,0.0).x,control), \
-    lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex,state,uv1,0.0).x,control), \
-    lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex,state,uv2,0.0).x,control) \
-}
+#define MASK_CONTROL_MACRO3(tex,state,control) float3( \
+    lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex,state,transform_uv[0],0.0).x,control), \
+    lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex,state,transform_uv[1],0.0).x,control), \
+    lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex,state,transform_uv[2],0.0).x,control) \
+)
+#define OFFSET_CONTROL_MACRO3(tex,state,control) float3( \
+    UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex,state,transform_uv[0],0.0).x, \
+    UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex,state,transform_uv[1],0.0).x, \
+    UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex,state,transform_uv[2],0.0).x \
+)*control
+
+#define MASK_CONTROL_MACRO3_UV(tex,state,control,uv) float3( \
+    lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex,state,uv[0],0.0).x,control), \
+    lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex,state,uv[1],0.0).x,control), \
+    lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex,state,uv[2],0.0).x,control) \
+)
+#define OFFSET_CONTROL_MACRO3_UV(tex,state,control,uv) float3( \
+    UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex,state,uv[0],0.0).x, \
+    UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex,state,uv[1],0.0).x, \
+    UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex,state,uv[2],0.0).x \
+)*control
