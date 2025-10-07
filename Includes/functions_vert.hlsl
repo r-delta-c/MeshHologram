@@ -12,7 +12,7 @@ v2f vert (appdata v){
         length(UNITY_MATRIX_M._m10_m11_m12),
         length(UNITY_MATRIX_M._m20_m21_m22)
     );
-    #ifdef _BILLBOARD_MODE
+    #if defined(_BILLBOARD_ENABLE)
         o.alpha = 1.0;
         float4x4 Billboard_Matrix_M = {
             1.0,0.0,0.0,0.0,

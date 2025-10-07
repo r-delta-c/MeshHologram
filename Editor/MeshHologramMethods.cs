@@ -29,11 +29,11 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             return mat.GetFloat(Shader.PropertyToID(ShaderProperties[key].property));
         }
 
-        private void PreviewNoiseGraph(float phase_scale, uint loop_mode, float mul, float add, float curve, uint ease_mode)
+        private void PreviewGraph(float phase_scale, uint loop_mode, float mul, float add, uint ease_mode, float curve)
         {
             using (new EditorGUILayout.VerticalScope("HelpBox"))
             {
-                PreviewGraph0 = new PreviewGraph(phase_scale, loop_mode, mul, add, curve, ease_mode);
+                PreviewGraph0 = new PreviewGraph(phase_scale, loop_mode, mul, add, ease_mode, curve);
             }
         }
 
@@ -64,7 +64,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         {
             using (new EditorGUILayout.VerticalScope("HelpBox"))
             {
-                foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.CONTROL, false, owner);
+                foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.MASK_OFFSET, false, owner);
                 if (foldout_bool)
                 {
                     DrawShaderProperty(tex0);
@@ -81,7 +81,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         {
             using (new EditorGUILayout.VerticalScope("HelpBox"))
             {
-                foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.CONTROL, false, owner);
+                foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.MASK_OFFSET, false, owner);
                 if (foldout_bool)
                 {
                     DrawShaderProperty(tex0);
@@ -133,7 +133,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             SHADER_PROPERTY CHRONO,
             SHADER_PROPERTY SPECTRUM,
             SHADER_PROPERTY MIRROR,
-            SHADER_PROPERTY TYPE
+            SHADER_PROPERTY MODE
         )
         {
             using (new EditorGUILayout.VerticalScope("HelpBox"))
@@ -155,7 +155,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                         case 4:
                             DrawShaderProperty(SPECTRUM);
                             DrawShaderProperty(MIRROR);
-                            DrawShaderProperty(TYPE);
+                            if(MODE!=SHADER_PROPERTY._EMPTY) DrawShaderProperty(MODE);
                             break;
                         default:
                             break;
@@ -185,13 +185,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     DrawShaderProperty(THRESHOLD_ADD);
                     DrawShaderProperty(EASE_MODE);
                     DrawShaderProperty(EASE_CURVE);
-                    PreviewNoiseGraph(
+                    PreviewGraph(
                         GetPropertyFloat(targetMat, PHASE_SCALE),
                         (uint)GetPropertyFloat(targetMat, LOOP_MODE),
                         GetPropertyFloat(targetMat, THRESHOLD_MUL),
                         GetPropertyFloat(targetMat, THRESHOLD_ADD),
-                        GetPropertyFloat(targetMat, EASE_CURVE),
-                        (uint)GetPropertyFloat(targetMat, EASE_MODE)
+                        (uint)GetPropertyFloat(targetMat, EASE_MODE),
+                        GetPropertyFloat(targetMat, EASE_CURVE)
                     );
                 }
             }
@@ -250,9 +250,9 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     SHADER_PROPERTY._NOISE1ST_OFFSET_BEFORE_SCALE,
                     SHADER_PROPERTY._NOISE1ST_SPACE,
                     SHADER_PROPERTY._NOISE1ST_SEED,
-                    SHADER_PROPERTY._NOISE1ST_TIME_MULTI,
+                    SHADER_PROPERTY._NOISE1ST_TIME_SPEED,
                     SHADER_PROPERTY._NOISE1ST_TIME_PHASE,
-                    SHADER_PROPERTY._NOISE1ST_PHASE_SCALE
+                    SHADER_PROPERTY._NOISE1ST_VALUE_SCALE
                 );
             }
         }
@@ -274,9 +274,9 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     SHADER_PROPERTY._NOISE2ND_OFFSET_BEFORE_SCALE,
                     SHADER_PROPERTY._NOISE2ND_SPACE,
                     SHADER_PROPERTY._NOISE2ND_SEED,
-                    SHADER_PROPERTY._NOISE2ND_TIME_MULTI,
+                    SHADER_PROPERTY._NOISE2ND_TIME_SPEED,
                     SHADER_PROPERTY._NOISE2ND_TIME_PHASE,
-                    SHADER_PROPERTY._NOISE2ND_PHASE_SCALE
+                    SHADER_PROPERTY._NOISE2ND_VALUE_SCALE
                 );
             }
         }
@@ -298,9 +298,9 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     SHADER_PROPERTY._NOISE3RD_OFFSET_BEFORE_SCALE,
                     SHADER_PROPERTY._NOISE3RD_SPACE,
                     SHADER_PROPERTY._NOISE3RD_SEED,
-                    SHADER_PROPERTY._NOISE3RD_TIME_MULTI,
+                    SHADER_PROPERTY._NOISE3RD_TIME_SPEED,
                     SHADER_PROPERTY._NOISE3RD_TIME_PHASE,
-                    SHADER_PROPERTY._NOISE3RD_PHASE_SCALE
+                    SHADER_PROPERTY._NOISE3RD_VALUE_SCALE
                 );
             }
         }

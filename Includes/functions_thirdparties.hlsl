@@ -1,4 +1,4 @@
-#ifdef _USE_AUDIOLINK
+#if defined(_AUDIOLINK_ENABLE)
 
 float ToggleSpectrum(float n, bool toggle){
     return lerp(

@@ -38,17 +38,17 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 }
 
                 EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._BILLBOARD_MODE);
+                DrawShaderProperty(SHADER_PROPERTY._BILLBOARD_ENABLE);
                 using (new EditorGUI.DisabledScope(
-                    !Convert.ToBoolean(GetPropertyFloat(targetMat, SHADER_PROPERTY._BILLBOARD_MODE))
+                    !Convert.ToBoolean(GetPropertyFloat(targetMat, SHADER_PROPERTY._BILLBOARD_ENABLE))
                 ))
                 {
                     DrawShaderProperty(SHADER_PROPERTY._FORCED_Z_SCALE_ZERO);
                 }
 
-                DrawShaderProperty(SHADER_PROPERTY._USE_FWIDTH);
+                DrawShaderProperty(SHADER_PROPERTY._FWIDTH_ENABLE);
                 using (new EditorGUI.DisabledScope(
-                    !Convert.ToBoolean(GetPropertyFloat(targetMat, SHADER_PROPERTY._USE_FWIDTH))
+                    !Convert.ToBoolean(GetPropertyFloat(targetMat, SHADER_PROPERTY._FWIDTH_ENABLE))
                 ))
                 {
                     DrawShaderProperty(SHADER_PROPERTY._DISTANCE_INFLUENCE);
@@ -58,8 +58,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
 
                 using (new EditorGUILayout.VerticalScope("HelpBox"))
                 {
-                    DrawShaderProperty(SHADER_PROPERTY._ACTIVATE_DIRECTIONAL_LIGHT_INFLUENCE);
-                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._ACTIVATE_DIRECTIONAL_LIGHT_INFLUENCE) == 1)
+                    DrawShaderProperty(SHADER_PROPERTY._DIRECTIONAL_LIGHT_INFLUENCE_ENABLE);
+                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._DIRECTIONAL_LIGHT_INFLUENCE_ENABLE) == 1)
                     {
                         DrawShaderProperty(SHADER_PROPERTY._DIRECTIONAL_LIGHT_INFLUENCE);
                     }
@@ -67,10 +67,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
 
                 using (new EditorGUILayout.VerticalScope("HelpBox"))
                 {
-                    DrawShaderProperty(SHADER_PROPERTY._ACTIVATE_AMBIENT_INFLUENCE);
-                    using (new EditorGUI.DisabledGroupScope(Convert.ToBoolean(GetPropertyFloat(targetMat, SHADER_PROPERTY._ACTIVATE_LIGHTVOLUMES_INFLUENCE))))
+                    DrawShaderProperty(SHADER_PROPERTY._AMBIENT_INFLUENCE_ENABLE);
+                    using (new EditorGUI.DisabledGroupScope(Convert.ToBoolean(GetPropertyFloat(targetMat, SHADER_PROPERTY._LIGHTVOLUMES_INFLUENCE_ENABLE))))
                     {
-                        if (GetPropertyFloat(targetMat, SHADER_PROPERTY._ACTIVATE_AMBIENT_INFLUENCE) == 1)
+                        if (GetPropertyFloat(targetMat, SHADER_PROPERTY._AMBIENT_INFLUENCE_ENABLE) == 1)
                         {
                             DrawShaderProperty(SHADER_PROPERTY._AMBIENT_INFLUENCE);
                         }
@@ -79,8 +79,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
 
                 using (new EditorGUILayout.VerticalScope("HelpBox"))
                 {
-                    DrawShaderProperty(SHADER_PROPERTY._ACTIVATE_LIGHTVOLUMES_INFLUENCE);
-                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._ACTIVATE_LIGHTVOLUMES_INFLUENCE) == 1)
+                    DrawShaderProperty(SHADER_PROPERTY._LIGHTVOLUMES_INFLUENCE_ENABLE);
+                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._LIGHTVOLUMES_INFLUENCE_ENABLE) == 1)
                     {
                         DrawShaderProperty(SHADER_PROPERTY._LIGHTVOLUMES_INFLUENCE);
                     }
@@ -94,8 +94,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 }
 
                 EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._PREVIEW_MODE);
-                DrawShaderProperty(SHADER_PROPERTY._ANTI_ALIASING);
+                DrawShaderProperty(SHADER_PROPERTY._PREVIEW_ENABLE);
+                DrawShaderProperty(SHADER_PROPERTY._ANTI_ALIASING_ENABLE);
                 EditorGUILayout.Space(16);
                 DrawShaderProperty(SHADER_PROPERTY._MAIN_TEX);
 
@@ -163,20 +163,20 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 EditorGUILayout.Space(4);
                 using (new EditorGUILayout.VerticalScope("HelpBox"))
                 {
-                    DrawShaderProperty(SHADER_PROPERTY._USE_AUDIOLINK);
-                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._USE_AUDIOLINK) == 1)
+                    DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_ENABLE);
+                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._AUDIOLINK_ENABLE) == 1)
                     {
                         DrawPartitionLine(4);
                         DrawHeaderLabel(LocalizationSystem.PropLangDic["label.vu"],CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
                         DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_VU_BAND);
-                        DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_VU_SMOOTH);
+                        DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_VU_SMOOTHING);
                         DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_VU_PANNING);
                         DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_VU_GAIN_MUL);
                         DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_VU_GAIN_ADD);
                         DrawPartitionLine(4);
                         DrawHeaderLabel(LocalizationSystem.PropLangDic["label.chronotensity"],CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
-                        DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_CHRONO_TENSITY_SCALE);
-                        DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_CHRONO_TENSITY_TYPE);
+                        DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_CHRONO_TENSITY_DIVISOR);
+                        DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_CHRONO_TENSITY_MODE);
                         DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_CHRONO_TENSITY_BAND);
                         DrawPartitionLine(4);
                         DrawHeaderLabel(LocalizationSystem.PropLangDic["label.theme_color"],CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
@@ -192,25 +192,25 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
             foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.FRAGMENT, true);
             if (foldout_bool)
             {
-                DrawShaderProperty(SHADER_PROPERTY._FILL);
-                DrawShaderProperty(SHADER_PROPERTY._TRIANGLE_COMP);
-                DrawShaderProperty(SHADER_PROPERTY._LINE_WIDTH);
-                DrawShaderProperty(SHADER_PROPERTY._LINE_GRADIENT_BIAS);
+                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_FILL);
+                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_TRIANGLE_COMPRESSION);
+                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_LINE_WIDTH);
+                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_LINE_GRADIENT_BIAS);
                 EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._MANUAL_LINE_SCALING);
+                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_MANUAL_LINE_SCALING);
                 using (new EditorGUI.DisabledScope(
-                    GetPropertyFloat(targetMat, SHADER_PROPERTY._MANUAL_LINE_SCALING) == 0))
+                    GetPropertyFloat(targetMat, SHADER_PROPERTY._FRAGMENT_MANUAL_LINE_SCALING) == 0))
                 {
-                    DrawShaderProperty(SHADER_PROPERTY._LINE_SCALE);
+                    DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_LINE_SCALE);
                 }
                 EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._LINE_FADE_MODE);
-                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_PARTITION_TYPE);
+                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_LINE_ANIMATION_MODE);
+                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_PARTITION_MODE);
                 EditorGUILayout.Space(16);
                 DrawSource(
                     0,
                     SHADER_PROPERTY._FRAGMENT_SOURCE,
-                    SHADER_PROPERTY._FRAGMENT_VALUE
+                    SHADER_PROPERTY._FRAGMENT_FIXED_VALUE
                 );
                 DrawAudioLinkSource(
                     0,
@@ -219,7 +219,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     SHADER_PROPERTY._FRAGMENT_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
                     SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_STRENGTH,
                     SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_MIRROR,
-                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_TYPE
+                    SHADER_PROPERTY._EMPTY
                 );
                 DrawControlTex(
                     0,
@@ -234,8 +234,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     0,
                     SHADER_PROPERTY._FRAGMENT_PHASE_SCALE,
                     SHADER_PROPERTY._FRAGMENT_LOOP_MODE,
-                    SHADER_PROPERTY._FRAGMENT_THRESHOLD_MUL,
-                    SHADER_PROPERTY._FRAGMENT_THRESHOLD_ADD,
+                    SHADER_PROPERTY._FRAGMENT_MID_MUL,
+                    SHADER_PROPERTY._FRAGMENT_MID_ADD,
                     SHADER_PROPERTY._FRAGMENT_EASE_MODE,
                     SHADER_PROPERTY._FRAGMENT_EASE_CURVE
                 );
@@ -286,12 +286,12 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         break;
                 }
                 DrawShaderProperty(SHADER_PROPERTY._EMISSION);
-                DrawShaderProperty(SHADER_PROPERTY._COLORING_PARTITION_TYPE);
+                DrawShaderProperty(SHADER_PROPERTY._COLORING_PARTITION_MODE);
                 EditorGUILayout.Space(16);
                 DrawSource(
                     1,
                     SHADER_PROPERTY._COLORING_SOURCE,
-                    SHADER_PROPERTY._COLORING_VALUE
+                    SHADER_PROPERTY._COLORING_FIXED_VALUE
                 );
                 DrawAudioLinkSource(
                     1,
@@ -300,7 +300,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     SHADER_PROPERTY._COLORING_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
                     SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_STRENGTH,
                     SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_MIRROR,
-                    SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_TYPE
+                    SHADER_PROPERTY._EMPTY
                 );
                 DrawControlTex(
                     1,
@@ -315,8 +315,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     1,
                     SHADER_PROPERTY._COLORING_PHASE_SCALE,
                     SHADER_PROPERTY._COLORING_LOOP_MODE,
-                    SHADER_PROPERTY._COLORING_THRESHOLD_MUL,
-                    SHADER_PROPERTY._COLORING_THRESHOLD_ADD,
+                    SHADER_PROPERTY._COLORING_MID_MUL,
+                    SHADER_PROPERTY._COLORING_MID_ADD,
                     SHADER_PROPERTY._COLORING_EASE_MODE,
                     SHADER_PROPERTY._COLORING_EASE_CURVE
                 );
@@ -330,41 +330,41 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
             {
                 using (new EditorGUILayout.VerticalScope("HelpBox"))
                 {
-                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_SCALE);
-                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._GEOMETRY_SCALE) == 1)
+                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_SCALE_ENABLE);
+                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._GEOMETRY_SCALE_ENABLE) == 1)
                     {
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_SCALE_RANGE);
+                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_SCALE_BOUNDS);
                     }
                 }
                 using (new EditorGUILayout.VerticalScope("HelpBox"))
                 {
-                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_EXTRUDE);
-                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._GEOMETRY_EXTRUDE) == 1)
+                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PUSHPULL_ENABLE);
+                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._GEOMETRY_PUSHPULL_ENABLE) == 1)
                     {
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_EXTRUDE_RANGE);
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PARTITION_BIAS);
+                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PUSHPULL_BOUNDS);
+                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PUSHPULL_PARTITION_BIAS);
                     }
                 }
                 using (new EditorGUILayout.VerticalScope("HelpBox"))
                 {
-                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_ROTATION);
-                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._GEOMETRY_ROTATION) == 1)
+                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_ROTATION_ENABLE);
+                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._GEOMETRY_ROTATION_ENABLE) == 1)
                     {
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_ROTATION_INFLUENCE);
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_ROTATION_REVERSE);
+                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_ROTATION_STRENGTH);
+                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_ROTATION_INVERT);
                         DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_ROTATION_NOISE_REPEAT);
                     }
                 }
 
                 EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._PIXELIZATION_SPACE);
-                DrawShaderProperty(SHADER_PROPERTY._PIXELIZATION);
+                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PIXELIZATION_SPACE);
+                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PIXELIZATION);
                 EditorGUILayout.Space(16);
 
                 DrawSource(
                     2,
                     SHADER_PROPERTY._GEOMETRY_SOURCE,
-                    SHADER_PROPERTY._GEOMETRY_VALUE
+                    SHADER_PROPERTY._GEOMETRY_FIXED_VALUE
                 );
                 DrawAudioLinkSource(
                     2,
@@ -373,7 +373,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     SHADER_PROPERTY._GEOMETRY_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
                     SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_STRENGTH,
                     SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_MIRROR,
-                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_TYPE
+                    SHADER_PROPERTY._EMPTY
                 );
                 DrawControlTex(
                     2,
@@ -388,8 +388,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     2,
                     SHADER_PROPERTY._GEOMETRY_PHASE_SCALE,
                     SHADER_PROPERTY._GEOMETRY_LOOP_MODE,
-                    SHADER_PROPERTY._GEOMETRY_THRESHOLD_MUL,
-                    SHADER_PROPERTY._GEOMETRY_THRESHOLD_ADD,
+                    SHADER_PROPERTY._GEOMETRY_MID_MUL,
+                    SHADER_PROPERTY._GEOMETRY_MID_ADD,
                     SHADER_PROPERTY._GEOMETRY_EASE_MODE,
                     SHADER_PROPERTY._GEOMETRY_EASE_CURVE
                 );
@@ -401,8 +401,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
             foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.ORBIT, true);
             if (foldout_bool)
             {
-                DrawShaderProperty(SHADER_PROPERTY._ACTIVATE_ORBIT);
-                if (GetPropertyFloat(targetMat, SHADER_PROPERTY._ACTIVATE_ORBIT) == 1)
+                DrawShaderProperty(SHADER_PROPERTY._ORBIT_ENABLE);
+                if (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_ENABLE) == 1)
                 {
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_OFFSET);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_SCALE);
@@ -415,11 +415,11 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                             switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_SOURCE))
                             {
                                 case 0:
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_VALUE);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_FIXED_VALUE);
                                     break;
                                 case 1:
                                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_SEED);
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_PRIMITIVE_THRESHOLD);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_PRIMITIVE_RATIO);
                                     break;
                                 case 2:
                                     InsertNoise1stProps(3);
@@ -440,7 +440,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         SHADER_PROPERTY._ORBIT_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
                         SHADER_PROPERTY._ORBIT_AUDIOLINK_SPECTRUM_STRENGTH,
                         SHADER_PROPERTY._ORBIT_AUDIOLINK_SPECTRUM_MIRROR,
-                        SHADER_PROPERTY._ORBIT_AUDIOLINK_SPECTRUM_TYPE
+                        SHADER_PROPERTY._EMPTY
                     );
                     DrawControlTex(
                         3,
@@ -455,15 +455,15 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         3,
                         SHADER_PROPERTY._ORBIT_PHASE_SCALE,
                         SHADER_PROPERTY._ORBIT_LOOP_MODE,
-                        SHADER_PROPERTY._ORBIT_THRESHOLD_MUL,
-                        SHADER_PROPERTY._ORBIT_THRESHOLD_ADD,
+                        SHADER_PROPERTY._ORBIT_MID_MUL,
+                        SHADER_PROPERTY._ORBIT_MID_ADD,
                         SHADER_PROPERTY._ORBIT_EASE_MODE,
                         SHADER_PROPERTY._ORBIT_EASE_CURVE
                     );
 
                     DrawPartitionLine(8);
                     DrawHeaderLabel(LocalizationSystem.GetLocalizeText("label.orbit_rotation"),CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_VARIANCE);
+                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_SPREAD);
                     using (new EditorGUILayout.VerticalScope("HelpBox"))
                     {
                         foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.SOURCE, false, 4);
@@ -473,7 +473,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                             switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_ROTATION_SOURCE))
                             {
                                 case 0:
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_VALUE);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_FIXED_VALUE);
                                     break;
                                 case 1:
                                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_SEED);
@@ -503,7 +503,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_STRENGTH);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_FREQUENCY);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_PHASE);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_TIME_MULTIPLIER);
+                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_SPEED);
                     using (new EditorGUILayout.VerticalScope("HelpBox"))
                     {
                         DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SOURCE);
@@ -518,8 +518,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                             case 3:
                                 DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_STRENGTH);
                                 DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_MIRROR);
-                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_TYPE);
-                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_RANGE);
+                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_MODE);
+                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_BOUNDS);
                                 break;
                             default:
                                 break;
@@ -528,8 +528,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
 
                     DrawPartitionLine(8);
                     DrawHeaderLabel(LocalizationSystem.GetLocalizeText("label.orbit_rotation_offset"),CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_TIME_MULTIPLIER);
+                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_ANGLE);
+                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_SPEED);
                     using (new EditorGUILayout.VerticalScope("HelpBox"))
                     {
                         foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.AUDIOLINK_SOURCE, false, 5);

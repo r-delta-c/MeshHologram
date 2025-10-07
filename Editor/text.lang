@@ -17,6 +17,7 @@ label.color.export||Export||エクスポート
 
 label.orbit||Orbit||Orbit
 label.orbit_rotation||Orbit Rotation||Orbit 回転
+label.orbit_rotation_offset||Orbit Rotation Offset||Orbit 回転オフセット
 label.orbit_wave||Orbit Wave||Orbit Wave
 label.orbit_audiolink||Orbit AudioLink||Orbit AudioLink
 label.noise1st_properties||Noise 1st Properties||Noise 1st プロパティ
@@ -27,6 +28,34 @@ label.remove_unused_properties||Remove Unused Properties||内部の未使用プ�
 label.texture_properties||Texture Properties||テクスチャプロパティ
 label.all_properties||All Properties||全てのプロパティ
 label.title_skin||Title Skin||タイトルスキン
+
+label.fragment.mask_offset||Masks|Offset||マスク|オフセット
+label.coloring.mask_offset||Masks|Offset||マスク|オフセット
+label.geometry.mask_offset||Masks|Offset||マスク|オフセット
+label.orbit.mask_offset||Masks|Offset||マスク|オフセット
+label.orbit_rotation.mask_offset||Masks|Offset||マスク|オフセット
+label.orbit_rotation_offset.mask_offset||Masks|Offset||マスク|オフセット
+
+label.fragment.source||Source||参照先
+label.coloring.source||Source||参照先
+label.geometry.source||Source||参照先
+label.orbit.source||Source||参照先
+label.orbit_rotation.source||Source||参照先
+label.orbit_rotation_offset.source||Source||参照先
+
+label.fragment.audiolink_source||AudioLink Source||AudioLink参照先
+label.coloring.audiolink_source||AudioLink Source||AudioLink参照先
+label.geometry.audiolink_source||AudioLink Source||AudioLink参照先
+label.orbit.audiolink_source||AudioLink Source||AudioLink参照先
+label.orbit_rotation.audiolink_source||AudioLink Source||AudioLink参照先
+label.orbit_rotation_offset.audiolink_source||AudioLink Source||AudioLink参照先
+
+label.fragment.modifier||Modifiers||モディファイア
+label.coloring.modifier||Modifiers||モディファイア
+label.geometry.modifier||Modifiers||モディファイア
+label.orbit.modifier||Modifiers||モディファイア
+label.orbit_rotation.modifier||Modifiers||モディファイア
+label.orbit_rotation_offset.modifier||Modifiers||モディファイア
 
 text.remove_texture_properties_text||Remove any unused texture properties in material.||マテリアル内部の未使用テクスチャプロパティを削除します。
 text.remove_all_properties_text||Remove any unused properties in material.||マテリアル内部の全ての未使用プロパティを削除します。

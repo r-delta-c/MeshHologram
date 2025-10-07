@@ -21,13 +21,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
             FoldoutList.Add(FOLDOUT.NOISE1ST, new FoldoutState(new string[1] { "label.noise1st_properties" }, 5));
             FoldoutList.Add(FOLDOUT.NOISE2ND, new FoldoutState(new string[1] { "label.noise2nd_properties" }, 5));
             FoldoutList.Add(FOLDOUT.NOISE3RD, new FoldoutState(new string[1] { "label.noise3rd_properties" }, 5));
-            FoldoutList.Add(FOLDOUT.CONTROL, new FoldoutState(new string[6]{
-                "label.fragment.control",
-                "label.coloring.control",
-                "label.geometry.control",
-                "label.orbit.control",
-                "label.orbit_rotation.control",
-                "label.orbit_rotation_offset.control"
+            FoldoutList.Add(FOLDOUT.MASK_OFFSET, new FoldoutState(new string[6]{
+                "label.fragment.mask_offset",
+                "label.coloring.mask_offset",
+                "label.geometry.mask_offset",
+                "label.orbit.mask_offset",
+                "label.orbit_rotation.mask_offset",
+                "label.orbit_rotation_offset.mask_offset"
             }, 6));
             FoldoutList.Add(FOLDOUT.SOURCE, new FoldoutState(new string[6]{
                 "label.fragment.source",

@@ -29,59 +29,66 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
 
         TRANSFORM_TEX_MACRO(_GeometryMaskMap);
         UV_MESH_MACRO;
-        float3 geometry_mask = MASK_CONTROL_MACRO3(_GeometryMaskMap,_point_repeat,_GeometryMaskMapStrength);
-        transform_pushpull_uv[0] = VertexCenterBias(transform_uv[1],transform_uv[2],transform_uv[0],uv_mesh,_GeometryPartitionBias);
-        transform_pushpull_uv[1] = VertexCenterBias(transform_uv[2],transform_uv[0],transform_uv[1],uv_mesh,_GeometryPartitionBias);
-        transform_pushpull_uv[2] = VertexCenterBias(transform_uv[0],transform_uv[1],transform_uv[2],uv_mesh,_GeometryPartitionBias);
+        float3 geometry_mask = MASK_CONTROL_MACRO3_MESH(_GeometryMaskMap,_point_repeat,_GeometryMaskMapStrength);
+        transform_pushpull_uv[0] = VertexCenterBias(transform_uv[1],transform_uv[2],transform_uv[0],uv_mesh,_GeometryPushPullPartitionBias);
+        transform_pushpull_uv[1] = VertexCenterBias(transform_uv[2],transform_uv[0],transform_uv[1],uv_mesh,_GeometryPushPullPartitionBias);
+        transform_pushpull_uv[2] = VertexCenterBias(transform_uv[0],transform_uv[1],transform_uv[2],uv_mesh,_GeometryPushPullPartitionBias);
         float3 geometry_pushpull_mask = MASK_CONTROL_MACRO3_UV(_GeometryMaskMap,_point_repeat,_GeometryMaskMapStrength,transform_pushpull_uv);
 
         TRANSFORM_TEX_MACRO(_GeometryMap);
         UV_MESH_MACRO;
-        float3 geometry_map = OFFSET_CONTROL_MACRO3(_GeometryMap,_point_repeat,_GeometryMapStrength);
-        transform_pushpull_uv[0] = VertexCenterBias(transform_uv[1],transform_uv[2],transform_uv[0],uv_mesh,_GeometryPartitionBias);
-        transform_pushpull_uv[1] = VertexCenterBias(transform_uv[2],transform_uv[0],transform_uv[1],uv_mesh,_GeometryPartitionBias);
-        transform_pushpull_uv[2] = VertexCenterBias(transform_uv[0],transform_uv[1],transform_uv[2],uv_mesh,_GeometryPartitionBias);
+        float3 geometry_map = OFFSET_CONTROL_MACRO3_MESH(_GeometryMap,_point_repeat,_GeometryMapStrength);
+        transform_pushpull_uv[0] = VertexCenterBias(transform_uv[1],transform_uv[2],transform_uv[0],uv_mesh,_GeometryPushPullPartitionBias);
+        transform_pushpull_uv[1] = VertexCenterBias(transform_uv[2],transform_uv[0],transform_uv[1],uv_mesh,_GeometryPushPullPartitionBias);
+        transform_pushpull_uv[2] = VertexCenterBias(transform_uv[0],transform_uv[1],transform_uv[2],uv_mesh,_GeometryPushPullPartitionBias);
         float3 geometry_pushpull_map = OFFSET_CONTROL_MACRO3_UV(_GeometryMap,_point_repeat,_GeometryMapStrength,transform_pushpull_uv);
 
         TRANSFORM_TEX_MACRO(_OrbitMaskMap);
-        float3 orbit_mask = MASK_CONTROL_MACRO3(_OrbitMaskMap,_point_repeat,_OrbitMaskMapStrength);
+        UV_MESH_MACRO;
+        float3 orbit_mask = MASK_CONTROL_MACRO3_MESH(_OrbitMaskMap,_point_repeat,_OrbitMaskMapStrength);
         TRANSFORM_TEX_MACRO(_OrbitMap);
-        float3 orbit_map = OFFSET_CONTROL_MACRO3(_OrbitMap,_point_repeat,_OrbitMapStrength);
+        UV_MESH_MACRO;
+        float3 orbit_map = OFFSET_CONTROL_MACRO3_MESH(_OrbitMap,_point_repeat,_OrbitMapStrength);
 
         TRANSFORM_TEX_MACRO(_OrbitRotationMaskMap);
-        float3 orbit_rotation_mask = MASK_CONTROL_MACRO3(_OrbitRotationMaskMap,_point_repeat,_OrbitRotationMaskMapStrength);
+        UV_MESH_MACRO;
+        float3 orbit_rotation_mask = MASK_CONTROL_MACRO3_MESH(_OrbitRotationMaskMap,_point_repeat,_OrbitRotationMaskMapStrength);
         TRANSFORM_TEX_MACRO(_OrbitRotationMap);
-        float3 orbit_rotation_map = OFFSET_CONTROL_MACRO3(_OrbitRotationMap,_point_repeat,_OrbitRotationMapStrength);
+        UV_MESH_MACRO;
+        float3 orbit_rotation_map = OFFSET_CONTROL_MACRO3_MESH(_OrbitRotationMap,_point_repeat,_OrbitRotationMapStrength);
 
         TRANSFORM_TEX_MACRO(_OrbitRotationOffsetMaskMap);
-        float3 orbit_rotation_offset_mask = MASK_CONTROL_MACRO3(_OrbitRotationOffsetMaskMap,_point_repeat,1.0);
+        UV_MESH_MACRO;
+        float3 orbit_rotation_offset_mask = MASK_CONTROL_MACRO3_MESH(_OrbitRotationOffsetMaskMap,_point_repeat,1.0);
         orbit_rotation_offset_mask = orbit_rotation_offset_mask*_OrbitRotationOffsetMaskMapStrength.xyz*_OrbitRotationOffsetMaskMapStrength.w;
 
-        #if defined(_USE_AUDIOLINK)
-            TRANSFORM_TEX_MACRO(_FragmentALMaskMap);
-            float3 fragment_al_mask = MASK_CONTROL_MACRO3(_FragmentALMaskMap,_point_repeat,_FragmentALMaskMapStrength);
-            TRANSFORM_TEX_MACRO(_ColoringALMaskMap);
-            float3 coloring_al_mask = MASK_CONTROL_MACRO3(_ColoringALMaskMap,_point_repeat,_ColoringALMaskMapStrength);
-            TRANSFORM_TEX_MACRO(_GeometryALMaskMap);
+        #if defined(_AUDIOLINK_ENABLE)
+            TRANSFORM_TEX_MACRO(_FragmentAudioLinkMaskMap);
+            float3 fragment_al_mask = MASK_CONTROL_MACRO3(_FragmentAudioLinkMaskMap,_point_repeat,_FragmentAudioLinkMaskMapStrength);
+            TRANSFORM_TEX_MACRO(_ColoringAudioLinkMaskMap);
+            float3 coloring_al_mask = MASK_CONTROL_MACRO3(_ColoringAudioLinkMaskMap,_point_repeat,_ColoringAudioLinkMaskMapStrength);
+            TRANSFORM_TEX_MACRO(_GeometryAudioLinkMaskMap);
             UV_MESH_MACRO;
-            float3 geometry_al_mask = MASK_CONTROL_MACRO3(_GeometryALMaskMap,_point_repeat,_GeometryALMaskMapStrength);
-            transform_pushpull_uv[0] = VertexCenterBias(transform_uv[1],transform_uv[2],transform_uv[0],uv_mesh,_GeometryPartitionBias);
-            transform_pushpull_uv[1] = VertexCenterBias(transform_uv[2],transform_uv[0],transform_uv[1],uv_mesh,_GeometryPartitionBias);
-            transform_pushpull_uv[2] = VertexCenterBias(transform_uv[0],transform_uv[1],transform_uv[2],uv_mesh,_GeometryPartitionBias);
-            float3 geometry_pushpull_al_mask = MASK_CONTROL_MACRO3_UV(_GeometryALMaskMap,_point_repeat,_GeometryALMaskMapStrength,transform_pushpull_uv);
-            TRANSFORM_TEX_MACRO(_OrbitALMaskMap);
-            float3 orbit_al_mask = MASK_CONTROL_MACRO3(_OrbitALMaskMap,_point_repeat,_OrbitALMaskMapStrength);
-            TRANSFORM_TEX_MACRO(_OrbitRotationOffsetALMaskMap);
-            float3 orbit_rotation_offset_al_mask = MASK_CONTROL_MACRO3(_OrbitRotationOffsetALMaskMap,_point_repeat,1.0);
-            orbit_rotation_offset_al_mask = orbit_rotation_offset_al_mask*_OrbitRotationOffsetALMaskMapStrength.xyz*_OrbitRotationOffsetALMaskMapStrength.w;
+            float3 geometry_al_mask = MASK_CONTROL_MACRO3_MESH(_GeometryAudioLinkMaskMap,_point_repeat,_GeometryAudioLinkMaskMapStrength);
+            transform_pushpull_uv[0] = VertexCenterBias(transform_uv[1],transform_uv[2],transform_uv[0],uv_mesh,_GeometryPushPullPartitionBias);
+            transform_pushpull_uv[1] = VertexCenterBias(transform_uv[2],transform_uv[0],transform_uv[1],uv_mesh,_GeometryPushPullPartitionBias);
+            transform_pushpull_uv[2] = VertexCenterBias(transform_uv[0],transform_uv[1],transform_uv[2],uv_mesh,_GeometryPushPullPartitionBias);
+            float3 geometry_pushpull_al_mask = MASK_CONTROL_MACRO3_UV(_GeometryAudioLinkMaskMap,_point_repeat,_GeometryAudioLinkMaskMapStrength,transform_pushpull_uv);
+            TRANSFORM_TEX_MACRO(_OrbitAudioLinkMaskMap);
+            UV_MESH_MACRO;
+            float3 orbit_al_mask = MASK_CONTROL_MACRO3_MESH(_OrbitAudioLinkMaskMap,_point_repeat,_OrbitAudioLinkMaskMapStrength);
+            TRANSFORM_TEX_MACRO(_OrbitRotationOffsetAudioLinkMaskMap);
+            UV_MESH_MACRO;
+            float3 orbit_rotation_offset_al_mask = MASK_CONTROL_MACRO3_MESH(_OrbitRotationOffsetAudioLinkMaskMap,_point_repeat,1.0);
+            orbit_rotation_offset_al_mask = orbit_rotation_offset_al_mask*_OrbitRotationOffsetAudioLinkMaskMapStrength.xyz*_OrbitRotationOffsetAudioLinkMaskMapStrength.w;
         #endif
 
 
 
-    #ifdef _USE_AUDIOLINK
-        float4 audiolink_vu_band = lerp(AudioLinkData(ALPASS_FILTEREDAUDIOLINK+uint2(_AudioLinkVUSmooth,_AudioLinkVUBand)),AudioLinkData(ALPASS_FILTEREDVU_INTENSITY),max(0.0,_AudioLinkVUBand-3.0));
+    #if defined(_AUDIOLINK_ENABLE)
+        float4 audiolink_vu_band = lerp(AudioLinkData(ALPASS_FILTEREDAUDIOLINK+uint2(_AudioLinkVUSmoothing,_AudioLinkVUBand)),AudioLinkData(ALPASS_FILTEREDVU_INTENSITY),max(0.0,_AudioLinkVUBand-3.0));
         float audiolink_vu = saturate(lerp(audiolink_vu_band.r,audiolink_vu_band.b,_AudioLinkVUPanning)*_AudioLinkVUGainMul+_AudioLinkVUGainAdd);
-        float audiolink_chronotensity = (AudioLinkDecodeDataAsUInt(ALPASS_CHRONOTENSITY+uint2(_AudioLinkChronoTensityType,_AudioLinkChronoTensityBand)).r/_AudioLinkChronoTensityScale);
+        float audiolink_chronotensity = (AudioLinkDecodeDataAsUInt(ALPASS_CHRONOTENSITY+uint2(_AudioLinkChronoTensityMode,_AudioLinkChronoTensityBand)).r/_AudioLinkChronoTensityDivisor);
     #endif
 
 
@@ -91,45 +98,45 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         float3 noise3rd_center_pos = (inp[0].noise3rd_pos+inp[1].noise3rd_pos+inp[2].noise3rd_pos)/3.0;
         float3 bias_pos[3];
 
-        float noise1st_time = _Time.x*_Noise1stTimeMulti+_Noise1stTimePhase+NOISE1ST_AUDIOLINK_PHASE_MACRO;
+        float noise1st_time = _Time.x*_Noise1stTimeSpeed+_Noise1stTimePhase;
         float3 noise1st_mesh_value = ValueNoise3D(noise1st_center_pos,_Noise1stSeed);
-        noise1st_mesh_value = noise1st_mesh_value*_Noise1stPhaseScale+noise1st_time;
+        noise1st_mesh_value = noise1st_mesh_value*_Noise1stValueScale+noise1st_time;
 
-        float noise2nd_time = _Time.x*_Noise2ndTimeMulti+_Noise2ndTimePhase+NOISE2ND_AUDIOLINK_PHASE_MACRO;
+        float noise2nd_time = _Time.x*_Noise2ndTimeSpeed+_Noise2ndTimePhase;
         float3 noise2nd_mesh_value = ValueNoise3D(noise2nd_center_pos,_Noise2ndSeed);
-        noise2nd_mesh_value = noise2nd_mesh_value*_Noise2ndPhaseScale+noise2nd_time;
+        noise2nd_mesh_value = noise2nd_mesh_value*_Noise2ndValueScale+noise2nd_time;
 
-        float noise3rd_time = _Time.x*_Noise3rdTimeMulti+_Noise3rdTimePhase+NOISE3RD_AUDIOLINK_PHASE_MACRO;
+        float noise3rd_time = _Time.x*_Noise3rdTimeSpeed+_Noise3rdTimePhase;
         float3 noise3rd_mesh_value = ValueNoise3D(noise3rd_center_pos,_Noise3rdSeed);
-        noise3rd_mesh_value = noise3rd_mesh_value*_Noise3rdPhaseScale+noise3rd_time;
+        noise3rd_mesh_value = noise3rd_mesh_value*_Noise3rdValueScale+noise3rd_time;
 
 
-        #if defined(_FRAGMENTPARTITIONTYPE_VERTEX) || defined(_COLORINGPARTITIONTYPE_VERTEX)
+        #if defined(_FRAGMENTPARTITIONMODE_VERTEX) || defined(_COLORINGPARTITIONMODE_VERTEX)
 
             float3 noise1st_vertex_value = float3(
                 ValueNoise3D(inp[0].noise1st_pos,_Noise1stSeed),
                 ValueNoise3D(inp[1].noise1st_pos,_Noise1stSeed),
                 ValueNoise3D(inp[2].noise1st_pos,_Noise1stSeed)
             );
-            noise1st_vertex_value = noise1st_vertex_value*_Noise1stPhaseScale+noise1st_time;
+            noise1st_vertex_value = noise1st_vertex_value*_Noise1stValueScale+noise1st_time;
 
             float3 noise2nd_vertex_value = float3(
                 ValueNoise3D(inp[0].noise2nd_pos,_Noise2ndSeed),
                 ValueNoise3D(inp[1].noise2nd_pos,_Noise2ndSeed),
                 ValueNoise3D(inp[2].noise2nd_pos,_Noise2ndSeed)
             );
-            noise2nd_vertex_value = noise2nd_vertex_value*_Noise2ndPhaseScale+noise2nd_time;
+            noise2nd_vertex_value = noise2nd_vertex_value*_Noise2ndValueScale+noise2nd_time;
 
             float3 noise3rd_vertex_value = float3(
                 ValueNoise3D(inp[0].noise3rd_pos,_Noise3rdSeed),
                 ValueNoise3D(inp[1].noise3rd_pos,_Noise3rdSeed),
                 ValueNoise3D(inp[2].noise3rd_pos,_Noise3rdSeed)
             );
-            noise3rd_vertex_value = noise3rd_vertex_value*_Noise3rdPhaseScale+noise3rd_time;
+            noise3rd_vertex_value = noise3rd_vertex_value*_Noise3rdValueScale+noise3rd_time;
 
         #endif
 
-        #if defined(_FRAGMENTPARTITIONTYPE_SIDE) || defined(_COLORINGPARTITIONTYPE_SIDE)
+        #if defined(_FRAGMENTPARTITIONMODE_SIDE) || defined(_COLORINGPARTITIONMODE_SIDE)
             bias_pos[0] = SideCenterPos(inp[1].noise1st_pos,inp[2].noise1st_pos,inp[0].noise1st_pos,noise1st_mesh_value);
             bias_pos[1] = SideCenterPos(inp[2].noise1st_pos,inp[0].noise1st_pos,inp[1].noise1st_pos,noise1st_mesh_value);
             bias_pos[2] = SideCenterPos(inp[0].noise1st_pos,inp[1].noise1st_pos,inp[2].noise1st_pos,noise1st_mesh_value);
@@ -138,7 +145,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
                 ValueNoise3D(bias_pos[1],_Noise1stSeed),
                 ValueNoise3D(bias_pos[2],_Noise1stSeed)
             );
-            noise1st_side_value = noise1st_side_value*_Noise1stPhaseScale+noise1st_time;
+            noise1st_side_value = noise1st_side_value*_Noise1stValueScale+noise1st_time;
 
             bias_pos[0] = SideCenterPos(inp[1].noise2nd_pos,inp[2].noise2nd_pos,inp[0].noise2nd_pos,noise3rd_mesh_value);
             bias_pos[1] = SideCenterPos(inp[2].noise2nd_pos,inp[0].noise2nd_pos,inp[1].noise2nd_pos,noise3rd_mesh_value);
@@ -148,7 +155,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
                 ValueNoise3D(bias_pos[1],_Noise2ndSeed),
                 ValueNoise3D(bias_pos[2],_Noise2ndSeed)
             );
-            noise2nd_side_value = noise2nd_side_value*_Noise2ndPhaseScale+noise2nd_time;
+            noise2nd_side_value = noise2nd_side_value*_Noise2ndValueScale+noise2nd_time;
 
             bias_pos[0] = SideCenterPos(inp[1].noise3rd_pos,inp[2].noise3rd_pos,inp[0].noise3rd_pos,noise3rd_mesh_value);
             bias_pos[1] = SideCenterPos(inp[2].noise3rd_pos,inp[0].noise3rd_pos,inp[1].noise3rd_pos,noise3rd_mesh_value);
@@ -158,36 +165,36 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
                 ValueNoise3D(bias_pos[1],_Noise3rdSeed),
                 ValueNoise3D(bias_pos[2],_Noise3rdSeed)
             );
-            noise3rd_side_value = noise3rd_side_value*_Noise3rdPhaseScale+noise3rd_time;
+            noise3rd_side_value = noise3rd_side_value*_Noise3rdValueScale+noise3rd_time;
 
         #endif
 
-        #if defined(_GEOMETRY_EXTRUDE)
+        #if defined(_GEOMETRY_PUSHPULL_ENABLE)
             float3 pushpull_noise_pos[3];
-            pushpull_noise_pos[0] = VertexCenterBias(inp[1].noise1st_pos,inp[2].noise1st_pos,inp[0].noise1st_pos,noise1st_center_pos,_GeometryPartitionBias);
-            pushpull_noise_pos[1] = VertexCenterBias(inp[2].noise1st_pos,inp[0].noise1st_pos,inp[1].noise1st_pos,noise1st_center_pos,_GeometryPartitionBias);
-            pushpull_noise_pos[2] = VertexCenterBias(inp[0].noise1st_pos,inp[1].noise1st_pos,inp[2].noise1st_pos,noise1st_center_pos,_GeometryPartitionBias);
+            pushpull_noise_pos[0] = VertexCenterBias(inp[1].noise1st_pos,inp[2].noise1st_pos,inp[0].noise1st_pos,noise1st_center_pos,_GeometryPushPullPartitionBias);
+            pushpull_noise_pos[1] = VertexCenterBias(inp[2].noise1st_pos,inp[0].noise1st_pos,inp[1].noise1st_pos,noise1st_center_pos,_GeometryPushPullPartitionBias);
+            pushpull_noise_pos[2] = VertexCenterBias(inp[0].noise1st_pos,inp[1].noise1st_pos,inp[2].noise1st_pos,noise1st_center_pos,_GeometryPushPullPartitionBias);
             float3 noise1st_pushpull_value = float3(
                 ValueNoise3D(pushpull_noise_pos[0],_Noise1stSeed),
                 ValueNoise3D(pushpull_noise_pos[1],_Noise1stSeed),
                 ValueNoise3D(pushpull_noise_pos[2],_Noise1stSeed)
-            );
-            pushpull_noise_pos[0] = VertexCenterBias(inp[1].noise2nd_pos,inp[2].noise2nd_pos,inp[0].noise2nd_pos,noise2nd_center_pos,_GeometryPartitionBias);
-            pushpull_noise_pos[1] = VertexCenterBias(inp[2].noise2nd_pos,inp[0].noise2nd_pos,inp[1].noise2nd_pos,noise2nd_center_pos,_GeometryPartitionBias);
-            pushpull_noise_pos[2] = VertexCenterBias(inp[0].noise2nd_pos,inp[1].noise2nd_pos,inp[2].noise2nd_pos,noise2nd_center_pos,_GeometryPartitionBias);
+            )*_Noise1stValueScale+noise1st_time;
+            pushpull_noise_pos[0] = VertexCenterBias(inp[1].noise2nd_pos,inp[2].noise2nd_pos,inp[0].noise2nd_pos,noise2nd_center_pos,_GeometryPushPullPartitionBias);
+            pushpull_noise_pos[1] = VertexCenterBias(inp[2].noise2nd_pos,inp[0].noise2nd_pos,inp[1].noise2nd_pos,noise2nd_center_pos,_GeometryPushPullPartitionBias);
+            pushpull_noise_pos[2] = VertexCenterBias(inp[0].noise2nd_pos,inp[1].noise2nd_pos,inp[2].noise2nd_pos,noise2nd_center_pos,_GeometryPushPullPartitionBias);
             float3 noise2nd_pushpull_value = float3(
                 ValueNoise3D(pushpull_noise_pos[0],_Noise2ndSeed),
                 ValueNoise3D(pushpull_noise_pos[1],_Noise2ndSeed),
                 ValueNoise3D(pushpull_noise_pos[2],_Noise2ndSeed)
-            );
-            pushpull_noise_pos[0] = VertexCenterBias(inp[1].noise3rd_pos,inp[2].noise3rd_pos,inp[0].noise3rd_pos,noise3rd_center_pos,_GeometryPartitionBias);
-            pushpull_noise_pos[1] = VertexCenterBias(inp[2].noise3rd_pos,inp[0].noise3rd_pos,inp[1].noise3rd_pos,noise3rd_center_pos,_GeometryPartitionBias);
-            pushpull_noise_pos[2] = VertexCenterBias(inp[0].noise3rd_pos,inp[1].noise3rd_pos,inp[2].noise3rd_pos,noise3rd_center_pos,_GeometryPartitionBias);
+            )*_Noise2ndValueScale+noise2nd_time;
+            pushpull_noise_pos[0] = VertexCenterBias(inp[1].noise3rd_pos,inp[2].noise3rd_pos,inp[0].noise3rd_pos,noise3rd_center_pos,_GeometryPushPullPartitionBias);
+            pushpull_noise_pos[1] = VertexCenterBias(inp[2].noise3rd_pos,inp[0].noise3rd_pos,inp[1].noise3rd_pos,noise3rd_center_pos,_GeometryPushPullPartitionBias);
+            pushpull_noise_pos[2] = VertexCenterBias(inp[0].noise3rd_pos,inp[1].noise3rd_pos,inp[2].noise3rd_pos,noise3rd_center_pos,_GeometryPushPullPartitionBias);
             float3 noise3rd_pushpull_value = float3(
                 ValueNoise3D(pushpull_noise_pos[0],_Noise3rdSeed),
                 ValueNoise3D(pushpull_noise_pos[1],_Noise3rdSeed),
                 ValueNoise3D(pushpull_noise_pos[2],_Noise3rdSeed)
-            );
+            )*_Noise3rdValueScale+noise3rd_time;
         #endif
 
     float3 fragment_stream[3];
@@ -195,7 +202,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
 
     FUNC_GEOMETRY_PROCESS(
         fragment_value,
-        _FragmentValue,
+        _FragmentFixedValue,
         _FragmentSource,
         REPLACE_FRAGMENT_NOISE1ST_PARTITION,
         REPLACE_FRAGMENT_NOISE2ND_PARTITION,
@@ -213,7 +220,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             _FragmentAudioLinkChronoTensityStrength,
             _FragmentAudioLinkSpectrumStrength,
             _FragmentAudioLinkSpectrumMirror,
-            _FragmentAudioLinkSpectrumType
+            0
         );
     #endif
 
@@ -221,19 +228,19 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         fragment_value,
         _FragmentPhaseScale,
         _FragmentLoopMode,
-        _FragmentThresholdMul,
-        _FragmentThresholdAdd,
+        _FragmentMidMul,
+        _FragmentMidAdd,
         _FragmentEaseCurve,
         _FragmentEaseMode
     );
 
-    fragment_value = saturate(lerp(fragment_value,1.0-fragment_value,_FragmentInverse));
+    fragment_value = saturate(lerp(fragment_value,1.0-fragment_value,_InvertFragment));
 
-    #ifdef _FRAGMENTPARTITIONTYPE_VERTEX
+    #if defined(_FRAGMENTPARTITIONMODE_VERTEX)
         fragment_stream[0] = float3(0.0,fragment_value.x,fragment_value.x);
         fragment_stream[1] = float3(fragment_value.y,0.0,fragment_value.y);
         fragment_stream[2] = float3(fragment_value.z,fragment_value.z,0.0);
-    #elif _FRAGMENTPARTITIONTYPE_SIDE
+    #elif defined(_FRAGMENTPARTITIONMODE_SIDE)
         float fragment_center_value = (fragment_value.x+fragment_value.y+fragment_value.z)/3.0;
         fragment_value = float3(
             SideCenterPos(fragment_value.y,fragment_value.z,fragment_value.x,fragment_center_value),
@@ -243,7 +250,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         fragment_stream[0] = float3(0.0,fragment_value.y,fragment_value.z);
         fragment_stream[1] = float3(fragment_value.x,0.0,fragment_value.z);
         fragment_stream[2] = float3(fragment_value.x,fragment_value.y,0.0);
-    #elif _FRAGMENTPARTITIONTYPE_MESH
+    #elif defined(_FRAGMENTPARTITIONMODE_MESH)
         fragment_stream[0] = fragment_value;
         fragment_stream[1] = fragment_value;
         fragment_stream[2] = fragment_value;
@@ -256,7 +263,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
 
     FUNC_GEOMETRY_PROCESS(
         coloring_value,
-        _ColoringValue,
+        _ColoringFixedValue,
         _ColoringSource,
         REPLACE_COLORING_NOISE1ST_PARTITION,
         REPLACE_COLORING_NOISE2ND_PARTITION,
@@ -274,7 +281,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             _ColoringAudioLinkChronoTensityStrength,
             _ColoringAudioLinkSpectrumStrength,
             _ColoringAudioLinkSpectrumMirror,
-            _ColoringAudioLinkSpectrumType
+            0
         );
     #endif
 
@@ -282,18 +289,18 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         coloring_value,
         _ColoringPhaseScale,
         _ColoringLoopMode,
-        _ColoringThresholdMul,
-        _ColoringThresholdAdd,
+        _ColoringMidMul,
+        _ColoringMidAdd,
         _ColoringEaseCurve,
         _ColoringEaseMode
     );
 
-    #ifdef _COLORINGPARTITIONTYPE_VERTEX
+    #if defined(_COLORINGPARTITIONMODE_VERTEX)
         color_stream[0] = coloring_value.x;
         color_stream[1] = coloring_value.y;
         color_stream[2] = coloring_value.z;
 
-    #elif _COLORINGPARTITIONTYPE_SIDE
+    #elif defined(_COLORINGPARTITIONMODE_SIDE)
         float coloring_center_value = (coloring_value.x+coloring_value.y+coloring_value.z)/3.0;
         coloring_value = float3(
             SideCenterPos(coloring_value.y,coloring_value.z,coloring_value.x,coloring_center_value),
@@ -303,14 +310,14 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         color_stream[0] = float3(0.0,coloring_value.y,coloring_value.z);
         color_stream[1] = float3(coloring_value.x,0.0,coloring_value.z);
         color_stream[2] = float3(coloring_value.x,coloring_value.y,0.0);
-    #elif _COLORINGPARTITIONTYPE_MESH
+    #elif defined(_COLORINGPARTITIONMODE_MESH)
         coloring_value = (coloring_value.x+coloring_value.y+coloring_value.z)/3.0;
         color_stream[0] = coloring_value;
         color_stream[1] = coloring_value;
         color_stream[2] = coloring_value;
     #endif
 
-    #ifdef _COLORSOURCE_VERTEXCOLOR
+    #if defined(_COLORSOURCE_VERTEXCOLOR)
         #define STREAM_VERTEXCOLOR_MACRO 
     #else
         #define STREAM_VERTEXCOLOR_MACRO //
@@ -320,12 +327,12 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
 
     float3 geometry_pos[3] = {inp[0].pos.xyz,inp[1].pos.xyz,inp[2].pos.xyz};
     float3 geometry_center_pos = (geometry_pos[0]+geometry_pos[1]+geometry_pos[2])/3.0;
-    #if defined(_GEOMETRY_SCALE) || defined(_GEOMETRY_ROTATION)
+    #if defined(_GEOMETRY_SCALE_ENABLE) || defined(_GEOMETRY_ROTATION_ENABLE)
         float geometry_value = 0.0;
 
         FUNC_GEOMETRY_PROCESS(
             geometry_value,
-            _GeometryValue,
+            _GeometryFixedValue,
             _GeometrySource,
             noise1st_mesh_value,
             noise2nd_mesh_value,
@@ -341,7 +348,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             _GeometryAudioLinkChronoTensityStrength,
             _GeometryAudioLinkSpectrumStrength,
             _GeometryAudioLinkSpectrumMirror,
-            _GeometryAudioLinkSpectrumType
+            0
         );
 
         float geometry_rotation_value = geometry_value;
@@ -350,8 +357,8 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             geometry_value,
             _GeometryPhaseScale,
             _GeometryLoopMode,
-            _GeometryThresholdMul,
-            _GeometryThresholdAdd,
+            _GeometryMidMul,
+            _GeometryMidAdd,
             _GeometryEaseCurve,
             _GeometryEaseMode
         );
@@ -359,21 +366,21 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         geometry_rotation_value *= _GeometryPhaseScale;
         geometry_rotation_value = lerp(geometry_rotation_value,triloop(geometry_rotation_value),SELECTOR_MACRO(_GeometryRotationNoiseRepeat,0));
         geometry_rotation_value = lerp(geometry_rotation_value,mod(geometry_rotation_value,1.0),SELECTOR_MACRO(_GeometryRotationNoiseRepeat,1));
-        geometry_rotation_value = ThresholdFormula(geometry_rotation_value,_GeometryThresholdMul,_GeometryThresholdAdd);
+        geometry_rotation_value = ThresholdFormula(geometry_rotation_value,_GeometryMidMul,_GeometryMidAdd);
         geometry_rotation_value = EasingSelector(geometry_rotation_value,_GeometryEaseCurve,_GeometryEaseMode);
     #endif
 
-    #if defined(_GEOMETRY_EXTRUDE)
+    #if defined(_GEOMETRY_PUSHPULL_ENABLE)
         float3 geometry_pushpull_value = 0.0;
         FUNC_GEOMETRY_PROCESS(
             geometry_pushpull_value,
-            _GeometryValue,
+            _GeometryFixedValue,
             _GeometrySource,
             noise1st_pushpull_value,
             noise2nd_pushpull_value,
             noise3rd_pushpull_value,
-            geometry_mask,
-            geometry_map
+            geometry_pushpull_mask,
+            geometry_pushpull_map
         );
         FUNC_GEOMETRY_AUDIOLINK_PROCESS(
             geometry_pushpull_value,
@@ -383,45 +390,45 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             _GeometryAudioLinkChronoTensityStrength,
             _GeometryAudioLinkSpectrumStrength,
             _GeometryAudioLinkSpectrumMirror,
-            _GeometryAudioLinkSpectrumType
+            0
         );
         FUNC_GEOMETRY_MODIFIER_PROCESS(
             geometry_pushpull_value,
             _GeometryPhaseScale,
             _GeometryLoopMode,
-            _GeometryThresholdMul,
-            _GeometryThresholdAdd,
+            _GeometryMidMul,
+            _GeometryMidAdd,
             _GeometryEaseCurve,
             _GeometryEaseMode
         );
     #endif
 
-    #ifdef _GEOMETRY_SCALE
-            geometry_pos[0] = lerp(geometry_center_pos,geometry_pos[0],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,geometry_value));
-            geometry_pos[1] = lerp(geometry_center_pos,geometry_pos[1],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,geometry_value));
-            geometry_pos[2] = lerp(geometry_center_pos,geometry_pos[2],lerp(_GeometryScaleRange.x,_GeometryScaleRange.y,geometry_value));
+    #if defined(_GEOMETRY_SCALE_ENABLE)
+            geometry_pos[0] = lerp(geometry_center_pos,geometry_pos[0],lerp(_GeometryScaleBounds.x,_GeometryScaleBounds.y,geometry_value));
+            geometry_pos[1] = lerp(geometry_center_pos,geometry_pos[1],lerp(_GeometryScaleBounds.x,_GeometryScaleBounds.y,geometry_value));
+            geometry_pos[2] = lerp(geometry_center_pos,geometry_pos[2],lerp(_GeometryScaleBounds.x,_GeometryScaleBounds.y,geometry_value));
     #endif
 
-    #ifdef _GEOMETRY_EXTRUDE
-            geometry_pos[0] = geometry_pos[0]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,geometry_pushpull_value.x)*inp[0].world_normal;
-            geometry_pos[1] = geometry_pos[1]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,geometry_pushpull_value.y)*inp[1].world_normal;
-            geometry_pos[2] = geometry_pos[2]+lerp(_GeometryExtrudeRange.x,_GeometryExtrudeRange.y,geometry_pushpull_value.z)*inp[2].world_normal;
+    #if defined(_GEOMETRY_PUSHPULL_ENABLE)
+            geometry_pos[0] = geometry_pos[0]+lerp(_GeometryPushPullBounds.x,_GeometryPushPullBounds.y,geometry_pushpull_value.x)*inp[0].world_normal;
+            geometry_pos[1] = geometry_pos[1]+lerp(_GeometryPushPullBounds.x,_GeometryPushPullBounds.y,geometry_pushpull_value.y)*inp[1].world_normal;
+            geometry_pos[2] = geometry_pos[2]+lerp(_GeometryPushPullBounds.x,_GeometryPushPullBounds.y,geometry_pushpull_value.z)*inp[2].world_normal;
     #endif
 
-    #ifdef _GEOMETRY_ROTATION
+    #if defined(_GEOMETRY_ROTATION_ENABLE)
         float3 normal_average = (inp[0].world_normal+inp[1].world_normal+inp[2].world_normal)/3.0;
-        float rotation_sign = sign(_GeometryRotationReverse*2.0-1.0);
-        geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center_pos,rotation_sign*geometry_rotation_value*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center_pos;
-        geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center_pos,rotation_sign*geometry_rotation_value*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center_pos;
-        geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center_pos,rotation_sign*geometry_rotation_value*UNITY_TWO_PI*_GeometryRotationInfluence,normal_average)+geometry_center_pos;
+        float rotation_sign = sign(_GeometryRotationInvert*2.0-1.0);
+        geometry_pos[0] = RodriguesRotation(geometry_pos[0]-geometry_center_pos,rotation_sign*geometry_rotation_value*UNITY_TWO_PI*_GeometryRotationStrength,normal_average)+geometry_center_pos;
+        geometry_pos[1] = RodriguesRotation(geometry_pos[1]-geometry_center_pos,rotation_sign*geometry_rotation_value*UNITY_TWO_PI*_GeometryRotationStrength,normal_average)+geometry_center_pos;
+        geometry_pos[2] = RodriguesRotation(geometry_pos[2]-geometry_center_pos,rotation_sign*geometry_rotation_value*UNITY_TWO_PI*_GeometryRotationStrength,normal_average)+geometry_center_pos;
     #endif
 
 
 
-    #if defined(_ACTIVATE_ORBIT)
+    #if defined(_ORBIT_ENABLE)
         float3 orbit_value = 0.0;
-        orbit_value += _OrbitValue*SELECTOR_MACRO(_OrbitSource,0);
-        orbit_value += (random(id+_OrbitSeed)>=_OrbitPrimitiveThreshold)*SELECTOR_MACRO(_OrbitSource,1);
+        orbit_value += _OrbitFixedValue*SELECTOR_MACRO(_OrbitSource,0);
+        orbit_value += (random(id+_OrbitSeed)>=_OrbitPrimitiveRatio)*SELECTOR_MACRO(_OrbitSource,1);
         orbit_value += noise1st_mesh_value*SELECTOR_MACRO(_OrbitSource,2);
         orbit_value += noise2nd_mesh_value*SELECTOR_MACRO(_OrbitSource,3);
         orbit_value += noise3rd_mesh_value*SELECTOR_MACRO(_OrbitSource,4);
@@ -437,15 +444,15 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             _OrbitAudioLinkChronoTensityStrength,
             _OrbitAudioLinkSpectrumStrength,
             _OrbitAudioLinkSpectrumMirror,
-            _OrbitAudioLinkSpectrumType
+            0
         );
 
         FUNC_GEOMETRY_MODIFIER_PROCESS(
             orbit_value,
             _OrbitPhaseScale,
             _OrbitLoopMode,
-            _OrbitThresholdMul,
-            _OrbitThresholdAdd,
+            _OrbitMidMul,
+            _OrbitMidAdd,
             _OrbitEaseCurve,
             _OrbitEaseMode
         );
@@ -457,7 +464,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         };
 
         float3 orbit_rotation_value = 0.0;
-        orbit_rotation_value += _OrbitRotationValue*SELECTOR_MACRO(_OrbitRotationSource,0);
+        orbit_rotation_value += _OrbitRotationFixedValue*SELECTOR_MACRO(_OrbitRotationSource,0);
         orbit_rotation_value += random(id+_OrbitRotationSeed)*SELECTOR_MACRO(_OrbitRotationSource,1);
         orbit_rotation_value += noise1st_mesh_value*SELECTOR_MACRO(_OrbitRotationSource,2);
         orbit_rotation_value += noise2nd_mesh_value*SELECTOR_MACRO(_OrbitRotationSource,3);
@@ -466,9 +473,9 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         orbit_rotation_value *= orbit_rotation_mask;
         orbit_rotation_value += orbit_rotation_map;
 
-        float3 orbit_anim = orbit_rotation_value*_OrbitRotationVariance.xyz;
+        float3 orbit_anim = orbit_rotation_value*_OrbitRotationSpread.xyz;
 
-        float3 orbit_wave_spectrum = MeshHAudioLinkSpectrum(orbit_anim.x,_OrbitWaveAudioLinkSpectrumMirror,_OrbitWaveAudioLinkSpectrumType)*float3(_OrbitWaveAudioLinkSpectrumStrength.x,_OrbitWaveAudioLinkSpectrumStrength.y,_OrbitWaveAudioLinkSpectrumStrength.y);
+        float3 orbit_wave_spectrum = MeshHAudioLinkSpectrum(orbit_anim.x,_OrbitWaveAudioLinkSpectrumMirror,_OrbitWaveAudioLinkSpectrumMode)*float3(_OrbitWaveAudioLinkSpectrumStrength.x,_OrbitWaveAudioLinkSpectrumStrength.y,_OrbitWaveAudioLinkSpectrumStrength.y);
 
         orbit_anim *= UNITY_TWO_PI;
 
@@ -478,11 +485,11 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             (orbit_anim.x+_OrbitWavePhase.y+ORBIT_WAVE_YZ_TIME_MACRO)
         );
         orbit_wave_value *= float3(_OrbitWaveFrequency.x,_OrbitWaveFrequency.y,_OrbitWaveFrequency.y);
-        orbit_wave_value += audiolink_chronotensity*orbit_rotation_offset_al_mask*SELECTOR_MACRO(_OrbitWaveAudioLinkSource,2);
+        orbit_wave_value += audiolink_chronotensity*_OrbitWaveAudioLinkChronoTensityStrength*orbit_rotation_offset_al_mask*SELECTOR_MACRO(_OrbitWaveAudioLinkSource,2);
 
         orbit_anim += ORBIT_ROTATION_TIME_MACRO;
-        orbit_anim *= orbit_rotation_offset_mask*saturate(_OrbitRotationOffsetMaskMapStrength.xyz)*saturate(_OrbitRotationOffsetMaskMapStrength.w);
-        orbit_anim += float3(_OrbitRotation.x,_OrbitRotation.y,_OrbitRotation.z)*UNITY_TWO_PI;
+        orbit_anim *= lerp(1.0,orbit_rotation_offset_mask,saturate(_OrbitRotationOffsetMaskMapStrength.xyz)*saturate(_OrbitRotationOffsetMaskMapStrength.w));
+        orbit_anim += float3(_OrbitRotationAngle.x,_OrbitRotationAngle.y,_OrbitRotationAngle.z)*UNITY_TWO_PI;
 
 
         orbit_anim += audiolink_vu*UNITY_TWO_PI*orbit_rotation_offset_al_mask*SELECTOR_MACRO(_OrbitRotationOffsetAudioLinkSource,1)*_OrbitRotationOffsetAudioLinkVUStrength.xyz*_OrbitRotationOffsetAudioLinkVUStrength.w;
@@ -495,7 +502,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             sin(orbit_anim.x)*sin(orbit_wave_value.z)*_OrbitWaveStrength.y
         );
 
-        float3 orbit_wave_al_value = lerp(_OrbitWaveAudioLinkSpectrumRange.x,_OrbitWaveAudioLinkSpectrumRange.y,orbit_wave_spectrum)*orbit_rotation_offset_al_mask*SELECTOR_MACRO(_OrbitWaveAudioLinkSource,3);
+        float3 orbit_wave_al_value = lerp(_OrbitWaveAudioLinkSpectrumBounds.x,_OrbitWaveAudioLinkSpectrumBounds.y,orbit_wave_spectrum)*orbit_rotation_offset_al_mask*SELECTOR_MACRO(_OrbitWaveAudioLinkSource,3);
 
         orbit_wave_value += float3(
             orbit_wave_al_value.x,
@@ -503,7 +510,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             sin(orbit_anim.x)*orbit_wave_al_value.z
         );
 
-        orbit_wave_value *= lerp(1.0,audiolink_vu*orbit_rotation_offset_al_mask,SELECTOR_MACRO(_OrbitWaveAudioLinkSource,1));
+        orbit_wave_value *= lerp(1.0,audiolink_vu*float3(_OrbitWaveAudioLinkVUStrength.x,_OrbitWaveAudioLinkVUStrength.y,_OrbitWaveAudioLinkVUStrength.y)*orbit_rotation_offset_al_mask,SELECTOR_MACRO(_OrbitWaveAudioLinkSource,1));
 
         float3 orbit_dir = cos(orbit_anim.x)*float3(0.0,1.0,0.0)*_OrbitScale.y + sin(orbit_anim.x)*float3(0.0,0.0,1.0)*_OrbitScale.z;
         orbit_dir *= _OrbitScale.w;
@@ -530,7 +537,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     for(int i = 0; i < 3; i++){
         matrix_v[i] = float4x4(inp[i].matrix_v_0,inp[i].matrix_v_1,inp[i].matrix_v_2,0.0,0.0,0.0,1.0);
 
-        #ifdef _PIXELIZATIONSPACE_POSTGEOMETRY
+        #if defined(_PIXELIZATIONSPACE_POSTGEOMETRY)
             geometry_pos[i] = Pixelization(geometry_pos[i],(scale));
         #endif
 

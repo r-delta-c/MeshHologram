@@ -1,5 +1,5 @@
 float3 Pixelization(float3 inputs, float3 scale){
-    float3 n = (_Pixelization.xyz+_Pixelization.w)*scale;
+    float3 n = (_GeometryPixelization.xyz+_GeometryPixelization.w)*scale;
     return n > 0.0 ? floor((inputs+0.5*n)/n)*n : inputs;
 }
 
@@ -23,7 +23,7 @@ float3 RodriguesRotation(float3 rot, float theta, float3 axis){
     return rot*cos(theta) + cross(axis,rot)*sin(theta) + axis*dot(axis,rot)*(1.0-cos(theta));
 }
 
-float ThresholdFormula(float n, float mul, float add){
+float3 ThresholdFormula(float3 n, float mul, float add){
     return saturate(n*mul-mul*0.5+0.5+add*(mul+(mul>=0.0?1.0:-1.0)));
 }
 
@@ -55,13 +55,13 @@ float3 EasingSelector(float3 i, float m, uint b){
 }
 
 float SideCenterPos(float n0, float n1, float n, float2 c){
-    return (n0+n1+VertexCenterBias(n0,n1,n,c,saturate(_TriangleComp/26.0)*0.5+0.5))/3.0;
+    return (n0+n1+VertexCenterBias(n0,n1,n,c,saturate(_FragmentTriangleCompression/26.0)*0.5+0.5))/3.0;
 }
 
 float2 SideCenterPos(float2 uv0, float2 uv1, float2 uv, float2 c){
-    return (uv0+uv1+VertexCenterBias(uv0,uv1,uv,c,saturate(_TriangleComp/26.0)*0.5+0.5))/3.0;
+    return (uv0+uv1+VertexCenterBias(uv0,uv1,uv,c,saturate(_FragmentTriangleCompression/26.0)*0.5+0.5))/3.0;
 }
 
 float3 SideCenterPos(float3 p0, float3 p1, float3 p, float3 c){
-    return (p0+p1+VertexCenterBias(p0,p1,p,c,saturate(_TriangleComp/26.0)*0.5+0.5))/3.0;
+    return (p0+p1+VertexCenterBias(p0,p1,p,c,saturate(_FragmentTriangleCompression/26.0)*0.5+0.5))/3.0;
 }
