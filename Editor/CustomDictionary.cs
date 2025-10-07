@@ -75,7 +75,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {SHADER_PROPERTY._FRAGMENT_MANUAL_LINE_SCALING,new ShaderPropertyState("_FragmentManualLineScalingEnable")},
                 {SHADER_PROPERTY._FRAGMENT_LINE_SCALE,new ShaderPropertyState("_FragmentLineScale")},
                 {SHADER_PROPERTY._FRAGMENT_LINE_ANIMATION_MODE,new ShaderPropertyState("_FragmentLineAnimationMode")},
-                {SHADER_PROPERTY._FRAGMENT_INVERSE,new ShaderPropertyState("_InvertFragment")},
                 {SHADER_PROPERTY._FRAGMENT_PARTITION_MODE,new ShaderPropertyState("_FragmentPartitionMode")},
 
 

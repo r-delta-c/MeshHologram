@@ -95,7 +95,6 @@ float _OrbitRotationMapStrength;
 UNITY_DECLARE_TEX2D_NOSAMPLER(_ColorGradientTex);
 float4 _ColorGradientTex_ST;
 
-bool _InvertFragment;
 float _FragmentTriangleCompression;
 float _FragmentFill;
 float _FragmentLineWidth;

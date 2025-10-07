@@ -234,8 +234,6 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         _FragmentEaseMode
     );
 
-    fragment_value = saturate(lerp(fragment_value,1.0-fragment_value,_InvertFragment));
-
     #if defined(_FRAGMENTPARTITIONMODE_VERTEX)
         fragment_stream[0] = float3(0.0,fragment_value.x,fragment_value.x);
         fragment_stream[1] = float3(fragment_value.y,0.0,fragment_value.y);

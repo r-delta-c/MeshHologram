@@ -88,7 +88,6 @@ Shader "DeltaField/shaders/MeshHologram"{
         _FragmentLineScale("Line Scale",Float)=1.0
         [KeywordEnum(Normal,Instant,ZoomIn,ZoomOut,PowerZoomIn,Collapse,Break,OutWide,OutThin,Vanishing,Join1,Join2,Join3)]
         _FragmentLineAnimationMode("Line Animation Mode",Int)=0
-        [MaterialToggle]_InvertFragment("Invert Fragment",Int)=0
         [KeywordEnum(Vertex,Side,Mesh)]
         _FragmentPartitionMode("Partition Mode",Int)=1
 
