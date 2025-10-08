@@ -82,7 +82,7 @@ Shader "DeltaField/shaders/MeshHologram"{
         _FragmentTriangleCompression("Triangle Compression",Float)=5.0
         [MaterialToggle]_FragmentFill("Fill",Float)=0.0
         _FragmentLineWidth("Line Width",Float)=2.0
-        _FragmentLineGradientBias("Line Gradient Bias",Range(-1.0,1.0))=0.0
+        _FragmentLineGradientBias("Line Gradient Bias",Float)=0.0
         [Toggle(_MANUAL_LINE_SCALING_ENABLE)]
         _FragmentManualLineScalingEnable("Enable Manual Line Scaling",Int)=0.0
         _FragmentLineScale("Line Scale",Float)=1.0
