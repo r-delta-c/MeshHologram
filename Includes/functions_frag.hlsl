@@ -45,7 +45,7 @@
     range.y = min(range.y*i.fragment_noise.y,(1.0-mask.r)*(1.0-mask.b));
     range.z = min(range.z*i.fragment_noise.z,(1.0-mask.r)*(1.0-mask.g));
 
-    float draw = EaseBias(max(max(range.x,range.y),range.z),_FragmentLineGradientBias);
+    float draw = EasePowInOutBias(max(max(range.x,range.y),range.z),_FragmentLineGradientBias);
 
     #if defined(_COLORINGPARTITIONMODE_SIDE)
         float3 coloring_side = i.color_noise * (range>0.0);

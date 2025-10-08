@@ -41,7 +41,7 @@ float EasingSelector(float i, float m, uint b){
     r += pow(i,m)*SELECTOR_MACRO(b,0);
     r += (1.0-pow(1.0-i,m))*SELECTOR_MACRO(b,1);
     r += EaseInOutPow(i,m)*SELECTOR_MACRO(b,2);
-    r += EaseInOutPowInverse(i,m)*SELECTOR_MACRO(b,3);
+    r += EaseInvertInOutPow(i,m)*SELECTOR_MACRO(b,3);
     return r;
 }
 
@@ -50,7 +50,7 @@ float3 EasingSelector(float3 i, float m, uint b){
     r += pow(i,m)*SELECTOR_MACRO(b,0);
     r += (1.0-pow(1.0-i,m))*SELECTOR_MACRO(b,1);
     r += EaseInOutPow(i,m)*SELECTOR_MACRO(b,2);
-    r += EaseInOutPowInverse(i,m)*SELECTOR_MACRO(b,3);
+    r += EaseInvertInOutPow(i,m)*SELECTOR_MACRO(b,3);
     return r;
 }
 
