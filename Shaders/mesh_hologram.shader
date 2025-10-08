@@ -292,7 +292,7 @@ Shader "DeltaField/shaders/MeshHologram"{
         _Noise1stSeed("Noise 1st Seed",Float)=0.0
         _Noise1stTimeSpeed("Noise 1st Time Speed",Float)=3.0
         _Noise1stTimePhase("Noise 1st Time Phase",Float)=0.0
-        _Noise1stValueScale("Noise 1st Value Scale",Float)=0.0
+        _Noise1stValueScale("Noise 1st Value Scale",Float)=1.0
 
 
         [DFVector(1,1,1)]_Noise2ndOffset0("Noise 2nd Offset",Vector)=(0.0,0.0,0.0,0.0)
@@ -306,7 +306,7 @@ Shader "DeltaField/shaders/MeshHologram"{
         _Noise2ndSeed("Noise 2nd Seed",Float)=1.0
         _Noise2ndTimeSpeed("Noise 2nd Time Speed",Float)=5.0
         _Noise2ndTimePhase("Noise 2nd Time Phase",Float)=0.0
-        _Noise2ndValueScale("Noise 2nd Value Scale",Float)=0.0
+        _Noise2ndValueScale("Noise 2nd Value Scale",Float)=1.0
 
 
         [DFVector(1,1,1)]_Noise3rdOffset0("Noise 3rd Offset",Vector)=(0.0,0.0,0.0,0.0)
@@ -320,7 +320,7 @@ Shader "DeltaField/shaders/MeshHologram"{
         _Noise3rdSeed("Noise 3rd Seed",Float)=2.0
         _Noise3rdTimeSpeed("Noise 3rd Time Speed",Float)=3.0
         _Noise3rdTimePhase("Noise 3rd Time Phase",Float)=0.0
-        _Noise3rdValueScale("Noise 3rd Value Scale",Float)=0.0
+        _Noise3rdValueScale("Noise 3rd Value Scale",Float)=1.0
 
 
 

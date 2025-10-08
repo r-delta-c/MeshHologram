@@ -3,8 +3,8 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.2.0-exp.1] 2025/10/nn
-- 以下の理由で実験的なバージョンを示す`exp.1`を付与しています。
+## [0.2.0-exp.2] 2025/10/nn
+- 以下の理由で実験的なバージョンを示す`exp.2`を付与しています。
     - 大規模な変更により、不具合が多く含まれている可能性があります。
     - パフォーマンス面で実験的な処理が含まれています。著しい問題を確認した場合は方針を切り替える可能性があります。
 ### Changed

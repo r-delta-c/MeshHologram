@@ -1,21 +1,25 @@
 #define FUNC_GEOMETRY_PROCESS(value,fixed_value,source,n1st,n2nd,n3rd,mask,offset) \
-    value += fixed_value*SELECTOR_MACRO(source,0); \
-    value += n1st*SELECTOR_MACRO(source,1); \
-    value += n2nd*SELECTOR_MACRO(source,2); \
-    value += n3rd*SELECTOR_MACRO(source,3); \
+    if(source==0) value = fixed_value; \
+    if(source==1) value = n1st; \
+    if(source==2) value = n2nd; \
+    if(source==3) value = n3rd; \
     value *= mask; \
     value += offset;
 
-#define FUNC_GEOMETRY_AUDIOLINK_PROCESS(value,al_mask,source,vu_add,chrono,spectrum,mirror,type) \
-    value += audiolink_vu*vu_add*al_mask*SELECTOR_MACRO(source,1); \
-    value = lerp(value,value*audiolink_vu*al_mask,SELECTOR_MACRO(source,2)); \
-    value += audiolink_chronotensity*chrono*al_mask*SELECTOR_MACRO(source,3); \
-    value = lerp(value,MeshHAudioLinkSpectrum(value,mirror,type),SELECTOR_MACRO(source,4)*al_mask)*spectrum;
+#if defined(_AUDIOLINK_ENABLE)
+    #define FUNC_GEOMETRY_AUDIOLINK_PROCESS(value,al_mask,source,vu_add,chrono,spectrum,mirror,type) \
+        if(source==1) value += audiolink_vu*vu_add*al_mask; \
+        if(source==2) value = value*audiolink_vu*al_mask; \
+        if(source==3) value += audiolink_chronotensity*chrono*al_mask; \
+        if(source==4) value = MeshHAudioLinkSpectrum(value,mirror,type)*al_mask*spectrum;
+#else
+    #define FUNC_GEOMETRY_AUDIOLINK_PROCESS(value,al_mask,source,vu_add,chrono,spectrum,mirror,type) //
+#endif
 
 #define FUNC_GEOMETRY_MODIFIER_PROCESS(value,phasescale,loopmode,mul,add,curve,easemode) \
     value *= phasescale; \
-    value = lerp(value,mod(value,1.0),SELECTOR_MACRO(loopmode,1)); \
-    value = lerp(value,triloop(value),SELECTOR_MACRO(loopmode,2)); \
+    if(loopmode==1) value = mod(value,1.0); \
+    if(loopmode==2) value = triloop(value); \
     value = ThresholdFormula(value,mul,add); \
     value = EasingSelector(value,curve,easemode);
 

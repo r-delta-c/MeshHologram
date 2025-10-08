@@ -38,19 +38,19 @@ float GenNoise(float3 inputs, float offset, float time, float seed, float phases
 
 float EasingSelector(float i, float m, uint b){
     float r = 0.0;
-    r += pow(i,m)*SELECTOR_MACRO(b,0);
-    r += (1.0-pow(1.0-i,m))*SELECTOR_MACRO(b,1);
-    r += EaseInOutPow(i,m)*SELECTOR_MACRO(b,2);
-    r += EaseInvertInOutPow(i,m)*SELECTOR_MACRO(b,3);
+    if(b==0) r = pow(i,m);
+    if(b==1) r = (1.0-pow(1.0-i,m));
+    if(b==2) r = EaseInOutPow(i,m);
+    if(b==3) r = EaseInvertInOutPow(i,m);
     return r;
 }
 
 float3 EasingSelector(float3 i, float m, uint b){
     float3 r = 0.0;
-    r += pow(i,m)*SELECTOR_MACRO(b,0);
-    r += (1.0-pow(1.0-i,m))*SELECTOR_MACRO(b,1);
-    r += EaseInOutPow(i,m)*SELECTOR_MACRO(b,2);
-    r += EaseInvertInOutPow(i,m)*SELECTOR_MACRO(b,3);
+    if(b==0) r = pow(i,m);
+    if(b==1) r = (1.0-pow(1.0-i,m));
+    if(b==2) r = EaseInOutPow(i,m);
+    if(b==3) r = EaseInvertInOutPow(i,m);
     return r;
 }
 
