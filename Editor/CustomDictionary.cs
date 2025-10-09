@@ -180,7 +180,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
 
                 {SHADER_PROPERTY._ORBIT_ROTATION_SOURCE,new ShaderPropertyState("_OrbitRotationSource")},
-                {SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_SOURCE,new ShaderPropertyState("_OrbitRotationOffsetSource")},
                 {SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_SOURCE,new ShaderPropertyState("_OrbitRotationOffsetAudioLinkSource")},
                 {SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_VU_STRENGTH,new ShaderPropertyState("_OrbitRotationOffsetAudioLinkVUStrength")},
                 {SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_CHRONO_TENSITY_STRENGTH,new ShaderPropertyState("_OrbitRotationOffsetAudioLinkChronoTensityStrength")},

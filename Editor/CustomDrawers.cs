@@ -180,6 +180,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 if (changeCheckScope.changed)
                 {
                     prop.floatValue = value ? 1.0f : 0.0f;
+                    if (keyword == "") return;
                     editor.RegisterPropertyChangeUndo("Refresh Material Keyword");
                     foreach (Material material in editor.targets)
                     {

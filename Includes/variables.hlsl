@@ -1,7 +1,11 @@
 fixed3 _LightColor0;
 
+bool _BillboardEnable;
 float _Forced_Z_Scale_Zero;
 float _DistanceInfluence;
+bool _FwidthEnable;
+bool _PreviewEnable;
+bool _AntiAliasingEnable;
 
 float _DirectionalLightInfluence;
 float _AmbientInfluence;
@@ -100,20 +104,30 @@ float _FragmentFill;
 float _FragmentLineWidth;
 float _FragmentLineGradientBias;
 float _FragmentLineScale;
+bool _FragmentManualLineScalingEnable;
+uint _FragmentLineAnimationMode;
+uint _FragmentPartitionMode;
 
+uint _ColorSource;
 fixed4 _Color0;
 fixed4 _Color1;
 float _Emission;
+uint _ColoringPartitionMode;
 
+bool _GeometryScaleEnable;
 float2 _GeometryScaleBounds;
+bool _GeometryPushPullEnable;
 float2 _GeometryPushPullBounds;
 float _GeometryPushPullPartitionBias;
+bool _GeometryRotationEnable;
 float _GeometryRotationStrength;
 float _GeometryRotationInvert;
 bool _GeometryRotationNoiseRepeat;
 
+uint _GeometryPixelizationSpace;
 float4 _GeometryPixelization;
 
+bool _OrbitEnable;
 float _OrbitSeed;
 float _OrbitPrimitiveRatio;
 float3 _OrbitOffset;
@@ -175,7 +189,6 @@ float _OrbitMidAdd;
 
 
 uint _OrbitRotationSource;
-uint _OrbitRotationOffsetSource;
 uint _OrbitRotationOffsetAudioLinkSource;
 float4 _OrbitRotationOffsetAudioLinkVUStrength;
 float4 _OrbitRotationOffsetAudioLinkChronoTensityStrength;
@@ -190,7 +203,8 @@ bool _OrbitWaveAudioLinkSpectrumMode;
 float2 _OrbitWaveAudioLinkSpectrumBounds;
 
 
-
+uint _Noise1stSpace;
+bool _Noise1stOffsetBeforeScale;
 float3 _Noise1stOffset0;
 float3 _Noise1stOffset1;
 float4 _Noise1stScale0;
@@ -200,7 +214,8 @@ float _Noise1stTimeSpeed;
 float _Noise1stTimePhase;
 float _Noise1stValueScale;
 
-
+uint _Noise2ndSpace;
+bool _Noise2ndOffsetBeforeScale;
 float3 _Noise2ndOffset0;
 float3 _Noise2ndOffset1;
 float4 _Noise2ndScale0;
@@ -210,8 +225,8 @@ float _Noise2ndTimeSpeed;
 float _Noise2ndTimePhase;
 float _Noise2ndValueScale;
 
-
-
+uint _Noise3rdSpace;
+bool _Noise3rdOffsetBeforeScale;
 float3 _Noise3rdOffset0;
 float3 _Noise3rdOffset1;
 float4 _Noise3rdScale0;
@@ -220,6 +235,28 @@ float _Noise3rdSeed;
 float _Noise3rdTimeSpeed;
 float _Noise3rdTimePhase;
 float _Noise3rdValueScale;
+
+uint _Noise4thSpace;
+bool _Noise4thOffsetBeforeScale;
+float3 _Noise4thOffset0;
+float3 _Noise4thOffset1;
+float4 _Noise4thScale0;
+float4 _Noise4thScale1;
+float _Noise4thSeed;
+float _Noise4thTimeSpeed;
+float _Noise4thTimePhase;
+float _Noise4thValueScale;
+
+uint _Noise5thSpace;
+bool _Noise5thOffsetBeforeScale;
+float3 _Noise5thOffset0;
+float3 _Noise5thOffset1;
+float4 _Noise5thScale0;
+float4 _Noise5thScale1;
+float _Noise5thSeed;
+float _Noise5thTimeSpeed;
+float _Noise5thTimePhase;
+float _Noise5thValueScale;
 
 
 SamplerState sampler_point_repeat;

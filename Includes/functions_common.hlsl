@@ -35,25 +35,6 @@ float GenNoise(float3 inputs, float offset, float time, float seed, float phases
     return (ValueNoise3D(inputs,seed)+offset)*phasescale+time;
 }
 
-
-float EasingSelector(float i, float m, uint b){
-    float r = 0.0;
-    if(b==0) r = pow(i,m);
-    if(b==1) r = (1.0-pow(1.0-i,m));
-    if(b==2) r = EaseInOutPow(i,m);
-    if(b==3) r = EaseInvertInOutPow(i,m);
-    return r;
-}
-
-float3 EasingSelector(float3 i, float m, uint b){
-    float3 r = 0.0;
-    if(b==0) r = pow(i,m);
-    if(b==1) r = (1.0-pow(1.0-i,m));
-    if(b==2) r = EaseInOutPow(i,m);
-    if(b==3) r = EaseInvertInOutPow(i,m);
-    return r;
-}
-
 float SideCenterPos(float n0, float n1, float n, float2 c){
     return (n0+n1+VertexCenterBias(n0,n1,n,c,saturate(_FragmentTriangleCompression/26.0)*0.5+0.5))/3.0;
 }

@@ -1,6 +1,6 @@
 Shader "DeltaField/shaders/MeshHologram"{
     Properties{
-        [KeywordEnum(Transparent,Cutout,DepthOnly)]
+        [Enum(Transparent,0,Cutout,1,DepthOnly,2)]
         _RenderingMode("Rendering Mode",Int)=0
         [Enum(UnityEngine.Rendering.CullMode)]
         _Cull("Culling Mode",Int)=0
@@ -10,14 +10,12 @@ Shader "DeltaField/shaders/MeshHologram"{
         [IntRange]_CustomRenderQueueT("Transparent Render Queue",Range(3000,5000))=3000
         [IntRange]_CustomRenderQueueC("Cutout Render Queue",Range(2001,2499))=2001
 
-        [Toggle(_BILLBOARD_ENABLE)]
-        _BillboardEnable("Enable Billboard",Int)=0
-        [MaterialToggle]_Forced_Z_Scale_Zero("Forced Z Scale Zero",Float)=1.0
+        [DFToggle(,0)]_BillboardEnable("Enable Billboard",Int)=0
+        [DFToggle(,0)]_Forced_Z_Scale_Zero("Forced Z Scale Zero",Float)=1.0
         _DistanceInfluence("Distance Influence",Range(0.0,1.0))=1.0
         [KeywordEnum(None,Position,Rotation,Position_Rotation)]
         _StereoMergeMode("Stereo Merge Mode",Int)=2
-        [Toggle(_FWIDTH_ENABLE)]
-        _FwidthEnable("Enable fwidth()",Int)=1
+        [MaterialToggle]_FwidthEnable("Enable fwidth()",Int)=1
 
         [DFToggle(_DIRECTIONALLIGHT_INFLUENCE_ENABLE,1)]
         _DirectionalLightInfluenceEnable("Activate Directional Light Influence",Int)=0
@@ -29,10 +27,8 @@ Shader "DeltaField/shaders/MeshHologram"{
         _LightVolumesInfluenceEnable("Activate LightVolumes",Int)=0.0
         _LightVolumesInfluence("LightVolumes Influence",Range(0.0,1.0))=1.0
 
-        [Toggle(_PREVIEW_ENABLE)]
-        _PreviewEnable("Enable Preview",Int)=0
-        [Toggle(_ANTI_ALIASING_ENABLE)]
-        _AntiAliasingEnable("Enable Anti Aliasing",Int)=0
+        [DFToggle(,0)]_PreviewEnable("Enable Preview",Int)=0
+        [DFToggle(,0)]_AntiAliasingEnable("Enable Anti Aliasing",Int)=0
 
         _MainTex("Fallback Texture",2D)="(1.0,1.0,1.0,0.25)" {}
 
@@ -80,50 +76,47 @@ Shader "DeltaField/shaders/MeshHologram"{
         _AudioLinkThemeColorBand("Theme Color Band",Int)=0
 
         _FragmentTriangleCompression("Triangle Compression",Float)=5.0
-        [MaterialToggle]_FragmentFill("Fill",Float)=0.0
+        [DFToggle(,0)]_FragmentFill("Fill",Float)=0.0
         _FragmentLineWidth("Line Width",Float)=2.0
         _FragmentLineGradientBias("Line Gradient Bias",Float)=0.0
-        [Toggle(_MANUAL_LINE_SCALING_ENABLE)]
-        _FragmentManualLineScalingEnable("Enable Manual Line Scaling",Int)=0.0
+        [DFToggle(,0)]_FragmentManualLineScalingEnable("Enable Manual Line Scaling",Int)=0.0
         _FragmentLineScale("Line Scale",Float)=1.0
         [KeywordEnum(Normal,Instant,ZoomIn,ZoomOut,PowerZoomIn,Collapse,Break,OutWide,OutThin,Vanishing,Join1,Join2,Join3)]
         _FragmentLineAnimationMode("Line Animation Mode",Int)=0
-        [KeywordEnum(Vertex,Side,Mesh)]
         _FragmentPartitionMode("Partition Mode",Int)=1
 
 
         _Color0("Primary Color",Color)=(1.0,1.0,1.0,1.0)
         _Color1("Secondary Color",Color)=(0.2,0.2,0.2,1.0)
         _Emission("Add Emission",Float)=0.0
-        [KeywordEnum(Gradient,Primary,GradientTex,VertexColor,UniqueSides,AudioLink_ThemeColor)]
+        [Enum(Gradient,0,Primary,1,GradientTex,2,VertexColor,3,UniqueSides,4,AudioLink_ThemeColor,5)]
         _ColorSource("Color Source",Int)=0
         _ColorGradientTex("Gradient Tex",2D)="white"{}
-        [KeywordEnum(Vertex,Side,Mesh)]
         _ColoringPartitionMode("Coloring Partition Mode",Int)=1
 
 
-        [DFToggle(_GEOMETRY_SCALE_ENABLE,1)]
+        [DFToggle(,1)]
         _GeometryScaleEnable("Enable Scale",Int)=0
         [DFVector(1,1)]_GeometryScaleBounds("Scale Bounds",Vector)=(0.5,0.0,0.0,0.0)
 
-        [DFToggle(_GEOMETRY_PUSHPULL_ENABLE,1)]
+        [DFToggle(,1)]
         _GeometryPushPullEnable("Enable PushPull",Int)=1
         [DFVector(1,1)]_GeometryPushPullBounds("PushPull Bounds",Vector)=(-0.15,0.0,0.0,0.0)
         _GeometryPushPullPartitionBias("PushPull Partition Bias| Vertex <=> Center",Range(0.0,1.0))=0.5
 
-        [DFToggle(_GEOMETRY_ROTATION_ENABLE,1)]
+        [DFToggle(,1)]
         _GeometryRotationEnable("Enable Rotation",Int)=0
         _GeometryRotationStrength("Rotation Strength",Range(0.0,1.0))=1.0
-        [MaterialToggle(_GEOMETRY_ROTATION_INVERT)]
+        [DFToggle(,0)]
         _GeometryRotationInvert("Invert Rotation",Int)=0
-        [MaterialToggle(_GEOMETRY_ROTATION_NOISE_REPEAT)]
+        [DFToggle(,0)]
         _GeometryRotationNoiseRepeat("Rotation Noise Repeat",Int)=0
 
-        [KeywordEnum(Disable,Model,World,PostGeometry)]
+        [Enum(Disable,0,Model,1,World,2,PostGeometry,3)]
         _GeometryPixelizationSpace("Pixelization Space",Int)=0
         [DFVector(1,1,1,2)]_GeometryPixelization("Pixelization",Vector)=(1.0,1.0,1.0,0.02)
 
-        [DFToggle(_ORBIT_ENABLE,1)]
+        [DFToggle(,1)]
         _OrbitEnable("Enable Orbit",Int)=0
         _OrbitSeed("Orbit Seed",Float)=0.0
         _OrbitPrimitiveRatio("Orbit Primitive Ratio",Range(0.0,1.0))=0.5
@@ -144,14 +137,14 @@ Shader "DeltaField/shaders/MeshHologram"{
 
 
 
-        [Enum(Value,0,Noise1st,1,Noise2nd,2,Noise3rd,3)]
+        [Enum(Value,0,Noise1st,1,Noise2nd,2,Noise3rd,3,Noise4th,4,Noise5th,5)]
         _FragmentSource("Fragment Source",Int)=1
         [Enum(Disable,0,VU_Add,1,VU_Mul,2,ChronoTensity,3,Spectrum,4)]
         _FragmentAudioLinkSource("Fragment AudioLink Source",Int)=0
         _FragmentAudioLinkVUStrength("Fragment AudioLink VU Strength",Float)=1.0
         _FragmentAudioLinkChronoTensityStrength("Fragment AudioLink ChronoTensity Strength",Float)=1.0
         _FragmentAudioLinkSpectrumStrength("Fragment AudioLink Spectrum Strength",Float)=1.0
-        [MaterialToggle]_FragmentAudioLinkSpectrumMirror("Fragment AudioLink Spectrum Mirror",Int)=0.0
+        [DFToggle(,0)]_FragmentAudioLinkSpectrumMirror("Fragment AudioLink Spectrum Mirror",Int)=0.0
 
         _FragmentFixedValue("Fragment Fixed Value",Range(0.0,1.0))=0.0
         _FragmentPhaseScale("Fragment Phase Scale",Float)=1.0
@@ -164,14 +157,14 @@ Shader "DeltaField/shaders/MeshHologram"{
         _FragmentMidAdd("Fragment Mid Add",Range(-0.5,0.5))=0.0
 
 
-        [Enum(Value,0,Noise1st,1,Noise2nd,2,Noise3rd,3)]
+        [Enum(Value,0,Noise1st,1,Noise2nd,2,Noise3rd,3,Noise4th,4,Noise5th,5)]
         _ColoringSource("Coloring Source",Int)=2
         [Enum(Disable,0,VU_Add,1,VU_Mul,2,ChronoTensity,3,Spectrum,4)]
         _ColoringAudioLinkSource("Coloring AudioLink Source",Int)=0
         _ColoringAudioLinkVUStrength("Coloring AudioLink VU Strength",Float)=1.0
         _ColoringAudioLinkChronoTensityStrength("Coloring AudioLink ChronoTensity Strength",Float)=1.0
         _ColoringAudioLinkSpectrumStrength("Coloring AudioLink Spectrum Strength",Float)=1.0
-        [MaterialToggle]_ColoringAudioLinkSpectrumMirror("Coloring AudioLink Spectrum Mirror",Int)=0.0
+        [DFToggle(,0)]_ColoringAudioLinkSpectrumMirror("Coloring AudioLink Spectrum Mirror",Int)=0.0
 
         _ColoringFixedValue("Coloring Fixed Value",Range(0.0,1.0))=0.0
         _ColoringPhaseScale("Coloring Phase Scale",Float)=1.0
@@ -184,14 +177,14 @@ Shader "DeltaField/shaders/MeshHologram"{
         _ColoringMidAdd("Coloring Mid Add",Range(-0.5,0.5))=0.0
 
 
-        [Enum(Value,0,Noise1st,1,Noise2nd,2,Noise3rd,3)]
+        [Enum(Value,0,Noise1st,1,Noise2nd,2,Noise3rd,3,Noise4th,4,Noise5th,5)]
         _GeometrySource("Geometry Source",Int)=3
         [Enum(Disable,0,VU_Add,1,VU_Mul,2,ChronoTensity,3,Spectrum,4)]
         _GeometryAudioLinkSource("Geometry AudioLink Source",Int)=0
         _GeometryAudioLinkVUStrength("Geometry AudioLink VU Strength",Float)=1.0
         _GeometryAudioLinkChronoTensityStrength("Geometry AudioLink ChronoTensity Strength",Float)=1.0
         _GeometryAudioLinkSpectrumStrength("Geometry AudioLink Spectrum Strength",Float)=1.0
-        [MaterialToggle]_GeometryAudioLinkSpectrumMirror("Geometry AudioLink Spectrum Mirror",Int)=0.0
+        [DFToggle(,0)]_GeometryAudioLinkSpectrumMirror("Geometry AudioLink Spectrum Mirror",Int)=0.0
 
         _GeometryFixedValue("Geometry Fixed Value",Range(0.0,1.0))=0.0
         _GeometryPhaseScale("Geometry Phase Scale",Float)=1.0
@@ -204,14 +197,14 @@ Shader "DeltaField/shaders/MeshHologram"{
         _GeometryMidAdd("Geometry Mid Add",Range(-0.5,0.5))=0.0
 
 
-        [Enum(Value,0,Primitive,1,Noise1st,2,Noise2nd,3,Noise3rd,4)]
+        [Enum(Value,0,Primitive,1,Noise1st,2,Noise2nd,3,Noise3rd,4,Noise4th,5,Noise5th,6)]
         _OrbitSource("Orbit Source",Int)=0
         [Enum(Disable,0,VU_Add,1,VU_Mul,2,ChronoTensity,3,Spectrum,4)]
         _OrbitAudioLinkSource("Orbit AudioLink Source",Int)=0
         _OrbitAudioLinkVUStrength("Orbit AudioLink VU Strength",Float)=1.0
         _OrbitAudioLinkChronoTensityStrength("Orbit AudioLink ChronoTensity Strength",Float)=1.0
         _OrbitAudioLinkSpectrumStrength("Orbit AudioLink Spectrum Strength",Float)=1.0
-        [MaterialToggle]_OrbitAudioLinkSpectrumMirror("Orbit AudioLink Spectrum Mirror",Int)=0.0
+        [DFToggle(,0)]_OrbitAudioLinkSpectrumMirror("Orbit AudioLink Spectrum Mirror",Int)=0.0
 
         _OrbitFixedValue("Orbit Value",Range(0.0,1.0))=0.0
         _OrbitPhaseScale("Orbit Phase Scale",Float)=1.0
@@ -224,10 +217,8 @@ Shader "DeltaField/shaders/MeshHologram"{
         _OrbitMidAdd("Orbit Mid Add",Range(-0.5,0.5))=0.0
 
 
-        [Enum(Value,0,Primitive,1,Noise1st,2,Noise2nd,3,Noise3rd,4)]
+        [Enum(Value,0,Primitive,1,Noise1st,2,Noise2nd,3,Noise3rd,4,Noise4th,5,Noise5th,6)]
         _OrbitRotationSource("Orbit Rotation Source",Int)=0
-        [Enum(Nothing,0,Noise1st,1,Noise2nd,2,Noise3rd,3)]
-        _OrbitRotationOffsetSource("Orbit Rotation Offset Source",Int)=0
         [Enum(Disable,0,VU_Add,1,ChronoTensity,2)]
         _OrbitRotationOffsetAudioLinkSource("Orbit Rotation Offset AudioLink Source",Int)=0
         [DFVector(1,1,1,2)]_OrbitRotationOffsetAudioLinkVUStrength("Orbit Rotation Offset AudioLink VU Strength",Vector)=(1.0,0.0,0.0,0.0)
@@ -240,8 +231,8 @@ Shader "DeltaField/shaders/MeshHologram"{
         [DFVector(1,1)]_OrbitWaveAudioLinkVUStrength("Orbit Wave AudioLink VU Strength",Vector)=(1.0,0.0,0.0,0.0)
         _OrbitWaveAudioLinkChronoTensityStrength("Orbit Wave AudioLink ChronoTensity Strength",Float)=1.0
         [DFVector(1,1)]_OrbitWaveAudioLinkSpectrumStrength("Orbit Wave AudioLink Spectrum Strength",Vector)=(1.0,0.0,0.0,0.0)
-        [MaterialToggle]_OrbitWaveAudioLinkSpectrumMirror("Orbit Wave AudioLink Spectrum Mirror",Int)=0
-        [MaterialToggle]_OrbitWaveAudioLinkSpectrumMode("Orbit Wave AudioLink Spectrum Mode",Int)=0
+        [MDFToggle(,0)]_OrbitWaveAudioLinkSpectrumMirror("Orbit Wave AudioLink Spectrum Mirror",Int)=0
+        [MDFToggle(,0)]_OrbitWaveAudioLinkSpectrumMode("Orbit Wave AudioLink Spectrum Mode",Int)=0
         [DFVector(1,1)]_OrbitWaveAudioLinkSpectrumBounds("Orbit Wave AudioLink Spectrum Bounds",Vector)=(0.0,1.0,0.0,0.0)
 
 
@@ -285,10 +276,10 @@ Shader "DeltaField/shaders/MeshHologram"{
         [DFVector(1,1,1,2)]_Noise1stScale0("Noise 1st Scale",Vector)=(1.0,1.0,1.0,3.0)
         [DFVector(1,1,1)]_Noise1stOffset1("Noise 1st Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
         [DFVector(1,1,1,2)]_Noise1stScale1("Noise 1st Scale Sub",Vector)=(1.0,1.0,1.0,1.0)
-        [Toggle(_NOISE1ST_OFFSET_BEFORE_SCALE)]
-        _Noise1stOffsetBeforeScale("Noise 1st Offset before Scale",Int)=0
-        [KeywordEnum(Offset,Model,World,Origin_World,Model_World,VertexColor)]
+        [DFToggle(,0)]
+        [Enum(Offset,0,Model,1,World,2,Origin_World,3,Model_World,4,VertexColor,5)]
         _Noise1stSpace("Noise 1st Position Space",Int)=1
+        _Noise1stOffsetBeforeScale("Noise 1st Offset before Scale",Int)=0
         _Noise1stSeed("Noise 1st Seed",Float)=0.0
         _Noise1stTimeSpeed("Noise 1st Time Speed",Float)=3.0
         _Noise1stTimePhase("Noise 1st Time Phase",Float)=0.0
@@ -299,10 +290,10 @@ Shader "DeltaField/shaders/MeshHologram"{
         [DFVector(1,1,1,2)]_Noise2ndScale0("Noise 2nd Scale",Vector)=(1.0,1.0,1.0,5.0)
         [DFVector(1,1,1)]_Noise2ndOffset1("Noise 2nd Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
         [DFVector(1,1,1,2)]_Noise2ndScale1("Noise 2nd Scale",Vector)=(1.0,1.0,1.0,1.0)
-        [Toggle(_NOISE2ND_OFFSET_BEFORE_SCALE)]
-        _Noise2ndOffsetBeforeScale("Noise 2nd Offset before Scale",Int)=0
-        [KeywordEnum(Offset,Model,World,Origin_World,Model_World,VertexColor)]
+        [DFToggle(,0)]
+        [Enum(Offset,0,Model,1,World,2,Origin_World,3,Model_World,4,VertexColor,5)]
         _Noise2ndSpace("Noise 2nd Position Space",Int)=1
+        _Noise2ndOffsetBeforeScale("Noise 2nd Offset before Scale",Int)=0
         _Noise2ndSeed("Noise 2nd Seed",Float)=1.0
         _Noise2ndTimeSpeed("Noise 2nd Time Speed",Float)=5.0
         _Noise2ndTimePhase("Noise 2nd Time Phase",Float)=0.0
@@ -313,14 +304,42 @@ Shader "DeltaField/shaders/MeshHologram"{
         [DFVector(1,1,1,2)]_Noise3rdScale0("Noise 3rd Scale",Vector)=(1.0,1.0,1.0,5.0)
         [DFVector(1,1,1)]_Noise3rdOffset1("Noise 3rd Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
         [DFVector(1,1,1,2)]_Noise3rdScale1("Noise 3rd Scale",Vector)=(1.0,1.0,1.0,1.0)
-        [Toggle(_NOISE3RD_OFFSET_BEFORE_SCALE)]
-        _Noise3rdOffsetBeforeScale("Noise 3rd Offset before Scale",Int)=0
-        [KeywordEnum(Offset,Model,World,Origin_World,Model_World,VertexColor)]
+        [DFToggle(,0)]
+        [Enum(Offset,0,Model,1,World,2,Origin_World,3,Model_World,4,VertexColor,5)]
         _Noise3rdSpace("Noise 3rd Position Space",Int)=1
+        _Noise3rdOffsetBeforeScale("Noise 3rd Offset before Scale",Int)=0
         _Noise3rdSeed("Noise 3rd Seed",Float)=2.0
         _Noise3rdTimeSpeed("Noise 3rd Time Speed",Float)=3.0
         _Noise3rdTimePhase("Noise 3rd Time Phase",Float)=0.0
         _Noise3rdValueScale("Noise 3rd Value Scale",Float)=1.0
+
+
+        [DFVector(1,1,1)]_Noise4thOffset0("Noise 4th Offset",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_Noise4thScale0("Noise 4th Scale",Vector)=(1.0,1.0,1.0,5.0)
+        [DFVector(1,1,1)]_Noise4thOffset1("Noise 4th Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_Noise4thScale1("Noise 4th Scale",Vector)=(1.0,1.0,1.0,1.0)
+        [DFToggle(,0)]
+        [Enum(Offset,0,Model,1,World,2,Origin_World,3,Model_World,4,VertexColor,5)]
+        _Noise4thSpace("Noise 4th Position Space",Int)=1
+        _Noise4thOffsetBeforeScale("Noise 4th Offset before Scale",Int)=0
+        _Noise4thSeed("Noise 4th Seed",Float)=2.0
+        _Noise4thTimeSpeed("Noise 4th Time Speed",Float)=3.0
+        _Noise4thTimePhase("Noise 4th Time Phase",Float)=0.0
+        _Noise4thValueScale("Noise 4th Value Scale",Float)=1.0
+
+
+        [DFVector(1,1,1)]_Noise5thOffset0("Noise 5th Offset",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_Noise5thScale0("Noise 5th Scale",Vector)=(1.0,1.0,1.0,5.0)
+        [DFVector(1,1,1)]_Noise5thOffset1("Noise 5th Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_Noise5thScale1("Noise 5th Scale",Vector)=(1.0,1.0,1.0,1.0)
+        [DFToggle(,0)]
+        [Enum(Offset,0,Model,1,World,2,Origin_World,3,Model_World,4,VertexColor,5)]
+        _Noise5thSpace("Noise 5th Position Space",Int)=1
+        _Noise5thOffsetBeforeScale("Noise 5th Offset before Scale",Int)=0
+        _Noise5thSeed("Noise 5th Seed",Float)=2.0
+        _Noise5thTimeSpeed("Noise 5th Time Speed",Float)=3.0
+        _Noise5thTimePhase("Noise 5th Time Phase",Float)=0.0
+        _Noise5thValueScale("Noise 5th Value Scale",Float)=1.0
 
 
 
@@ -351,47 +370,12 @@ Shader "DeltaField/shaders/MeshHologram"{
             #pragma multi_compile_shadowcaster
             #include "UnityCG.cginc"
 
-            #pragma shader_feature_local _ _PREVIEW_ENABLE
-            #pragma shader_feature_local _ _BILLBOARD_ENABLE
             #pragma shader_feature_local _ _AUDIOLINK_ENABLE
-            #pragma shader_feature_local _ _FWIDTH_ENABLE
-            #pragma shader_feature_local _ _ANTI_ALIASING_ENABLE
-
             #pragma shader_feature_local _ _DIRECTIONALLIGHT_INFLUENCE_ENABLE
             #pragma shader_feature_local _ _AMBIENT_INFLUENCE_ENABLE
             #pragma shader_feature_local _ _LIGHTVOLUMES_ENABLE
 
             #pragma shader_feature_local _STEREOMERGEMODE_NONE _STEREOMERGEMODE_POSITION _STEREOMERGEMODE_ROTATION _STEREOMERGEMODE_POSITION_ROTATION
-
-            #pragma shader_feature_local _FRAGMENTLINEANIMATIONMODE_NORMAL _FRAGMENTLINEANIMATIONMODE_INSTANT _FRAGMENTLINEANIMATIONMODE_OUTWIDE _FRAGMENTLINEANIMATIONMODE_OUTTHIN _FRAGMENTLINEANIMATIONMODE_BREAK _FRAGMENTLINEANIMATIONMODE_VANISHING _FRAGMENTLINEANIMATIONMODE_ZOOMIN _FRAGMENTLINEANIMATIONMODE_ZOOMOUT _FRAGMENTLINEANIMATIONMODE_POWERZOOMIN _FRAGMENTLINEANIMATIONMODE_COLLAPSE _FRAGMENTLINEANIMATIONMODE_JOIN1 _FRAGMENTLINEANIMATIONMODE_JOIN2 _FRAGMENTLINEANIMATIONMODE_JOIN3
-
-
-            #pragma shader_feature_local _ _MANUAL_LINE_SCALING_ENABLE
-            #pragma shader_feature_local _FRAGMENTPARTITIONMODE_VERTEX _FRAGMENTPARTITIONMODE_SIDE _FRAGMENTPARTITIONMODE_MESH
-
-            #pragma shader_feature_local _COLORSOURCE_GRADIENT _COLORSOURCE_PRIMARY _COLORSOURCE_GRADIENTTEX _COLORSOURCE_VERTEXCOLOR _COLORSOURCE_UNIQUESIDES _COLORSOURCE_AUDIOLINK_THEMECOLOR
-            #pragma shader_feature_local _COLORINGPARTITIONMODE_VERTEX _COLORINGPARTITIONMODE_SIDE _COLORINGPARTITIONMODE_MESH
-
-            #pragma shader_feature_local _ _GEOMETRY_SCALE_ENABLE
-            #pragma shader_feature_local _ _GEOMETRY_PUSHPULL_ENABLE
-            #pragma shader_feature_local _ _GEOMETRY_ROTATION_ENABLE
-            #pragma shader_feature_local _ _GEOMETRY_ROTATION_NOISE_REPEAT
-
-            #pragma shader_feature_local _ _ORBIT_ENABLE
-            #pragma shader_feature_local _PIXELIZATIONSPACE_DISABLE _PIXELIZATIONSPACE_MODEL _PIXELIZATIONSPACE_WORLD _PIXELIZATIONSPACE_POSTGEOMETRY
-
-
-
-            #pragma shader_feature_local _NOISE1STSPACE_OFFSET _NOISE1STSPACE_MODEL _NOISE1STSPACE_WORLD _NOISE1STSPACE_ORIGIN_WORLD _NOISE1STSPACE_MODEL_WORLD _NOISE1STSPACE_VERTEXCOLOR
-            #pragma shader_feature_local _ _NOISE1ST_OFFSET_BEFORE_SCALE
-
-            #pragma shader_feature_local _NOISE2NDSPACE_OFFSET _NOISE2NDSPACE_MODEL _NOISE2NDSPACE_WORLD _NOISE2NDSPACE_ORIGIN_WORLD _NOISE2NDSPACE_MODEL_WORLD _NOISE2NDSPACE_VERTEXCOLOR
-            #pragma shader_feature_local _ _NOISE2ND_OFFSET_BEFORE_SCALE
-
-            #pragma shader_feature_local _NOISE3RDSPACE_OFFSET _NOISE3RDSPACE_MODEL _NOISE3RDSPACE_WORLD _NOISE3RDSPACE_ORIGIN_WORLD _NOISE3RDSPACE_MODEL_WORLD _NOISE3RDSPACE_VERTEXCOLOR
-            #pragma shader_feature_local _ _NOISE3RD_OFFSET_BEFORE_SCALE
-
-            #pragma shader_feature_local _ _RENDERINGMODE_CUTOUT
 
             #include "AutoLight.cginc"
 
@@ -452,49 +436,12 @@ Shader "DeltaField/shaders/MeshHologram"{
             #include "UnityCG.cginc"
             #include "AutoLight.cginc"
 
-
-
-            #pragma shader_feature_local _ _PREVIEW_ENABLE
-            #pragma shader_feature_local _ _BILLBOARD_ENABLE
             #pragma shader_feature_local _ _AUDIOLINK_ENABLE
-            #pragma shader_feature_local _ _FWIDTH_ENABLE
-            #pragma shader_feature_local _ _ANTI_ALIASING_ENABLE
-
             #pragma shader_feature_local _ _DIRECTIONALLIGHT_INFLUENCE_ENABLE
             #pragma shader_feature_local _ _AMBIENT_INFLUENCE_ENABLE
             #pragma shader_feature_local _ _LIGHTVOLUMES_ENABLE
 
             #pragma shader_feature_local _STEREOMERGEMODE_NONE _STEREOMERGEMODE_POSITION _STEREOMERGEMODE_ROTATION _STEREOMERGEMODE_POSITION_ROTATION
-
-            #pragma shader_feature_local _FRAGMENTLINEANIMATIONMODE_NORMAL _FRAGMENTLINEANIMATIONMODE_INSTANT _FRAGMENTLINEANIMATIONMODE_OUTWIDE _FRAGMENTLINEANIMATIONMODE_OUTTHIN _FRAGMENTLINEANIMATIONMODE_BREAK _FRAGMENTLINEANIMATIONMODE_VANISHING _FRAGMENTLINEANIMATIONMODE_ZOOMIN _FRAGMENTLINEANIMATIONMODE_ZOOMOUT _FRAGMENTLINEANIMATIONMODE_POWERZOOMIN _FRAGMENTLINEANIMATIONMODE_COLLAPSE _FRAGMENTLINEANIMATIONMODE_JOIN1 _FRAGMENTLINEANIMATIONMODE_JOIN2 _FRAGMENTLINEANIMATIONMODE_JOIN3
-
-
-            #pragma shader_feature_local _ _MANUAL_LINE_SCALING_ENABLE
-            #pragma shader_feature_local _FRAGMENTPARTITIONMODE_VERTEX _FRAGMENTPARTITIONMODE_SIDE _FRAGMENTPARTITIONMODE_MESH
-
-            #pragma shader_feature_local _COLORSOURCE_GRADIENT _COLORSOURCE_PRIMARY _COLORSOURCE_GRADIENTTEX _COLORSOURCE_VERTEXCOLOR _COLORSOURCE_UNIQUESIDES _COLORSOURCE_AUDIOLINK_THEMECOLOR
-            #pragma shader_feature_local _COLORINGPARTITIONMODE_VERTEX _COLORINGPARTITIONMODE_SIDE _COLORINGPARTITIONMODE_MESH
-
-            #pragma shader_feature_local _ _GEOMETRY_SCALE_ENABLE
-            #pragma shader_feature_local _ _GEOMETRY_PUSHPULL_ENABLE
-            #pragma shader_feature_local _ _GEOMETRY_ROTATION_ENABLE
-            #pragma shader_feature_local _ _GEOMETRY_ROTATION_NOISE_REPEAT
-
-            #pragma shader_feature_local _ _ORBIT_ENABLE
-            #pragma shader_feature_local _PIXELIZATIONSPACE_DISABLE _PIXELIZATIONSPACE_MODEL _PIXELIZATIONSPACE_WORLD _PIXELIZATIONSPACE_POSTGEOMETRY
-
-
-
-            #pragma shader_feature_local _NOISE1STSPACE_OFFSET _NOISE1STSPACE_MODEL _NOISE1STSPACE_WORLD _NOISE1STSPACE_ORIGIN_WORLD _NOISE1STSPACE_MODEL_WORLD _NOISE1STSPACE_VERTEXCOLOR
-            #pragma shader_feature_local _ _NOISE1ST_OFFSET_BEFORE_SCALE
-
-            #pragma shader_feature_local _NOISE2NDSPACE_OFFSET _NOISE2NDSPACE_MODEL _NOISE2NDSPACE_WORLD _NOISE2NDSPACE_ORIGIN_WORLD _NOISE2NDSPACE_MODEL_WORLD _NOISE2NDSPACE_VERTEXCOLOR
-            #pragma shader_feature_local _ _NOISE2ND_OFFSET_BEFORE_SCALE
-
-            #pragma shader_feature_local _NOISE3RDSPACE_OFFSET _NOISE3RDSPACE_MODEL _NOISE3RDSPACE_WORLD _NOISE3RDSPACE_ORIGIN_WORLD _NOISE3RDSPACE_MODEL_WORLD _NOISE3RDSPACE_VERTEXCOLOR
-            #pragma shader_feature_local _ _NOISE3RD_OFFSET_BEFORE_SCALE
-
-            #pragma shader_feature_local _ _RENDERINGMODE_CUTOUT
 
             #include "Packages/com.deltafield.meshhologram/Includes/macro_general.hlsl"
             #include "Packages/com.deltafield.meshhologram/Includes/macro_noise.hlsl"

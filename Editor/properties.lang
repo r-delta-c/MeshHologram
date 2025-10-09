@@ -145,7 +145,6 @@ _OrbitOffset||Orbit Offset*/X/Y/Z||Orbitの座標オフセット*/X/Y/Z
 _OrbitScale||Orbit Scale*/X/Y/Z/Scale||Orbit スケール*/X/Y/Z/スケール
 
 _OrbitRotationSource||Orbit Rotation Source*||Orbit 回転の参照先*
-_OrbitRotationOffsetSource||Orbit Rotation Offset Source*||Orbit Rotation オフセットの参照先*
 _OrbitRotationOffsetAudioLinkSource||Orbit Rotation Offset AudioLink Source*||Orbit Rotation オフセットのAudioLink参照先*
 _OrbitRotationOffsetAudioLinkVUStrength||VU Strength*/X/Y/Z/W||VUの強さ*/X/Y/Z/W
 _OrbitRotationOffsetAudioLinkChronoTensityStrength||ChronoTensity Strength*/X/Y/Z/W||ChronoTensityの強さ*/X/Y/Z/W

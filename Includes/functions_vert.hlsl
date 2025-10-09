@@ -12,7 +12,12 @@ v2f vert (appdata v){
         length(UNITY_MATRIX_M._m10_m11_m12),
         length(UNITY_MATRIX_M._m20_m21_m22)
     );
-    #if defined(_BILLBOARD_ENABLE)
+    [branch]if(_BillboardEnable==0){
+        o.alpha = v.color.a;
+        [branch]if(_GeometryPixelizationSpace==1) v.pos.xyz = Pixelization(v.pos.xyz, float3(1.0,1.0,1.0));
+        o.pos = mul(UNITY_MATRIX_M,v.pos);
+        [branch]if(_GeometryPixelizationSpace==2) o.pos.xyz = Pixelization(o.pos.xyz, scale);
+    }else{
         o.alpha = 1.0;
         float4x4 Billboard_Matrix_M = {
             1.0,0.0,0.0,0.0,
@@ -26,19 +31,16 @@ v2f vert (appdata v){
         Billboard_Matrix_M._m02_m12_m22 = -Stereo_Merge_Matrix_V[2].xyz*scale.z*(1.0-_Forced_Z_Scale_Zero);
         Billboard_Matrix_M._m03_m13_m23 = UNITY_MATRIX_M._m03_m13_m23;
 
-        VERTEX_PIXELIZATION_MODEL_MACRO;
+        [branch]if(_GeometryPixelizationSpace==1) v.pos.xyz = Pixelization(v.pos.xyz, float3(1.0,1.0,1.0));
         o.pos = mul(Billboard_Matrix_M,v.pos);
-        VERTEX_PIXELIZATION_WORLD_MACRO;
-    #else
-        o.alpha = v.color.a;
-        VERTEX_PIXELIZATION_MODEL_MACRO;
-        o.pos = mul(UNITY_MATRIX_M,v.pos);
-        VERTEX_PIXELIZATION_WORLD_MACRO;
-    #endif
+        [branch]if(_GeometryPixelizationSpace==2) o.pos.xyz = Pixelization(o.pos.xyz, scale);
+    }
 
-    o.noise1st_pos = NOISE1ST_POS_MACRO;
-    o.noise2nd_pos = NOISE2ND_POS_MACRO;
-    o.noise3rd_pos = NOISE3RD_POS_MACRO;
+    NOISE_SPACE_POS_MACRO(o.noise1st_pos,_Noise1stSpace,_Noise1stOffsetBeforeScale,_Noise1stOffset0,_Noise1stOffset1,_Noise1stScale0,_Noise1stScale1);
+    NOISE_SPACE_POS_MACRO(o.noise2nd_pos,_Noise2ndSpace,_Noise2ndOffsetBeforeScale,_Noise2ndOffset0,_Noise2ndOffset1,_Noise2ndScale0,_Noise2ndScale1);
+    NOISE_SPACE_POS_MACRO(o.noise1st_pos,_Noise3rdSpace,_Noise3rdOffsetBeforeScale,_Noise3rdOffset0,_Noise3rdOffset1,_Noise3rdScale0,_Noise3rdScale1);
+    NOISE_SPACE_POS_MACRO(o.noise1st_pos,_Noise4thSpace,_Noise4thOffsetBeforeScale,_Noise4thOffset0,_Noise4thOffset1,_Noise4thScale0,_Noise4thScale1);
+    NOISE_SPACE_POS_MACRO(o.noise1st_pos,_Noise5thSpace,_Noise5thOffsetBeforeScale,_Noise5thOffset0,_Noise5thOffset1,_Noise5thScale0,_Noise5thScale1);
     SWITCH_SHADE_WORLDPOS_MACRO o.world_pos = o.pos;
     o.origin_pos = unity_ObjectToWorld._m03_m13_m23;
     SWITCH_WORLDNORMAL_MACRO o.world_normal = UnityObjectToWorldNormal(v.normal);

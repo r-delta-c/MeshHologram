@@ -21,16 +21,16 @@
 #endif
 
 
-    #if defined(_PREVIEW_ENABLE)
-        c.rgb = saturate(draw*c.rgb);
-        c.a = 1.0;
-    #else
+    [branch]if(_PreviewEnable==0){
         c.a = saturate(draw)*i.alpha*c.a;
-        #if defined(_ANTI_ALIASING_ENABLE)
+        [branch]if(_AntiAliasingEnable==1){
             float diff_pixel = fwidth(c.a)*0.5;
             c.a = lerp(c.a,saturate(c.a+diff_pixel),diff_pixel);
-        #endif
-    #endif
+        }
+    }else{
+        c.rgb = saturate(draw*c.rgb);
+        c.a = 1.0;
+    }
 
     c.rgb *= saturate(c.rgb)*(max(0.0,_Emission)+1.0);
 
