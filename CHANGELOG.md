@@ -67,7 +67,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - 詳細は[変更されたプロパティ]、[0.2.0-exp.3以降で使用されるキーワード]からご確認ください。
 
 ### 変更されたプロパティ
-[変更されたプロパティ]: ###変更されたプロパティ
+[変更されたプロパティ]: #変更されたプロパティ
 <details>
     <summary><b>プロパティ一覧</b></summary>
 
@@ -179,7 +179,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 <br>
 
 ### 0.2.0-exp.3以降で使用されるキーワード
-[0.2.0-exp.3以降で使用されるキーワード]: ###0.2.0-exp.3以降で使用されるキーワード
+[0.2.0-exp.3以降で使用されるキーワード]: #020-exp3以降で使用されるキーワード
 <details>
     <summary><b>キーワード一覧</b></summary>
 
