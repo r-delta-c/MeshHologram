@@ -5,7 +5,7 @@ Copyright (c) 2025, DeltaField
 
 ## Overview | 概要
 Name: MeshHologram<br>
-Version: 0.1.5<br>
+Version: 0.2.0-exp.3<br>
 
 ワイヤーフレーム描写を拡張した、プロシージャルで高度なコントロールが可能なシェーダーです。<br>
 
