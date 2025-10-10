@@ -23,6 +23,7 @@
 
     [branch]if(_PreviewEnable==0){
         c.a = saturate(draw)*i.alpha*c.a;
+        [branch]if(_RenderingMode==1) c.a = step(0.5,c.a);
         [branch]if(_AntiAliasingEnable==1){
             float diff_pixel = fwidth(c.a)*0.5;
             c.a = lerp(c.a,saturate(c.a+diff_pixel),diff_pixel);

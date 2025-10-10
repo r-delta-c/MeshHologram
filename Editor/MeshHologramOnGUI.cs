@@ -207,11 +207,26 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_LINE_ANIMATION_MODE);
                 DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_PARTITION_MODE);
                 EditorGUILayout.Space(16);
-                DrawSource(
-                    0,
-                    SHADER_PROPERTY._FRAGMENT_SOURCE,
-                    SHADER_PROPERTY._FRAGMENT_FIXED_VALUE
-                );
+
+                using (new EditorGUILayout.VerticalScope("HelpBox"))
+                {
+                    foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.SOURCE, false, 0);
+                    if (foldout_bool)
+                    {
+                        DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_SOURCE);
+                        switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._FRAGMENT_SOURCE))
+                        {
+                            case 0:
+                                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_FIXED_VALUE);
+                                break;
+                            case 1:
+                                DrawFragmentNoise();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
                 DrawAudioLinkSource(
                     0,
                     SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SOURCE,
@@ -288,11 +303,26 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 DrawShaderProperty(SHADER_PROPERTY._EMISSION);
                 DrawShaderProperty(SHADER_PROPERTY._COLORING_PARTITION_MODE);
                 EditorGUILayout.Space(16);
-                DrawSource(
-                    1,
-                    SHADER_PROPERTY._COLORING_SOURCE,
-                    SHADER_PROPERTY._COLORING_FIXED_VALUE
-                );
+
+                using (new EditorGUILayout.VerticalScope("HelpBox"))
+                {
+                    foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.SOURCE, false, 1);
+                    if (foldout_bool)
+                    {
+                        DrawShaderProperty(SHADER_PROPERTY._COLORING_SOURCE);
+                        switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._COLORING_SOURCE))
+                        {
+                            case 0:
+                                DrawShaderProperty(SHADER_PROPERTY._COLORING_FIXED_VALUE);
+                                break;
+                            case 1:
+                                DrawColoringNoise();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
                 DrawAudioLinkSource(
                     1,
                     SHADER_PROPERTY._COLORING_AUDIOLINK_SOURCE,
@@ -361,11 +391,25 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PIXELIZATION);
                 EditorGUILayout.Space(16);
 
-                DrawSource(
-                    2,
-                    SHADER_PROPERTY._GEOMETRY_SOURCE,
-                    SHADER_PROPERTY._GEOMETRY_FIXED_VALUE
-                );
+                using (new EditorGUILayout.VerticalScope("HelpBox"))
+                {
+                    foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.SOURCE, false, 2);
+                    if (foldout_bool)
+                    {
+                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_SOURCE);
+                        switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._GEOMETRY_SOURCE))
+                        {
+                            case 0:
+                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_FIXED_VALUE);
+                                break;
+                            case 1:
+                                DrawGeometryNoise();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
                 DrawAudioLinkSource(
                     2,
                     SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SOURCE,
@@ -422,13 +466,9 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_PRIMITIVE_RATIO);
                                     break;
                                 case 2:
-                                    InsertNoise1stProps(3);
+                                    DrawOrbitNoise();
                                     break;
-                                case 3:
-                                    InsertNoise2ndProps(3);
-                                    break;
-                                case 4:
-                                    InsertNoise3rdProps(3);
+                                default:
                                     break;
                             }
                         }
@@ -479,13 +519,9 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_SEED);
                                     break;
                                 case 2:
-                                    InsertNoise1stProps(4);
+                                    DrawOrbitRotationNoise();
                                     break;
-                                case 3:
-                                    InsertNoise2ndProps(4);
-                                    break;
-                                case 4:
-                                    InsertNoise3rdProps(4);
+                                default:
                                     break;
                             }
                         }
@@ -565,7 +601,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
             foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.OTHERS, true);
             if (foldout_bool)
             {
-                RemoveProp = new RemoveProperties(targetMat);
+                RemoveProp = new CleanupTools(targetMat);
                 EditorGUILayout.Space(16);
                 using (new EditorGUILayout.HorizontalScope())
                 {

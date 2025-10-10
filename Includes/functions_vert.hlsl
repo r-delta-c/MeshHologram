@@ -36,11 +36,11 @@ v2f vert (appdata v){
         [branch]if(_GeometryPixelizationSpace==2) o.pos.xyz = Pixelization(o.pos.xyz, scale);
     }
 
-    NOISE_SPACE_POS_MACRO(o.noise1st_pos,_Noise1stSpace,_Noise1stOffsetBeforeScale,_Noise1stOffset0,_Noise1stOffset1,_Noise1stScale0,_Noise1stScale1);
-    NOISE_SPACE_POS_MACRO(o.noise2nd_pos,_Noise2ndSpace,_Noise2ndOffsetBeforeScale,_Noise2ndOffset0,_Noise2ndOffset1,_Noise2ndScale0,_Noise2ndScale1);
-    NOISE_SPACE_POS_MACRO(o.noise1st_pos,_Noise3rdSpace,_Noise3rdOffsetBeforeScale,_Noise3rdOffset0,_Noise3rdOffset1,_Noise3rdScale0,_Noise3rdScale1);
-    NOISE_SPACE_POS_MACRO(o.noise1st_pos,_Noise4thSpace,_Noise4thOffsetBeforeScale,_Noise4thOffset0,_Noise4thOffset1,_Noise4thScale0,_Noise4thScale1);
-    NOISE_SPACE_POS_MACRO(o.noise1st_pos,_Noise5thSpace,_Noise5thOffsetBeforeScale,_Noise5thOffset0,_Noise5thOffset1,_Noise5thScale0,_Noise5thScale1);
+    NOISE_SPACE_POS_MACRO(o.fragment_pos,_FragmentNoiseSpace,_FragmentNoiseOffsetBeforeScale,_FragmentNoiseOffset0,_FragmentNoiseOffset1,_FragmentNoiseScale0,_FragmentNoiseScale1);
+    NOISE_SPACE_POS_MACRO(o.coloring_pos,_ColoringNoiseSpace,_ColoringNoiseOffsetBeforeScale,_ColoringNoiseOffset0,_ColoringNoiseOffset1,_ColoringNoiseScale0,_ColoringNoiseScale1);
+    NOISE_SPACE_POS_MACRO(o.geometry_pos,_GeometryNoiseSpace,_GeometryNoiseOffsetBeforeScale,_GeometryNoiseOffset0,_GeometryNoiseOffset1,_GeometryNoiseScale0,_GeometryNoiseScale1);
+    NOISE_SPACE_POS_MACRO(o.orbit_pos,_OrbitNoiseSpace,_OrbitNoiseOffsetBeforeScale,_OrbitNoiseOffset0,_OrbitNoiseOffset1,_OrbitNoiseScale0,_OrbitNoiseScale1);
+    NOISE_SPACE_POS_MACRO(o.orbit_rotation_pos,_OrbitRotationNoiseSpace,_OrbitRotationNoiseOffsetBeforeScale,_OrbitRotationNoiseOffset0,_OrbitRotationNoiseOffset1,_OrbitRotationNoiseScale0,_OrbitRotationNoiseScale1);
     SWITCH_SHADE_WORLDPOS_MACRO o.world_pos = o.pos;
     o.origin_pos = unity_ObjectToWorld._m03_m13_m23;
     SWITCH_WORLDNORMAL_MACRO o.world_normal = UnityObjectToWorldNormal(v.normal);

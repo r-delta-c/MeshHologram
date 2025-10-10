@@ -27,7 +27,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
         static private LANG lang;
         static private LANG current_lang;
         static private TITLE_SKINS current_title_skin;
-        private RemoveProperties RemoveProp;
+        private CleanupTools RemoveProp;
 
         private GradientMapManager gradientMapManager = new GradientMapManager();
         private Gradient gradient = new Gradient();

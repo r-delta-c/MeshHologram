@@ -97,35 +97,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             }
         }
 
-        private void DrawSource(int owner,SHADER_PROPERTY SOURCE,SHADER_PROPERTY VALUE)
-        {
-            using (new EditorGUILayout.VerticalScope("HelpBox"))
-            {
-                foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.SOURCE, false, owner);
-                if (foldout_bool)
-                {
-                    DrawShaderProperty(SOURCE);
-                    switch (GetPropertyFloat(targetMat, SOURCE))
-                    {
-                        case 0:
-                            DrawShaderProperty(VALUE);
-                            break;
-                        case 1:
-                            InsertNoise1stProps(owner);
-                            break;
-                        case 2:
-                            InsertNoise2ndProps(owner);
-                            break;
-                        case 3:
-                            InsertNoise3rdProps(owner);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-        }
-
         private void DrawAudioLinkSource(
             int owner,
             SHADER_PROPERTY SOURCE,
@@ -198,8 +169,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         }
 
         private void DrawNoiseProps(
-            int order,
-            FOLDOUT foldout,
             SHADER_PROPERTY OFFSET0,
             SHADER_PROPERTY SCALE0,
             SHADER_PROPERTY OFFSET1,
@@ -212,97 +181,101 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             SHADER_PROPERTY PHASE_SCALE
             )
         {
-            foldout_bool = FoldoutList.MenuFoldout(foldout, false, order);
-            if (foldout_bool)
+            DrawShaderProperty(OFFSET0);
+            DrawShaderProperty(SCALE0);
+            if (GetPropertyFloat(targetMat, SPACE) == 4)
             {
-                DrawShaderProperty(OFFSET0);
-                DrawShaderProperty(SCALE0);
-                if (GetPropertyFloat(targetMat, SPACE) == 4)
-                {
-                    DrawShaderProperty(OFFSET1);
-                    DrawShaderProperty(SCALE1);
-                }
-                DrawShaderProperty(OFFSET_BEFORE_SCALE);
-                DrawShaderProperty(SPACE);
-                EditorGUILayout.Space(16);
-                DrawShaderProperty(SEED);
-                EditorGUILayout.Space(16);
-                DrawShaderProperty(TIME_MULTI);
-                DrawShaderProperty(TIME_PHASE);
-                DrawShaderProperty(PHASE_SCALE);
+                DrawShaderProperty(OFFSET1);
+                DrawShaderProperty(SCALE1);
             }
+            DrawShaderProperty(OFFSET_BEFORE_SCALE);
+            DrawShaderProperty(SPACE);
+            EditorGUILayout.Space(16);
+            DrawShaderProperty(SEED);
+            EditorGUILayout.Space(16);
+            DrawShaderProperty(TIME_MULTI);
+            DrawShaderProperty(TIME_PHASE);
+            DrawShaderProperty(PHASE_SCALE);
         }
 
-        private void InsertNoise1stProps(int order = -1)
+        private void DrawFragmentNoise()
         {
-            Color32 c = GUI.backgroundColor;
-            GUI.backgroundColor = new Color32(128, 0, 0, 255);
-            using (new EditorGUILayout.VerticalScope("HelpBox"))
-            {
-                GUI.backgroundColor = c;
-                DrawNoiseProps(
-                    order,
-                    FOLDOUT.NOISE1ST,
-                    SHADER_PROPERTY._NOISE1ST_OFFSET0,
-                    SHADER_PROPERTY._NOISE1ST_SCALE0,
-                    SHADER_PROPERTY._NOISE1ST_OFFSET1,
-                    SHADER_PROPERTY._NOISE1ST_SCALE1,
-                    SHADER_PROPERTY._NOISE1ST_OFFSET_BEFORE_SCALE,
-                    SHADER_PROPERTY._NOISE1ST_SPACE,
-                    SHADER_PROPERTY._NOISE1ST_SEED,
-                    SHADER_PROPERTY._NOISE1ST_TIME_SPEED,
-                    SHADER_PROPERTY._NOISE1ST_TIME_PHASE,
-                    SHADER_PROPERTY._NOISE1ST_VALUE_SCALE
-                );
-            }
+            DrawNoiseProps(
+                SHADER_PROPERTY._FRAGMENT_NOISE_OFFSET0,
+                SHADER_PROPERTY._FRAGMENT_NOISE_SCALE0,
+                SHADER_PROPERTY._FRAGMENT_NOISE_OFFSET1,
+                SHADER_PROPERTY._FRAGMENT_NOISE_SCALE1,
+                SHADER_PROPERTY._FRAGMENT_NOISE_OFFSET_BEFORE_SCALE,
+                SHADER_PROPERTY._FRAGMENT_NOISE_SPACE,
+                SHADER_PROPERTY._FRAGMENT_NOISE_SEED,
+                SHADER_PROPERTY._FRAGMENT_NOISE_TIME_SPEED,
+                SHADER_PROPERTY._FRAGMENT_NOISE_TIME_PHASE,
+                SHADER_PROPERTY._FRAGMENT_NOISE_VALUE_SCALE
+            );
         }
 
-        private void InsertNoise2ndProps(int order = -1)
+        private void DrawColoringNoise()
         {
-            Color32 c = GUI.backgroundColor;
-            GUI.backgroundColor = new Color32(0, 255, 0, 255);
-            using (new EditorGUILayout.VerticalScope("HelpBox"))
-            {
-                GUI.backgroundColor = c;
-                DrawNoiseProps(
-                    order,
-                    FOLDOUT.NOISE2ND,
-                    SHADER_PROPERTY._NOISE2ND_OFFSET0,
-                    SHADER_PROPERTY._NOISE2ND_SCALE0,
-                    SHADER_PROPERTY._NOISE2ND_OFFSET1,
-                    SHADER_PROPERTY._NOISE2ND_SCALE1,
-                    SHADER_PROPERTY._NOISE2ND_OFFSET_BEFORE_SCALE,
-                    SHADER_PROPERTY._NOISE2ND_SPACE,
-                    SHADER_PROPERTY._NOISE2ND_SEED,
-                    SHADER_PROPERTY._NOISE2ND_TIME_SPEED,
-                    SHADER_PROPERTY._NOISE2ND_TIME_PHASE,
-                    SHADER_PROPERTY._NOISE2ND_VALUE_SCALE
-                );
-            }
+            DrawNoiseProps(
+                SHADER_PROPERTY._COLORING_NOISE_OFFSET0,
+                SHADER_PROPERTY._COLORING_NOISE_SCALE0,
+                SHADER_PROPERTY._COLORING_NOISE_OFFSET1,
+                SHADER_PROPERTY._COLORING_NOISE_SCALE1,
+                SHADER_PROPERTY._COLORING_NOISE_OFFSET_BEFORE_SCALE,
+                SHADER_PROPERTY._COLORING_NOISE_SPACE,
+                SHADER_PROPERTY._COLORING_NOISE_SEED,
+                SHADER_PROPERTY._COLORING_NOISE_TIME_SPEED,
+                SHADER_PROPERTY._COLORING_NOISE_TIME_PHASE,
+                SHADER_PROPERTY._COLORING_NOISE_VALUE_SCALE
+            );
         }
 
-        private void InsertNoise3rdProps(int order = -1)
+        private void DrawGeometryNoise()
         {
-            Color32 c = GUI.backgroundColor;
-            GUI.backgroundColor = new Color32(0, 0, 32, 255);
-            using (new EditorGUILayout.VerticalScope("HelpBox"))
-            {
-                GUI.backgroundColor = c;
-                DrawNoiseProps(
-                    order,
-                    FOLDOUT.NOISE3RD,
-                    SHADER_PROPERTY._NOISE3RD_OFFSET0,
-                    SHADER_PROPERTY._NOISE3RD_SCALE0,
-                    SHADER_PROPERTY._NOISE3RD_OFFSET1,
-                    SHADER_PROPERTY._NOISE3RD_SCALE1,
-                    SHADER_PROPERTY._NOISE3RD_OFFSET_BEFORE_SCALE,
-                    SHADER_PROPERTY._NOISE3RD_SPACE,
-                    SHADER_PROPERTY._NOISE3RD_SEED,
-                    SHADER_PROPERTY._NOISE3RD_TIME_SPEED,
-                    SHADER_PROPERTY._NOISE3RD_TIME_PHASE,
-                    SHADER_PROPERTY._NOISE3RD_VALUE_SCALE
-                );
-            }
+            DrawNoiseProps(
+                SHADER_PROPERTY._GEOMETRY_NOISE_OFFSET0,
+                SHADER_PROPERTY._GEOMETRY_NOISE_SCALE0,
+                SHADER_PROPERTY._GEOMETRY_NOISE_OFFSET1,
+                SHADER_PROPERTY._GEOMETRY_NOISE_SCALE1,
+                SHADER_PROPERTY._GEOMETRY_NOISE_OFFSET_BEFORE_SCALE,
+                SHADER_PROPERTY._GEOMETRY_NOISE_SPACE,
+                SHADER_PROPERTY._GEOMETRY_NOISE_SEED,
+                SHADER_PROPERTY._GEOMETRY_NOISE_TIME_SPEED,
+                SHADER_PROPERTY._GEOMETRY_NOISE_TIME_PHASE,
+                SHADER_PROPERTY._GEOMETRY_NOISE_VALUE_SCALE
+            );
+        }
+
+        private void DrawOrbitNoise()
+        {
+            DrawNoiseProps(
+                SHADER_PROPERTY._ORBIT_NOISE_OFFSET0,
+                SHADER_PROPERTY._ORBIT_NOISE_SCALE0,
+                SHADER_PROPERTY._ORBIT_NOISE_OFFSET1,
+                SHADER_PROPERTY._ORBIT_NOISE_SCALE1,
+                SHADER_PROPERTY._ORBIT_NOISE_OFFSET_BEFORE_SCALE,
+                SHADER_PROPERTY._ORBIT_NOISE_SPACE,
+                SHADER_PROPERTY._ORBIT_NOISE_SEED,
+                SHADER_PROPERTY._ORBIT_NOISE_TIME_SPEED,
+                SHADER_PROPERTY._ORBIT_NOISE_TIME_PHASE,
+                SHADER_PROPERTY._ORBIT_NOISE_VALUE_SCALE
+            );
+        }
+
+        private void DrawOrbitRotationNoise()
+        {
+            DrawNoiseProps(
+                SHADER_PROPERTY._ORBIT_ROTATION_NOISE_OFFSET0,
+                SHADER_PROPERTY._ORBIT_ROTATION_NOISE_SCALE0,
+                SHADER_PROPERTY._ORBIT_ROTATION_NOISE_OFFSET1,
+                SHADER_PROPERTY._ORBIT_ROTATION_NOISE_SCALE1,
+                SHADER_PROPERTY._ORBIT_ROTATION_NOISE_OFFSET_BEFORE_SCALE,
+                SHADER_PROPERTY._ORBIT_ROTATION_NOISE_SPACE,
+                SHADER_PROPERTY._ORBIT_ROTATION_NOISE_SEED,
+                SHADER_PROPERTY._ORBIT_ROTATION_NOISE_TIME_SPEED,
+                SHADER_PROPERTY._ORBIT_ROTATION_NOISE_TIME_PHASE,
+                SHADER_PROPERTY._ORBIT_ROTATION_NOISE_VALUE_SCALE
+            );
         }
     }
 }

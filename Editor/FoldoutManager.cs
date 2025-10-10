@@ -18,9 +18,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
             FoldoutList.Add(FOLDOUT.COLOR, new FoldoutState(new string[1] { "label.color" }));
             FoldoutList.Add(FOLDOUT.GEOMETRY, new FoldoutState(new string[1] { "label.geometry" }));
             FoldoutList.Add(FOLDOUT.ORBIT, new FoldoutState(new string[1] { "label.orbit" }));
-            FoldoutList.Add(FOLDOUT.NOISE1ST, new FoldoutState(new string[1] { "label.noise1st_properties" }, 5));
-            FoldoutList.Add(FOLDOUT.NOISE2ND, new FoldoutState(new string[1] { "label.noise2nd_properties" }, 5));
-            FoldoutList.Add(FOLDOUT.NOISE3RD, new FoldoutState(new string[1] { "label.noise3rd_properties" }, 5));
             FoldoutList.Add(FOLDOUT.MASK_OFFSET, new FoldoutState(new string[6]{
                 "label.fragment.mask_offset",
                 "label.coloring.mask_offset",

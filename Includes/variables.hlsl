@@ -1,5 +1,5 @@
 fixed3 _LightColor0;
-
+uint _RenderingMode;
 bool _BillboardEnable;
 float _Forced_Z_Scale_Zero;
 float _DistanceInfluence;
@@ -144,51 +144,51 @@ float3 _OrbitWavePhase;
 float3 _OrbitWaveSpeed;
 
 
-uint _FragmentSource;
+int _FragmentSource;
 uint _FragmentAudioLinkSource;
 float _FragmentFixedValue;
 float _FragmentPhaseScale;
-uint _FragmentLoopMode;
+int _FragmentLoopMode;
 uint _FragmentEaseMode;
 float _FragmentEaseCurve;
 float _FragmentMidMul;
 float _FragmentMidAdd;
 
 
-uint _ColoringSource;
+int _ColoringSource;
 uint _ColoringAudioLinkSource;
 float _ColoringFixedValue;
 float _ColoringPhaseScale;
-uint _ColoringLoopMode;
+int _ColoringLoopMode;
 uint _ColoringEaseMode;
 float _ColoringEaseCurve;
 float _ColoringMidMul;
 float _ColoringMidAdd;
 
 
-uint _GeometrySource;
+int _GeometrySource;
 uint _GeometryAudioLinkSource;
 float _GeometryFixedValue;
 float _GeometryPhaseScale;
-uint _GeometryLoopMode;
+int _GeometryLoopMode;
 uint _GeometryEaseMode;
 float _GeometryEaseCurve;
 float _GeometryMidMul;
 float _GeometryMidAdd;
 
 
-uint _OrbitSource;
+int _OrbitSource;
 uint _OrbitAudioLinkSource;
 float _OrbitFixedValue;
 float _OrbitPhaseScale;
-uint _OrbitLoopMode;
+int _OrbitLoopMode;
 uint _OrbitEaseMode;
 float _OrbitEaseCurve;
 float _OrbitMidMul;
 float _OrbitMidAdd;
 
 
-uint _OrbitRotationSource;
+int _OrbitRotationSource;
 uint _OrbitRotationOffsetAudioLinkSource;
 float4 _OrbitRotationOffsetAudioLinkVUStrength;
 float4 _OrbitRotationOffsetAudioLinkChronoTensityStrength;
@@ -203,60 +203,60 @@ bool _OrbitWaveAudioLinkSpectrumMode;
 float2 _OrbitWaveAudioLinkSpectrumBounds;
 
 
-uint _Noise1stSpace;
-bool _Noise1stOffsetBeforeScale;
-float3 _Noise1stOffset0;
-float3 _Noise1stOffset1;
-float4 _Noise1stScale0;
-float4 _Noise1stScale1;
-float _Noise1stSeed;
-float _Noise1stTimeSpeed;
-float _Noise1stTimePhase;
-float _Noise1stValueScale;
+uint _FragmentNoiseSpace;
+bool _FragmentNoiseOffsetBeforeScale;
+float3 _FragmentNoiseOffset0;
+float3 _FragmentNoiseOffset1;
+float4 _FragmentNoiseScale0;
+float4 _FragmentNoiseScale1;
+float _FragmentNoiseSeed;
+float _FragmentNoiseTimeSpeed;
+float _FragmentNoiseTimePhase;
+float _FragmentNoiseValueScale;
 
-uint _Noise2ndSpace;
-bool _Noise2ndOffsetBeforeScale;
-float3 _Noise2ndOffset0;
-float3 _Noise2ndOffset1;
-float4 _Noise2ndScale0;
-float4 _Noise2ndScale1;
-float _Noise2ndSeed;
-float _Noise2ndTimeSpeed;
-float _Noise2ndTimePhase;
-float _Noise2ndValueScale;
+uint _ColoringNoiseSpace;
+bool _ColoringNoiseOffsetBeforeScale;
+float3 _ColoringNoiseOffset0;
+float3 _ColoringNoiseOffset1;
+float4 _ColoringNoiseScale0;
+float4 _ColoringNoiseScale1;
+float _ColoringNoiseSeed;
+float _ColoringNoiseTimeSpeed;
+float _ColoringNoiseTimePhase;
+float _ColoringNoiseValueScale;
 
-uint _Noise3rdSpace;
-bool _Noise3rdOffsetBeforeScale;
-float3 _Noise3rdOffset0;
-float3 _Noise3rdOffset1;
-float4 _Noise3rdScale0;
-float4 _Noise3rdScale1;
-float _Noise3rdSeed;
-float _Noise3rdTimeSpeed;
-float _Noise3rdTimePhase;
-float _Noise3rdValueScale;
+uint _GeometryNoiseSpace;
+bool _GeometryNoiseOffsetBeforeScale;
+float3 _GeometryNoiseOffset0;
+float3 _GeometryNoiseOffset1;
+float4 _GeometryNoiseScale0;
+float4 _GeometryNoiseScale1;
+float _GeometryNoiseSeed;
+float _GeometryNoiseTimeSpeed;
+float _GeometryNoiseTimePhase;
+float _GeometryNoiseValueScale;
 
-uint _Noise4thSpace;
-bool _Noise4thOffsetBeforeScale;
-float3 _Noise4thOffset0;
-float3 _Noise4thOffset1;
-float4 _Noise4thScale0;
-float4 _Noise4thScale1;
-float _Noise4thSeed;
-float _Noise4thTimeSpeed;
-float _Noise4thTimePhase;
-float _Noise4thValueScale;
+uint _OrbitNoiseSpace;
+bool _OrbitNoiseOffsetBeforeScale;
+float3 _OrbitNoiseOffset0;
+float3 _OrbitNoiseOffset1;
+float4 _OrbitNoiseScale0;
+float4 _OrbitNoiseScale1;
+float _OrbitNoiseSeed;
+float _OrbitNoiseTimeSpeed;
+float _OrbitNoiseTimePhase;
+float _OrbitNoiseValueScale;
 
-uint _Noise5thSpace;
-bool _Noise5thOffsetBeforeScale;
-float3 _Noise5thOffset0;
-float3 _Noise5thOffset1;
-float4 _Noise5thScale0;
-float4 _Noise5thScale1;
-float _Noise5thSeed;
-float _Noise5thTimeSpeed;
-float _Noise5thTimePhase;
-float _Noise5thValueScale;
+uint _OrbitRotationNoiseSpace;
+bool _OrbitRotationNoiseOffsetBeforeScale;
+float3 _OrbitRotationNoiseOffset0;
+float3 _OrbitRotationNoiseOffset1;
+float4 _OrbitRotationNoiseScale0;
+float4 _OrbitRotationNoiseScale1;
+float _OrbitRotationNoiseSeed;
+float _OrbitRotationNoiseTimeSpeed;
+float _OrbitRotationNoiseTimePhase;
+float _OrbitRotationNoiseValueScale;
 
 
 SamplerState sampler_point_repeat;

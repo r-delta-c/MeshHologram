@@ -21,31 +21,31 @@
         default:
             diff = _FragmentTriangleCompression-sides;
             break;
-        case 2:
+        case 1:
             diff = (_FragmentTriangleCompression-sides)*i.fragment_noise;
             break;
-        case 3:
+        case 2:
             diff = (_FragmentTriangleCompression-sides)/i.fragment_noise;
             break;
-        case 4:
+        case 3:
             diff = _FragmentTriangleCompression-sides*i.fragment_noise-1.0;
             break;
-        case 5:
+        case 4:
             diff = _FragmentTriangleCompression-sides/i.fragment_noise;
             break;
-        case 6:
+        case 5:
             diff = _FragmentTriangleCompression-sides+i.fragment_noise;
             break;
-        case 7:
+        case 6:
             diff = _FragmentTriangleCompression-sides-i.fragment_noise;
             break;
-        case 8:
+        case 7:
             diff = _FragmentTriangleCompression*i.fragment_noise-sides;
             break;
-        case 9:
+        case 8:
             diff = (_FragmentTriangleCompression-1.0)/i.fragment_noise-sides+2.0;
             break;
-        case 12:
+        case 11:
             diff = _FragmentTriangleCompression/i.fragment_noise-sides/i.fragment_noise;
             break;
     }
@@ -56,10 +56,10 @@
         default:
             mask = saturate(diff/width);
             break;
-        case 10:
+        case 9:
             mask = saturate(i.fragment_noise*diff/width);
             break;
-        case 11:
+        case 10:
             mask = saturate(i.fragment_noise*diff/(i.fragment_noise*width));
             break;
     }

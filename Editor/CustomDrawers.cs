@@ -199,8 +199,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
     }
     public class DFColorMask : MaterialPropertyDrawer
     {
-        public DFColorMask()
-        { }
+        public DFColorMask() { }
 
         public override void OnGUI(Rect position, MaterialProperty prop, string label, MaterialEditor editor)
         {
@@ -220,6 +219,41 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     {
                         prop.floatValue = (float)value;
                     }
+                }
+            }
+        }
+    }
+    public class DFLineAnimationMode : MaterialPropertyDrawer
+    {
+        public DFLineAnimationMode() { }
+
+        enum LINE_ANIMATION_MODE
+        {
+            NORMAL,
+            ZOOM_IN,
+            ZOOM_OUT,
+            POWER_ZOOM_IN,
+            COLLAPSE,
+            BREAK,
+            OUT_WIDE,
+            OUT_THIN,
+            VANISHING,
+            JOIN_1,
+            JOIN_2,
+            JOIN_3
+        };
+
+        public override void OnGUI(Rect position, MaterialProperty prop, string label, MaterialEditor editor)
+        {
+            using (var changeCheckScope = new EditorGUI.ChangeCheckScope())
+            {
+                LINE_ANIMATION_MODE mode = (LINE_ANIMATION_MODE)(int)prop.floatValue;
+                EditorGUI.showMixedValue = prop.hasMixedValue;
+                mode = (LINE_ANIMATION_MODE)EditorGUILayout.EnumPopup(label, mode);
+                EditorGUI.showMixedValue = false;
+                if (changeCheckScope.changed)
+                {
+                    prop.floatValue = (float)mode;
                 }
             }
         }

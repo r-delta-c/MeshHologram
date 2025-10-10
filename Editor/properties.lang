@@ -1,240 +1,262 @@
 property._Test||TEST||テスト
 
-_RenderingMode||Rendering Mode||レンダリングモード
-_Cull||Culling Mode*||カリングモード*
-_ZWrite||Z Write*||Z Write*
-_CustomRenderQueueT||Transparent RenderQueue||透明レンダーキュー
-_CustomRenderQueueC||Cutout RenderQueue||カットアウトレンダーキュー
-_Forced_Z_Scale_Zero||Forced Z Scale Zero*||奥行きのスケールを0にする*
+_RenderingMode||Rendering Mode (PASS)||レンダリングモード (PASS)
+_Cull||Culling Mode||カリングモード
+_ZWrite||Z Write||Z Write
+_CustomRenderQueueT||Transparent RenderQueue (QUEUE)||透明レンダーキュー (QUEUE)
+_CustomRenderQueueC||Cutout RenderQueue (QUEUE)||カットアウトレンダーキュー (QUEUE)
+_Forced_Z_Scale_Zero||Forced Z Scale Zero||奥行きのスケールを0にする
 _BillboardEnable||Enable Billboard||ビルボード描写を有効にする
 _FwidthEnable||Use fwidth()||fwidth()の使用
-_DistanceInfluence||Distance Influence*||ワイヤーフレーム描写の距離補正*
-_DirectionalLightInfluenceEnable||Enable Directional light Influence||ディレクショナルライトの影響を有効にする
-_DirectionalLightInfluence||Influence*||影響量*||
-_AmbientInfluenceEnable||Enable Ambient Influence||環境光の影響を有効にする
-_AmbientInfluence||Influence*||影響量*||
-_LightVolumesInfluenceEnable||Enable LightVolumes Influence||LightVolumesの影響を有効にする
-_LightVolumesInfluence||Influence*||影響量*||
+_DistanceInfluence||Distance Influence||ワイヤーフレーム描写の距離補正
+_DirectionalLightInfluenceEnable||Enable Directional light Influence (KEYWORD)||ディレクショナルライトの影響を有効にする (KEYWORD)
+_DirectionalLightInfluence||Influence||影響量||
+_AmbientInfluenceEnable||Enable Ambient Influence (KEYWORD)||環境光の影響を有効にする (KEYWORD)
+_AmbientInfluence||Influence||影響量||
+_LightVolumesInfluenceEnable||Enable LightVolumes Influence (KEYWORD)||LightVolumesの影響を有効にする (KEYWORD)
+_LightVolumesInfluence||Influence||影響量||
 
-_ZClip||Z Clip*||Z Clip*
-_ZTest||Z Test*||Z Test*
-_ColorMask||Color Mask*||Color Mask*
-_OffsetFactor||Offset Factor*||Offset Factor*
-_OffsetUnits||Offset Units*||Offset Units*
+_ZClip||Z Clip||Z Clip
+_ZTest||Z Test||Z Test
+_ColorMask||Color Mask||Color Mask
+_OffsetFactor||Offset Factor||Offset Factor
+_OffsetUnits||Offset Units||Offset Units
 _AlphaToMask||_AlphaToMask||_AlphaToMask
-_AlphaToMaskMemory||Alpha to Mask*||Alpha to Mask*
-_StereoMergeMode||Stereo Merge Mode||ステレオ合成モード
-_BlendOp||Blend Op*||Blend Op*
-_SrcBlend||Src Blend*||Src Blend*
-_DstBlend||Dst Blend*||Dst Blend*
-_BlendOpAlpha||Blend Op Alpha*||Blend Op Alpha*
-_SrcBlendAlpha||Src Blend Alpha*||Src Blend Alpha*
-_DstBlendAlpha||Dst Blend Alpha*||Dst Blend Alpha*
+_AlphaToMaskMemory||Alpha to Mask||Alpha to Mask
+_StereoMergeMode||Stereo Merge Mode (KEYWORD)||ステレオ合成モード (KEYWORD)
+_BlendOp||Blend Op||Blend Op
+_SrcBlend||Src Blend||Src Blend
+_DstBlend||Dst Blend||Dst Blend
+_BlendOpAlpha||Blend Op Alpha||Blend Op Alpha
+_SrcBlendAlpha||Src Blend Alpha||Src Blend Alpha
+_DstBlendAlpha||Dst Blend Alpha||Dst Blend Alpha
 
 _PreviewEnable||Enable Preview||プレビューを有効にする
 _AntiAliasingEnable||Enable Anti-Aliasing||アンチエイリアスを有効にする
 
-_StencilRef||Ref*||Ref値*
-_StencilReadMask||ReadMask*||ReadMask*
-_StencilWriteMask||WriteMask*||WriteMask*
-_StencilComp||Comp*||Comp*
-_StencilPass||Pass*||Pass*
-_StencilFail||Fail*||Fail*
-_StencilZFail||Fail*||Z Fail*
+_StencilRef||Ref||Ref値
+_StencilReadMask||ReadMask||ReadMask
+_StencilWriteMask||WriteMask||WriteMask
+_StencilComp||Comp||Comp
+_StencilPass||Pass||Pass
+_StencilFail||Fail||Fail
+_StencilZFail||Fail||Z Fail
 
 _AudioLinkEnable||Enable AudioLink||AudioLinkを有効にする
-_AudioLinkVUBand||Band*||帯域*
-_AudioLinkVUSmoothing||Smoothness*||滑らかさ*
-_AudioLinkVUPanning||Panning*||L/R*
-_AudioLinkVUGainMul||Gain (Mul)*||出力(乗算)*
-_AudioLinkVUGainAdd||Gain (Add)*||出力(加算)*
-_AudioLinkChronoTensityDivisor||Divisor*||除算*
-_AudioLinkChronoTensityMode||Mode*||モード*
-_AudioLinkChronoTensityBand||Band*||帯域*
-_AudioLinkThemeColorBand||Band*||帯域*
+_AudioLinkVUBand||Band||帯域
+_AudioLinkVUSmoothing||Smoothness||滑らかさ
+_AudioLinkVUPanning||Panning||L/R
+_AudioLinkVUGainMul||Gain (Mul)||出力(乗算)
+_AudioLinkVUGainAdd||Gain (Add)||出力(加算)
+_AudioLinkChronoTensityDivisor||Divisor||除算
+_AudioLinkChronoTensityMode||Mode||モード
+_AudioLinkChronoTensityBand||Band||帯域
+_AudioLinkThemeColorBand||Band||帯域
 
-_FragmentTriangleCompression||Triangle Compression*||三角形の縮小*
-_FragmentFill||Fill*||塗りつぶす*
-_FragmentLineWidth||Line Width*||線の太さ*
-_FragmentLineGradientBias||Line Gradient Bias*||線幅のグラデーションカーブ*
+_FragmentTriangleCompression||Triangle Compression||三角形の縮小
+_FragmentFill||Fill||塗りつぶす
+_FragmentLineWidth||Line Width||線の太さ
+_FragmentLineGradientBias||Line Gradient Bias||線幅のグラデーションカーブ
 _FragmentManualLineScalingEnable||Manual Line Scaling||線のスケールの手動操作
-_FragmentLineScale||Line Scale*||線の全体スケール*
+_FragmentLineScale||Line Scale||線の全体スケール
 _FragmentLineAnimationMode||Line Animation Mode||線のアニメーションモード
-_FragmentSource||Fragment Source*||フラグメントの参照先*
-_FragmentAudioLinkSource||Fragment AudioLink Source*||フラグメントのAudioLink参照先*
-_FragmentAudioLinkVUStrength||VU Strength*||VUの強さ*
-_FragmentAudioLinkChronoTensityStrength||ChronoTensity Strength*||ChronoTensityの強さ*
-_FragmentAudioLinkSpectrumStrength||Spectrum Strength*||Spectrumの強さ*
-_FragmentAudioLinkSpectrumMirror||Spectrum Mirror*||Spectrumのミラー*
-_FragmentFixedValue||Fixed Value*||固定値*
-_FragmentPhaseScale||Phase Scale*||周期のスケール*
-_FragmentLoopMode||Loop Mode*||ループモード
-_FragmentEaseMode||Ease Mode*||イージングモード
+_FragmentSource||Fragment Source||フラグメントの参照先
+_FragmentAudioLinkSource||Fragment AudioLink Source||フラグメントのAudioLink参照先
+_FragmentAudioLinkVUStrength||VU Strength||VUの強さ
+_FragmentAudioLinkChronoTensityStrength||ChronoTensity Strength||ChronoTensityの強さ
+_FragmentAudioLinkSpectrumStrength||Spectrum Strength||Spectrumの強さ
+_FragmentAudioLinkSpectrumMirror||Spectrum Mirror||Spectrumのミラー
+_FragmentFixedValue||Fixed Value||固定値
+_FragmentPhaseScale||Phase Scale||周期のスケール
+_FragmentLoopMode||Loop Mode||ループモード
+_FragmentEaseMode||Ease Mode||イージングモード
 _FragmentEaseCurve||Ease Curve||イージングカーブ
 _FragmentMidMul||Mid Mul||中間乗算
 _FragmentMidAdd||Mid Add||中間加算
 _FragmentPartitionMode||Partition||区切り
 
-_Color0||Primary Color*||プライマリーカラー*
-_Color1||Secondary Color*||セカンダリーカラー*
-_Emission||Add Emission*||エミッションの追加*
+_Color0||Primary Color||プライマリーカラー
+_Color1||Secondary Color||セカンダリーカラー
+_Emission||Add Emission||エミッションの追加
 _ColorSource||Color Source||色の参照先
-_ColorGradientTex||Color Gradient Tex*||グラデーションテクスチャ*
-_ColoringSource||Coloring Source*||着色の参照先*
-_ColoringAudioLinkSource||Coloring AudioLink Source*||着色のAudioLink参照先*
-_ColoringAudioLinkVUStrength||VU Strength*||VUの強さ*
-_ColoringAudioLinkChronoTensityStrength||ChronoTensity Strength*||ChronoTensityの強さ*
-_ColoringAudioLinkSpectrumStrength||Spectrum Strength*||Spectrumの強さ*
-_ColoringAudioLinkSpectrumMirror||Spectrum Mirror*||Spectrumのミラー*
-_ColoringFixedValue||Fixed Value*||固定値*
-_ColoringPhaseScale||Phase Scale*||周期のスケール*
-_ColoringLoopMode||Loop Mode*||ループモード
-_ColoringEaseMode||Ease Mode*||イージングモード
+_ColorGradientTex||Color Gradient Tex||グラデーションテクスチャ
+_ColoringSource||Coloring Source||着色の参照先
+_ColoringAudioLinkSource||Coloring AudioLink Source||着色のAudioLink参照先
+_ColoringAudioLinkVUStrength||VU Strength||VUの強さ
+_ColoringAudioLinkChronoTensityStrength||ChronoTensity Strength||ChronoTensityの強さ
+_ColoringAudioLinkSpectrumStrength||Spectrum Strength||Spectrumの強さ
+_ColoringAudioLinkSpectrumMirror||Spectrum Mirror||Spectrumのミラー
+_ColoringFixedValue||Fixed Value||固定値
+_ColoringPhaseScale||Phase Scale||周期のスケール
+_ColoringLoopMode||Loop Mode||ループモード
+_ColoringEaseMode||Ease Mode||イージングモード
 _ColoringEaseCurve||Ease Curve||イージングカーブ
 _ColoringMidMul||Mid Mul||中間乗算
 _ColoringMidAdd||Mid Add||中間加算
 _ColoringPartitionMode||Coloring Partition Mode||着色の区切り
 
-_GeometrySource||Geometry Source*||ジオメトリの参照先*
-_GeometryAudioLinkSource||Geometry AudioLink Source*||ジオメトリのAudioLink参照先*
-_GeometryAudioLinkVUStrength||VU Strength*||VUの強さ*
-_GeometryAudioLinkChronoTensityStrength||ChronoTensity Strength*||ChronoTensityの強さ*
-_GeometryAudioLinkSpectrumStrength||Spectrum Strength*||Spectrumの強さ*
-_GeometryAudioLinkSpectrumMirror||Spectrum Mirror*||Spectrumのミラー*
-_GeometryFixedValue||Fixed Value*||固定値*
-_GeometryPhaseScale||Phase Scale*||周期のスケール*
-_GeometryLoopMode||Loop Mode*||ループモード
-_GeometryEaseMode||Ease Mode*||イージングモード
+_GeometrySource||Geometry Source||ジオメトリの参照先
+_GeometryAudioLinkSource||Geometry AudioLink Source||ジオメトリのAudioLink参照先
+_GeometryAudioLinkVUStrength||VU Strength||VUの強さ
+_GeometryAudioLinkChronoTensityStrength||ChronoTensity Strength||ChronoTensityの強さ
+_GeometryAudioLinkSpectrumStrength||Spectrum Strength||Spectrumの強さ
+_GeometryAudioLinkSpectrumMirror||Spectrum Mirror||Spectrumのミラー
+_GeometryFixedValue||Fixed Value||固定値
+_GeometryPhaseScale||Phase Scale||周期のスケール
+_GeometryLoopMode||Loop Mode||ループモード
+_GeometryEaseMode||Ease Mode||イージングモード
 _GeometryEaseCurve||Ease Curve||イージングカーブ
 _GeometryMidMul||Mid Mul||中間乗算
 _GeometryMidAdd||Mid Add||中間加算
 
 _GeometryScaleEnable||Enable Scale||スケールの有効
-_GeometryScaleBounds||Scale Bounds*/A/B||スケールの範囲*/A/B
+_GeometryScaleBounds||Scale Bounds/A/B||スケールの範囲/A/B
 
 _GeometryPushPullEnable||Enable PushPull||押し出しの有効
-_GeometryPushPullBounds||PushPull Bounds*/A/B||押し出しの範囲*/A/B
-_GeometryPushPullPartitionBias||Partition Bias | Vertex-Center-Side*||区切りの偏り | 頂点-中心-辺*
+_GeometryPushPullBounds||PushPull Bounds/A/B||押し出しの範囲/A/B
+_GeometryPushPullPartitionBias||Partition Bias | Vertex-Center-Side||区切りの偏り | 頂点-中心-辺
 
 _GeometryRotationEnable||Enable Rotation||回転の有効
-_GeometryRotationStrength||Strength*||強さ*
-_GeometryRotationInvert||Invert Rotation*||逆回転*
+_GeometryRotationStrength||Strength||強さ
+_GeometryRotationInvert||Invert Rotation||逆回転
 _GeometryRotationNoiseRepeat||One-way Rotation||一方向回転
 
 _GeometryPixelizationSpace||Vertex Pixelization Position Space||頂点モザイク化の空間
-_GeometryPixelization||Vertex Pixelization*/X/Y/Z/All||頂点モザイク化*/X/Y/Z/All
+_GeometryPixelization||Vertex Pixelization/X/Y/Z/All||頂点モザイク化/X/Y/Z/All
 
 
 _OrbitEnable||Enable Orbit||Orbitの有効
-_OrbitSource||Orbit Source*||Orbitの参照先*
-_OrbitAudioLinkSource||Orbit AudioLink Source*||OrbitのAudioLink参照先*
-_OrbitAudioLinkVUStrength||VU Strength*||VUの強さ*
-_OrbitAudioLinkChronoTensityStrength||ChronoTensity Strength*||ChronoTensityの強さ*
-_OrbitAudioLinkSpectrumStrength||Spectrum Strength*||Spectrumの強さ*
-_OrbitAudioLinkSpectrumMirror||Spectrum Mirror*||Spectrumのミラー*
-_OrbitFixedValue||Fixed Value*||固定値*
-_OrbitPhaseScale||Phase Scale*||周期のスケール*
-_OrbitLoopMode||Loop Mode*||ループモード
-_OrbitEaseMode||Ease Mode*||イージングモード
+_OrbitSource||Orbit Source||Orbitの参照先
+_OrbitAudioLinkSource||Orbit AudioLink Source||OrbitのAudioLink参照先
+_OrbitAudioLinkVUStrength||VU Strength||VUの強さ
+_OrbitAudioLinkChronoTensityStrength||ChronoTensity Strength||ChronoTensityの強さ
+_OrbitAudioLinkSpectrumStrength||Spectrum Strength||Spectrumの強さ
+_OrbitAudioLinkSpectrumMirror||Spectrum Mirror||Spectrumのミラー
+_OrbitFixedValue||Fixed Value||固定値
+_OrbitPhaseScale||Phase Scale||周期のスケール
+_OrbitLoopMode||Loop Mode||ループモード
+_OrbitEaseMode||Ease Mode||イージングモード
 _OrbitEaseCurve||Ease Curve||イージングカーブ
 _OrbitMidMul||Mid Mul||中間乗算
 _OrbitMidAdd||Mid Add||中間加算
-_OrbitSeed||Orbit Seed*||Orbitのシード値*
-_OrbitPrimitiveRatio||Orbit Primitive Ratio*||Orbit Primitiveの比率*
-_OrbitOffset||Orbit Offset*/X/Y/Z||Orbitの座標オフセット*/X/Y/Z
-_OrbitScale||Orbit Scale*/X/Y/Z/Scale||Orbit スケール*/X/Y/Z/スケール
+_OrbitSeed||Orbit Seed||Orbitのシード値
+_OrbitPrimitiveRatio||Orbit Primitive Ratio||Orbit Primitiveの比率
+_OrbitOffset||Orbit Offset/X/Y/Z||Orbitの座標オフセット/X/Y/Z
+_OrbitScale||Orbit Scale/X/Y/Z/Scale||Orbit スケール/X/Y/Z/スケール
 
-_OrbitRotationSource||Orbit Rotation Source*||Orbit 回転の参照先*
-_OrbitRotationOffsetAudioLinkSource||Orbit Rotation Offset AudioLink Source*||Orbit Rotation オフセットのAudioLink参照先*
-_OrbitRotationOffsetAudioLinkVUStrength||VU Strength*/X/Y/Z/W||VUの強さ*/X/Y/Z/W
-_OrbitRotationOffsetAudioLinkChronoTensityStrength||ChronoTensity Strength*/X/Y/Z/W||ChronoTensityの強さ*/X/Y/Z/W
-_OrbitRotationFixedValue||Fixed Value*||固定値*
-_OrbitRotationSeed||Orbit Rotation Seed*||Orbit 回転のシード値*
-_OrbitRotationAngle||Orbit Rotation Angle*/X/Y/Z||Orbitの回転*/X/Y/Z
-_OrbitRotationSpeed||Orbit Rotation Speed*/X/Y/Z/W||Orbitの回転速度*/X/Y/Z/W
+_OrbitRotationSource||Orbit Rotation Source||Orbit 回転の参照先
+_OrbitRotationOffsetAudioLinkSource||Orbit Rotation Offset AudioLink Source||Orbit 回転オフセットのAudioLink参照先
+_OrbitRotationOffsetAudioLinkVUStrength||VU Strength/X/Y/Z/W||VUの強さ/X/Y/Z/W
+_OrbitRotationOffsetAudioLinkChronoTensityStrength||ChronoTensity Strength/X/Y/Z/W||ChronoTensityの強さ/X/Y/Z/W
+_OrbitRotationFixedValue||Fixed Value||固定値
+_OrbitRotationSeed||Orbit Rotation Seed||Orbit 回転のシード値
+_OrbitRotationAngle||Orbit Rotation Angle/X/Y/Z||Orbitの回転/X/Y/Z
+_OrbitRotationSpeed||Orbit Rotation Speed/X/Y/Z/W||Orbitの回転速度/X/Y/Z/W
 
-_OrbitRotationSpread||Orbit Rotation Spread*/X/Y/Z||Orbitの回転のバラつき*/X/Y/Z
+_OrbitRotationSpread||Orbit Rotation Spread/X/Y/Z||Orbitの回転のバラつき/X/Y/Z
 
-_OrbitWaveStrength||Strength*/X/YZ//||強さ*/X/YZ//
-_OrbitWaveFrequency||Frequency*/X/YZ//||周波頻度*/X/YZ//
-_OrbitWavePhase||Phase*/X/YZ//||周期*/X/YZ//
-_OrbitWaveSpeed||Speed*/X/YZ//||波の早さ*/X/YZ//
+_OrbitWaveStrength||Strength/X/YZ//||強さ/X/YZ//
+_OrbitWaveFrequency||Frequency/X/YZ//||周波頻度/X/YZ//
+_OrbitWavePhase||Phase/X/YZ//||周期/X/YZ//
+_OrbitWaveSpeed||Speed/X/YZ//||波の早さ/X/YZ//
 
-_OrbitWaveAudioLinkSource||Orbit Wave AudioLink Source*||Orbit WaveのAudioLink参照先*
-_OrbitWaveAudioLinkVUStrength||VU Strength*/X/YZ//||VUの強さ*/X/YZ//
-_OrbitWaveAudioLinkChronoTensityStrength||ChronoTensity Strength*||ChronoTensityの強さ*
-_OrbitWaveAudioLinkSpectrumStrength||Spectrum Strength*/X/YZ//||Spectrumの強さ*/X/YZ//
-_OrbitWaveAudioLinkSpectrumMirror||Spectrum Mirror*||Spectrumのミラー*
-_OrbitWaveAudioLinkSpectrumMode||Use AutoCorrelator*||AutoCorrelatorを使う*
-_OrbitWaveAudioLinkSpectrumBounds||Spectrum Bounds*/A/B//||Spectrumの範囲*/A/B//
-
-
-_FragmentMaskMap||Mask*||マスク*
-_FragmentMaskMapStrength||Strength*||強さ*
-_GeometryMaskMap||Mask*||マスク*
-_GeometryMaskMapStrength||Strength*||強さ*
-_ColoringMaskMap||Mask*||マスク*
-_ColoringMaskMapStrength||Strength*||強さ*
-_OrbitMaskMap||Mask*||マスク*
-_OrbitMaskMapStrength||Strength*||強さ*
-_OrbitRotationMaskMap||Mask*||マスク*
-_OrbitRotationMaskMapStrength||Strength*||強さ*
-_OrbitRotationOffsetMaskMap||Mask*||マスク*
-_OrbitRotationOffsetMaskMapStrength||Strength*/X/Y/Z/W||強さ*/X/Y/Z/W
-
-_FragmentMap||Offset*||オフセット*
-_FragmentMapStrength||Strength*||強さ*
-_GeometryMap||Offset*||オフセット*
-_GeometryMapStrength||Strength*||強さ*
-_ColoringMap||Offset*||オフセット*
-_ColoringMapStrength||Strength*||強さ*
-_OrbitMap||Offset*||オフセット*
-_OrbitMapStrength||Strength*||強さ*
-_OrbitRotationMap||Offset*||オフセット*
-_OrbitRotationMapStrength||Strength*||強さ*
-
-_FragmentAudioLinkMaskMap||AudioLink Mask*||AudioLink マスク*
-_FragmentAudioLinkMaskMapStrength||Strength*||強さ*
-_GeometryAudioLinkMaskMap||AudioLink Mask*||AudioLink マスク*
-_GeometryAudioLinkMaskMapStrength||Strength*||強さ*
-_ColoringAudioLinkMaskMap||AudioLink Mask*||AudioLink マスク*
-_ColoringAudioLinkMaskMapStrength||Strength*||強さ*
-_OrbitAudioLinkMaskMap||AudioLink Mask*||AudioLink マスク*
-_OrbitAudioLinkMaskMapStrength||Strength*||強さ*
-_OrbitRotationOffsetAudioLinkMaskMap||AudioLink Mask*||AudioLink マスク*
-_OrbitRotationOffsetAudioLinkMaskMapStrength||Strength*/X/Y/Z/W||強さ*/X/Y/Z/W
+_OrbitWaveAudioLinkSource||Orbit Wave AudioLink Source||Orbit WaveのAudioLink参照先
+_OrbitWaveAudioLinkVUStrength||VU Strength/X/YZ//||VUの強さ/X/YZ//
+_OrbitWaveAudioLinkChronoTensityStrength||ChronoTensity Strength||ChronoTensityの強さ
+_OrbitWaveAudioLinkSpectrumStrength||Spectrum Strength/X/YZ//||Spectrumの強さ/X/YZ//
+_OrbitWaveAudioLinkSpectrumMirror||Spectrum Mirror||Spectrumのミラー
+_OrbitWaveAudioLinkSpectrumMode||Use AutoCorrelator||AutoCorrelatorを使う
+_OrbitWaveAudioLinkSpectrumBounds||Spectrum Bounds/A/B//||Spectrumの範囲/A/B//
 
 
+_FragmentMaskMap||Mask||マスク
+_FragmentMaskMapStrength||Strength||強さ
+_GeometryMaskMap||Mask||マスク
+_GeometryMaskMapStrength||Strength||強さ
+_ColoringMaskMap||Mask||マスク
+_ColoringMaskMapStrength||Strength||強さ
+_OrbitMaskMap||Mask||マスク
+_OrbitMaskMapStrength||Strength||強さ
+_OrbitRotationMaskMap||Mask||マスク
+_OrbitRotationMaskMapStrength||Strength||強さ
+_OrbitRotationOffsetMaskMap||Mask||マスク
+_OrbitRotationOffsetMaskMapStrength||Strength/X/Y/Z/W||強さ/X/Y/Z/W
 
-_Noise1stOffset0||Offset*/X/Y/Z||オフセット*/X/Y/Z
-_Noise1stScale0||Scale*/X/Y/Z/W||スケール*/X/Y/Z/W
-_Noise1stOffset1||Offset Sub*/X/Y/Z||サブ オフセット*/X/Y/Z
-_Noise1stScale1||Scale Sub*/X/Y/Z/W||サブ スケール*/X/Y/Z/W
-_Noise1stOffsetBeforeScale||Before Scale||スケーリングを後にする
-_Noise1stSpace||Position Space||座標空間
-_Noise1stSeed||Seed*||シード値*
-_Noise1stTimeSpeed||Time Speed||時間の早さ*
-_Noise1stTimePhase||Time Phase||時間周期*
-_Noise1stValueScale||Value Phase Scale*||値の周期スケール*
+_FragmentMap||Offset||オフセット
+_FragmentMapStrength||Strength||強さ
+_GeometryMap||Offset||オフセット
+_GeometryMapStrength||Strength||強さ
+_ColoringMap||Offset||オフセット
+_ColoringMapStrength||Strength||強さ
+_OrbitMap||Offset||オフセット
+_OrbitMapStrength||Strength||強さ
+_OrbitRotationMap||Offset||オフセット
+_OrbitRotationMapStrength||Strength||強さ
 
-_Noise2ndOffset0||Offset*/X/Y/Z||オフセット*/X/Y/Z
-_Noise2ndScale0||Scale*/X/Y/Z/W||スケール*/X/Y/Z/W
-_Noise2ndOffset1||Offset Sub*/X/Y/Z||サブ オフセット*/X/Y/Z
-_Noise2ndScale1||Scale Sub*/X/Y/Z/W||サブ スケール*/X/Y/Z/W
-_Noise2ndOffsetBeforeScale||Before Scale||スケーリングを後にする
-_Noise2ndSpace||Position Space||座標空間
-_Noise2ndSeed||Seed*||シード値*
-_Noise2ndTimeSpeed||Time Speed||時間の早さ*
-_Noise2ndTimePhase||Time Phase||時間周期*
-_Noise2ndValueScale||Value Phase Scale*||値の周期スケール*
+_FragmentAudioLinkMaskMap||AudioLink Mask||AudioLink マスク
+_FragmentAudioLinkMaskMapStrength||Strength||強さ
+_GeometryAudioLinkMaskMap||AudioLink Mask||AudioLink マスク
+_GeometryAudioLinkMaskMapStrength||Strength||強さ
+_ColoringAudioLinkMaskMap||AudioLink Mask||AudioLink マスク
+_ColoringAudioLinkMaskMapStrength||Strength||強さ
+_OrbitAudioLinkMaskMap||AudioLink Mask||AudioLink マスク
+_OrbitAudioLinkMaskMapStrength||Strength||強さ
+_OrbitRotationOffsetAudioLinkMaskMap||AudioLink Mask||AudioLink マスク
+_OrbitRotationOffsetAudioLinkMaskMapStrength||Strength/X/Y/Z/W||強さ/X/Y/Z/W
 
-_Noise3rdOffset0||Offset*/X/Y/Z||オフセット*/X/Y/Z
-_Noise3rdScale0||Scale*/X/Y/Z/W||スケール*/X/Y/Z/W
-_Noise3rdOffset1||Offset Sub*/X/Y/Z||サブ オフセット*/X/Y/Z
-_Noise3rdScale1||Scale Sub*/X/Y/Z/W||サブ スケール*/X/Y/Z/W
-_Noise3rdOffsetBeforeScale||Before Scale||スケーリングを後にする
-_Noise3rdSpace||Position Space||座標空間
-_Noise3rdSeed||Seed*||シード値*
-_Noise3rdTimeSpeed||Time Speed||時間の早さ*
-_Noise3rdTimePhase||Time Phase||時間周期*
-_Noise3rdValueScale||Value Phase Scale*||値の周期スケール*
+
+
+_FragmentNoiseOffset0||Offset/X/Y/Z||オフセット/X/Y/Z
+_FragmentNoiseScale0||Scale/X/Y/Z/W||スケール/X/Y/Z/W
+_FragmentNoiseOffset1||Offset Sub/X/Y/Z||サブ オフセット/X/Y/Z
+_FragmentNoiseScale1||Scale Sub/X/Y/Z/W||サブ スケール/X/Y/Z/W
+_FragmentNoiseOffsetBeforeScale||Before Scale||スケーリングを後にする
+_FragmentNoiseSpace||Position Space||座標空間
+_FragmentNoiseSeed||Seed||シード値
+_FragmentNoiseTimeSpeed||Time Speed||時間の早さ
+_FragmentNoiseTimePhase||Time Phase||時間周期
+_FragmentNoiseValueScale||Value Phase Scale||値の周期スケール
+
+_ColoringNoiseOffset0||Offset/X/Y/Z||オフセット/X/Y/Z
+_ColoringNoiseScale0||Scale/X/Y/Z/W||スケール/X/Y/Z/W
+_ColoringNoiseOffset1||Offset Sub/X/Y/Z||サブ オフセット/X/Y/Z
+_ColoringNoiseScale1||Scale Sub/X/Y/Z/W||サブ スケール/X/Y/Z/W
+_ColoringNoiseOffsetBeforeScale||Before Scale||スケーリングを後にする
+_ColoringNoiseSpace||Position Space||座標空間
+_ColoringNoiseSeed||Seed||シード値
+_ColoringNoiseTimeSpeed||Time Speed||時間の早さ
+_ColoringNoiseTimePhase||Time Phase||時間周期
+_ColoringNoiseValueScale||Value Phase Scale||値の周期スケール
+
+_GeometryNoiseOffset0||Offset/X/Y/Z||オフセット/X/Y/Z
+_GeometryNoiseScale0||Scale/X/Y/Z/W||スケール/X/Y/Z/W
+_GeometryNoiseOffset1||Offset Sub/X/Y/Z||サブ オフセット/X/Y/Z
+_GeometryNoiseScale1||Scale Sub/X/Y/Z/W||サブ スケール/X/Y/Z/W
+_GeometryNoiseOffsetBeforeScale||Before Scale||スケーリングを後にする
+_GeometryNoiseSpace||Position Space||座標空間
+_GeometryNoiseSeed||Seed||シード値
+_GeometryNoiseTimeSpeed||Time Speed||時間の早さ
+_GeometryNoiseTimePhase||Time Phase||時間周期
+_GeometryNoiseValueScale||Value Phase Scale||値の周期スケール
+
+_OrbitNoiseOffset0||Offset/X/Y/Z||オフセット/X/Y/Z
+_OrbitNoiseScale0||Scale/X/Y/Z/W||スケール/X/Y/Z/W
+_OrbitNoiseOffset1||Offset Sub/X/Y/Z||サブ オフセット/X/Y/Z
+_OrbitNoiseScale1||Scale Sub/X/Y/Z/W||サブ スケール/X/Y/Z/W
+_OrbitNoiseOffsetBeforeScale||Before Scale||スケーリングを後にする
+_OrbitNoiseSpace||Position Space||座標空間
+_OrbitNoiseSeed||Seed||シード値
+_OrbitNoiseTimeSpeed||Time Speed||時間の早さ
+_OrbitNoiseTimePhase||Time Phase||時間周期
+_OrbitNoiseValueScale||Value Phase Scale||値の周期スケール
+
+_OrbitRotationNoiseOffset0||Offset/X/Y/Z||オフセット/X/Y/Z
+_OrbitRotationNoiseScale0||Scale/X/Y/Z/W||スケール/X/Y/Z/W
+_OrbitRotationNoiseOffset1||Offset Sub/X/Y/Z||サブ オフセット/X/Y/Z
+_OrbitRotationNoiseScale1||Scale Sub/X/Y/Z/W||サブ スケール/X/Y/Z/W
+_OrbitRotationNoiseOffsetBeforeScale||Before Scale||スケーリングを後にする
+_OrbitRotationNoiseSpace||Position Space||座標空間
+_OrbitRotationNoiseSeed||Seed||シード値
+_OrbitRotationNoiseTimeSpeed||Time Speed||時間の早さ
+_OrbitRotationNoiseTimePhase||Time Phase||時間周期
+_OrbitRotationNoiseValueScale||Value Phase Scale||値の周期スケール
