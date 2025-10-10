@@ -210,7 +210,7 @@ _FragmentNoiseOffset0||Offset/X/Y/Z||オフセット/X/Y/Z
 _FragmentNoiseScale0||Scale/X/Y/Z/W||スケール/X/Y/Z/W
 _FragmentNoiseOffset1||Offset Sub/X/Y/Z||サブ オフセット/X/Y/Z
 _FragmentNoiseScale1||Scale Sub/X/Y/Z/W||サブ スケール/X/Y/Z/W
-_FragmentNoiseOffsetBeforeScale||Before Scale||スケーリングを後にする
+_FragmentNoiseOffsetBeforeScale||Apply Offset Before Scale||スケーリング前にオフセットを加える
 _FragmentNoiseSpace||Position Space||座標空間
 _FragmentNoiseSeed||Seed||シード値
 _FragmentNoiseTimeSpeed||Time Speed||時間の早さ
@@ -221,7 +221,7 @@ _ColoringNoiseOffset0||Offset/X/Y/Z||オフセット/X/Y/Z
 _ColoringNoiseScale0||Scale/X/Y/Z/W||スケール/X/Y/Z/W
 _ColoringNoiseOffset1||Offset Sub/X/Y/Z||サブ オフセット/X/Y/Z
 _ColoringNoiseScale1||Scale Sub/X/Y/Z/W||サブ スケール/X/Y/Z/W
-_ColoringNoiseOffsetBeforeScale||Before Scale||スケーリングを後にする
+_ColoringNoiseOffsetBeforeScale||Apply Offset Before Scale||スケーリング前にオフセットを加える
 _ColoringNoiseSpace||Position Space||座標空間
 _ColoringNoiseSeed||Seed||シード値
 _ColoringNoiseTimeSpeed||Time Speed||時間の早さ
