@@ -38,7 +38,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - **プロパティ、ラベル、キーワードの大幅なリネーム。**
     - 適切な表現ではない、実態が読みにくいといった問題のあったプロパティ名、ラベル表記、キーワード名を多く変更しました。これにより、殆どのプロパティとキーワードの互換性が消失しております。
-    - 詳細は[変更されたプロパティ](ChangedProperties)、[0.2.0-exp.3以降で使用されるキーワード](ChangedKeywords)からご確認ください。
+    - 詳細は[変更されたプロパティ]、[0.2.0-exp.3以降で使用されるキーワード]からご確認ください。
 
 - **多くのプロパティのキーワード制御の廃止。**
     - これまではキーワード制御により必要な処理の分別などを行ってきましたが、以下の理由により多くのキーワード制御を廃止しました。
@@ -64,10 +64,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 - いくつかのプロパティ、キーワードを削除。
-    - 詳細は[変更されたプロパティ](ChangedProperties)、[0.2.0-exp.3以降で使用されるキーワード](ChangedKeywords)からご確認ください。
+    - 詳細は[変更されたプロパティ]、[0.2.0-exp.3以降で使用されるキーワード]からご確認ください。
 
 ### 変更されたプロパティ
-[ChangedProperties]: ###変更されたプロパティ
+[変更されたプロパティ]: ###変更されたプロパティ
 <details>
     <summary><b>プロパティ一覧</b></summary>
 
@@ -179,7 +179,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 <br>
 
 ### 0.2.0-exp.3以降で使用されるキーワード
-[ChangedKeywords]: ###0.2.0-exp.3以降で使用されるキーワード
+[0.2.0-exp.3以降で使用されるキーワード]: ###0.2.0-exp.3以降で使用されるキーワード
 <details>
     <summary><b>キーワード一覧</b></summary>
 
