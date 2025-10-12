@@ -140,15 +140,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
             for (int i = 0; i < localized_text.Count; i++)
             {
                 string text = localized_text[i];
-                if (MeshHologramInspector.LocalizationSystem.PropLangDic.ContainsKey(text))
-                {
-                    display[i] = MeshHologramInspector.LocalizationSystem.PropLangDic[text];
-                }
-                else
-                {
-                    Debug.LogWarning("Could not get localized text. -> " + text);
-                    display[i] = text;
-                }
+                display[i] = MeshHologramInspector.LocalizationSystem.GetLocalizeText(text);
             }
         }
     }

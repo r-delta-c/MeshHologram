@@ -10,7 +10,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
     {
         private void DrawTitle()
         {
-            current_lang = (LANG)EditorGUILayout.EnumPopup(LocalizationSystem.PropLangDic["label.language"], current_lang, new GUIStyle("miniPullDown"));
+            current_lang = (LANG)EditorGUILayout.EnumPopup(LocalizationSystem.GetLocalizeText("label.language"), current_lang, new GUIStyle("miniPullDown"));
         }
 
         private void DrawRenderings()
@@ -269,11 +269,11 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                             DrawShaderProperty(SHADER_PROPERTY._COLOR_GRADIENT_TEX);
                             using (new EditorGUILayout.VerticalScope())
                             {
-                                if (GUILayout.Button(LocalizationSystem.PropLangDic["label.color.preview"]))
+                                if (GUILayout.Button(LocalizationSystem.GetLocalizeText("label.color.preview")))
                                 {
                                     targetMat.SetTexture("_ColorGradientTex", gradientMapManager.CreateTexture(gradient));
                                 }
-                                if (GUILayout.Button(LocalizationSystem.PropLangDic["label.color.export"]))
+                                if (GUILayout.Button(LocalizationSystem.GetLocalizeText("label.color.export")))
                                 {
                                     Texture2D GenTex = gradientMapManager.Export(gradient);
                                     if (GenTex != null)
@@ -537,7 +537,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     );
 
                     DrawPartitionLine(8);
-                    DrawHeaderLabel(LocalizationSystem.PropLangDic["label.orbit_wave"],CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
+                    DrawHeaderLabel(LocalizationSystem.GetLocalizeText("label.orbit_wave"),CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_STRENGTH);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_FREQUENCY);
                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_PHASE);
@@ -617,13 +617,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 EditorGUILayout.Space(16);
                 using (new EditorGUILayout.HorizontalScope())
                 {
-                    if (GUILayout.Button(LocalizationSystem.PropLangDic["label.mesh_bounds_editor.button"]))
+                    if (GUILayout.Button(LocalizationSystem.GetLocalizeText("label.mesh_bounds_editor.button")))
                     {
                         MeshBoundsEditor.Window();
                     }
                 }
                 EditorGUILayout.Space(16);
-                current_title_skin = (TITLE_SKINS)EditorGUILayout.EnumPopup(LocalizationSystem.PropLangDic["label.title_skin"], current_title_skin);
+                current_title_skin = (TITLE_SKINS)EditorGUILayout.EnumPopup(LocalizationSystem.GetLocalizeText("label.title_skin"), current_title_skin);
             }
         }
 
@@ -633,7 +633,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
             style.alignment = TextAnchor.MiddleCenter;
             style.richText = true;
             style.wordWrap = true;
-            string text = "<color=#ffffff><size=12><i>" + LocalizationSystem.PropLangDic["label.easter_egg_text"] + "</i></size></color>";
+            string text = "<color=#ffffff><size=12><i>" + LocalizationSystem.GetLocalizeText("label.easter_egg_text") + "</i></size></color>";
             EditorGUILayout.LabelField(text, style);
         }
 

@@ -13,10 +13,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 LocalizationSystem.LoadLangFiles(current_lang);
                 foreach (SHADER_PROPERTY i in ShaderProperties.Keys)
                 {
-                    if (LocalizationSystem.PropLangDic.ContainsKey(ShaderProperties[i].property))
-                    {
-                        ShaderProperties[i].display = LocalizationSystem.PropLangDic[ShaderProperties[i].property];
-                    }
+                    ShaderProperties[i].display = LocalizationSystem.GetLocalizeText(ShaderProperties[i].property);
                 }
                 lang = current_lang;
 

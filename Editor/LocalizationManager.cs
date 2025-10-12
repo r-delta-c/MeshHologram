@@ -8,26 +8,27 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
     internal class LocalizationManager
     {
         private string resolve_path;
-        internal Dictionary<string, string> PropLangDic;
+        private Dictionary<string, string> PropLocalizeDic;
         internal LocalizationManager(string resolve_path)
         {
             this.resolve_path = resolve_path;
         }
         internal string GetLocalizeText(string key)
         {
-            if (PropLangDic.ContainsKey(key))
+            if (PropLocalizeDic.ContainsKey(key))
             {
-                return PropLangDic[key];
+                return PropLocalizeDic[key];
             }
             else
             {
+                Debug.LogWarning("Could not get localized text. -> " + key);
                 return key;
             }
         }
         internal void LoadLangFiles(LANG lang = LANG.ENGLISH)
         {
             int index = (int)lang;
-            PropLangDic = new Dictionary<string, string>();
+            PropLocalizeDic = new Dictionary<string, string>();
             LoadText(resolve_path + "/Editor/", "text.lang");
             LoadText(resolve_path + "/Editor/", "properties.lang");
 
@@ -51,13 +52,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                             string[] values = line.Split("||");
                             if (values.Length >= index + 1)
                             {
-                                if (PropLangDic.ContainsKey(values[0]))
+                                if (PropLocalizeDic.ContainsKey(values[0]))
                                 {
                                     Debug.LogWarning("There are multiple localized text. -> Column:" + column + " - " + line);
                                 }
                                 else
                                 {
-                                    PropLangDic.Add(values[0], values[index]);
+                                    PropLocalizeDic.Add(values[0], values[index]);
                                 }
                             }
                             else
