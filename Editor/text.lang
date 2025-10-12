@@ -37,6 +37,8 @@ label.orbit.mask_offset||Masks / Offset||マスク / オフセット
 label.orbit_rotation.mask_offset||Masks / Offset||マスク / オフセット
 label.orbit_rotation_offset.mask_offset||Masks / Offset||マスク / オフセット
 
+label.warning.texture_importer_srgb||"sRGB (Color Texture)" is enabled in the assigned texture.Disable it when using this texture as an offset or mask, unless intended.||設定されているテクスチャのインポート設定の"sRGB (Color Texture)"が有効になっています。オフセット、マスクに使用する場合、意図していない限りはオフにすることを推奨します。
+
 label.fragment.source||Source||参照先
 label.coloring.source||Source||参照先
 label.geometry.source||Source||参照先

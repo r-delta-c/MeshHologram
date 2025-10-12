@@ -226,7 +226,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_STRENGTH,
                     SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_MIRROR
                 );
-                DrawControlTex(
+                DrawMaskOffsetTex(
                     0,
                     SHADER_PROPERTY._FRAGMENT_MASK_CONTROL_TEX,
                     SHADER_PROPERTY._FRAGMENT_MASK_CONTROL,
@@ -326,7 +326,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_STRENGTH,
                     SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_MIRROR
                 );
-                DrawControlTex(
+                DrawMaskOffsetTex(
                     1,
                     SHADER_PROPERTY._COLORING_MASK_CONTROL_TEX,
                     SHADER_PROPERTY._COLORING_MASK_CONTROL,
@@ -417,7 +417,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_STRENGTH,
                     SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_MIRROR
                 );
-                DrawControlTex(
+                DrawMaskOffsetTex(
                     2,
                     SHADER_PROPERTY._GEOMETRY_MASK_CONTROL_TEX,
                     SHADER_PROPERTY._GEOMETRY_MASK_CONTROL,
@@ -484,7 +484,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         SHADER_PROPERTY._ORBIT_AUDIOLINK_SPECTRUM_STRENGTH,
                         SHADER_PROPERTY._ORBIT_AUDIOLINK_SPECTRUM_MIRROR
                     );
-                    DrawControlTex(
+                    DrawMaskOffsetTex(
                         3,
                         SHADER_PROPERTY._ORBIT_MASK_CONTROL_TEX,
                         SHADER_PROPERTY._ORBIT_MASK_CONTROL,
@@ -528,7 +528,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                             }
                         }
                     }
-                    DrawControlTex(
+                    DrawMaskOffsetTex(
                         4,
                         SHADER_PROPERTY._ORBIT_ROTATION_MASK_CONTROL_TEX,
                         SHADER_PROPERTY._ORBIT_ROTATION_MASK_CONTROL,
@@ -597,7 +597,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                             }
                         }
                     }
-                    DrawControlTex(
+                    DrawMaskOffsetTex(
                         5,
                         SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_MASK_CONTROL_TEX,
                         SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_MASK_CONTROL,

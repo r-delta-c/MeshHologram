@@ -57,7 +57,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             EditorGUILayout.LabelField("<color=silver>" + label + "</color>", style);
         }
 
-        private void DrawControlTex(int owner, SHADER_PROPERTY tex0, SHADER_PROPERTY strength0, SHADER_PROPERTY tex1, SHADER_PROPERTY strength1)
+        private void DrawMaskOffsetTex(int owner, SHADER_PROPERTY tex0, SHADER_PROPERTY strength0, SHADER_PROPERTY tex1, SHADER_PROPERTY strength1)
         {
             using (new EditorGUILayout.VerticalScope("HelpBox"))
             {
@@ -65,16 +65,18 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 if (foldout_bool)
                 {
                     DrawShaderProperty(tex0);
+                    CheckSRGBTexture(tex0);
                     DrawShaderProperty(strength0);
                     DrawPartitionLine(4);
                     DrawShaderProperty(tex1);
+                    CheckSRGBTexture(tex1);
                     DrawShaderProperty(strength1);
                     EditorGUILayout.Space(4);
                 }
             }
         }
 
-        private void DrawControlTex(int owner, SHADER_PROPERTY tex0, SHADER_PROPERTY strength0, SHADER_PROPERTY tex1, SHADER_PROPERTY strength1, SHADER_PROPERTY tex2, SHADER_PROPERTY strength2)
+        private void DrawMaskOffsetTex(int owner, SHADER_PROPERTY tex0, SHADER_PROPERTY strength0, SHADER_PROPERTY tex1, SHADER_PROPERTY strength1, SHADER_PROPERTY tex2, SHADER_PROPERTY strength2)
         {
             using (new EditorGUILayout.VerticalScope("HelpBox"))
             {
@@ -82,15 +84,31 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 if (foldout_bool)
                 {
                     DrawShaderProperty(tex0);
+                    CheckSRGBTexture(tex0);
                     DrawShaderProperty(strength0);
                     DrawPartitionLine(4);
                     DrawShaderProperty(tex1);
+                    CheckSRGBTexture(tex1);
                     DrawShaderProperty(strength1);
                     DrawPartitionLine(4);
                     DrawShaderProperty(tex2);
+                    CheckSRGBTexture(tex2);
                     DrawShaderProperty(strength2);
                     EditorGUILayout.Space(4);
                 }
+            }
+        }
+
+        private void CheckSRGBTexture(SHADER_PROPERTY tex)
+        {
+            Texture2D texture = targetMat.GetTexture(ShaderProperties[tex].property) as Texture2D;
+            if (texture == null) return;
+            string path = AssetDatabase.GetAssetPath(texture);
+            if (string.IsNullOrEmpty(path)) return;
+            TextureImporter importer = AssetImporter.GetAtPath(path) as TextureImporter;
+            if (importer.sRGBTexture)
+            {
+                EditorGUILayout.HelpBox(LocalizationSystem.GetLocalizeText("label.warning.texture_importer_srgb"), MessageType.Warning);
             }
         }
 
