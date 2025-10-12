@@ -3,6 +3,67 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.2.0] 2025/10/13
+### Added
+- AudioLinkの設定を、各機能ごとに制御できるプロパティを追加。
+        <details>
+            <summary><b>プロパティ一覧</b></summary>
+
+        - `_FragmentAudioLinkVUBand`
+        - `_FragmentAudioLinkVUSmoothing`
+        - `_FragmentAudioLinkVUPanning`
+        - `_FragmentAudioLinkChronoTensityMode`
+        - `_FragmentAudioLinkChronoTensityBand`
+        - `_ColoringAudioLinkVUBand`
+        - `_ColoringAudioLinkVUSmoothing`
+        - `_ColoringAudioLinkVUPanning`
+        - `_ColoringAudioLinkChronoTensityMode`
+        - `_ColoringAudioLinkChronoTensityBand`
+        - `_GeometryAudioLinkVUBand`
+        - `_GeometryAudioLinkVUSmoothing`
+        - `_GeometryAudioLinkVUPanning`
+        - `_GeometryAudioLinkChronoTensityMode`
+        - `_GeometryAudioLinkChronoTensityBand`
+        - `_OrbitAudioLinkVUBand`
+        - `_OrbitAudioLinkVUSmoothing`
+        - `_OrbitAudioLinkVUPanning`
+        - `_OrbitAudioLinkChronoTensityMode`
+        - `_OrbitAudioLinkChronoTensityBand`
+        - `_OrbitRotationOffsetAudioLinkVUBand`
+        - `_OrbitRotationOffsetAudioLinkVUSmoothing`
+        - `_OrbitRotationOffsetAudioLinkVUPanning`
+        - `_OrbitRotationOffsetAudioLinkChronoTensityMode`
+        - `_OrbitRotationOffsetAudioLinkChronoTensityBand`
+        - `_OrbitWaveOffsetAudioLinkVUBand`
+        - `_OrbitWaveOffsetAudioLinkVUSmoothing`
+        - `_OrbitWaveOffsetAudioLinkVUPanning`
+        - `_OrbitWaveOffsetAudioLinkChronoTensityMode`
+        - `_OrbitWaveOffsetAudioLinkChronoTensityBand`
+        </details>
+
+<br>
+
+- マスク/オフセットで使用するテクスチャのインポート設定`sRGB (Color Texture)が有効だった場合、インスペクター上で警告を表示。
+
+### Changed
+- `Partition Mode(区切り)`などで辺を表現していた`Side`を`Edge`へリネーム。
+
+### Removed
+- 元あるプロパティ機能の拡張により以下のプロパティが削除されました。
+    - `_AudioLinkVUBand`
+    - `_AudioLinkVUSmoothing`
+    - `_AudioLinkVUPanning`
+    - `_AudioLinkVUGainMul`
+    - `_AudioLinkVUGainAdd`
+    - `_AudioLinkChronoTensityDivisor`
+    - `_AudioLinkChronoTensityMode`
+    - `_AudioLinkChronoTensityBand`
+
+### known issue
+- Examplesのマテリアルが古いバージョンのままで反映されていない。
+    - スケジュールの関係で、修正を延期しています。予めご了承ください。
+
+
 ## [0.2.0-exp.3] 2025/10/10
 - 以下の理由で実験的なバージョンを示す`exp.3`を付与しています。
     - 大規模な変更により、不具合が多く含まれている可能性があります。
@@ -14,10 +75,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - `_@@@LoopMode`を追加。
         - 後述する**Modifiers(モディファイア)**の入力値のループ処理を設定することができます。
     - AudioLinkの機能の効果の強度をより細かく設定できるように多数のプロパティが追加されました。
-        - _@@@AudioLinkVUStrength
-        - _@@@AudioLinkChronoTensityStrength
-        - _@@@AudioLinkSpectrumStrength
-        - _@@@AudioLinkSpectrumMirror
+        - `_@@@AudioLinkVUStrength`
+        - `_@@@AudioLinkChronoTensityStrength`
+        - `_@@@AudioLinkSpectrumStrength`
+        - `_@@@AudioLinkSpectrumMirror`
 
 ### Changed
 - **処理構成の大幅な変更。**
@@ -328,6 +389,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - マテリアルのインスペクターから、MeshHologramが選択できない不具合を修正。
     - MeshBoundsEditorで使用しているシェーダーのパスを変更することで対処。
 
+[0.2.0]: https://github.com/r-delta-c/MeshHologram/compare/0.2.0-exp.3...0.2.0
 [0.2.0-exp.3]: https://github.com/r-delta-c/MeshHologram/compare/0.1.5...0.2.0-exp.3
 [0.1.5]: https://github.com/r-delta-c/MeshHologram/compare/0.1.4...0.1.5
 [0.1.4]: https://github.com/r-delta-c/MeshHologram/compare/0.1.3...0.1.4
