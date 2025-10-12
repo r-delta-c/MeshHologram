@@ -35,14 +35,14 @@ float GenNoise(float3 inputs, float offset, float time, float seed, float phases
     return (ValueNoise3D(inputs,seed)+offset)*phasescale+time;
 }
 
-float SideCenterPos(float n0, float n1, float n, float2 c){
+float EdgeCenterPos(float n0, float n1, float n, float2 c){
     return (n0+n1+VertexCenterBias(n0,n1,n,c,saturate(_FragmentTriangleCompression/26.0)*0.5+0.5))/3.0;
 }
 
-float2 SideCenterPos(float2 uv0, float2 uv1, float2 uv, float2 c){
+float2 EdgeCenterPos(float2 uv0, float2 uv1, float2 uv, float2 c){
     return (uv0+uv1+VertexCenterBias(uv0,uv1,uv,c,saturate(_FragmentTriangleCompression/26.0)*0.5+0.5))/3.0;
 }
 
-float3 SideCenterPos(float3 p0, float3 p1, float3 p, float3 c){
+float3 EdgeCenterPos(float3 p0, float3 p1, float3 p, float3 c){
     return (p0+p1+VertexCenterBias(p0,p1,p,c,saturate(_FragmentTriangleCompression/26.0)*0.5+0.5))/3.0;
 }

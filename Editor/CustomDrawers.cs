@@ -200,6 +200,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
     public class DFColorMask : MaterialPropertyDrawer
     {
         public DFColorMask() { }
+        public override float GetPropertyHeight(MaterialProperty prop, string label, MaterialEditor editor) => 0;
 
         public override void OnGUI(Rect position, MaterialProperty prop, string label, MaterialEditor editor)
         {
@@ -226,6 +227,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
     public class DFLineAnimationMode : MaterialPropertyDrawer
     {
         public DFLineAnimationMode() { }
+        public override float GetPropertyHeight(MaterialProperty prop, string label, MaterialEditor editor) => 0;
 
         enum LINE_ANIMATION_MODE
         {
@@ -250,6 +252,38 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 LINE_ANIMATION_MODE mode = (LINE_ANIMATION_MODE)(int)prop.floatValue;
                 EditorGUI.showMixedValue = prop.hasMixedValue;
                 mode = (LINE_ANIMATION_MODE)EditorGUILayout.EnumPopup(label, mode);
+                EditorGUI.showMixedValue = false;
+                if (changeCheckScope.changed)
+                {
+                    prop.floatValue = (float)mode;
+                }
+            }
+        }
+    }
+    public class DFChronoTensityMode : MaterialPropertyDrawer
+    {
+        public DFChronoTensityMode() { }
+        public override float GetPropertyHeight(MaterialProperty prop, string label, MaterialEditor editor) => 0;
+
+        enum CHRONOTENSITY_MODE
+        {
+            NUDGING,
+            FILTERED_NUDGING,
+            DYNAMICS,
+            FILTERED_DYNAMICS,
+            HOLD,
+            FILTERED_HOLD,
+            INCREASES_WITH_LOUDER,
+            INCREASES_WITH_QUITE
+        };
+
+        public override void OnGUI(Rect position, MaterialProperty prop, string label, MaterialEditor editor)
+        {
+            using (var changeCheckScope = new EditorGUI.ChangeCheckScope())
+            {
+                CHRONOTENSITY_MODE mode = (CHRONOTENSITY_MODE)(int)prop.floatValue;
+                EditorGUI.showMixedValue = prop.hasMixedValue;
+                mode = (CHRONOTENSITY_MODE)EditorGUILayout.EnumPopup(label, mode);
                 EditorGUI.showMixedValue = false;
                 if (changeCheckScope.changed)
                 {

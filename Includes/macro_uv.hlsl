@@ -1,10 +1,10 @@
 #define CONTROL_VERTEX_MACRO(tex) \
     TRANSFORM_TEX_MACRO(tex)
 
-#define CONTROL_SIDE_MACRO(tex) \
+#define CONTROL_EDGE_MACRO(tex) \
     TRANSFORM_TEX_MACRO(tex) \
     UV_MESH_MACRO; \
-    UV_SIDE_MACRO(tex)
+    UV_EDGE_MACRO(tex)
 
 #define CONTROL_MESH_MACRO(tex) \
     TRANSFORM_TEX_MACRO(tex) \
@@ -17,10 +17,10 @@
 
 #define UV_MESH_MACRO uv_mesh = (transform_uv[0]+transform_uv[1]+transform_uv[2])/3.0
 
-#define UV_SIDE_MACRO(tex) \
-    uv_side[0] = SideCenterPos(transform_uv[1],transform_uv[2],transform_uv[0],uv_mesh); \
-    uv_side[1] = SideCenterPos(transform_uv[2],transform_uv[0],transform_uv[1],uv_mesh); \
-    uv_side[2] = SideCenterPos(transform_uv[0],transform_uv[1],transform_uv[2],uv_mesh);
+#define UV_EDGE_MACRO(tex) \
+    uv_edge[0] = EdgeCenterPos(transform_uv[1],transform_uv[2],transform_uv[0],uv_mesh); \
+    uv_edge[1] = EdgeCenterPos(transform_uv[2],transform_uv[0],transform_uv[1],uv_mesh); \
+    uv_edge[2] = EdgeCenterPos(transform_uv[0],transform_uv[1],transform_uv[2],uv_mesh);
 
 #define MASK_CONTROL_MACRO3(tex,state,control) float3( \
     lerp(1.0,UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex,state,transform_uv[0],0.0).x,control), \

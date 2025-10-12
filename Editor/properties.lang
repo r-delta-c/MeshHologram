@@ -43,15 +43,7 @@ _StencilFail||Fail||Fail
 _StencilZFail||Fail||Z Fail
 
 _AudioLinkEnable||Enable AudioLink||AudioLinkを有効にする
-_AudioLinkVUBand||Band||帯域
-_AudioLinkVUSmoothing||Smoothness||滑らかさ
-_AudioLinkVUPanning||Panning||L/R
-_AudioLinkVUGainMul||Gain (Mul)||出力(乗算)
-_AudioLinkVUGainAdd||Gain (Add)||出力(加算)
-_AudioLinkChronoTensityDivisor||Divisor||除算
-_AudioLinkChronoTensityMode||Mode||モード
-_AudioLinkChronoTensityBand||Band||帯域
-_AudioLinkThemeColorBand||Band||帯域
+_AudioLinkThemeColorBand||AudioLink Theme Color Band||AudioLinkテーマカラー帯域
 
 _FragmentTriangleCompression||Triangle Compression||三角形の縮小
 _FragmentFill||Fill||塗りつぶす
@@ -61,12 +53,19 @@ _FragmentManualLineScalingEnable||Manual Line Scaling||線のスケールの手�
 _FragmentLineScale||Line Scale||線の全体スケール
 _FragmentLineAnimationMode||Line Animation Mode||線のアニメーションモード
 _FragmentSource||Fragment Source||フラグメントの参照先
+_FragmentFixedValue||Fixed Value||固定値
+
 _FragmentAudioLinkSource||Fragment AudioLink Source||フラグメントのAudioLink参照先
+_FragmentAudioLinkVUBand||VU Band||VU帯域
+_FragmentAudioLinkVUSmoothing||VU Smoothing||VUの滑らかさ
+_FragmentAudioLinkVUPanning||VU Panning||VU L/R
 _FragmentAudioLinkVUStrength||VU Strength||VUの強さ
+_FragmentAudioLinkChronoTensityBand||ChronoTensity Band||ChronoTensity帯域
+_FragmentAudioLinkChronoTensityMode||ChronoTensity Mode||ChronoTensityのモード
 _FragmentAudioLinkChronoTensityStrength||ChronoTensity Strength||ChronoTensityの強さ
 _FragmentAudioLinkSpectrumStrength||Spectrum Strength||Spectrumの強さ
 _FragmentAudioLinkSpectrumMirror||Spectrum Mirror||Spectrumのミラー
-_FragmentFixedValue||Fixed Value||固定値
+
 _FragmentPhaseScale||Phase Scale||周期のスケール
 _FragmentLoopMode||Loop Mode||ループモード
 _FragmentEaseMode||Ease Mode||イージングモード
@@ -81,12 +80,19 @@ _Emission||Add Emission||エミッションの追加
 _ColorSource||Color Source||色の参照先
 _ColorGradientTex||Color Gradient Tex||グラデーションテクスチャ
 _ColoringSource||Coloring Source||着色の参照先
+_ColoringFixedValue||Fixed Value||固定値
+
 _ColoringAudioLinkSource||Coloring AudioLink Source||着色のAudioLink参照先
+_ColoringAudioLinkVUBand||VU Band||VU帯域
+_ColoringAudioLinkVUSmoothing||VU Smoothing||VUの滑らかさ
+_ColoringAudioLinkVUPanning||VU Panning||VU L/R
 _ColoringAudioLinkVUStrength||VU Strength||VUの強さ
+_ColoringAudioLinkChronoTensityBand||ChronoTensity Band||ChronoTensity帯域
+_ColoringAudioLinkChronoTensityMode||ChronoTensity Mode||ChronoTensityのモード
 _ColoringAudioLinkChronoTensityStrength||ChronoTensity Strength||ChronoTensityの強さ
 _ColoringAudioLinkSpectrumStrength||Spectrum Strength||Spectrumの強さ
 _ColoringAudioLinkSpectrumMirror||Spectrum Mirror||Spectrumのミラー
-_ColoringFixedValue||Fixed Value||固定値
+
 _ColoringPhaseScale||Phase Scale||周期のスケール
 _ColoringLoopMode||Loop Mode||ループモード
 _ColoringEaseMode||Ease Mode||イージングモード
@@ -96,12 +102,19 @@ _ColoringMidAdd||Mid Add||中間加算
 _ColoringPartitionMode||Coloring Partition Mode||着色の区切り
 
 _GeometrySource||Geometry Source||ジオメトリの参照先
+_GeometryFixedValue||Fixed Value||固定値
+
 _GeometryAudioLinkSource||Geometry AudioLink Source||ジオメトリのAudioLink参照先
+_GeometryAudioLinkVUBand||VU Band||VU帯域
+_GeometryAudioLinkVUSmoothing||VU Smoothing||VUの滑らかさ
+_GeometryAudioLinkVUPanning||VU Panning||VU L/R
 _GeometryAudioLinkVUStrength||VU Strength||VUの強さ
+_GeometryAudioLinkChronoTensityBand||ChronoTensity Band||ChronoTensity帯域
+_GeometryAudioLinkChronoTensityMode||ChronoTensity Mode||ChronoTensityのモード
 _GeometryAudioLinkChronoTensityStrength||ChronoTensity Strength||ChronoTensityの強さ
 _GeometryAudioLinkSpectrumStrength||Spectrum Strength||Spectrumの強さ
 _GeometryAudioLinkSpectrumMirror||Spectrum Mirror||Spectrumのミラー
-_GeometryFixedValue||Fixed Value||固定値
+
 _GeometryPhaseScale||Phase Scale||周期のスケール
 _GeometryLoopMode||Loop Mode||ループモード
 _GeometryEaseMode||Ease Mode||イージングモード
@@ -114,7 +127,7 @@ _GeometryScaleBounds||Scale Bounds/A/B||スケールの範囲/A/B
 
 _GeometryPushPullEnable||Enable PushPull||押し出しの有効
 _GeometryPushPullBounds||PushPull Bounds/A/B||押し出しの範囲/A/B
-_GeometryPushPullPartitionBias||Partition Bias | Vertex-Center-Side||区切りの偏り | 頂点-中心-辺
+_GeometryPushPullPartitionBias||Partition Bias | Vertex-Center-Edge||区切りの偏り | 頂点-中心-辺
 
 _GeometryRotationEnable||Enable Rotation||回転の有効
 _GeometryRotationStrength||Strength||強さ
@@ -127,12 +140,19 @@ _GeometryPixelization||Vertex Pixelization/X/Y/Z/All||頂点モザイク化/X/Y/
 
 _OrbitEnable||Enable Orbit||Orbitの有効
 _OrbitSource||Orbit Source||Orbitの参照先
+_OrbitFixedValue||Fixed Value||固定値
 _OrbitAudioLinkSource||Orbit AudioLink Source||OrbitのAudioLink参照先
+
+_OrbitAudioLinkVUBand||VU Band||VU帯域
+_OrbitAudioLinkVUSmoothing||VU Smoothing||VUの滑らかさ
+_OrbitAudioLinkVUPanning||VU Panning||VU L/R
 _OrbitAudioLinkVUStrength||VU Strength||VUの強さ
+_OrbitAudioLinkChronoTensityBand||ChronoTensity Band||ChronoTensity帯域
+_OrbitAudioLinkChronoTensityMode||ChronoTensity Mode||ChronoTensityのモード
 _OrbitAudioLinkChronoTensityStrength||ChronoTensity Strength||ChronoTensityの強さ
 _OrbitAudioLinkSpectrumStrength||Spectrum Strength||Spectrumの強さ
 _OrbitAudioLinkSpectrumMirror||Spectrum Mirror||Spectrumのミラー
-_OrbitFixedValue||Fixed Value||固定値
+
 _OrbitPhaseScale||Phase Scale||周期のスケール
 _OrbitLoopMode||Loop Mode||ループモード
 _OrbitEaseMode||Ease Mode||イージングモード
@@ -145,10 +165,17 @@ _OrbitOffset||Orbit Offset/X/Y/Z||Orbitの座標オフセット/X/Y/Z
 _OrbitScale||Orbit Scale/X/Y/Z/Scale||Orbit スケール/X/Y/Z/スケール
 
 _OrbitRotationSource||Orbit Rotation Source||Orbit 回転の参照先
-_OrbitRotationOffsetAudioLinkSource||Orbit Rotation Offset AudioLink Source||Orbit 回転オフセットのAudioLink参照先
-_OrbitRotationOffsetAudioLinkVUStrength||VU Strength/X/Y/Z/W||VUの強さ/X/Y/Z/W
-_OrbitRotationOffsetAudioLinkChronoTensityStrength||ChronoTensity Strength/X/Y/Z/W||ChronoTensityの強さ/X/Y/Z/W
 _OrbitRotationFixedValue||Fixed Value||固定値
+
+_OrbitRotationOffsetAudioLinkSource||Orbit Rotation Offset AudioLink Source||Orbit 回転オフセットのAudioLink参照先
+_OrbitRotationOffsetAudioLinkVUBand||VU Band||VU帯域
+_OrbitRotationOffsetAudioLinkVUSmoothing||VU Smoothing||VUの滑らかさ
+_OrbitRotationOffsetAudioLinkVUPanning||VU Panning||VU L/R
+_OrbitRotationOffsetAudioLinkVUStrength||VU Strength/X/Y/Z/W||VUの強さ/X/Y/Z/W
+_OrbitRotationOffsetAudioLinkChronoTensityBand||ChronoTensity Band||ChronoTensity帯域
+_OrbitRotationOffsetAudioLinkChronoTensityMode||ChronoTensity Mode||ChronoTensityのモード
+_OrbitRotationOffsetAudioLinkChronoTensityStrength||ChronoTensity Strength/X/Y/Z/W||ChronoTensityの強さ/X/Y/Z/W
+
 _OrbitRotationSeed||Orbit Rotation Seed||Orbit 回転のシード値
 _OrbitRotationAngle||Orbit Rotation Angle/X/Y/Z||Orbitの回転/X/Y/Z
 _OrbitRotationSpeed||Orbit Rotation Speed/X/Y/Z/W||Orbitの回転速度/X/Y/Z/W
@@ -161,8 +188,13 @@ _OrbitWavePhase||Phase/X/YZ//||周期/X/YZ//
 _OrbitWaveSpeed||Speed/X/YZ//||波の早さ/X/YZ//
 
 _OrbitWaveAudioLinkSource||Orbit Wave AudioLink Source||Orbit WaveのAudioLink参照先
+_OrbitWaveAudioLinkVUBand||VU Band||VU帯域
+_OrbitWaveAudioLinkVUSmoothing||VU Smoothing||VUの滑らかさ
+_OrbitWaveAudioLinkVUPanning||VU Panning||VU L/R
 _OrbitWaveAudioLinkVUStrength||VU Strength/X/YZ//||VUの強さ/X/YZ//
-_OrbitWaveAudioLinkChronoTensityStrength||ChronoTensity Strength||ChronoTensityの強さ
+_OrbitWaveAudioLinkChronoTensityBand||ChronoTensity Band||ChronoTensity帯域
+_OrbitWaveAudioLinkChronoTensityMode||ChronoTensity Mode||ChronoTensityのモード
+_OrbitWaveAudioLinkChronoTensityStrength||ChronoTensity Strength/X/YZ//||ChronoTensityの強さ/X/YZ//
 _OrbitWaveAudioLinkSpectrumStrength||Spectrum Strength/X/YZ//||Spectrumの強さ/X/YZ//
 _OrbitWaveAudioLinkSpectrumMirror||Spectrum Mirror||Spectrumのミラー
 _OrbitWaveAudioLinkSpectrumMode||Use AutoCorrelator||AutoCorrelatorを使う

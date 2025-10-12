@@ -100,11 +100,15 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         private void DrawAudioLinkSource(
             int owner,
             SHADER_PROPERTY SOURCE,
-            SHADER_PROPERTY VU_ADD,
-            SHADER_PROPERTY CHRONO,
-            SHADER_PROPERTY SPECTRUM,
-            SHADER_PROPERTY MIRROR,
-            SHADER_PROPERTY MODE
+            SHADER_PROPERTY VU_BAND,
+            SHADER_PROPERTY VU_SMOOTHING,
+            SHADER_PROPERTY VU_PANNING,
+            SHADER_PROPERTY VU_STRENGTH,
+            SHADER_PROPERTY CHRONO_TENSITY_BAND,
+            SHADER_PROPERTY CHRONO_TENSITY_MODE,
+            SHADER_PROPERTY CHRONO_TENSITY_STRENGTH,
+            SHADER_PROPERTY SPECTRUM_STRENGTH,
+            SHADER_PROPERTY SPECTRUM_MIRROR
         )
         {
             using (new EditorGUILayout.VerticalScope("HelpBox"))
@@ -116,17 +120,24 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     switch (GetPropertyFloat(targetMat, SOURCE))
                     {
                         case 1:
-                            DrawShaderProperty(VU_ADD);
+                            DrawShaderProperty(VU_BAND);
+                            DrawShaderProperty(VU_SMOOTHING);
+                            DrawShaderProperty(VU_PANNING);
+                            DrawShaderProperty(VU_STRENGTH);
                             break;
                         case 2:
+                            DrawShaderProperty(VU_BAND);
+                            DrawShaderProperty(VU_SMOOTHING);
+                            DrawShaderProperty(VU_PANNING);
                             break;
                         case 3:
-                            DrawShaderProperty(CHRONO);
+                            DrawShaderProperty(CHRONO_TENSITY_BAND);
+                            DrawShaderProperty(CHRONO_TENSITY_MODE);
+                            DrawShaderProperty(CHRONO_TENSITY_STRENGTH);
                             break;
                         case 4:
-                            DrawShaderProperty(SPECTRUM);
-                            DrawShaderProperty(MIRROR);
-                            if(MODE!=SHADER_PROPERTY._EMPTY) DrawShaderProperty(MODE);
+                            DrawShaderProperty(SPECTRUM_MIRROR);
+                            DrawShaderProperty(SPECTRUM_STRENGTH);
                             break;
                         default:
                             break;

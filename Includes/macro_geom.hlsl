@@ -5,7 +5,12 @@
         fragment_value, \
         fragment_al_mask, \
         _FragmentAudioLinkSource, \
+        _FragmentAudioLinkVUBand, \
+        _FragmentAudioLinkVUSmoothing, \
+        _FragmentAudioLinkVUPanning, \
         _FragmentAudioLinkVUStrength, \
+        _FragmentAudioLinkChronoTensityMode, \
+        _FragmentAudioLinkChronoTensityBand, \
         _FragmentAudioLinkChronoTensityStrength, \
         _FragmentAudioLinkSpectrumStrength, \
         _FragmentAudioLinkSpectrumMirror, \
@@ -28,7 +33,12 @@
         coloring_value, \
         coloring_al_mask, \
         _ColoringAudioLinkSource, \
+        _ColoringAudioLinkVUBand, \
+        _ColoringAudioLinkVUSmoothing, \
+        _ColoringAudioLinkVUPanning, \
         _ColoringAudioLinkVUStrength, \
+        _ColoringAudioLinkChronoTensityMode, \
+        _ColoringAudioLinkChronoTensityBand, \
         _ColoringAudioLinkChronoTensityStrength, \
         _ColoringAudioLinkSpectrumStrength, \
         _ColoringAudioLinkSpectrumMirror, \
@@ -45,26 +55,32 @@
     );
 
 #if defined(_AUDIOLINK_ENABLE)
-    #define FUNC_GEOMETRY_AUDIOLINK_PROCESS(value,al_mask,source,vu_add,chrono,spectrum,mirror,type) \
+    #define FUNC_GEOMETRY_AUDIOLINK_PROCESS(value,al_mask,source,vu_band,vu_smoothing,vu_panning,vu_strength,chrono_mode,chrono_band,chrono_strength,spectrum_strength,mirror,mode) \
+        FUNC_GEOMETRY_AUDIOLINK_INIT(vu_band,vu_smoothing,vu_panning,vu_strength,chrono_mode,chrono_band,chrono_strength) \
         [branch]switch(source){ \
             case 1: \
-                value += audiolink_vu*vu_add*al_mask; \
+                value += audiolink_vu*al_mask; \
                 break; \
             case 2: \
                 value = value*audiolink_vu*al_mask; \
                 break; \
             case 3: \
-                value += audiolink_chronotensity*chrono*al_mask; \
+                value += audiolink_chronotensity*al_mask; \
                 break; \
             case 4: \
-                value = MeshHAudioLinkSpectrum(value,mirror,type)*al_mask*spectrum; \
+                value = MeshHAudioLinkSpectrum(value,mirror,mode)*al_mask*spectrum_strength; \
                 break; \
             default: \
                 break; \
         }
 #else
-    #define FUNC_GEOMETRY_AUDIOLINK_PROCESS(value,al_mask,source,vu_add,chrono,spectrum,mirror,type) //
+    #define FUNC_GEOMETRY_AUDIOLINK_PROCESS(value,al_mask,source,vu_band,vu_smoothing,vu_panning,vu_strength,chrono_mode,chrono_band,chrono_strength,spectrum_strength,mirror,mode) //
 #endif
+
+#define FUNC_GEOMETRY_AUDIOLINK_INIT(vu_band,vu_smoothing,vu_panning,vu_strength,chrono_mode,chrono_band,chrono_strength) \
+        audiolink_vu_data = lerp(AudioLinkData(ALPASS_FILTEREDAUDIOLINK+uint2(vu_smoothing,vu_band)),AudioLinkData(ALPASS_FILTEREDVU_INTENSITY),max(0.0,vu_band-3.0)); \
+        audiolink_vu = saturate(lerp(audiolink_vu_data.r,audiolink_vu_data.b,vu_panning)*vu_strength); \
+        audiolink_chronotensity = AudioLinkDecodeDataAsUInt(ALPASS_CHRONOTENSITY+uint2(chrono_mode,chrono_band)).r/1000000.0*chrono_strength; \
 
 #define FUNC_GEOMETRY_MODIFIER_PROCESS(value,phase_scale,loop_mode,mul,add,curve,ease_mode) \
     value *= phase_scale; \
@@ -101,11 +117,11 @@
         ValueNoise3D(inp[2].pos,seed) \
     )*scale+time)
 
-#define FUNC_NOISE_SIDE_VALUE(pos,center,seed,scale,time) \
+#define FUNC_NOISE_EDGE_VALUE(pos,center,seed,scale,time) \
     (float3( \
-        ValueNoise3D(SideCenterPos(inp[1].pos,inp[2].pos,inp[0].pos,center),seed), \
-        ValueNoise3D(SideCenterPos(inp[2].pos,inp[0].pos,inp[1].pos,center),seed), \
-        ValueNoise3D(SideCenterPos(inp[0].pos,inp[1].pos,inp[2].pos,center),seed) \
+        ValueNoise3D(EdgeCenterPos(inp[1].pos,inp[2].pos,inp[0].pos,center),seed), \
+        ValueNoise3D(EdgeCenterPos(inp[2].pos,inp[0].pos,inp[1].pos,center),seed), \
+        ValueNoise3D(EdgeCenterPos(inp[0].pos,inp[1].pos,inp[2].pos,center),seed) \
     )*scale+time)
 
 #define FUNC_NOISE_BIAS_VALUE(pos,center,seed,scale,time,bias) \

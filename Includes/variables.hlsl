@@ -11,35 +11,7 @@ float _DirectionalLightInfluence;
 float _AmbientInfluence;
 float _LightVolumesInfluence;
 
-float _AudioLinkVUBand;
-float _AudioLinkVUSmoothing;
-float _AudioLinkVUPanning;
-float _AudioLinkVUGainMul;
-float _AudioLinkVUGainAdd;
-float _AudioLinkChronoTensityDivisor;
-uint _AudioLinkChronoTensityMode;
-uint _AudioLinkChronoTensityBand;
 uint _AudioLinkThemeColorBand;
-
-float _FragmentAudioLinkVUStrength;
-float _FragmentAudioLinkChronoTensityStrength;
-float _FragmentAudioLinkSpectrumStrength;
-bool _FragmentAudioLinkSpectrumMirror;
-
-float _ColoringAudioLinkVUStrength;
-float _ColoringAudioLinkChronoTensityStrength;
-float _ColoringAudioLinkSpectrumStrength;
-bool _ColoringAudioLinkSpectrumMirror;
-
-float _GeometryAudioLinkVUStrength;
-float _GeometryAudioLinkChronoTensityStrength;
-float _GeometryAudioLinkSpectrumStrength;
-bool _GeometryAudioLinkSpectrumMirror;
-
-float _OrbitAudioLinkVUStrength;
-float _OrbitAudioLinkChronoTensityStrength;
-float _OrbitAudioLinkSpectrumStrength;
-bool _OrbitAudioLinkSpectrumMirror;
 
 UNITY_DECLARE_TEX2D_NOSAMPLER(_FragmentAudioLinkMaskMap);
 float4 _FragmentAudioLinkMaskMap_ST;
@@ -145,8 +117,19 @@ float3 _OrbitWaveSpeed;
 
 
 int _FragmentSource;
-uint _FragmentAudioLinkSource;
 float _FragmentFixedValue;
+
+uint _FragmentAudioLinkSource;
+uint _FragmentAudioLinkVUBand;
+float _FragmentAudioLinkVUSmoothing;
+float _FragmentAudioLinkVUPanning;
+float _FragmentAudioLinkVUStrength;
+uint _FragmentAudioLinkChronoTensityMode;
+uint _FragmentAudioLinkChronoTensityBand;
+float _FragmentAudioLinkChronoTensityStrength;
+float _FragmentAudioLinkSpectrumStrength;
+bool _FragmentAudioLinkSpectrumMirror;
+
 float _FragmentPhaseScale;
 int _FragmentLoopMode;
 uint _FragmentEaseMode;
@@ -156,8 +139,19 @@ float _FragmentMidAdd;
 
 
 int _ColoringSource;
-uint _ColoringAudioLinkSource;
 float _ColoringFixedValue;
+
+uint _ColoringAudioLinkSource;
+uint _ColoringAudioLinkVUBand;
+float _ColoringAudioLinkVUSmoothing;
+float _ColoringAudioLinkVUPanning;
+float _ColoringAudioLinkVUStrength;
+uint _ColoringAudioLinkChronoTensityMode;
+uint _ColoringAudioLinkChronoTensityBand;
+float _ColoringAudioLinkChronoTensityStrength;
+float _ColoringAudioLinkSpectrumStrength;
+bool _ColoringAudioLinkSpectrumMirror;
+
 float _ColoringPhaseScale;
 int _ColoringLoopMode;
 uint _ColoringEaseMode;
@@ -167,8 +161,19 @@ float _ColoringMidAdd;
 
 
 int _GeometrySource;
-uint _GeometryAudioLinkSource;
 float _GeometryFixedValue;
+
+uint _GeometryAudioLinkSource;
+uint _GeometryAudioLinkVUBand;
+float _GeometryAudioLinkVUSmoothing;
+float _GeometryAudioLinkVUPanning;
+float _GeometryAudioLinkVUStrength;
+uint _GeometryAudioLinkChronoTensityMode;
+uint _GeometryAudioLinkChronoTensityBand;
+float _GeometryAudioLinkChronoTensityStrength;
+float _GeometryAudioLinkSpectrumStrength;
+bool _GeometryAudioLinkSpectrumMirror;
+
 float _GeometryPhaseScale;
 int _GeometryLoopMode;
 uint _GeometryEaseMode;
@@ -178,8 +183,19 @@ float _GeometryMidAdd;
 
 
 int _OrbitSource;
-uint _OrbitAudioLinkSource;
 float _OrbitFixedValue;
+
+uint _OrbitAudioLinkSource;
+uint _OrbitAudioLinkVUBand;
+float _OrbitAudioLinkVUSmoothing;
+float _OrbitAudioLinkVUPanning;
+float _OrbitAudioLinkVUStrength;
+uint _OrbitAudioLinkChronoTensityMode;
+uint _OrbitAudioLinkChronoTensityBand;
+float _OrbitAudioLinkChronoTensityStrength;
+float _OrbitAudioLinkSpectrumStrength;
+bool _OrbitAudioLinkSpectrumMirror;
+
 float _OrbitPhaseScale;
 int _OrbitLoopMode;
 uint _OrbitEaseMode;
@@ -189,17 +205,30 @@ float _OrbitMidAdd;
 
 
 int _OrbitRotationSource;
-uint _OrbitRotationOffsetAudioLinkSource;
-float4 _OrbitRotationOffsetAudioLinkVUStrength;
-float4 _OrbitRotationOffsetAudioLinkChronoTensityStrength;
 float _OrbitRotationFixedValue;
 
+uint _OrbitRotationOffsetAudioLinkSource;
+uint _OrbitRotationOffsetAudioLinkVUBand;
+float _OrbitRotationOffsetAudioLinkVUSmoothing;
+float _OrbitRotationOffsetAudioLinkVUPanning;
+float4 _OrbitRotationOffsetAudioLinkVUStrength;
+uint _OrbitRotationOffsetAudioLinkChronoTensityMode;
+uint _OrbitRotationOffsetAudioLinkChronoTensityBand;
+float4 _OrbitRotationOffsetAudioLinkChronoTensityStrength;
+
+
+
 uint _OrbitWaveAudioLinkSource;
+uint _OrbitWaveAudioLinkVUBand;
+float _OrbitWaveAudioLinkVUSmoothing;
+float _OrbitWaveAudioLinkVUPanning;
 float2 _OrbitWaveAudioLinkVUStrength;
-float _OrbitWaveAudioLinkChronoTensityStrength;
+uint _OrbitWaveAudioLinkChronoTensityMode;
+uint _OrbitWaveAudioLinkChronoTensityBand;
+float2 _OrbitWaveAudioLinkChronoTensityStrength;
 float2 _OrbitWaveAudioLinkSpectrumStrength;
-bool _OrbitWaveAudioLinkSpectrumMirror;
 bool _OrbitWaveAudioLinkSpectrumMode;
+bool _OrbitWaveAudioLinkSpectrumMirror;
 float2 _OrbitWaveAudioLinkSpectrumBounds;
 
 

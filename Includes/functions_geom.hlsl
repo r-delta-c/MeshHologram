@@ -86,9 +86,9 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
 
 
     #if defined(_AUDIOLINK_ENABLE)
-        float4 audiolink_vu_band = lerp(AudioLinkData(ALPASS_FILTEREDAUDIOLINK+uint2(_AudioLinkVUSmoothing,_AudioLinkVUBand)),AudioLinkData(ALPASS_FILTEREDVU_INTENSITY),max(0.0,_AudioLinkVUBand-3.0));
-        float audiolink_vu = saturate(lerp(audiolink_vu_band.r,audiolink_vu_band.b,_AudioLinkVUPanning)*_AudioLinkVUGainMul+_AudioLinkVUGainAdd);
-        float audiolink_chronotensity = (AudioLinkDecodeDataAsUInt(ALPASS_CHRONOTENSITY+uint2(_AudioLinkChronoTensityMode,_AudioLinkChronoTensityBand)).r/_AudioLinkChronoTensityDivisor);
+        float4 audiolink_vu_data;
+        float audiolink_vu;
+        float audiolink_chronotensity;
     #endif
 
     float3 noise_center_pos = 0.0;
@@ -107,7 +107,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             break;
         case 1:
             FUNC_NOISE_CENTER_POS(fragment_pos);
-            fragment_value = lerp(_FragmentFixedValue,FUNC_NOISE_SIDE_VALUE(fragment_pos,noise_center_pos,_FragmentNoiseSeed,_FragmentNoiseValueScale,fragment_time),_FragmentSource);
+            fragment_value = lerp(_FragmentFixedValue,FUNC_NOISE_EDGE_VALUE(fragment_pos,noise_center_pos,_FragmentNoiseSeed,_FragmentNoiseValueScale,fragment_time),_FragmentSource);
             FUNC_GEOMETRY_FRAGMENT_PROCESS;
             fragment_stream[0] = float3(0.0,fragment_value.y,fragment_value.z);
             fragment_stream[1] = float3(fragment_value.x,0.0,fragment_value.z);
@@ -136,7 +136,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             break;
         case 1:
             FUNC_NOISE_CENTER_POS(coloring_pos);
-            coloring_value = lerp(_ColoringFixedValue,FUNC_NOISE_SIDE_VALUE(coloring_pos,noise_center_pos,_ColoringNoiseSeed,_ColoringNoiseValueScale,coloring_time),_ColoringSource);
+            coloring_value = lerp(_ColoringFixedValue,FUNC_NOISE_EDGE_VALUE(coloring_pos,noise_center_pos,_ColoringNoiseSeed,_ColoringNoiseValueScale,coloring_time),_ColoringSource);
             FUNC_GEOMETRY_COLORING_PROCESS;
             color_stream[0] = float3(0.0,coloring_value.y,coloring_value.z);
             color_stream[1] = float3(coloring_value.x,0.0,coloring_value.z);
@@ -166,7 +166,12 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             geometry_value,
             geometry_al_mask,
             _GeometryAudioLinkSource,
+            _GeometryAudioLinkVUBand,
+            _GeometryAudioLinkVUSmoothing,
+            _GeometryAudioLinkVUPanning,
             _GeometryAudioLinkVUStrength,
+            _GeometryAudioLinkChronoTensityMode,
+            _GeometryAudioLinkChronoTensityBand,
             _GeometryAudioLinkChronoTensityStrength,
             _GeometryAudioLinkSpectrumStrength,
             _GeometryAudioLinkSpectrumMirror,
@@ -201,7 +206,12 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             geometry_pushpull_value,
             geometry_pushpull_al_mask,
             _GeometryAudioLinkSource,
+            _GeometryAudioLinkVUBand,
+            _GeometryAudioLinkVUSmoothing,
+            _GeometryAudioLinkVUPanning,
             _GeometryAudioLinkVUStrength,
+            _GeometryAudioLinkChronoTensityMode,
+            _GeometryAudioLinkChronoTensityBand,
             _GeometryAudioLinkChronoTensityStrength,
             _GeometryAudioLinkSpectrumStrength,
             _GeometryAudioLinkSpectrumMirror,
@@ -250,7 +260,12 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             orbit_value,
             orbit_al_mask,
             _OrbitAudioLinkSource,
+            _OrbitAudioLinkVUBand,
+            _OrbitAudioLinkVUSmoothing,
+            _OrbitAudioLinkVUPanning,
             _OrbitAudioLinkVUStrength,
+            _OrbitAudioLinkChronoTensityMode,
+            _OrbitAudioLinkChronoTensityBand,
             _OrbitAudioLinkChronoTensityStrength,
             _OrbitAudioLinkSpectrumStrength,
             _OrbitAudioLinkSpectrumMirror,
@@ -285,6 +300,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         float3 orbit_anim = orbit_rotation_value*_OrbitRotationSpread.xyz;
 
         #if defined(_AUDIOLINK_ENABLE)
+            audiolink_vu_data = lerp(AudioLinkData(ALPASS_FILTEREDAUDIOLINK+uint2(_OrbitWaveAudioLinkVUSmoothing,_OrbitWaveAudioLinkVUBand)),AudioLinkData(ALPASS_FILTEREDVU_INTENSITY),max(0.0,_OrbitWaveAudioLinkVUBand-3.0));
             float3 orbit_wave_spectrum = MeshHAudioLinkSpectrum(orbit_anim.x,_OrbitWaveAudioLinkSpectrumMirror,_OrbitWaveAudioLinkSpectrumMode)*float3(_OrbitWaveAudioLinkSpectrumStrength.x,_OrbitWaveAudioLinkSpectrumStrength.y,_OrbitWaveAudioLinkSpectrumStrength.y);
         #endif
         orbit_anim *= UNITY_TWO_PI;
@@ -294,9 +310,12 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             (orbit_anim.x+_OrbitWavePhase.y+ORBIT_WAVE_YZ_TIME_MACRO),
             (orbit_anim.x+_OrbitWavePhase.y+ORBIT_WAVE_YZ_TIME_MACRO)
         );
+        orbit_wave_value *= float3(_OrbitWaveFrequency.x,_OrbitWaveFrequency.y,_OrbitWaveFrequency.y);
         #if defined(_AUDIOLINK_ENABLE)
-            orbit_wave_value *= float3(_OrbitWaveFrequency.x,_OrbitWaveFrequency.y,_OrbitWaveFrequency.y);
-            [branch]if(_OrbitWaveAudioLinkSource==2) orbit_wave_value += audiolink_chronotensity*_OrbitWaveAudioLinkChronoTensityStrength*orbit_rotation_offset_al_mask;
+            [branch]if(_OrbitWaveAudioLinkSource==2){
+                float2 audiolink_orbit_wave_chronotensity = AudioLinkDecodeDataAsUInt(ALPASS_CHRONOTENSITY+uint2(_OrbitWaveAudioLinkChronoTensityMode,_OrbitWaveAudioLinkChronoTensityBand)).r/1000000.0*_OrbitWaveAudioLinkChronoTensityStrength.xy*orbit_rotation_offset_al_mask;
+                orbit_wave_value += float3(audiolink_orbit_wave_chronotensity.x,audiolink_orbit_wave_chronotensity.y,audiolink_orbit_wave_chronotensity.y)*UNITY_TWO_PI;
+            }
         #endif
 
         orbit_anim += ORBIT_ROTATION_TIME_MACRO;
@@ -304,10 +323,19 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         orbit_anim += float3(_OrbitRotationAngle.x,_OrbitRotationAngle.y,_OrbitRotationAngle.z)*UNITY_TWO_PI;
 
         #if defined(_AUDIOLINK_ENABLE)
+        FUNC_GEOMETRY_AUDIOLINK_INIT(
+            _OrbitRotationOffsetAudioLinkVUBand,
+            _OrbitRotationOffsetAudioLinkVUSmoothing,
+            _OrbitRotationOffsetAudioLinkVUPanning,
+            _OrbitRotationOffsetAudioLinkVUStrength,
+            _OrbitRotationOffsetAudioLinkChronoTensityMode,
+            _OrbitRotationOffsetAudioLinkChronoTensityBand,
+            _OrbitRotationOffsetAudioLinkChronoTensityStrength
+        );
             [branch]if(_OrbitRotationOffsetAudioLinkSource==1){
                 orbit_anim += audiolink_vu*UNITY_TWO_PI*orbit_rotation_offset_al_mask*_OrbitRotationOffsetAudioLinkVUStrength.xyz*_OrbitRotationOffsetAudioLinkVUStrength.w;
             }else if(_OrbitRotationOffsetAudioLinkSource==2){
-                orbit_anim += audiolink_chronotensity*orbit_rotation_offset_al_mask*_OrbitRotationOffsetAudioLinkChronoTensityStrength.xyz*_OrbitRotationOffsetAudioLinkChronoTensityStrength.w;
+                orbit_anim += audiolink_chronotensity*UNITY_TWO_PI*orbit_rotation_offset_al_mask*_OrbitRotationOffsetAudioLinkChronoTensityStrength.xyz*_OrbitRotationOffsetAudioLinkChronoTensityStrength.w;
             }
         #endif
 
@@ -319,7 +347,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
 
         float3 orbit_wave_al_value = 0.0;
         #if defined(_AUDIOLINK_ENABLE)
-            [branch]if(_OrbitWaveAudioLinkSource==3)lerp(_OrbitWaveAudioLinkSpectrumBounds.x,_OrbitWaveAudioLinkSpectrumBounds.y,orbit_wave_spectrum)*orbit_rotation_offset_al_mask;
+            [branch]if(_OrbitWaveAudioLinkSource==3) orbit_wave_al_value = lerp(_OrbitWaveAudioLinkSpectrumBounds.x,_OrbitWaveAudioLinkSpectrumBounds.y,orbit_wave_spectrum)*orbit_rotation_offset_al_mask;
         #endif
 
         orbit_wave_value += float3(
@@ -329,7 +357,10 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         );
 
         #if defined(_AUDIOLINK_ENABLE)
-            [branch]if(_OrbitWaveAudioLinkSource==1) orbit_wave_value *= audiolink_vu*float3(_OrbitWaveAudioLinkVUStrength.x,_OrbitWaveAudioLinkVUStrength.y,_OrbitWaveAudioLinkVUStrength.y)*orbit_rotation_offset_al_mask;
+            [branch]if(_OrbitWaveAudioLinkSource==1){
+                float2 audiolink_orbit_wave_vu = saturate(lerp(audiolink_vu_data.r,audiolink_vu_data.b,_OrbitWaveAudioLinkVUPanning)*_OrbitWaveAudioLinkVUStrength.xy)*orbit_rotation_offset_al_mask;
+                orbit_wave_value *= float3(audiolink_orbit_wave_vu.x,audiolink_orbit_wave_vu.y,audiolink_orbit_wave_vu.y);
+            }
         #endif
 
         float3 orbit_dir = cos(orbit_anim.x)*float3(0.0,1.0,0.0)*_OrbitScale.y + sin(orbit_anim.x)*float3(0.0,0.0,1.0)*_OrbitScale.z;

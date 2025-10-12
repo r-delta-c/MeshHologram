@@ -70,12 +70,12 @@
 
     float draw = EasePowInOutBias(max(max(range.x,range.y),range.z),_FragmentLineGradientBias);
 
-    float3 coloring_side = 0.0;
+    float3 coloring_edge = 0.0;
     float coloring_t = 0.0;
     [branch]if(_ColoringPartitionMode==1){
-        coloring_side = i.color_noise * (range>0.0);
+        coloring_edge = i.color_noise * (range>0.0);
         sides = 0.0<sides;
-        coloring_t = max(sides.x*coloring_side.x,max(sides.y*coloring_side.y,sides.z*coloring_side.z));
+        coloring_t = max(sides.x*coloring_edge.x,max(sides.y*coloring_edge.y,sides.z*coloring_edge.z));
         coloring_t = lerp(coloring_t,1.0,(i.color_noise.x+i.color_noise.y+i.color_noise.z)/3.0*1.1);
     }
 

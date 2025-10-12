@@ -166,20 +166,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_ENABLE);
                     if (GetPropertyFloat(targetMat, SHADER_PROPERTY._AUDIOLINK_ENABLE) == 1)
                     {
-                        DrawPartitionLine(4);
-                        DrawHeaderLabel(LocalizationSystem.PropLangDic["label.vu"],CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
-                        DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_VU_BAND);
-                        DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_VU_SMOOTHING);
-                        DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_VU_PANNING);
-                        DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_VU_GAIN_MUL);
-                        DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_VU_GAIN_ADD);
-                        DrawPartitionLine(4);
-                        DrawHeaderLabel(LocalizationSystem.PropLangDic["label.chronotensity"],CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
-                        DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_CHRONO_TENSITY_DIVISOR);
-                        DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_CHRONO_TENSITY_MODE);
-                        DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_CHRONO_TENSITY_BAND);
-                        DrawPartitionLine(4);
-                        DrawHeaderLabel(LocalizationSystem.PropLangDic["label.theme_color"],CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
                         DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_THEME_COLOR_BAND);
                     }
                 }
@@ -230,11 +216,15 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 DrawAudioLinkSource(
                     0,
                     SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SOURCE,
+                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_VU_BAND,
+                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_VU_SMOOTHING,
+                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_VU_PANNING,
                     SHADER_PROPERTY._FRAGMENT_AUDIOLINK_VU_STRENGTH,
+                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_CHRONO_TENSITY_BAND,
+                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_CHRONO_TENSITY_MODE,
                     SHADER_PROPERTY._FRAGMENT_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
                     SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_STRENGTH,
-                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_MIRROR,
-                    SHADER_PROPERTY._EMPTY
+                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_MIRROR
                 );
                 DrawControlTex(
                     0,
@@ -326,11 +316,15 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 DrawAudioLinkSource(
                     1,
                     SHADER_PROPERTY._COLORING_AUDIOLINK_SOURCE,
+                    SHADER_PROPERTY._COLORING_AUDIOLINK_VU_BAND,
+                    SHADER_PROPERTY._COLORING_AUDIOLINK_VU_SMOOTHING,
+                    SHADER_PROPERTY._COLORING_AUDIOLINK_VU_PANNING,
                     SHADER_PROPERTY._COLORING_AUDIOLINK_VU_STRENGTH,
+                    SHADER_PROPERTY._COLORING_AUDIOLINK_CHRONO_TENSITY_BAND,
+                    SHADER_PROPERTY._COLORING_AUDIOLINK_CHRONO_TENSITY_MODE,
                     SHADER_PROPERTY._COLORING_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
                     SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_STRENGTH,
-                    SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_MIRROR,
-                    SHADER_PROPERTY._EMPTY
+                    SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_MIRROR
                 );
                 DrawControlTex(
                     1,
@@ -413,11 +407,15 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 DrawAudioLinkSource(
                     2,
                     SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SOURCE,
+                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_VU_BAND,
+                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_VU_SMOOTHING,
+                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_VU_PANNING,
                     SHADER_PROPERTY._GEOMETRY_AUDIOLINK_VU_STRENGTH,
+                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_CHRONO_TENSITY_BAND,
+                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_CHRONO_TENSITY_MODE,
                     SHADER_PROPERTY._GEOMETRY_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
                     SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_STRENGTH,
-                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_MIRROR,
-                    SHADER_PROPERTY._EMPTY
+                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_MIRROR
                 );
                 DrawControlTex(
                     2,
@@ -476,11 +474,15 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     DrawAudioLinkSource(
                         3,
                         SHADER_PROPERTY._ORBIT_AUDIOLINK_SOURCE,
+                        SHADER_PROPERTY._ORBIT_AUDIOLINK_VU_BAND,
+                        SHADER_PROPERTY._ORBIT_AUDIOLINK_VU_SMOOTHING,
+                        SHADER_PROPERTY._ORBIT_AUDIOLINK_VU_PANNING,
                         SHADER_PROPERTY._ORBIT_AUDIOLINK_VU_STRENGTH,
+                        SHADER_PROPERTY._ORBIT_AUDIOLINK_CHRONO_TENSITY_BAND,
+                        SHADER_PROPERTY._ORBIT_AUDIOLINK_CHRONO_TENSITY_MODE,
                         SHADER_PROPERTY._ORBIT_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
                         SHADER_PROPERTY._ORBIT_AUDIOLINK_SPECTRUM_STRENGTH,
-                        SHADER_PROPERTY._ORBIT_AUDIOLINK_SPECTRUM_MIRROR,
-                        SHADER_PROPERTY._EMPTY
+                        SHADER_PROPERTY._ORBIT_AUDIOLINK_SPECTRUM_MIRROR
                     );
                     DrawControlTex(
                         3,
@@ -546,10 +548,15 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                         switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SOURCE))
                         {
                             case 1:
+                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_VU_BAND);
+                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_VU_SMOOTHING);
+                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_VU_PANNING);
                                 DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_VU_STRENGTH);
                                 break;
                             case 2:
-                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_CHRONOTENSITY_STRENGTH);
+                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_CHRONO_TENSITY_MODE);
+                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_CHRONO_TENSITY_BAND);
+                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_CHRONO_TENSITY_STRENGTH);
                                 break;
                             case 3:
                                 DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_STRENGTH);
@@ -575,9 +582,14 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                             switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_SOURCE))
                             {
                                 case 1:
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_VU_BAND);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_VU_SMOOTHING);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_VU_PANNING);
                                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_VU_STRENGTH);
                                     break;
                                 case 2:
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_CHRONO_TENSITY_BAND);
+                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_CHRONO_TENSITY_MODE);
                                     DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_CHRONO_TENSITY_STRENGTH);
                                     break;
                                 default:
