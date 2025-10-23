@@ -40,10 +40,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
         private void Init(uint[] ints)
         {
-            vertical_field0 = ExtractEqualRow(ints,1);
-            vertical_field1 = ExtractEqualRow(ints,2);
-            vertical_field2 = ExtractEqualRow(ints,3);
-            vertical_field3 = ExtractEqualRow(ints,4);
+            vertical_field0 = ExtractEqualRow(ints, 1);
+            vertical_field1 = ExtractEqualRow(ints, 2);
+            vertical_field2 = ExtractEqualRow(ints, 3);
+            vertical_field3 = ExtractEqualRow(ints, 4);
         }
 
         private uint[] ExtractEqualRow(uint[] ints, uint row)

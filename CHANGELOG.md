@@ -90,7 +90,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
         - **Masks/Offset(マスク/オフセット)**
         <br>入力値に対してマスクやオフセットを与えるテクスチャを設定します。AudioLinkのマスクも含まれます。
         - **Modifiers(モディファイア)**
-        <br>最終的な出力値をループ処理、イージング、加算、乗算などの処理を行います。これまでノイズで設定されていた機能はこちらに移動されました。
+        <br>最終的な出力値をループ処理、イージング、加算、乗算などの処理を行います。これまでノイズで設定されていた機能のいくつかはこちらに移動されました。
         - Orbit、OrbitRotationは一部異なりますが殆どは共通した機構となっています。
 
     - **ナンバー付けされていたノイズの枠管理は廃止され、各機能のSource(参照先)に統合されました。**
@@ -126,6 +126,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 - いくつかのプロパティ、キーワードを削除。
     - 詳細は[変更されたプロパティ]、[0.2.0-exp.3以降で使用されるキーワード]からご確認ください。
+
+- `Line Animation Mode(線のアニメーションモード)`から`Instant`を削除。
+    - **Modifier(モディファイア)**のプロパティを制御することで再現できます。
 
 ### 変更されたプロパティ
 [変更されたプロパティ]: #変更されたプロパティ
@@ -202,10 +205,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 |`_OrbitMaskControl`|->|`_OrbitMaskMapStrength`|
 |`_Noise1stOffsetControlTex`|->|削除|
 |`_Noise1stOffsetControl`|->|削除|
-|`_ColoringNoiseOffsetControlTex`|->|削除|
-|`_ColoringNoiseOffsetControl`|->|削除|
-|`_GeometryNoiseOffsetControlTex`|->|削除|
-|`_GeometryNoiseOffsetControl`|->|削除|
+|`_Noise2ndOffsetControlTex`|->|削除|
+|`_Noise2ndOffsetControl`|->|削除|
+|`_Noise3rdOffsetControlTex`|->|削除|
+|`_Noise3rdOffsetControl`|->|削除|
 ||||
 |`_FragmentAudioLinkNoiseSpectrum`|->|削除|
 |`_FragmentAudioLinkStrength`|->|削除、刷新|

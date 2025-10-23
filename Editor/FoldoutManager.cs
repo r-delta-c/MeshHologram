@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramInspector;
 
 namespace DeltaField.Shaders.MeshHologram.Editor {
     internal class FoldoutManager
@@ -10,47 +11,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
         private Dictionary<FOLDOUT, FoldoutState> FoldoutList = new Dictionary<FOLDOUT, FoldoutState>();
         internal FoldoutManager()
         {
-            FoldoutList.Add(FOLDOUT.RENDERING, new FoldoutState(new string[1] { "label.rendering" }));
             FoldoutList.Add(FOLDOUT.RENDERING_OTHER, new FoldoutState(new string[1] { "label.other_renderings" }));
-            FoldoutList.Add(FOLDOUT.STENCIL, new FoldoutState(new string[1] { "label.stencil" }));
-            FoldoutList.Add(FOLDOUT.AUDIOLINK, new FoldoutState(new string[1] { "label.audiolink" }));
-            FoldoutList.Add(FOLDOUT.FRAGMENT, new FoldoutState(new string[1] { "label.fragment" }));
-            FoldoutList.Add(FOLDOUT.COLOR, new FoldoutState(new string[1] { "label.color" }));
-            FoldoutList.Add(FOLDOUT.GEOMETRY, new FoldoutState(new string[1] { "label.geometry" }));
-            FoldoutList.Add(FOLDOUT.ORBIT, new FoldoutState(new string[1] { "label.orbit" }));
-            FoldoutList.Add(FOLDOUT.MASK_OFFSET, new FoldoutState(new string[6]{
-                "label.fragment.mask_offset",
-                "label.coloring.mask_offset",
-                "label.geometry.mask_offset",
-                "label.orbit.mask_offset",
-                "label.orbit_rotation.mask_offset",
-                "label.orbit_rotation_offset.mask_offset"
-            }, 6));
-            FoldoutList.Add(FOLDOUT.SOURCE, new FoldoutState(new string[6]{
-                "label.fragment.source",
-                "label.coloring.source",
-                "label.geometry.source",
-                "label.orbit.source",
-                "label.orbit_rotation.source",
-                "label.orbit_rotation_offset.source"
-            }, 6));
-            FoldoutList.Add(FOLDOUT.AUDIOLINK_SOURCE, new FoldoutState(new string[6]{
-                "label.fragment.audiolink_source",
-                "label.coloring.audiolink_source",
-                "label.geometry.audiolink_source",
-                "label.orbit.audiolink_source",
-                "label.orbit_rotation.audiolink_source",
-                "label.orbit_rotation_offset.audiolink_source"
-            }, 6));
-            FoldoutList.Add(FOLDOUT.MODIFIER, new FoldoutState(new string[6]{
-                "label.fragment.modifier",
-                "label.coloring.modifier",
-                "label.geometry.modifier",
-                "label.orbit.modifier",
-                "label.orbit_rotation.modifier",
-                "label.orbit_rotation_offset.modifier"
-            }, 6));
-            FoldoutList.Add(FOLDOUT.OTHERS, new FoldoutState(new string[1] { "label.others" }));
         }
 
         internal bool MenuFoldout(FOLDOUT foldout, bool bold = true, int owner = 0)
@@ -140,7 +101,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
             for (int i = 0; i < localized_text.Count; i++)
             {
                 string text = localized_text[i];
-                display[i] = MeshHologramInspector.LocalizationSystem.GetLocalizeText(text);
+                display[i] = LocalizationSystem.GetLocalizeText(text);
             }
         }
     }

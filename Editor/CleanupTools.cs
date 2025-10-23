@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramInspector;
 
 namespace DeltaField.Shaders.MeshHologram.Editor{
     public class CleanupTools
@@ -17,16 +18,16 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
 
             using (new EditorGUILayout.HorizontalScope())
             {
-                EditorGUILayout.LabelField(MeshHologramInspector.LocalizationSystem.GetLocalizeText("label.data_cleanup"));
+                EditorGUILayout.LabelField(LocalizationSystem.GetLocalizeText("label.data_cleanup"));
                 using (new EditorGUILayout.VerticalScope())
                 {
-                    if (GUILayout.Button(MeshHologramInspector.LocalizationSystem.GetLocalizeText("label.texture_properties"), new GUIStyle("miniButton")))
+                    if (GUILayout.Button(LocalizationSystem.GetLocalizeText("label.texture_properties"), new GUIStyle("miniButton")))
                     {
                         if (EditorUtility.DisplayDialog(
-                            MeshHologramInspector.LocalizationSystem.GetLocalizeText("label.data_cleanup"),
-                            MeshHologramInspector.LocalizationSystem.GetLocalizeText("text.remove_unused_textures_text"),
-                            MeshHologramInspector.LocalizationSystem.GetLocalizeText("text.remove"),
-                            MeshHologramInspector.LocalizationSystem.GetLocalizeText("text.cancel")))
+                            LocalizationSystem.GetLocalizeText("label.data_cleanup"),
+                            LocalizationSystem.GetLocalizeText("text.remove_unused_textures_text"),
+                            LocalizationSystem.GetLocalizeText("text.remove"),
+                            LocalizationSystem.GetLocalizeText("text.cancel")))
                         {
                             RemoveTextures();
                             mat.ApplyModifiedProperties();
@@ -34,13 +35,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                             AssetDatabase.Refresh();
                         }
                     }
-                    if (GUILayout.Button(MeshHologramInspector.LocalizationSystem.GetLocalizeText("label.all_properties"), new GUIStyle("miniButton")))
+                    if (GUILayout.Button(LocalizationSystem.GetLocalizeText("label.all_properties"), new GUIStyle("miniButton")))
                     {
                         if (EditorUtility.DisplayDialog(
-                            MeshHologramInspector.LocalizationSystem.GetLocalizeText("label.data_cleanup"),
-                            MeshHologramInspector.LocalizationSystem.GetLocalizeText("text.remove_unused_properties_text"),
-                            MeshHologramInspector.LocalizationSystem.GetLocalizeText("text.remove"),
-                            MeshHologramInspector.LocalizationSystem.GetLocalizeText("text.cancel")))
+                            LocalizationSystem.GetLocalizeText("label.data_cleanup"),
+                            LocalizationSystem.GetLocalizeText("text.remove_unused_properties_text"),
+                            LocalizationSystem.GetLocalizeText("text.remove"),
+                            LocalizationSystem.GetLocalizeText("text.cancel")))
                         {
                             RemoveTextures();
                             RemoveVariableProperties();
@@ -49,13 +50,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                             AssetDatabase.Refresh();
                         }
                     }
-                    if (GUILayout.Button(MeshHologramInspector.LocalizationSystem.GetLocalizeText("label.unused_keywords"), new GUIStyle("miniButton")))
+                    if (GUILayout.Button(LocalizationSystem.GetLocalizeText("label.unused_keywords"), new GUIStyle("miniButton")))
                     {
                         if (EditorUtility.DisplayDialog(
-                            MeshHologramInspector.LocalizationSystem.GetLocalizeText("label.data_cleanup"),
-                            MeshHologramInspector.LocalizationSystem.GetLocalizeText("text.remove_unused_keywords_text"),
-                            MeshHologramInspector.LocalizationSystem.GetLocalizeText("text.remove"),
-                            MeshHologramInspector.LocalizationSystem.GetLocalizeText("text.cancel")))
+                            LocalizationSystem.GetLocalizeText("label.data_cleanup"),
+                            LocalizationSystem.GetLocalizeText("text.remove_unused_keywords_text"),
+                            LocalizationSystem.GetLocalizeText("text.remove"),
+                            LocalizationSystem.GetLocalizeText("text.cancel")))
                         {
                             RemoveUnusedKeywords(m);
                             mat.ApplyModifiedProperties();

@@ -5,8 +5,10 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramManager;
 
-namespace DeltaField.Shaders.MeshHologram.Editor{
+namespace DeltaField.Shaders.MeshHologram.Editor
+{
     public class RichTitle
     {
         public TITLE_SKINS title_skin;
@@ -67,7 +69,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                     int impact = 0;
                     foreach (char text in str)
                     {
-                        if (state.Contains(count) || impact>0 && text.ToString()==" ")
+                        if (state.Contains(count) || impact > 0 && text.ToString() == " ")
                         {
                             impact++;
                         }
@@ -79,15 +81,15 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                                 DrawBomb(size);
                                 impact = 0;
                             }
-                            if (GUILayout.Button("<color=#ffffff>" + text + "</color>", CustomDictionary.gui[CUSTOM_GUI.TITLE1])&&text.ToString()!=" ")
+                            if (GUILayout.Button("<color=#ffffff>" + text + "</color>", CustomGUIStyle[GUI_STYLE.TITLE1]) && text.ToString() != " ")
                             {
                                 CharTimeLimit[count]++;
                             }
                         }
                         if (state.Contains(count) && text.ToString() == "m")
                         {
-                                int size = 24 + impact * impact / 2;
-                                DrawBomb(size);
+                            int size = 24 + impact * impact / 2;
+                            DrawBomb(size);
                         }
                         count++;
                     }
@@ -107,7 +109,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
         private void SkinRAINBOW()
         {
             string epic_header = "<b><i>" + "<color=#" + ColorUtility.ToHtmlStringRGB(new Color() { r = Random.value, g = Random.value, b = Random.value, a = 1.0f }) + ">" + "Mesh Hologram" + "</color></i></b>";
-            EditorGUILayout.LabelField(epic_header, CustomDictionary.gui[CUSTOM_GUI.TITLE1]);
+            EditorGUILayout.LabelField(epic_header, CustomGUIStyle[GUI_STYLE.TITLE1]);
         }
         private void SkinSMASH()
         {
@@ -119,7 +121,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                     Vector2 wh = new Vector2(Random.Range(0.6f, 2.0f), Random.Range(0.6f, 2.0f));
                     Vector2 offset = new Vector2(1.0f, 1.0f) - (wh * 0.5f);
                     GUI.matrix = Matrix4x4.TRS(new Vector3(offset.x, offset.y, 0.0f), Quaternion.identity, new Vector3(wh.x, wh.y, 1.0f));
-                    GUI.Label(GUILayoutUtility.GetRect(42, 42), "<color=#ffffff>" + text + "</color>", CustomDictionary.gui[CUSTOM_GUI.TITLE1]);
+                    GUI.Label(GUILayoutUtility.GetRect(42, 42), "<color=#ffffff>" + text + "</color>", CustomGUIStyle[GUI_STYLE.TITLE1]);
                     GUI.matrix = Matrix4x4.identity;
                 }
             }
@@ -131,7 +133,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
             float t = (float)dt.Hour / (float)24;
             t = Mathf.Clamp01(Mathf.Abs(t * 2.0f % 2.0f * mul - mul) - mul * 0.5f + 0.5f);
             string epic_header = "<b><i>" + "<color=#" + ColorUtility.ToHtmlStringRGB(Color.Lerp(new Color(1.0f, 0.5f, 0.0f), new Color(0.0f, 0.5f, 1.0f), t)) + ">" + "Mesh Hologram" + "</color></i></b>";
-            EditorGUILayout.LabelField(epic_header, CustomDictionary.gui[CUSTOM_GUI.TITLE1]);
+            EditorGUILayout.LabelField(epic_header, CustomGUIStyle[GUI_STYLE.TITLE1]);
         }
     }
 }

@@ -1,642 +1,13 @@
 #if UNITY_EDITOR
 using System;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
+using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramManager;
 
-namespace DeltaField.Shaders.MeshHologram.Editor {
+namespace DeltaField.Shaders.MeshHologram.Editor
+{
     public partial class MeshHologramInspector : ShaderGUI
     {
-        private void DrawTitle()
-        {
-            current_lang = (LANG)EditorGUILayout.EnumPopup(LocalizationSystem.GetLocalizeText("label.language"), current_lang, new GUIStyle("miniPullDown"));
-        }
-
-        private void DrawRenderings()
-        {
-            foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.RENDERING, true);
-            if (foldout_bool)
-            {
-                DrawShaderProperty(SHADER_PROPERTY._RENDERING_MODE);
-                DrawShaderProperty(SHADER_PROPERTY._CULL);
-
-                using (new EditorGUI.DisabledScope(
-                    true))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._Z_WRITE);
-                }
-                using (new EditorGUI.DisabledScope(
-                    GetPropertyFloat(targetMat, SHADER_PROPERTY._RENDERING_MODE) != 0))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._CUSTOM_RENDER_QUEUE_T);
-                }
-                using (new EditorGUI.DisabledScope(
-                    GetPropertyFloat(targetMat, SHADER_PROPERTY._RENDERING_MODE) == 0))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._CUSTOM_RENDER_QUEUE_C);
-                }
-
-                EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._BILLBOARD_ENABLE);
-                using (new EditorGUI.DisabledScope(
-                    !Convert.ToBoolean(GetPropertyFloat(targetMat, SHADER_PROPERTY._BILLBOARD_ENABLE))
-                ))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._FORCED_Z_SCALE_ZERO);
-                }
-
-                DrawShaderProperty(SHADER_PROPERTY._FWIDTH_ENABLE);
-                using (new EditorGUI.DisabledScope(
-                    !Convert.ToBoolean(GetPropertyFloat(targetMat, SHADER_PROPERTY._FWIDTH_ENABLE))
-                ))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._DISTANCE_INFLUENCE);
-                }
-                EditorGUILayout.Space(16);
-
-
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._DIRECTIONAL_LIGHT_INFLUENCE_ENABLE);
-                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._DIRECTIONAL_LIGHT_INFLUENCE_ENABLE) == 1)
-                    {
-                        DrawShaderProperty(SHADER_PROPERTY._DIRECTIONAL_LIGHT_INFLUENCE);
-                    }
-                }
-
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._AMBIENT_INFLUENCE_ENABLE);
-                    using (new EditorGUI.DisabledGroupScope(Convert.ToBoolean(GetPropertyFloat(targetMat, SHADER_PROPERTY._LIGHTVOLUMES_INFLUENCE_ENABLE))))
-                    {
-                        if (GetPropertyFloat(targetMat, SHADER_PROPERTY._AMBIENT_INFLUENCE_ENABLE) == 1)
-                        {
-                            DrawShaderProperty(SHADER_PROPERTY._AMBIENT_INFLUENCE);
-                        }
-                    }
-                }
-
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._LIGHTVOLUMES_INFLUENCE_ENABLE);
-                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._LIGHTVOLUMES_INFLUENCE_ENABLE) == 1)
-                    {
-                        DrawShaderProperty(SHADER_PROPERTY._LIGHTVOLUMES_INFLUENCE);
-                    }
-                }
-
-                EditorGUILayout.Space(16);
-
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    DrawOtherRendering();
-                }
-
-                EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._PREVIEW_ENABLE);
-                DrawShaderProperty(SHADER_PROPERTY._ANTI_ALIASING_ENABLE);
-                EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._MAIN_TEX);
-
-            }
-
-        }
-
-        private void DrawOtherRendering()
-        {
-            foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.RENDERING_OTHER, false);
-            if (foldout_bool)
-            {
-                DrawShaderProperty(SHADER_PROPERTY._Z_CLIP);
-                DrawShaderProperty(SHADER_PROPERTY._Z_TEST);
-                DrawShaderProperty(SHADER_PROPERTY._COLOR_MASK);
-                DrawShaderProperty(SHADER_PROPERTY._OFFSET_FACTOR);
-                DrawShaderProperty(SHADER_PROPERTY._OFFSET_UNITS);
-
-                using (new EditorGUI.DisabledScope(
-                    GetPropertyFloat(targetMat, SHADER_PROPERTY._RENDERING_MODE) != 0))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._ALPHA_TO_MASK);
-                }
-
-                EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._STEREO_MERGE_MODE);
-                EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._BLEND_OP);
-                DrawShaderProperty(SHADER_PROPERTY._SRC_BLEND);
-                DrawShaderProperty(SHADER_PROPERTY._DST_BLEND);
-                EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._BLEND_OP_ALPHA);
-                DrawShaderProperty(SHADER_PROPERTY._SRC_BLEND_ALPHA);
-                DrawShaderProperty(SHADER_PROPERTY._DST_BLEND_ALPHA);
-                editor.EnableInstancingField();
-                editor.DoubleSidedGIField();
-            }
-
-        }
-
-        private void DrawStencil()
-        {
-            foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.STENCIL, true);
-            if (foldout_bool)
-            {
-                EditorGUILayout.Space(4);
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._STENCIL_REF);
-                    DrawShaderProperty(SHADER_PROPERTY._STENCIL_READ_MASK);
-                    DrawShaderProperty(SHADER_PROPERTY._STENCIL_WRITE_MASK);
-                    DrawShaderProperty(SHADER_PROPERTY._STENCIL_COMP);
-                    DrawShaderProperty(SHADER_PROPERTY._STENCIL_PASS);
-                    DrawShaderProperty(SHADER_PROPERTY._STENCIL_FAIL);
-                    DrawShaderProperty(SHADER_PROPERTY._STENCIL_Z_FAIL);
-                }
-            }
-        }
-
-        private void DrawAudioLink()
-        {
-            foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.AUDIOLINK, true);
-            if (foldout_bool)
-            {
-                EditorGUILayout.Space(4);
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_ENABLE);
-                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._AUDIOLINK_ENABLE) == 1)
-                    {
-                        DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_THEME_COLOR_BAND);
-                    }
-                }
-            }
-
-        }
-
-        private void DrawFragment()
-        {
-            foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.FRAGMENT, true);
-            if (foldout_bool)
-            {
-                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_FILL);
-                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_TRIANGLE_COMPRESSION);
-                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_LINE_WIDTH);
-                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_LINE_GRADIENT_BIAS);
-                EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_MANUAL_LINE_SCALING);
-                using (new EditorGUI.DisabledScope(
-                    GetPropertyFloat(targetMat, SHADER_PROPERTY._FRAGMENT_MANUAL_LINE_SCALING) == 0))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_LINE_SCALE);
-                }
-                EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_LINE_ANIMATION_MODE);
-                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_PARTITION_MODE);
-                EditorGUILayout.Space(16);
-
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.SOURCE, false, 0);
-                    if (foldout_bool)
-                    {
-                        DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_SOURCE);
-                        switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._FRAGMENT_SOURCE))
-                        {
-                            case 0:
-                                DrawShaderProperty(SHADER_PROPERTY._FRAGMENT_FIXED_VALUE);
-                                break;
-                            case 1:
-                                DrawFragmentNoise();
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-                DrawAudioLinkSource(
-                    0,
-                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SOURCE,
-                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_VU_BAND,
-                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_VU_SMOOTHING,
-                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_VU_PANNING,
-                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_VU_STRENGTH,
-                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_CHRONO_TENSITY_BAND,
-                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_CHRONO_TENSITY_MODE,
-                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
-                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_STRENGTH,
-                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_SPECTRUM_MIRROR
-                );
-                DrawMaskOffsetTex(
-                    0,
-                    SHADER_PROPERTY._FRAGMENT_MASK_CONTROL_TEX,
-                    SHADER_PROPERTY._FRAGMENT_MASK_CONTROL,
-                    SHADER_PROPERTY._FRAGMENT_OFFSET_CONTROL_TEX,
-                    SHADER_PROPERTY._FRAGMENT_OFFSET_CONTROL,
-                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_MASK_CONTROL_TEX,
-                    SHADER_PROPERTY._FRAGMENT_AUDIOLINK_MASK_CONTROL
-                );
-                DrawModifier(
-                    0,
-                    SHADER_PROPERTY._FRAGMENT_PHASE_SCALE,
-                    SHADER_PROPERTY._FRAGMENT_LOOP_MODE,
-                    SHADER_PROPERTY._FRAGMENT_MID_MUL,
-                    SHADER_PROPERTY._FRAGMENT_MID_ADD,
-                    SHADER_PROPERTY._FRAGMENT_EASE_MODE,
-                    SHADER_PROPERTY._FRAGMENT_EASE_CURVE
-                );
-            }
-        }
-
-        private void DrawColor()
-        {
-            foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.COLOR, true);
-            if (foldout_bool)
-            {
-                DrawShaderProperty(SHADER_PROPERTY._COLOR_SOURCE);
-                switch (targetMat.GetInt(ShaderProperties[SHADER_PROPERTY._COLOR_SOURCE].property))
-                {
-                    case 0:
-                        DrawShaderProperty(SHADER_PROPERTY._COLOR0);
-                        DrawShaderProperty(SHADER_PROPERTY._COLOR1);
-                        break;
-                    case 1:
-                        DrawShaderProperty(SHADER_PROPERTY._COLOR0);
-                        break;
-                    case 2:
-                        EditorGUILayout.GradientField("Gradient Field", gradient);
-                        using (new EditorGUILayout.HorizontalScope())
-                        {
-                            DrawShaderProperty(SHADER_PROPERTY._COLOR_GRADIENT_TEX);
-                            using (new EditorGUILayout.VerticalScope())
-                            {
-                                if (GUILayout.Button(LocalizationSystem.GetLocalizeText("label.color.preview")))
-                                {
-                                    targetMat.SetTexture("_ColorGradientTex", gradientMapManager.CreateTexture(gradient));
-                                }
-                                if (GUILayout.Button(LocalizationSystem.GetLocalizeText("label.color.export")))
-                                {
-                                    Texture2D GenTex = gradientMapManager.Export(gradient);
-                                    if (GenTex != null)
-                                    {
-                                        targetMat.SetTexture("_ColorGradientTex", GenTex);
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case 5:
-                        DrawShaderProperty(SHADER_PROPERTY._AUDIOLINK_THEME_COLOR_BAND);
-                        break;
-                    default:
-                        break;
-                }
-                DrawShaderProperty(SHADER_PROPERTY._EMISSION);
-                DrawShaderProperty(SHADER_PROPERTY._COLORING_PARTITION_MODE);
-                EditorGUILayout.Space(16);
-
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.SOURCE, false, 1);
-                    if (foldout_bool)
-                    {
-                        DrawShaderProperty(SHADER_PROPERTY._COLORING_SOURCE);
-                        switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._COLORING_SOURCE))
-                        {
-                            case 0:
-                                DrawShaderProperty(SHADER_PROPERTY._COLORING_FIXED_VALUE);
-                                break;
-                            case 1:
-                                DrawColoringNoise();
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-                DrawAudioLinkSource(
-                    1,
-                    SHADER_PROPERTY._COLORING_AUDIOLINK_SOURCE,
-                    SHADER_PROPERTY._COLORING_AUDIOLINK_VU_BAND,
-                    SHADER_PROPERTY._COLORING_AUDIOLINK_VU_SMOOTHING,
-                    SHADER_PROPERTY._COLORING_AUDIOLINK_VU_PANNING,
-                    SHADER_PROPERTY._COLORING_AUDIOLINK_VU_STRENGTH,
-                    SHADER_PROPERTY._COLORING_AUDIOLINK_CHRONO_TENSITY_BAND,
-                    SHADER_PROPERTY._COLORING_AUDIOLINK_CHRONO_TENSITY_MODE,
-                    SHADER_PROPERTY._COLORING_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
-                    SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_STRENGTH,
-                    SHADER_PROPERTY._COLORING_AUDIOLINK_SPECTRUM_MIRROR
-                );
-                DrawMaskOffsetTex(
-                    1,
-                    SHADER_PROPERTY._COLORING_MASK_CONTROL_TEX,
-                    SHADER_PROPERTY._COLORING_MASK_CONTROL,
-                    SHADER_PROPERTY._COLORING_OFFSET_CONTROL_TEX,
-                    SHADER_PROPERTY._COLORING_OFFSET_CONTROL,
-                    SHADER_PROPERTY._COLORING_AUDIOLINK_MASK_CONTROL_TEX,
-                    SHADER_PROPERTY._COLORING_AUDIOLINK_MASK_CONTROL
-                );
-                DrawModifier(
-                    1,
-                    SHADER_PROPERTY._COLORING_PHASE_SCALE,
-                    SHADER_PROPERTY._COLORING_LOOP_MODE,
-                    SHADER_PROPERTY._COLORING_MID_MUL,
-                    SHADER_PROPERTY._COLORING_MID_ADD,
-                    SHADER_PROPERTY._COLORING_EASE_MODE,
-                    SHADER_PROPERTY._COLORING_EASE_CURVE
-                );
-            }
-        }
-
-        private void DrawGeometry()
-        {
-            foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.GEOMETRY, true);
-            if (foldout_bool)
-            {
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_SCALE_ENABLE);
-                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._GEOMETRY_SCALE_ENABLE) == 1)
-                    {
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_SCALE_BOUNDS);
-                    }
-                }
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PUSHPULL_ENABLE);
-                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._GEOMETRY_PUSHPULL_ENABLE) == 1)
-                    {
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PUSHPULL_BOUNDS);
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PUSHPULL_PARTITION_BIAS);
-                    }
-                }
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_ROTATION_ENABLE);
-                    if (GetPropertyFloat(targetMat, SHADER_PROPERTY._GEOMETRY_ROTATION_ENABLE) == 1)
-                    {
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_ROTATION_STRENGTH);
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_ROTATION_INVERT);
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_ROTATION_NOISE_REPEAT);
-                    }
-                }
-
-                EditorGUILayout.Space(16);
-                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PIXELIZATION_SPACE);
-                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_PIXELIZATION);
-                EditorGUILayout.Space(16);
-
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.SOURCE, false, 2);
-                    if (foldout_bool)
-                    {
-                        DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_SOURCE);
-                        switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._GEOMETRY_SOURCE))
-                        {
-                            case 0:
-                                DrawShaderProperty(SHADER_PROPERTY._GEOMETRY_FIXED_VALUE);
-                                break;
-                            case 1:
-                                DrawGeometryNoise();
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-                DrawAudioLinkSource(
-                    2,
-                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SOURCE,
-                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_VU_BAND,
-                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_VU_SMOOTHING,
-                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_VU_PANNING,
-                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_VU_STRENGTH,
-                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_CHRONO_TENSITY_BAND,
-                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_CHRONO_TENSITY_MODE,
-                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
-                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_STRENGTH,
-                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_SPECTRUM_MIRROR
-                );
-                DrawMaskOffsetTex(
-                    2,
-                    SHADER_PROPERTY._GEOMETRY_MASK_CONTROL_TEX,
-                    SHADER_PROPERTY._GEOMETRY_MASK_CONTROL,
-                    SHADER_PROPERTY._GEOMETRY_OFFSET_CONTROL_TEX,
-                    SHADER_PROPERTY._GEOMETRY_OFFSET_CONTROL,
-                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_MASK_CONTROL_TEX,
-                    SHADER_PROPERTY._GEOMETRY_AUDIOLINK_MASK_CONTROL
-                );
-                DrawModifier(
-                    2,
-                    SHADER_PROPERTY._GEOMETRY_PHASE_SCALE,
-                    SHADER_PROPERTY._GEOMETRY_LOOP_MODE,
-                    SHADER_PROPERTY._GEOMETRY_MID_MUL,
-                    SHADER_PROPERTY._GEOMETRY_MID_ADD,
-                    SHADER_PROPERTY._GEOMETRY_EASE_MODE,
-                    SHADER_PROPERTY._GEOMETRY_EASE_CURVE
-                );
-            }
-        }
-
-        private void DrawOrbit()
-        {
-            foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.ORBIT, true);
-            if (foldout_bool)
-            {
-                DrawShaderProperty(SHADER_PROPERTY._ORBIT_ENABLE);
-                if (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_ENABLE) == 1)
-                {
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_OFFSET);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_SCALE);
-                    using (new EditorGUILayout.VerticalScope("HelpBox"))
-                    {
-                        foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.SOURCE, false, 3);
-                        if (foldout_bool)
-                        {
-                            DrawShaderProperty(SHADER_PROPERTY._ORBIT_SOURCE);
-                            switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_SOURCE))
-                            {
-                                case 0:
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_FIXED_VALUE);
-                                    break;
-                                case 1:
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_SEED);
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_PRIMITIVE_RATIO);
-                                    break;
-                                case 2:
-                                    DrawOrbitNoise();
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
-                    DrawAudioLinkSource(
-                        3,
-                        SHADER_PROPERTY._ORBIT_AUDIOLINK_SOURCE,
-                        SHADER_PROPERTY._ORBIT_AUDIOLINK_VU_BAND,
-                        SHADER_PROPERTY._ORBIT_AUDIOLINK_VU_SMOOTHING,
-                        SHADER_PROPERTY._ORBIT_AUDIOLINK_VU_PANNING,
-                        SHADER_PROPERTY._ORBIT_AUDIOLINK_VU_STRENGTH,
-                        SHADER_PROPERTY._ORBIT_AUDIOLINK_CHRONO_TENSITY_BAND,
-                        SHADER_PROPERTY._ORBIT_AUDIOLINK_CHRONO_TENSITY_MODE,
-                        SHADER_PROPERTY._ORBIT_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
-                        SHADER_PROPERTY._ORBIT_AUDIOLINK_SPECTRUM_STRENGTH,
-                        SHADER_PROPERTY._ORBIT_AUDIOLINK_SPECTRUM_MIRROR
-                    );
-                    DrawMaskOffsetTex(
-                        3,
-                        SHADER_PROPERTY._ORBIT_MASK_CONTROL_TEX,
-                        SHADER_PROPERTY._ORBIT_MASK_CONTROL,
-                        SHADER_PROPERTY._ORBIT_OFFSET_CONTROL_TEX,
-                        SHADER_PROPERTY._ORBIT_OFFSET_CONTROL,
-                        SHADER_PROPERTY._ORBIT_AUDIOLINK_MASK_CONTROL_TEX,
-                        SHADER_PROPERTY._ORBIT_AUDIOLINK_MASK_CONTROL
-                    );
-                    DrawModifier(
-                        3,
-                        SHADER_PROPERTY._ORBIT_PHASE_SCALE,
-                        SHADER_PROPERTY._ORBIT_LOOP_MODE,
-                        SHADER_PROPERTY._ORBIT_MID_MUL,
-                        SHADER_PROPERTY._ORBIT_MID_ADD,
-                        SHADER_PROPERTY._ORBIT_EASE_MODE,
-                        SHADER_PROPERTY._ORBIT_EASE_CURVE
-                    );
-
-                    DrawPartitionLine(8);
-                    DrawHeaderLabel(LocalizationSystem.GetLocalizeText("label.orbit_rotation"),CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_SPREAD);
-                    using (new EditorGUILayout.VerticalScope("HelpBox"))
-                    {
-                        foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.SOURCE, false, 4);
-                        if (foldout_bool)
-                        {
-                            DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_SOURCE);
-                            switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_ROTATION_SOURCE))
-                            {
-                                case 0:
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_FIXED_VALUE);
-                                    break;
-                                case 1:
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_SEED);
-                                    break;
-                                case 2:
-                                    DrawOrbitRotationNoise();
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
-                    DrawMaskOffsetTex(
-                        4,
-                        SHADER_PROPERTY._ORBIT_ROTATION_MASK_CONTROL_TEX,
-                        SHADER_PROPERTY._ORBIT_ROTATION_MASK_CONTROL,
-                        SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_CONTROL_TEX,
-                        SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_CONTROL
-                    );
-
-                    DrawPartitionLine(8);
-                    DrawHeaderLabel(LocalizationSystem.GetLocalizeText("label.orbit_wave"),CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_STRENGTH);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_FREQUENCY);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_PHASE);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_SPEED);
-                    using (new EditorGUILayout.VerticalScope("HelpBox"))
-                    {
-                        DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SOURCE);
-                        switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SOURCE))
-                        {
-                            case 1:
-                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_VU_BAND);
-                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_VU_SMOOTHING);
-                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_VU_PANNING);
-                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_VU_STRENGTH);
-                                break;
-                            case 2:
-                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_CHRONO_TENSITY_MODE);
-                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_CHRONO_TENSITY_BAND);
-                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_CHRONO_TENSITY_STRENGTH);
-                                break;
-                            case 3:
-                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_STRENGTH);
-                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_MIRROR);
-                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_MODE);
-                                DrawShaderProperty(SHADER_PROPERTY._ORBIT_WAVE_AUDIOLINK_SPECTRUM_BOUNDS);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-
-                    DrawPartitionLine(8);
-                    DrawHeaderLabel(LocalizationSystem.GetLocalizeText("label.orbit_rotation_offset"),CustomDictionary.gui[CUSTOM_GUI.HEADER1]);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_ANGLE);
-                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_SPEED);
-                    using (new EditorGUILayout.VerticalScope("HelpBox"))
-                    {
-                        foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.AUDIOLINK_SOURCE, false, 5);
-                        if (foldout_bool)
-                        {
-                            DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_SOURCE);
-                            switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_SOURCE))
-                            {
-                                case 1:
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_VU_BAND);
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_VU_SMOOTHING);
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_VU_PANNING);
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_VU_STRENGTH);
-                                    break;
-                                case 2:
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_CHRONO_TENSITY_BAND);
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_CHRONO_TENSITY_MODE);
-                                    DrawShaderProperty(SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_CHRONO_TENSITY_STRENGTH);
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
-                    DrawMaskOffsetTex(
-                        5,
-                        SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_MASK_CONTROL_TEX,
-                        SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_MASK_CONTROL,
-                        SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_MASK_CONTROL_TEX,
-                        SHADER_PROPERTY._ORBIT_ROTATION_OFFSET_AUDIOLINK_MASK_CONTROL
-                    );
-                }
-            }
-        }
-
-        private void DrawOthers()
-        {
-            foldout_bool = FoldoutList.MenuFoldout(FOLDOUT.OTHERS, true);
-            if (foldout_bool)
-            {
-                RemoveProp = new CleanupTools(targetMat);
-                EditorGUILayout.Space(16);
-                using (new EditorGUILayout.HorizontalScope())
-                {
-                    if (GUILayout.Button(LocalizationSystem.GetLocalizeText("label.mesh_bounds_editor.button")))
-                    {
-                        MeshBoundsEditor.Window();
-                    }
-                }
-                EditorGUILayout.Space(16);
-                current_title_skin = (TITLE_SKINS)EditorGUILayout.EnumPopup(LocalizationSystem.GetLocalizeText("label.title_skin"), current_title_skin);
-            }
-        }
-
-        private void DrawEasterEgg()
-        {
-            GUIStyle style = new GUIStyle();
-            style.alignment = TextAnchor.MiddleCenter;
-            style.richText = true;
-            style.wordWrap = true;
-            string text = "<color=#ffffff><size=12><i>" + LocalizationSystem.GetLocalizeText("label.easter_egg_text") + "</i></size></color>";
-            EditorGUILayout.LabelField(text, style);
-        }
-
         public override void OnGUI(MaterialEditor editor, MaterialProperty[] Properties)
         {
             if (Initialize == false)
@@ -646,7 +17,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 Config = new ConfigManager(resolve_path);
                 LocalizationSystem = new LocalizationManager(resolve_path);
 
-                ShaderProperties = new CustomDictionary().GetShaderProperties();
                 current_lang = (LANG)Enum.Parse(typeof(LANG), Config.GetLanguage());
                 UpdateLocalization();
                 lang = current_lang;
@@ -682,6 +52,14 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 GUILayout.FlexibleSpace();
             }
 
+            foreach (MESHHOLOGRAM_PROP_ENUM key in MeshHologramProps.Keys)
+            {
+                if (key == MESHHOLOGRAM_PROP_ENUM._DUMMY) continue;
+                MeshHologramProps[key].var = FindProperty(MeshHologramProps[key].property, props);
+            }
+
+
+
             using (var changeCheckScope = new EditorGUI.ChangeCheckScope())
             {
                 EditorGUILayout.Space(16);
@@ -689,37 +67,77 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                 {
                     DrawTitle();
                 }
-
-                EditorGUILayout.Space(16);
-                EditorGUILayout.LabelField("<color=white>General</color>", CustomDictionary.gui[CUSTOM_GUI.HEADER0]);
-                EditorGUILayout.Space(6);
+                MenuIndex = GUILayout.Toolbar(MenuIndex, MenuLabels);
                 using (new EditorGUILayout.VerticalScope("HelpBox"))
                 {
-                    DrawRenderings();
-                    DrawLine();
-                    DrawStencil();
-                    DrawLine();
-                    DrawAudioLink();
-                }
-
-                EditorGUILayout.Space(16);
-                EditorGUILayout.LabelField("<color=white>Main</color>", CustomDictionary.gui[CUSTOM_GUI.HEADER0]);
-                EditorGUILayout.Space(6);
-
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    DrawFragment();
-                    DrawLine();
-                    DrawColor();
-                    DrawLine();
-                    DrawGeometry();
-                    DrawLine();
-                    DrawOrbit();
-                }
-
-                using (new EditorGUILayout.VerticalScope("HelpBox"))
-                {
-                    DrawOthers();
+                    GUILayout.BeginHorizontal(GUILayout.ExpandWidth(false));
+                    DrawHeader(MenuLabels[MenuIndex].text);
+                    switch (MenuIndex)
+                    {
+                        case 0:
+                            DrawHeaderButtonGeneral();
+                            GUILayout.EndHorizontal();
+                            DrawPartitionLine(4);
+                            GeneralIndex = GUILayout.Toolbar(GeneralIndex, GeneralLabels);
+                            GUILayout.BeginHorizontal(GUILayout.ExpandWidth(false));
+                            DrawHeader(GeneralLabels[GeneralIndex].text);
+                            switch (GeneralIndex)
+                            {
+                                case 0:
+                                    DrawHeaderButtonRendering();
+                                    GUILayout.EndHorizontal();
+                                    DrawRenderings();
+                                    break;
+                                case 1:
+                                    DrawHeaderButtonStencil();
+                                    GUILayout.EndHorizontal();
+                                    DrawStencil();
+                                    break;
+                                case 2:
+                                    DrawHeaderButtonAudioLink();
+                                    GUILayout.EndHorizontal();
+                                    DrawAudioLink();
+                                    break;
+                            }
+                            break;
+                        case 1:
+                            DrawHeaderButtonMain();
+                            GUILayout.EndHorizontal();
+                            DrawPartitionLine(4);
+                            MainIndex = GUILayout.Toolbar(MainIndex, MainLabels);
+                            GUILayout.BeginHorizontal(GUILayout.ExpandWidth(false));
+                            DrawHeader(MainLabels[MainIndex].text);
+                            switch (MainIndex)
+                            {
+                                case 0:
+                                    DrawHeaderButtonFragment();
+                                    GUILayout.EndHorizontal();
+                                    DrawFragment();
+                                    break;
+                                case 1:
+                                    DrawHeaderButtonColor();
+                                    GUILayout.EndHorizontal();
+                                    DrawColor();
+                                    break;
+                                case 2:
+                                    DrawHeaderButtonGeometry();
+                                    GUILayout.EndHorizontal();
+                                    DrawGeometry();
+                                    break;
+                                case 3:
+                                    DrawHeaderButtonOrbit();
+                                    GUILayout.EndHorizontal();
+                                    DrawMainOrbit();
+                                    break;
+                            }
+                            break;
+                        case 2:
+                            DrawHeaderButtonOthers();
+                            GUILayout.EndHorizontal();
+                            DrawPartitionLine(4);
+                            DrawOthers();
+                            break;
+                    }
                 }
 
                 if (changeCheckScope.changed)
@@ -728,20 +146,20 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                     int render_queue;
                     foreach (Material mat in editor.targets)
                     {
-                        switch (GetPropertyFloat(targetMat, SHADER_PROPERTY._RENDERING_MODE))
+                        switch (GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._RENDERING_MODE))
                         {
                             case 0:
                                 targetMat.SetShaderPassEnabled("SHADOWCASTER", false);
                                 targetMat.SetShaderPassEnabled("FORWARDBASE", true);
-                                render_queue = Math.Clamp((int)GetPropertyFloat(targetMat, SHADER_PROPERTY._CUSTOM_RENDER_QUEUE_T), 3000, 5000);
+                                render_queue = Math.Clamp((int)GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._CUSTOM_RENDER_QUEUE_T), 3000, 5000);
                                 targetMat.renderQueue = render_queue;
-                                targetMat.SetFloat("_AlphaToMask", GetPropertyFloat(targetMat, SHADER_PROPERTY._ALPHA_TO_MASK));
+                                targetMat.SetFloat("_AlphaToMask", GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._ALPHA_TO_MASK));
                                 targetMat.SetInt("_ZWrite", 0);
                                 break;
                             case 1:
                                 targetMat.SetShaderPassEnabled("SHADOWCASTER", true);
                                 targetMat.SetShaderPassEnabled("FORWARDBASE", true);
-                                render_queue = Math.Clamp((int)GetPropertyFloat(targetMat, SHADER_PROPERTY._CUSTOM_RENDER_QUEUE_C), 2001, 2499);
+                                render_queue = Math.Clamp((int)GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._CUSTOM_RENDER_QUEUE_C), 2001, 2499);
                                 targetMat.renderQueue = render_queue;
                                 targetMat.SetFloat("_AlphaToMask", 1);
                                 targetMat.SetInt("_ZWrite", 1);
@@ -749,9 +167,9 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
                             case 2:
                                 targetMat.SetShaderPassEnabled("SHADOWCASTER", true);
                                 targetMat.SetShaderPassEnabled("FORWARDBASE", false);
-                                render_queue = Math.Clamp((int)GetPropertyFloat(targetMat, SHADER_PROPERTY._CUSTOM_RENDER_QUEUE_C), 2001, 2499);
+                                render_queue = Math.Clamp((int)GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._CUSTOM_RENDER_QUEUE_C), 2001, 2499);
                                 targetMat.renderQueue = render_queue;
-                                targetMat.SetFloat("_AlphaToMask", GetPropertyFloat(targetMat, SHADER_PROPERTY._ALPHA_TO_MASK));
+                                targetMat.SetFloat("_AlphaToMask", GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._ALPHA_TO_MASK));
                                 targetMat.SetInt("_ZWrite", 1);
                                 break;
                         }
