@@ -101,7 +101,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
             for (int i = 0; i < localized_text.Count; i++)
             {
                 string text = localized_text[i];
-                display[i] = LocalizationSystem.GetLocalizeText(text);
+                display[i] = LocalizationManager.GetLocalizeText(text);
             }
         }
     }

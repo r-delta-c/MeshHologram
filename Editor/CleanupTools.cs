@@ -18,16 +18,16 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
 
             using (new EditorGUILayout.HorizontalScope())
             {
-                EditorGUILayout.LabelField(LocalizationSystem.GetLocalizeText("label.data_cleanup"));
+                EditorGUILayout.LabelField(LocalizationManager.GetLocalizeText("label.data_cleanup"));
                 using (new EditorGUILayout.VerticalScope())
                 {
-                    if (GUILayout.Button(LocalizationSystem.GetLocalizeText("label.texture_properties"), new GUIStyle("miniButton")))
+                    if (GUILayout.Button(LocalizationManager.GetLocalizeText("label.texture_properties"), new GUIStyle("miniButton")))
                     {
                         if (EditorUtility.DisplayDialog(
-                            LocalizationSystem.GetLocalizeText("label.data_cleanup"),
-                            LocalizationSystem.GetLocalizeText("text.remove_unused_textures_text"),
-                            LocalizationSystem.GetLocalizeText("text.remove"),
-                            LocalizationSystem.GetLocalizeText("text.cancel")))
+                            LocalizationManager.GetLocalizeText("label.data_cleanup"),
+                            LocalizationManager.GetLocalizeText("text.remove_unused_textures_text"),
+                            LocalizationManager.GetLocalizeText("text.remove"),
+                            LocalizationManager.GetLocalizeText("text.cancel")))
                         {
                             RemoveTextures();
                             mat.ApplyModifiedProperties();
@@ -35,13 +35,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                             AssetDatabase.Refresh();
                         }
                     }
-                    if (GUILayout.Button(LocalizationSystem.GetLocalizeText("label.all_properties"), new GUIStyle("miniButton")))
+                    if (GUILayout.Button(LocalizationManager.GetLocalizeText("label.all_properties"), new GUIStyle("miniButton")))
                     {
                         if (EditorUtility.DisplayDialog(
-                            LocalizationSystem.GetLocalizeText("label.data_cleanup"),
-                            LocalizationSystem.GetLocalizeText("text.remove_unused_properties_text"),
-                            LocalizationSystem.GetLocalizeText("text.remove"),
-                            LocalizationSystem.GetLocalizeText("text.cancel")))
+                            LocalizationManager.GetLocalizeText("label.data_cleanup"),
+                            LocalizationManager.GetLocalizeText("text.remove_unused_properties_text"),
+                            LocalizationManager.GetLocalizeText("text.remove"),
+                            LocalizationManager.GetLocalizeText("text.cancel")))
                         {
                             RemoveTextures();
                             RemoveVariableProperties();
@@ -50,13 +50,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                             AssetDatabase.Refresh();
                         }
                     }
-                    if (GUILayout.Button(LocalizationSystem.GetLocalizeText("label.unused_keywords"), new GUIStyle("miniButton")))
+                    if (GUILayout.Button(LocalizationManager.GetLocalizeText("label.unused_keywords"), new GUIStyle("miniButton")))
                     {
                         if (EditorUtility.DisplayDialog(
-                            LocalizationSystem.GetLocalizeText("label.data_cleanup"),
-                            LocalizationSystem.GetLocalizeText("text.remove_unused_keywords_text"),
-                            LocalizationSystem.GetLocalizeText("text.remove"),
-                            LocalizationSystem.GetLocalizeText("text.cancel")))
+                            LocalizationManager.GetLocalizeText("label.data_cleanup"),
+                            LocalizationManager.GetLocalizeText("text.remove_unused_keywords_text"),
+                            LocalizationManager.GetLocalizeText("text.remove"),
+                            LocalizationManager.GetLocalizeText("text.cancel")))
                         {
                             RemoveUnusedKeywords(m);
                             mat.ApplyModifiedProperties();

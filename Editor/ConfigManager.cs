@@ -2,29 +2,31 @@
 using System.IO;
 using System;
 using UnityEngine;
+using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramInspector;
+using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramConstant;
 
 namespace DeltaField.Shaders.MeshHologram.Editor{
-    public class ConfigManager{
-        private string path;
-        private string lang_key = "[LANGUAGE]|";
-        private string title_skin_key = "[TITLESKIN]|";
-        public ConfigManager(string resolve_path){
-            path = resolve_path + "/Editor/config.ini";
-            if (!File.Exists(path))
-            {
-                SaveConfig();
-            }
+    public static class ConfigManager{
+        public static readonly string path = resolve_path + "/Editor/config.ini";
 
-        }
-        public string GetLanguage(){
+        private const string lang_key = "[LANGUAGE]|";
+        private const string title_skin_key = "[TITLESKIN]|";
+
+        public static LANG lang = GetLanguage();
+        public static TITLE_SKINS title_skin = GetTitleSkin();
+
+        public static LANG GetLanguage()
+        {
             string r = null;
-            using(StreamReader reader = new StreamReader(path)){
-                while(!reader.EndOfStream){
+            using (StreamReader reader = new StreamReader(path))
+            {
+                while (!reader.EndOfStream)
+                {
                     string line = reader.ReadLine();
                     if (line.StartsWith(lang_key))
                     {
                         r = line.Replace(lang_key, "");
-                        if (!Enum.IsDefined(typeof(LANG),r))
+                        if (!Enum.IsDefined(typeof(LANG), r))
                         {
                             r = LANG.ENGLISH.ToString();
                         }
@@ -32,12 +34,16 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                     }
                 }
             }
-            return r;
+            LANG r_e = ParseEnum<LANG>(r);
+            lang = r_e;
+            return r_e;
         }
-        public string GetTitleSkin(){
+        public static TITLE_SKINS GetTitleSkin(){
             string r = null;
-            using(StreamReader reader = new StreamReader(path)){
-                while(!reader.EndOfStream){
+            using (StreamReader reader = new StreamReader(path))
+            {
+                while (!reader.EndOfStream)
+                {
                     string line = reader.ReadLine();
                     if (line.StartsWith(title_skin_key))
                     {
@@ -46,13 +52,22 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                     }
                 }
             }
-            return r;
+            TITLE_SKINS r_e = ParseEnum<TITLE_SKINS>(r);
+            title_skin = r_e;
+            return r_e;
         }
-        public void SaveConfig(LANG lang = LANG.ENGLISH, TITLE_SKINS title_skin = TITLE_SKINS.NORMAL){
-            using(StreamWriter writer = new StreamWriter(path)){
-                writer.WriteLine(lang_key+lang.ToString());
-                writer.WriteLine(title_skin_key+title_skin.ToString());
+        public static void SaveConfig()
+        {
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                writer.WriteLine(lang_key + lang.ToString());
+                writer.WriteLine(title_skin_key + title_skin.ToString());
             }
+        }
+        private static T ParseEnum<T>(string s)
+            where T : Enum
+        {
+            return (T)Enum.Parse(typeof(T), s);
         }
     }
 }

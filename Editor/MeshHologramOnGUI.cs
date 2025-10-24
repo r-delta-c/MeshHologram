@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using System;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramManager;
@@ -12,30 +13,17 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         {
             if (Initialize == false)
             {
-                string resolve_path = UnityEditor.PackageManager.PackageInfo.FindForAssetPath("Packages/com.deltafield.meshhologram").resolvedPath;
-
-                Config = new ConfigManager(resolve_path);
-                LocalizationSystem = new LocalizationManager(resolve_path);
-
-                current_lang = (LANG)Enum.Parse(typeof(LANG), Config.GetLanguage());
+                if (!File.Exists(ConfigManager.path)) ConfigManager.SaveConfig();
                 UpdateLocalization();
-                lang = current_lang;
-                current_title_skin = (TITLE_SKINS)Enum.Parse(typeof(TITLE_SKINS), Config.GetTitleSkin());
                 FoldoutList = new FoldoutManager();
                 Initialize = true;
             }
 
-            if (lang != current_lang)
+            if (lang != ConfigManager.lang)
             {
                 UpdateLocalization();
                 FoldoutList.UpdateLocalization();
-            }
-
-            if (ShaderTitle.title_skin != current_title_skin)
-            {
-                ShaderTitle.title_skin = current_title_skin;
-                ShaderTitle.ResetTimeLimit();
-                Config.SaveConfig(current_lang, current_title_skin);
+                lang = ConfigManager.lang;
             }
 
             if (InspectorInitialize == false)
@@ -48,7 +36,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             using (new EditorGUILayout.HorizontalScope())
             {
                 GUILayout.FlexibleSpace();
-                ShaderTitle.Draw();
+                RichTitle.DrawTitle();
                 GUILayout.FlexibleSpace();
             }
 
@@ -65,7 +53,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 EditorGUILayout.Space(16);
                 using (new EditorGUILayout.VerticalScope("HelpBox"))
                 {
-                    DrawTitle();
+                    LocalizationManager.DrawLanguageEnumPopup();
                 }
                 MenuIndex = GUILayout.Toolbar(MenuIndex, MenuLabels);
                 using (new EditorGUILayout.VerticalScope("HelpBox"))

@@ -9,11 +9,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 {
     public partial class MeshHologramInspector : ShaderGUI
     {
-        private void DrawTitle()
-        {
-            current_lang = (LANG)EditorGUILayout.EnumPopup(LocalizationSystem.GetLocalizeText("label.language"), current_lang, new GUIStyle("miniPullDown"));
-        }
-
         private void DrawRenderings()
         {
             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._RENDERING_MODE);
@@ -233,11 +228,11 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._COLOR_GRADIENT_TEX);
                             using (new EditorGUILayout.VerticalScope())
                             {
-                                if (GUILayout.Button(LocalizationSystem.GetLocalizeText("label.color.preview")))
+                                if (GUILayout.Button(LocalizationManager.GetLocalizeText("label.color.preview")))
                                 {
                                     targetMat.SetTexture("_ColorGradientTex", gradientMapManager.CreateTexture(gradient));
                                 }
-                                if (GUILayout.Button(LocalizationSystem.GetLocalizeText("label.color.export")))
+                                if (GUILayout.Button(LocalizationManager.GetLocalizeText("label.color.export")))
                                 {
                                     Texture2D GenTex = gradientMapManager.Export(gradient);
                                     if (GenTex != null)
@@ -648,13 +643,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             EditorGUILayout.Space(16);
             using (new EditorGUILayout.HorizontalScope())
             {
-                if (GUILayout.Button(LocalizationSystem.GetLocalizeText("label.mesh_bounds_editor.button")))
+                if (GUILayout.Button(LocalizationManager.GetLocalizeText("label.mesh_bounds_editor.button")))
                 {
                     MeshBoundsEditor.Window();
                 }
             }
             EditorGUILayout.Space(16);
-            current_title_skin = (TITLE_SKINS)EditorGUILayout.EnumPopup(LocalizationSystem.GetLocalizeText("label.title_skin"), current_title_skin);
+            RichTitle.DrawTitleSkinPopup();
         }
 
         private void DrawEasterEgg()
@@ -663,7 +658,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             style.alignment = TextAnchor.MiddleCenter;
             style.richText = true;
             style.wordWrap = true;
-            string text = "<color=#ffffff><size=12><i>" + LocalizationSystem.GetLocalizeText("label.easter_egg_text") + "</i></size></color>";
+            string text = "<color=#ffffff><size=12><i>" + LocalizationManager.GetLocalizeText("label.easter_egg_text") + "</i></size></color>";
             EditorGUILayout.LabelField(text, style);
         }
 

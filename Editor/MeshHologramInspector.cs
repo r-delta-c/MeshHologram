@@ -18,22 +18,17 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
         private Material targetMat;
         private MaterialEditor editor;
         private MaterialProperty[] props;
-        static private ConfigManager Config;
 
-        static internal LocalizationManager LocalizationSystem;
-        static private FoldoutManager FoldoutList;
-        static private RichTitle ShaderTitle = new RichTitle();
-        static private int MenuIndex,GeneralIndex,MainIndex,SubIndex,OrbitIndex;
-        static private GUIContent[]
+        private static FoldoutManager FoldoutList;
+        private static int MenuIndex,GeneralIndex,MainIndex,SubIndex,OrbitIndex;
+        private static GUIContent[]
             MenuLabels = new GUIContent[3]{new GUIContent(),new GUIContent(),new GUIContent()},
             GeneralLabels = new GUIContent[3]{new GUIContent(),new GUIContent(),new GUIContent()},
             MainLabels = new GUIContent[4]{new GUIContent(),new GUIContent(),new GUIContent(),new GUIContent()},
             SubLabels = new GUIContent[4]{new GUIContent(),new GUIContent(),new GUIContent(),new GUIContent()},
             OrbitLabels = new GUIContent[4]{new GUIContent(),new GUIContent(),new GUIContent(),new GUIContent()};
-        static private GUILayoutOption MainGUIOption = GUILayout.MinHeight(240);
-        static private LANG lang;
-        static private LANG current_lang;
-        static private TITLE_SKINS current_title_skin;
+        private static GUILayoutOption MainGUIOption = GUILayout.MinHeight(240);
+        private static LANG lang = ConfigManager.lang;
         private CleanupTools cleanup_tool;
 
         private GradientMapManager gradientMapManager = new GradientMapManager();
@@ -41,7 +36,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
 
         private PreviewGraph PreviewGraph0;
 
-        static private bool Initialize = false;
+        private static bool Initialize = false;
         private bool InspectorInitialize = false;
     }
 }

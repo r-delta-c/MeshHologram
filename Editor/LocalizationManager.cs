@@ -2,18 +2,34 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Codice.CM.Common;
+using UnityEditor;
 using UnityEngine;
+using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramConstant;
 
-namespace DeltaField.Shaders.MeshHologram.Editor{
-    internal class LocalizationManager
+namespace DeltaField.Shaders.MeshHologram.Editor
+{
+    public static class LocalizationManager
     {
-        private string resolve_path;
-        private Dictionary<string, string> PropLocalizeDic;
-        internal LocalizationManager(string resolve_path)
+        private static LANG lang = ConfigManager.lang;
+        public static LANG current_lang = ConfigManager.lang;
+        private static Dictionary<string, string> PropLocalizeDic = LoadLangFiles();
+
+        public static bool DrawLanguageEnumPopup()
         {
-            this.resolve_path = resolve_path;
+            lang = (LANG)EditorGUILayout.EnumPopup(GetLocalizeText("label.language"), ConfigManager.lang, new GUIStyle("miniPullDown"));
+            if (lang != current_lang)
+            {
+                PropLocalizeDic = LoadLangFiles();
+                current_lang = lang;
+                ConfigManager.lang = lang;
+                ConfigManager.SaveConfig();
+                return true;
+            }
+            else return false;
         }
-        internal string GetLocalizeText(string key)
+
+        public static string GetLocalizeText(string key)
         {
             if (PropLocalizeDic.ContainsKey(key))
             {
@@ -25,12 +41,14 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                 return key;
             }
         }
-        internal void LoadLangFiles(LANG lang = LANG.ENGLISH)
+        internal static Dictionary<string, string> LoadLangFiles()
         {
             int index = (int)lang;
-            PropLocalizeDic = new Dictionary<string, string>();
+            Dictionary<string, string> r = new Dictionary<string, string>();
             LoadText(resolve_path + "/Editor/", "text.lang");
             LoadText(resolve_path + "/Editor/", "properties.lang");
+
+            return r;
 
             void LoadText(string path, string file_name)
             {
@@ -52,19 +70,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                             string[] values = line.Split("||");
                             if (values.Length >= index + 1)
                             {
-                                if (PropLocalizeDic.ContainsKey(values[0]))
-                                {
-                                    Debug.LogWarning("There are multiple localized text. -> Column:" + column + " - " + line);
-                                }
-                                else
-                                {
-                                    PropLocalizeDic.Add(values[0], values[index]);
-                                }
+                                if (r.ContainsKey(values[0])) Debug.LogWarning("There are multiple localized text. -> Column:" + column + " - " + line);
+                                else r.Add(values[0], values[index]);
                             }
-                            else
-                            {
-                                Debug.LogWarning("Could not get localized text. -> Column:" + column + " | " + line);
-                            }
+                            else Debug.LogWarning("Could not get localized text. -> Column:" + column + " | " + line);
                         }
                     }
                 }

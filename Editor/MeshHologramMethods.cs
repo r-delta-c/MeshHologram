@@ -10,40 +10,34 @@ namespace DeltaField.Shaders.MeshHologram.Editor
     {
         private void UpdateLocalization()
         {
+            foreach (MESHHOLOGRAM_PROP_ENUM i in MeshHologramProps.Keys)
             {
-                LocalizationSystem.LoadLangFiles(current_lang);
-                foreach (MESHHOLOGRAM_PROP_ENUM i in MeshHologramProps.Keys)
-                {
-                    MeshHologramProps[i].display = LocalizationSystem.GetLocalizeText(MeshHologramProps[i].property);
-                }
-                lang = current_lang;
-
-                Config.SaveConfig(current_lang, current_title_skin);
-                UpdateTabLabels();
+                MeshHologramProps[i].display = LocalizationManager.GetLocalizeText(MeshHologramProps[i].property);
             }
+            UpdateTabLabels();
         }
 
         private void UpdateTabLabels()
         {
-            MenuLabels[0].text = LocalizationSystem.GetLocalizeText("label.general");
-            MenuLabels[1].text = LocalizationSystem.GetLocalizeText("label.main");
-            MenuLabels[2].text = LocalizationSystem.GetLocalizeText("label.others");
+            MenuLabels[0].text = LocalizationManager.GetLocalizeText("label.general");
+            MenuLabels[1].text = LocalizationManager.GetLocalizeText("label.main");
+            MenuLabels[2].text = LocalizationManager.GetLocalizeText("label.others");
 
-            GeneralLabels[0].text = LocalizationSystem.GetLocalizeText("label.rendering");
-            GeneralLabels[1].text = LocalizationSystem.GetLocalizeText("label.stencil");
-            GeneralLabels[2].text = LocalizationSystem.GetLocalizeText("label.audiolink");
+            GeneralLabels[0].text = LocalizationManager.GetLocalizeText("label.rendering");
+            GeneralLabels[1].text = LocalizationManager.GetLocalizeText("label.stencil");
+            GeneralLabels[2].text = LocalizationManager.GetLocalizeText("label.audiolink");
 
-            MainLabels[0].text = LocalizationSystem.GetLocalizeText("label.fragment");
-            MainLabels[1].text = LocalizationSystem.GetLocalizeText("label.color");
-            MainLabels[2].text = LocalizationSystem.GetLocalizeText("label.geometry");
-            MainLabels[3].text = LocalizationSystem.GetLocalizeText("label.orbit");
+            MainLabels[0].text = LocalizationManager.GetLocalizeText("label.fragment");
+            MainLabels[1].text = LocalizationManager.GetLocalizeText("label.color");
+            MainLabels[2].text = LocalizationManager.GetLocalizeText("label.geometry");
+            MainLabels[3].text = LocalizationManager.GetLocalizeText("label.orbit");
 
             UpdateSubTabLabels();
 
-            OrbitLabels[0].text = LocalizationSystem.GetLocalizeText("label.orbit");
-            OrbitLabels[1].text = LocalizationSystem.GetLocalizeText("label.orbit_rotation");
-            OrbitLabels[2].text = LocalizationSystem.GetLocalizeText("label.orbit_wave");
-            OrbitLabels[3].text = LocalizationSystem.GetLocalizeText("label.orbit_rotation_offset");
+            OrbitLabels[0].text = LocalizationManager.GetLocalizeText("label.orbit");
+            OrbitLabels[1].text = LocalizationManager.GetLocalizeText("label.orbit_rotation");
+            OrbitLabels[2].text = LocalizationManager.GetLocalizeText("label.orbit_wave");
+            OrbitLabels[3].text = LocalizationManager.GetLocalizeText("label.orbit_rotation_offset");
         }
 
         private void UpdateSubTabLabels()
@@ -51,27 +45,27 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             switch (OrbitIndex)
             {
                 case 0:
-                    SubLabels[0].text = LocalizationSystem.GetLocalizeText("label.source");
-                    SubLabels[1].text = LocalizationSystem.GetLocalizeText("label.audiolink_source");
-                    SubLabels[2].text = LocalizationSystem.GetLocalizeText("label.mask_offset");
-                    SubLabels[3].text = LocalizationSystem.GetLocalizeText("label.modifiers");
+                    SubLabels[0].text = LocalizationManager.GetLocalizeText("label.source");
+                    SubLabels[1].text = LocalizationManager.GetLocalizeText("label.audiolink_source");
+                    SubLabels[2].text = LocalizationManager.GetLocalizeText("label.mask_offset");
+                    SubLabels[3].text = LocalizationManager.GetLocalizeText("label.modifiers");
                     break;
                 case 1:
-                    SubLabels[0].text = LocalizationSystem.GetLocalizeText("label.source");
+                    SubLabels[0].text = LocalizationManager.GetLocalizeText("label.source");
                     SubLabels[1].text = "---";
-                    SubLabels[2].text = LocalizationSystem.GetLocalizeText("label.mask_offset");
+                    SubLabels[2].text = LocalizationManager.GetLocalizeText("label.mask_offset");
                     SubLabels[3].text = "---";
                     break;
                 case 2:
                     SubLabels[0].text = "---";
-                    SubLabels[1].text = LocalizationSystem.GetLocalizeText("label.audiolink_source");
+                    SubLabels[1].text = LocalizationManager.GetLocalizeText("label.audiolink_source");
                     SubLabels[2].text = "---";
                     SubLabels[3].text = "---";
                     break;
                 case 3:
                     SubLabels[0].text = "---";
-                    SubLabels[1].text = LocalizationSystem.GetLocalizeText("label.audiolink_source");
-                    SubLabels[2].text = LocalizationSystem.GetLocalizeText("label.mask_offset");
+                    SubLabels[1].text = LocalizationManager.GetLocalizeText("label.audiolink_source");
+                    SubLabels[2].text = LocalizationManager.GetLocalizeText("label.mask_offset");
                     SubLabels[3].text = "---";
                     break;
                 default:
@@ -261,7 +255,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             TextureImporter importer = AssetImporter.GetAtPath(path) as TextureImporter;
             if (importer.sRGBTexture)
             {
-                EditorGUILayout.HelpBox(LocalizationSystem.GetLocalizeText("label.warning.texture_importer_srgb"), MessageType.Warning);
+                EditorGUILayout.HelpBox(LocalizationManager.GetLocalizeText("label.warning.texture_importer_srgb"), MessageType.Warning);
             }
         }
 

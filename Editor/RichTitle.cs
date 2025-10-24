@@ -9,25 +9,28 @@ using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramManager;
 
 namespace DeltaField.Shaders.MeshHologram.Editor
 {
-    public class RichTitle
+    public static class RichTitle
     {
-        public TITLE_SKINS title_skin;
-        private Texture2D bomb;
-        private int[] CharTimeLimit = new int[13];
-        public RichTitle()
-        {
-            bomb = AssetDatabase.LoadAssetAtPath<Texture2D>("Packages/com.deltafield.meshhologram/Editor/resources/bomb.png");
-            if (bomb == null)
-            {
-                bomb = new Texture2D(1, 1);
-                bomb.SetPixel(1, 1, new Color32(255, 0, 255, 255));
-                bomb.Apply();
-            }
+        private static TITLE_SKINS title_skin = ConfigManager.title_skin;
+        public static TITLE_SKINS current_title_skin = ConfigManager.title_skin;
+        private static Texture2D bomb = InitBomb();
+        private static int[] CharTimeLimit = new int[13];
 
-        }
-        public void Draw()
+        public static Texture2D InitBomb()
         {
-            switch (title_skin)
+            Texture2D r = AssetDatabase.LoadAssetAtPath<Texture2D>("Packages/com.deltafield.meshhologram/Editor/resources/bomb.png");
+            if (r == null)
+            {
+                r = new Texture2D(1, 1);
+                r.SetPixel(1, 1, Color.magenta);
+                r.Apply();
+            }
+            return r;
+        }
+
+        public static void DrawTitle()
+        {
+            switch (ConfigManager.title_skin)
             {
                 case TITLE_SKINS.NORMAL:
                     SkinNORMAL();
@@ -43,7 +46,20 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     break;
             }
         }
-        private void SkinNORMAL()
+
+        public static void DrawTitleSkinPopup()
+        {
+            title_skin = (TITLE_SKINS)EditorGUILayout.EnumPopup(LocalizationManager.GetLocalizeText("label.title_skin"), current_title_skin, new GUIStyle("miniPullDown"));
+            if (title_skin != current_title_skin)
+            {
+                current_title_skin = title_skin;
+                ConfigManager.title_skin = current_title_skin;
+                ConfigManager.SaveConfig();
+                ResetTimeLimit();
+            }
+        }
+
+        private static void SkinNORMAL()
         {
             using (new EditorGUILayout.HorizontalScope())
             {
@@ -98,20 +114,21 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 GUILayout.FlexibleSpace();
             }
         }
-        public void ResetTimeLimit()
+        public static void ResetTimeLimit()
         {
             CharTimeLimit = new int[13];
         }
-        private void DrawBomb(int size)
+        public static void DrawBomb(int size)
         {
             GUI.DrawTexture(GUILayoutUtility.GetRect(size, size), bomb);
         }
-        private void SkinRAINBOW()
+
+        private static void SkinRAINBOW()
         {
             string epic_header = "<b><i>" + "<color=#" + ColorUtility.ToHtmlStringRGB(new Color() { r = Random.value, g = Random.value, b = Random.value, a = 1.0f }) + ">" + "Mesh Hologram" + "</color></i></b>";
             EditorGUILayout.LabelField(epic_header, CustomGUIStyle[GUI_STYLE.TITLE1]);
         }
-        private void SkinSMASH()
+        private static void SkinSMASH()
         {
             using (new EditorGUILayout.HorizontalScope())
             {
@@ -126,7 +143,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 }
             }
         }
-        private void SkinDayAndNight()
+        private static void SkinDayAndNight()
         {
             float mul = 2.5f;
             DateTime dt = DateTime.Now;
