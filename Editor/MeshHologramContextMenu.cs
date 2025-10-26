@@ -15,7 +15,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             if (DrawContextMenuIcon())
             {
                 GenericMenu menu = new GenericMenu();
-                menu.AddItem(new GUIContent("Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties")), false, () => CopyBuffer(CopyBlock(targetMat,
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.RENDERING].GetMainBlock(),
@@ -23,7 +23,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                         PropertyBlockNames[PROPERTY_BLOCK.AUDIOLINK].GetMainBlock()
                     })));
                 menu.AddSeparator("");
-                menu.AddItem(new GUIContent("Paste"), false, () => ParseBlock(
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties")), false, () => ParseBlock(
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.RENDERING].GetMainBlock(),
@@ -38,7 +38,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             if (DrawContextMenuIcon())
             {
                 GenericMenu menu = new GenericMenu();
-                menu.AddItem(new GUIContent("Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties")), false, () => CopyBuffer(CopyBlock(targetMat,
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.FRAGMENT].GetFullBlock(),
@@ -50,7 +50,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                         PropertyBlockNames[PROPERTY_BLOCK.ORBIT_ROTATION_OFFSET].GetFullBlock(),
                     })));
                 menu.AddSeparator("");
-                menu.AddItem(new GUIContent("Paste"), false, () => ParseBlock(
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties")), false, () => ParseBlock(
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.FRAGMENT].GetFullBlock(),
@@ -74,13 +74,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             if (DrawContextMenuIcon())
             {
                 GenericMenu menu = new GenericMenu();
-                menu.AddItem(new GUIContent("Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties")), false, () => CopyBuffer(CopyBlock(targetMat,
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.RENDERING].GetMainBlock()
                     })));
                 menu.AddSeparator("");
-                menu.AddItem(new GUIContent("Paste"), false, () => ParseBlock(
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties")), false, () => ParseBlock(
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.RENDERING].GetMainBlock()
@@ -94,13 +94,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             if (DrawContextMenuIcon())
             {
                 GenericMenu menu = new GenericMenu();
-                menu.AddItem(new GUIContent("Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties")), false, () => CopyBuffer(CopyBlock(targetMat,
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.STENCIL].GetMainBlock()
                     })));
                 menu.AddSeparator("");
-                menu.AddItem(new GUIContent("Paste"), false, () => ParseBlock(
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties")), false, () => ParseBlock(
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                 {
                     PropertyBlockNames[PROPERTY_BLOCK.STENCIL].GetMainBlock()
@@ -114,13 +114,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             if (DrawContextMenuIcon())
             {
                 GenericMenu menu = new GenericMenu();
-                menu.AddItem(new GUIContent("Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties")), false, () => CopyBuffer(CopyBlock(targetMat,
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.AUDIOLINK].GetMainBlock()
                     })));
                 menu.AddSeparator("");
-                menu.AddItem(new GUIContent("Paste"), false, () =>  ParseBlock(
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties")), false, () =>  ParseBlock(
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.AUDIOLINK].GetMainBlock()
@@ -135,20 +135,20 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             if (DrawContextMenuIcon())
             {
                 GenericMenu menu = new GenericMenu();
-                menu.AddItem(new GUIContent("Main Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties_specific")), false, () => CopyBuffer(CopyBlock(targetMat,
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.FRAGMENT].GetMainBlock()
                     })));
-                menu.AddItem(new GUIContent("Full Copy"), false, () => CopyBuffer(CopyBlock(targetMat,PropertyBlockNames[PROPERTY_BLOCK.FRAGMENT].GetFullBlocks())));
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties_all")), false, () => CopyBuffer(CopyBlock(targetMat,PropertyBlockNames[PROPERTY_BLOCK.FRAGMENT].GetFullBlocks())));
                 menu.AddSeparator("");
-                menu.AddItem(new GUIContent("Main Paste"), false, () => ParseBlock(
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties_specific")), false, () => ParseBlock(
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.FRAGMENT].GetMainBlock()
                     }
                 ));
-                menu.AddItem(new GUIContent("Full Paste"), false, () => ParseBlock(PropertyBlockNames[PROPERTY_BLOCK.FRAGMENT].GetFullBlocks()));
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties_all")), false, () => ParseBlock(PropertyBlockNames[PROPERTY_BLOCK.FRAGMENT].GetFullBlocks()));
                 menu.ShowAsContext();
             }
         }
@@ -157,20 +157,20 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             if (DrawContextMenuIcon())
             {
                 GenericMenu menu = new GenericMenu();
-                menu.AddItem(new GUIContent("Main Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties_specific")), false, () => CopyBuffer(CopyBlock(targetMat,
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.COLOR].GetMainBlock()
                     })));
-                menu.AddItem(new GUIContent("Full Copy"), false, () => CopyBuffer(CopyBlock(targetMat,PropertyBlockNames[PROPERTY_BLOCK.COLOR].GetFullBlocks())));
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties_all")), false, () => CopyBuffer(CopyBlock(targetMat,PropertyBlockNames[PROPERTY_BLOCK.COLOR].GetFullBlocks())));
                 menu.AddSeparator("");
-                menu.AddItem(new GUIContent("Main Paste"), false, () => ParseBlock(
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties_specific")), false, () => ParseBlock(
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.COLOR].GetMainBlock()
                     }
                 ));
-                menu.AddItem(new GUIContent("Full Paste"), false, () => ParseBlock(PropertyBlockNames[PROPERTY_BLOCK.COLOR].GetFullBlocks()));
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties_all")), false, () => ParseBlock(PropertyBlockNames[PROPERTY_BLOCK.COLOR].GetFullBlocks()));
                 menu.ShowAsContext();
             }
         }
@@ -179,20 +179,20 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             if (DrawContextMenuIcon())
             {
                 GenericMenu menu = new GenericMenu();
-                menu.AddItem(new GUIContent("Main Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties_specific")), false, () => CopyBuffer(CopyBlock(targetMat,
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.GEOMETRY].GetMainBlock()
                     })));
-                menu.AddItem(new GUIContent("Full Copy"), false, () => CopyBuffer(CopyBlock(targetMat,PropertyBlockNames[PROPERTY_BLOCK.GEOMETRY].GetFullBlocks())));
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties_all")), false, () => CopyBuffer(CopyBlock(targetMat,PropertyBlockNames[PROPERTY_BLOCK.GEOMETRY].GetFullBlocks())));
                 menu.AddSeparator("");
-                menu.AddItem(new GUIContent("Main Paste"), false, () => ParseBlock(
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties_specific")), false, () => ParseBlock(
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.GEOMETRY].GetMainBlock()
                     }
                 ));
-                menu.AddItem(new GUIContent("Full Paste"), false, () => ParseBlock(PropertyBlockNames[PROPERTY_BLOCK.GEOMETRY].GetFullBlocks()));
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties_all")), false, () => ParseBlock(PropertyBlockNames[PROPERTY_BLOCK.GEOMETRY].GetFullBlocks()));
                 menu.ShowAsContext();
             }
         }
@@ -201,7 +201,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             if (DrawContextMenuIcon())
             {
                 GenericMenu menu = new GenericMenu();
-                menu.AddItem(new GUIContent("Main Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties_specific")), false, () => CopyBuffer(CopyBlock(targetMat,
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.ORBIT].GetMainBlock(),
@@ -209,7 +209,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                         PropertyBlockNames[PROPERTY_BLOCK.ORBIT_WAVE].GetMainBlock(),
                         PropertyBlockNames[PROPERTY_BLOCK.ORBIT_ROTATION_OFFSET].GetMainBlock(),
                     })));
-                menu.AddItem(new GUIContent("Full Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties_all")), false, () => CopyBuffer(CopyBlock(targetMat,
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.ORBIT].GetFullBlock(),
@@ -218,7 +218,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                         PropertyBlockNames[PROPERTY_BLOCK.ORBIT_ROTATION_OFFSET].GetFullBlock()
                     })));
                 menu.AddSeparator("");
-                menu.AddItem(new GUIContent("Main Paste"), false, () => ParseBlock(
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties_specific")), false, () => ParseBlock(
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.ORBIT].GetMainBlock(),
@@ -226,7 +226,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                         PropertyBlockNames[PROPERTY_BLOCK.ORBIT_WAVE].GetMainBlock(),
                         PropertyBlockNames[PROPERTY_BLOCK.ORBIT_ROTATION_OFFSET].GetMainBlock(),
                     }));
-                menu.AddItem(new GUIContent("Full Paste"), false, () => ParseBlock(
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties_all")), false, () => ParseBlock(
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[PROPERTY_BLOCK.ORBIT].GetFullBlock(),
@@ -246,20 +246,20 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             if (DrawContextMenuIcon())
             {
                 GenericMenu menu = new GenericMenu();
-                menu.AddItem(new GUIContent("Main Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties_specific")), false, () => CopyBuffer(CopyBlock(targetMat,
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                     {
                         PropertyBlockNames[orbit_block].GetMainBlock()
                     })));
-                menu.AddItem(new GUIContent("Full Copy"), false, () => CopyBuffer(CopyBlock(targetMat, PropertyBlockNames[orbit_block].GetFullBlocks())));
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties_all")), false, () => CopyBuffer(CopyBlock(targetMat, PropertyBlockNames[orbit_block].GetFullBlocks())));
                 menu.AddSeparator("");
-                menu.AddItem(new GUIContent("Main Paste"), false, () => ParseBlock(
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties_specific")), false, () => ParseBlock(
                     new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                 {
                     PropertyBlockNames[orbit_block].GetMainBlock()
                 }
                 ));
-                menu.AddItem(new GUIContent("Full Paste"), false, () => ParseBlock(PropertyBlockNames[orbit_block].GetFullBlocks()));
+                menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties_all")), false, () => ParseBlock(PropertyBlockNames[orbit_block].GetFullBlocks()));
                 menu.ShowAsContext();
             }
         }
@@ -274,7 +274,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     PROPERTY_BLOCK block = GetMainIndexBlock();
                     GenericMenu menu = new GenericMenu();
                     string name = PropertyBlockNames[block].name;
-                    menu.AddItem(new GUIContent("Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                    menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties")), false, () => CopyBuffer(CopyBlock(targetMat,
                         new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                         {
                             PropertyBlockNames[block].GetCommonBlock(PROPERTY_BLOCK.SOURCE),
@@ -284,7 +284,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                         }
                     )));
                     menu.AddSeparator("");
-                    menu.AddItem(new GUIContent("Paste"), false, () => ParseBlock(new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
+                    menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties")), false, () => ParseBlock(new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                         {
                             PropertyBlockNames[block].GetCommonBlock(PROPERTY_BLOCK.SOURCE),
                             PropertyBlockNames[block].GetCommonBlock(PROPERTY_BLOCK.AUDIOLINK_SOURCE),
@@ -308,13 +308,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     PROPERTY_BLOCK common_block = GetCommonIndexBlock();
 
                     GenericMenu menu = new GenericMenu();
-                    menu.AddItem(new GUIContent("Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                    menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties")), false, () => CopyBuffer(CopyBlock(targetMat,
                         new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                         {
                             PropertyBlockNames[block].GetCommonBlock(common_block)
                         })));
                     menu.AddSeparator("");
-                    menu.AddItem(new GUIContent("Paste"), false, () => ParseBlock(new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
+                    menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties")), false, () => ParseBlock(new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                         {
                             PropertyBlockNames[block].GetCommonBlock(common_block)
                         }
@@ -337,7 +337,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     switch (orbit_block)
                     {
                         case PROPERTY_BLOCK.ORBIT:
-                            menu.AddItem(new GUIContent("Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                            menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties")), false, () => CopyBuffer(CopyBlock(targetMat,
                                 new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                                 {
                                     PropertyBlockNames[orbit_block].GetCommonBlock(PROPERTY_BLOCK.SOURCE),
@@ -347,7 +347,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                                 }
                             )));
                             menu.AddSeparator("");
-                            menu.AddItem(new GUIContent("Paste"), false, () => ParseBlock(new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
+                            menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties")), false, () => ParseBlock(new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                                 {
                                     PropertyBlockNames[orbit_block].GetCommonBlock(PROPERTY_BLOCK.SOURCE),
                                     PropertyBlockNames[orbit_block].GetCommonBlock(PROPERTY_BLOCK.AUDIOLINK_SOURCE),
@@ -358,7 +358,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                             menu.ShowAsContext();
                             break;
                         case PROPERTY_BLOCK.ORBIT_ROTATION:
-                            menu.AddItem(new GUIContent("Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                            menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties")), false, () => CopyBuffer(CopyBlock(targetMat,
                                 new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                                 {
                                     PropertyBlockNames[orbit_block].GetCommonBlock(PROPERTY_BLOCK.SOURCE),
@@ -366,7 +366,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                                 }
                             )));
                             menu.AddSeparator("");
-                            menu.AddItem(new GUIContent("Paste"), false, () => ParseBlock(new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
+                            menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties")), false, () => ParseBlock(new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                                 {
                                     PropertyBlockNames[orbit_block].GetCommonBlock(PROPERTY_BLOCK.SOURCE),
                                     PropertyBlockNames[orbit_block].GetCommonBlock(PROPERTY_BLOCK.MASK_OFFSET),
@@ -375,14 +375,14 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                             menu.ShowAsContext();
                             break;
                         case PROPERTY_BLOCK.ORBIT_WAVE:
-                            menu.AddItem(new GUIContent("Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                            menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties")), false, () => CopyBuffer(CopyBlock(targetMat,
                                 new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                                 {
                                     PropertyBlockNames[orbit_block].GetCommonBlock(PROPERTY_BLOCK.AUDIOLINK_SOURCE)
                                 }
                             )));
                             menu.AddSeparator("");
-                            menu.AddItem(new GUIContent("Paste"), false, () => ParseBlock(new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
+                            menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties")), false, () => ParseBlock(new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                                 {
                                     PropertyBlockNames[orbit_block].GetCommonBlock(PROPERTY_BLOCK.AUDIOLINK_SOURCE),
                                 }
@@ -390,7 +390,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                             menu.ShowAsContext();
                             break;
                         case PROPERTY_BLOCK.ORBIT_ROTATION_OFFSET:
-                            menu.AddItem(new GUIContent("Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                            menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties")), false, () => CopyBuffer(CopyBlock(targetMat,
                                 new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                                 {
                                     PropertyBlockNames[orbit_block].GetCommonBlock(PROPERTY_BLOCK.AUDIOLINK_SOURCE),
@@ -398,7 +398,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                                 }
                             )));
                             menu.AddSeparator("");
-                            menu.AddItem(new GUIContent("Paste"), false, () => ParseBlock(new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
+                            menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties")), false, () => ParseBlock(new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                                 {
                                     PropertyBlockNames[orbit_block].GetCommonBlock(PROPERTY_BLOCK.AUDIOLINK_SOURCE),
                                     PropertyBlockNames[orbit_block].GetCommonBlock(PROPERTY_BLOCK.MASK_OFFSET),
@@ -428,19 +428,19 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     GenericMenu menu = new GenericMenu();
                     if (label == "---")
                     {
-                        menu.AddDisabledItem(new GUIContent("Copy"));
+                        menu.AddDisabledItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties")));
                         menu.AddSeparator("");
-                        menu.AddDisabledItem(new GUIContent("Paste"));
+                        menu.AddDisabledItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties")));
                     }
                     else
                     {
-                        menu.AddItem(new GUIContent("Copy"), false, () => CopyBuffer(CopyBlock(targetMat,
+                        menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties")), false, () => CopyBuffer(CopyBlock(targetMat,
                             new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                             {
                                 PropertyBlockNames[orbit_block].GetCommonBlock(common_block)
                             })));
                         menu.AddSeparator("");
-                        menu.AddItem(new GUIContent("Paste"), false, () => ParseBlock(new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
+                        menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.paste_properties")), false, () => ParseBlock(new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                             {
                                 PropertyBlockNames[orbit_block].GetCommonBlock(common_block)
                             }

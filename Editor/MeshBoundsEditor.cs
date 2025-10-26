@@ -31,16 +31,16 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             using (var changeCheckScope = new EditorGUI.ChangeCheckScope())
             {
                 EditorGUILayout.Space(16);
-                MeshFilter ChangeTarget = (MeshFilter)EditorGUILayout.ObjectField("Target", Target, typeof(MeshFilter), true);
+                MeshFilter ChangeTarget = (MeshFilter)EditorGUILayout.ObjectField(LocalizationManager.GetLocalizeText("text.target"), Target, typeof(MeshFilter), true);
                 if (Target != ChangeTarget)
                 {
                     if (Target != null && Source != null)
                     {
                         if (EditorUtility.DisplayDialog(
-                            "Changing Target",
-                            "Changing the Target will reset the Bounds",
-                            "OK",
-                            "Cancel"))
+                            LocalizationManager.GetLocalizeText("dialog.mesh_bounds_editor.changing_target.title"),
+                            LocalizationManager.GetLocalizeText("dialog.mesh_bounds_editor.changing_target.text"),
+                            LocalizationManager.GetLocalizeText("dialog.ok"),
+                            LocalizationManager.GetLocalizeText("dialog.cancel")))
                         {
                             update_preview = true;
                         }
@@ -53,16 +53,16 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 }
 
                 EditorGUILayout.Space(16);
-                Mesh ChangeSource = (Mesh)EditorGUILayout.ObjectField("Mesh", Source, typeof(Mesh), false);
+                Mesh ChangeSource = (Mesh)EditorGUILayout.ObjectField(LocalizationManager.GetLocalizeText("text.mesh"), Source, typeof(Mesh), false);
                 if (Source != ChangeSource)
                 {
                     if (Target != null && Source != null)
                     {
                         if (EditorUtility.DisplayDialog(
-                            "Changing Source",
-                            "Changing the Source will reset the Bounds",
-                            "OK",
-                            "Cancel"))
+                            LocalizationManager.GetLocalizeText("dialog.mesh_bounds_editor.changing_mesh.title"),
+                            LocalizationManager.GetLocalizeText("dialog.mesh_bounds_editor.changing_mesh.text"),
+                            LocalizationManager.GetLocalizeText("dialog.ok"),
+                            LocalizationManager.GetLocalizeText("dialog.cancel")))
                         {
                             update_preview = true;
                         }
@@ -101,7 +101,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                         {
                             bounds.center = mesh_preview.bounds.center;
                             bounds.size = mesh_preview.bounds.size;
-                            if (GUILayout.Button("Reset Default"))
+                            if (GUILayout.Button(LocalizationManager.GetLocalizeText("text.reset_default")))
                             {
                                 bounds.center = Source.bounds.center;
                                 bounds.size = Source.bounds.size;
@@ -115,29 +115,21 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                             bounds.size = EditorGUILayout.Vector3Field("Size", bounds.size);
                         }
                     }
-                    if (GUILayout.Button("Export"))
+                    if (GUILayout.Button(LocalizationManager.GetLocalizeText("text.export")))
                     {
-                        if (EditorUtility.DisplayDialog(
-                            "Export Mesh",
-                            "Save the mesh you have set.",
-                            "OK",
-                            "Cancel"
-                        ))
-                        {
-                            string path = EditorUtility.SaveFilePanel("Create Mesh", "", mesh_preview.name, "mesh");
+                        string path = EditorUtility.SaveFilePanel("Create Mesh", "", mesh_preview.name, "mesh");
 
-                            if (!string.IsNullOrEmpty(path))
-                            {
-                                path = path.Replace("\\", "/").Replace(Application.dataPath, "Assets");
-                                AssetDatabase.CreateAsset(mesh_preview, path);
-                                AssetDatabase.Refresh();
-                                mesh_before = AssetDatabase.LoadAssetAtPath<Mesh>(path);
-                                EditorUtility.SetDirty(mesh_before);
-                                Target.sharedMesh = mesh_before;
-                                Source = mesh_before;
-                                mesh_preview = null;
-                                DestroyImmediate(Guide);
-                            }
+                        if (!string.IsNullOrEmpty(path))
+                        {
+                            path = path.Replace("\\", "/").Replace(Application.dataPath, "Assets");
+                            AssetDatabase.CreateAsset(mesh_preview, path);
+                            AssetDatabase.Refresh();
+                            mesh_before = AssetDatabase.LoadAssetAtPath<Mesh>(path);
+                            EditorUtility.SetDirty(mesh_before);
+                            Target.sharedMesh = mesh_before;
+                            Source = mesh_before;
+                            mesh_preview = null;
+                            DestroyImmediate(Guide);
                         }
                     }
                 }
