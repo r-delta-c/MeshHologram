@@ -327,7 +327,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_CONTROL,
                 }
             )},
-            {PROPERTY_BLOCK.ORBIT_WAVE,new PropertyBlock("OrbitWace",
+            {PROPERTY_BLOCK.ORBIT_WAVE,new PropertyBlock("OrbitWave",
                 new MESHHOLOGRAM_PROP_ENUM[]{
                     MESHHOLOGRAM_PROP_ENUM._ORBIT_WAVE_STRENGTH,
                     MESHHOLOGRAM_PROP_ENUM._ORBIT_WAVE_FREQUENCY,
