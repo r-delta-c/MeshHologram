@@ -3,6 +3,56 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.2.1] 2025/10/26
+### Added
+- プロパティをグループごとにコピー、ペーストする機能を追加しました。
+- Property Checkerを追加しました。
+    - MeshHologramシェーダー内のプロパティ設定で、描写に問題が発生する可能性がある構成が確認された場合、そのリストを列挙する機能です。
+
+### Changed
+- UIが大幅に変更されました。
+    - タブの開閉からメニューバーの選択で表示が切り替わるようになりました。
+    - スクロールの手間や負担が軽減されます。
+- 一部のラベルテキストが変更されました。
+- **Source(参照先)、AudioLink Source(AudioLinkの参照先)の内部的な値が変更されました。**
+    - 各カテゴリー内での整合性の確認を簡潔に行うことを目的としています。詳細は以下の通りです。
+
+    ### 変更前
+    - Orbit、OrbitRotation(Orbit 回転)のSource(参照先)
+        - Fixed Value = 0
+        - Primitive = 1
+        - Noise = 2
+    - Orbit WaveのAudioLink Source(AudioLink参照先)
+        - None = 0
+        - VU_Mul = 1
+        - ChronoTensity = 2
+        - Spectrum = 3
+    - Orbit Rotation Offset(Orbit 回転オフセット)のAudioLink Source(AudioLink参照先)
+        - None = 0
+        - VU_Add = 1
+        - ChronoTensity = 2
+        
+    ### 上記は以下のように統一されました。
+    - スクリプト、アニメーション等で対応しない値が入力された場合は効果がないか、適切な挙動をしません。
+
+    #### Source(参照先)
+
+    |Enum|Value|
+    |:--|:--|
+    |Fixed Value|0|
+    |Noise|1|
+    |Primitive|2|
+
+    #### AudioLink Source(AudioLink参照先)
+
+    |Enum|Value|
+    |:--|:--|
+    |None|0|
+    |VU_Add|1|
+    |VU_Mul|2|
+    |ChronoTensity|3|
+    |Spectrum|4|
+
 ## [0.2.0] 2025/10/13
 ### Added
 - AudioLinkの設定を、各機能ごとに制御できるプロパティを追加。
