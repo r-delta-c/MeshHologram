@@ -12,62 +12,73 @@ label.fragment||Fragment||フラグメント
 label.color||Color||カラー
 label.geometry||Geometry||ジオメトリ
 
-label.color.preview||Preview||プレビュー
-label.color.export||Export||エクスポート
-
 label.orbit||Orbit||Orbit
 label.orbit_rotation||Orbit Rotation||Orbit 回転
-label.orbit_rotation_offset||Orbit Rotation Offset||Orbit 回転オフセット
 label.orbit_wave||Orbit Wave||Orbit Wave
-label.orbit_audiolink||Orbit AudioLink||Orbit AudioLink
+label.orbit_rotation_offset||Orbit Rotation Offset||Orbit 回転オフセット
+
+label.mask_offset||Masks / Offset||マスク / オフセット
+label.source||Source||参照先
+label.audiolink_source||AudioLink||AudioLink
+label.modifiers||Modifiers||モディファイア
+
 label.others||Others||その他
 label.data_cleanup||Data Clean Up||内部データのクリーンアップ
 label.texture_properties||Texture Properties||テクスチャプロパティ
 label.all_properties||All Properties||全てのプロパティ
 label.unused_keywords||Unused Keywords||未使用のキーワード
+label.mesh_bounds_editor.button||Open Mesh Bounds Editor||Mesh Bounds Editorを開く
+label.property_checker.button||Open Property Checker||Property Checkerを開く
 label.title_skin||Title Skin||タイトルスキン
 
-label.mask_offset||Masks / Offset||マスク / オフセット
-label.source||Source||参照先
-label.audiolink_source||AudioLink Source||AudioLink参照先
-label.modifiers||Modifiers||モディファイア
+label.check||Check||チェックする。
+label.recheck||Recheck||再チェックする。
 
-label.fragment.mask_offset||Masks / Offset||マスク / オフセット
-label.coloring.mask_offset||Masks / Offset||マスク / オフセット
-label.geometry.mask_offset||Masks / Offset||マスク / オフセット
-label.orbit.mask_offset||Masks / Offset||マスク / オフセット
-label.orbit_rotation.mask_offset||Masks / Offset||マスク / オフセット
-label.orbit_rotation_offset.mask_offset||Masks / Offset||マスク / オフセット
+label.easter_egg_text||Isn’t it nicer when the window doesn’t jump around as you close a tab?||タブを閉じて、勝手にスクロールされないウィンドウの方がお好みでしょう？
 
 label.warning.texture_importer_srgb||"sRGB (Color Texture)" is enabled in the assigned texture.Disable it when using this texture as an offset or mask, unless intended.||設定されているテクスチャのインポート設定の"sRGB (Color Texture)"が有効になっています。オフセット、マスクに使用する場合、意図していない限りはオフにすることを推奨します。
 
-label.fragment.source||Source||参照先
-label.coloring.source||Source||参照先
-label.geometry.source||Source||参照先
-label.orbit.source||Source||参照先
-label.orbit_rotation.source||Source||参照先
-label.orbit_rotation_offset.source||Source||参照先
+text.target||Target||対象
+text.mesh||Mesh||メッシュ
+text.preview||Preview||プレビュー
+text.export||Export||エクスポート
+text.copy_properties||Copy Properties||プロパティをコピー
+text.paste_properties||Paste Properties||プロパティをペースト
+text.copy_properties_specific||Copy Category-Specific Properties||カテゴリー特有のプロパティをコピー
+text.paste_properties_specific||Paste Category-Specific Properties||カテゴリー特有のプロパティをペースト
+text.copy_properties_all||Copy All Category Properties||全てのプロパティをコピー
+text.paste_properties_all||Paste All Category Properties||全てのプロパティをペースト
 
-label.fragment.audiolink_source||AudioLink Source||AudioLink参照先
-label.coloring.audiolink_source||AudioLink Source||AudioLink参照先
-label.geometry.audiolink_source||AudioLink Source||AudioLink参照先
-label.orbit.audiolink_source||AudioLink Source||AudioLink参照先
-label.orbit_rotation.audiolink_source||AudioLink Source||AudioLink参照先
-label.orbit_rotation_offset.audiolink_source||AudioLink Source||AudioLink参照先
+text.reset_default||Reset Default||初期状態にリセットする。
 
-label.fragment.modifier||Modifiers||モディファイア
-label.coloring.modifier||Modifiers||モディファイア
-label.geometry.modifier||Modifiers||モディファイア
-label.orbit.modifier||Modifiers||モディファイア
-label.orbit_rotation.modifier||Modifiers||モディファイア
-label.orbit_rotation_offset.modifier||Modifiers||モディファイア
+text.property||Property||プロパティ
+text.type||Type||型
+text.category||Category||カテゴリー
 
-text.remove_unused_textures_text||Remove any unused texture properties in material.||マテリアル内部の未使用テクスチャプロパティを削除します。
-text.remove_unused_properties_text||Remove any unused properties in material.||マテリアル内部の全ての未使用プロパティを削除します。
-text.remove_unused_keywords_text||Remove any unused keywords in material.||マテリアル内部の未使用キーワードを削除します。
-text.remove||Remove||削除
-text.cancel||Cancel||キャンセル
+dialog.ok||OK||OK
+dialog.remove||Remove||削除
+dialog.cancel||Cancel||キャンセル
 
-label.mesh_bounds_editor.button||Open Mesh Bounds Editor||Mesh Bounds Editorを開く
+dialog.remove_unused_textures.text||Remove any unused texture properties in material.||マテリアル内部の未使用テクスチャプロパティを削除します。
+dialog.remove_unused_properties.text||Remove any unused properties in material.||マテリアル内部の全ての未使用プロパティを削除します。
+dialog.remove_unused_keywords.text||Remove any unused keywords in material.||マテリアル内部の未使用キーワードを削除します。
 
-label.easter_egg_text||Isn’t it nicer when the window doesn’t jump around as you close a tab?||タブを閉じて、勝手にスクロールされないウィンドウの方がお好みでしょう？
+dialog.mesh_bounds_editor.changing_target.title||Changing Target||対象の変更
+dialog.mesh_bounds_editor.changing_target.text||Changing the Target will reset the Bounds||対象を変更するとBoundsの設定がリセットされます。
+dialog.mesh_bounds_editor.changing_mesh.title||Changing Mesh||メッシュの変更
+dialog.mesh_bounds_editor.changing_mesh.text||Changing the Mesh will reset the Bounds||メッシュを変更するとBoundsの設定がリセットされます。
+
+dialog.property_paste.information||Property Paste Information||Property Paste Information
+dialog.property_paste_failed.text||Failed to paste properties. Please check the Unity Console for more details.||プロパティの貼り付けに失敗しています。詳細はUnityのコンソールをご確認ください。
+log.property_paste.not_exist_properties.text||The following properties were required but not found in the clipboard, so no changes were made.||以下のプロパティを必要としていましたがクリップボードに存在していなかったため、変更されていません。
+log.property_paste.not_exist_categories.text||The following property categories were required but not found in the clipboard, so no changes were made.||以下のプロパティカテゴリーを必要としていましたがクリップボードに存在していなかったため、変更されていません。
+log.property_paste.type_mismatch.text||The following properties could not be converted to the appropriate type during reading, so no changes were made. Note that properties with mismatched element counts between the source and target cannot be pasted due to design limitations.||以下のプロパティは読み取り時に適切な型に変換することができなかったため、変更されていません。また、仕様上コピー元と先で要素数が異なるものを張り付けることもできません。
+log.property_paste.out_of_range.text||The following properties contained unsupported values and were not applied. This may have occurred because the source and target have different specifications.||以下のプロパティは対応外の値が入力されたため、変更されていません。コピー元とコピー先で異なる仕様を持っていた可能性があります。
+
+property_check.no_problem.text||No issues were found in this material...||このマテリアルに注意すべき点は見当たりませんでした…。
+property_check.out_of_supported_shader.text||Not supported shader.||このシェーダーはサポートされていません。
+property_check.colormask_not_all.text||{0} is set to something other than “All.” Please check the result is as intended.||{0}がAll以外になっています。適切に描写されているかご注意ください。
+property_check.unique_blend.text||Blend settings differ from the expected configuration. Please check the result is as intended.||ブレンド設定が以下と異なっています。適切に描写されているかご注意ください。
+property_check.stencil_enabled.text||{0} is set to a value other than “Disable,” and the {1} operation is enable. Please check the result is as intended.||{0}がDisable以外になっており、{1}が機能しています。適切に描写されているかご注意ください。
+property_check.loop_mode_clip.text||{0} is set to “Clip.” In this mode, when {1} is “Noise” or {2} is “ChronoTensity” (accumulative input types), the value will be clamped at 1, preventing further change.||{0}がClipになっています。この場合は{1}がNoise、{2}がChronoTensityのように入力値が蓄積する設定では1で頭打ちになり、変化が発生しなくなります。
+property_check.loop_mode_repeat.text||{0} is set to “Repeat” or “PingPong.” When {1} is “FixedValue” or anything other than “ChronoTensity,” and the input is expected to vary between 0 and 1, the value will loop back to 0 after reaching 1.||{0}がRepeat、PingPongになっています。この場合は{1}がFixedValue、{2}がChronoTensity以外のように入力値が0~1で変化する挙動を想定していた場合、1に到達すると0へループしてしまいます。

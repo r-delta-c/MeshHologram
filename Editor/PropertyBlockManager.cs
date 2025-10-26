@@ -149,18 +149,19 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         private static List<string> FailedPasteProperty = new List<string>();
         private static List<string> FailedPastePropertyBlock = new List<string>();
         private static List<string> TypeMismatchPasteProperty = new List<string>();
+        private static List<string> OutOfRangePasteProperty = new List<string>();
 
         private static void DisplayInfoDialog()
         {
             EditorUtility.DisplayDialog(
-                "Property Paste Information",
-                "プロパティの貼り付けに失敗しています。詳細はUnityのコンソールをご確認ください。",
-                "OK"
+                LocalizationManager.GetLocalizeText("dialog.property_paste.information"),
+                LocalizationManager.GetLocalizeText("dialog.property_paste_failed.text"),
+                LocalizationManager.GetLocalizeText("dialog.ok")
             );
             string log;
             if (FailedPasteProperty.Count > 0)
             {
-                log = "以下のプロパティを必要としていましたがクリップボードに存在していなかったため、変更されていません。\n";
+                log = LocalizationManager.GetLocalizeText("log.property_paste.not_exist_properties.text")+"\n";
                 foreach (string context in FailedPasteProperty)
                 {
                     log += "* "+context+"\n";
@@ -170,7 +171,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
             if (FailedPastePropertyBlock.Count > 0)
             {
-                log = "以下のプロパティカテゴリーを必要としていましたがクリップボードに存在していなかったため、変更されていません。\n";
+                log = LocalizationManager.GetLocalizeText("log.property_paste.not_exist_categories.text")+"\n";
                 foreach (string context in FailedPastePropertyBlock)
                 {
                     log += "* "+context+"\n";
@@ -180,8 +181,18 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
             if (TypeMismatchPasteProperty.Count > 0)
             {
-                log = "以下のプロパティは読み取り時に適切な型に変換することができなかったため、変更されていません。また、仕様上コピー元と先で要素数が異なるものを張り付けることもできません。\n";
+                log = LocalizationManager.GetLocalizeText("log.property_paste.type_mismatch.text")+"\n";
                 foreach (string context in TypeMismatchPasteProperty)
+                {
+                    log += "* "+context + "\n";
+                }
+                Debug.LogWarning(log);
+            }
+
+            if (OutOfRangePasteProperty.Count > 0)
+            {
+                log = LocalizationManager.GetLocalizeText("log.property_paste.out_of_range.text")+"\n";
+                foreach (string context in OutOfRangePasteProperty)
                 {
                     log += "* "+context + "\n";
                 }
@@ -191,6 +202,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             FailedPasteProperty.Clear();
             FailedPastePropertyBlock.Clear();
             TypeMismatchPasteProperty.Clear();
+            OutOfRangePasteProperty.Clear();
             dialog_flag = false;
         }
 
@@ -278,7 +290,18 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     dialog_flag = true;
                     continue;
                 }
+
                 bool type_mismatch_flag = false;
+                bool source_enum = false;
+                bool audiolink_source_enum = false;
+                source_enum =
+                    (e == MESHHOLOGRAM_PROP_ENUM._FRAGMENT_SOURCE) ||
+                    (e == MESHHOLOGRAM_PROP_ENUM._COLOR_SOURCE) ||
+                    (e == MESHHOLOGRAM_PROP_ENUM._GEOMETRY_SOURCE);
+                audiolink_source_enum =
+                    (e == MESHHOLOGRAM_PROP_ENUM._ORBIT_WAVE_AUDIOLINK_SOURCE) ||
+                    (e == MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_AUDIOLINK_SOURCE);
+
                 string data = data_dic[prop];
                 MaterialProperty mp = MeshHologramProps[e].var;
                 ShaderPropertyType type = MeshHologramProps[e].type;
@@ -286,23 +309,19 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {
                     case ShaderPropertyType.Color:
                         Color? r_c = StringToColor(data);
-                        if (r_c == null) type_mismatch_flag = true;
-                        else mp.colorValue = (Color)r_c;
+                        if (CheckVector4Exception(r_c)) mp.colorValue = (Color)r_c;
                         break;
                     case ShaderPropertyType.Vector:
                         Vector4? r_v = StringToVector4(data);
-                        if (r_v == null) type_mismatch_flag = true;
-                        else mp.vectorValue = (Vector4)r_v;
+                        if (CheckVector4Exception(r_v)) mp.vectorValue = (Vector4)r_v;
                         break;
                     case ShaderPropertyType.Float:
                         float? r_f = StringToFloat(data);
-                        if (r_f == null) type_mismatch_flag = true;
-                        else mp.floatValue = (float)r_f;
+                        if (CheckException(r_f)) mp.floatValue = (float)r_f;
                         break;
                     case ShaderPropertyType.Range:
                         float? r_r = StringToFloat(data);
-                        if (r_r == null) type_mismatch_flag = true;
-                        else mp.floatValue = (float)r_r;
+                        if (CheckException(r_r)) mp.floatValue = (float)r_r;
                         break;
                     case ShaderPropertyType.Texture:
                         Texture r_t = StringToTexture(data);
@@ -311,17 +330,81 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                         break;
                     case ShaderPropertyType.Int:
                         int? r_i = StringToInt(data);
-                        if (r_i == null) type_mismatch_flag = true;
-                        else mp.intValue = (int)r_i;
+                        if (CheckException(r_i)) mp.intValue = (int)r_i;
                         break;
                 }
                 if (type_mismatch_flag) TypeMismatchException(MeshHologramProps[e].property, type);
+
+                bool CheckException(float? var)
+                {
+                    if (var == null)
+                    {
+                        type_mismatch_flag = true;
+                        return false;
+                    }
+                    else
+                    {
+                        if ((e == MESHHOLOGRAM_PROP_ENUM._FRAGMENT_SOURCE) || (e == MESHHOLOGRAM_PROP_ENUM._COLOR_SOURCE) || (e == MESHHOLOGRAM_PROP_ENUM._GEOMETRY_SOURCE)) {
+                            if (var > 1)
+                            {
+                                OutOfRangeException(MeshHologramProps[e].property);
+                                return false;
+                            }
+                            else return true;
+                        } else if (e == MESHHOLOGRAM_PROP_ENUM._ORBIT_WAVE_AUDIOLINK_SOURCE)
+                        {
+                            if (var==1)
+                            {
+                                OutOfRangeException(MeshHologramProps[e].property);
+                                return false;
+                            }
+                            else return true;
+                        } else if (e == MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_AUDIOLINK_SOURCE)
+                        {
+                            switch (var)
+                            {
+                                case 2:
+                                    OutOfRangeException(MeshHologramProps[e].property);
+                                    return false;
+                                case 4:
+                                    OutOfRangeException(MeshHologramProps[e].property);
+                                    return false;
+                                default:
+                                    return true;
+                            }
+                        }
+                        else return true;
+                    }
+                }
+                bool CheckVector4Exception(Vector4? input)
+                {
+                    if (input == null)
+                    {
+                        type_mismatch_flag = true;
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
             }
         }
 
         private static void TypeMismatchException(string prop, ShaderPropertyType type)
         {
-            TypeMismatchPasteProperty.Add("Prop: "+prop+" | Type: "+type);
+            TypeMismatchPasteProperty.Add(String.Format("{0}: {1} | {2}: {3}",
+            LocalizationManager.GetLocalizeText("text.property"),
+            prop,
+            LocalizationManager.GetLocalizeText("text.type"),
+            type
+            ));
+            dialog_flag = true;
+        }
+
+        private static void OutOfRangeException(string prop)
+        {
+            OutOfRangePasteProperty.Add(LocalizationManager.GetLocalizeText("text.property") + ": " + prop);
             dialog_flag = true;
         }
 

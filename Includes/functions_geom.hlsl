@@ -251,8 +251,8 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         float orbit_time = 0.0;
         FUNC_NOISE_CENTER_POS(orbit_pos);
         orbit_value += _OrbitFixedValue*SELECTOR_MACRO(_OrbitSource,0);
-        orbit_value += (random(id+_OrbitSeed)>=_OrbitPrimitiveRatio)*SELECTOR_MACRO(_OrbitSource,1);
-        orbit_value += (ValueNoise3D(noise_center_pos,_OrbitNoiseSeed)*_OrbitNoiseValueScale+orbit_time)*SELECTOR_MACRO(_OrbitSource,2);
+        orbit_value += (ValueNoise3D(noise_center_pos,_OrbitNoiseSeed)*_OrbitNoiseValueScale+orbit_time)*SELECTOR_MACRO(_OrbitSource,1);
+        orbit_value += (random(id+_OrbitSeed)>=_OrbitPrimitiveRatio)*SELECTOR_MACRO(_OrbitSource,2);
         orbit_value *= orbit_mask;
         orbit_value += orbit_map;
 
@@ -292,8 +292,8 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         float orbit_rotation_time = 0.0;
         FUNC_NOISE_CENTER_POS(orbit_rotation_pos);
         orbit_rotation_value += _OrbitRotationFixedValue*SELECTOR_MACRO(_OrbitRotationSource,0);
-        orbit_rotation_value += random(id+_OrbitRotationSeed)*SELECTOR_MACRO(_OrbitRotationSource,1);
-        orbit_rotation_value += (ValueNoise3D(noise_center_pos,_OrbitRotationNoiseSeed)*_OrbitRotationNoiseValueScale+orbit_rotation_time)*SELECTOR_MACRO(_OrbitRotationSource,2);
+        orbit_rotation_value += (ValueNoise3D(noise_center_pos,_OrbitRotationNoiseSeed)*_OrbitRotationNoiseValueScale+orbit_rotation_time)*SELECTOR_MACRO(_OrbitRotationSource,1);
+        orbit_rotation_value += random(id+_OrbitRotationSeed)*SELECTOR_MACRO(_OrbitRotationSource,2);
         orbit_rotation_value *= orbit_rotation_mask;
         orbit_rotation_value += orbit_rotation_map;
 
@@ -312,7 +312,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         );
         orbit_wave_value *= float3(_OrbitWaveFrequency.x,_OrbitWaveFrequency.y,_OrbitWaveFrequency.y);
         #if defined(_AUDIOLINK_ENABLE)
-            [branch]if(_OrbitWaveAudioLinkSource==2){
+            [branch]if(_OrbitWaveAudioLinkSource==3){
                 float2 audiolink_orbit_wave_chronotensity = AudioLinkDecodeDataAsUInt(ALPASS_CHRONOTENSITY+uint2(_OrbitWaveAudioLinkChronoTensityMode,_OrbitWaveAudioLinkChronoTensityBand)).r/1000000.0*_OrbitWaveAudioLinkChronoTensityStrength.xy*orbit_rotation_offset_al_mask;
                 orbit_wave_value += float3(audiolink_orbit_wave_chronotensity.x,audiolink_orbit_wave_chronotensity.y,audiolink_orbit_wave_chronotensity.y)*UNITY_TWO_PI;
             }
@@ -334,7 +334,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         );
             [branch]if(_OrbitRotationOffsetAudioLinkSource==1){
                 orbit_anim += audiolink_vu*UNITY_TWO_PI*orbit_rotation_offset_al_mask*_OrbitRotationOffsetAudioLinkVUStrength.xyz*_OrbitRotationOffsetAudioLinkVUStrength.w;
-            }else if(_OrbitRotationOffsetAudioLinkSource==2){
+            }else if(_OrbitRotationOffsetAudioLinkSource==3){
                 orbit_anim += audiolink_chronotensity*UNITY_TWO_PI*orbit_rotation_offset_al_mask*_OrbitRotationOffsetAudioLinkChronoTensityStrength.xyz*_OrbitRotationOffsetAudioLinkChronoTensityStrength.w;
             }
         #endif
@@ -347,7 +347,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
 
         float3 orbit_wave_al_value = 0.0;
         #if defined(_AUDIOLINK_ENABLE)
-            [branch]if(_OrbitWaveAudioLinkSource==3) orbit_wave_al_value = lerp(_OrbitWaveAudioLinkSpectrumBounds.x,_OrbitWaveAudioLinkSpectrumBounds.y,orbit_wave_spectrum)*orbit_rotation_offset_al_mask;
+            [branch]if(_OrbitWaveAudioLinkSource==4) orbit_wave_al_value = lerp(_OrbitWaveAudioLinkSpectrumBounds.x,_OrbitWaveAudioLinkSpectrumBounds.y,orbit_wave_spectrum)*orbit_rotation_offset_al_mask;
         #endif
 
         orbit_wave_value += float3(
@@ -357,7 +357,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         );
 
         #if defined(_AUDIOLINK_ENABLE)
-            [branch]if(_OrbitWaveAudioLinkSource==1){
+            [branch]if(_OrbitWaveAudioLinkSource==2){
                 float2 audiolink_orbit_wave_vu = saturate(lerp(audiolink_vu_data.r,audiolink_vu_data.b,_OrbitWaveAudioLinkVUPanning)*_OrbitWaveAudioLinkVUStrength.xy)*orbit_rotation_offset_al_mask;
                 orbit_wave_value *= float3(audiolink_orbit_wave_vu.x,audiolink_orbit_wave_vu.y,audiolink_orbit_wave_vu.y);
             }

@@ -292,6 +292,97 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             }
         }
     }
+
+    public class DFSourceDrawer : MaterialPropertyDrawer
+    {
+        public DFSourceDrawer(float f)
+        {
+            orbit_source = f==1;
+        }
+
+        private bool orbit_source = false;
+
+        public override float GetPropertyHeight(MaterialProperty prop, string label, MaterialEditor editor) => 0;
+
+        enum SOURCE
+        {
+            [InspectorName("0: Fixed Value")]
+            FIXED_VALUE,
+            [InspectorName("1: Noise")]
+            NOISE,
+            [InspectorName("2: Primitive")]
+            PRIMITIVE
+        }
+
+        private bool CheckOrbitSource(Enum e)
+        {
+            if ((SOURCE)e == SOURCE.PRIMITIVE && !orbit_source) return false;
+            else return true;
+        }
+
+        public override void OnGUI(Rect position, MaterialProperty prop, string label, MaterialEditor editor)
+        {
+            using (var changeCheckScope = new EditorGUI.ChangeCheckScope())
+            {
+                SOURCE mode = (SOURCE)(int)prop.floatValue;
+                EditorGUI.showMixedValue = prop.hasMixedValue;
+                mode = (SOURCE)EditorGUILayout.EnumPopup(new GUIContent(label), mode, CheckOrbitSource, false);
+                EditorGUI.showMixedValue = false;
+                if (changeCheckScope.changed)
+                {
+                    prop.floatValue = (float)mode;
+                }
+            }
+        }
+    }
+    public class DFAudioLinkSourceDrawer : MaterialPropertyDrawer
+    {
+        public DFAudioLinkSourceDrawer(float f)
+        {
+            block_type = (int)f;
+        }
+
+        private int block_type = 0;
+
+        public override float GetPropertyHeight(MaterialProperty prop, string label, MaterialEditor editor) => 0;
+
+        enum AUDIOLINK_SOURCE
+        {
+            [InspectorName("0: None")]
+            NONE,
+            [InspectorName("1: VU Add")]
+            VU_ADD,
+            [InspectorName("2: VU Mul")]
+            VU_MUL,
+            [InspectorName("3: ChronoTensity")]
+            CHRONOTENSITY,
+            [InspectorName("4: Spectrum")]
+            SPECTRUM
+        }
+
+        private bool CheckAudioLinkSource(Enum e)
+        {
+            if (block_type == 1 && (AUDIOLINK_SOURCE)e == AUDIOLINK_SOURCE.VU_ADD) return false;
+            else if (block_type == 2 && (AUDIOLINK_SOURCE)e == AUDIOLINK_SOURCE.VU_MUL) return false;
+            else if (block_type == 2 && (AUDIOLINK_SOURCE)e == AUDIOLINK_SOURCE.SPECTRUM) return false;
+            else return true;
+        }
+
+        public override void OnGUI(Rect position, MaterialProperty prop, string label, MaterialEditor editor)
+        {
+            using (var changeCheckScope = new EditorGUI.ChangeCheckScope())
+            {
+                AUDIOLINK_SOURCE mode = (AUDIOLINK_SOURCE)(int)prop.floatValue;
+                EditorGUI.showMixedValue = prop.hasMixedValue;
+                mode = (AUDIOLINK_SOURCE)EditorGUILayout.EnumPopup(new GUIContent(label), mode, CheckAudioLinkSource, false);
+                EditorGUI.showMixedValue = false;
+                if (changeCheckScope.changed)
+                {
+                    prop.floatValue = (float)mode;
+                }
+            }
+        }
+    }
 }
 
 #endif

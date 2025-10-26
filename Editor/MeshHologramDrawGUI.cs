@@ -228,11 +228,11 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._COLOR_GRADIENT_TEX);
                             using (new EditorGUILayout.VerticalScope())
                             {
-                                if (GUILayout.Button(LocalizationManager.GetLocalizeText("label.color.preview")))
+                                if (GUILayout.Button(LocalizationManager.GetLocalizeText("text.preview")))
                                 {
                                     targetMat.SetTexture("_ColorGradientTex", gradientMapManager.CreateTexture(gradient));
                                 }
-                                if (GUILayout.Button(LocalizationManager.GetLocalizeText("label.color.export")))
+                                if (GUILayout.Button(LocalizationManager.GetLocalizeText("text.export")))
                                 {
                                     Texture2D GenTex = gradientMapManager.Export(gradient);
                                     if (GenTex != null)
@@ -453,10 +453,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                                 DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_FIXED_VALUE);
                                 break;
                             case 1:
-                                DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_SEED);
-                                DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_PRIMITIVE_RATIO);
-                                break;
-                            case 2:
                                 DrawNoiseProps(
                                     MESHHOLOGRAM_PROP_ENUM._ORBIT_NOISE_OFFSET0,
                                     MESHHOLOGRAM_PROP_ENUM._ORBIT_NOISE_SCALE0,
@@ -469,6 +465,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                                     MESHHOLOGRAM_PROP_ENUM._ORBIT_NOISE_TIME_PHASE,
                                     MESHHOLOGRAM_PROP_ENUM._ORBIT_NOISE_VALUE_SCALE
                                 );
+                                break;
+                            case 2:
+                                DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_SEED);
+                                DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_PRIMITIVE_RATIO);
                                 break;
                             default:
                                 break;
@@ -531,10 +531,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_FIXED_VALUE);
                             break;
                         case 1:
-                            DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_SEED);
+                            DrawOrbitRotationNoise();
                             break;
                         case 2:
-                            DrawOrbitRotationNoise();
+                            DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_SEED);
                             break;
                         default:
                             break;
@@ -569,18 +569,18 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_WAVE_AUDIOLINK_SOURCE);
                     switch (GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._ORBIT_WAVE_AUDIOLINK_SOURCE))
                     {
-                        case 1:
+                        case 2:
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_WAVE_AUDIOLINK_VU_BAND);
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_WAVE_AUDIOLINK_VU_SMOOTHING);
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_WAVE_AUDIOLINK_VU_PANNING);
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_WAVE_AUDIOLINK_VU_STRENGTH);
                             break;
-                        case 2:
+                        case 3:
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_WAVE_AUDIOLINK_CHRONO_TENSITY_MODE);
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_WAVE_AUDIOLINK_CHRONO_TENSITY_BAND);
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_WAVE_AUDIOLINK_CHRONO_TENSITY_STRENGTH);
                             break;
-                        case 3:
+                        case 4:
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_WAVE_AUDIOLINK_SPECTRUM_STRENGTH);
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_WAVE_AUDIOLINK_SPECTRUM_MIRROR);
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_WAVE_AUDIOLINK_SPECTRUM_MODE);
@@ -615,7 +615,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_AUDIOLINK_VU_PANNING);
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_AUDIOLINK_VU_STRENGTH);
                             break;
-                        case 2:
+                        case 3:
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_AUDIOLINK_CHRONO_TENSITY_BAND);
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_AUDIOLINK_CHRONO_TENSITY_MODE);
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_AUDIOLINK_CHRONO_TENSITY_STRENGTH);
@@ -646,6 +646,11 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 if (GUILayout.Button(LocalizationManager.GetLocalizeText("label.mesh_bounds_editor.button")))
                 {
                     MeshBoundsEditor.Window();
+                }
+                if (GUILayout.Button(LocalizationManager.GetLocalizeText("label.property_checker.button")))
+                {
+                    PropertyChecker.SetMaterial(targetMat);
+                    PropertyChecker.Window();
                 }
             }
             EditorGUILayout.Space(16);
