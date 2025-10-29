@@ -92,9 +92,9 @@
             break;
         case 2:
             [branch]if(_ColoringPartitionMode==1){
-                c = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColorGradientTex, _linear_repeat,float2(coloring_t*0.994+0.004,0.5),0.0);
+                c = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColorGradientTex, _linear_repeat,float2(mod(coloring_t*_ColorGradientTex_ST.x+_ColorGradientTex_ST.z,1.0)*0.994+0.004,0.5),0.0);
             }else{
-                c = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColorGradientTex, _linear_repeat,float2(i.color_noise.r*0.994+0.004,0.5),0.0);
+                c = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColorGradientTex, _linear_repeat,float2(mod(i.color_noise.r*_ColorGradientTex_ST.x+_ColorGradientTex_ST.z,1.0)*0.994+0.004,0.5),0.0);
             }
             break;
         case 3:
