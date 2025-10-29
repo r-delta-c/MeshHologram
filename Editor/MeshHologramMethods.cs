@@ -8,15 +8,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 {
     public partial class MeshHologramInspector : ShaderGUI
     {
-        private void UpdateLocalization()
-        {
-            foreach (MESHHOLOGRAM_PROP_ENUM i in MeshHologramProps.Keys)
-            {
-                MeshHologramProps[i].display = LocalizationManager.GetLocalizeText(MeshHologramProps[i].property);
-            }
-            UpdateTabLabels();
-        }
-
         private void UpdateTabLabels()
         {
             MenuLabels[0].text = LocalizationManager.GetLocalizeText("label.general");
@@ -87,7 +78,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
         private void DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM key)
         {
-            editor.ShaderProperty(MeshHologramProps[key].var, MeshHologramProps[key].display);
+            editor.ShaderProperty(MeshHologramProps[key].var, MeshHologramProps[key].property);
         }
 
         private void DrawLine()
@@ -136,10 +127,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             MESHHOLOGRAM_PROP_ENUM AUDIOLINK_SPECTRUM_STRENGTH,
             MESHHOLOGRAM_PROP_ENUM AUDIOLINK_SPECTRUM_MIRROR,
             MESHHOLOGRAM_PROP_ENUM MASK_CONTROL_TEX,
+            MESHHOLOGRAM_PROP_ENUM MASK_CONTROL_TEX_ST,
             MESHHOLOGRAM_PROP_ENUM MASK_CONTROL,
             MESHHOLOGRAM_PROP_ENUM OFFSET_CONTROL_TEX,
+            MESHHOLOGRAM_PROP_ENUM OFFSET_CONTROL_TEX_ST,
             MESHHOLOGRAM_PROP_ENUM OFFSET_CONTROL,
             MESHHOLOGRAM_PROP_ENUM AUDIOLINK_MASK_CONTROL_TEX,
+            MESHHOLOGRAM_PROP_ENUM AUDIOLINK_MASK_CONTROL_TEX_ST,
             MESHHOLOGRAM_PROP_ENUM AUDIOLINK_MASK_CONTROL,
             MESHHOLOGRAM_PROP_ENUM PHASE_SCALE,
             MESHHOLOGRAM_PROP_ENUM LOOP_MODE,
@@ -196,10 +190,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 case 2:
                     DrawMaskOffsetTex(
                         MASK_CONTROL_TEX,
+                        MASK_CONTROL_TEX_ST,
                         MASK_CONTROL,
                         OFFSET_CONTROL_TEX,
+                        OFFSET_CONTROL_TEX_ST,
                         OFFSET_CONTROL,
                         AUDIOLINK_MASK_CONTROL_TEX,
+                        AUDIOLINK_MASK_CONTROL_TEX_ST,
                         AUDIOLINK_MASK_CONTROL
                     );
                     break;
@@ -218,32 +215,50 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             }
         }
 
-        private void DrawMaskOffsetTex(MESHHOLOGRAM_PROP_ENUM tex0, MESHHOLOGRAM_PROP_ENUM strength0, MESHHOLOGRAM_PROP_ENUM tex1, MESHHOLOGRAM_PROP_ENUM strength1)
+        private void DrawMaskOffsetTex(
+            MESHHOLOGRAM_PROP_ENUM tex0, MESHHOLOGRAM_PROP_ENUM st0, MESHHOLOGRAM_PROP_ENUM strength0,
+            MESHHOLOGRAM_PROP_ENUM tex1, MESHHOLOGRAM_PROP_ENUM st1, MESHHOLOGRAM_PROP_ENUM strength1)
         {
             DrawShaderProperty(tex0);
             CheckSRGBTexture(tex0);
             DrawShaderProperty(strength0);
+            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight);
+            DrawShaderProperty(st0);
+            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*3.0f);
             DrawPartitionLine(4);
             DrawShaderProperty(tex1);
             CheckSRGBTexture(tex1);
             DrawShaderProperty(strength1);
-            EditorGUILayout.Space(4);
+            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight);
+            DrawShaderProperty(st1);
+            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*3.0f);
         }
 
-        private void DrawMaskOffsetTex(MESHHOLOGRAM_PROP_ENUM tex0, MESHHOLOGRAM_PROP_ENUM strength0, MESHHOLOGRAM_PROP_ENUM tex1, MESHHOLOGRAM_PROP_ENUM strength1, MESHHOLOGRAM_PROP_ENUM tex2, MESHHOLOGRAM_PROP_ENUM strength2)
+        private void DrawMaskOffsetTex(
+            MESHHOLOGRAM_PROP_ENUM tex0, MESHHOLOGRAM_PROP_ENUM st0, MESHHOLOGRAM_PROP_ENUM strength0,
+            MESHHOLOGRAM_PROP_ENUM tex1, MESHHOLOGRAM_PROP_ENUM st1, MESHHOLOGRAM_PROP_ENUM strength1,
+            MESHHOLOGRAM_PROP_ENUM tex2, MESHHOLOGRAM_PROP_ENUM st2, MESHHOLOGRAM_PROP_ENUM strength2)
         {
             DrawShaderProperty(tex0);
             CheckSRGBTexture(tex0);
             DrawShaderProperty(strength0);
+            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight);
+            DrawShaderProperty(st0);
+            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*3.0f);
             DrawPartitionLine(4);
             DrawShaderProperty(tex1);
             CheckSRGBTexture(tex1);
             DrawShaderProperty(strength1);
+            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight);
+            DrawShaderProperty(st1);
+            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*3.0f);
             DrawPartitionLine(4);
             DrawShaderProperty(tex2);
             CheckSRGBTexture(tex2);
             DrawShaderProperty(strength2);
-            EditorGUILayout.Space(4);
+            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight);
+            DrawShaderProperty(st2);
+            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*3.0f);
         }
 
         private void CheckSRGBTexture(MESHHOLOGRAM_PROP_ENUM tex)

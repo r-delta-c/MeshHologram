@@ -28,6 +28,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
         private void OnGUI()
         {
+            LocalizationManager.DrawLanguageEnumPopup();
+            EditorGUILayout.Space(16);
             using (var changeCheckScope = new EditorGUI.ChangeCheckScope())
             {
                 EditorGUILayout.Space(16);

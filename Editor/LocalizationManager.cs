@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Codice.CM.Common;
 using UnityEditor;
 using UnityEngine;
 using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramConstant;
@@ -13,7 +12,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
     {
         private static LANG lang = ConfigManager.lang;
         public static LANG current_lang = ConfigManager.lang;
-        private static Dictionary<string, string> PropLocalizeDic = LoadLangFiles();
+        private static Dictionary<string, string[]> PropLocalizeDic = LoadLangFiles();
 
         public static bool DrawLanguageEnumPopup()
         {
@@ -29,22 +28,36 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             else return false;
         }
 
-        public static string GetLocalizeText(string key)
+        public static string GetLocalizeText(string key, int index = 0)
         {
-            if (PropLocalizeDic.ContainsKey(key))
-            {
-                return PropLocalizeDic[key];
-            }
-            else
+            if (!PropLocalizeDic.ContainsKey(key))
             {
                 Debug.LogWarning("Could not get localized text. -> " + key);
                 return key;
             }
+            string[] values = PropLocalizeDic[key];
+            if (values.Length < index)
+            {
+                Debug.LogWarning("Argument index is out of range.");
+                index = 0;
+            }
+                return PropLocalizeDic[key][index];
         }
-        internal static Dictionary<string, string> LoadLangFiles()
+
+        public static string[] GetLocalizeTexts(string key)
+        {
+            if (!PropLocalizeDic.ContainsKey(key))
+            {
+                Debug.LogWarning("Could not get localized text. -> " + key);
+                return new string[5];
+            }
+            return PropLocalizeDic[key];
+        }
+
+        internal static Dictionary<string, string[]> LoadLangFiles()
         {
             int index = (int)lang;
-            Dictionary<string, string> r = new Dictionary<string, string>();
+            Dictionary<string, string[]> r = new Dictionary<string, string[]>();
             LoadText(resolve_path + "/Editor/", "text.lang");
             LoadText(resolve_path + "/Editor/", "properties.lang");
 
@@ -56,25 +69,29 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 if (!File.Exists(path))
                 {
                     Debug.LogWarning(file_name + " does not exist.");
+                    return;
                 }
-                else
+
+                using (StreamReader reader = new StreamReader(path))
                 {
-                    using (StreamReader reader = new StreamReader(path))
+                    int column = 0;
+                    while (!reader.EndOfStream)
                     {
-                        int column = 0;
-                        while (!reader.EndOfStream)
+                        column++;
+                        string line = reader.ReadLine();
+                        if (line == "") continue;
+                        string[] langs = line.Split("||");
+                        if (langs.Length > index)
                         {
-                            column++;
-                            string line = reader.ReadLine();
-                            if (line == "") continue;
-                            string[] values = line.Split("||");
-                            if (values.Length >= index + 1)
+                            if (r.ContainsKey(langs[0]))
                             {
-                                if (r.ContainsKey(values[0])) Debug.LogWarning("There are multiple localized text. -> Column:" + column + " - " + line);
-                                else r.Add(values[0], values[index]);
+                                Debug.LogWarning("There are multiple localized text. -> Column:" + column + " - " + line);
+                                continue;
                             }
-                            else Debug.LogWarning("Could not get localized text. -> Column:" + column + " | " + line);
+
+                            r.Add(langs[0], langs[index].Split('/'));
                         }
+                        else Debug.LogWarning("Could not get localized text. -> Column:" + column + " | " + line);
                     }
                 }
             }

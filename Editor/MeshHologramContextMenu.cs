@@ -268,7 +268,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         {
             using (new GUILayout.HorizontalScope(GUILayout.ExpandWidth(false)))
             {
-                DrawHeader("Commons");
+                DrawHeader(LocalizationManager.GetLocalizeText("label.commons"));
                 if (DrawContextMenuIcon())
                 {
                     PROPERTY_BLOCK block = GetMainIndexBlock();
@@ -328,7 +328,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         {
             using (new GUILayout.HorizontalScope(GUILayout.ExpandWidth(false)))
             {
-                DrawHeader("Commons");
+                DrawHeader(LocalizationManager.GetLocalizeText("label.commons"));
                 if (DrawContextMenuIcon())
                 {
                     GenericMenu menu = new GenericMenu();

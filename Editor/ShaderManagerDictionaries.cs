@@ -19,6 +19,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             )
         );
 
+        public static Dictionary<string, MESHHOLOGRAM_PROP_ENUM> propEnumToName = MeshHologramProps.Values.ToDictionary(e => e.property, e => e.enum_value);
+
+        public static ShaderPropertyState GetStringToPropertyState(string name)
+        {
+            return MeshHologramProps[propEnumToName[name]];
+        }
+
         internal static Dictionary<GUI_STYLE, GUIStyle> CustomGUIStyle = new Dictionary<GUI_STYLE, GUIStyle> {
             { Editor.GUI_STYLE.PLAIN,new GUIStyle(){
 

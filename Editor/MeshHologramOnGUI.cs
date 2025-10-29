@@ -14,14 +14,14 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             if (Initialize == false)
             {
                 if (!File.Exists(ConfigManager.path)) ConfigManager.SaveConfig();
-                UpdateLocalization();
+                UpdateTabLabels();
                 FoldoutList = new FoldoutManager();
                 Initialize = true;
             }
 
             if (lang != ConfigManager.lang)
             {
-                UpdateLocalization();
+                UpdateTabLabels();
                 FoldoutList.UpdateLocalization();
                 lang = ConfigManager.lang;
             }
@@ -130,39 +130,71 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
                 if (changeCheckScope.changed)
                 {
-                    editor.RegisterPropertyChangeUndo("Property");
-                    int render_queue;
-                    foreach (Material mat in editor.targets)
+                    EditorApplication.delayCall += () =>
                     {
-                        switch (GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._RENDERING_MODE))
+                        editor.RegisterPropertyChangeUndo("Property");
+                        int render_queue;
+                        foreach (Material mat in editor.targets)
                         {
-                            case 0:
-                                targetMat.SetShaderPassEnabled("SHADOWCASTER", false);
-                                targetMat.SetShaderPassEnabled("FORWARDBASE", true);
-                                render_queue = Math.Clamp((int)GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._CUSTOM_RENDER_QUEUE_T), 3000, 5000);
-                                targetMat.renderQueue = render_queue;
-                                targetMat.SetFloat("_AlphaToMask", GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._ALPHA_TO_MASK));
-                                targetMat.SetInt("_ZWrite", 0);
-                                break;
-                            case 1:
-                                targetMat.SetShaderPassEnabled("SHADOWCASTER", true);
-                                targetMat.SetShaderPassEnabled("FORWARDBASE", true);
-                                render_queue = Math.Clamp((int)GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._CUSTOM_RENDER_QUEUE_C), 2001, 2499);
-                                targetMat.renderQueue = render_queue;
-                                targetMat.SetFloat("_AlphaToMask", 1);
-                                targetMat.SetInt("_ZWrite", 1);
-                                break;
-                            case 2:
-                                targetMat.SetShaderPassEnabled("SHADOWCASTER", true);
-                                targetMat.SetShaderPassEnabled("FORWARDBASE", false);
-                                render_queue = Math.Clamp((int)GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._CUSTOM_RENDER_QUEUE_C), 2001, 2499);
-                                targetMat.renderQueue = render_queue;
-                                targetMat.SetFloat("_AlphaToMask", GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._ALPHA_TO_MASK));
-                                targetMat.SetInt("_ZWrite", 1);
-                                break;
+                            switch (GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._RENDERING_MODE))
+                            {
+                                default:
+                                    targetMat.SetShaderPassEnabled("SHADOWCASTER", false);
+                                    targetMat.SetShaderPassEnabled("FORWARDBASE", true);
+                                    render_queue = Math.Clamp((int)GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._CUSTOM_RENDER_QUEUE_T), 3000, 5000);
+                                    targetMat.renderQueue = render_queue;
+                                    targetMat.SetFloat("_AlphaToMask", GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._ALPHA_TO_MASK));
+                                    targetMat.SetInt("_ZWrite", 0);
+                                    break;
+                                case 1:
+                                    targetMat.SetShaderPassEnabled("SHADOWCASTER", true);
+                                    targetMat.SetShaderPassEnabled("FORWARDBASE", true);
+                                    render_queue = Math.Clamp((int)GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._CUSTOM_RENDER_QUEUE_C), 2001, 2499);
+                                    targetMat.renderQueue = render_queue;
+                                    targetMat.SetFloat("_AlphaToMask", 1);
+                                    targetMat.SetInt("_ZWrite", 1);
+                                    break;
+                                case 2:
+                                    targetMat.SetShaderPassEnabled("SHADOWCASTER", true);
+                                    targetMat.SetShaderPassEnabled("FORWARDBASE", false);
+                                    render_queue = Math.Clamp((int)GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._CUSTOM_RENDER_QUEUE_C), 2001, 2499);
+                                    targetMat.renderQueue = render_queue;
+                                    targetMat.SetFloat("_AlphaToMask", GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._ALPHA_TO_MASK));
+                                    targetMat.SetInt("_ZWrite", 1);
+                                    break;
+                            }
+
+                            switch(GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._STEREO_MERGE_MODE))
+                            {
+                                default:
+                                    targetMat.EnableKeyword("_STEREOMERGEMODE_NONE");
+                                    targetMat.DisableKeyword("_STEREOMERGEMODE_POSITION");
+                                    targetMat.DisableKeyword("_STEREOMERGEMODE_ROTATION");
+                                    targetMat.DisableKeyword("_STEREOMERGEMODE_POSITION_ROTATION");
+                                    break;
+                                case 1:
+                                    targetMat.DisableKeyword("_STEREOMERGEMODE_NONE");
+                                    targetMat.EnableKeyword("_STEREOMERGEMODE_POSITION");
+                                    targetMat.DisableKeyword("_STEREOMERGEMODE_ROTATION");
+                                    targetMat.DisableKeyword("_STEREOMERGEMODE_POSITION_ROTATION");
+                                    break;
+                                case 2:
+                                    targetMat.DisableKeyword("_STEREOMERGEMODE_NONE");
+                                    targetMat.DisableKeyword("_STEREOMERGEMODE_POSITION");
+                                    targetMat.EnableKeyword("_STEREOMERGEMODE_ROTATION");
+                                    targetMat.DisableKeyword("_STEREOMERGEMODE_POSITION_ROTATION");
+                                    break;
+                                case 3:
+                                    targetMat.DisableKeyword("_STEREOMERGEMODE_NONE");
+                                    targetMat.DisableKeyword("_STEREOMERGEMODE_POSITION");
+                                    targetMat.DisableKeyword("_STEREOMERGEMODE_ROTATION");
+                                    targetMat.EnableKeyword("_STEREOMERGEMODE_POSITION_ROTATION");
+                                    break;
+                            }
+
+                            EditorUtility.SetDirty(targetMat);
                         }
-                        EditorUtility.SetDirty(targetMat);
-                    }
+                    };
                 }
             }
             EditorGUILayout.Space(640);

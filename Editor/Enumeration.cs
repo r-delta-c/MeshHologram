@@ -29,6 +29,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         [MeshHologramPropMeta("_AntiAliasingEnable")] _ANTI_ALIASING_ENABLE,
 
         [MeshHologramPropMeta("_MainTex")] _MAIN_TEX,
+        [MeshHologramPropMeta("_MainTex_ST")] _MAIN_TEX_ST,
 
         [MeshHologramPropMeta("_ZClip")] _Z_CLIP,
         [MeshHologramPropMeta("_ZTest")] _Z_TEST,
@@ -90,10 +91,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         [MeshHologramPropMeta("_FragmentAudioLinkSpectrumStrength")] _FRAGMENT_AUDIOLINK_SPECTRUM_STRENGTH,
 
         [MeshHologramPropMeta("_FragmentMaskMap")] _FRAGMENT_MASK_CONTROL_TEX,
+        [MeshHologramPropMeta("_FragmentMaskMap_ST")] _FRAGMENT_MASK_CONTROL_TEX_ST,
         [MeshHologramPropMeta("_FragmentMaskMapStrength")] _FRAGMENT_MASK_CONTROL,
         [MeshHologramPropMeta("_FragmentMap")] _FRAGMENT_OFFSET_CONTROL_TEX,
+        [MeshHologramPropMeta("_FragmentMap_ST")] _FRAGMENT_OFFSET_CONTROL_TEX_ST,
         [MeshHologramPropMeta("_FragmentMapStrength")] _FRAGMENT_OFFSET_CONTROL,
         [MeshHologramPropMeta("_FragmentAudioLinkMaskMap")] _FRAGMENT_AUDIOLINK_MASK_CONTROL_TEX,
+        [MeshHologramPropMeta("_FragmentAudioLinkMaskMap_ST")] _FRAGMENT_AUDIOLINK_MASK_CONTROL_TEX_ST,
         [MeshHologramPropMeta("_FragmentAudioLinkMaskMapStrength")] _FRAGMENT_AUDIOLINK_MASK_CONTROL,
 
         [MeshHologramPropMeta("_FragmentPhaseScale")] _FRAGMENT_PHASE_SCALE,
@@ -109,6 +113,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         [MeshHologramPropMeta("_Emission")] _EMISSION,
         [MeshHologramPropMeta("_ColorSource")] _COLOR_SOURCE,
         [MeshHologramPropMeta("_ColorGradientTex")] _COLOR_GRADIENT_TEX,
+        [MeshHologramPropMeta("_ColorGradientTex_ST")] _COLOR_GRADIENT_TEX_ST,
         [MeshHologramPropMeta("_ColoringPartitionMode")] _COLORING_PARTITION_MODE,
 
         [MeshHologramPropMeta("_ColoringSource")] _COLORING_SOURCE,
@@ -136,10 +141,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         [MeshHologramPropMeta("_ColoringAudioLinkSpectrumStrength")] _COLORING_AUDIOLINK_SPECTRUM_STRENGTH,
 
         [MeshHologramPropMeta("_ColoringMaskMap")] _COLORING_MASK_CONTROL_TEX,
+        [MeshHologramPropMeta("_ColoringMaskMap_ST")] _COLORING_MASK_CONTROL_TEX_ST,
         [MeshHologramPropMeta("_ColoringMaskMapStrength")] _COLORING_MASK_CONTROL,
         [MeshHologramPropMeta("_ColoringMap")] _COLORING_OFFSET_CONTROL_TEX,
+        [MeshHologramPropMeta("_ColoringMap_ST")] _COLORING_OFFSET_CONTROL_TEX_ST,
         [MeshHologramPropMeta("_ColoringMapStrength")] _COLORING_OFFSET_CONTROL,
         [MeshHologramPropMeta("_ColoringAudioLinkMaskMap")] _COLORING_AUDIOLINK_MASK_CONTROL_TEX,
+        [MeshHologramPropMeta("_ColoringAudioLinkMaskMap_ST")] _COLORING_AUDIOLINK_MASK_CONTROL_TEX_ST,
         [MeshHologramPropMeta("_ColoringAudioLinkMaskMapStrength")] _COLORING_AUDIOLINK_MASK_CONTROL,
 
         [MeshHologramPropMeta("_ColoringPhaseScale")] _COLORING_PHASE_SCALE,
@@ -188,10 +196,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         [MeshHologramPropMeta("_GeometryAudioLinkSpectrumStrength")] _GEOMETRY_AUDIOLINK_SPECTRUM_STRENGTH,
 
         [MeshHologramPropMeta("_GeometryMaskMap")] _GEOMETRY_MASK_CONTROL_TEX,
+        [MeshHologramPropMeta("_GeometryMaskMap_ST")] _GEOMETRY_MASK_CONTROL_TEX_ST,
         [MeshHologramPropMeta("_GeometryMaskMapStrength")] _GEOMETRY_MASK_CONTROL,
         [MeshHologramPropMeta("_GeometryMap")] _GEOMETRY_OFFSET_CONTROL_TEX,
+        [MeshHologramPropMeta("_GeometryMap_ST")] _GEOMETRY_OFFSET_CONTROL_TEX_ST,
         [MeshHologramPropMeta("_GeometryMapStrength")] _GEOMETRY_OFFSET_CONTROL,
         [MeshHologramPropMeta("_GeometryAudioLinkMaskMap")] _GEOMETRY_AUDIOLINK_MASK_CONTROL_TEX,
+        [MeshHologramPropMeta("_GeometryAudioLinkMaskMap_ST")] _GEOMETRY_AUDIOLINK_MASK_CONTROL_TEX_ST,
         [MeshHologramPropMeta("_GeometryAudioLinkMaskMapStrength")] _GEOMETRY_AUDIOLINK_MASK_CONTROL,
 
         [MeshHologramPropMeta("_GeometryPhaseScale")] _GEOMETRY_PHASE_SCALE,
@@ -234,10 +245,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         [MeshHologramPropMeta("_OrbitAudioLinkSpectrumStrength")] _ORBIT_AUDIOLINK_SPECTRUM_STRENGTH,
 
         [MeshHologramPropMeta("_OrbitMaskMap")] _ORBIT_MASK_CONTROL_TEX,
+        [MeshHologramPropMeta("_OrbitMaskMap_ST")] _ORBIT_MASK_CONTROL_TEX_ST,
         [MeshHologramPropMeta("_OrbitMaskMapStrength")] _ORBIT_MASK_CONTROL,
         [MeshHologramPropMeta("_OrbitMap")] _ORBIT_OFFSET_CONTROL_TEX,
+        [MeshHologramPropMeta("_OrbitMap_ST")] _ORBIT_OFFSET_CONTROL_TEX_ST,
         [MeshHologramPropMeta("_OrbitMapStrength")] _ORBIT_OFFSET_CONTROL,
         [MeshHologramPropMeta("_OrbitAudioLinkMaskMap")] _ORBIT_AUDIOLINK_MASK_CONTROL_TEX,
+        [MeshHologramPropMeta("_OrbitAudioLinkMaskMap_ST")] _ORBIT_AUDIOLINK_MASK_CONTROL_TEX_ST,
         [MeshHologramPropMeta("_OrbitAudioLinkMaskMapStrength")] _ORBIT_AUDIOLINK_MASK_CONTROL,
 
         [MeshHologramPropMeta("_OrbitPhaseScale")] _ORBIT_PHASE_SCALE,
@@ -265,8 +279,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         [MeshHologramPropMeta("_OrbitRotationNoiseValueScale")] _ORBIT_ROTATION_NOISE_VALUE_SCALE,
 
         [MeshHologramPropMeta("_OrbitRotationMaskMap")] _ORBIT_ROTATION_MASK_CONTROL_TEX,
+        [MeshHologramPropMeta("_OrbitRotationMaskMap_ST")] _ORBIT_ROTATION_MASK_CONTROL_TEX_ST,
         [MeshHologramPropMeta("_OrbitRotationMaskMapStrength")] _ORBIT_ROTATION_MASK_CONTROL,
         [MeshHologramPropMeta("_OrbitRotationMap")] _ORBIT_ROTATION_OFFSET_CONTROL_TEX,
+        [MeshHologramPropMeta("_OrbitRotationMap_ST")] _ORBIT_ROTATION_OFFSET_CONTROL_TEX_ST,
         [MeshHologramPropMeta("_OrbitRotationMapStrength")] _ORBIT_ROTATION_OFFSET_CONTROL,
 
 
@@ -302,8 +318,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         [MeshHologramPropMeta("_OrbitRotationOffsetAudioLinkChronoTensityStrength")] _ORBIT_ROTATION_OFFSET_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
 
         [MeshHologramPropMeta("_OrbitRotationOffsetMaskMap")] _ORBIT_ROTATION_OFFSET_MASK_CONTROL_TEX,
+        [MeshHologramPropMeta("_OrbitRotationOffsetMaskMap_ST")] _ORBIT_ROTATION_OFFSET_MASK_CONTROL_TEX_ST,
         [MeshHologramPropMeta("_OrbitRotationOffsetMaskMapStrength")] _ORBIT_ROTATION_OFFSET_MASK_CONTROL,
         [MeshHologramPropMeta("_OrbitRotationOffsetAudioLinkMaskMap")] _ORBIT_ROTATION_OFFSET_AUDIOLINK_MASK_CONTROL_TEX,
+        [MeshHologramPropMeta("_OrbitRotationOffsetAudioLinkMaskMap_ST")] _ORBIT_ROTATION_OFFSET_AUDIOLINK_MASK_CONTROL_TEX_ST,
         [MeshHologramPropMeta("_OrbitRotationOffsetAudioLinkMaskMapStrength")] _ORBIT_ROTATION_OFFSET_AUDIOLINK_MASK_CONTROL,
     }
 
@@ -323,7 +341,345 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         AUDIOLINK_SOURCE,
         MASK_OFFSET,
         MODIFIER
-    } 
+    }
+
+    public enum DF_ENUM_RENDERING_MODE
+    {
+        [InspectorName("Transparent")]
+        TRANSPARENT,
+        [InspectorName("Cutout")]
+        CUTOUT,
+        [InspectorName("DepthOnly")]
+        DEPTH_ONLY,
+    }
+    public enum DF_ENUM_CULL
+    {
+        [InspectorName("0: Off")]
+        OFF,
+        [InspectorName("1: Front")]
+        FRONT,
+        [InspectorName("2: Back")]
+        BACK,
+    }
+    public enum DF_ENUM_COMPARE
+    {
+        [InspectorName("0: Disabled")]
+        DISABLE,
+        [InspectorName("1: Never")]
+        NEVER,
+        [InspectorName("2: Less")]
+        LESS,
+        [InspectorName("3: Equal")]
+        EQUAL,
+        [InspectorName("4: LessEqual")]
+        LESS_EQUAL,
+        [InspectorName("5: Greater")]
+        GREATER,
+        [InspectorName("6: NotEqual")]
+        NOT_EQUAL,
+        [InspectorName("7: GreaterEqual")]
+        GREATER_EQUAL,
+        [InspectorName("8: Always")]
+        ALWAYS,
+    }
+    public enum DF_ENUM_STEREO_MERGE_MODE
+    {
+        [InspectorName("None")]
+        NONE,
+        [InspectorName("Position")]
+        POSITION,
+        [InspectorName("Rotation")]
+        ROTATION,
+        [InspectorName("Position & Rotation")]
+        POSITION_ROTATION,
+    }
+
+    public enum DF_ENUM_BLEND_OP
+    {
+        [InspectorName("0: Add")]
+        ADD,
+        [InspectorName("1: Subtract")]
+        SUBTRACT,
+        [InspectorName("2: ReverseSubtract")]
+        REVERSESUBTRACT,
+        [InspectorName("3: Min")]
+        MIN,
+        [InspectorName("4: Max")]
+        MAX,
+        [InspectorName("5: LogicalClear")]
+        LOGICALCLEAR,
+        [InspectorName("6: LogicalSet")]
+        LOGICALSET,
+        [InspectorName("7: LogicalCopy")]
+        LOGICALCOPY,
+        [InspectorName("8: LogicalCopyInverted")]
+        LOGICALCOPYINVERTED,
+        [InspectorName("9: LogicalNoop")]
+        LOGICALNOOP,
+        [InspectorName("10: LogicalInvert")]
+        LOGICALINVERT,
+        [InspectorName("11: LogicalAnd")]
+        LOGICALAND,
+        [InspectorName("12: LogicalNand")]
+        LOGICALNAND,
+        [InspectorName("13: LogicalOr")]
+        LOGICALOR,
+        [InspectorName("14: LogicalNor")]
+        LOGICALNOR,
+        [InspectorName("15: LogicalXor")]
+        LOGICALXOR,
+        [InspectorName("16: LogicalEquivalence")]
+        LOGICALEQUIVALENCE,
+        [InspectorName("17: LogicalAndReverse")]
+        LOGICALANDREVERSE,
+        [InspectorName("18: LogicalAndInverted")]
+        LOGICALANDINVERTED,
+        [InspectorName("19: LogicalOrReverse")]
+        LOGICALORREVERSE,
+        [InspectorName("20: LogicalOrInverted")]
+        LOGICALORINVERTED,
+        [InspectorName("21: Multiply")]
+        MULTIPLY,
+        [InspectorName("22: Screen")]
+        SCREEN,
+        [InspectorName("23: Overlay")]
+        OVERLAY,
+        [InspectorName("24: Darken")]
+        DARKEN,
+        [InspectorName("25: Lighten")]
+        LIGHTEN,
+        [InspectorName("26: ColorDodge")]
+        COLORDODGE,
+        [InspectorName("27: ColorBurn")]
+        COLORBURN,
+        [InspectorName("28: HardLight")]
+        HARDLIGHT,
+        [InspectorName("29: SoftLight")]
+        SOFTLIGHT,
+        [InspectorName("30: Difference")]
+        DIFFERENCE,
+        [InspectorName("31: Exclusion")]
+        EXCLUSION,
+        [InspectorName("32: HSLHue")]
+        HSLHUE,
+        [InspectorName("33: HSLSaturation")]
+        HSLSATURATION,
+        [InspectorName("34: HSLColor")]
+        HSLCOLOR,
+        [InspectorName("35: HSLLuminosity")]
+        HSLLUMINOSITY,
+    }
+    public enum DF_ENUM_BLEND_MODE
+    {
+        [InspectorName("0: Zero")]
+        ZERO,
+        [InspectorName("1: One")]
+        ONE,
+        [InspectorName("2: DstColor")]
+        DSTCOLOR,
+        [InspectorName("3: SrcColor")]
+        SRCCOLOR,
+        [InspectorName("4: OneMinusDstColor")]
+        ONEMINUSDSTCOLOR,
+        [InspectorName("5: SrcAlpha")]
+        SRCALPHA,
+        [InspectorName("6: OneMinusSrcColor")]
+        ONEMINUSSRCCOLOR,
+        [InspectorName("7: DstAlpha")]
+        DSTALPHA,
+        [InspectorName("8: OneMinusDstAlpha")]
+        ONEMINUSDSTALPHA,
+        [InspectorName("9: SrcAlphaSaturate")]
+        SRCALPHASATURATE,
+        [InspectorName("10: OneMinusSrcAlpha")]
+        ONEMINUSSRCALPHA,
+    }
+    public enum DF_ENUM_STENCIL_OP
+    {
+        [InspectorName("0: Keep")]
+        KEEP,
+        [InspectorName("1: Zero")]
+        ZERO,
+        [InspectorName("2: Replace")]
+        REPLACE,
+        [InspectorName("3: IncrementSaturate")]
+        INCREMENTSATURATE,
+        [InspectorName("4: DecrementSaturate")]
+        DECREMENTSATURATE,
+        [InspectorName("5: Invert")]
+        INVERT,
+        [InspectorName("6: IncrementWrap")]
+        INCREMENTWRAP,
+        [InspectorName("7: DecrementWrap")]
+        DECREMENTWRAP,
+    }
+
+    public enum DF_ENUM_AUDIOLINK_BAND
+    {
+        [InspectorName("0: Base")]
+        BASE,
+        [InspectorName("1: Low Mid")]
+        LOW_MID,
+        [InspectorName("2: High Mid")]
+        HIGH_MID,
+        [InspectorName("3: Treble")]
+        TREBLE,
+    }
+
+    public enum DF_ENUM_AUDIOLINK_BAND_EXPANDED
+    {
+        [InspectorName("0: Base")]
+        BASE,
+        [InspectorName("1: Low Mid")]
+        LOW_MID,
+        [InspectorName("2: High Mid")]
+        HIGH_MID,
+        [InspectorName("3: Treble")]
+        TREBLE,
+        [InspectorName("4: Average")]
+        AVERAGE,
+    }
+
+    public enum DF_ENUM_LINE_ANIMATION_MODE
+    {
+        [InspectorName("0: Normal")]
+        NORMAL,
+        [InspectorName("1: ZoomIn")]
+        ZOOM_IN,
+        [InspectorName("2: ZoomOut")]
+        ZOOM_OUT,
+        [InspectorName("3: PowerZoomIn")]
+        POWER_ZOOM_IN,
+        [InspectorName("4: Collapse")]
+        COLLAPSE,
+        [InspectorName("5: Break")]
+        BREAK,
+        [InspectorName("6: OutWide")]
+        OUT_WIDE,
+        [InspectorName("7: OutThin")]
+        OUT_THIN,
+        [InspectorName("8: Vanishing")]
+        VANISHING,
+        [InspectorName("9: Join1")]
+        JOIN_1,
+        [InspectorName("10: Join2")]
+        JOIN_2,
+        [InspectorName("11: Join3")]
+        JOIN_3,
+    }
+    public enum DF_ENUM_PARTITION_MODE
+    {
+        [InspectorName("0: Vertex")]
+        VERTEX,
+        [InspectorName("1: Edge")]
+        EDGE,
+        [InspectorName("2: Mesh")]
+        MESH,
+    }
+    public enum DF_ENUM_COLOR_SOURCE
+    {
+        [InspectorName("0: Gradient")]
+        GRADIENT,
+        [InspectorName("1: Primary")]
+        PRIMARY,
+        [InspectorName("2: GradientTex")]
+        GRADIENTTEX,
+        [InspectorName("3: VertexColor")]
+        VERTEXCOLOR,
+        [InspectorName("4: UniqueEdges")]
+        UNIQUEEDGES,
+        [InspectorName("5: AudioLink ThemeColor")]
+        AUDIOLINK_THEMECOLOR,
+    }
+    public enum DF_ENUM_PIXELIZATION_SPACE
+    {
+        [InspectorName("0: Disable")]
+        DISABLE,
+        [InspectorName("1: Model")]
+        MODEL,
+        [InspectorName("2: World")]
+        WORLD,
+        [InspectorName("3: PostGeometry")]
+        POSTGEOMETRY,
+    }
+    public enum DF_ENUM_NOISE_SPACE
+    {
+        [InspectorName("0: Offset")]
+        OFFSET,
+        [InspectorName("1: Model")]
+        MODEL,
+        [InspectorName("2: World")]
+        WORLD,
+        [InspectorName("3: Offset World")]
+        OFFSET_WORLD,
+        [InspectorName("4: Model & World")]
+        MODEL_WORLD,
+        [InspectorName("5: VertexColor")]
+        VERTEXCOLOR,
+    }
+
+    public enum DF_ENUM_SOURCE
+    {
+        [InspectorName("0: Fixed Value")]
+        FIXED_VALUE,
+        [InspectorName("1: Noise")]
+        NOISE,
+        [InspectorName("2: Primitive")]
+        PRIMITIVE,
+    }
+    public enum DF_ENUM_AUDIOLINK_SOURCE
+    {
+        [InspectorName("0: None")]
+        NONE,
+        [InspectorName("1: VU Add")]
+        VU_ADD,
+        [InspectorName("2: VU Mul")]
+        VU_MUL,
+        [InspectorName("3: ChronoTensity")]
+        CHRONOTENSITY,
+        [InspectorName("4: Spectrum")]
+        SPECTRUM,
+    }
+    public enum DF_ENUM_AUDIOLINK_CHRONOTENSITY_MODE
+    {
+        [InspectorName("0: Nudging")]
+        NUDGING,
+        [InspectorName("1: Filtered Nudging")]
+        FILTERED_NUDGING,
+        [InspectorName("2: Dynamics")]
+        DYNAMICS,
+        [InspectorName("3: Filtered Dynamics")]
+        FILTERED_DYNAMICS,
+        [InspectorName("4: Hold")]
+        HOLD,
+        [InspectorName("5: Filtered Hold")]
+        FILTERED_HOLD,
+        [InspectorName("6: Increases with Louder")]
+        INCREASES_WITH_LOUDER,
+        [InspectorName("7: Increases with Quite")]
+        INCREASES_WITH_QUITE,
+    }
+
+    public enum DF_ENUM_LOOP_MODE
+    {
+        [InspectorName("0: Clip")]
+        CLIP,
+        [InspectorName("1: Repeat")]
+        REPEAT,
+        [InspectorName("2: Ping-Pong")]
+        PING_PONG,
+    }
+    public enum DF_ENUM_EASE_MODE
+    {
+        [InspectorName("0: In")]
+        IN,
+        [InspectorName("1: Out")]
+        OUT,
+        [InspectorName("2: InOut")]
+        INOUT,
+        [InspectorName("3: Invert InOut")]
+        INVERT_INOUT,
+    }
 
     public enum GUI_STYLE
     {

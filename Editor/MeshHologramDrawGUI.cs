@@ -90,6 +90,9 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ANTI_ALIASING_ENABLE);
             EditorGUILayout.Space(16);
             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._MAIN_TEX);
+            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight);
+            DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._MAIN_TEX_ST);
+            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*3.0f);
         }
 
         private void DrawOtherRendering()
@@ -193,10 +196,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_SPECTRUM_STRENGTH,
                 MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_SPECTRUM_MIRROR,
                 MESHHOLOGRAM_PROP_ENUM._FRAGMENT_MASK_CONTROL_TEX,
+                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_MASK_CONTROL_TEX_ST,
                 MESHHOLOGRAM_PROP_ENUM._FRAGMENT_MASK_CONTROL,
                 MESHHOLOGRAM_PROP_ENUM._FRAGMENT_OFFSET_CONTROL_TEX,
+                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_OFFSET_CONTROL_TEX_ST,
                 MESHHOLOGRAM_PROP_ENUM._FRAGMENT_OFFSET_CONTROL,
                 MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_MASK_CONTROL_TEX,
+                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_MASK_CONTROL_TEX_ST,
                 MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_MASK_CONTROL,
                 MESHHOLOGRAM_PROP_ENUM._FRAGMENT_PHASE_SCALE,
                 MESHHOLOGRAM_PROP_ENUM._FRAGMENT_LOOP_MODE,
@@ -223,25 +229,29 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                         break;
                     case 2:
                         EditorGUILayout.GradientField("Gradient Field", gradient);
-                        using (new EditorGUILayout.HorizontalScope())
+                        DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._COLOR_GRADIENT_TEX);
+                        EditorGUILayout.Space(EditorGUIUtility.singleLineHeight);
+                        Rect rect = GUILayoutUtility.GetLastRect();
+                        float width = (rect.width-64.0f) * 0.5f - 8.0f;
+                        rect.x += 72.0f;
+                        rect.y += 2.0f;
+                        rect.width = width;
+                        rect.height = EditorGUIUtility.singleLineHeight;
+                        if (GUI.Button(rect,LocalizationManager.GetLocalizeText("text.preview")))
                         {
-                            DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._COLOR_GRADIENT_TEX);
-                            using (new EditorGUILayout.VerticalScope())
-                            {
-                                if (GUILayout.Button(LocalizationManager.GetLocalizeText("text.preview")))
-                                {
-                                    targetMat.SetTexture("_ColorGradientTex", gradientMapManager.CreateTexture(gradient));
-                                }
-                                if (GUILayout.Button(LocalizationManager.GetLocalizeText("text.export")))
+                            MeshHologramProps[MESHHOLOGRAM_PROP_ENUM._COLOR_GRADIENT_TEX].var.textureValue = gradientMapManager.CreateTexture(gradient);
+                        }
+                        rect.x += width + 4.0f;
+                        if (GUI.Button(rect, LocalizationManager.GetLocalizeText("text.export")))
+                        {
+                            EditorApplication.delayCall += () =>
                                 {
                                     Texture2D GenTex = gradientMapManager.Export(gradient);
-                                    if (GenTex != null)
-                                    {
-                                        targetMat.SetTexture("_ColorGradientTex", GenTex);
-                                    }
-                                }
-                            }
+                                    if (GenTex != null) MeshHologramProps[MESHHOLOGRAM_PROP_ENUM._COLOR_GRADIENT_TEX].var.textureValue = GenTex;
+                                };
                         }
+                        DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._COLOR_GRADIENT_TEX_ST);
+                        EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*3.0f);
                         break;
                     case 5:
                         DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._AUDIOLINK_THEME_COLOR_BAND);
@@ -282,10 +292,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_SPECTRUM_STRENGTH,
                 MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_SPECTRUM_MIRROR,
                 MESHHOLOGRAM_PROP_ENUM._COLORING_MASK_CONTROL_TEX,
+                MESHHOLOGRAM_PROP_ENUM._COLORING_MASK_CONTROL_TEX_ST,
                 MESHHOLOGRAM_PROP_ENUM._COLORING_MASK_CONTROL,
                 MESHHOLOGRAM_PROP_ENUM._COLORING_OFFSET_CONTROL_TEX,
+                MESHHOLOGRAM_PROP_ENUM._COLORING_OFFSET_CONTROL_TEX_ST,
                 MESHHOLOGRAM_PROP_ENUM._COLORING_OFFSET_CONTROL,
                 MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_MASK_CONTROL_TEX,
+                MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_MASK_CONTROL_TEX_ST,
                 MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_MASK_CONTROL,
                 MESHHOLOGRAM_PROP_ENUM._COLORING_PHASE_SCALE,
                 MESHHOLOGRAM_PROP_ENUM._COLORING_LOOP_MODE,
@@ -361,10 +374,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_SPECTRUM_STRENGTH,
                 MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_SPECTRUM_MIRROR,
                 MESHHOLOGRAM_PROP_ENUM._GEOMETRY_MASK_CONTROL_TEX,
+                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_MASK_CONTROL_TEX_ST,
                 MESHHOLOGRAM_PROP_ENUM._GEOMETRY_MASK_CONTROL,
                 MESHHOLOGRAM_PROP_ENUM._GEOMETRY_OFFSET_CONTROL_TEX,
+                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_OFFSET_CONTROL_TEX_ST,
                 MESHHOLOGRAM_PROP_ENUM._GEOMETRY_OFFSET_CONTROL,
                 MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_MASK_CONTROL_TEX,
+                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_MASK_CONTROL_TEX_ST,
                 MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_MASK_CONTROL,
                 MESHHOLOGRAM_PROP_ENUM._GEOMETRY_PHASE_SCALE,
                 MESHHOLOGRAM_PROP_ENUM._GEOMETRY_LOOP_MODE,
@@ -491,10 +507,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     case 2:
                         DrawMaskOffsetTex(
                             MESHHOLOGRAM_PROP_ENUM._ORBIT_MASK_CONTROL_TEX,
+                            MESHHOLOGRAM_PROP_ENUM._ORBIT_MASK_CONTROL_TEX_ST,
                             MESHHOLOGRAM_PROP_ENUM._ORBIT_MASK_CONTROL,
                             MESHHOLOGRAM_PROP_ENUM._ORBIT_OFFSET_CONTROL_TEX,
+                            MESHHOLOGRAM_PROP_ENUM._ORBIT_OFFSET_CONTROL_TEX_ST,
                             MESHHOLOGRAM_PROP_ENUM._ORBIT_OFFSET_CONTROL,
                             MESHHOLOGRAM_PROP_ENUM._ORBIT_AUDIOLINK_MASK_CONTROL_TEX,
+                            MESHHOLOGRAM_PROP_ENUM._ORBIT_AUDIOLINK_MASK_CONTROL_TEX_ST,
                             MESHHOLOGRAM_PROP_ENUM._ORBIT_AUDIOLINK_MASK_CONTROL
                         );
                         break;
@@ -543,8 +562,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 case 2:
                     DrawMaskOffsetTex(
                         MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_MASK_CONTROL_TEX,
+                        MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_MASK_CONTROL_TEX_ST,
                         MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_MASK_CONTROL,
                         MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_CONTROL_TEX,
+                        MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_CONTROL_TEX_ST,
                         MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_CONTROL
                     );
                     break;
@@ -625,12 +646,17 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     }
                     break;
                 case 2:
-                    DrawMaskOffsetTex(
-                        MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_MASK_CONTROL_TEX,
-                        MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_MASK_CONTROL,
-                        MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_AUDIOLINK_MASK_CONTROL_TEX,
-                        MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_AUDIOLINK_MASK_CONTROL
-                    );
+                    DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_MASK_CONTROL_TEX);
+                    CheckSRGBTexture(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_MASK_CONTROL_TEX);
+                    DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_MASK_CONTROL_TEX_ST);
+                    EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*4.0f);
+                    DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_MASK_CONTROL);
+                    DrawPartitionLine(4);
+                    DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_AUDIOLINK_MASK_CONTROL_TEX);
+                    CheckSRGBTexture(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_AUDIOLINK_MASK_CONTROL_TEX);
+                    DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_AUDIOLINK_MASK_CONTROL_TEX_ST);
+                    EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*4.0f);
+                    DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_AUDIOLINK_MASK_CONTROL);
                     break;
                 default:
                     break;

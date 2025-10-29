@@ -1,5 +1,6 @@
 _dummy||_dummy||_dummy
 _MainTex||Fallback Tex||フォールバックテクスチャ
+_MainTex_ST||||
 
 _RenderingMode||Rendering Mode (PASS)||レンダリングモード (PASS)
 _Cull||Culling Mode||カリングモード
@@ -9,7 +10,7 @@ _CustomRenderQueueC||Cutout RenderQueue (QUEUE)||カットアウトレンダー�
 _Forced_Z_Scale_Zero||Forced Z Scale Zero||奥行きのスケールを0にする
 _BillboardEnable||Enable Billboard||ビルボード描写を有効にする
 _FwidthEnable||Use fwidth()||fwidth()の使用
-_DistanceInfluence||Distance Influence||ワイヤーフレーム描写の距離補正
+_DistanceInfluence||Distance Influence||ワイヤーフレームの距離補正
 _DirectionalLightInfluenceEnable||Enable Directional light Influence (KEYWORD)||ディレクショナルライトの影響を有効にする (KEYWORD)
 _DirectionalLightInfluence||Influence||影響量||
 _AmbientInfluenceEnable||Enable Ambient Influence (KEYWORD)||環境光の影響を有効にする (KEYWORD)
@@ -80,6 +81,7 @@ _Color1||Secondary Color||セカンダリーカラー
 _Emission||Add Emission||エミッションの追加
 _ColorSource||Color Source||色の参照先
 _ColorGradientTex||Color Gradient Tex||グラデーションテクスチャ
+_ColorGradientTex_ST||||
 _ColoringSource||Coloring Source||着色の参照先
 _ColoringFixedValue||Fixed Value||固定値
 
@@ -203,38 +205,54 @@ _OrbitWaveAudioLinkSpectrumBounds||Spectrum Bounds/A/B//||Spectrumの範囲/A/B/
 
 
 _FragmentMaskMap||Mask||マスク
+_FragmentMaskMap_ST||||
 _FragmentMaskMapStrength||Strength||強さ
 _GeometryMaskMap||Mask||マスク
+_GeometryMaskMap_ST||||
 _GeometryMaskMapStrength||Strength||強さ
 _ColoringMaskMap||Mask||マスク
+_ColoringMaskMap_ST||||
 _ColoringMaskMapStrength||Strength||強さ
 _OrbitMaskMap||Mask||マスク
+_OrbitMaskMap_ST||||
 _OrbitMaskMapStrength||Strength||強さ
 _OrbitRotationMaskMap||Mask||マスク
+_OrbitRotationMaskMap_ST||||
 _OrbitRotationMaskMapStrength||Strength||強さ
 _OrbitRotationOffsetMaskMap||Mask||マスク
+_OrbitRotationOffsetMaskMap_ST||||
 _OrbitRotationOffsetMaskMapStrength||Strength/X/Y/Z/W||強さ/X/Y/Z/W
 
 _FragmentMap||Offset||オフセット
+_FragmentMap_ST||||
 _FragmentMapStrength||Strength||強さ
 _GeometryMap||Offset||オフセット
+_GeometryMap_ST||||
 _GeometryMapStrength||Strength||強さ
 _ColoringMap||Offset||オフセット
+_ColoringMap_ST||||
 _ColoringMapStrength||Strength||強さ
 _OrbitMap||Offset||オフセット
+_OrbitMap_ST||||
 _OrbitMapStrength||Strength||強さ
 _OrbitRotationMap||Offset||オフセット
+_OrbitRotationMap_ST||||
 _OrbitRotationMapStrength||Strength||強さ
 
 _FragmentAudioLinkMaskMap||AudioLink Mask||AudioLink マスク
+_FragmentAudioLinkMaskMap_ST||||
 _FragmentAudioLinkMaskMapStrength||Strength||強さ
 _GeometryAudioLinkMaskMap||AudioLink Mask||AudioLink マスク
+_GeometryAudioLinkMaskMap_ST||||
 _GeometryAudioLinkMaskMapStrength||Strength||強さ
 _ColoringAudioLinkMaskMap||AudioLink Mask||AudioLink マスク
+_ColoringAudioLinkMaskMap_ST||||
 _ColoringAudioLinkMaskMapStrength||Strength||強さ
 _OrbitAudioLinkMaskMap||AudioLink Mask||AudioLink マスク
+_OrbitAudioLinkMaskMap_ST||||
 _OrbitAudioLinkMaskMapStrength||Strength||強さ
 _OrbitRotationOffsetAudioLinkMaskMap||AudioLink Mask||AudioLink マスク
+_OrbitRotationOffsetAudioLinkMaskMap_ST||||
 _OrbitRotationOffsetAudioLinkMaskMapStrength||Strength/X/Y/Z/W||強さ/X/Y/Z/W
 
 

@@ -45,9 +45,12 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             public string display;
             public readonly int id;
             public readonly ShaderPropertyType type;
+            public readonly float minValue = 0.0f;
+            public readonly float maxValue = 1.0f;
             public ShaderPropertyState(MeshHologramPropMeta meta, MESHHOLOGRAM_PROP_ENUM e)
             {
                 string name = meta.property;
+                int index = shader.FindPropertyIndex(name);
                 if (name == "_dummy")
                 {
                     type = ShaderPropertyType.Float;
@@ -55,13 +58,18 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 }
                 else
                 {
-                    id = shader.GetPropertyNameId(shader.FindPropertyIndex(name));
+                    id = shader.GetPropertyNameId(index);
                     if (id == -1)
                     {
                         if (String.IsNullOrEmpty(name)) name = "EMPTY";
                         throw new Exception(name + " property is invalid.");
                     }
-                    type = shader.GetPropertyType(shader.FindPropertyIndex(name));
+                    type = shader.GetPropertyType(index);
+                }
+                if(type == ShaderPropertyType.Range)
+                {
+                    minValue = ShaderUtil.GetRangeLimits(shader, index, 1);
+                    maxValue = ShaderUtil.GetRangeLimits(shader, index, 2);
                 }
                 property = name;
                 display = name;

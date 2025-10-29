@@ -17,6 +17,7 @@ label.orbit_rotation||Orbit Rotation||Orbit 回転
 label.orbit_wave||Orbit Wave||Orbit Wave
 label.orbit_rotation_offset||Orbit Rotation Offset||Orbit 回転オフセット
 
+label.commons||Commons||共通設定
 label.mask_offset||Masks / Offset||マスク / オフセット
 label.source||Source||参照先
 label.audiolink_source||AudioLink||AudioLink
@@ -34,7 +35,7 @@ label.title_skin||Title Skin||タイトルスキン
 label.check||Check||チェックする。
 label.recheck||Recheck||再チェックする。
 
-label.easter_egg_text||Isn’t it nicer when the window doesn’t jump around as you close a tab?||タブを閉じて、勝手にスクロールされないウィンドウの方がお好みでしょう？
+label.easter_egg_text||Isn’t it nicer when the window doesn't jump around as you operate the screen?||画面を操作しても、勝手にスクロールされないウィンドウの方がお好みでしょう？
 
 label.warning.texture_importer_srgb||"sRGB (Color Texture)" is enabled in the assigned texture.Disable it when using this texture as an offset or mask, unless intended.||設定されているテクスチャのインポート設定の"sRGB (Color Texture)"が有効になっています。オフセット、マスクに使用する場合、意図していない限りはオフにすることを推奨します。
 
