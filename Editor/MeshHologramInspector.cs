@@ -28,15 +28,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
             SubLabels = new GUIContent[4]{new GUIContent(),new GUIContent(),new GUIContent(),new GUIContent()},
             OrbitLabels = new GUIContent[4]{new GUIContent(),new GUIContent(),new GUIContent(),new GUIContent()};
         private static GUILayoutOption MainGUIOption = GUILayout.MinHeight(240);
-        private static LANG lang = ConfigManager.lang;
+        private static LANG lang;
         private CleanupTools cleanup_tool;
 
         private GradientMapManager gradientMapManager = new GradientMapManager();
         private Gradient gradient = new Gradient();
 
         private PreviewGraph PreviewGraph0;
-
-        private static bool Initialize = false;
         private bool InspectorInitialize = false;
     }
 }

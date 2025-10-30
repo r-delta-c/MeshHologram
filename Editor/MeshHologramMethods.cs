@@ -8,7 +8,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 {
     public partial class MeshHologramInspector : ShaderGUI
     {
-        private void UpdateTabLabels()
+        private static void UpdateTabLabels()
         {
             MenuLabels[0].text = LocalizationManager.GetLocalizeText("label.general");
             MenuLabels[1].text = LocalizationManager.GetLocalizeText("label.main");
@@ -31,7 +31,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             OrbitLabels[3].text = LocalizationManager.GetLocalizeText("label.orbit_rotation_offset");
         }
 
-        private void UpdateSubTabLabels()
+        private static void UpdateSubTabLabels()
         {
             switch (OrbitIndex)
             {

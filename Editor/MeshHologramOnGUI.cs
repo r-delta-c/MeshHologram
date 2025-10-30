@@ -4,20 +4,26 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramManager;
+using static DeltaField.Shaders.MeshHologram.Editor.Initializer;
 
 namespace DeltaField.Shaders.MeshHologram.Editor
 {
     public partial class MeshHologramInspector : ShaderGUI
     {
+        static MeshHologramInspector()
+        {
+            if (IsInitialized) Init();
+            else OnInitialized += Init;
+        }
+        private static void Init()
+        {
+            if (!File.Exists(ConfigManager.path)) ConfigManager.SaveConfig();
+            UpdateTabLabels();
+            FoldoutList = new FoldoutManager();
+        }
         public override void OnGUI(MaterialEditor editor, MaterialProperty[] Properties)
         {
-            if (Initialize == false)
-            {
-                if (!File.Exists(ConfigManager.path)) ConfigManager.SaveConfig();
-                UpdateTabLabels();
-                FoldoutList = new FoldoutManager();
-                Initialize = true;
-            }
+            if (IsInitialized == false) return;
 
             if (lang != ConfigManager.lang)
             {

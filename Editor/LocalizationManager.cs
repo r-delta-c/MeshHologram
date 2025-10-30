@@ -5,14 +5,28 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramConstant;
+using static DeltaField.Shaders.MeshHologram.Editor.Initializer;
 
 namespace DeltaField.Shaders.MeshHologram.Editor
 {
     public static class LocalizationManager
     {
-        private static LANG lang = ConfigManager.lang;
-        public static LANG current_lang = ConfigManager.lang;
-        private static Dictionary<string, string[]> PropLocalizeDic = LoadLangFiles();
+        private static LANG lang;
+        public static LANG current_lang;
+        private static Dictionary<string, string[]> PropLocalizeDic;
+
+        static LocalizationManager()
+        {
+            if (IsInitialized) Init();
+            else OnInitialized += Init;
+        }
+
+        private static void Init()
+        {
+            lang = ConfigManager.lang;
+            current_lang = ConfigManager.lang;
+            PropLocalizeDic = LoadLangFiles();
+        }
 
         public static bool DrawLanguageEnumPopup()
         {
@@ -88,7 +102,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                                 Debug.LogWarning("There are multiple localized text. -> Column:" + column + " - " + line);
                                 continue;
                             }
-
                             r.Add(langs[0], langs[index].Split('/'));
                         }
                         else Debug.LogWarning("Could not get localized text. -> Column:" + column + " | " + line);

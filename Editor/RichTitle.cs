@@ -6,15 +6,29 @@ using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramManager;
+using static DeltaField.Shaders.MeshHologram.Editor.Initializer;
 
 namespace DeltaField.Shaders.MeshHologram.Editor
 {
     public static class RichTitle
     {
-        private static TITLE_SKINS title_skin = ConfigManager.title_skin;
-        public static TITLE_SKINS current_title_skin = ConfigManager.title_skin;
+        private static TITLE_SKINS title_skin;
+        public static TITLE_SKINS current_title_skin;
         private static Texture2D bomb = InitBomb();
         private static int[] CharTimeLimit = new int[13];
+
+        static RichTitle()
+        {
+            if (IsInitialized) Init();
+            else OnInitialized += Init;
+        }
+
+        private static void Init()
+        {
+            title_skin = ConfigManager.title_skin;
+            current_title_skin = ConfigManager.title_skin;
+            bomb = InitBomb();
+        }
 
         public static Texture2D InitBomb()
         {
@@ -32,7 +46,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         {
             switch (ConfigManager.title_skin)
             {
-                case TITLE_SKINS.NORMAL:
+                default:
                     SkinNORMAL();
                     break;
                 case TITLE_SKINS.RAINBOW:
