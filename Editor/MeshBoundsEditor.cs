@@ -2,6 +2,7 @@
 
 using UnityEditor;
 using UnityEngine;
+using static DeltaField.Shaders.MeshHologram.Editor.Initializer;
 
 namespace DeltaField.Shaders.MeshHologram.Editor
 {
@@ -28,6 +29,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
         private void OnGUI()
         {
+            if (IsInitialized == false) return;
             LocalizationManager.DrawLanguageEnumPopup();
             EditorGUILayout.Space(16);
             using (var changeCheckScope = new EditorGUI.ChangeCheckScope())
