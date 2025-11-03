@@ -252,7 +252,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         FUNC_NOISE_CENTER_POS(orbit_pos);
         orbit_value += _OrbitFixedValue*SELECTOR_MACRO(_OrbitSource,0);
         orbit_value += (ValueNoise3D(noise_center_pos,_OrbitNoiseSeed)*_OrbitNoiseValueScale+orbit_time)*SELECTOR_MACRO(_OrbitSource,1);
-        orbit_value += (random(id+_OrbitSeed)>=_OrbitPrimitiveRatio)*SELECTOR_MACRO(_OrbitSource,2);
+        orbit_value += (random(id+_OrbitSeed)<_OrbitPrimitiveRatio)*SELECTOR_MACRO(_OrbitSource,2);
         orbit_value *= orbit_mask;
         orbit_value += orbit_map;
 
