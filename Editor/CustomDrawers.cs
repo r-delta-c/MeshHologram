@@ -12,6 +12,11 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 {
     public class DFNumber : MaterialPropertyDrawer
     {
+        private bool is_int;
+        public DFNumber(float b)
+        {
+            is_int = b == 1;
+        }
         public override float GetPropertyHeight(MaterialProperty mp, string prop, MaterialEditor editor) => 0;
         public override void OnGUI(Rect rect, MaterialProperty mp, string prop, MaterialEditor editor)
         {
@@ -27,7 +32,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                         break;
                     case MaterialProperty.PropType.Range:
                         ShaderPropertyState state = GetStringToPropertyState(prop);
-                        value = EditorGUILayout.Slider(text, value, state.minValue, state.maxValue);
+                        if (is_int) value = EditorGUILayout.IntSlider(text, (int)value, (int)state.minValue, (int)state.maxValue);
+                        else value = EditorGUILayout.Slider(text, value, state.minValue, state.maxValue);
                         break;
                     default:
                         break;

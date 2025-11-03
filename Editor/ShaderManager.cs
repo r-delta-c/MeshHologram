@@ -66,7 +66,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     }
                     type = shader.GetPropertyType(index);
                 }
-                if(type == ShaderPropertyType.Range)
+                if (type == ShaderPropertyType.Range)
                 {
                     minValue = ShaderUtil.GetRangeLimits(shader, index, 1);
                     maxValue = ShaderUtil.GetRangeLimits(shader, index, 2);
