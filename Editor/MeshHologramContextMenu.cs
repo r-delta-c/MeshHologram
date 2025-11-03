@@ -242,7 +242,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         private void DrawHeaderButtonOrbitBlock()
         {
             PROPERTY_BLOCK orbit_block = GetOrbitIndexBlock();
-            string name = PropertyBlockNames[orbit_block].name;
+            string name = PropertyBlockNames[orbit_block].category_name;
             if (DrawContextMenuIcon())
             {
                 GenericMenu menu = new GenericMenu();
@@ -273,7 +273,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {
                     PROPERTY_BLOCK block = GetMainIndexBlock();
                     GenericMenu menu = new GenericMenu();
-                    string name = PropertyBlockNames[block].name;
+                    string name = PropertyBlockNames[block].category_name;
                     menu.AddItem(new GUIContent(LocalizationManager.GetLocalizeText("text.copy_properties")), false, () => CopyBuffer(CopyBlock(targetMat,
                         new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[]
                         {
@@ -304,7 +304,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 if (DrawContextMenuIcon())
                 {
                     PROPERTY_BLOCK block = GetMainIndexBlock();
-                    string name = PropertyBlockNames[block].name;
+                    string name = PropertyBlockNames[block].category_name;
                     PROPERTY_BLOCK common_block = GetCommonIndexBlock();
 
                     GenericMenu menu = new GenericMenu();
@@ -333,7 +333,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 {
                     GenericMenu menu = new GenericMenu();
                     PROPERTY_BLOCK orbit_block = GetOrbitIndexBlock();
-                    string name = PropertyBlockNames[orbit_block].name;
+                    string name = PropertyBlockNames[orbit_block].category_name;
                     switch (orbit_block)
                     {
                         case PROPERTY_BLOCK.ORBIT:
@@ -422,7 +422,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 if (DrawContextMenuIcon())
                 {
                     PROPERTY_BLOCK orbit_block = GetOrbitIndexBlock();
-                    string name = PropertyBlockNames[orbit_block].name;
+                    string name = PropertyBlockNames[orbit_block].category_name;
                     PROPERTY_BLOCK common_block = GetCommonIndexBlock();
 
                     GenericMenu menu = new GenericMenu();

@@ -15,15 +15,18 @@ namespace DeltaField.Shaders.MeshHologram.Editor
     {
         public class PropertyBlock
         {
-            public readonly string name;
+            public readonly string category_name;
+            public readonly string category_remove_name;
             public readonly MESHHOLOGRAM_PROP_ENUM[] MainEnums;
             public readonly MESHHOLOGRAM_PROP_ENUM[] SourceEnums;
             public readonly MESHHOLOGRAM_PROP_ENUM[] AudioLinkEnums;
             public readonly MESHHOLOGRAM_PROP_ENUM[] MaskOffsetEnums;
             public readonly MESHHOLOGRAM_PROP_ENUM[] ModifierEnums;
-            public PropertyBlock(string s, MESHHOLOGRAM_PROP_ENUM[] main, MESHHOLOGRAM_PROP_ENUM[] source = null, MESHHOLOGRAM_PROP_ENUM[] audiolink = null, MESHHOLOGRAM_PROP_ENUM[] mask_offset = null, MESHHOLOGRAM_PROP_ENUM[] modifier = null)
+            public PropertyBlock(string name, MESHHOLOGRAM_PROP_ENUM[] main, MESHHOLOGRAM_PROP_ENUM[] source = null, MESHHOLOGRAM_PROP_ENUM[] audiolink = null, MESHHOLOGRAM_PROP_ENUM[] mask_offset = null, MESHHOLOGRAM_PROP_ENUM[] modifier = null, string remove_name = null)
             {
-                name = s;
+                category_name = name;
+                if (remove_name == null) category_remove_name = name;
+                else category_remove_name = remove_name;
                 MainEnums = main;
                 SourceEnums = source;
                 AudioLinkEnums = audiolink;
@@ -32,16 +35,16 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             }
             public Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string> GetMainBlock()
             {
-                return new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>(name, MainEnums, null);
+                return new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>(category_name, MainEnums, null);
             }
             public Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string> GetCommonBlock(PROPERTY_BLOCK block)
             {
                 Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string> tuple = block switch
                 {
-                    PROPERTY_BLOCK.SOURCE => new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>("Source", SourceEnums, name),
-                    PROPERTY_BLOCK.AUDIOLINK_SOURCE => new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>("AudioLinkSource", AudioLinkEnums, name),
-                    PROPERTY_BLOCK.MASK_OFFSET => new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>("MaskOffset", MaskOffsetEnums, name),
-                    PROPERTY_BLOCK.MODIFIER => new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>("Modifier", ModifierEnums, name),
+                    PROPERTY_BLOCK.SOURCE => new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>("Source", SourceEnums, category_remove_name),
+                    PROPERTY_BLOCK.AUDIOLINK_SOURCE => new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>("AudioLinkSource", AudioLinkEnums, category_remove_name),
+                    PROPERTY_BLOCK.MASK_OFFSET => new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>("MaskOffset", MaskOffsetEnums, category_remove_name),
+                    PROPERTY_BLOCK.MODIFIER => new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>("Modifier", ModifierEnums, category_remove_name),
                     _ => throw new ArgumentException()
                 };
                 return tuple;
@@ -52,7 +55,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 string source, audiolink_source, mask_offset, modifier;
                 if (remove_prefix)
                 {
-                    prefix_name = name;
+                    prefix_name = category_remove_name;
                     source = "Source";
                     audiolink_source = "AudioLinkSource";
                     mask_offset = "MaskOffset";
@@ -60,10 +63,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 }
                 else
                 {
-                    source = name;
-                    audiolink_source = name;
-                    mask_offset = name;
-                    modifier = name;
+                    source = category_name;
+                    audiolink_source = category_name;
+                    mask_offset = category_name;
+                    modifier = category_name;
                 }
                 int block_count = CommonEnumCount();
                 Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[] blocks = new Tuple<string, MESHHOLOGRAM_PROP_ENUM[],string>[block_count];
@@ -90,7 +93,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 if (AudioLinkEnums != null) current_index += ArrayCopy(AudioLinkEnums);
                 if (MaskOffsetEnums != null) current_index += ArrayCopy(MaskOffsetEnums);
                 if (ModifierEnums != null) current_index += ArrayCopy(ModifierEnums);
-                return new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>(name, props, null);
+                return new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>(category_name, props, null);
 
                 int ArrayCopy(MESHHOLOGRAM_PROP_ENUM[] source)
                 {
@@ -101,11 +104,11 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             public Tuple<string, MESHHOLOGRAM_PROP_ENUM[],string>[] GetFullBlocks(bool remove_prefix = true)
             {
                 string prefix_name = null;
-                if(remove_prefix) prefix_name = name;
+                if(remove_prefix) prefix_name = category_remove_name;
                 int block_count = 1 + CommonEnumCount();
                 Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[] blocks = new Tuple<string, MESHHOLOGRAM_PROP_ENUM[], string>[block_count];
                 int current_index = 0;
-                ReplaceElement(name, MainEnums, ref blocks, ref current_index, null);
+                ReplaceElement(category_name, MainEnums, ref blocks, ref current_index, null);
                 ReplaceElement("Source", SourceEnums, ref blocks, ref current_index, prefix_name);
                 ReplaceElement("AudioLinkSource", AudioLinkEnums, ref blocks, ref current_index, prefix_name);
                 ReplaceElement("MaskOffset", MaskOffsetEnums, ref blocks, ref current_index, prefix_name);

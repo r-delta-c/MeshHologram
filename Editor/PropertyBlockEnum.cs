@@ -180,7 +180,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     MESHHOLOGRAM_PROP_ENUM._COLORING_EASE_CURVE,
                     MESHHOLOGRAM_PROP_ENUM._COLORING_MID_MUL,
                     MESHHOLOGRAM_PROP_ENUM._COLORING_MID_ADD,
-                }
+                },
+                "Coloring"
             )},
             {PROPERTY_BLOCK.GEOMETRY,new PropertyBlock("Geometry",
                 new MESHHOLOGRAM_PROP_ENUM[]{
