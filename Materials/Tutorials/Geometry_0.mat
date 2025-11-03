@@ -7,12 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AL_Interstellar
+  m_Name: Geometry_0
   m_Shader: {fileID: 4800000, guid: 8e1a1ea0eaffb904d94d9abaccb340af, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _AUDIOLINK_ENABLE
   - _STEREOMERGEMODE_ROTATION
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -105,13 +104,13 @@ Material:
     - _AmbientInfluence: 1
     - _AmbientInfluenceEnable: 0
     - _AntiAliasingEnable: 1
-    - _AudioLinkEnable: 1
+    - _AudioLinkEnable: 0
     - _AudioLinkThemeColorBand: 0
     - _BillboardEnable: 0
     - _BlendOp: 0
     - _BlendOpAlpha: 0
     - _ColorMask: 15
-    - _ColorSource: 0
+    - _ColorSource: 1
     - _ColoringAudioLinkChronoTensityBand: 0
     - _ColoringAudioLinkChronoTensityMode: 0
     - _ColoringAudioLinkChronoTensityStrength: 1
@@ -123,24 +122,24 @@ Material:
     - _ColoringAudioLinkVUPanning: 0.5
     - _ColoringAudioLinkVUSmoothing: 8
     - _ColoringAudioLinkVUStrength: 1
-    - _ColoringEaseCurve: 3
+    - _ColoringEaseCurve: 1
     - _ColoringEaseMode: 2
     - _ColoringFixedValue: 0
-    - _ColoringLoopMode: 2
+    - _ColoringLoopMode: 0
     - _ColoringMapStrength: 1
     - _ColoringMaskMapStrength: 1
     - _ColoringMidAdd: 0
-    - _ColoringMidMul: 12
+    - _ColoringMidMul: 1
     - _ColoringNoiseOffsetBeforeScale: 0
     - _ColoringNoiseSeed: 1
     - _ColoringNoiseSpace: 1
     - _ColoringNoiseTimePhase: 0
-    - _ColoringNoiseTimeSpeed: 0.2
-    - _ColoringNoiseValueScale: 2
-    - _ColoringPartitionMode: 2
-    - _ColoringPhaseScale: 2
-    - _ColoringSource: 1
-    - _Cull: 0
+    - _ColoringNoiseTimeSpeed: 5
+    - _ColoringNoiseValueScale: 1
+    - _ColoringPartitionMode: 1
+    - _ColoringPhaseScale: 1
+    - _ColoringSource: 0
+    - _Cull: 2
     - _CustomRenderQueueC: 2001
     - _CustomRenderQueueT: 3000
     - _DirectionalLightInfluence: 1
@@ -190,7 +189,7 @@ Material:
     - _GeometryAudioLinkChronoTensityMode: 0
     - _GeometryAudioLinkChronoTensityStrength: 1
     - _GeometryAudioLinkMaskMapStrength: 1
-    - _GeometryAudioLinkSource: 1
+    - _GeometryAudioLinkSource: 0
     - _GeometryAudioLinkSpectrumMirror: 0
     - _GeometryAudioLinkSpectrumStrength: 1
     - _GeometryAudioLinkVUBand: 0
@@ -199,7 +198,7 @@ Material:
     - _GeometryAudioLinkVUStrength: 1
     - _GeometryEaseCurve: 1
     - _GeometryEaseMode: 2
-    - _GeometryFixedValue: 1
+    - _GeometryFixedValue: 0
     - _GeometryLoopMode: 2
     - _GeometryMapStrength: 1
     - _GeometryMaskMapStrength: 1
@@ -209,7 +208,7 @@ Material:
     - _GeometryNoiseSeed: 2
     - _GeometryNoiseSpace: 1
     - _GeometryNoiseTimePhase: 0
-    - _GeometryNoiseTimeSpeed: 0
+    - _GeometryNoiseTimeSpeed: 3
     - _GeometryNoiseValueScale: 1
     - _GeometryPhaseScale: 1
     - _GeometryPixelizationSpace: 0
@@ -236,42 +235,42 @@ Material:
     - _OrbitAudioLinkVUPanning: 0.5
     - _OrbitAudioLinkVUSmoothing: 8
     - _OrbitAudioLinkVUStrength: 1
-    - _OrbitEaseCurve: 3
+    - _OrbitEaseCurve: 1
     - _OrbitEaseMode: 2
-    - _OrbitEnable: 1
+    - _OrbitEnable: 0
     - _OrbitFixedValue: 0
-    - _OrbitLoopMode: 2
+    - _OrbitLoopMode: 0
     - _OrbitMapStrength: 1
     - _OrbitMaskMapStrength: 1
     - _OrbitMidAdd: 0
-    - _OrbitMidMul: 12
+    - _OrbitMidMul: 1
     - _OrbitNoiseOffsetBeforeScale: 0
-    - _OrbitNoiseSeed: 1
+    - _OrbitNoiseSeed: 3
     - _OrbitNoiseSpace: 1
     - _OrbitNoiseTimePhase: 0
-    - _OrbitNoiseTimeSpeed: 0.2
-    - _OrbitNoiseValueScale: 2
-    - _OrbitPhaseScale: 2
+    - _OrbitNoiseTimeSpeed: 3
+    - _OrbitNoiseValueScale: 1
+    - _OrbitPhaseScale: 1
     - _OrbitPrimitiveRatio: 0.5
     - _OrbitRotationFixedValue: 0
     - _OrbitRotationMapStrength: 1
     - _OrbitRotationMaskMapStrength: 1
     - _OrbitRotationNoiseOffsetBeforeScale: 0
-    - _OrbitRotationNoiseSeed: 2
+    - _OrbitRotationNoiseSeed: 4
     - _OrbitRotationNoiseSpace: 1
     - _OrbitRotationNoiseTimePhase: 0
-    - _OrbitRotationNoiseTimeSpeed: 5
+    - _OrbitRotationNoiseTimeSpeed: 3
     - _OrbitRotationNoiseValueScale: 1
     - _OrbitRotationOffsetAudioLinkChronoTensityBand: 0
-    - _OrbitRotationOffsetAudioLinkChronoTensityMode: 1
-    - _OrbitRotationOffsetAudioLinkSource: 3
+    - _OrbitRotationOffsetAudioLinkChronoTensityMode: 0
+    - _OrbitRotationOffsetAudioLinkSource: 0
     - _OrbitRotationOffsetAudioLinkVUBand: 0
     - _OrbitRotationOffsetAudioLinkVUPanning: 0.5
     - _OrbitRotationOffsetAudioLinkVUSmoothing: 8
     - _OrbitRotationSeed: 1
     - _OrbitRotationSource: 2
     - _OrbitSeed: 0
-    - _OrbitSource: 1
+    - _OrbitSource: 2
     - _OrbitWaveAudioLinkChronoTensityBand: 0
     - _OrbitWaveAudioLinkChronoTensityMode: 0
     - _OrbitWaveAudioLinkSource: 0
@@ -296,8 +295,8 @@ Material:
     - _ZTest: 4
     - _ZWrite: 0
     m_Colors:
-    - _Color0: {r: 0.7921569, g: 1, b: 0.9882353, a: 1}
-    - _Color1: {r: 0.9764706, g: 1, b: 0.654902, a: 1}
+    - _Color0: {r: 1, g: 1, b: 1, a: 1}
+    - _Color1: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _ColoringNoiseOffset0: {r: 0, g: 0, b: 0, a: 0}
     - _ColoringNoiseOffset1: {r: 0, g: 0, b: 0, a: 0}
     - _ColoringNoiseScale0: {r: 1, g: 1, b: 1, a: 5}
@@ -308,7 +307,7 @@ Material:
     - _FragmentNoiseScale1: {r: 1, g: 1, b: 1, a: 1}
     - _GeometryNoiseOffset0: {r: 0, g: 0, b: 0, a: 0}
     - _GeometryNoiseOffset1: {r: 0, g: 0, b: 0, a: 0}
-    - _GeometryNoiseScale0: {r: 1, g: 1, b: 1, a: 12}
+    - _GeometryNoiseScale0: {r: 1, g: 1, b: 1, a: 5}
     - _GeometryNoiseScale1: {r: 1, g: 1, b: 1, a: 1}
     - _GeometryPixelization: {r: 0, g: 0, b: 0, a: 0.02}
     - _GeometryPushPullBounds: {r: -0.15, g: 0, b: 0, a: 0}
@@ -318,7 +317,7 @@ Material:
     - _OrbitNoiseScale0: {r: 1, g: 1, b: 1, a: 5}
     - _OrbitNoiseScale1: {r: 1, g: 1, b: 1, a: 1}
     - _OrbitOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _OrbitRotationAngle: {r: 0, g: 0, b: 0.25, a: 0}
+    - _OrbitRotationAngle: {r: 0, g: 0, b: 0, a: 0}
     - _OrbitRotationNoiseOffset0: {r: 0, g: 0, b: 0, a: 0}
     - _OrbitRotationNoiseOffset1: {r: 0, g: 0, b: 0, a: 0}
     - _OrbitRotationNoiseScale0: {r: 1, g: 1, b: 1, a: 5}
@@ -334,8 +333,8 @@ Material:
     - _OrbitWaveAudioLinkSpectrumBounds: {r: 0, g: 1, b: 0, a: 0}
     - _OrbitWaveAudioLinkSpectrumStrength: {r: 1, g: 0, b: 0, a: 0}
     - _OrbitWaveAudioLinkVUStrength: {r: 1, g: 0, b: 0, a: 0}
-    - _OrbitWaveFrequency: {r: 5, g: 3, b: 0, a: 0}
+    - _OrbitWaveFrequency: {r: 5, g: 5, b: 0, a: 0}
     - _OrbitWavePhase: {r: 0, g: 0, b: 0, a: 0}
-    - _OrbitWaveSpeed: {r: 8, g: 5, b: 0, a: 0}
-    - _OrbitWaveStrength: {r: 0.06, g: 0, b: 0, a: 0}
+    - _OrbitWaveSpeed: {r: 1, g: 5, b: 0, a: 0}
+    - _OrbitWaveStrength: {r: 0, g: 0.1, b: 0, a: 0}
   m_BuildTextureStacks: []
