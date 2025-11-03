@@ -6,15 +6,16 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramInspector;
+using static DeltaField.Shaders.MeshHologram.Editor.Initializer;
 
 namespace DeltaField.Shaders.MeshHologram.Editor{
-    public class CleanupTools
+    public static class CleanupTools
     {
-        public CleanupTools(Material m)
+        private static SerializedObject serialized_mat;
+        private static SerializedProperty props;
+        public static void DrawCleanupTools(Material[] materials)
         {
-            SerializedObject mat = new SerializedObject(m);
-            mat.Update();
-            SerializedProperty props = mat.FindProperty("m_SavedProperties");
+            if (IsInitialized == false) return;
 
             using (new EditorGUILayout.HorizontalScope())
             {
@@ -29,8 +30,12 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                             LocalizationManager.GetLocalizeText("dialog.remove"),
                             LocalizationManager.GetLocalizeText("dialog.cancel")))
                         {
-                            RemoveTextures();
-                            mat.ApplyModifiedProperties();
+                            foreach(Material m in materials)
+                            {
+                                SerializationMaterial(m);
+                                RemoveTextures(m);
+                                serialized_mat.ApplyModifiedProperties();
+                            }
                             AssetDatabase.SaveAssets();
                             AssetDatabase.Refresh();
                         }
@@ -43,9 +48,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                             LocalizationManager.GetLocalizeText("dialog.remove"),
                             LocalizationManager.GetLocalizeText("dialog.cancel")))
                         {
-                            RemoveTextures();
-                            RemoveVariableProperties();
-                            mat.ApplyModifiedProperties();
+                            foreach (Material m in materials)
+                            {
+                                SerializationMaterial(m);
+                                RemoveTextures(m);
+                                RemoveVariableProperties(m);
+                                serialized_mat.ApplyModifiedProperties();
+                            }
                             AssetDatabase.SaveAssets();
                             AssetDatabase.Refresh();
                         }
@@ -58,25 +67,35 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                             LocalizationManager.GetLocalizeText("dialog.remove"),
                             LocalizationManager.GetLocalizeText("dialog.cancel")))
                         {
-                            RemoveUnusedKeywords(m);
-                            mat.ApplyModifiedProperties();
+                            foreach(Material m in materials)
+                            {
+                                Undo.RecordObject(m, "Remove Unused Keywords");
+                                RemoveUnusedKeywords(m);
+                                EditorUtility.SetDirty(m);
+                            }
                             AssetDatabase.SaveAssets();
                             AssetDatabase.Refresh();
                         }
                     }
                 }
             }
-            void RemoveTextures()
+            void SerializationMaterial(Material m)
             {
-                RemoveUnusedProperties(props.FindPropertyRelative("m_TexEnvs"));
+                serialized_mat = new SerializedObject(m);
+                serialized_mat.Update();
+                props = serialized_mat.FindProperty("m_SavedProperties");
+            }
+            void RemoveTextures(Material m)
+            {
+                RemoveUnusedProperties(props.FindPropertyRelative("m_TexEnvs"),m);
 
             }
-            void RemoveVariableProperties()
+            void RemoveVariableProperties(Material m)
             {
-                RemoveUnusedProperties(props.FindPropertyRelative("m_Floats"));
-                RemoveUnusedProperties(props.FindPropertyRelative("m_Colors"));
+                RemoveUnusedProperties(props.FindPropertyRelative("m_Floats"),m);
+                RemoveUnusedProperties(props.FindPropertyRelative("m_Colors"),m);
             }
-            void RemoveUnusedProperties(SerializedProperty props)
+            void RemoveUnusedProperties(SerializedProperty props, Material m)
             {
                 for (int i = props.arraySize - 1; i >= 0; i--)
                 {
@@ -87,22 +106,19 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
                     }
                 }
             }
-            void RemoveUnusedKeywords(Material mat)
+            void RemoveUnusedKeywords(Material m)
             {
-                LocalKeyword[] LocalKeywords = mat.shader.keywordSpace.keywords;
-                List<string> keywords = mat.shaderKeywords.ToList();
+                LocalKeyword[] LocalKeywords = m.shader.keywordSpace.keywords;
+                List<string> keywords = m.shaderKeywords.ToList();
                 List<string> apply_keyword = new List<string>();
                 foreach (LocalKeyword valid_keyword in LocalKeywords)
                 {
                     foreach(string keyword in keywords)
                     {
-                        if (valid_keyword.name == keyword)
-                        {
-                            apply_keyword.Add(keyword);
-                        }
+                        if (valid_keyword.name == keyword) apply_keyword.Add(keyword);
                     }
                 }
-                mat.shaderKeywords = apply_keyword.ToArray();
+                m.shaderKeywords = apply_keyword.ToArray();
             }
         }
     }

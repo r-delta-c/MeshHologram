@@ -35,9 +35,15 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             if (InspectorInitialize == false)
             {
                 this.editor = editor;
-                targetMat = this.editor.target as Material;
-                props = Properties;
+                targetMat = editor.target as Material;
+                targetMats = new Material[editor.targets.Length];
+                for(int i = 0; i < editor.targets.Length; i++)
+                {
+                    targetMats[i] = editor.targets[i] as Material;
+                }
+                InspectorInitialize = true;
             }
+            props = Properties;
 
             using (new EditorGUILayout.HorizontalScope())
             {
@@ -57,6 +63,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             using (var changeCheckScope = new EditorGUI.ChangeCheckScope())
             {
                 EditorGUILayout.Space(16);
+                UpdateSubTabLabels();
                 using (new EditorGUILayout.VerticalScope("HelpBox"))
                 {
                     LocalizationManager.DrawLanguageEnumPopup();
@@ -140,7 +147,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     {
                         editor.RegisterPropertyChangeUndo("Property");
                         int render_queue;
-                        foreach (Material mat in editor.targets)
+                        foreach (Material mat in targetMats)
                         {
                             switch (GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._RENDERING_MODE))
                             {

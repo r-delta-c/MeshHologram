@@ -16,6 +16,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
         }
 
         private Material targetMat;
+        private Material[] targetMats;
         private MaterialEditor editor;
         private MaterialProperty[] props;
 
@@ -29,7 +30,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
             OrbitLabels = new GUIContent[4]{new GUIContent(),new GUIContent(),new GUIContent(),new GUIContent()};
         private static GUILayoutOption MainGUIOption = GUILayout.MinHeight(240);
         private static LANG lang;
-        private CleanupTools cleanup_tool;
 
         private GradientMapManager gradientMapManager = new GradientMapManager();
         private Gradient gradient = new Gradient();
