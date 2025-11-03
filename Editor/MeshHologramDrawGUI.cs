@@ -400,7 +400,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 DrawHeader(OrbitLabels[OrbitIndex].text);
                 DrawHeaderButtonOrbitBlock();
                 GUILayout.EndHorizontal();
-                UpdateSubTabLabels();
                 DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_ENABLE);
                 if (GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._ORBIT_ENABLE) == 1)
                 {
@@ -665,7 +664,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
         private void DrawOthers()
         {
-            cleanup_tool = new CleanupTools(targetMat);
+            CleanupTools.DrawCleanupTools(targetMats);
             EditorGUILayout.Space(16);
             using (new EditorGUILayout.HorizontalScope())
             {

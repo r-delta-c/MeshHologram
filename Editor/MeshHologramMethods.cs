@@ -33,38 +33,48 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
         private static void UpdateSubTabLabels()
         {
-            switch (OrbitIndex)
+            if (MainIndex == 3)
             {
-                case 0:
-                    SubLabels[0].text = LocalizationManager.GetLocalizeText("label.source");
-                    SubLabels[1].text = LocalizationManager.GetLocalizeText("label.audiolink_source");
-                    SubLabels[2].text = LocalizationManager.GetLocalizeText("label.mask_offset");
-                    SubLabels[3].text = LocalizationManager.GetLocalizeText("label.modifiers");
-                    break;
-                case 1:
-                    SubLabels[0].text = LocalizationManager.GetLocalizeText("label.source");
-                    SubLabels[1].text = "---";
-                    SubLabels[2].text = LocalizationManager.GetLocalizeText("label.mask_offset");
-                    SubLabels[3].text = "---";
-                    break;
-                case 2:
-                    SubLabels[0].text = "---";
-                    SubLabels[1].text = LocalizationManager.GetLocalizeText("label.audiolink_source");
-                    SubLabels[2].text = "---";
-                    SubLabels[3].text = "---";
-                    break;
-                case 3:
-                    SubLabels[0].text = "---";
-                    SubLabels[1].text = LocalizationManager.GetLocalizeText("label.audiolink_source");
-                    SubLabels[2].text = LocalizationManager.GetLocalizeText("label.mask_offset");
-                    SubLabels[3].text = "---";
-                    break;
-                default:
-                    SubLabels[0].text = "---";
-                    SubLabels[1].text = "---";
-                    SubLabels[2].text = "---";
-                    SubLabels[3].text = "---";
-                    break;
+                switch (OrbitIndex)
+                {
+                    case 0:
+                        SubLabels[0].text = LocalizationManager.GetLocalizeText("label.source");
+                        SubLabels[1].text = LocalizationManager.GetLocalizeText("label.audiolink_source");
+                        SubLabels[2].text = LocalizationManager.GetLocalizeText("label.mask_offset");
+                        SubLabels[3].text = LocalizationManager.GetLocalizeText("label.modifiers");
+                        break;
+                    case 1:
+                        SubLabels[0].text = LocalizationManager.GetLocalizeText("label.source");
+                        SubLabels[1].text = "---";
+                        SubLabels[2].text = LocalizationManager.GetLocalizeText("label.mask_offset");
+                        SubLabels[3].text = "---";
+                        break;
+                    case 2:
+                        SubLabels[0].text = "---";
+                        SubLabels[1].text = LocalizationManager.GetLocalizeText("label.audiolink_source");
+                        SubLabels[2].text = "---";
+                        SubLabels[3].text = "---";
+                        break;
+                    case 3:
+                        SubLabels[0].text = "---";
+                        SubLabels[1].text = LocalizationManager.GetLocalizeText("label.audiolink_source");
+                        SubLabels[2].text = LocalizationManager.GetLocalizeText("label.mask_offset");
+                        SubLabels[3].text = "---";
+                        break;
+                    default:
+                        SubLabels[0].text = "---";
+                        SubLabels[1].text = "---";
+                        SubLabels[2].text = "---";
+                        SubLabels[3].text = "---";
+                        break;
+                }
+            }
+            else
+            {
+                SubLabels[0].text = LocalizationManager.GetLocalizeText("label.source");
+                SubLabels[1].text = LocalizationManager.GetLocalizeText("label.audiolink_source");
+                SubLabels[2].text = LocalizationManager.GetLocalizeText("label.mask_offset");
+                SubLabels[3].text = LocalizationManager.GetLocalizeText("label.modifiers");
             }
         }
 
