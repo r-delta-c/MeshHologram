@@ -230,18 +230,18 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             MESHHOLOGRAM_PROP_ENUM tex1, MESHHOLOGRAM_PROP_ENUM st1, MESHHOLOGRAM_PROP_ENUM strength1)
         {
             DrawShaderProperty(tex0);
-            CheckSRGBTexture(tex0);
             DrawShaderProperty(strength0);
             EditorGUILayout.Space(EditorGUIUtility.singleLineHeight);
             DrawShaderProperty(st0);
             EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*3.0f);
+            CheckSRGBTexture(tex0);
             DrawPartitionLine(4);
             DrawShaderProperty(tex1);
-            CheckSRGBTexture(tex1);
             DrawShaderProperty(strength1);
             EditorGUILayout.Space(EditorGUIUtility.singleLineHeight);
             DrawShaderProperty(st1);
             EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*3.0f);
+            CheckSRGBTexture(tex1);
         }
 
         private void DrawMaskOffsetTex(
@@ -250,25 +250,25 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             MESHHOLOGRAM_PROP_ENUM tex2, MESHHOLOGRAM_PROP_ENUM st2, MESHHOLOGRAM_PROP_ENUM strength2)
         {
             DrawShaderProperty(tex0);
-            CheckSRGBTexture(tex0);
             DrawShaderProperty(strength0);
             EditorGUILayout.Space(EditorGUIUtility.singleLineHeight);
             DrawShaderProperty(st0);
             EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*3.0f);
+            CheckSRGBTexture(tex0);
             DrawPartitionLine(4);
             DrawShaderProperty(tex1);
-            CheckSRGBTexture(tex1);
             DrawShaderProperty(strength1);
             EditorGUILayout.Space(EditorGUIUtility.singleLineHeight);
             DrawShaderProperty(st1);
             EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*3.0f);
+            CheckSRGBTexture(tex1);
             DrawPartitionLine(4);
             DrawShaderProperty(tex2);
-            CheckSRGBTexture(tex2);
             DrawShaderProperty(strength2);
             EditorGUILayout.Space(EditorGUIUtility.singleLineHeight);
             DrawShaderProperty(st2);
             EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*3.0f);
+            CheckSRGBTexture(tex2);
         }
 
         private void CheckSRGBTexture(MESHHOLOGRAM_PROP_ENUM tex)

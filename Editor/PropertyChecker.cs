@@ -62,12 +62,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 if (refresh_list)
                 {
                     InfoList.Clear();
-                    foreach (MESHHOLOGRAM_PROP_ENUM key in TargetProps.Keys)
-                    {
-                        if (key == MESHHOLOGRAM_PROP_ENUM._DUMMY) continue;
-                        TargetProps[key].var = MaterialEditor.GetMaterialProperty(new UnityEngine.Object[] { targetMat }, TargetProps[key].property);
-                        TargetProps[key].display = LocalizationManager.GetLocalizeText(TargetProps[key].property);
-                    }
                     refresh_list = false;
                     out_of_supported_shader = false;
                     checked_material = true;
@@ -98,6 +92,14 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 out_of_supported_shader = true;
                 return;
             }
+
+            foreach (MESHHOLOGRAM_PROP_ENUM key in TargetProps.Keys)
+            {
+                if (key == MESHHOLOGRAM_PROP_ENUM._DUMMY) continue;
+                TargetProps[key].var = MaterialEditor.GetMaterialProperty(new UnityEngine.Object[] { targetMat }, TargetProps[key].property);
+                TargetProps[key].display = LocalizationManager.GetLocalizeText(TargetProps[key].property);
+            }
+
             if (TargetProps[MESHHOLOGRAM_PROP_ENUM._COLOR_MASK].var.floatValue != 15)
             {
                 InfoList.Add(new Tuple<MessageType, string>(MessageType.Warning,
