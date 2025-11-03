@@ -3,6 +3,33 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.2.2] 2025/11/04
+### Added
+- Mesh Bounds Editorに言語変更のポップアップを追加。
+- いくつかのローカライズ未対応のテキストを適応。
+- 内部データのクリーンアップをマテリアル複数選択時に全てに適応されるようになりました。
+
+### Changed
+- いくつかのラベルの表示を変更。
+- OrbitのSource(参照先)、`Primitive`の`Orbit Primitive Ratio(Orbit Primitiveの比率)`の効果を反転。
+- Orbit Rotation Offset(Orbit 回転オフセット)の`Orbit Rotation Angle(Orbitの回転)`の回転適応順を変更。
+    - `Z` -> `Y`の順番で計算され、`Y`を回転させてから`Z`を回転させることで直感的に向きを変えられるようになっています。
+- チュートリアル用のマテリアルとそのフォルダ、`Orbit`、`Noise`を`Tutorials`フォルダｈ移行。
+
+### Fixed
+- PropertyCheckerで適切なプロパティ名が表示されない問題を修正。
+- いくつかのラベルが誤った表示になっていた問題を修正。
+- Color Source(色の参照先)のGradientTexで使用されるGradient Texture(グラデーションテクスチャ)が適切にタイリング、オフセットが適応されない問題を修正。
+- 特定の条件時(未特定だが、マテリアルの保存時、アセットの更新、旧マテリアルデータの読み取り等と考えられる。)、エラーログが表示される問題を修正。
+- Colorカテゴリーでプロパティを一括コピーした際に、誤ったプロパティ名が出力される問題を修正。
+- 特定のOrbitメニューを開いて、共通設定(Commons)の一部が無効なラベル表示になった時にメインメニューを切り替えても元に戻らない問題を修正。
+- OrbitのSource(参照先)、`Noise`の、`TimeSpeed(時間速度)`と`TimePhase(時間周期)`が反映されない問題を修正。
+- Examplesのマテリアルを正常に描写されるように更新。
+
+### Removed
+- 独自のGUI描写に切り替えた関係で、殆どのプロパティで右クリックによるコンテキストメニューが表示されなくなりました。
+    - 同様にLock in Childrenも使用不可になりました。
+
 ## [0.2.1] 2025/10/26
 ### Added
 - プロパティをグループごとにコピー、ペーストする機能を追加しました。
@@ -442,6 +469,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - マテリアルのインスペクターから、MeshHologramが選択できない不具合を修正。
     - MeshBoundsEditorで使用しているシェーダーのパスを変更することで対処。
 
+[0.2.2]: https://github.com/r-delta-c/MeshHologram/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/r-delta-c/MeshHologram/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/r-delta-c/MeshHologram/compare/0.2.0-exp.3...0.2.0
 [0.2.0-exp.3]: https://github.com/r-delta-c/MeshHologram/compare/0.1.5...0.2.0-exp.3
