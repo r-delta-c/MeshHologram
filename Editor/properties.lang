@@ -44,7 +44,7 @@ _StencilPass||Pass||Pass
 _StencilFail||Fail||Fail
 _StencilZFail||Fail||Z Fail
 
-_AudioLinkEnable||Enable AudioLink||AudioLinkを有効にする
+_AudioLinkEnable||Enable AudioLink (KEYWORD)||AudioLinkを有効にする (KEYWORD)
 _AudioLinkThemeColorBand||AudioLink Theme Color Band||AudioLinkテーマカラー帯域
 
 _FragmentTriangleCompression||Triangle Compression||三角形の縮小
@@ -126,10 +126,10 @@ _GeometryMidMul||Mid Mul||中間乗算
 _GeometryMidAdd||Mid Add||中間加算
 
 _GeometryScaleEnable||Enable Scale||スケールの有効
-_GeometryScaleBounds||Scale Bounds/A/B||スケールの範囲/A/B
+_GeometryScaleBounds||Scale Bounds$A$B||スケールの範囲$A$B
 
 _GeometryPushPullEnable||Enable PushPull||押し出しの有効
-_GeometryPushPullBounds||PushPull Bounds/A/B||押し出しの範囲/A/B
+_GeometryPushPullBounds||PushPull Bounds$A$B||押し出しの範囲$A$B
 _GeometryPushPullPartitionBias||Partition Bias | Vertex-Center-Edge||区切りの偏り | 頂点-中心-辺
 
 _GeometryRotationEnable||Enable Rotation||回転の有効
@@ -138,7 +138,7 @@ _GeometryRotationInvert||Invert Rotation||逆回転
 _GeometryRotationNoiseRepeat||One-way Rotation||一方向回転
 
 _GeometryPixelizationSpace||Vertex Pixelization Position Space||頂点モザイク化の空間
-_GeometryPixelization||Vertex Pixelization/X/Y/Z/All||頂点モザイク化/X/Y/Z/All
+_GeometryPixelization||Vertex Pixelization$X$Y$Z$All||頂点モザイク化$X$Y$Z$All
 
 
 _OrbitEnable||Enable Orbit||Orbitの有効
@@ -164,8 +164,8 @@ _OrbitMidMul||Mid Mul||中間乗算
 _OrbitMidAdd||Mid Add||中間加算
 _OrbitSeed||Orbit Seed||Orbitのシード値
 _OrbitPrimitiveRatio||Orbit Primitive Ratio||Orbit Primitiveの比率
-_OrbitOffset||Orbit Offset/X/Y/Z||Orbitの座標オフセット/X/Y/Z
-_OrbitScale||Orbit Scale/X/Y/Z/Scale||Orbit スケール/X/Y/Z/スケール
+_OrbitOffset||Orbit Offset$X$Y$Z||Orbitの座標オフセット$X$Y$Z
+_OrbitScale||Orbit Scale$X$Y$Z$Scale||Orbit スケール$X$Y$Z$スケール
 
 _OrbitRotationSource||Orbit Rotation Source||Orbit 回転の参照先
 _OrbitRotationFixedValue||Fixed Value||固定値
@@ -174,34 +174,34 @@ _OrbitRotationOffsetAudioLinkSource||Orbit Rotation Offset AudioLink Source||Orb
 _OrbitRotationOffsetAudioLinkVUBand||VU Band||VU帯域
 _OrbitRotationOffsetAudioLinkVUSmoothing||VU Smoothing||VUの滑らかさ
 _OrbitRotationOffsetAudioLinkVUPanning||VU Panning||VU L/R
-_OrbitRotationOffsetAudioLinkVUStrength||VU Strength/X/Y/Z/W||VUの強さ/X/Y/Z/W
+_OrbitRotationOffsetAudioLinkVUStrength||VU Strength$X$Y$Z$W||VUの強さ$X$Y$Z$W
 _OrbitRotationOffsetAudioLinkChronoTensityBand||ChronoTensity Band||ChronoTensity帯域
 _OrbitRotationOffsetAudioLinkChronoTensityMode||ChronoTensity Mode||ChronoTensityのモード
-_OrbitRotationOffsetAudioLinkChronoTensityStrength||ChronoTensity Strength/X/Y/Z/W||ChronoTensityの強さ/X/Y/Z/W
+_OrbitRotationOffsetAudioLinkChronoTensityStrength||ChronoTensity Strength$X$Y$Z$W||ChronoTensityの強さ$X$Y$Z$W
 
 _OrbitRotationSeed||Orbit Rotation Seed||Orbit 回転のシード値
-_OrbitRotationAngle||Orbit Rotation Angle/X/Y/Z||Orbitの回転/X/Y/Z
-_OrbitRotationSpeed||Orbit Rotation Speed/X/Y/Z/W||Orbitの回転速度/X/Y/Z/W
+_OrbitRotationAngle||Orbit Rotation Angle$X$Y$Z||Orbitの回転$X$Y$Z
+_OrbitRotationSpeed||Orbit Rotation Speed$X$Y$Z$W||Orbitの回転速度$X$Y$Z$W
 
-_OrbitRotationSpread||Orbit Rotation Spread/X/Y/Z||Orbitの回転のバラつき/X/Y/Z
+_OrbitRotationSpread||Orbit Rotation Spread$X$Y$Z||Orbitの回転のバラつき$X$Y$Z
 
-_OrbitWaveStrength||Strength/X/YZ//||強さ/X/YZ//
-_OrbitWaveFrequency||Frequency/X/YZ//||周波頻度/X/YZ//
-_OrbitWavePhase||Phase/X/YZ//||周期/X/YZ//
-_OrbitWaveSpeed||Speed/X/YZ//||波の早さ/X/YZ//
+_OrbitWaveStrength||Strength$X$YZ$$||強さ$X$YZ$$
+_OrbitWaveFrequency||Frequency$X$YZ$$||周波頻度$X$YZ$$
+_OrbitWavePhase||Phase$X$YZ$$||周期$X$YZ$$
+_OrbitWaveSpeed||Speed$X$YZ$$||波の早さ$X$YZ$$
 
 _OrbitWaveAudioLinkSource||Orbit Wave AudioLink Source||Orbit WaveのAudioLink参照先
 _OrbitWaveAudioLinkVUBand||VU Band||VU帯域
 _OrbitWaveAudioLinkVUSmoothing||VU Smoothing||VUの滑らかさ
 _OrbitWaveAudioLinkVUPanning||VU Panning||VU L/R
-_OrbitWaveAudioLinkVUStrength||VU Strength/X/YZ//||VUの強さ/X/YZ//
+_OrbitWaveAudioLinkVUStrength||VU Strength$X$YZ$$||VUの強さ$X$YZ$$
 _OrbitWaveAudioLinkChronoTensityBand||ChronoTensity Band||ChronoTensity帯域
 _OrbitWaveAudioLinkChronoTensityMode||ChronoTensity Mode||ChronoTensityのモード
-_OrbitWaveAudioLinkChronoTensityStrength||ChronoTensity Strength/X/YZ//||ChronoTensityの強さ/X/YZ//
-_OrbitWaveAudioLinkSpectrumStrength||Spectrum Strength/X/YZ//||Spectrumの強さ/X/YZ//
+_OrbitWaveAudioLinkChronoTensityStrength||ChronoTensity Strength$X$YZ$$||ChronoTensityの強さ$X$YZ$$
+_OrbitWaveAudioLinkSpectrumStrength||Spectrum Strength$X$YZ$$||Spectrumの強さ$X$YZ$$
 _OrbitWaveAudioLinkSpectrumMirror||Spectrum Mirror||Spectrumのミラー
 _OrbitWaveAudioLinkSpectrumMode||Use AutoCorrelator||AutoCorrelatorを使う
-_OrbitWaveAudioLinkSpectrumBounds||Spectrum Bounds/A/B//||Spectrumの範囲/A/B//
+_OrbitWaveAudioLinkSpectrumBounds||Spectrum Bounds$A$B$$||Spectrumの範囲$A$B$$
 
 
 _FragmentMaskMap||Mask||マスク
@@ -221,7 +221,7 @@ _OrbitRotationMaskMap_ST||||
 _OrbitRotationMaskMapStrength||Strength||強さ
 _OrbitRotationOffsetMaskMap||Mask||マスク
 _OrbitRotationOffsetMaskMap_ST||||
-_OrbitRotationOffsetMaskMapStrength||Strength/X/Y/Z/W||強さ/X/Y/Z/W
+_OrbitRotationOffsetMaskMapStrength||Strength$X$Y$Z$W||強さ$X$Y$Z$W
 
 _FragmentMap||Offset||オフセット
 _FragmentMap_ST||||
@@ -253,14 +253,14 @@ _OrbitAudioLinkMaskMap_ST||||
 _OrbitAudioLinkMaskMapStrength||Strength||強さ
 _OrbitRotationOffsetAudioLinkMaskMap||AudioLink Mask||AudioLink マスク
 _OrbitRotationOffsetAudioLinkMaskMap_ST||||
-_OrbitRotationOffsetAudioLinkMaskMapStrength||Strength/X/Y/Z/W||強さ/X/Y/Z/W
+_OrbitRotationOffsetAudioLinkMaskMapStrength||Strength$X$Y$Z$W||強さ$X$Y$Z$W
 
 
 
-_FragmentNoiseOffset0||Offset/X/Y/Z||オフセット/X/Y/Z
-_FragmentNoiseScale0||Scale/X/Y/Z/W||スケール/X/Y/Z/W
-_FragmentNoiseOffset1||Offset Sub/X/Y/Z||サブ オフセット/X/Y/Z
-_FragmentNoiseScale1||Scale Sub/X/Y/Z/W||サブ スケール/X/Y/Z/W
+_FragmentNoiseOffset0||Offset$X$Y$Z||オフセット$X$Y$Z
+_FragmentNoiseScale0||Scale$X$Y$Z$W||スケール$X$Y$Z$W
+_FragmentNoiseOffset1||Offset Sub$X$Y$Z||サブ オフセット$X$Y$Z
+_FragmentNoiseScale1||Scale Sub$X$Y$Z$W||サブ スケール$X$Y$Z$W
 _FragmentNoiseOffsetBeforeScale||Apply Offset Before Scale||スケーリング前にオフセットを加える
 _FragmentNoiseSpace||Position Space||座標空間
 _FragmentNoiseSeed||Seed||シード値
@@ -268,10 +268,10 @@ _FragmentNoiseTimeSpeed||Time Speed||時間の早さ
 _FragmentNoiseTimePhase||Time Phase||時間周期
 _FragmentNoiseValueScale||Value Phase Scale||値の周期スケール
 
-_ColoringNoiseOffset0||Offset/X/Y/Z||オフセット/X/Y/Z
-_ColoringNoiseScale0||Scale/X/Y/Z/W||スケール/X/Y/Z/W
-_ColoringNoiseOffset1||Offset Sub/X/Y/Z||サブ オフセット/X/Y/Z
-_ColoringNoiseScale1||Scale Sub/X/Y/Z/W||サブ スケール/X/Y/Z/W
+_ColoringNoiseOffset0||Offset$X$Y$Z||オフセット$X$Y$Z
+_ColoringNoiseScale0||Scale$X$Y$Z$W||スケール$X$Y$Z$W
+_ColoringNoiseOffset1||Offset Sub$X$Y$Z||サブ オフセット$X$Y$Z
+_ColoringNoiseScale1||Scale Sub$X$Y$Z$W||サブ スケール$X$Y$Z$W
 _ColoringNoiseOffsetBeforeScale||Apply Offset Before Scale||スケーリング前にオフセットを加える
 _ColoringNoiseSpace||Position Space||座標空間
 _ColoringNoiseSeed||Seed||シード値
@@ -279,10 +279,10 @@ _ColoringNoiseTimeSpeed||Time Speed||時間の早さ
 _ColoringNoiseTimePhase||Time Phase||時間周期
 _ColoringNoiseValueScale||Value Phase Scale||値の周期スケール
 
-_GeometryNoiseOffset0||Offset/X/Y/Z||オフセット/X/Y/Z
-_GeometryNoiseScale0||Scale/X/Y/Z/W||スケール/X/Y/Z/W
-_GeometryNoiseOffset1||Offset Sub/X/Y/Z||サブ オフセット/X/Y/Z
-_GeometryNoiseScale1||Scale Sub/X/Y/Z/W||サブ スケール/X/Y/Z/W
+_GeometryNoiseOffset0||Offset$X$Y$Z||オフセット$X$Y$Z
+_GeometryNoiseScale0||Scale$X$Y$Z$W||スケール$X$Y$Z$W
+_GeometryNoiseOffset1||Offset Sub$X$Y$Z||サブ オフセット$X$Y$Z
+_GeometryNoiseScale1||Scale Sub$X$Y$Z$W||サブ スケール$X$Y$Z$W
 _GeometryNoiseOffsetBeforeScale||Before Scale||スケーリングを後にする
 _GeometryNoiseSpace||Position Space||座標空間
 _GeometryNoiseSeed||Seed||シード値
@@ -290,22 +290,22 @@ _GeometryNoiseTimeSpeed||Time Speed||時間の早さ
 _GeometryNoiseTimePhase||Time Phase||時間周期
 _GeometryNoiseValueScale||Value Phase Scale||値の周期スケール
 
-_OrbitNoiseOffset0||Offset/X/Y/Z||オフセット/X/Y/Z
-_OrbitNoiseScale0||Scale/X/Y/Z/W||スケール/X/Y/Z/W
-_OrbitNoiseOffset1||Offset Sub/X/Y/Z||サブ オフセット/X/Y/Z
-_OrbitNoiseScale1||Scale Sub/X/Y/Z/W||サブ スケール/X/Y/Z/W
-_OrbitNoiseOffsetBeforeScale||Before Scale||スケーリングを後にする
+_OrbitNoiseOffset0||Offset$X$Y$Z||オフセット$X$Y$Z
+_OrbitNoiseScale0||Scale$X$Y$Z$W||スケール$X$Y$Z$W
+_OrbitNoiseOffset1||Offset Sub$X$Y$Z||サブ オフセット$X$Y$Z
+_OrbitNoiseScale1||Scale Sub$X$Y$Z$W||サブ スケール$X$Y$Z$W
+_OrbitNoiseOffsetBeforeScale||Before Scale||スケーリング前にオフセットを加える
 _OrbitNoiseSpace||Position Space||座標空間
 _OrbitNoiseSeed||Seed||シード値
 _OrbitNoiseTimeSpeed||Time Speed||時間の早さ
 _OrbitNoiseTimePhase||Time Phase||時間周期
 _OrbitNoiseValueScale||Value Phase Scale||値の周期スケール
 
-_OrbitRotationNoiseOffset0||Offset/X/Y/Z||オフセット/X/Y/Z
-_OrbitRotationNoiseScale0||Scale/X/Y/Z/W||スケール/X/Y/Z/W
-_OrbitRotationNoiseOffset1||Offset Sub/X/Y/Z||サブ オフセット/X/Y/Z
-_OrbitRotationNoiseScale1||Scale Sub/X/Y/Z/W||サブ スケール/X/Y/Z/W
-_OrbitRotationNoiseOffsetBeforeScale||Before Scale||スケーリングを後にする
+_OrbitRotationNoiseOffset0||Offset$X$Y$Z||オフセット$X$Y$Z
+_OrbitRotationNoiseScale0||Scale$X$Y$Z$W||スケール$X$Y$Z$W
+_OrbitRotationNoiseOffset1||Offset Sub$X$Y$Z||サブ オフセット$X$Y$Z
+_OrbitRotationNoiseScale1||Scale Sub$X$Y$Z$W||サブ スケール$X$Y$Z$W
+_OrbitRotationNoiseOffsetBeforeScale||Before Scale||スケーリング前にオフセットを加える
 _OrbitRotationNoiseSpace||Position Space||座標空間
 _OrbitRotationNoiseSeed||Seed||シード値
 _OrbitRotationNoiseTimeSpeed||Time Speed||時間の早さ

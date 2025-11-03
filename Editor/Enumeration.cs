@@ -516,8 +516,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
     public enum DF_ENUM_AUDIOLINK_BAND
     {
-        [InspectorName("0: Base")]
-        BASE,
+        [InspectorName("0: Bass")]
+        BASS,
         [InspectorName("1: Low Mid")]
         LOW_MID,
         [InspectorName("2: High Mid")]
@@ -528,8 +528,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
     public enum DF_ENUM_AUDIOLINK_BAND_EXPANDED
     {
-        [InspectorName("0: Base")]
-        BASE,
+        [InspectorName("0: Bass")]
+        BASS,
         [InspectorName("1: Low Mid")]
         LOW_MID,
         [InspectorName("2: High Mid")]

@@ -102,7 +102,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                                 Debug.LogWarning("There are multiple localized text. -> Column:" + column + " - " + line);
                                 continue;
                             }
-                            r.Add(langs[0], langs[index].Split('/'));
+                            r.Add(langs[0], langs[index].Split('$'));
                         }
                         else Debug.LogWarning("Could not get localized text. -> Column:" + column + " | " + line);
                     }
