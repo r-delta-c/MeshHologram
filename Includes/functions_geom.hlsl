@@ -248,7 +248,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
 
     [branch]if(_OrbitEnable==1){
         float3 orbit_value = 0.0;
-        float orbit_time = 0.0;
+        float orbit_time = _Time.x*_OrbitNoiseTimeSpeed+_OrbitNoiseTimePhase;
         FUNC_NOISE_CENTER_POS(orbit_pos);
         orbit_value += _OrbitFixedValue*SELECTOR_MACRO(_OrbitSource,0);
         orbit_value += (ValueNoise3D(noise_center_pos,_OrbitNoiseSeed)*_OrbitNoiseValueScale+orbit_time)*SELECTOR_MACRO(_OrbitSource,1);
