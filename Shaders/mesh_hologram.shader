@@ -4,21 +4,21 @@ Shader "DeltaField/shaders/MeshHologram"{
         [DFCull]_Cull("Culling Mode",Int)=0
         [DFToggle(,0)]_ZWrite("Z Write",Int)=0
 
-        [DFNumber]_CustomRenderQueueT("Transparent Render Queue",Range(3000,5000))=3000
-        [DFNumber]_CustomRenderQueueC("Cutout Render Queue",Range(2001,2499))=2001
+        [DFNumber(0)]_CustomRenderQueueT("Transparent Render Queue",Range(3000,5000))=3000
+        [DFNumber(0)]_CustomRenderQueueC("Cutout Render Queue",Range(2001,2499))=2001
 
         [DFToggle(,0)]_BillboardEnable("Enable Billboard",Int)=0
         [DFToggle(,0)]_Forced_Z_Scale_Zero("Forced Z Scale Zero",Float)=1.0
-        [DFNumber]_DistanceInfluence("Distance Influence",Range(0.0,1.0))=1.0
+        [DFNumber(0)]_DistanceInfluence("Distance Influence",Range(0.0,1.0))=1.0
         [DFStereoMergeMode]_StereoMergeMode("Stereo Merge Mode",Int)=2
         [DFToggle(,0)]_FwidthEnable("Enable fwidth()",Int)=1
 
         [DFToggle(_DIRECTIONALLIGHT_INFLUENCE_ENABLE,1)]_DirectionalLightInfluenceEnable("Activate Directional Light Influence",Int)=0
-        [DFNumber]_DirectionalLightInfluence("Directional Light Influence",Range(0.0,1.0))=1.0
+        [DFNumber(0)]_DirectionalLightInfluence("Directional Light Influence",Range(0.0,1.0))=1.0
         [DFToggle(_AMBIENT_INFLUENCE_ENABLE,1)]_AmbientInfluenceEnable("Activate Ambient Influence",Int)=0.0
-        [DFNumber]_AmbientInfluence("Ambient Influence",Range(0.0,1.0))=1.0
+        [DFNumber(0)]_AmbientInfluence("Ambient Influence",Range(0.0,1.0))=1.0
         [DFToggle(_LIGHTVOLUMES_ENABLE,1)]_LightVolumesInfluenceEnable("Activate LightVolumes",Int)=0.0
-        [DFNumber]_LightVolumesInfluence("LightVolumes Influence",Range(0.0,1.0))=1.0
+        [DFNumber(0)]_LightVolumesInfluence("LightVolumes Influence",Range(0.0,1.0))=1.0
 
         [DFToggle(,0)]_PreviewEnable("Enable Preview",Int)=0
         [DFToggle(,0)]_AntiAliasingEnable("Enable Anti Aliasing",Int)=1
@@ -30,8 +30,8 @@ Shader "DeltaField/shaders/MeshHologram"{
         [DFToggle(,0)]_ZClip("Z Clip",Int)=1
         [DFCompare]_ZTest("Z Test",Int)=4
         [DFColorMask]_ColorMask("Color Mask",Int)=15
-        [DFNumber]_OffsetFactor("Offset Factor",Range(-1.0,1.0))=0.0
-        [DFNumber]_OffsetUnits("Offset Factor",Range(-1.0,1.0))=0.0
+        [DFNumber(0)]_OffsetFactor("Offset Factor",Range(-1.0,1.0))=0.0
+        [DFNumber(0)]_OffsetUnits("Offset Factor",Range(-1.0,1.0))=0.0
         _AlphaToMask("Alpha To Mask",Int)=0
         [DFToggle(,0)]_AlphaToMaskMemory("Alpha To Mask",Int)=0
 
@@ -47,7 +47,7 @@ Shader "DeltaField/shaders/MeshHologram"{
         [IntRange]_StencilRef("Stencil Ref",Range(0,255))=0
         [IntRange]_StencilReadMask("Stencil Read Mask",Range(0,255))=255
         [IntRange]_StencilWriteMask("Stencil Write Mask",Range(0,255))=255
-        [DFCompare]_StencilComp("Stencil Comp",Int)=8
+        [DFCompare]_StencilComp("Stencil Comp",Int)=0
         [DFStencilOp]_StencilPass("Stencil Pass",Int)=0
         [DFStencilOp]_StencilFail("Stencil Fail",Int)=0
         [DFStencilOp]_StencilZFail("Stencil ZFail",Int)=0
@@ -56,19 +56,19 @@ Shader "DeltaField/shaders/MeshHologram"{
         [DFToggle(_AUDIOLINK_ENABLE,1)]_AudioLinkEnable("Enable AudioLink",Int)=0
         [DFAudioLinkBand]_AudioLinkThemeColorBand("Theme Color Band",Int)=0
 
-        [DFNumber]_FragmentTriangleCompression("Triangle Compression",Float)=5.0
+        [DFNumber(0)]_FragmentTriangleCompression("Triangle Compression",Float)=5.0
         [DFToggle(,0)]_FragmentFill("Fill",Float)=0.0
-        [DFNumber]_FragmentLineWidth("Line Width",Float)=2.0
-        [DFNumber]_FragmentLineGradientBias("Line Gradient Bias",Float)=0.0
+        [DFNumber(0)]_FragmentLineWidth("Line Width",Float)=2.0
+        [DFNumber(0)]_FragmentLineGradientBias("Line Gradient Bias",Float)=0.0
         [DFToggle(,0)]_FragmentManualLineScalingEnable("Enable Manual Line Scaling",Int)=0.0
-        [DFNumber]_FragmentLineScale("Line Scale",Float)=1.0
+        [DFNumber(0)]_FragmentLineScale("Line Scale",Float)=1.0
         [DFLineAnimationMode]_FragmentLineAnimationMode("Line Animation Mode",Int)=0
         [DFPartitionMode]_FragmentPartitionMode("Partition Mode",Int)=1
 
 
         [DFColor]_Color0("Primary Color",Color)=(1.0,1.0,1.0,1.0)
         [DFColor]_Color1("Secondary Color",Color)=(0.2,0.2,0.2,1.0)
-        [DFNumber]_Emission("Add Emission",Float)=0.0
+        [DFNumber(0)]_Emission("Add Emission",Float)=0.0
         [DFColorSource]_ColorSource("Color Source",Int)=0
         [DFTexture]_ColorGradientTex("Gradient Tex",2D)="white"{}
         [DFTextureST(1)]_ColorGradientTex_ST("Gradient Tex ST",Vector)=(1.0,1.0,0.0,0.0)
@@ -80,10 +80,10 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         [DFToggle(,1)]_GeometryPushPullEnable("Enable PushPull",Int)=1
         [DFVector(1,1)]_GeometryPushPullBounds("PushPull Bounds",Vector)=(-0.15,0.0,0.0,0.0)
-        [DFNumber]_GeometryPushPullPartitionBias("PushPull Partition Bias| Vertex <=> Center",Range(0.0,1.0))=0.5
+        [DFNumber(0)]_GeometryPushPullPartitionBias("PushPull Partition Bias| Vertex <=> Center",Range(0.0,1.0))=0.5
 
         [DFToggle(,1)]_GeometryRotationEnable("Enable Rotation",Int)=0
-        [DFNumber]_GeometryRotationStrength("Rotation Strength",Range(0.0,1.0))=1.0
+        [DFNumber(0)]_GeometryRotationStrength("Rotation Strength",Range(0.0,1.0))=1.0
         [DFToggle(,0)]_GeometryRotationInvert("Invert Rotation",Int)=0
         [DFToggle(,0)]_GeometryRotationNoiseRepeat("Rotation Noise Repeat",Int)=0
 
@@ -91,12 +91,12 @@ Shader "DeltaField/shaders/MeshHologram"{
         [DFVector(1,1,1,2)]_GeometryPixelization("Pixelization",Vector)=(0.0,0.0,0.0,0.02)
 
         [DFToggle(,1)]_OrbitEnable("Enable Orbit",Int)=0
-        [DFNumber]_OrbitSeed("Orbit Seed",Float)=0.0
-        [DFNumber]_OrbitPrimitiveRatio("Orbit Primitive Ratio",Range(0.0,1.0))=0.5
+        [DFNumber(0)]_OrbitSeed("Orbit Seed",Float)=0.0
+        [DFNumber(0)]_OrbitPrimitiveRatio("Orbit Primitive Ratio",Range(0.0,1.0))=0.5
         [DFVector(1,1,1)]_OrbitOffset("Orbit Offset",Vector)=(0.0,0.0,0.0,0.0)
         [DFVector(0,1,1,2)]_OrbitScale("Orbit Scale",Vector)=(1.0,1.0,1.0,1.0)
 
-        [DFNumber]_OrbitRotationSeed("Orbit Rotation Seed",Float)=1.0
+        [DFNumber(0)]_OrbitRotationSeed("Orbit Rotation Seed",Float)=1.0
         [DFVector(1,2,2)]_OrbitRotationAngle("Orbit Rotation Angle",Vector)=(0.0,0.0,0.0,0.0)
 
         [DFVector(1,1,1,2)]_OrbitRotationSpeed("Orbit Rotation Speed",Vector)=(4.0,0.0,0.0,1.0)
@@ -111,97 +111,97 @@ Shader "DeltaField/shaders/MeshHologram"{
 
 
         [DFSource(0)]_FragmentSource("Fragment Source",Int)=1
-        [DFNumber]_FragmentFixedValue("Fragment Fixed Value",Range(0.0,1.0))=0.0
+        [DFNumber(0)]_FragmentFixedValue("Fragment Fixed Value",Range(0.0,1.0))=0.0
         [DFAudioLinkSource(0)]_FragmentAudioLinkSource("Fragment AudioLink Source",Int)=0
         [DFAudioLinkBandExpanded]_FragmentAudioLinkVUBand("Fragment AudioLink VUBand",Int)=0
-        [IntRange]_FragmentAudioLinkVUSmoothing("Fragment AudioLink VU Smoothing",Range(0,15))=8
-        [DFNumber]_FragmentAudioLinkVUPanning("Fragment AudioLink VU Panning",Range(0.0,1.0))=0.5
-        [DFNumber]_FragmentAudioLinkVUStrength("Fragment AudioLink VU Strength",Float)=1.0
+        [DFNumber(1)]_FragmentAudioLinkVUSmoothing("Fragment AudioLink VU Smoothing",Range(0,15))=8
+        [DFNumber(0)]_FragmentAudioLinkVUPanning("Fragment AudioLink VU Panning",Range(0.0,1.0))=0.5
+        [DFNumber(0)]_FragmentAudioLinkVUStrength("Fragment AudioLink VU Strength",Float)=1.0
         [DFAudioLinkChronoTensityMode]_FragmentAudioLinkChronoTensityMode("Fragment AudioLink Chrono Tensity Mode",Int)=0
         [DFAudioLinkBand]_FragmentAudioLinkChronoTensityBand("Fragment AudioLink Chrono Tensity Band",Int)=0
-        [DFNumber]_FragmentAudioLinkChronoTensityStrength("Fragment AudioLink ChronoTensity Strength",Float)=1.0
-        [DFNumber]_FragmentAudioLinkSpectrumStrength("Fragment AudioLink Spectrum Strength",Float)=1.0
+        [DFNumber(0)]_FragmentAudioLinkChronoTensityStrength("Fragment AudioLink ChronoTensity Strength",Float)=1.0
+        [DFNumber(0)]_FragmentAudioLinkSpectrumStrength("Fragment AudioLink Spectrum Strength",Float)=1.0
         [DFToggle(,0)]_FragmentAudioLinkSpectrumMirror("Fragment AudioLink Spectrum Mirror",Int)=0.0
 
-        [DFNumber]_FragmentPhaseScale("Fragment Phase Scale",Float)=1.0
+        [DFNumber(0)]_FragmentPhaseScale("Fragment Phase Scale",Float)=1.0
         [DFLoopMode]_FragmentLoopMode("Fragment Loop Mode",Int)=2
         [DFEaseMode]_FragmentEaseMode("Fragment Easing Mode",Int)=2
-        [DFNumber]_FragmentEaseCurve("Fragment Easing Curve",Float)=1.0
-        [DFNumber]_FragmentMidMul("Fragment Mid Mul",Float)=1.0
-        [DFNumber]_FragmentMidAdd("Fragment Mid Add",Range(-0.5,0.5))=0.0
+        [DFNumber(0)]_FragmentEaseCurve("Fragment Easing Curve",Float)=1.0
+        [DFNumber(0)]_FragmentMidMul("Fragment Mid Mul",Float)=1.0
+        [DFNumber(0)]_FragmentMidAdd("Fragment Mid Add",Range(-0.5,0.5))=0.0
 
 
         [DFSource(0)]_ColoringSource("Coloring Source",Int)=1
-        [DFNumber]_ColoringFixedValue("Coloring Fixed Value",Range(0.0,1.0))=0.0
+        [DFNumber(0)]_ColoringFixedValue("Coloring Fixed Value",Range(0.0,1.0))=0.0
         [DFAudioLinkSource(0)]_ColoringAudioLinkSource("Coloring AudioLink Source",Int)=0
         [DFAudioLinkBandExpanded]_ColoringAudioLinkVUBand("Coloring AudioLink VUBand",Int)=0
-        [IntRange]_ColoringAudioLinkVUSmoothing("Coloring AudioLink VU Smoothing",Range(0,15))=8
-        [DFNumber]_ColoringAudioLinkVUPanning("Coloring AudioLink VU Panning",Range(0.0,1.0))=0.5
-        [DFNumber]_ColoringAudioLinkVUStrength("Coloring AudioLink VU Strength",Float)=1.0
+        [DFNumber(1)]_ColoringAudioLinkVUSmoothing("Coloring AudioLink VU Smoothing",Range(0,15))=8
+        [DFNumber(0)]_ColoringAudioLinkVUPanning("Coloring AudioLink VU Panning",Range(0.0,1.0))=0.5
+        [DFNumber(0)]_ColoringAudioLinkVUStrength("Coloring AudioLink VU Strength",Float)=1.0
         [DFAudioLinkChronoTensityMode]_ColoringAudioLinkChronoTensityMode("Coloring AudioLink Chrono Tensity Mode",Int)=0
         [DFAudioLinkBand]_ColoringAudioLinkChronoTensityBand("Coloring AudioLink Chrono Tensity Band",Int)=0
-        [DFNumber]_ColoringAudioLinkChronoTensityStrength("Coloring AudioLink ChronoTensity Strength",Float)=1.0
-        [DFNumber]_ColoringAudioLinkSpectrumStrength("Coloring AudioLink Spectrum Strength",Float)=1.0
+        [DFNumber(0)]_ColoringAudioLinkChronoTensityStrength("Coloring AudioLink ChronoTensity Strength",Float)=1.0
+        [DFNumber(0)]_ColoringAudioLinkSpectrumStrength("Coloring AudioLink Spectrum Strength",Float)=1.0
         [DFToggle(,0)]_ColoringAudioLinkSpectrumMirror("Coloring AudioLink Spectrum Mirror",Int)=0.0
 
-        [DFNumber]_ColoringPhaseScale("Coloring Phase Scale",Float)=1.0
+        [DFNumber(0)]_ColoringPhaseScale("Coloring Phase Scale",Float)=1.0
         [DFLoopMode]_ColoringLoopMode("Coloring Loop Mode",Int)=2
         [DFEaseMode]_ColoringEaseMode("Coloring Easing Mode",Int)=2
-        [DFNumber]_ColoringEaseCurve("Coloring Easing Curve",Float)=1.0
-        [DFNumber]_ColoringMidMul("Coloring Mid Mul",Float)=1.0
-        [DFNumber]_ColoringMidAdd("Coloring Mid Add",Range(-0.5,0.5))=0.0
+        [DFNumber(0)]_ColoringEaseCurve("Coloring Easing Curve",Float)=1.0
+        [DFNumber(0)]_ColoringMidMul("Coloring Mid Mul",Float)=1.0
+        [DFNumber(0)]_ColoringMidAdd("Coloring Mid Add",Range(-0.5,0.5))=0.0
 
 
         [DFSource(0)]_GeometrySource("Geometry Source",Int)=1
-        [DFNumber]_GeometryFixedValue("Geometry Fixed Value",Range(0.0,1.0))=0.0
+        [DFNumber(0)]_GeometryFixedValue("Geometry Fixed Value",Range(0.0,1.0))=0.0
         [DFAudioLinkSource(0)]_GeometryAudioLinkSource("Geometry AudioLink Source",Int)=0
         [DFAudioLinkBandExpanded]_GeometryAudioLinkVUBand("Geometry AudioLink VUBand",Int)=0
-        [IntRange]_GeometryAudioLinkVUSmoothing("Geometry AudioLink VU Smoothing",Range(0,15))=8
-        [DFNumber]_GeometryAudioLinkVUPanning("Geometry AudioLink VU Panning",Range(0.0,1.0))=0.5
-        [DFNumber]_GeometryAudioLinkVUStrength("Geometry AudioLink VU Strength",Float)=1.0
+        [DFNumber(1)]_GeometryAudioLinkVUSmoothing("Geometry AudioLink VU Smoothing",Range(0,15))=8
+        [DFNumber(0)]_GeometryAudioLinkVUPanning("Geometry AudioLink VU Panning",Range(0.0,1.0))=0.5
+        [DFNumber(0)]_GeometryAudioLinkVUStrength("Geometry AudioLink VU Strength",Float)=1.0
         [DFAudioLinkChronoTensityMode]_GeometryAudioLinkChronoTensityMode("Geometry AudioLink Chrono Tensity Mode",Int)=0
         [DFAudioLinkBand]_GeometryAudioLinkChronoTensityBand("Geometry AudioLink Chrono Tensity Band",Int)=0
-        [DFNumber]_GeometryAudioLinkChronoTensityStrength("Geometry AudioLink ChronoTensity Strength",Float)=1.0
-        [DFNumber]_GeometryAudioLinkSpectrumStrength("Geometry AudioLink Spectrum Strength",Float)=1.0
+        [DFNumber(0)]_GeometryAudioLinkChronoTensityStrength("Geometry AudioLink ChronoTensity Strength",Float)=1.0
+        [DFNumber(0)]_GeometryAudioLinkSpectrumStrength("Geometry AudioLink Spectrum Strength",Float)=1.0
         [DFToggle(,0)]_GeometryAudioLinkSpectrumMirror("Geometry AudioLink Spectrum Mirror",Int)=0.0
 
-        [DFNumber]_GeometryPhaseScale("Geometry Phase Scale",Float)=1.0
+        [DFNumber(0)]_GeometryPhaseScale("Geometry Phase Scale",Float)=1.0
         [DFLoopMode]_GeometryLoopMode("Geometry Loop Mode",Int)=2
         [DFEaseMode]_GeometryEaseMode("Geometry Easing Mode",Int)=2
-        [DFNumber]_GeometryEaseCurve("Geometry Easing Curve",Float)=1.0
-        [DFNumber]_GeometryMidMul("Geometry Mid Mul",Float)=1.0
-        [DFNumber]_GeometryMidAdd("Geometry Mid Add",Range(-0.5,0.5))=0.0
+        [DFNumber(0)]_GeometryEaseCurve("Geometry Easing Curve",Float)=1.0
+        [DFNumber(0)]_GeometryMidMul("Geometry Mid Mul",Float)=1.0
+        [DFNumber(0)]_GeometryMidAdd("Geometry Mid Add",Range(-0.5,0.5))=0.0
 
 
-        [DFSource(1)]_OrbitSource("Orbit Source",Int)=1
-        [DFNumber]_OrbitFixedValue("Orbit Value",Range(0.0,1.0))=0.0
+        [DFSource(1)]_OrbitSource("Orbit Source",Int)=2
+        [DFNumber(0)]_OrbitFixedValue("Orbit Value",Range(0.0,1.0))=0.0
         [DFAudioLinkSource(0)]_OrbitAudioLinkSource("Orbit AudioLink Source",Int)=0
         [DFAudioLinkBandExpanded]_OrbitAudioLinkVUBand("Orbit AudioLink VUBand",Int)=0
-        [IntRange]_OrbitAudioLinkVUSmoothing("Orbit AudioLink VU Smoothing",Range(0,15))=8
-        [DFNumber]_OrbitAudioLinkVUPanning("Orbit AudioLink VU Panning",Range(0.0,1.0))=0.5
-        [DFNumber]_OrbitAudioLinkVUStrength("Orbit AudioLink VU Strength",Float)=1.0
+        [DFNumber(1)]_OrbitAudioLinkVUSmoothing("Orbit AudioLink VU Smoothing",Range(0,15))=8
+        [DFNumber(0)]_OrbitAudioLinkVUPanning("Orbit AudioLink VU Panning",Range(0.0,1.0))=0.5
+        [DFNumber(0)]_OrbitAudioLinkVUStrength("Orbit AudioLink VU Strength",Float)=1.0
         [DFAudioLinkChronoTensityMode]_OrbitAudioLinkChronoTensityMode("Orbit AudioLink Chrono Tensity Mode",Int)=0
         [DFAudioLinkBand]_OrbitAudioLinkChronoTensityBand("Orbit AudioLink Chrono Tensity Band",Int)=0
-        [DFNumber]_OrbitAudioLinkChronoTensityStrength("Orbit AudioLink ChronoTensity Strength",Float)=1.0
-        [DFNumber]_OrbitAudioLinkSpectrumStrength("Orbit AudioLink Spectrum Strength",Float)=1.0
+        [DFNumber(0)]_OrbitAudioLinkChronoTensityStrength("Orbit AudioLink ChronoTensity Strength",Float)=1.0
+        [DFNumber(0)]_OrbitAudioLinkSpectrumStrength("Orbit AudioLink Spectrum Strength",Float)=1.0
         [DFToggle(,0)]_OrbitAudioLinkSpectrumMirror("Orbit AudioLink Spectrum Mirror",Int)=0.0
 
-        [DFNumber]_OrbitPhaseScale("Orbit Phase Scale",Float)=1.0
-        [DFLoopMode]_OrbitLoopMode("Orbit Loop Mode",Int)=2
+        [DFNumber(0)]_OrbitPhaseScale("Orbit Phase Scale",Float)=1.0
+        [DFLoopMode]_OrbitLoopMode("Orbit Loop Mode",Int)=0
         [DFEaseMode]_OrbitEaseMode("Orbit Easing Mode",Int)=2
-        [DFNumber]_OrbitEaseCurve("Orbit Easing Curve",Float)=1.0
-        [DFNumber]_OrbitMidMul("Orbit Mid Mul",Float)=1.0
-        [DFNumber]_OrbitMidAdd("Orbit Mid Add",Range(-0.5,0.5))=0.0
+        [DFNumber(0)]_OrbitEaseCurve("Orbit Easing Curve",Float)=1.0
+        [DFNumber(0)]_OrbitMidMul("Orbit Mid Mul",Float)=1.0
+        [DFNumber(0)]_OrbitMidAdd("Orbit Mid Add",Range(-0.5,0.5))=0.0
 
 
 
-        [DFSource(1)]_OrbitRotationSource("Orbit Rotation Source",Int)=1
-        [DFNumber]_OrbitRotationFixedValue("Orbit Rotation Fixed Value",Range(0.0,1.0))=0.0
+        [DFSource(1)]_OrbitRotationSource("Orbit Rotation Source",Int)=2
+        [DFNumber(0)]_OrbitRotationFixedValue("Orbit Rotation Fixed Value",Range(0.0,1.0))=0.0
 
         [DFAudioLinkSource(1)]_OrbitWaveAudioLinkSource("Orbit Wave AudioLink Source",Int)=0
         [DFAudioLinkBandExpanded]_OrbitWaveAudioLinkVUBand("Orbit Wave AudioLink VUBand",Int)=0
-        [IntRange]_OrbitWaveAudioLinkVUSmoothing("Orbit Wave AudioLink VU Smoothing",Range(0,15))=8
-        [DFNumber]_OrbitWaveAudioLinkVUPanning("Orbit Wave AudioLink VU Panning",Range(0.0,1.0))=0.5
+        [DFNumber(1)]_OrbitWaveAudioLinkVUSmoothing("Orbit Wave AudioLink VU Smoothing",Range(0,15))=8
+        [DFNumber(0)]_OrbitWaveAudioLinkVUPanning("Orbit Wave AudioLink VU Panning",Range(0.0,1.0))=0.5
         [DFVector(1,1)]_OrbitWaveAudioLinkVUStrength("Orbit Wave AudioLink VU Strength",Vector)=(1.0,0.0,0.0,0.0)
         [DFVector(1,1)]_OrbitWaveAudioLinkChronoTensityStrength("Orbit Wave AudioLink ChronoTensity Strength",Vector)=(1.0,1.0,0.0,0.0)
         [DFAudioLinkChronoTensityMode]_OrbitWaveAudioLinkChronoTensityMode("Orbit Wave AudioLink Chrono Tensity Mode",Int)=0
@@ -213,8 +213,8 @@ Shader "DeltaField/shaders/MeshHologram"{
 
         [DFAudioLinkSource(2)]_OrbitRotationOffsetAudioLinkSource("Orbit Rotation Offset AudioLink Source",Int)=0
         [DFAudioLinkBandExpanded]_OrbitRotationOffsetAudioLinkVUBand("Orbit Offset AudioLink VUBand",Int)=0
-        [IntRange]_OrbitRotationOffsetAudioLinkVUSmoothing("Orbit Offset AudioLink VU Smoothing",Range(0,15))=8
-        [DFNumber]_OrbitRotationOffsetAudioLinkVUPanning("Orbit Offset AudioLink VU Panning",Range(0.0,1.0))=0.5
+        [DFNumber(1)]_OrbitRotationOffsetAudioLinkVUSmoothing("Orbit Offset AudioLink VU Smoothing",Range(0,15))=8
+        [DFNumber(0)]_OrbitRotationOffsetAudioLinkVUPanning("Orbit Offset AudioLink VU Panning",Range(0.0,1.0))=0.5
         [DFVector(1,1,1,2)]_OrbitRotationOffsetAudioLinkVUStrength("Orbit Rotation Offset AudioLink VU Strength",Vector)=(1.0,0.0,0.0,1.0)
         [DFAudioLinkChronoTensityMode]_OrbitRotationOffsetAudioLinkChronoTensityMode("Orbit Offset AudioLink Chrono Tensity Mode",Int)=0
         [DFAudioLinkBand]_OrbitRotationOffsetAudioLinkChronoTensityBand("Orbit Offset AudioLink Chrono Tensity Band",Int)=0
@@ -280,10 +280,10 @@ Shader "DeltaField/shaders/MeshHologram"{
         [DFVector(1,1,1,2)]_FragmentNoiseScale1("Noise 1st Scale Sub",Vector)=(1.0,1.0,1.0,1.0)
         [DFNoiseSpace]_FragmentNoiseSpace("Noise 1st Position Space",Int)=1
         [DFToggle(,0)]_FragmentNoiseOffsetBeforeScale("Noise 1st Offset before Scale",Int)=0
-        [DFNumber]_FragmentNoiseSeed("Noise 1st Seed",Float)=0.0
-        [DFNumber]_FragmentNoiseTimeSpeed("Noise 1st Time Speed",Float)=3.0
-        [DFNumber]_FragmentNoiseTimePhase("Noise 1st Time Phase",Float)=0.0
-        [DFNumber]_FragmentNoiseValueScale("Noise 1st Value Scale",Float)=1.0
+        [DFNumber(0)]_FragmentNoiseSeed("Noise 1st Seed",Float)=0.0
+        [DFNumber(0)]_FragmentNoiseTimeSpeed("Noise 1st Time Speed",Float)=3.0
+        [DFNumber(0)]_FragmentNoiseTimePhase("Noise 1st Time Phase",Float)=0.0
+        [DFNumber(0)]_FragmentNoiseValueScale("Noise 1st Value Scale",Float)=1.0
 
 
         [DFVector(1,1,1)]_ColoringNoiseOffset0("Noise 2nd Offset",Vector)=(0.0,0.0,0.0,0.0)
@@ -292,10 +292,10 @@ Shader "DeltaField/shaders/MeshHologram"{
         [DFVector(1,1,1,2)]_ColoringNoiseScale1("Noise 2nd Scale",Vector)=(1.0,1.0,1.0,1.0)
         [DFNoiseSpace]_ColoringNoiseSpace("Noise 2nd Position Space",Int)=1
         [DFToggle(,0)]_ColoringNoiseOffsetBeforeScale("Noise 2nd Offset before Scale",Int)=0
-        [DFNumber]_ColoringNoiseSeed("Noise 2nd Seed",Float)=1.0
-        [DFNumber]_ColoringNoiseTimeSpeed("Noise 2nd Time Speed",Float)=5.0
-        [DFNumber]_ColoringNoiseTimePhase("Noise 2nd Time Phase",Float)=0.0
-        [DFNumber]_ColoringNoiseValueScale("Noise 2nd Value Scale",Float)=1.0
+        [DFNumber(0)]_ColoringNoiseSeed("Noise 2nd Seed",Float)=1.0
+        [DFNumber(0)]_ColoringNoiseTimeSpeed("Noise 2nd Time Speed",Float)=5.0
+        [DFNumber(0)]_ColoringNoiseTimePhase("Noise 2nd Time Phase",Float)=0.0
+        [DFNumber(0)]_ColoringNoiseValueScale("Noise 2nd Value Scale",Float)=1.0
 
 
         [DFVector(1,1,1)]_GeometryNoiseOffset0("Noise 3rd Offset",Vector)=(0.0,0.0,0.0,0.0)
@@ -304,10 +304,10 @@ Shader "DeltaField/shaders/MeshHologram"{
         [DFVector(1,1,1,2)]_GeometryNoiseScale1("Noise 3rd Scale",Vector)=(1.0,1.0,1.0,1.0)
         [DFNoiseSpace]_GeometryNoiseSpace("Noise 3rd Position Space",Int)=1
         [DFToggle(,0)]_GeometryNoiseOffsetBeforeScale("Noise 3rd Offset before Scale",Int)=0
-        [DFNumber]_GeometryNoiseSeed("Noise 3rd Seed",Float)=2.0
-        [DFNumber]_GeometryNoiseTimeSpeed("Noise 3rd Time Speed",Float)=3.0
-        [DFNumber]_GeometryNoiseTimePhase("Noise 3rd Time Phase",Float)=0.0
-        [DFNumber]_GeometryNoiseValueScale("Noise 3rd Value Scale",Float)=1.0
+        [DFNumber(0)]_GeometryNoiseSeed("Noise 3rd Seed",Float)=2.0
+        [DFNumber(0)]_GeometryNoiseTimeSpeed("Noise 3rd Time Speed",Float)=3.0
+        [DFNumber(0)]_GeometryNoiseTimePhase("Noise 3rd Time Phase",Float)=0.0
+        [DFNumber(0)]_GeometryNoiseValueScale("Noise 3rd Value Scale",Float)=1.0
 
 
         [DFVector(1,1,1)]_OrbitNoiseOffset0("Noise 4th Offset",Vector)=(0.0,0.0,0.0,0.0)
@@ -316,10 +316,10 @@ Shader "DeltaField/shaders/MeshHologram"{
         [DFVector(1,1,1,2)]_OrbitNoiseScale1("Noise 4th Scale",Vector)=(1.0,1.0,1.0,1.0)
         [DFNoiseSpace]_OrbitNoiseSpace("Noise 4th Position Space",Int)=1
         [DFToggle(,0)]_OrbitNoiseOffsetBeforeScale("Noise 4th Offset before Scale",Int)=0
-        [DFNumber]_OrbitNoiseSeed("Noise 4th Seed",Float)=2.0
-        [DFNumber]_OrbitNoiseTimeSpeed("Noise 4th Time Speed",Float)=3.0
-        [DFNumber]_OrbitNoiseTimePhase("Noise 4th Time Phase",Float)=0.0
-        [DFNumber]_OrbitNoiseValueScale("Noise 4th Value Scale",Float)=1.0
+        [DFNumber(0)]_OrbitNoiseSeed("Noise 4th Seed",Float)=3.0
+        [DFNumber(0)]_OrbitNoiseTimeSpeed("Noise 4th Time Speed",Float)=3.0
+        [DFNumber(0)]_OrbitNoiseTimePhase("Noise 4th Time Phase",Float)=0.0
+        [DFNumber(0)]_OrbitNoiseValueScale("Noise 4th Value Scale",Float)=1.0
 
 
         [DFVector(1,1,1)]_OrbitRotationNoiseOffset0("Noise 5th Offset",Vector)=(0.0,0.0,0.0,0.0)
@@ -328,10 +328,10 @@ Shader "DeltaField/shaders/MeshHologram"{
         [DFVector(1,1,1,2)]_OrbitRotationNoiseScale1("Noise 5th Scale",Vector)=(1.0,1.0,1.0,1.0)
         [DFNoiseSpace]_OrbitRotationNoiseSpace("Noise 5th Position Space",Int)=1
         [DFToggle(,0)]_OrbitRotationNoiseOffsetBeforeScale("Noise 5th Offset before Scale",Int)=0
-        [DFNumber]_OrbitRotationNoiseSeed("Noise 5th Seed",Float)=2.0
-        [DFNumber]_OrbitRotationNoiseTimeSpeed("Noise 5th Time Speed",Float)=3.0
-        [DFNumber]_OrbitRotationNoiseTimePhase("Noise 5th Time Phase",Float)=0.0
-        [DFNumber]_OrbitRotationNoiseValueScale("Noise 5th Value Scale",Float)=1.0
+        [DFNumber(0)]_OrbitRotationNoiseSeed("Noise 5th Seed",Float)=4.0
+        [DFNumber(0)]_OrbitRotationNoiseTimeSpeed("Noise 5th Time Speed",Float)=3.0
+        [DFNumber(0)]_OrbitRotationNoiseTimePhase("Noise 5th Time Phase",Float)=0.0
+        [DFNumber(0)]_OrbitRotationNoiseValueScale("Noise 5th Value Scale",Float)=1.0
 
 
 
