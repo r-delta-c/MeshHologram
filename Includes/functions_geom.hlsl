@@ -16,16 +16,61 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         float2 transform_uv[3];
         float2 transform_pushpull_uv[3];
         float2 uv_mesh;
+        float2 uv_edge[3];
 
+        float3 fragment_mask;
+        float3 fragment_map;
         TRANSFORM_TEX_MACRO(_FragmentMaskMap);
-        float3 fragment_mask = MASK_CONTROL_MACRO3(_FragmentMaskMap,_point_repeat,_FragmentMaskMapStrength);
-        TRANSFORM_TEX_MACRO(_FragmentMap);
-        float3 fragment_map = OFFSET_CONTROL_MACRO3(_FragmentMap,_point_repeat,_FragmentMapStrength);
+        [branch]switch(_FragmentPartitionMode){
+            default:
+                fragment_mask = MASK_CONTROL_MACRO3(_FragmentMaskMap,_point_repeat,_FragmentMaskMapStrength);
+                TRANSFORM_TEX_MACRO(_FragmentMap);
+                fragment_map = MASK_CONTROL_MACRO3(_FragmentMap,_point_repeat,_FragmentMapStrength);
+                break;
+            case 1:
+                UV_MESH_MACRO;
+                UV_EDGE_MACRO;
+                fragment_mask = MASK_CONTROL_MACRO3_EDGE(_FragmentMaskMap,_point_repeat,_FragmentMaskMapStrength);
+                TRANSFORM_TEX_MACRO(_FragmentMap);
+                UV_MESH_MACRO;
+                UV_EDGE_MACRO;
+                fragment_map = MASK_CONTROL_MACRO3_EDGE(_FragmentMap,_point_repeat,_FragmentMapStrength);
+                break;
+            case 2:
+                UV_MESH_MACRO;
+                fragment_mask = MASK_CONTROL_MACRO3_MESH(_FragmentMaskMap,_point_repeat,_FragmentMaskMapStrength);
+                TRANSFORM_TEX_MACRO(_FragmentMap);
+                UV_MESH_MACRO;
+                fragment_map = MASK_CONTROL_MACRO3_MESH(_FragmentMap,_point_repeat,_FragmentMapStrength);
+                break;
+        }
 
+        float3 coloring_mask;
+        float3 coloring_map;
         TRANSFORM_TEX_MACRO(_ColoringMaskMap);
-        float3 coloring_mask = MASK_CONTROL_MACRO3(_ColoringMaskMap,_point_repeat,_ColoringMaskMapStrength);
-        TRANSFORM_TEX_MACRO(_ColoringMap);
-        float3 coloring_map = OFFSET_CONTROL_MACRO3(_ColoringMap,_point_repeat,_ColoringMapStrength);
+        [branch]switch(_ColoringPartitionMode){
+            default:
+                coloring_mask = MASK_CONTROL_MACRO3(_ColoringMaskMap,_point_repeat,_ColoringMaskMapStrength);
+                TRANSFORM_TEX_MACRO(_ColoringMap);
+                coloring_map = MASK_CONTROL_MACRO3(_ColoringMap,_point_repeat,_ColoringMapStrength);
+                break;
+            case 1:
+                UV_MESH_MACRO;
+                UV_EDGE_MACRO;
+                coloring_mask = MASK_CONTROL_MACRO3_EDGE(_ColoringMaskMap,_point_repeat,_ColoringMaskMapStrength);
+                TRANSFORM_TEX_MACRO(_ColoringMap);
+                UV_MESH_MACRO;
+                UV_EDGE_MACRO;
+                coloring_map = MASK_CONTROL_MACRO3_EDGE(_ColoringMap,_point_repeat,_ColoringMapStrength);
+                break;
+            case 2:
+                UV_MESH_MACRO;
+                coloring_mask = MASK_CONTROL_MACRO3_MESH(_ColoringMaskMap,_point_repeat,_ColoringMaskMapStrength);
+                TRANSFORM_TEX_MACRO(_ColoringMap);
+                UV_MESH_MACRO;
+                coloring_map = MASK_CONTROL_MACRO3_MESH(_ColoringMap,_point_repeat,_ColoringMapStrength);
+                break;
+        }
 
         TRANSFORM_TEX_MACRO(_GeometryMaskMap);
         UV_MESH_MACRO;
