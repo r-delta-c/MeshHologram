@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.2.3] 2025/11/04
+### Added
+- Others(その他)にプロジェクトフォルダ内のShaderCacheフォルダを開くボタンを追加。
+
+### Fixed
+- Fragment Partition(フラグメントの区切り)、Coloring Partition(着色の区切り)においてMask/Offset(マスク/オフセット)が適切に連動せず、座標がずれる問題を修正。
+- 一部のStencil(ステンシル)のラベルがローカライズされていない問題を修正。
+
 ## [0.2.2] 2025/11/04
 ### Added
 - Mesh Bounds Editorに言語変更のポップアップを追加。
@@ -14,7 +22,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - OrbitのSource(参照先)、`Primitive`の`Orbit Primitive Ratio(Orbit Primitiveの比率)`の効果を反転。
 - Orbit Rotation Offset(Orbit 回転オフセット)の`Orbit Rotation Angle(Orbitの回転)`の回転適応順を変更。
     - `Z` -> `Y`の順番で計算され、`Y`を回転させてから`Z`を回転させることで直感的に向きを変えられるようになっています。
-- チュートリアル用のマテリアルとそのフォルダ、`Orbit`、`Noise`を`Tutorials`フォルダｈ移行。
+- チュートリアル用のマテリアルとそのフォルダ、`Orbit`、`Noise`を`Tutorials`フォルダへ移行。
 
 ### Fixed
 - PropertyCheckerで適切なプロパティ名が表示されない問題を修正。
