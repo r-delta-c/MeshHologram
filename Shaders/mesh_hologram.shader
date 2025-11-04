@@ -44,9 +44,9 @@ Shader "DeltaField/shaders/MeshHologram"{
         [DFBlendMode]_DstBlendAlpha("Alpha Blend Mode Destination", Int)=10
 
 
-        [IntRange]_StencilRef("Stencil Ref",Range(0,255))=0
-        [IntRange]_StencilReadMask("Stencil Read Mask",Range(0,255))=255
-        [IntRange]_StencilWriteMask("Stencil Write Mask",Range(0,255))=255
+        [DFNumber(1)]_StencilRef("Stencil Ref",Range(0,255))=0
+        [DFNumber(1)]_StencilReadMask("Stencil Read Mask",Range(0,255))=255
+        [DFNumber(1)]_StencilWriteMask("Stencil Write Mask",Range(0,255))=255
         [DFCompare]_StencilComp("Stencil Comp",Int)=0
         [DFStencilOp]_StencilPass("Stencil Pass",Int)=0
         [DFStencilOp]_StencilFail("Stencil Fail",Int)=0
