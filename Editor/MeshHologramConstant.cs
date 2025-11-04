@@ -20,7 +20,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             packageInfo = UnityEditor.PackageManager.PackageInfo.FindForAssetPath("Packages/com.deltafield.meshhologram");
             if (packageInfo != null)
             {
-                resolve_path = packageInfo.resolvedPath;
+                resolve_path = packageInfo.resolvedPath.Replace("\\","/");
                 EditorApplication.update -= CheckPackageInfo;
             }
         }

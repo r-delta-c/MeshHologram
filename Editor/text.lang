@@ -30,6 +30,9 @@ label.all_properties||All Properties||全てのプロパティ
 label.unused_keywords||Unused Keywords||未使用のキーワード
 label.mesh_bounds_editor.button||Open Mesh Bounds Editor||Mesh Bounds Editorを開く
 label.property_checker.button||Open Property Checker||Property Checkerを開く
+
+label.open_shadercache.button||Open ShaderCache Folder||ShaderCacheフォルダを開く
+
 label.title_skin||Title Skin||タイトルスキン
 
 label.check||Check||チェックする。

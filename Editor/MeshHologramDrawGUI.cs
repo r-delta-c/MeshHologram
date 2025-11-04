@@ -3,7 +3,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramManager;
-
+using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramConstant;
 
 namespace DeltaField.Shaders.MeshHologram.Editor
 {
@@ -677,6 +677,11 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     PropertyChecker.SetMaterial(targetMat);
                     PropertyChecker.Window();
                 }
+            }
+            EditorGUILayout.Space(16);
+            if (GUILayout.Button(LocalizationManager.GetLocalizeText("label.open_shadercache.button")))
+            {
+                EditorUtility.RevealInFinder(resolve_path.Replace("/Packages/com.deltafield.meshhologram","/Library/ShaderCache/shader"));
             }
             EditorGUILayout.Space(16);
             RichTitle.DrawTitleSkinPopup();
