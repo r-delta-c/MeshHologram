@@ -477,6 +477,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - マテリアルのインスペクターから、MeshHologramが選択できない不具合を修正。
     - MeshBoundsEditorで使用しているシェーダーのパスを変更することで対処。
 
+[0.2.3]: https://github.com/r-delta-c/MeshHologram/compare/0.2.2...0.2.3
 [0.2.2]: https://github.com/r-delta-c/MeshHologram/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/r-delta-c/MeshHologram/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/r-delta-c/MeshHologram/compare/0.2.0-exp.3...0.2.0
