@@ -80,6 +80,9 @@ bool _FragmentManualLineScalingEnable;
 uint _FragmentLineAnimationMode;
 uint _FragmentPartitionMode;
 
+float _FragmentSmoothing;
+float _ColoringSmoothing;
+
 uint _ColorSource;
 fixed4 _Color0;
 fixed4 _Color1;

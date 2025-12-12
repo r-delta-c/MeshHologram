@@ -183,9 +183,9 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             FUNC_NOISE_CENTER_POS(coloring_pos);
             coloring_value = lerp(_ColoringFixedValue,FUNC_NOISE_EDGE_VALUE(coloring_pos,noise_center_pos,_ColoringNoiseSeed,_ColoringNoiseValueScale,coloring_time),_ColoringSource);
             FUNC_GEOMETRY_COLORING_PROCESS;
-            color_stream[0] = float3(0.0,coloring_value.y,coloring_value.z);
-            color_stream[1] = float3(coloring_value.x,0.0,coloring_value.z);
-            color_stream[2] = float3(coloring_value.x,coloring_value.y,0.0);
+            color_stream[0] = coloring_value;
+            color_stream[1] = coloring_value;
+            color_stream[2] = coloring_value;
             break;
         case 2:
             FUNC_NOISE_CENTER_POS(coloring_pos);
