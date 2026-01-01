@@ -41,9 +41,9 @@ v2f vert (appdata v){
     NOISE_SPACE_POS_MACRO(o.geometry_pos,_GeometryNoiseSpace,_GeometryNoiseOffsetBeforeScale,_GeometryNoiseOffset0,_GeometryNoiseOffset1,_GeometryNoiseScale0,_GeometryNoiseScale1);
     NOISE_SPACE_POS_MACRO(o.orbit_pos,_OrbitNoiseSpace,_OrbitNoiseOffsetBeforeScale,_OrbitNoiseOffset0,_OrbitNoiseOffset1,_OrbitNoiseScale0,_OrbitNoiseScale1);
     NOISE_SPACE_POS_MACRO(o.orbit_rotation_pos,_OrbitRotationNoiseSpace,_OrbitRotationNoiseOffsetBeforeScale,_OrbitRotationNoiseOffset0,_OrbitRotationNoiseOffset1,_OrbitRotationNoiseScale0,_OrbitRotationNoiseScale1);
-    SWITCH_SHADE_WORLDPOS_MACRO o.world_pos = o.pos;
+    o.world_pos = o.pos;
     o.origin_pos = unity_ObjectToWorld._m03_m13_m23;
-    SWITCH_WORLDNORMAL_MACRO o.world_normal = UnityObjectToWorldNormal(v.normal);
+    o.world_normal = UnityObjectToWorldNormal(v.normal);
 
     o.matrix_v_0 = Stereo_Merge_Matrix_V._m00_m01_m02_m03;
     o.matrix_v_1 = Stereo_Merge_Matrix_V._m10_m11_m12_m13;

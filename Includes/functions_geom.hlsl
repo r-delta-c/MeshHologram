@@ -351,9 +351,9 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         orbit_anim *= UNITY_TWO_PI;
 
         float3 orbit_wave_value = float3(
-            (orbit_anim.x+_OrbitWavePhase.x+ORBIT_WAVE_X_TIME_MACRO),
-            (orbit_anim.x+_OrbitWavePhase.y+ORBIT_WAVE_YZ_TIME_MACRO),
-            (orbit_anim.x+_OrbitWavePhase.y+ORBIT_WAVE_YZ_TIME_MACRO)
+            (orbit_anim.x+_OrbitWavePhase.x+_Time.x*_OrbitWaveSpeed.x),
+            (orbit_anim.x+_OrbitWavePhase.y+_Time.x*_OrbitWaveSpeed.y),
+            (orbit_anim.x+_OrbitWavePhase.y+_Time.x*_OrbitWaveSpeed.y)
         );
         orbit_wave_value *= float3(_OrbitWaveFrequency.x,_OrbitWaveFrequency.y,_OrbitWaveFrequency.y);
         #if defined(_AUDIOLINK_ENABLE)
@@ -363,7 +363,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             }
         #endif
 
-        orbit_anim += ORBIT_ROTATION_TIME_MACRO;
+        orbit_anim += _Time.x*_OrbitRotationSpeed.xyz*_OrbitRotationSpeed.w;
         orbit_anim *= lerp(1.0,orbit_rotation_offset_mask,saturate(_OrbitRotationOffsetMaskMapStrength.xyz)*saturate(_OrbitRotationOffsetMaskMapStrength.w));
         orbit_anim += float3(_OrbitRotationAngle.x,_OrbitRotationAngle.y,_OrbitRotationAngle.z)*UNITY_TWO_PI;
 
@@ -425,7 +425,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         vertex_pos[2] = lerp(vertex_pos[2],orbit[2],orbit_value);
     }
 
-    SWITCH_SHADE_WORLDPOS_MACRO float3 world_pos[3];
+    float3 world_pos[3];
     float4 pos[3];
     float camera_distance[3];
     float4x4 matrix_v[3];
@@ -435,7 +435,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
 
         [branch]if(_GeometryPixelizationSpace==3) vertex_pos[i] = Pixelization(vertex_pos[i],(scale));
 
-        SWITCH_SHADE_WORLDPOS_MACRO world_pos[i] = vertex_pos[i];
+        world_pos[i] = vertex_pos[i];
         camera_distance[i] = HOLOGRAM_CAMERA_DISTANCE_MACRO(i);
 
         pos[i] = mul(matrix_v[i],float4(vertex_pos[i],1.0));
@@ -452,8 +452,8 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     o.color_noise = color_stream[0];
     o.vertex_color = inp[0].vertex_color;
     o.normal = inp[0].normal;
-    SWITCH_SHADE_WORLDPOS_MACRO o.world_pos = world_pos[0];
-    SWITCH_WORLDNORMAL_MACRO o.world_normal = inp[0].world_normal;
+    o.world_pos = world_pos[0];
+    o.world_normal = inp[0].world_normal;
     UNITY_TRANSFER_LIGHTING(o,inp[0].uv)
     UNITY_TRANSFER_INSTANCE_ID(inp[0], o);
     UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(inp[0], o);
@@ -467,8 +467,8 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     o.color_noise = color_stream[1];
     o.vertex_color = inp[1].vertex_color;
     o.normal = inp[1].normal;
-    SWITCH_SHADE_WORLDPOS_MACRO o.world_pos = world_pos[1];
-    SWITCH_WORLDNORMAL_MACRO o.world_normal = inp[1].world_normal;
+    o.world_pos = world_pos[1];
+    o.world_normal = inp[1].world_normal;
     UNITY_TRANSFER_LIGHTING(o,inp[1].uv)
     UNITY_TRANSFER_INSTANCE_ID(inp[1], o);
     UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(inp[1], o);
@@ -482,8 +482,8 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     o.color_noise = color_stream[2];
     o.vertex_color = inp[2].vertex_color;
     o.normal = inp[2].normal;
-    SWITCH_SHADE_WORLDPOS_MACRO o.world_pos = world_pos[2];
-    SWITCH_WORLDNORMAL_MACRO o.world_normal = inp[2].world_normal;
+    o.world_pos = world_pos[2];
+    o.world_normal = inp[2].world_normal;
     UNITY_TRANSFER_LIGHTING(o,inp[2].uv)
     UNITY_TRANSFER_INSTANCE_ID(inp[2], o);
     UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(inp[2], o);
