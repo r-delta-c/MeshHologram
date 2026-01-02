@@ -371,26 +371,26 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #include "AutoLight.cginc"
 
-            #include "Packages/com.deltafield.meshhologram/Includes/macro_general.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/macro_noise.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/macro_uv.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/macro_geom.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/macro_thirdparties.hlsl"
-            #include "Packages/com.deltafield.shader_commons/Includes/macro_stereo_merge.hlsl"
+            #include "../Includes/macro_general.hlsl"
+            #include "../Includes/macro_noise.hlsl"
+            #include "../Includes/macro_uv.hlsl"
+            #include "../Includes/macro_geom.hlsl"
+            #include "../Includes/macro_thirdparties.hlsl"
+            #include "../../com.deltafield.shader_commons/Includes/macro_stereo_merge.hlsl"
             
-            #include "Packages/com.deltafield.shader_commons/Includes/functions_math.hlsl"
-            #include "Packages/com.deltafield.shader_commons/Includes/functions_random.hlsl"
-            #include "Packages/com.deltafield.shader_commons/Includes/functions_random3d.hlsl"
-            #include "Packages/com.deltafield.shader_commons/Includes/functions_stereo_merge.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/variables.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/functions_common.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/functions_thirdparties.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/functions_noise.hlsl"
+            #include "../../com.deltafield.shader_commons/Includes/functions_math.hlsl"
+            #include "../../com.deltafield.shader_commons/Includes/functions_random.hlsl"
+            #include "../../com.deltafield.shader_commons/Includes/functions_random3d.hlsl"
+            #include "../../com.deltafield.shader_commons/Includes/functions_stereo_merge.hlsl"
+            #include "../Includes/variables.hlsl"
+            #include "../Includes/functions_common.hlsl"
+            #include "../Includes/functions_thirdparties.hlsl"
+            #include "../Includes/functions_noise.hlsl"
 
-            #include "Packages/com.deltafield.meshhologram/Includes/structs.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/functions_vert.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/functions_geom.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/functions_frag_depth_write.hlsl"
+            #include "../Includes/structs.hlsl"
+            #include "../Includes/functions_vert.hlsl"
+            #include "../Includes/functions_geom.hlsl"
+            #include "../Includes/functions_frag_depth_write.hlsl"
 
             ENDHLSL
         }
@@ -435,28 +435,28 @@ Shader "DeltaField/shaders/MeshHologram"{
 
             #pragma shader_feature_local _STEREOMERGEMODE_NONE _STEREOMERGEMODE_POSITION _STEREOMERGEMODE_ROTATION _STEREOMERGEMODE_POSITION_ROTATION
 
-            #include "Packages/com.deltafield.meshhologram/Includes/macro_general.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/macro_noise.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/macro_uv.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/macro_geom.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/macro_thirdparties.hlsl"
-            #include "Packages/com.deltafield.shader_commons/Includes/macro_stereo_merge.hlsl"
+            #include "../Includes/macro_general.hlsl"
+            #include "../Includes/macro_noise.hlsl"
+            #include "../Includes/macro_uv.hlsl"
+            #include "../Includes/macro_geom.hlsl"
+            #include "../Includes/macro_thirdparties.hlsl"
+            #include "../../com.deltafield.shader_commons/Includes/macro_stereo_merge.hlsl"
 
-            #include "Packages/com.deltafield.shader_commons/Includes/functions_math.hlsl"
-            #include "Packages/com.deltafield.shader_commons/Includes/functions_random.hlsl"
-            #include "Packages/com.deltafield.shader_commons/Includes/functions_random3d.hlsl"
-            #include "Packages/com.deltafield.shader_commons/Includes/functions_stereo_merge.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/variables.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/functions_common.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/functions_thirdparties.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/functions_noise.hlsl"
+            #include "../../com.deltafield.shader_commons/Includes/functions_math.hlsl"
+            #include "../../com.deltafield.shader_commons/Includes/functions_random.hlsl"
+            #include "../../com.deltafield.shader_commons/Includes/functions_random3d.hlsl"
+            #include "../../com.deltafield.shader_commons/Includes/functions_stereo_merge.hlsl"
+            #include "../Includes/variables.hlsl"
+            #include "../Includes/functions_common.hlsl"
+            #include "../Includes/functions_thirdparties.hlsl"
+            #include "../Includes/functions_noise.hlsl"
 
-            #include "Packages/com.deltafield.meshhologram/Includes/structs.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/functions_vert.hlsl"
-            #include "Packages/com.deltafield.meshhologram/Includes/functions_geom.hlsl"
+            #include "../Includes/structs.hlsl"
+            #include "../Includes/functions_vert.hlsl"
+            #include "../Includes/functions_geom.hlsl"
             fixed4 frag(g2f i) : SV_Target{
-                #include "Packages/com.deltafield.meshhologram/Includes/functions_frag.hlsl"
-                #include "Packages/com.deltafield.meshhologram/Includes/functions_frag_mesh.hlsl"
+                #include "../Includes/functions_frag.hlsl"
+                #include "../Includes/functions_frag_mesh.hlsl"
             }
             ENDHLSL
         }
