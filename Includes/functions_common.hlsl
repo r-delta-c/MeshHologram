@@ -31,8 +31,22 @@ float Inverse12(float x, float r){
     return 1.0>mod(x,2.0)?r:-r+1.0;
 }
 
-float GenNoise(float3 inputs, float offset, float time, float seed, float phasescale){
-    return (ValueNoise3D(inputs,seed)+offset)*phasescale+time;
+float Texture3PosNoise(float3 p, Texture2D tex, float4 st){
+    p.xy += p.z;
+    p.xy = p.xy*st.xy+st.zw;
+    return UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex, _linear_repeat, p.xy, 0.0);
+}
+
+float Texture3BlendNoise(float3 p, Texture2D tex, float4 st){
+    p.xy = p.xy*st.xy+st.zw;
+    float r0 = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColoringLiteNoiseMap, _linear_repeat, p.xy, 0.0);
+    float r1 = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColoringLiteNoiseMap, _linear_repeat, p.yz, 0.0);
+    float r2 = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColoringLiteNoiseMap, _linear_repeat, p.zx, 0.0);
+    float2 t = min(1.0,float2(
+        (r0-1.0)*(r0-1.0),
+        (r1-1.0)*(r1-1.0)
+    )+0.1);
+    return lerp(r0,lerp(r1,r2,(t.y)),(t.x));
 }
 
 float EdgeCenterPos(float n0, float n1, float n, float2 c){

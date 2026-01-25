@@ -21,7 +21,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             UpdateTabLabels();
             FoldoutList = new FoldoutManager();
         }
-        public override void OnGUI(MaterialEditor editor, MaterialProperty[] Properties)
+        public override void OnGUI(MaterialEditor editor, MaterialProperty[] props)
         {
             if (IsInitialized == false) return;
 
@@ -31,19 +31,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 FoldoutList.UpdateLocalization();
                 lang = ConfigManager.lang;
             }
-
-            if (InspectorInitialize == false)
-            {
-                this.editor = editor;
-                targetMat = editor.target as Material;
-                targetMats = new Material[editor.targets.Length];
-                for(int i = 0; i < editor.targets.Length; i++)
-                {
-                    targetMats[i] = editor.targets[i] as Material;
-                }
-                InspectorInitialize = true;
-            }
-            props = Properties;
 
             using (new EditorGUILayout.HorizontalScope())
             {
@@ -58,7 +45,17 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 MeshHologramProps[key].var = FindProperty(MeshHologramProps[key].property, props);
             }
 
-
+            if (InspectorInitialize == false)
+            {
+                this.editor = editor;
+                targetMat = editor.target as Material;
+                targetMats = new Material[editor.targets.Length];
+                for(int i = 0; i < editor.targets.Length; i++) targetMats[i] = editor.targets[i] as Material;
+                CheckNoiseLiteMode(-1);
+                CheckToggleKeyword(ref DirectionalLightInfluenceState);
+                CheckToggleKeyword(ref AmbientInfluenceState);
+                InspectorInitialize = true;
+            }
 
             using (var changeCheckScope = new EditorGUI.ChangeCheckScope())
             {
@@ -205,8 +202,18 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                                     break;
                             }
 
+                            if (ChangeNoiseLiteMode!=null) ApplyNoiseLiteMode(mat,(int)ChangeNoiseLiteMode);
+                            DirectionalLightInfluenceState.ApplyToggle(mat);
+                            AmbientInfluenceState.ApplyToggle(mat);
                             EditorUtility.SetDirty(targetMat);
                         }
+                        if(ChangeNoiseLiteMode!=null)
+                        {
+                            CheckNoiseLiteMode(-1);
+                            ChangeNoiseLiteMode = null;
+                        }
+                        CheckToggleKeyword(ref DirectionalLightInfluenceState);
+                        CheckToggleKeyword(ref AmbientInfluenceState);
                     };
                 }
             }

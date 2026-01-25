@@ -78,6 +78,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         [MeshHologramPropMeta("_FragmentNoiseTimeSpeed")] _FRAGMENT_NOISE_TIME_SPEED,
         [MeshHologramPropMeta("_FragmentNoiseTimePhase")] _FRAGMENT_NOISE_TIME_PHASE,
         [MeshHologramPropMeta("_FragmentNoiseValueScale")] _FRAGMENT_NOISE_VALUE_SCALE,
+        [MeshHologramPropMeta("_FragmentLiteNoiseMap")] _FRAGMENT_LITE_NOISE_MAP,
+        [MeshHologramPropMeta("_FragmentLiteNoiseMap_ST")] _FRAGMENT_LITE_NOISE_MAP_ST,
 
         [MeshHologramPropMeta("_FragmentAudioLinkSource")] _FRAGMENT_AUDIOLINK_SOURCE,
         [MeshHologramPropMeta("_FragmentAudioLinkVUBand")] _FRAGMENT_AUDIOLINK_VU_BAND,
@@ -128,6 +130,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         [MeshHologramPropMeta("_ColoringNoiseTimeSpeed")] _COLORING_NOISE_TIME_SPEED,
         [MeshHologramPropMeta("_ColoringNoiseTimePhase")] _COLORING_NOISE_TIME_PHASE,
         [MeshHologramPropMeta("_ColoringNoiseValueScale")] _COLORING_NOISE_VALUE_SCALE,
+        [MeshHologramPropMeta("_ColoringLiteNoiseMap")] _COLORING_LITE_NOISE_MAP,
+        [MeshHologramPropMeta("_ColoringLiteNoiseMap_ST")] _COLORING_LITE_NOISE_MAP_ST,
 
         [MeshHologramPropMeta("_ColoringAudioLinkSource")] _COLORING_AUDIOLINK_SOURCE,
         [MeshHologramPropMeta("_ColoringAudioLinkVUBand")] _COLORING_AUDIOLINK_VU_BAND,
@@ -183,6 +187,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         [MeshHologramPropMeta("_GeometryNoiseTimeSpeed")] _GEOMETRY_NOISE_TIME_SPEED,
         [MeshHologramPropMeta("_GeometryNoiseTimePhase")] _GEOMETRY_NOISE_TIME_PHASE,
         [MeshHologramPropMeta("_GeometryNoiseValueScale")] _GEOMETRY_NOISE_VALUE_SCALE,
+        [MeshHologramPropMeta("_GeometryLiteNoiseMap")] _GEOMETRY_LITE_NOISE_MAP,
+        [MeshHologramPropMeta("_GeometryLiteNoiseMap_ST")] _GEOMETRY_LITE_NOISE_MAP_ST,
 
         [MeshHologramPropMeta("_GeometryAudioLinkSource")] _GEOMETRY_AUDIOLINK_SOURCE,
         [MeshHologramPropMeta("_GeometryAudioLinkVUBand")] _GEOMETRY_AUDIOLINK_VU_BAND,
@@ -232,6 +238,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         [MeshHologramPropMeta("_OrbitNoiseTimeSpeed")] _ORBIT_NOISE_TIME_SPEED,
         [MeshHologramPropMeta("_OrbitNoiseTimePhase")] _ORBIT_NOISE_TIME_PHASE,
         [MeshHologramPropMeta("_OrbitNoiseValueScale")] _ORBIT_NOISE_VALUE_SCALE,
+        [MeshHologramPropMeta("_OrbitLiteNoiseMap")] _ORBIT_LITE_NOISE_MAP,
+        [MeshHologramPropMeta("_OrbitLiteNoiseMap_ST")] _ORBIT_LITE_NOISE_MAP_ST,
 
         [MeshHologramPropMeta("_OrbitAudioLinkSource")] _ORBIT_AUDIOLINK_SOURCE,
         [MeshHologramPropMeta("_OrbitAudioLinkVUBand")] _ORBIT_AUDIOLINK_VU_BAND,
@@ -277,6 +285,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         [MeshHologramPropMeta("_OrbitRotationNoiseTimeSpeed")] _ORBIT_ROTATION_NOISE_TIME_SPEED,
         [MeshHologramPropMeta("_OrbitRotationNoiseTimePhase")] _ORBIT_ROTATION_NOISE_TIME_PHASE,
         [MeshHologramPropMeta("_OrbitRotationNoiseValueScale")] _ORBIT_ROTATION_NOISE_VALUE_SCALE,
+        [MeshHologramPropMeta("_OrbitRotationLiteNoiseMap")] _ORBIT_ROTATION_LITE_NOISE_MAP,
+        [MeshHologramPropMeta("_OrbitRotationLiteNoiseMap_ST")] _ORBIT_ROTATION_LITE_NOISE_MAP_ST,
 
         [MeshHologramPropMeta("_OrbitRotationMaskMap")] _ORBIT_ROTATION_MASK_CONTROL_TEX,
         [MeshHologramPropMeta("_OrbitRotationMaskMap_ST")] _ORBIT_ROTATION_MASK_CONTROL_TEX_ST,
@@ -341,6 +351,23 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         AUDIOLINK_SOURCE,
         MASK_OFFSET,
         MODIFIER
+    }
+
+    public enum MAIN_CATEGORY
+    {
+        FRAGMENT       = 0,
+        COLOR          = 1,
+        GEOMETRY       = 2,
+        ORBIT          = 3,
+        ORBIT_ROTATION = 4,
+    }
+
+    public enum STEREO_MERGE_MODE
+    {
+        _                 = 0,
+        POSITION          = 1,
+        ROTATION          = 2,
+        POSITION_ROTATION = 3
     }
 
     public enum DF_ENUM_RENDERING_MODE

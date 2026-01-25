@@ -213,7 +213,7 @@
             }
             break;
         case 3:
-            c = i.vertex_color;
+            c = i.color;
             break;
         case 4:
             c.rgb = lerp(i.baryCentricCoords,1.0-i.baryCentricCoords,i.color_noise.r);

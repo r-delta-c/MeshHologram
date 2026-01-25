@@ -274,66 +274,70 @@ Shader "DeltaField/shaders/MeshHologram"{
         [DFVector(1,1,1,2)]_OrbitRotationOffsetAudioLinkMaskMapStrength("Orbit Rotation Offset AudioLink Mask Map Strength",Vector)=(1.0,1.0,1.0,1.0)
 
 
-        [DFVector(1,1,1)]_FragmentNoiseOffset0("Noise 1st Offset",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(1,1,1,2)]_FragmentNoiseScale0("Noise 1st Scale",Vector)=(1.0,1.0,1.0,3.0)
-        [DFVector(1,1,1)]_FragmentNoiseOffset1("Noise 1st Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(1,1,1,2)]_FragmentNoiseScale1("Noise 1st Scale Sub",Vector)=(1.0,1.0,1.0,1.0)
-        [DFNoiseSpace]_FragmentNoiseSpace("Noise 1st Position Space",Int)=1
-        [DFToggle(,0)]_FragmentNoiseOffsetBeforeScale("Noise 1st Offset before Scale",Int)=0
-        [DFNumber(0)]_FragmentNoiseSeed("Noise 1st Seed",Float)=0.0
-        [DFNumber(0)]_FragmentNoiseTimeSpeed("Noise 1st Time Speed",Float)=3.0
-        [DFNumber(0)]_FragmentNoiseTimePhase("Noise 1st Time Phase",Float)=0.0
-        [DFNumber(0)]_FragmentNoiseValueScale("Noise 1st Value Scale",Float)=1.0
+        [DFVector(1,1,1)]_FragmentNoiseOffset0("Fragment Offset",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_FragmentNoiseScale0("Fragment Scale",Vector)=(1.0,1.0,1.0,3.0)
+        [DFVector(1,1,1)]_FragmentNoiseOffset1("Fragment Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_FragmentNoiseScale1("Fragment Scale Sub",Vector)=(1.0,1.0,1.0,1.0)
+        [DFNoiseSpace]_FragmentNoiseSpace("Fragment Position Space",Int)=1
+        [DFToggle(,0)]_FragmentNoiseOffsetBeforeScale("Fragment Offset before Scale",Int)=0
+        [DFNumber(0)]_FragmentNoiseSeed("Fragment Seed",Float)=0.0
+        [DFNumber(0)]_FragmentNoiseTimeSpeed("Fragment Time Speed",Float)=3.0
+        [DFNumber(0)]_FragmentNoiseTimePhase("Fragment Time Phase",Float)=0.0
+        [DFNumber(0)]_FragmentNoiseValueScale("Fragment Value Scale",Float)=1.0
+        [DFTexture]_FragmentLiteNoiseMap("Fragment Lite Noise Map",2D)=""{}
+        [DFTextureST(0)]_FragmentLiteNoiseMap_ST("Fragment Lite Noise Map ST",Vector)=(0.0,0.0,1.0,1.0)
 
+        [DFVector(1,1,1)]_ColoringNoiseOffset0("Coloring Offset",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_ColoringNoiseScale0("Coloring Scale",Vector)=(1.0,1.0,1.0,5.0)
+        [DFVector(1,1,1)]_ColoringNoiseOffset1("Coloring Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_ColoringNoiseScale1("Coloring Scale",Vector)=(1.0,1.0,1.0,1.0)
+        [DFNoiseSpace]_ColoringNoiseSpace("Coloring Position Space",Int)=1
+        [DFToggle(,0)]_ColoringNoiseOffsetBeforeScale("Coloring Offset before Scale",Int)=0
+        [DFNumber(0)]_ColoringNoiseSeed("Coloring Seed",Float)=1.0
+        [DFNumber(0)]_ColoringNoiseTimeSpeed("Coloring Time Speed",Float)=5.0
+        [DFNumber(0)]_ColoringNoiseTimePhase("Coloring Time Phase",Float)=0.0
+        [DFNumber(0)]_ColoringNoiseValueScale("Coloring Value Scale",Float)=1.0
+        [DFTexture]_ColoringLiteNoiseMap("Coloring Lite Noise Map",2D)=""{}
+        [DFTextureST(0)]_ColoringLiteNoiseMap_ST("Coloring Lite Noise Map ST",Vector)=(0.0,0.0,1.0,1.0)
 
-        [DFVector(1,1,1)]_ColoringNoiseOffset0("Noise 2nd Offset",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(1,1,1,2)]_ColoringNoiseScale0("Noise 2nd Scale",Vector)=(1.0,1.0,1.0,5.0)
-        [DFVector(1,1,1)]_ColoringNoiseOffset1("Noise 2nd Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(1,1,1,2)]_ColoringNoiseScale1("Noise 2nd Scale",Vector)=(1.0,1.0,1.0,1.0)
-        [DFNoiseSpace]_ColoringNoiseSpace("Noise 2nd Position Space",Int)=1
-        [DFToggle(,0)]_ColoringNoiseOffsetBeforeScale("Noise 2nd Offset before Scale",Int)=0
-        [DFNumber(0)]_ColoringNoiseSeed("Noise 2nd Seed",Float)=1.0
-        [DFNumber(0)]_ColoringNoiseTimeSpeed("Noise 2nd Time Speed",Float)=5.0
-        [DFNumber(0)]_ColoringNoiseTimePhase("Noise 2nd Time Phase",Float)=0.0
-        [DFNumber(0)]_ColoringNoiseValueScale("Noise 2nd Value Scale",Float)=1.0
+        [DFVector(1,1,1)]_GeometryNoiseOffset0("Geometry Offset",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_GeometryNoiseScale0("Geometry Scale",Vector)=(1.0,1.0,1.0,5.0)
+        [DFVector(1,1,1)]_GeometryNoiseOffset1("Geometry Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_GeometryNoiseScale1("Geometry Scale",Vector)=(1.0,1.0,1.0,1.0)
+        [DFNoiseSpace]_GeometryNoiseSpace("Geometry Position Space",Int)=1
+        [DFToggle(,0)]_GeometryNoiseOffsetBeforeScale("Geometry Offset before Scale",Int)=0
+        [DFNumber(0)]_GeometryNoiseSeed("Geometry Seed",Float)=2.0
+        [DFNumber(0)]_GeometryNoiseTimeSpeed("Geometry Time Speed",Float)=3.0
+        [DFNumber(0)]_GeometryNoiseTimePhase("Geometry Time Phase",Float)=0.0
+        [DFNumber(0)]_GeometryNoiseValueScale("Geometry Value Scale",Float)=1.0
+        [DFTexture]_GeometryLiteNoiseMap("Geometry Lite Noise Map",2D)=""{}
+        [DFTextureST(0)]_GeometryLiteNoiseMap_ST("Geometry Lite Noise Map ST",Vector)=(0.0,0.0,1.0,1.0)
 
+        [DFVector(1,1,1)]_OrbitNoiseOffset0("Orbit Offset",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_OrbitNoiseScale0("Orbit Scale",Vector)=(1.0,1.0,1.0,5.0)
+        [DFVector(1,1,1)]_OrbitNoiseOffset1("Orbit Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_OrbitNoiseScale1("Orbit Scale",Vector)=(1.0,1.0,1.0,1.0)
+        [DFNoiseSpace]_OrbitNoiseSpace("Orbit Position Space",Int)=1
+        [DFToggle(,0)]_OrbitNoiseOffsetBeforeScale("Orbit Offset before Scale",Int)=0
+        [DFNumber(0)]_OrbitNoiseSeed("Orbit Seed",Float)=3.0
+        [DFNumber(0)]_OrbitNoiseTimeSpeed("Orbit Time Speed",Float)=3.0
+        [DFNumber(0)]_OrbitNoiseTimePhase("Orbit Time Phase",Float)=0.0
+        [DFNumber(0)]_OrbitNoiseValueScale("Orbit Value Scale",Float)=1.0
+        [DFTexture]_OrbitLiteNoiseMap("Orbit Lite Noise Map",2D)=""{}
+        [DFTextureST(0)]_OrbitLiteNoiseMap_ST("Orbit Lite Noise Map ST",Vector)=(0.0,0.0,1.0,1.0)
 
-        [DFVector(1,1,1)]_GeometryNoiseOffset0("Noise 3rd Offset",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(1,1,1,2)]_GeometryNoiseScale0("Noise 3rd Scale",Vector)=(1.0,1.0,1.0,5.0)
-        [DFVector(1,1,1)]_GeometryNoiseOffset1("Noise 3rd Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(1,1,1,2)]_GeometryNoiseScale1("Noise 3rd Scale",Vector)=(1.0,1.0,1.0,1.0)
-        [DFNoiseSpace]_GeometryNoiseSpace("Noise 3rd Position Space",Int)=1
-        [DFToggle(,0)]_GeometryNoiseOffsetBeforeScale("Noise 3rd Offset before Scale",Int)=0
-        [DFNumber(0)]_GeometryNoiseSeed("Noise 3rd Seed",Float)=2.0
-        [DFNumber(0)]_GeometryNoiseTimeSpeed("Noise 3rd Time Speed",Float)=3.0
-        [DFNumber(0)]_GeometryNoiseTimePhase("Noise 3rd Time Phase",Float)=0.0
-        [DFNumber(0)]_GeometryNoiseValueScale("Noise 3rd Value Scale",Float)=1.0
-
-
-        [DFVector(1,1,1)]_OrbitNoiseOffset0("Noise 4th Offset",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(1,1,1,2)]_OrbitNoiseScale0("Noise 4th Scale",Vector)=(1.0,1.0,1.0,5.0)
-        [DFVector(1,1,1)]_OrbitNoiseOffset1("Noise 4th Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(1,1,1,2)]_OrbitNoiseScale1("Noise 4th Scale",Vector)=(1.0,1.0,1.0,1.0)
-        [DFNoiseSpace]_OrbitNoiseSpace("Noise 4th Position Space",Int)=1
-        [DFToggle(,0)]_OrbitNoiseOffsetBeforeScale("Noise 4th Offset before Scale",Int)=0
-        [DFNumber(0)]_OrbitNoiseSeed("Noise 4th Seed",Float)=3.0
-        [DFNumber(0)]_OrbitNoiseTimeSpeed("Noise 4th Time Speed",Float)=3.0
-        [DFNumber(0)]_OrbitNoiseTimePhase("Noise 4th Time Phase",Float)=0.0
-        [DFNumber(0)]_OrbitNoiseValueScale("Noise 4th Value Scale",Float)=1.0
-
-
-        [DFVector(1,1,1)]_OrbitRotationNoiseOffset0("Noise 5th Offset",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(1,1,1,2)]_OrbitRotationNoiseScale0("Noise 5th Scale",Vector)=(1.0,1.0,1.0,5.0)
-        [DFVector(1,1,1)]_OrbitRotationNoiseOffset1("Noise 5th Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
-        [DFVector(1,1,1,2)]_OrbitRotationNoiseScale1("Noise 5th Scale",Vector)=(1.0,1.0,1.0,1.0)
-        [DFNoiseSpace]_OrbitRotationNoiseSpace("Noise 5th Position Space",Int)=1
-        [DFToggle(,0)]_OrbitRotationNoiseOffsetBeforeScale("Noise 5th Offset before Scale",Int)=0
-        [DFNumber(0)]_OrbitRotationNoiseSeed("Noise 5th Seed",Float)=4.0
-        [DFNumber(0)]_OrbitRotationNoiseTimeSpeed("Noise 5th Time Speed",Float)=3.0
-        [DFNumber(0)]_OrbitRotationNoiseTimePhase("Noise 5th Time Phase",Float)=0.0
-        [DFNumber(0)]_OrbitRotationNoiseValueScale("Noise 5th Value Scale",Float)=1.0
-
-
+        [DFVector(1,1,1)]_OrbitRotationNoiseOffset0("OrbitRotation Offset",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_OrbitRotationNoiseScale0("OrbitRotation Scale",Vector)=(1.0,1.0,1.0,5.0)
+        [DFVector(1,1,1)]_OrbitRotationNoiseOffset1("OrbitRotation Offset Sub",Vector)=(0.0,0.0,0.0,0.0)
+        [DFVector(1,1,1,2)]_OrbitRotationNoiseScale1("OrbitRotation Scale",Vector)=(1.0,1.0,1.0,1.0)
+        [DFNoiseSpace]_OrbitRotationNoiseSpace("OrbitRotation Position Space",Int)=1
+        [DFToggle(,0)]_OrbitRotationNoiseOffsetBeforeScale("OrbitRotation Offset before Scale",Int)=0
+        [DFNumber(0)]_OrbitRotationNoiseSeed("OrbitRotation Seed",Float)=4.0
+        [DFNumber(0)]_OrbitRotationNoiseTimeSpeed("OrbitRotation Time Speed",Float)=3.0
+        [DFNumber(0)]_OrbitRotationNoiseTimePhase("OrbitRotation Time Phase",Float)=0.0
+        [DFNumber(0)]_OrbitRotationNoiseValueScale("OrbitRotation Value Scale",Float)=1.0
+        [DFTexture]_OrbitRotationLiteNoiseMap("OrbitRotation Lite Noise Map",2D)=""{}
+        [DFTextureST(0)]_OrbitRotationLiteNoiseMap_ST("OrbitRotation Lite Noise Map ST",Vector)=(0.0,0.0,1.0,1.0)
 
     }
     SubShader{
@@ -368,6 +372,12 @@ Shader "DeltaField/shaders/MeshHologram"{
             #pragma shader_feature_local _ _LIGHTVOLUMES_ENABLE
 
             #pragma shader_feature_local _STEREOMERGEMODE_NONE _STEREOMERGEMODE_POSITION _STEREOMERGEMODE_ROTATION _STEREOMERGEMODE_POSITION_ROTATION
+
+            #pragma shader_feature_local _FRAGMENTNOISELITEMODE_NORMAL _FRAGMENTNOISELITEMODE_LITE0 _FRAGMENTNOISELITEMODE_LITE1
+            #pragma shader_feature_local _COLORINGNOISELITEMODE_NORMAL _COLORINGNOISELITEMODE_LITE0 _COLORINGNOISELITEMODE_LITE1
+            #pragma shader_feature_local _GEOMETRYNOISELITEMODE_NORMAL _GEOMETRYNOISELITEMODE_LITE0 _GEOMETRYNOISELITEMODE_LITE1
+            #pragma shader_feature_local _ORBITNOISELITEMODE_NORMAL _ORBITNOISELITEMODE_LITE0 _ORBITNOISELITEMODE_LITE1
+            #pragma shader_feature_local _ORBITROTATIONNOISELITEMODE_NORMAL _ORBITROTATIONNOISELITEMODE_LITE0 _ORBITROTATIONNOISELITEMODE_LITE1
 
             #include "AutoLight.cginc"
 
@@ -434,6 +444,12 @@ Shader "DeltaField/shaders/MeshHologram"{
             #pragma shader_feature_local _ _LIGHTVOLUMES_ENABLE
 
             #pragma shader_feature_local _STEREOMERGEMODE_NONE _STEREOMERGEMODE_POSITION _STEREOMERGEMODE_ROTATION _STEREOMERGEMODE_POSITION_ROTATION
+
+            #pragma shader_feature_local _FRAGMENTNOISELITEMODE_NORMAL _FRAGMENTNOISELITEMODE_LITE0 _FRAGMENTNOISELITEMODE_LITE1
+            #pragma shader_feature_local _COLORINGNOISELITEMODE_NORMAL _COLORINGNOISELITEMODE_LITE0 _COLORINGNOISELITEMODE_LITE1
+            #pragma shader_feature_local _GEOMETRYNOISELITEMODE_NORMAL _GEOMETRYNOISELITEMODE_LITE0 _GEOMETRYNOISELITEMODE_LITE1
+            #pragma shader_feature_local _ORBITNOISELITEMODE_NORMAL _ORBITNOISELITEMODE_LITE0 _ORBITNOISELITEMODE_LITE1
+            #pragma shader_feature_local _ORBITROTATIONNOISELITEMODE_NORMAL _ORBITROTATIONNOISELITEMODE_LITE0 _ORBITROTATIONNOISELITEMODE_LITE1
 
             #include "../Includes/macro_general.hlsl"
             #include "../Includes/macro_noise.hlsl"

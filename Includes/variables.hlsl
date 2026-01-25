@@ -66,10 +66,19 @@ UNITY_DECLARE_TEX2D_NOSAMPLER(_OrbitRotationMap);
 float4 _OrbitRotationMap_ST;
 float _OrbitRotationMapStrength;
 
-
-
 UNITY_DECLARE_TEX2D_NOSAMPLER(_ColorGradientTex);
 float4 _ColorGradientTex_ST;
+
+UNITY_DECLARE_TEX2D_NOSAMPLER(_FragmentLiteNoiseMap);
+float4 _FragmentLiteNoiseMap_ST;
+UNITY_DECLARE_TEX2D_NOSAMPLER(_ColoringLiteNoiseMap);
+float4 _ColoringLiteNoiseMap_ST;
+UNITY_DECLARE_TEX2D_NOSAMPLER(_GeometryLiteNoiseMap);
+float4 _GeometryLiteNoiseMap_ST;
+UNITY_DECLARE_TEX2D_NOSAMPLER(_OrbitLiteNoiseMap);
+float4 _OrbitLiteNoiseMap_ST;
+UNITY_DECLARE_TEX2D_NOSAMPLER(_OrbitRotationLiteNoiseMap);
+float4 _OrbitRotationLiteNoiseMap_ST;
 
 float _FragmentTriangleCompression;
 float _FragmentFill;

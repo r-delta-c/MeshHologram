@@ -6,12 +6,6 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(inp[1])
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(inp[2])
 
-    float3 scale = float3(
-        length(UNITY_MATRIX_M._m00_m01_m02),
-        length(UNITY_MATRIX_M._m10_m11_m12),
-        length(UNITY_MATRIX_M._m20_m21_m22)
-    );
-
     // CONTROL
         float2 transform_uv[3];
         float2 transform_pushpull_uv[3];
@@ -144,7 +138,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
 
     [branch]switch(_FragmentPartitionMode){
         default:
-            fragment_value = lerp(_FragmentFixedValue,FUNC_NOISE_VERTEX_VALUE(fragment_pos,_FragmentNoiseSeed,_FragmentNoiseValueScale,fragment_time),_FragmentSource);
+            fragment_value = lerp(_FragmentFixedValue,FUNC_FRAGMENT_NOISE_VERTEX(fragment_pos,_FragmentNoiseSeed,_FragmentNoiseValueScale,fragment_time),_FragmentSource);
             FUNC_GEOMETRY_FRAGMENT_PROCESS;
             fragment_stream[0] = float3(0.0,fragment_value.x,fragment_value.x);
             fragment_stream[1] = float3(fragment_value.y,0.0,fragment_value.y);
@@ -152,7 +146,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             break;
         case 1:
             FUNC_NOISE_CENTER_POS(fragment_pos);
-            fragment_value = lerp(_FragmentFixedValue,FUNC_NOISE_EDGE_VALUE(fragment_pos,noise_center_pos,_FragmentNoiseSeed,_FragmentNoiseValueScale,fragment_time),_FragmentSource);
+            fragment_value = lerp(_FragmentFixedValue,FUNC_FRAGMENT_NOISE_EDGE(fragment_pos,noise_center_pos,_FragmentNoiseSeed,_FragmentNoiseValueScale,fragment_time),_FragmentSource);
             FUNC_GEOMETRY_FRAGMENT_PROCESS;
             fragment_stream[0] = float3(0.0,fragment_value.y,fragment_value.z);
             fragment_stream[1] = float3(fragment_value.x,0.0,fragment_value.z);
@@ -160,7 +154,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             break;
         case 2:
             FUNC_NOISE_CENTER_POS(fragment_pos);
-            fragment_value = lerp(_FragmentFixedValue,ValueNoise3D(noise_center_pos,_FragmentNoiseSeed)*_FragmentNoiseValueScale+fragment_time,_FragmentSource);
+            fragment_value = lerp(_FragmentFixedValue,FUNC_FRAGMENT_NOISE_MESH(noise_center_pos,_FragmentNoiseSeed,_FragmentNoiseValueScale,fragment_time),_FragmentSource);
             FUNC_GEOMETRY_FRAGMENT_PROCESS;
             fragment_stream[0] = fragment_value;
             fragment_stream[1] = fragment_value;
@@ -173,7 +167,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
 
     [branch]switch(_ColoringPartitionMode){
         default:
-            coloring_value = lerp(_ColoringFixedValue,FUNC_NOISE_VERTEX_VALUE(coloring_pos,_ColoringNoiseSeed,_ColoringNoiseValueScale,coloring_time),_ColoringSource);
+            coloring_value = lerp(_ColoringFixedValue,FUNC_FRAGMENT_NOISE_VERTEX(coloring_pos,_ColoringNoiseSeed,_ColoringNoiseValueScale,coloring_time),_ColoringSource);
             FUNC_GEOMETRY_COLORING_PROCESS;
             color_stream[0] = coloring_value.x;
             color_stream[1] = coloring_value.y;
@@ -181,7 +175,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             break;
         case 1:
             FUNC_NOISE_CENTER_POS(coloring_pos);
-            coloring_value = lerp(_ColoringFixedValue,FUNC_NOISE_EDGE_VALUE(coloring_pos,noise_center_pos,_ColoringNoiseSeed,_ColoringNoiseValueScale,coloring_time),_ColoringSource);
+            coloring_value = lerp(_ColoringFixedValue,FUNC_FRAGMENT_NOISE_EDGE(coloring_pos,noise_center_pos,_ColoringNoiseSeed,_ColoringNoiseValueScale,coloring_time),_ColoringSource);
             FUNC_GEOMETRY_COLORING_PROCESS;
             color_stream[0] = coloring_value;
             color_stream[1] = coloring_value;
@@ -189,7 +183,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             break;
         case 2:
             FUNC_NOISE_CENTER_POS(coloring_pos);
-            coloring_value = lerp(_ColoringFixedValue,ValueNoise3D(noise_center_pos,_ColoringNoiseSeed)*_ColoringNoiseValueScale+coloring_time,_ColoringSource);
+            coloring_value = lerp(_ColoringFixedValue,FUNC_COLORING_NOISE_MESH(noise_center_pos,_ColoringNoiseSeed,_ColoringNoiseValueScale,coloring_time),_ColoringSource);
             FUNC_GEOMETRY_COLORING_PROCESS;
             color_stream[0] = coloring_value;
             color_stream[1] = coloring_value;
@@ -204,7 +198,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     float geometry_time = _Time.x*_GeometryNoiseTimeSpeed+_GeometryNoiseTimePhase;
     [branch]if((_GeometryScaleEnable==1)||(_GeometryRotationEnable==1)){
         FUNC_NOISE_CENTER_POS(geometry_pos);
-        geometry_value = lerp(_GeometryFixedValue,ValueNoise3D(noise_center_pos,_GeometryNoiseSeed)*_GeometryNoiseValueScale+geometry_time,_GeometrySource);
+        geometry_value = lerp(_GeometryFixedValue,FUNC_GEOMETRY_NOISE_MESH(noise_center_pos,_GeometryNoiseSeed,_GeometryNoiseValueScale,geometry_time),_GeometrySource);
         geometry_value *= geometry_mask;
         geometry_value += geometry_map;
         FUNC_GEOMETRY_AUDIOLINK_PROCESS(
@@ -243,7 +237,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     float3 geometry_pushpull_value = 0.0;
     [branch]if(_GeometryPushPullEnable==1){
         FUNC_NOISE_CENTER_POS(geometry_pos);
-        geometry_pushpull_value = lerp(_GeometryFixedValue,FUNC_NOISE_BIAS_VALUE(geometry_pos,noise_center_pos,_GeometryNoiseSeed,_GeometryNoiseValueScale,geometry_time,_GeometryPushPullPartitionBias),_GeometrySource);
+        geometry_pushpull_value = lerp(_GeometryFixedValue,FUNC_GEOMETRY_NOISE_BIAS(geometry_pos,noise_center_pos,_GeometryNoiseSeed,_GeometryNoiseValueScale,geometry_time,_GeometryPushPullPartitionBias),_GeometrySource);
         geometry_pushpull_value *= geometry_pushpull_mask;
         geometry_pushpull_value += geometry_pushpull_map;
 
@@ -296,7 +290,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         float orbit_time = _Time.x*_OrbitNoiseTimeSpeed+_OrbitNoiseTimePhase;
         FUNC_NOISE_CENTER_POS(orbit_pos);
         orbit_value += _OrbitFixedValue*SELECTOR_MACRO(_OrbitSource,0);
-        orbit_value += (ValueNoise3D(noise_center_pos,_OrbitNoiseSeed)*_OrbitNoiseValueScale+orbit_time)*SELECTOR_MACRO(_OrbitSource,1);
+        orbit_value += (FUNC_ORBIT_NOISE_MESH(noise_center_pos,_OrbitNoiseSeed,_OrbitNoiseValueScale,orbit_time))*SELECTOR_MACRO(_OrbitSource,1);
         orbit_value += (random(id+_OrbitSeed)<_OrbitPrimitiveRatio)*SELECTOR_MACRO(_OrbitSource,2);
         orbit_value *= orbit_mask;
         orbit_value += orbit_map;
@@ -337,7 +331,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         float orbit_rotation_time = 0.0;
         FUNC_NOISE_CENTER_POS(orbit_rotation_pos);
         orbit_rotation_value += _OrbitRotationFixedValue*SELECTOR_MACRO(_OrbitRotationSource,0);
-        orbit_rotation_value += (ValueNoise3D(noise_center_pos,_OrbitRotationNoiseSeed)*_OrbitRotationNoiseValueScale+orbit_rotation_time)*SELECTOR_MACRO(_OrbitRotationSource,1);
+        orbit_rotation_value += (FUNC_ORBITROTATION_NOISE_MESH(noise_center_pos,_OrbitRotationNoiseSeed,_OrbitRotationNoiseValueScale,orbit_rotation_time))*SELECTOR_MACRO(_OrbitRotationSource,1);
         orbit_rotation_value += random(id+_OrbitRotationSeed)*SELECTOR_MACRO(_OrbitRotationSource,2);
         orbit_rotation_value *= orbit_rotation_mask;
         orbit_rotation_value += orbit_rotation_map;
@@ -433,7 +427,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     for(int i = 0; i < 3; i++){
         matrix_v[i] = float4x4(inp[i].matrix_v_0,inp[i].matrix_v_1,inp[i].matrix_v_2,0.0,0.0,0.0,1.0);
 
-        [branch]if(_GeometryPixelizationSpace==3) vertex_pos[i] = Pixelization(vertex_pos[i],(scale));
+        [branch]if(_GeometryPixelizationSpace==3) vertex_pos[i] = Pixelization(vertex_pos[i],(inp[i].scale.xyz));
 
         world_pos[i] = vertex_pos[i];
         camera_distance[i] = HOLOGRAM_CAMERA_DISTANCE_MACRO(i);
@@ -442,48 +436,46 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         pos[i] = mul(UNITY_MATRIX_P,pos[i]);
     }
 
-    o.model_scale = (scale.x+scale.y+scale.z)/3.0;
-
     o.pos = pos[0];
-    o.alpha = inp[0].alpha;
     o.camera_distance = camera_distance[0];
     o.baryCentricCoords = float3(1.0,0.0,0.0);
     o.fragment_noise = fragment_stream[0];
     o.color_noise = color_stream[0];
-    o.vertex_color = inp[0].vertex_color;
+    o.color = inp[0].color;
     o.normal = inp[0].normal;
     o.world_pos = world_pos[0];
     o.world_normal = inp[0].world_normal;
+    o.model_scale = inp[0].scale.w;
     UNITY_TRANSFER_LIGHTING(o,inp[0].uv)
     UNITY_TRANSFER_INSTANCE_ID(inp[0], o);
     UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(inp[0], o);
     stream.Append(o);
 
     o.pos = pos[1];
-    o.alpha = inp[1].alpha;
     o.camera_distance = camera_distance[1];
     o.baryCentricCoords = float3(0.0,1.0,0.0);
     o.fragment_noise = fragment_stream[1];
     o.color_noise = color_stream[1];
-    o.vertex_color = inp[1].vertex_color;
+    o.color = inp[1].color;
     o.normal = inp[1].normal;
     o.world_pos = world_pos[1];
     o.world_normal = inp[1].world_normal;
+    o.model_scale = inp[1].scale.w;
     UNITY_TRANSFER_LIGHTING(o,inp[1].uv)
     UNITY_TRANSFER_INSTANCE_ID(inp[1], o);
     UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(inp[1], o);
     stream.Append(o);
 
     o.pos = pos[2];
-    o.alpha = inp[2].alpha;
     o.camera_distance = camera_distance[2];
     o.baryCentricCoords = float3(0.0,0.0,1.0);
     o.fragment_noise = fragment_stream[2];
     o.color_noise = color_stream[2];
-    o.vertex_color = inp[2].vertex_color;
+    o.color = inp[2].color;
     o.normal = inp[2].normal;
     o.world_pos = world_pos[2];
     o.world_normal = inp[2].world_normal;
+    o.model_scale = inp[2].scale.w;
     UNITY_TRANSFER_LIGHTING(o,inp[2].uv)
     UNITY_TRANSFER_INSTANCE_ID(inp[2], o);
     UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(inp[2], o);

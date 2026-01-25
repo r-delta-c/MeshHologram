@@ -110,23 +110,121 @@
 
 #define FUNC_NOISE_CENTER_POS(pos) noise_center_pos = ((inp[0].pos+inp[1].pos+inp[2].pos)/3.0)
 
-#define FUNC_NOISE_VERTEX_VALUE(pos,seed,scale,time) \
+#if defined(_FRAGMENTNOISELITEMODE_LITE0)
+    #define FUNC_FRAGMENT_NOISE_VERTEX(pos,seed,scale,time) FUNC_NOISE_LITE0_VERTEX_VALUE(pos,scale,time,_FragmentLiteNoiseMap)
+    #define FUNC_FRAGMENT_NOISE_EDGE(pos,center,seed,scale,time) FUNC_NOISE_LITE0_EDGE_VALUE(pos,center,scale,time,_FragmentLiteNoiseMap)
+    #define FUNC_FRAGMENT_NOISE_MESH(pos,seed,scale,time) FUNC_NOISE_LITE0_MESH_VALUE(pos,scale,time,_FragmentLiteNoiseMap)
+#elif defined(_FRAGMENTNOISELITEMODE_LITE1)
+    #define FUNC_FRAGMENT_NOISE_VERTEX(pos,seed,scale,time) FUNC_NOISE_LITE1_VERTEX_VALUE(pos,scale,time,_FragmentLiteNoiseMap)
+    #define FUNC_FRAGMENT_NOISE_EDGE(pos,center,seed,scale,time) FUNC_NOISE_LITE1_EDGE_VALUE(pos,center,scale,time,_FragmentLiteNoiseMap)
+    #define FUNC_FRAGMENT_NOISE_MESH(pos,seed,scale,time) FUNC_NOISE_LITE1_MESH_VALUE(pos,scale,time,_FragmentLiteNoiseMap)
+#else
+    #define FUNC_FRAGMENT_NOISE_VERTEX(pos,seed,scale,time) FUNC_NOISE_NORMAL_VERTEX_VALUE(pos,seed,scale,time)
+    #define FUNC_FRAGMENT_NOISE_EDGE(pos,center,seed,scale,time) FUNC_NOISE_NORMAL_EDGE_VALUE(pos,center,seed,scale,time)
+    #define FUNC_FRAGMENT_NOISE_MESH(pos,seed,scale,time) FUNC_NOISE_NORMAL_MESH_VALUE(pos,seed,scale,time)
+#endif
+
+#if defined(_COLORINGNOISELITEMODE_LITE0)
+    #define FUNC_COLORING_NOISE_VERTEX(pos,seed,scale,time) FUNC_NOISE_LITE0_VERTEX_VALUE(pos,scale,time,_ColoringLiteNoiseMap)
+    #define FUNC_COLORING_NOISE_EDGE(pos,center,seed,scale,time) FUNC_NOISE_LITE0_EDGE_VALUE(pos,center,scale,time,_ColoringLiteNoiseMap)
+    #define FUNC_COLORING_NOISE_MESH(pos,seed,scale,time) FUNC_NOISE_LITE0_MESH_VALUE(pos,scale,time,_ColoringLiteNoiseMap)
+#elif defined(_COLORINGNOISELITEMODE_LITE1)
+    #define FUNC_COLORING_NOISE_VERTEX(pos,seed,scale,time) FUNC_NOISE_LITE1_VERTEX_VALUE(pos,scale,time,_ColoringLiteNoiseMap)
+    #define FUNC_COLORING_NOISE_EDGE(pos,center,seed,scale,time) FUNC_NOISE_LITE1_EDGE_VALUE(pos,center,scale,time,_ColoringLiteNoiseMap)
+    #define FUNC_COLORING_NOISE_MESH(pos,seed,scale,time) FUNC_NOISE_LITE1_MESH_VALUE(pos,scale,time,_ColoringLiteNoiseMap)
+#else
+    #define FUNC_COLORING_NOISE_VERTEX(pos,seed,scale,time) FUNC_NOISE_NORMAL_VERTEX_VALUE(pos,seed,scale,time)
+    #define FUNC_COLORING_NOISE_EDGE(pos,center,seed,scale,time) FUNC_NOISE_NORMAL_EDGE_VALUE(pos,center,seed,scale,time)
+    #define FUNC_COLORING_NOISE_MESH(pos,seed,scale,time) FUNC_NOISE_NORMAL_MESH_VALUE(pos,seed,scale,time)
+#endif
+
+#if defined(_GEOMETRYNOISELITEMODE_LITE0)
+    #define FUNC_GEOMETRY_NOISE_MESH(pos,seed,scale,time) FUNC_NOISE_LITE0_MESH_VALUE(pos,scale,time,_GeometryLiteNoiseMap)
+    #define FUNC_GEOMETRY_NOISE_BIAS(pos,center,seed,scale,time,bias) FUNC_NOISE_LITE0_BIAS_VALUE(pos,center,scale,time,bias,_GeometryLiteNoiseMap)
+#elif defined(_GEOMETRYNOISELITEMODE_LITE1)
+    #define FUNC_GEOMETRY_NOISE_MESH(pos,seed,scale,time) FUNC_NOISE_LITE1_MESH_VALUE(pos,scale,time,_GeometryLiteNoiseMap)
+    #define FUNC_GEOMETRY_NOISE_BIAS(pos,center,seed,scale,time,bias) FUNC_NOISE_LITE1_BIAS_VALUE(pos,center,scale,time,bias,_GeometryLiteNoiseMap)
+#else
+    #define FUNC_GEOMETRY_NOISE_MESH(pos,seed,scale,time) FUNC_NOISE_NORMAL_MESH_VALUE(pos,seed,scale,time)
+    #define FUNC_GEOMETRY_NOISE_BIAS(pos,center,seed,scale,time,bias) FUNC_NOISE_NORMAL_BIAS_VALUE(pos,center,seed,scale,time,bias)
+#endif
+
+#if defined(_ORBITNOISELITEMODE_LITE0)
+    #define FUNC_ORBIT_NOISE_MESH(pos,seed,scale,time) FUNC_NOISE_LITE0_MESH_VALUE(pos,scale,time,_OrbitLiteNoiseMap)
+#elif defined(_ORBITNOISELITEMODE_LITE1)
+    #define FUNC_ORBIT_NOISE_MESH(pos,seed,scale,time) FUNC_NOISE_LITE1_MESH_VALUE(pos,scale,time,_OrbitLiteNoiseMap)
+#else
+    #define FUNC_ORBIT_NOISE_MESH(pos,seed,scale,time) FUNC_NOISE_NORMAL_MESH_VALUE(pos,seed,scale,time)
+#endif
+
+#if defined(_ORBITROTATIONNOISELITEMODE_LITE0)
+    #define FUNC_ORBITROTATION_NOISE_MESH(pos,seed,scale,time) FUNC_NOISE_LITE0_MESH_VALUE(pos,scale,time,_OrbitRotationLiteNoiseMap)
+#elif defined(_ORBITROTATIONNOISELITEMODE_LITE1)
+    #define FUNC_ORBITROTATION_NOISE_MESH(pos,seed,scale,time) FUNC_NOISE_LITE1_MESH_VALUE(pos,scale,time,_OrbitRotationLiteNoiseMap)
+#else
+    #define FUNC_ORBITROTATION_NOISE_MESH(pos,seed,scale,time) FUNC_NOISE_NORMAL_MESH_VALUE(pos,seed,scale,time)
+#endif
+
+#define FUNC_NOISE_NORMAL_VERTEX_VALUE(pos,seed,scale,time) \
     (float3( \
         ValueNoise3D(inp[0].pos,seed), \
         ValueNoise3D(inp[1].pos,seed), \
         ValueNoise3D(inp[2].pos,seed) \
     )*scale+time)
+#define FUNC_NOISE_LITE0_VERTEX_VALUE(pos,scale,time,texture) \
+    (float3( \
+        Texture3PosNoise(inp[0].pos,texture,texture##_ST), \
+        Texture3PosNoise(inp[1].pos,texture,texture##_ST), \
+        Texture3PosNoise(inp[2].pos,texture,texture##_ST) \
+    )*scale+time)
+#define FUNC_NOISE_LITE1_VERTEX_VALUE(pos,scale,time,texture) \
+    (float3( \
+        Texture3BlendNoise(inp[0].pos,texture,texture##_ST), \
+        Texture3BlendNoise(inp[1].pos,texture,texture##_ST), \
+        Texture3BlendNoise(inp[2].pos,texture,texture##_ST) \
+    )*scale+time)
 
-#define FUNC_NOISE_EDGE_VALUE(pos,center,seed,scale,time) \
+#define FUNC_NOISE_NORMAL_EDGE_VALUE(pos,center,seed,scale,time) \
     (float3( \
         ValueNoise3D(EdgeCenterPos(inp[1].pos,inp[2].pos,inp[0].pos,center),seed), \
         ValueNoise3D(EdgeCenterPos(inp[2].pos,inp[0].pos,inp[1].pos,center),seed), \
         ValueNoise3D(EdgeCenterPos(inp[0].pos,inp[1].pos,inp[2].pos,center),seed) \
     )*scale+time)
+#define FUNC_NOISE_LITE0_EDGE_VALUE(pos,center,scale,time,texture) \
+    (float3( \
+        Texture3PosNoise(EdgeCenterPos(inp[1].pos,inp[2].pos,inp[0].pos,center),texture,texture##_ST), \
+        Texture3PosNoise(EdgeCenterPos(inp[2].pos,inp[0].pos,inp[1].pos,center),texture,texture##_ST), \
+        Texture3PosNoise(EdgeCenterPos(inp[0].pos,inp[1].pos,inp[2].pos,center),texture,texture##_ST) \
+    )*scale+time)
+#define FUNC_NOISE_LITE1_EDGE_VALUE(pos,center,scale,time,texture) \
+    (float3( \
+         Texture3BlendNoise(EdgeCenterPos(inp[1].pos,inp[2].pos,inp[0].pos,center),texture,texture##_ST), \
+         Texture3BlendNoise(EdgeCenterPos(inp[2].pos,inp[0].pos,inp[1].pos,center),texture,texture##_ST), \
+         Texture3BlendNoise(EdgeCenterPos(inp[0].pos,inp[1].pos,inp[2].pos,center),texture,texture##_ST) \
+    )*scale+time)
 
-#define FUNC_NOISE_BIAS_VALUE(pos,center,seed,scale,time,bias) \
+#define FUNC_NOISE_NORMAL_MESH_VALUE(pos_center,seed,scale,time) \
+    (ValueNoise3D(pos_center,seed)*scale+time)
+#define FUNC_NOISE_LITE0_MESH_VALUE(pos_center,scale,time,texture) \
+    (Texture3PosNoise(pos_center,texture,texture##_ST)*scale+time)
+#define FUNC_NOISE_LITE1_MESH_VALUE(pos_center,scale,time,texture) \
+    (Texture3BlendNoise(pos_center,texture,texture##_ST)*scale+time)
+
+#define FUNC_NOISE_NORMAL_BIAS_VALUE(pos,center,seed,scale,time,bias) \
     (float3( \
         ValueNoise3D(VertexCenterBias(inp[1].pos,inp[2].pos,inp[0].pos,center,bias),seed), \
         ValueNoise3D(VertexCenterBias(inp[2].pos,inp[0].pos,inp[1].pos,center,bias),seed), \
         ValueNoise3D(VertexCenterBias(inp[0].pos,inp[1].pos,inp[2].pos,center,bias),seed) \
+    )*scale+time)
+#define FUNC_NOISE_LITE0_BIAS_VALUE(pos,center,scale,time,bias,texture) \
+    (float3( \
+        Texture3PosNoise(VertexCenterBias(inp[1].pos,inp[2].pos,inp[0].pos,center,bias),texture,texture##_ST), \
+        Texture3PosNoise(VertexCenterBias(inp[2].pos,inp[0].pos,inp[1].pos,center,bias),texture,texture##_ST), \
+        Texture3PosNoise(VertexCenterBias(inp[0].pos,inp[1].pos,inp[2].pos,center,bias),texture,texture##_ST) \
+    )*scale+time)
+#define FUNC_NOISE_LITE1_BIAS_VALUE(pos,center,scale,time,bias,texture) \
+    (float3( \
+         Texture3BlendNoise(VertexCenterBias(inp[1].pos,inp[2].pos,inp[0].pos,center,bias),texture,texture##_ST), \
+         Texture3BlendNoise(VertexCenterBias(inp[2].pos,inp[0].pos,inp[1].pos,center,bias),texture,texture##_ST), \
+         Texture3BlendNoise(VertexCenterBias(inp[0].pos,inp[1].pos,inp[2].pos,center,bias),texture,texture##_ST) \
     )*scale+time)

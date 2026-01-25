@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using System;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramManager;
@@ -91,6 +92,16 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             editor.ShaderProperty(MeshHologramProps[key].var, MeshHologramProps[key].property);
         }
 
+        private void DrawKeywordToggle(ref MeshHologramToggleState state, bool isLeft = false)
+        {
+            EditorGUI.showMixedValue = state.hasMixedValue;
+            EditorGUI.BeginChangeCheck();
+            if (isLeft) EditorGUILayout.ToggleLeft("test",state._value);
+            else EditorGUILayout.Toggle("test",state._value);
+            if(EditorGUI.EndChangeCheck()) state.Toggle(state._value); 
+            EditorGUI.showMixedValue = false;
+        }
+
         private void DrawLine()
         {
             GUILayout.Box("", GUILayout.ExpandWidth(true), GUILayout.Height(2));
@@ -113,162 +124,58 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             EditorGUILayout.LabelField("<color=silver>" + label + "</color>", style);
         }
 
-        private void DrawSubMenu(
-            MESHHOLOGRAM_PROP_ENUM SOURCE,
-            MESHHOLOGRAM_PROP_ENUM FIXED_VALUE,
-            MESHHOLOGRAM_PROP_ENUM NOISE_OFFSET0,
-            MESHHOLOGRAM_PROP_ENUM NOISE_SCALE0,
-            MESHHOLOGRAM_PROP_ENUM NOISE_OFFSET1,
-            MESHHOLOGRAM_PROP_ENUM NOISE_SCALE1,
-            MESHHOLOGRAM_PROP_ENUM NOISE_OFFSET_BEFORE_SCALE,
-            MESHHOLOGRAM_PROP_ENUM NOISE_SPACE,
-            MESHHOLOGRAM_PROP_ENUM NOISE_SEED,
-            MESHHOLOGRAM_PROP_ENUM NOISE_TIME_SPEED,
-            MESHHOLOGRAM_PROP_ENUM NOISE_TIME_PHASE,
-            MESHHOLOGRAM_PROP_ENUM NOISE_VALUE_SCALE,
-            MESHHOLOGRAM_PROP_ENUM AUDIOLINK_SOURCE,
-            MESHHOLOGRAM_PROP_ENUM AUDIOLINK_VU_BAND,
-            MESHHOLOGRAM_PROP_ENUM AUDIOLINK_VU_SMOOTHING,
-            MESHHOLOGRAM_PROP_ENUM AUDIOLINK_VU_PANNING,
-            MESHHOLOGRAM_PROP_ENUM AUDIOLINK_VU_STRENGTH,
-            MESHHOLOGRAM_PROP_ENUM AUDIOLINK_CHRONO_TENSITY_BAND,
-            MESHHOLOGRAM_PROP_ENUM AUDIOLINK_CHRONO_TENSITY_MODE,
-            MESHHOLOGRAM_PROP_ENUM AUDIOLINK_CHRONO_TENSITY_STRENGTH,
-            MESHHOLOGRAM_PROP_ENUM AUDIOLINK_SPECTRUM_STRENGTH,
-            MESHHOLOGRAM_PROP_ENUM AUDIOLINK_SPECTRUM_MIRROR,
-            MESHHOLOGRAM_PROP_ENUM MASK_CONTROL_TEX,
-            MESHHOLOGRAM_PROP_ENUM MASK_CONTROL_TEX_ST,
-            MESHHOLOGRAM_PROP_ENUM MASK_CONTROL,
-            MESHHOLOGRAM_PROP_ENUM OFFSET_CONTROL_TEX,
-            MESHHOLOGRAM_PROP_ENUM OFFSET_CONTROL_TEX_ST,
-            MESHHOLOGRAM_PROP_ENUM OFFSET_CONTROL,
-            MESHHOLOGRAM_PROP_ENUM AUDIOLINK_MASK_CONTROL_TEX,
-            MESHHOLOGRAM_PROP_ENUM AUDIOLINK_MASK_CONTROL_TEX_ST,
-            MESHHOLOGRAM_PROP_ENUM AUDIOLINK_MASK_CONTROL,
-            MESHHOLOGRAM_PROP_ENUM PHASE_SCALE,
-            MESHHOLOGRAM_PROP_ENUM LOOP_MODE,
-            MESHHOLOGRAM_PROP_ENUM MID_MUL,
-            MESHHOLOGRAM_PROP_ENUM MID_ADD,
-            MESHHOLOGRAM_PROP_ENUM EASE_MODE,
-            MESHHOLOGRAM_PROP_ENUM EASE_CURVE
-        )
+        private void DrawSubMenu(MeshHologramCommonProps props)
         {
             switch (SubIndex)
             {
                 case 0:
-                    DrawShaderProperty(SOURCE);
-                    switch(GetPropertyFloat(targetMat, SOURCE))
+                    DrawShaderProperty(props.source.source);
+                    switch(GetPropertyFloat(targetMat, props.source.source))
                     {
                         case 0:
-                            DrawShaderProperty(FIXED_VALUE);
-                            break;
+                            DrawShaderProperty(props.source.fixed_value); break;
                         case 1:
-                            DrawShaderProperty(NOISE_OFFSET0);
-                            DrawShaderProperty(NOISE_SCALE0);
-                            if (GetPropertyFloat(targetMat, NOISE_SPACE) == 4)
-                            {
-                                DrawShaderProperty(NOISE_OFFSET1);
-                                DrawShaderProperty(NOISE_SCALE1);
-                            }
-                            DrawShaderProperty(NOISE_OFFSET_BEFORE_SCALE);
-                            DrawShaderProperty(NOISE_SPACE);
-                            EditorGUILayout.Space(16);
-                            DrawShaderProperty(NOISE_SEED);
-                            EditorGUILayout.Space(16);
-                            DrawShaderProperty(NOISE_TIME_SPEED);
-                            DrawShaderProperty(NOISE_TIME_PHASE);
-                            DrawShaderProperty(NOISE_VALUE_SCALE);
-                            break;
+                            DrawNoiseProps(MAIN_CATEGORY.FRAGMENT,props.source); break;
                         default:
                             break;
                     }
                     break;
                 case 1:
-                    DrawAudioLinkSource(
-                        AUDIOLINK_SOURCE,
-                        AUDIOLINK_VU_BAND,
-                        AUDIOLINK_VU_SMOOTHING,
-                        AUDIOLINK_VU_PANNING,
-                        AUDIOLINK_VU_STRENGTH,
-                        AUDIOLINK_CHRONO_TENSITY_BAND,
-                        AUDIOLINK_CHRONO_TENSITY_MODE,
-                        AUDIOLINK_CHRONO_TENSITY_STRENGTH,
-                        AUDIOLINK_SPECTRUM_STRENGTH,
-                        AUDIOLINK_SPECTRUM_MIRROR
-                    );
-                    break;
+                    DrawAudioLinkSource(props.audiolink); break;
                 case 2:
                     DrawMaskOffsetTex(
-                        MASK_CONTROL_TEX,
-                        MASK_CONTROL_TEX_ST,
-                        MASK_CONTROL,
-                        OFFSET_CONTROL_TEX,
-                        OFFSET_CONTROL_TEX_ST,
-                        OFFSET_CONTROL,
-                        AUDIOLINK_MASK_CONTROL_TEX,
-                        AUDIOLINK_MASK_CONTROL_TEX_ST,
-                        AUDIOLINK_MASK_CONTROL
+                        props.mask_offset.mask_tex,
+                        props.mask_offset.mask_st,
+                        props.mask_offset.mask_strength
+                    );
+                    DrawPartitionLine(4);
+                    DrawMaskOffsetTex(
+                        props.mask_offset.offset_tex,
+                        props.mask_offset.offset_st,
+                        props.mask_offset.offset_strength
+                    );
+                    DrawPartitionLine(4);
+                    DrawMaskOffsetTex(
+                        props.mask_offset.audiolink_mask_tex,
+                        props.mask_offset.audiolink_mask_st,
+                        props.mask_offset.audiolink_mask_strength
                     );
                     break;
-                case 3:
-                    DrawModifiers(
-                        PHASE_SCALE,
-                        LOOP_MODE,
-                        MID_MUL,
-                        MID_ADD,
-                        EASE_MODE,
-                        EASE_CURVE
-                    );
-                    break;
-                default:
+                case 3: 
+                    DrawModifiers(props.modifier); break;
+                default: 
                     break;
             }
         }
 
-        private void DrawMaskOffsetTex(
-            MESHHOLOGRAM_PROP_ENUM tex0, MESHHOLOGRAM_PROP_ENUM st0, MESHHOLOGRAM_PROP_ENUM strength0,
-            MESHHOLOGRAM_PROP_ENUM tex1, MESHHOLOGRAM_PROP_ENUM st1, MESHHOLOGRAM_PROP_ENUM strength1)
+        private void DrawMaskOffsetTex(MESHHOLOGRAM_PROP_ENUM tex, MESHHOLOGRAM_PROP_ENUM st, MESHHOLOGRAM_PROP_ENUM strength = MESHHOLOGRAM_PROP_ENUM._DUMMY)
         {
-            DrawShaderProperty(tex0);
-            DrawShaderProperty(strength0);
+            DrawShaderProperty(tex);
+            if(strength != MESHHOLOGRAM_PROP_ENUM._DUMMY) DrawShaderProperty(strength);
             EditorGUILayout.Space(EditorGUIUtility.singleLineHeight);
-            DrawShaderProperty(st0);
+            DrawShaderProperty(st);
             EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*3.0f);
-            CheckSRGBTexture(tex0);
-            DrawPartitionLine(4);
-            DrawShaderProperty(tex1);
-            DrawShaderProperty(strength1);
-            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight);
-            DrawShaderProperty(st1);
-            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*3.0f);
-            CheckSRGBTexture(tex1);
-        }
-
-        private void DrawMaskOffsetTex(
-            MESHHOLOGRAM_PROP_ENUM tex0, MESHHOLOGRAM_PROP_ENUM st0, MESHHOLOGRAM_PROP_ENUM strength0,
-            MESHHOLOGRAM_PROP_ENUM tex1, MESHHOLOGRAM_PROP_ENUM st1, MESHHOLOGRAM_PROP_ENUM strength1,
-            MESHHOLOGRAM_PROP_ENUM tex2, MESHHOLOGRAM_PROP_ENUM st2, MESHHOLOGRAM_PROP_ENUM strength2)
-        {
-            DrawShaderProperty(tex0);
-            DrawShaderProperty(strength0);
-            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight);
-            DrawShaderProperty(st0);
-            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*3.0f);
-            CheckSRGBTexture(tex0);
-            DrawPartitionLine(4);
-            DrawShaderProperty(tex1);
-            DrawShaderProperty(strength1);
-            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight);
-            DrawShaderProperty(st1);
-            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*3.0f);
-            CheckSRGBTexture(tex1);
-            DrawPartitionLine(4);
-            DrawShaderProperty(tex2);
-            DrawShaderProperty(strength2);
-            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight);
-            DrawShaderProperty(st2);
-            EditorGUILayout.Space(EditorGUIUtility.singleLineHeight*3.0f);
-            CheckSRGBTexture(tex2);
+            CheckSRGBTexture(tex);
         }
 
         private void CheckSRGBTexture(MESHHOLOGRAM_PROP_ENUM tex)
@@ -284,117 +191,227 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             }
         }
 
-        private void DrawAudioLinkSource(
-            MESHHOLOGRAM_PROP_ENUM SOURCE,
-            MESHHOLOGRAM_PROP_ENUM VU_BAND,
-            MESHHOLOGRAM_PROP_ENUM VU_SMOOTHING,
-            MESHHOLOGRAM_PROP_ENUM VU_PANNING,
-            MESHHOLOGRAM_PROP_ENUM VU_STRENGTH,
-            MESHHOLOGRAM_PROP_ENUM CHRONO_TENSITY_BAND,
-            MESHHOLOGRAM_PROP_ENUM CHRONO_TENSITY_MODE,
-            MESHHOLOGRAM_PROP_ENUM CHRONO_TENSITY_STRENGTH,
-            MESHHOLOGRAM_PROP_ENUM SPECTRUM_STRENGTH,
-            MESHHOLOGRAM_PROP_ENUM SPECTRUM_MIRROR
-        )
+        private void DrawAudioLinkSource(MeshHologramAudioLinkProps props)
         {
-            DrawShaderProperty(SOURCE);
-            switch (GetPropertyFloat(targetMat, SOURCE))
+            DrawShaderProperty(props.source);
+            switch (GetPropertyFloat(targetMat, props.source))
             {
                 case 1:
-                    DrawShaderProperty(VU_BAND);
-                    DrawShaderProperty(VU_SMOOTHING);
-                    DrawShaderProperty(VU_PANNING);
-                    DrawShaderProperty(VU_STRENGTH);
+                    DrawShaderProperty(props.vu_band);
+                    DrawShaderProperty(props.vu_smoothing);
+                    DrawShaderProperty(props.vu_panning);
+                    DrawShaderProperty(props.vu_strength);
                     break;
                 case 2:
-                    DrawShaderProperty(VU_BAND);
-                    DrawShaderProperty(VU_SMOOTHING);
-                    DrawShaderProperty(VU_PANNING);
+                    DrawShaderProperty(props.vu_band);
+                    DrawShaderProperty(props.vu_smoothing);
+                    DrawShaderProperty(props.vu_panning);
                     break;
                 case 3:
-                    DrawShaderProperty(CHRONO_TENSITY_BAND);
-                    DrawShaderProperty(CHRONO_TENSITY_MODE);
-                    DrawShaderProperty(CHRONO_TENSITY_STRENGTH);
+                    DrawShaderProperty(props.chrono_tensity_band);
+                    DrawShaderProperty(props.chrono_tensity_mode);
+                    DrawShaderProperty(props.chrono_tensity_strength);
                     break;
                 case 4:
-                    DrawShaderProperty(SPECTRUM_MIRROR);
-                    DrawShaderProperty(SPECTRUM_STRENGTH);
+                    DrawShaderProperty(props.spectrum_mirror);
+                    DrawShaderProperty(props.spectrum_strength);
                     break;
                 default:
                     break;
             }
         }
 
-        private void DrawModifiers(
-            MESHHOLOGRAM_PROP_ENUM PHASE_SCALE,
-            MESHHOLOGRAM_PROP_ENUM LOOP_MODE,
-            MESHHOLOGRAM_PROP_ENUM THRESHOLD_MUL,
-            MESHHOLOGRAM_PROP_ENUM THRESHOLD_ADD,
-            MESHHOLOGRAM_PROP_ENUM EASE_MODE,
-            MESHHOLOGRAM_PROP_ENUM EASE_CURVE
-        )
+        private void DrawModifiers(MeshHologramModifierProps props)
         {
-            DrawShaderProperty(PHASE_SCALE);
-            DrawShaderProperty(LOOP_MODE);
-            DrawShaderProperty(THRESHOLD_MUL);
-            DrawShaderProperty(THRESHOLD_ADD);
-            DrawShaderProperty(EASE_MODE);
-            DrawShaderProperty(EASE_CURVE);
+            DrawShaderProperty(props.phase_scale);
+            DrawShaderProperty(props.loop_mode);
+            DrawShaderProperty(props.mid_mul);
+            DrawShaderProperty(props.mid_add);
+            DrawShaderProperty(props.ease_mode);
+            DrawShaderProperty(props.ease_curve);
             PreviewGraph(
-                GetPropertyFloat(targetMat, PHASE_SCALE),
-                (uint)GetPropertyFloat(targetMat, LOOP_MODE),
-                GetPropertyFloat(targetMat, THRESHOLD_MUL),
-                GetPropertyFloat(targetMat, THRESHOLD_ADD),
-                (uint)GetPropertyFloat(targetMat, EASE_MODE),
-                GetPropertyFloat(targetMat, EASE_CURVE)
+                GetPropertyFloat(targetMat, props.phase_scale),
+                (uint)GetPropertyFloat(targetMat, props.loop_mode),
+                GetPropertyFloat(targetMat, props.mid_mul),
+                GetPropertyFloat(targetMat, props.mid_add),
+                (uint)GetPropertyFloat(targetMat, props.ease_mode),
+                GetPropertyFloat(targetMat, props.ease_curve)
             );
         }
 
         private void DrawNoiseProps(
-            MESHHOLOGRAM_PROP_ENUM OFFSET0,
-            MESHHOLOGRAM_PROP_ENUM SCALE0,
-            MESHHOLOGRAM_PROP_ENUM OFFSET1,
-            MESHHOLOGRAM_PROP_ENUM SCALE1,
-            MESHHOLOGRAM_PROP_ENUM OFFSET_BEFORE_SCALE,
-            MESHHOLOGRAM_PROP_ENUM SPACE,
-            MESHHOLOGRAM_PROP_ENUM SEED,
-            MESHHOLOGRAM_PROP_ENUM TIME_MULTI,
-            MESHHOLOGRAM_PROP_ENUM TIME_PHASE,
-            MESHHOLOGRAM_PROP_ENUM PHASE_SCALE
+            MAIN_CATEGORY cat,
+            MeshHologramSourceProps props
             )
         {
-            DrawShaderProperty(OFFSET0);
-            DrawShaderProperty(SCALE0);
-            if (GetPropertyFloat(targetMat, SPACE) == 4)
+            DrawShaderProperty(props.offset0);
+            DrawShaderProperty(props.scale0);
+            using (new EditorGUI.DisabledGroupScope(GetPropertyFloat(targetMat, props.space) != 4))
             {
-                DrawShaderProperty(OFFSET1);
-                DrawShaderProperty(SCALE1);
+                DrawShaderProperty(props.offset1);
+                DrawShaderProperty(props.scale1);
             }
-            DrawShaderProperty(OFFSET_BEFORE_SCALE);
-            DrawShaderProperty(SPACE);
+            DrawShaderProperty(props.offset_before_scale);
+            DrawShaderProperty(props.space);
+            DrawShaderProperty(props.time_speed);
+            DrawShaderProperty(props.time_phase);
+            DrawShaderProperty(props.value_scale);
             EditorGUILayout.Space(16);
-            DrawShaderProperty(SEED);
-            EditorGUILayout.Space(16);
-            DrawShaderProperty(TIME_MULTI);
-            DrawShaderProperty(TIME_PHASE);
-            DrawShaderProperty(PHASE_SCALE);
+            DrawNoiseLiteModeGroupButtons((int)cat);
+            if (NoiseLiteMode[(int)cat] != 0) DrawMaskOffsetTex(props.map,props.map_st);
+            else DrawShaderProperty(props.seed);
         }
 
-        private void DrawOrbitRotationNoise()
+        private void DrawNoiseLiteModeGroupButtons(int element = -1)
         {
-            DrawNoiseProps(
-                MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_NOISE_OFFSET0,
-                MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_NOISE_SCALE0,
-                MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_NOISE_OFFSET1,
-                MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_NOISE_SCALE1,
-                MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_NOISE_OFFSET_BEFORE_SCALE,
-                MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_NOISE_SPACE,
-                MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_NOISE_SEED,
-                MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_NOISE_TIME_SPEED,
-                MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_NOISE_TIME_PHASE,
-                MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_NOISE_VALUE_SCALE
-            );
+            using(new EditorGUILayout.VerticalScope())
+            {
+                Rect rect = EditorGUILayout.GetControlRect();
+                Rect toggle_rect = new Rect(rect);
+                float toggle_width = 48.0f;
+                float label_width = rect.width - (toggle_width*3.0f);
+                float toggle_start_x = rect.x + label_width;
+                rect.width = label_width;
+                toggle_rect.x = toggle_start_x;
+                toggle_rect.width -= label_width;
+
+                int radio_offset = (int)(toggle_rect.width/6.0f);
+                toggle_rect.x += radio_offset;
+                toggle_rect.width -= radio_offset;
+                GUIStyle center_radio = new GUIStyle("Radio");
+                center_radio.fixedWidth = center_radio.lineHeight;
+                center_radio.margin = new RectOffset(0,radio_offset,0,0);
+
+                string[] labels = new string[5]{"Fragment","Color","Geometry","Orbit","OrbitRotation"};
+
+                EditorGUI.LabelField(rect,"Noise Lite Mode");
+                if (element > -1 && element <= 5) DrawNoiseLiteModeRadio(element);
+                else for(int i = 0; i < 5; i++) DrawNoiseLiteModeRadio(i);
+
+                void DrawNoiseLiteModeRadio(int i)
+                {
+                    rect.y += 20.0f;
+                    toggle_rect.y += 20.0f;
+                    EditorGUILayout.Space(20);
+                    EditorGUI.LabelField(rect,labels[i]);
+                    _NoiseLiteMode[i] = GUI.Toolbar(toggle_rect,_NoiseLiteMode[i],new string[3]{"","",""},center_radio);
+                }
+
+                toggle_rect.x -= radio_offset;
+                toggle_rect.width += radio_offset;
+                toggle_rect.y += 24.0f;
+                EditorGUILayout.Space(24);
+                toggle_rect.width *= 0.5f;
+                Rect revert_button_rect = new Rect(toggle_rect);
+                Rect apply_button_rect = new Rect(toggle_rect);
+                apply_button_rect.x += apply_button_rect.width;
+
+                using(new EditorGUI.DisabledScope(_NoiseLiteMode.SequenceEqual(NoiseLiteMode)))
+                {
+                    if (GUI.Button(revert_button_rect, "Revert")) CheckNoiseLiteMode(element);
+                    if (GUI.Button(apply_button_rect, "Apply"))
+                    {
+                        bool dialog_frag = false, apply_frag = false;
+                        for(int i = 0; i < 4; i++) if(_NoiseLiteMode[i] == 0 && NoiseLiteMode[i] != 0)
+                        {
+                            ResetNoiseLiteMap[i] = true;
+                            dialog_frag = true;
+                        }
+                        if (dialog_frag)
+                        {
+                           apply_frag = EditorUtility.DisplayDialog(
+                            "tes",
+                            "tes",
+                            "OK",
+                            "Cancel"
+                            );
+                        }
+                        else apply_frag = true;
+                        if(apply_frag) ChangeNoiseLiteMode = element;
+                    } 
+                }
+            }
         }
+
+        private void CheckNoiseLiteMode(int target_element)
+        {
+            if(target_element > -1 && target_element <= 5) GetNoiseMode(target_element,MainCatsName[target_element]);
+            else for(int i = 0; i < 5; i++) GetNoiseMode(i,MainCatsName[i]);
+            void GetNoiseMode(int element ,string key)
+            {
+                key += "NOISELITEMODE_";
+                int value;
+                if(targetMat.IsKeywordEnabled(key+"LITE0")) value = 1;
+                else if(targetMat.IsKeywordEnabled(key+"LITE1")) value = 2;
+                else value = 0;
+                NoiseLiteMode[element] = value;
+                _NoiseLiteMode[element] = value;
+            }
+        }
+        private void ApplyNoiseLiteMode(Material mat, int target_element)
+        {
+            MESHHOLOGRAM_PROP_ENUM[] prop_enums = new MESHHOLOGRAM_PROP_ENUM[5]
+            {
+                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_LITE_NOISE_MAP,
+                MESHHOLOGRAM_PROP_ENUM._COLORING_LITE_NOISE_MAP,
+                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_LITE_NOISE_MAP,
+                MESHHOLOGRAM_PROP_ENUM._ORBIT_LITE_NOISE_MAP,
+                MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_LITE_NOISE_MAP,
+            };
+
+            if(target_element > -1 && target_element <= 5) SetNoiseMode(target_element);
+            else for(int i = 0; i < 5; i++) SetNoiseMode(i);
+
+            void SetNoiseMode(int element)
+            {
+                string key = MainCatsName[element];
+
+                key += "NOISELITEMODE_";
+                switch (_NoiseLiteMode[element])
+                {
+                    case 1:
+                        mat.EnableKeyword(key+"LITE0");
+                        mat.DisableKeyword(key+"LITE1");
+                        mat.DisableKeyword(key+"NORMAL");
+                        break;
+                    case 2:
+                        mat.DisableKeyword(key+"LITE0");
+                        mat.EnableKeyword(key+"LITE1");
+                        mat.DisableKeyword(key+"NORMAL");
+                        break;
+                    default:
+                        mat.DisableKeyword(key+"LITE0");
+                        mat.DisableKeyword(key+"LITE1");
+                        mat.EnableKeyword(key+"NORMAL");
+                        break;
+                }
+                key += _NoiseLiteMode[element] switch
+                {
+                    1 => "LITE0",
+                    2 => "LITE1",
+                    _ => "NORMAL",
+                };
+                if(NoiseLiteMode[element]!=0 && _NoiseLiteMode[element]==0) MeshHologramProps[prop_enums[element]].var.textureValue = null;
+
+                mat.EnableKeyword(key);
+            }
+        }
+
+        private void CheckToggleKeyword(ref MeshHologramToggleState state)
+        {
+            state.value = targetMat.IsKeywordEnabled(state.keyword);
+            state._value = state.value;
+            state.hasMixedValue = false;
+            foreach (Material m in targetMats)
+            {
+                if (state.value != m.IsKeywordEnabled(state.keyword))
+                {
+                    state.hasMixedValue = true;
+                    return;
+                }
+            }
+        }
+
     }
 }
 

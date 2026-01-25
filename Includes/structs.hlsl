@@ -8,25 +8,19 @@ struct appdata{
 };
 struct v2f{
     float4 pos : SV_POSITION;
-    float2 uv : TEXCOORD0;
-    float3 fragment_pos:TEXCOORD1;
-    float3 coloring_pos:TEXCOORD2;
-    float3 geometry_pos:TEXCOORD3;
-    float3 orbit_pos:TEXCOORD4;
-    float3 orbit_rotation_pos:TEXCOORD5;
-
-    float3 world_pos : TEXCOORD6;
-    float3 origin_pos : TEXCOORD7;
-
-    float4 vertex_color : TEXCOORD8;
-    float alpha : TEXCOORD9;
-
-    float4 matrix_v_0:TEXCOORD11;
-    float4 matrix_v_1:TEXCOORD12;
-    float4 matrix_v_2:TEXCOORD13;
-
-    float3 normal : NORMAL0;
-    float3 world_normal : NORMAL1;
+    float4 fragment_pos:TEXCOORD0;          // fragment_pos.xyz
+    float4 coloring_pos:TEXCOORD1;          // coloring_pos.xyz
+    float4 geometry_pos:TEXCOORD2;          // geometry_pos.xyz
+    float4 orbit_pos:TEXCOORD3;             // orbit_pos.xyz
+    float4 orbit_rotation_pos:TEXCOORD4;    // orbit_rotation_pos.xyz
+    float2 uv:TEXCOORD10;                   // uv.xy
+    float4 color:TEXCOORD11;                // color.rgba
+    float4 scale:TEXCOORD12;                // scale.xyz, scale.w
+    float3 normal:TEXCOORD15;               // normal.xyz
+    float3 world_normal:TEXCOORD16;         // world_normal.xyz
+    float4 matrix_v_0:TEXCOORD20;           // matrix_v_0.xyzw
+    float4 matrix_v_1:TEXCOORD21;           // matrix_v_1.xyzw
+    float4 matrix_v_2:TEXCOORD22;           // matrix_v_2.xyzw
 
     UNITY_VERTEX_INPUT_INSTANCE_ID
     UNITY_VERTEX_OUTPUT_STEREO
@@ -39,8 +33,7 @@ struct g2f{
     float3 world_pos : TEXCOORD4;
 
     float3 baryCentricCoords : TEXCOORD5;
-    fixed4 vertex_color : TEXCOORD6;
-    fixed alpha :TEXCOORD7;
+    fixed4 color : TEXCOORD6;
     float camera_distance : TEXCOORD8;
     float model_scale : TEXCOORD9;
 

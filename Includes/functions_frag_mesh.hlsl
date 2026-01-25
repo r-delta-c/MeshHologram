@@ -22,7 +22,7 @@
 
 
     [branch]if(_PreviewEnable==0){
-        c.a = saturate(draw.x+draw.y+draw.z)*i.alpha*c.a;
+        c.a = saturate(draw.x+draw.y+draw.z)*i.color.a*c.a;
         [branch]if(_RenderingMode==1) c.a = step(0.1,c.a);
         [branch]if(_AntiAliasingEnable==1){
             float diff_pixel = fwidth(c.a)*0.5;

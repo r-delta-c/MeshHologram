@@ -12,13 +12,14 @@ v2f vert (appdata v){
         length(UNITY_MATRIX_M._m10_m11_m12),
         length(UNITY_MATRIX_M._m20_m21_m22)
     );
+    o.scale = float4(scale.xyz,(scale.x+scale.y+scale.z)/3.0);
+    o.color = v.color;
     [branch]if(_BillboardEnable==0){
-        o.alpha = v.color.a;
         [branch]if(_GeometryPixelizationSpace==1) v.pos.xyz = Pixelization(v.pos.xyz, float3(1.0,1.0,1.0));
         o.pos = mul(UNITY_MATRIX_M,v.pos);
         [branch]if(_GeometryPixelizationSpace==2) o.pos.xyz = Pixelization(o.pos.xyz, scale);
     }else{
-        o.alpha = 1.0;
+        o.color.w = 1.0;
         float4x4 Billboard_Matrix_M = {
             1.0,0.0,0.0,0.0,
             0.0,1.0,0.0,0.0,
@@ -36,20 +37,16 @@ v2f vert (appdata v){
         [branch]if(_GeometryPixelizationSpace==2) o.pos.xyz = Pixelization(o.pos.xyz, scale);
     }
 
-    NOISE_SPACE_POS_MACRO(o.fragment_pos,_FragmentNoiseSpace,_FragmentNoiseOffsetBeforeScale,_FragmentNoiseOffset0,_FragmentNoiseOffset1,_FragmentNoiseScale0,_FragmentNoiseScale1);
-    NOISE_SPACE_POS_MACRO(o.coloring_pos,_ColoringNoiseSpace,_ColoringNoiseOffsetBeforeScale,_ColoringNoiseOffset0,_ColoringNoiseOffset1,_ColoringNoiseScale0,_ColoringNoiseScale1);
-    NOISE_SPACE_POS_MACRO(o.geometry_pos,_GeometryNoiseSpace,_GeometryNoiseOffsetBeforeScale,_GeometryNoiseOffset0,_GeometryNoiseOffset1,_GeometryNoiseScale0,_GeometryNoiseScale1);
-    NOISE_SPACE_POS_MACRO(o.orbit_pos,_OrbitNoiseSpace,_OrbitNoiseOffsetBeforeScale,_OrbitNoiseOffset0,_OrbitNoiseOffset1,_OrbitNoiseScale0,_OrbitNoiseScale1);
-    NOISE_SPACE_POS_MACRO(o.orbit_rotation_pos,_OrbitRotationNoiseSpace,_OrbitRotationNoiseOffsetBeforeScale,_OrbitRotationNoiseOffset0,_OrbitRotationNoiseOffset1,_OrbitRotationNoiseScale0,_OrbitRotationNoiseScale1);
-    o.world_pos = o.pos;
-    o.origin_pos = unity_ObjectToWorld._m03_m13_m23;
+    NOISE_SPACE_POS_MACRO(o.fragment_pos.xyz,_FragmentNoiseSpace,_FragmentNoiseOffsetBeforeScale,_FragmentNoiseOffset0,_FragmentNoiseOffset1,_FragmentNoiseScale0,_FragmentNoiseScale1);
+    NOISE_SPACE_POS_MACRO(o.coloring_pos.xyz,_ColoringNoiseSpace,_ColoringNoiseOffsetBeforeScale,_ColoringNoiseOffset0,_ColoringNoiseOffset1,_ColoringNoiseScale0,_ColoringNoiseScale1);
+    NOISE_SPACE_POS_MACRO(o.geometry_pos.xyz,_GeometryNoiseSpace,_GeometryNoiseOffsetBeforeScale,_GeometryNoiseOffset0,_GeometryNoiseOffset1,_GeometryNoiseScale0,_GeometryNoiseScale1);
+    NOISE_SPACE_POS_MACRO(o.orbit_pos.xyz,_OrbitNoiseSpace,_OrbitNoiseOffsetBeforeScale,_OrbitNoiseOffset0,_OrbitNoiseOffset1,_OrbitNoiseScale0,_OrbitNoiseScale1);
+    NOISE_SPACE_POS_MACRO(o.orbit_rotation_pos.xyz,_OrbitRotationNoiseSpace,_OrbitRotationNoiseOffsetBeforeScale,_OrbitRotationNoiseOffset0,_OrbitRotationNoiseOffset1,_OrbitRotationNoiseScale0,_OrbitRotationNoiseScale1);
     o.world_normal = UnityObjectToWorldNormal(v.normal);
 
     o.matrix_v_0 = Stereo_Merge_Matrix_V._m00_m01_m02_m03;
     o.matrix_v_1 = Stereo_Merge_Matrix_V._m10_m11_m12_m13;
     o.matrix_v_2 = Stereo_Merge_Matrix_V._m20_m21_m22_m23;
-
-    o.vertex_color = v.color;
 
     return o;
 }

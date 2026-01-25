@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramManager;
 
 namespace DeltaField.Shaders.MeshHologram.Editor {
     public partial class MeshHologramInspector : ShaderGUI
@@ -28,6 +29,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
             MainLabels = new GUIContent[4]{new GUIContent(),new GUIContent(),new GUIContent(),new GUIContent()},
             SubLabels = new GUIContent[4]{new GUIContent(),new GUIContent(),new GUIContent(),new GUIContent()},
             OrbitLabels = new GUIContent[4]{new GUIContent(),new GUIContent(),new GUIContent(),new GUIContent()};
+        private static string[] MainCatsName = new string[5]{"_FRAGMENT","_COLORING","_GEOMETRY","_ORBIT","_ORBITROTATION"};
+
         private static GUILayoutOption MainGUIOption = GUILayout.MinHeight(240);
         private static LANG lang;
 
@@ -36,6 +39,13 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
 
         private PreviewGraph PreviewGraph0;
         private bool InspectorInitialize = false;
+
+        private MeshHologramToggleState DirectionalLightInfluenceState = new MeshHologramToggleState("_DIRECTIONALLIGHT_INFLUENCE_ENABLE","test");
+        private MeshHologramToggleState AmbientInfluenceState = new MeshHologramToggleState("_AMBIENT_INFLUENCE_ENABLE","test");
+        private STEREO_MERGE_MODE[] StereoMergeMode = new STEREO_MERGE_MODE[2];
+        private int[] NoiseLiteMode = new int[5], _NoiseLiteMode = new int[5];
+        private bool[] ResetNoiseLiteMap = new bool[5];
+        private int? ChangeNoiseLiteMode = null;
     }
 }
 #endif

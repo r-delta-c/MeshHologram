@@ -50,22 +50,16 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
             using (new EditorGUILayout.VerticalScope("HelpBox"))
             {
-                DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._DIRECTIONAL_LIGHT_INFLUENCE_ENABLE);
-                if (GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._DIRECTIONAL_LIGHT_INFLUENCE_ENABLE) == 1)
-                {
-                    DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._DIRECTIONAL_LIGHT_INFLUENCE);
-                }
+                DrawKeywordToggle(ref DirectionalLightInfluenceState,true);
+                if (DirectionalLightInfluenceState._value) DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._DIRECTIONAL_LIGHT_INFLUENCE);
             }
 
             using (new EditorGUILayout.VerticalScope("HelpBox"))
             {
-                DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._AMBIENT_INFLUENCE_ENABLE);
+                DrawKeywordToggle(ref AmbientInfluenceState,true);
                 using (new EditorGUI.DisabledGroupScope(Convert.ToBoolean(GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._LIGHTVOLUMES_INFLUENCE_ENABLE))))
                 {
-                    if (GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._AMBIENT_INFLUENCE_ENABLE) == 1)
-                    {
-                        DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._AMBIENT_INFLUENCE);
-                    }
+                    if (AmbientInfluenceState._value) DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._AMBIENT_INFLUENCE);
                 }
             }
 
@@ -172,45 +166,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             DrawHeaderButtonCommons();
             SubIndex = GUILayout.Toolbar(SubIndex, SubLabels);
             DrawHeaderButtonCommon();
-            DrawSubMenu(
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_SOURCE,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_FIXED_VALUE,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_NOISE_OFFSET0,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_NOISE_SCALE0,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_NOISE_OFFSET1,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_NOISE_SCALE1,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_NOISE_OFFSET_BEFORE_SCALE,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_NOISE_SPACE,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_NOISE_SEED,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_NOISE_TIME_SPEED,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_NOISE_TIME_PHASE,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_NOISE_VALUE_SCALE,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_SOURCE,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_VU_BAND,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_VU_SMOOTHING,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_VU_PANNING,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_VU_STRENGTH,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_CHRONO_TENSITY_BAND,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_CHRONO_TENSITY_MODE,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_SPECTRUM_STRENGTH,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_SPECTRUM_MIRROR,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_MASK_CONTROL_TEX,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_MASK_CONTROL_TEX_ST,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_MASK_CONTROL,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_OFFSET_CONTROL_TEX,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_OFFSET_CONTROL_TEX_ST,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_OFFSET_CONTROL,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_MASK_CONTROL_TEX,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_MASK_CONTROL_TEX_ST,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_AUDIOLINK_MASK_CONTROL,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_PHASE_SCALE,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_LOOP_MODE,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_MID_MUL,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_MID_ADD,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_EASE_MODE,
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_EASE_CURVE
-            );
+            DrawSubMenu(FragmentCommonPropIDs);
         }
 
         private void DrawColor()
@@ -268,45 +224,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             DrawHeaderButtonCommons();
             SubIndex = GUILayout.Toolbar(SubIndex, SubLabels);
             DrawHeaderButtonCommon();
-            DrawSubMenu(
-                MESHHOLOGRAM_PROP_ENUM._COLORING_SOURCE,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_FIXED_VALUE,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_NOISE_OFFSET0,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_NOISE_SCALE0,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_NOISE_OFFSET1,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_NOISE_SCALE1,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_NOISE_OFFSET_BEFORE_SCALE,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_NOISE_SPACE,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_NOISE_SEED,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_NOISE_TIME_SPEED,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_NOISE_TIME_PHASE,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_NOISE_VALUE_SCALE,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_SOURCE,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_VU_BAND,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_VU_SMOOTHING,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_VU_PANNING,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_VU_STRENGTH,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_CHRONO_TENSITY_BAND,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_CHRONO_TENSITY_MODE,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_SPECTRUM_STRENGTH,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_SPECTRUM_MIRROR,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_MASK_CONTROL_TEX,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_MASK_CONTROL_TEX_ST,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_MASK_CONTROL,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_OFFSET_CONTROL_TEX,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_OFFSET_CONTROL_TEX_ST,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_OFFSET_CONTROL,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_MASK_CONTROL_TEX,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_MASK_CONTROL_TEX_ST,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_AUDIOLINK_MASK_CONTROL,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_PHASE_SCALE,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_LOOP_MODE,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_MID_MUL,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_MID_ADD,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_EASE_MODE,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_EASE_CURVE
-            );
+            DrawSubMenu(ColorCommonPropIDs);
         }
 
         private void DrawGeometry()
@@ -350,45 +268,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             DrawHeaderButtonCommons();
             SubIndex = GUILayout.Toolbar(SubIndex, SubLabels);
             DrawHeaderButtonCommon();
-            DrawSubMenu(
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_SOURCE,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_FIXED_VALUE,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_NOISE_OFFSET0,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_NOISE_SCALE0,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_NOISE_OFFSET1,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_NOISE_SCALE1,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_NOISE_OFFSET_BEFORE_SCALE,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_NOISE_SPACE,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_NOISE_SEED,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_NOISE_TIME_SPEED,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_NOISE_TIME_PHASE,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_NOISE_VALUE_SCALE,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_SOURCE,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_VU_BAND,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_VU_SMOOTHING,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_VU_PANNING,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_VU_STRENGTH,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_CHRONO_TENSITY_BAND,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_CHRONO_TENSITY_MODE,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_SPECTRUM_STRENGTH,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_SPECTRUM_MIRROR,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_MASK_CONTROL_TEX,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_MASK_CONTROL_TEX_ST,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_MASK_CONTROL,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_OFFSET_CONTROL_TEX,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_OFFSET_CONTROL_TEX_ST,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_OFFSET_CONTROL,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_MASK_CONTROL_TEX,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_MASK_CONTROL_TEX_ST,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_AUDIOLINK_MASK_CONTROL,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_PHASE_SCALE,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_LOOP_MODE,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_MID_MUL,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_MID_ADD,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_EASE_MODE,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_EASE_CURVE
-            );
+            DrawSubMenu(GeometryCommonPropIDs);
         }
 
         private void DrawMainOrbit()
@@ -468,18 +348,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                                 DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_FIXED_VALUE);
                                 break;
                             case 1:
-                                DrawNoiseProps(
-                                    MESHHOLOGRAM_PROP_ENUM._ORBIT_NOISE_OFFSET0,
-                                    MESHHOLOGRAM_PROP_ENUM._ORBIT_NOISE_SCALE0,
-                                    MESHHOLOGRAM_PROP_ENUM._ORBIT_NOISE_OFFSET1,
-                                    MESHHOLOGRAM_PROP_ENUM._ORBIT_NOISE_SCALE1,
-                                    MESHHOLOGRAM_PROP_ENUM._ORBIT_NOISE_OFFSET_BEFORE_SCALE,
-                                    MESHHOLOGRAM_PROP_ENUM._ORBIT_NOISE_SPACE,
-                                    MESHHOLOGRAM_PROP_ENUM._ORBIT_NOISE_SEED,
-                                    MESHHOLOGRAM_PROP_ENUM._ORBIT_NOISE_TIME_SPEED,
-                                    MESHHOLOGRAM_PROP_ENUM._ORBIT_NOISE_TIME_PHASE,
-                                    MESHHOLOGRAM_PROP_ENUM._ORBIT_NOISE_VALUE_SCALE
-                                );
+                                DrawNoiseProps(OrbitCommonPropIDs.category,OrbitCommonPropIDs.source);
                                 break;
                             case 2:
                                 DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_SEED);
@@ -490,41 +359,29 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                         }
                         break;
                     case 1:
-                        DrawAudioLinkSource(
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_AUDIOLINK_SOURCE,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_AUDIOLINK_VU_BAND,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_AUDIOLINK_VU_SMOOTHING,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_AUDIOLINK_VU_PANNING,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_AUDIOLINK_VU_STRENGTH,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_AUDIOLINK_CHRONO_TENSITY_BAND,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_AUDIOLINK_CHRONO_TENSITY_MODE,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_AUDIOLINK_CHRONO_TENSITY_STRENGTH,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_AUDIOLINK_SPECTRUM_STRENGTH,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_AUDIOLINK_SPECTRUM_MIRROR
-                        );
+                        DrawAudioLinkSource(OrbitCommonPropIDs.audiolink);
                         break;
                     case 2:
                         DrawMaskOffsetTex(
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_MASK_CONTROL_TEX,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_MASK_CONTROL_TEX_ST,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_MASK_CONTROL,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_OFFSET_CONTROL_TEX,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_OFFSET_CONTROL_TEX_ST,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_OFFSET_CONTROL,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_AUDIOLINK_MASK_CONTROL_TEX,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_AUDIOLINK_MASK_CONTROL_TEX_ST,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_AUDIOLINK_MASK_CONTROL
+                            OrbitCommonPropIDs.mask_offset.mask_tex,
+                            OrbitCommonPropIDs.mask_offset.mask_st,
+                            OrbitCommonPropIDs.mask_offset.mask_strength
+                        );
+                        DrawPartitionLine(4);
+                        DrawMaskOffsetTex(
+                            OrbitCommonPropIDs.mask_offset.offset_tex,
+                            OrbitCommonPropIDs.mask_offset.offset_st,
+                            OrbitCommonPropIDs.mask_offset.offset_strength
+                        );
+                        DrawPartitionLine(4);
+                        DrawMaskOffsetTex(
+                            OrbitCommonPropIDs.mask_offset.audiolink_mask_tex,
+                            OrbitCommonPropIDs.mask_offset.audiolink_mask_st,
+                            OrbitCommonPropIDs.mask_offset.audiolink_mask_strength
                         );
                         break;
                     case 3:
-                        DrawModifiers(
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_PHASE_SCALE,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_LOOP_MODE,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_MID_MUL,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_MID_ADD,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_EASE_MODE,
-                            MESHHOLOGRAM_PROP_ENUM._ORBIT_EASE_CURVE
-                        );
+                        DrawModifiers(OrbitCommonPropIDs.modifier);
                         break;
                     default:
                         break;
@@ -549,7 +406,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_FIXED_VALUE);
                             break;
                         case 1:
-                            DrawOrbitRotationNoise();
+                            DrawNoiseProps(MAIN_CATEGORY.ORBIT_ROTATION, OrbitRotationCommonPropIDs.source);
                             break;
                         case 2:
                             DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_SEED);
@@ -562,11 +419,14 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     DrawMaskOffsetTex(
                         MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_MASK_CONTROL_TEX,
                         MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_MASK_CONTROL_TEX_ST,
-                        MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_MASK_CONTROL,
+                        MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_MASK_CONTROL
+                    );
+                    DrawMaskOffsetTex(
                         MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_CONTROL_TEX,
                         MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_CONTROL_TEX_ST,
                         MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_OFFSET_CONTROL
                     );
+
                     break;
                 default:
                     break;
@@ -685,6 +545,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             }
             EditorGUILayout.Space(16);
             RichTitle.DrawTitleSkinPopup();
+            EditorGUILayout.Space(32);
+            DrawNoiseLiteModeGroupButtons();
         }
 
         private void DrawEasterEgg()

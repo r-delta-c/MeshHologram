@@ -103,7 +103,7 @@ Material:
     - _AlphaToMaskMemory: 0
     - _AmbientInfluence: 1
     - _AmbientInfluenceEnable: 0
-    - _AntiAliasingEnable: 1
+    - _AntiAliasingEnable: 0
     - _AudioLinkEnable: 0
     - _AudioLinkThemeColorBand: 0
     - _BillboardEnable: 0
@@ -180,7 +180,7 @@ Material:
     - _FragmentNoiseTimePhase: 0
     - _FragmentNoiseTimeSpeed: 6
     - _FragmentNoiseValueScale: 2
-    - _FragmentPartitionMode: 0
+    - _FragmentPartitionMode: 1
     - _FragmentPhaseScale: 1
     - _FragmentSource: 0
     - _FragmentTriangleCompression: 5
