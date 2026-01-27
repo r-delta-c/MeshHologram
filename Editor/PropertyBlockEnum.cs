@@ -24,11 +24,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     MESHHOLOGRAM_PROP_ENUM._STEREO_MERGE_MODE,
                     MESHHOLOGRAM_PROP_ENUM._FWIDTH_ENABLE,
 
-                    MESHHOLOGRAM_PROP_ENUM._DIRECTIONAL_LIGHT_INFLUENCE_ENABLE,
                     MESHHOLOGRAM_PROP_ENUM._DIRECTIONAL_LIGHT_INFLUENCE,
-                    MESHHOLOGRAM_PROP_ENUM._AMBIENT_INFLUENCE_ENABLE,
                     MESHHOLOGRAM_PROP_ENUM._AMBIENT_INFLUENCE,
-                    MESHHOLOGRAM_PROP_ENUM._LIGHTVOLUMES_INFLUENCE_ENABLE,
                     MESHHOLOGRAM_PROP_ENUM._LIGHTVOLUMES_INFLUENCE,
                     MESHHOLOGRAM_PROP_ENUM._PREVIEW_ENABLE,
                     MESHHOLOGRAM_PROP_ENUM._ANTI_ALIASING_ENABLE,
@@ -63,7 +60,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             )},
             {PROPERTY_BLOCK.AUDIOLINK,new PropertyBlock("AudioLink",
                 new MESHHOLOGRAM_PROP_ENUM[]{
-                    MESHHOLOGRAM_PROP_ENUM._AUDIOLINK_ENABLE,
                     MESHHOLOGRAM_PROP_ENUM._AUDIOLINK_THEME_COLOR_BAND,
                 }
             )},

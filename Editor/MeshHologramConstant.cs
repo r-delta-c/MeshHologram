@@ -26,9 +26,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             }
         }
 
-        public static readonly string EnableDirectionalLightInfluence = "_DIRECTIONALLIGHT_INFLUENCE_ENABLE";
-        public static readonly string EnableAmbientInfluence = "_AMBIENT_INFLUENCE_ENABLE";
-
         public static readonly MeshHologramCommonProps FragmentCommonPropIDs = new MeshHologramCommonProps(
             MAIN_CATEGORY.FRAGMENT,
             new MeshHologramSourceProps(

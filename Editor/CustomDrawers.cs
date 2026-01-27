@@ -327,10 +327,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
     public class DFToggle : MaterialPropertyDrawer
     {
         bool toggle_left_side;
-        string keyword;
-        public DFToggle(string keyword, float b = 0)
+        public DFToggle(float b = 0)
         {
-            this.keyword = keyword;
             this.toggle_left_side = b != 0;
         }
         public override float GetPropertyHeight(MaterialProperty mp, string prop, MaterialEditor editor) => 0;
@@ -341,32 +339,10 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             {
                 bool value = mp.floatValue != 0.0f;
                 EditorGUI.showMixedValue = mp.hasMixedValue;
-                if (toggle_left_side)
-                {
-                    value = EditorGUILayout.ToggleLeft(text, value);
-                }
-                else
-                {
-                    value = EditorGUILayout.Toggle(text, value);
-                }
+                if (toggle_left_side) value = EditorGUILayout.ToggleLeft(text, value);
+                else value = EditorGUILayout.Toggle(text, value);
                 EditorGUI.showMixedValue = false;
-                // if (changeCheckScope.changed)
-                // {
-                //     mp.floatValue = value ? 1.0f : 0.0f;
-                //     if (keyword == "") return;
-                //     editor.RegisterPropertyChangeUndo("Refresh Material Keyword");
-                //     foreach (Material material in editor.targets)
-                //     {
-                //         if (value)
-                //         {
-                //             material.EnableKeyword(keyword);
-                //         }
-                //         else
-                //         {
-                //             material.DisableKeyword(keyword);
-                //         }
-                //     }
-                // }
+                if (changeCheckScope.changed) mp.floatValue = value ? 1.0f : 0.0f;
             }
         }
     }

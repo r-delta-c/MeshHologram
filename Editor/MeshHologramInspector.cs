@@ -40,8 +40,14 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
         private PreviewGraph PreviewGraph0;
         private bool InspectorInitialize = false;
 
-        private MeshHologramToggleState DirectionalLightInfluenceState = new MeshHologramToggleState("_DIRECTIONALLIGHT_INFLUENCE_ENABLE","test");
-        private MeshHologramToggleState AmbientInfluenceState = new MeshHologramToggleState("_AMBIENT_INFLUENCE_ENABLE","test");
+        private MeshHologramToggleState EnableDirectionalLightInfluenceState = 
+            new MeshHologramToggleState("_DIRECTIONALLIGHT_INFLUENCE_ENABLE","test");
+        private MeshHologramToggleState EnableAmbientInfluenceState = 
+            new MeshHologramToggleState("_AMBIENT_INFLUENCE_ENABLE","test");
+        private MeshHologramToggleState EnableAudioLinkState = 
+            new MeshHologramToggleState("_AUDIOLINK_ENABLE","test");
+        private MeshHologramToggleState EnableLightVolumesState = 
+            new MeshHologramToggleState("_LIGHTVOLUMES_ENABLE","test");
         private STEREO_MERGE_MODE[] StereoMergeMode = new STEREO_MERGE_MODE[2];
         private int[] NoiseLiteMode = new int[5], _NoiseLiteMode = new int[5];
         private bool[] ResetNoiseLiteMap = new bool[5];

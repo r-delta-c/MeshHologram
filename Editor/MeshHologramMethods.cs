@@ -94,10 +94,11 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
         private void DrawKeywordToggle(ref MeshHologramToggleState state, bool isLeft = false)
         {
+            string label = LocalizationManager.GetLocalizeText(state.label);
             EditorGUI.showMixedValue = state.hasMixedValue;
             EditorGUI.BeginChangeCheck();
-            if (isLeft) EditorGUILayout.ToggleLeft("test",state._value);
-            else EditorGUILayout.Toggle("test",state._value);
+            if (isLeft) EditorGUILayout.ToggleLeft(label,state._value);
+            else EditorGUILayout.Toggle(label,state._value);
             if(EditorGUI.EndChangeCheck()) state.Toggle(state._value); 
             EditorGUI.showMixedValue = false;
         }

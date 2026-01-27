@@ -50,26 +50,23 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
             using (new EditorGUILayout.VerticalScope("HelpBox"))
             {
-                DrawKeywordToggle(ref DirectionalLightInfluenceState,true);
-                if (DirectionalLightInfluenceState._value) DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._DIRECTIONAL_LIGHT_INFLUENCE);
+                DrawKeywordToggle(ref EnableDirectionalLightInfluenceState,true);
+                if (EnableDirectionalLightInfluenceState._value) DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._DIRECTIONAL_LIGHT_INFLUENCE);
             }
 
             using (new EditorGUILayout.VerticalScope("HelpBox"))
             {
-                DrawKeywordToggle(ref AmbientInfluenceState,true);
-                using (new EditorGUI.DisabledGroupScope(Convert.ToBoolean(GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._LIGHTVOLUMES_INFLUENCE_ENABLE))))
+                DrawKeywordToggle(ref EnableAmbientInfluenceState,true);
+                using (new EditorGUI.DisabledGroupScope(EnableLightVolumesState._value))
                 {
-                    if (AmbientInfluenceState._value) DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._AMBIENT_INFLUENCE);
+                    if (EnableAmbientInfluenceState._value) DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._AMBIENT_INFLUENCE);
                 }
             }
 
             using (new EditorGUILayout.VerticalScope("HelpBox"))
             {
-                DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._LIGHTVOLUMES_INFLUENCE_ENABLE);
-                if (GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._LIGHTVOLUMES_INFLUENCE_ENABLE) == 1)
-                {
-                    DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._LIGHTVOLUMES_INFLUENCE);
-                }
+                DrawKeywordToggle(ref EnableLightVolumesState,true);
+                if (EnableLightVolumesState._value) DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._LIGHTVOLUMES_INFLUENCE);
             }
 
             EditorGUILayout.Space(16);
@@ -134,11 +131,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
         private void DrawAudioLink()
         {
-            DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._AUDIOLINK_ENABLE);
-            if (GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._AUDIOLINK_ENABLE) == 1)
-            {
-                DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._AUDIOLINK_THEME_COLOR_BAND);
-            }
+            DrawKeywordToggle(ref EnableAudioLinkState);
+            if (EnableAudioLinkState._value) DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._AUDIOLINK_THEME_COLOR_BAND);
         }
 
         private void DrawFragment()

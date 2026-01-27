@@ -19,11 +19,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         [MeshHologramPropMeta("_StereoMergeMode")] _STEREO_MERGE_MODE,
         [MeshHologramPropMeta("_FwidthEnable")] _FWIDTH_ENABLE,
 
-        [MeshHologramPropMeta("_DirectionalLightInfluenceEnable")] _DIRECTIONAL_LIGHT_INFLUENCE_ENABLE,
         [MeshHologramPropMeta("_DirectionalLightInfluence")] _DIRECTIONAL_LIGHT_INFLUENCE,
-        [MeshHologramPropMeta("_AmbientInfluenceEnable")] _AMBIENT_INFLUENCE_ENABLE,
         [MeshHologramPropMeta("_AmbientInfluence")] _AMBIENT_INFLUENCE,
-        [MeshHologramPropMeta("_LightVolumesInfluenceEnable")] _LIGHTVOLUMES_INFLUENCE_ENABLE,
         [MeshHologramPropMeta("_LightVolumesInfluence")] _LIGHTVOLUMES_INFLUENCE,
         [MeshHologramPropMeta("_PreviewEnable")] _PREVIEW_ENABLE,
         [MeshHologramPropMeta("_AntiAliasingEnable")] _ANTI_ALIASING_ENABLE,
@@ -53,7 +50,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         [MeshHologramPropMeta("_StencilFail")] _STENCIL_FAIL,
         [MeshHologramPropMeta("_StencilZFail")] _STENCIL_Z_FAIL,
 
-        [MeshHologramPropMeta("_AudioLinkEnable")] _AUDIOLINK_ENABLE,
         [MeshHologramPropMeta("_AudioLinkThemeColorBand")] _AUDIOLINK_THEME_COLOR_BAND,
 
 
