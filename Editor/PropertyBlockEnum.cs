@@ -38,6 +38,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     MESHHOLOGRAM_PROP_ENUM._OFFSET_FACTOR,
                     MESHHOLOGRAM_PROP_ENUM._OFFSET_UNITS,
                     MESHHOLOGRAM_PROP_ENUM._ALPHA_TO_MASK,
+                    MESHHOLOGRAM_PROP_ENUM._ALPHA_TO_MASK_MEMORY,
 
                     MESHHOLOGRAM_PROP_ENUM._BLEND_OP,
                     MESHHOLOGRAM_PROP_ENUM._SRC_BLEND,
@@ -73,6 +74,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     MESHHOLOGRAM_PROP_ENUM._FRAGMENT_LINE_SCALE,
                     MESHHOLOGRAM_PROP_ENUM._FRAGMENT_LINE_ANIMATION_MODE,
                     MESHHOLOGRAM_PROP_ENUM._FRAGMENT_PARTITION_MODE,
+                    MESHHOLOGRAM_PROP_ENUM._FRAGMENT_EDGE_BLEND_WIDTH,
                 },
                 new MESHHOLOGRAM_PROP_ENUM[]
                 {
@@ -129,6 +131,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     MESHHOLOGRAM_PROP_ENUM._COLOR_SOURCE,
                     MESHHOLOGRAM_PROP_ENUM._COLOR_GRADIENT_TEX,
                     MESHHOLOGRAM_PROP_ENUM._COLORING_PARTITION_MODE,
+                    MESHHOLOGRAM_PROP_ENUM._COLORING_EDGE_BLEND_WIDTH,
                     MESHHOLOGRAM_PROP_ENUM._AUDIOLINK_THEME_COLOR_BAND,
                 },
                 new MESHHOLOGRAM_PROP_ENUM[]

@@ -13,7 +13,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
     public static class RichTitle
     {
         private static TITLE_SKINS title_skin;
-        public static TITLE_SKINS current_title_skin;
         private static Texture2D bomb = InitBomb();
         private static int[] CharTimeLimit = new int[13];
 
@@ -25,8 +24,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
         private static void Init()
         {
-            title_skin = ConfigManager.title_skin;
-            current_title_skin = ConfigManager.title_skin;
+            title_skin = (TITLE_SKINS)ConfigManager.GetState(CONFIG.TITLE_SKIN);
             bomb = InitBomb();
         }
 
@@ -44,7 +42,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
         public static void DrawTitle()
         {
-            switch (ConfigManager.title_skin)
+            switch (title_skin)
             {
                 default:
                     SkinNORMAL();
@@ -63,12 +61,11 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
         public static void DrawTitleSkinPopup()
         {
+            TITLE_SKINS current_title_skin = (TITLE_SKINS)ConfigManager.GetState(CONFIG.TITLE_SKIN);
             title_skin = (TITLE_SKINS)EditorGUILayout.EnumPopup(LocalizationManager.GetLocalizeText("label.title_skin"), current_title_skin, new GUIStyle("miniPullDown"));
-            if (title_skin != current_title_skin)
+            if (current_title_skin!=title_skin)
             {
-                current_title_skin = title_skin;
-                ConfigManager.title_skin = current_title_skin;
-                ConfigManager.SaveConfig();
+                ConfigManager.SetTitleSkinState(title_skin);
                 ResetTimeLimit();
             }
         }

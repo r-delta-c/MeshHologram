@@ -75,6 +75,7 @@ _FragmentEaseCurve||Ease Curve||イージングカーブ
 _FragmentMidMul||Mid Mul||中間乗算
 _FragmentMidAdd||Mid Add||中間加算
 _FragmentPartitionMode||Partition||区切り
+_FragmentEdgeBlendWidth||Fragment Edge Blend Width||辺の区切りのブレンド幅
 
 _Color0||Primary Color||プライマリーカラー
 _Color1||Secondary Color||セカンダリーカラー
@@ -103,6 +104,7 @@ _ColoringEaseCurve||Ease Curve||イージングカーブ
 _ColoringMidMul||Mid Mul||中間乗算
 _ColoringMidAdd||Mid Add||中間加算
 _ColoringPartitionMode||Coloring Partition Mode||着色の区切り
+_ColoringEdgeBlendWidth||Coloring Edge Blend Width||辺の区切りのブレンド幅
 
 _GeometrySource||Geometry Source||ジオメトリの参照先
 _GeometryFixedValue||Fixed Value||固定値

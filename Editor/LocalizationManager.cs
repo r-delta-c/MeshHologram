@@ -12,7 +12,6 @@ namespace DeltaField.Shaders.MeshHologram.Editor
     public static class LocalizationManager
     {
         private static LANG lang;
-        public static LANG current_lang;
         private static Dictionary<string, string[]> PropLocalizeDic;
 
         static LocalizationManager()
@@ -23,20 +22,18 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
         private static void Init()
         {
-            lang = ConfigManager.lang;
-            current_lang = ConfigManager.lang;
+            lang = (LANG)ConfigManager.GetState(CONFIG.LANGUAGE);
             PropLocalizeDic = LoadLangFiles();
         }
 
         public static bool DrawLanguageEnumPopup()
         {
-            lang = (LANG)EditorGUILayout.EnumPopup(GetLocalizeText("label.language"), ConfigManager.lang, new GUIStyle("miniPullDown"));
-            if (lang != current_lang)
+            LANG config_lang = (LANG)ConfigManager.GetState(CONFIG.LANGUAGE);
+            lang = (LANG)EditorGUILayout.EnumPopup(GetLocalizeText("label.language"), config_lang, new GUIStyle("miniPullDown"));
+            if (config_lang != lang)
             {
                 PropLocalizeDic = LoadLangFiles();
-                current_lang = lang;
-                ConfigManager.lang = lang;
-                ConfigManager.SaveConfig();
+                ConfigManager.SetLanguageState(lang);
                 return true;
             }
             else return false;

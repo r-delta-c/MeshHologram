@@ -25,19 +25,34 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             {
                 float value = mp.floatValue;
                 EditorGUI.showMixedValue = mp.hasMixedValue;
-                switch (mp.type)
-                {
-                    case MaterialProperty.PropType.Float:
-                        value = EditorGUILayout.FloatField(text, value);
-                        break;
-                    case MaterialProperty.PropType.Range:
-                        ShaderPropertyState state = GetStringToPropertyState(prop);
-                        if (is_int) value = EditorGUILayout.IntSlider(text, (int)value, (int)state.minValue, (int)state.maxValue);
-                        else value = EditorGUILayout.Slider(text, value, state.minValue, state.maxValue);
-                        break;
-                    default:
-                        break;
-                }
+                value = EditorGUILayout.FloatField(text, value);
+                EditorGUI.showMixedValue = false;
+                if (changeCheckScope.changed) mp.floatValue = value;
+            }
+        }
+    }
+
+    public class DFRange : MaterialPropertyDrawer
+    {
+        private bool is_int;
+        private float min;
+        private float max;
+        public DFRange(float min, float max, float is_int, float min_minus, float max_minus)
+        {
+            this.min = min_minus==0?min:-min;
+            this.max = max_minus==0?max:-max;
+            this.is_int = is_int == 1;
+        }
+        public override float GetPropertyHeight(MaterialProperty mp, string prop, MaterialEditor editor) => 0;
+        public override void OnGUI(Rect rect, MaterialProperty mp, string prop, MaterialEditor editor)
+        {
+            string text = LocalizationManager.GetLocalizeTexts(prop)[0];
+            using (var changeCheckScope = new EditorGUI.ChangeCheckScope())
+            {
+                float value = mp.floatValue;
+                EditorGUI.showMixedValue = mp.hasMixedValue;
+                if (is_int) value = EditorGUILayout.IntSlider(text, (int)value, (int)min, (int)max);
+                else value = EditorGUILayout.Slider(text, value, min, max);
                 EditorGUI.showMixedValue = false;
                 if (changeCheckScope.changed) mp.floatValue = value;
             }
@@ -161,12 +176,19 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
     public class DFTextureStrength : MaterialPropertyDrawer
     {
+        private float min;
+        private float max;
+        public DFTextureStrength()
+        {
+            this.min = 0.0f;
+            this.max = 1.0f;
+        }
+
         public override float GetPropertyHeight(MaterialProperty mp, string prop, MaterialEditor editor) => 0;
         public override void OnGUI(Rect rect, MaterialProperty mp, string prop, MaterialEditor editor)
         {
             string text = LocalizationManager.GetLocalizeTexts(prop)[0];
             float value;
-            ShaderPropertyState state = GetStringToPropertyState(prop);
 
             float line_height = EditorGUIUtility.singleLineHeight + 2.0f;
             rect.height = EditorGUIUtility.singleLineHeight;
@@ -184,7 +206,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             {
                 EditorGUI.showMixedValue = mp.hasMixedValue;
                 EditorGUI.LabelField(label_rect, text);
-                value = EditorGUI.Slider(slider_rect, mp.floatValue, state.minValue, state.maxValue);
+                value = EditorGUI.Slider(slider_rect, mp.floatValue, min, max);
                 EditorGUI.showMixedValue = false;
 
                 if (changeCheckScope.changed) mp.floatValue = value;

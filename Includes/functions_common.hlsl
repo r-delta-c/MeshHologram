@@ -34,14 +34,14 @@ float Inverse12(float x, float r){
 float Texture3PosNoise(float3 p, Texture2D tex, float4 st){
     p.xy += p.z;
     p.xy = p.xy*st.xy+st.zw;
-    return UNITY_SAMPLE_TEX2D_SAMPLER_LOD(tex, _linear_repeat, p.xy, 0.0);
+    return tex.SampleLevel(_linear_repeat, p.xy, 0.0).r;
 }
 
 float Texture3BlendNoise(float3 p, Texture2D tex, float4 st){
     p.xy = p.xy*st.xy+st.zw;
-    float r0 = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColoringLiteNoiseMap, _linear_repeat, p.xy, 0.0);
-    float r1 = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColoringLiteNoiseMap, _linear_repeat, p.yz, 0.0);
-    float r2 = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColoringLiteNoiseMap, _linear_repeat, p.zx, 0.0);
+    float r0 = _ColoringLiteNoiseMap.SampleLevel(_linear_repeat, p.xy, 0.0).r;
+    float r1 = _ColoringLiteNoiseMap.SampleLevel(_linear_repeat, p.yz, 0.0).g;
+    float r2 = _ColoringLiteNoiseMap.SampleLevel(_linear_repeat, p.zx, 0.0).b;
     float2 t = min(1.0,float2(
         (r0-1.0)*(r0-1.0),
         (r1-1.0)*(r1-1.0)
@@ -49,7 +49,7 @@ float Texture3BlendNoise(float3 p, Texture2D tex, float4 st){
     return lerp(r0,lerp(r1,r2,(t.y)),(t.x));
 }
 
-float EdgeCenterPos(float n0, float n1, float n, float2 c){
+float EdgeCenterPos(float n0, float n1, float n, float c){
     return (n0+n1+VertexCenterBias(n0,n1,n,c,saturate(_FragmentTriangleCompression/26.0)*0.5+0.5))/3.0;
 }
 

@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramManager;
@@ -9,6 +10,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
     {
         public static string resolve_path { get; private set; }
         public static UnityEditor.PackageManager.PackageInfo packageInfo { get; private set; }
+        public static string shader_base_path { get; private set; }
+        public static string shader_keyword_path { get; private set; }
 
         [InitializeOnLoadMethod]
         private static void WaitForPackage()
@@ -22,6 +25,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             if (packageInfo != null)
             {
                 resolve_path = packageInfo.resolvedPath.Replace("\\","/");
+                shader_base_path = resolve_path+"/Editor/temp/base.dfshader";
+                shader_keyword_path = resolve_path+"/Editor/temp/keywords.dfshader";
                 EditorApplication.update -= CheckPackageInfo;
             }
         }
@@ -290,6 +295,63 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 MESHHOLOGRAM_PROP_ENUM._DUMMY
             )
         );
+
+        public const string built_in_temp = 
+            "Shader \"DeltaField/shaders/write_test\"{ \n"+
+            "   Properties{}\n"+
+            "   SubShader{\n"+
+            "       Pass{\n"+
+            "           Name \"Built-in\"\n"+
+            "           Tags{ \"RenderType\"=\"Opaque\" \"Queue\"=\"Geometry\"}\n"+
+            "           Cull [_Cull]\n"+
+            "           ZWrite On\n"+
+            "           HLSLPROGRAM\n"+
+            "           #pragma vertex vert\n"+
+            "           #pragma fragment frag\n"+
+            "           #include \"UnityCG.cginc\"\n"+
+            "           struct appdata{float4 vertex : POSITION;};\n"+
+            "           struct v2f{float4 vertex : SV_POSITION;};\n"+
+            "           v2f vert (appdata v){\n"+
+            "               v2f o;\n"+
+            "               o.vertex = UnityObjectToClipPos(v.vertex);\n"+
+            "               return o;\n"+
+            "           }\n"+
+            "           fixed4 frag (v2f i) : SV_Target{\n"+
+            "               return fixed4(0.0,1.0,0.0,1.0);\n"+
+            "           }\n"+
+            "           ENDHLSL\n"+
+            "       }\n"+
+            "   }\n"+
+            "}";
+
+        public const string urp_temp = 
+            "Shader \"DeltaField/shaders/write_test\"{ \n"+
+            "   Properties{}\n"+
+            "   SubShader{\n"+
+            "       Pass{\n"+
+            "           Name \"URP\"\n"+
+            "           Tags{ \"RenderType\"=\"Opaque\" \"Queue\"=\"Geometry\"}\n"+
+            "           Cull [_Cull]\n"+
+            "           ZWrite On\n"+
+            "           HLSLPROGRAM\n"+
+            "           #pragma vertex vert\n"+
+            "           #pragma fragment frag\n"+
+            "           #include \"UnityCG.cginc\"\n"+
+            "           struct appdata{float4 vertex : POSITION;};\n"+
+            "           struct v2f{float4 vertex : SV_POSITION;};\n"+
+            "           v2f vert (appdata v){\n"+
+            "               v2f o;\n"+
+            "               o.vertex = UnityObjectToClipPos(v.vertex);\n"+
+            "               return o;\n"+
+            "           }\n"+
+            "           fixed4 frag (v2f i) : SV_Target{\n"+
+            "               return fixed4(0.0,1.0,0.0,1.0);\n"+
+            "           }\n"+
+            "           ENDHLSL\n"+
+            "       }\n"+
+            "   }\n"+
+            "}";
+
     }
 }
 

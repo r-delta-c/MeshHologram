@@ -50,23 +50,24 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
             using (new EditorGUILayout.VerticalScope("HelpBox"))
             {
-                DrawKeywordToggle(ref EnableDirectionalLightInfluenceState,true);
-                if (EnableDirectionalLightInfluenceState._value) DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._DIRECTIONAL_LIGHT_INFLUENCE);
+                bool enabled = DrawKeywordToggle(MeshHologramKeywords[MESHHOLOGRAM_KEYWORD_ENUM._DIRECTIONALLIGHT_ENABLE],true);
+                if (enabled) DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._DIRECTIONAL_LIGHT_INFLUENCE);
             }
 
             using (new EditorGUILayout.VerticalScope("HelpBox"))
             {
-                DrawKeywordToggle(ref EnableAmbientInfluenceState,true);
-                using (new EditorGUI.DisabledGroupScope(EnableLightVolumesState._value))
+                bool enabled = DrawKeywordToggle(MeshHologramKeywords[MESHHOLOGRAM_KEYWORD_ENUM._AMBIENT_INFLUENCE_ENABLE],true);
+                using (new EditorGUI.DisabledGroupScope(
+                    (MeshHologramKeywords[MESHHOLOGRAM_KEYWORD_ENUM._LIGHTVOLUMES_ENABLE] as ToggleKeyword)._value))
                 {
-                    if (EnableAmbientInfluenceState._value) DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._AMBIENT_INFLUENCE);
+                    if (enabled) DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._AMBIENT_INFLUENCE);
                 }
             }
 
             using (new EditorGUILayout.VerticalScope("HelpBox"))
             {
-                DrawKeywordToggle(ref EnableLightVolumesState,true);
-                if (EnableLightVolumesState._value) DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._LIGHTVOLUMES_INFLUENCE);
+                bool enabled = DrawKeywordToggle(MeshHologramKeywords[MESHHOLOGRAM_KEYWORD_ENUM._LIGHTVOLUMES_ENABLE],true);
+                if (enabled) DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._LIGHTVOLUMES_INFLUENCE);
             }
 
             EditorGUILayout.Space(16);
@@ -99,7 +100,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 using (new EditorGUI.DisabledScope(
                     GetPropertyFloat(targetMat, MESHHOLOGRAM_PROP_ENUM._RENDERING_MODE) != 0))
                 {
-                    DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ALPHA_TO_MASK);
+                    DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._ALPHA_TO_MASK_MEMORY);
                 }
 
                 EditorGUILayout.Space(16);
@@ -131,8 +132,8 @@ namespace DeltaField.Shaders.MeshHologram.Editor
 
         private void DrawAudioLink()
         {
-            DrawKeywordToggle(ref EnableAudioLinkState);
-            if (EnableAudioLinkState._value) DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._AUDIOLINK_THEME_COLOR_BAND);
+            bool enabled = DrawKeywordToggle(MeshHologramKeywords[MESHHOLOGRAM_KEYWORD_ENUM._AUDIOLINK_ENABLE],true);
+            if (enabled) DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._AUDIOLINK_THEME_COLOR_BAND);
         }
 
         private void DrawFragment()
@@ -153,6 +154,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 EditorGUILayout.Space(16);
                 DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._FRAGMENT_LINE_ANIMATION_MODE);
                 DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._FRAGMENT_PARTITION_MODE);
+                DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._FRAGMENT_EDGE_BLEND_WIDTH);
             }
 
             DrawPartitionLine(4);
@@ -211,6 +213,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 }
                 DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._EMISSION);
                 DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._COLORING_PARTITION_MODE);
+                DrawShaderProperty(MESHHOLOGRAM_PROP_ENUM._COLORING_EDGE_BLEND_WIDTH);
             }
 
             DrawPartitionLine(4);

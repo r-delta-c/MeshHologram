@@ -6,15 +6,18 @@ using UnityEngine;
 using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramInspector;
 using static DeltaField.Shaders.MeshHologram.Editor.MeshHologramConstant;
 using static DeltaField.Shaders.MeshHologram.Editor.Initializer;
+using System.Collections.Generic;
 
 namespace DeltaField.Shaders.MeshHologram.Editor{
     public static class ConfigManager{
-        private const string lang_key = "[LANGUAGE]|";
-        private const string title_skin_key = "[TITLESKIN]|";
-
         public static string path { get; private set; }
-        public static LANG lang;
-        public static TITLE_SKINS title_skin;
+
+        private static Dictionary<CONFIG, Enum> ConfigStates = new Dictionary<CONFIG, Enum>()
+        {
+            {CONFIG.LANGUAGE,new LANG()},
+            {CONFIG.TITLE_SKIN,new TITLE_SKINS()},
+            {CONFIG.PIPELINE,new PIPELINE()},
+        };
 
         static ConfigManager()
         {
@@ -25,64 +28,62 @@ namespace DeltaField.Shaders.MeshHologram.Editor{
         private static void Init()
         {
             path = resolve_path + "/Editor/config.ini";
-            GetLanguage();
-            GetTitleSkin();
+            LoadConfigStates();
         }
 
-        private static void GetLanguage()
+        private static void LoadConfigStates()
         {
             if (path==null) return;
-            string r = null;
             using (StreamReader reader = new StreamReader(path))
             {
                 while (!reader.EndOfStream)
                 {
-                    string line = reader.ReadLine();
-                    if (line.StartsWith(lang_key))
+                    string r = null;
+                    Type type = null;
+                    string[] key_pairs = reader.ReadLine().Split('|');
+                    key_pairs[0] = key_pairs[0].TrimStart('[').TrimEnd(']');
+                    if(!Enum.IsDefined(typeof(CONFIG), key_pairs[0])) return;
+                    CONFIG config = (CONFIG)Enum.Parse(typeof(CONFIG), key_pairs[0]);
+                    if (ConfigStates.ContainsKey(config))
                     {
-                        r = line.Replace(lang_key, "");
-                        if (!Enum.IsDefined(typeof(LANG), r))
-                        {
-                            r = LANG.ENGLISH.ToString();
-                        }
-                        break;
+                        type = ConfigStates[config].GetType();
+                        if(Enum.IsDefined(type, key_pairs[1])) ConfigStates[config] = (Enum)Enum.Parse(type, key_pairs[1]);
+                        else r = Enum.GetName(type, 0);
                     }
+                    if (r==null) continue;
+                    ConfigStates[config] = (Enum)Enum.Parse(type, r);
                 }
             }
-            LANG r_e = ParseEnum<LANG>(r);
-            lang = r_e;
         }
-        private static void GetTitleSkin(){
-            if (path==null) return;
-            string r = null;
-            using (StreamReader reader = new StreamReader(path))
-            {
-                while (!reader.EndOfStream)
-                {
-                    string line = reader.ReadLine();
-                    if (line.StartsWith(title_skin_key))
-                    {
-                        r = line.Replace(title_skin_key, "");
-                        break;
-                    }
-                }
-            }
-            TITLE_SKINS r_e = ParseEnum<TITLE_SKINS>(r);
-            title_skin = r_e;
-        }
+
         public static void SaveConfig()
         {
             if (path==null) return;
             using (StreamWriter writer = new StreamWriter(path))
             {
-                writer.WriteLine(lang_key + lang.ToString());
-                writer.WriteLine(title_skin_key + title_skin.ToString());
+                foreach(CONFIG config in ConfigStates.Keys) writer.WriteLine("["+config+"]|" + ConfigStates[config].ToString());
             }
         }
-        private static T ParseEnum<T>(string s)
-            where T : Enum
+
+        public static Enum GetState(CONFIG c)
         {
-            return (T)Enum.Parse(typeof(T), s);
+            return ConfigStates[c];
+        }
+
+        internal static void SetLanguageState(LANG lang)
+        {
+            ConfigStates[CONFIG.LANGUAGE] = lang;
+            SaveConfig();
+        }
+        internal static void SetTitleSkinState(TITLE_SKINS title_skin)
+        {
+            ConfigStates[CONFIG.TITLE_SKIN] = title_skin;
+            SaveConfig();
+        }
+        internal static void SetPipelineState(PIPELINE pipeline)
+        {
+            ConfigStates[CONFIG.PIPELINE] = pipeline;
+            SaveConfig();
         }
     }
 }

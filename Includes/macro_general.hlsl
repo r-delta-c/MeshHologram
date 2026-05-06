@@ -1,3 +1,11 @@
+#ifndef PI
+#define PI 3.14159265359
+#endif
+
+#ifndef TWO_PI
+#define TWO_PI 6.28318530718
+#endif
+
 #if defined(USING_STEREO_MATRICES)
     #define HOLOGRAM_CAMERA_DISTANCE_MACRO(i) length((unity_StereoWorldSpaceCameraPos[0]+unity_StereoWorldSpaceCameraPos[1])*0.5-vertex_pos[i])
 #else

@@ -10,7 +10,7 @@ namespace DeltaField.Shaders.MeshHologram.Editor
         public static event Action OnInitialized;
 
         [InitializeOnLoadMethod]
-        internal static void WaitForInit()
+        private static void WaitForInit()
         {
             EditorApplication.update += Init;
         }

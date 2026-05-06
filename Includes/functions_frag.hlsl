@@ -1,13 +1,13 @@
     UNITY_SETUP_INSTANCE_ID(i)
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);
 
-    fixed4 c = fixed4(0.0,0.0,0.0,1.0);
+    half4 c = half4(0.0,0.0,0.0,1.0);
 
     float3 sides;
     [branch]if(_FwidthEnable==0){
         sides = (i.baryCentricCoords*96.0);
     }else{
-        sides = (i.baryCentricCoords/(fwidth(i.baryCentricCoords)*0.5/lerp(1.0,max(i.camera_distance,1e-4),_DistanceInfluence))/unity_CameraProjection._m11/_ScreenParams.y*1024.0);
+        sides = (i.baryCentricCoords/(fwidth(i.baryCentricCoords)*0.5/lerp(1.0,max(i.camera_distance,1e-4),_DistanceInfluence))/-UNITY_MATRIX_P._m11/_ScreenParams.y*1024.0);
     }
     [branch]if(_FragmentManualLineScalingEnable==0){
         sides /= i.model_scale;
@@ -23,9 +23,6 @@
     float3 blend;
     float3 draw;
 
-    _FragmentSmoothing = 1.0;
-    _ColoringSmoothing = 100.0;
-
     [branch]switch(_FragmentLineAnimationMode){
         default: // def
             diff = (_FragmentTriangleCompression-sides)/width;
@@ -33,8 +30,8 @@
             diff_1 = float3(diff.z-diff.x,diff.z-diff.y,diff.y-diff.z);
 
             blend = min(1.0,
-                max(0.0,lerp(diff_0*_FragmentSmoothing+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
-                max(0.0,lerp(diff_1*_FragmentSmoothing+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
+                max(0.0,lerp(diff_0*_FragmentEdgeBlendWidth+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
+                max(0.0,lerp(diff_1*_FragmentEdgeBlendWidth+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
             );
             draw = lerp(saturate(1.0-lerp(abs(diff/1.0),diff,_FragmentFill))*i.fragment_noise.xyz,0.0,blend);
             break;
@@ -46,8 +43,8 @@
             diff *= i.fragment_noise.xyz;
 
             blend = min(1.0,
-                max(0.0,lerp(diff_0*_FragmentSmoothing+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
-                max(0.0,lerp(diff_1*_FragmentSmoothing+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
+                max(0.0,lerp(diff_0*_FragmentEdgeBlendWidth+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
+                max(0.0,lerp(diff_1*_FragmentEdgeBlendWidth+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
             );
             draw = lerp(saturate(1.0-lerp(abs(diff/1.0),diff,_FragmentFill))*i.fragment_noise.xyz,0.0,blend);
             break;
@@ -59,8 +56,8 @@
             diff /= i.fragment_noise.xyz;
 
             blend = min(1.0,
-                max(0.0,lerp(diff_0*_FragmentSmoothing+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
-                max(0.0,lerp(diff_1*_FragmentSmoothing+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
+                max(0.0,lerp(diff_0*_FragmentEdgeBlendWidth+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
+                max(0.0,lerp(diff_1*_FragmentEdgeBlendWidth+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
             );
             draw = lerp(saturate(1.0-lerp(abs(diff/1.0),diff,_FragmentFill))*i.fragment_noise.xyz,0.0,blend);
             break;
@@ -72,8 +69,8 @@
             diff = (_FragmentTriangleCompression-sides*i.fragment_noise.xyz)/width;
 
             blend = min(1.0,
-                max(0.0,lerp(diff_0*_FragmentSmoothing+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
-                max(0.0,lerp(diff_1*_FragmentSmoothing+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
+                max(0.0,lerp(diff_0*_FragmentEdgeBlendWidth+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
+                max(0.0,lerp(diff_1*_FragmentEdgeBlendWidth+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
             );
             draw = lerp(saturate(1.0-lerp(abs(diff/1.0),diff,_FragmentFill))*i.fragment_noise.xyz,0.0,blend);
             break;
@@ -85,8 +82,8 @@
             diff = (_FragmentTriangleCompression-sides/i.fragment_noise.xyz)/width;
 
             blend = min(1.0,
-                max(0.0,lerp(diff_0*_FragmentSmoothing+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
-                max(0.0,lerp(diff_1*_FragmentSmoothing+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
+                max(0.0,lerp(diff_0*_FragmentEdgeBlendWidth+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
+                max(0.0,lerp(diff_1*_FragmentEdgeBlendWidth+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
             );
             draw = lerp(saturate(1.0-lerp(abs(diff/1.0),diff,_FragmentFill))*i.fragment_noise.xyz,0.0,blend);
             break;
@@ -98,8 +95,8 @@
             diff = (_FragmentTriangleCompression-sides+i.fragment_noise.xyz-1.0)/width;
 
             blend = min(1.0,
-                max(0.0,lerp(diff_0*_FragmentSmoothing+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
-                max(0.0,lerp(diff_1*_FragmentSmoothing+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
+                max(0.0,lerp(diff_0*_FragmentEdgeBlendWidth+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
+                max(0.0,lerp(diff_1*_FragmentEdgeBlendWidth+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
             );
             draw = lerp(saturate(1.0-lerp(abs(diff/1.0),diff,_FragmentFill))*i.fragment_noise.xyz,0.0,blend);
             break;
@@ -111,8 +108,8 @@
             diff = (_FragmentTriangleCompression-sides-i.fragment_noise.xyz+1.0)/width;
 
             blend = min(1.0,
-                max(0.0,lerp(diff_0*_FragmentSmoothing+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
-                max(0.0,lerp(diff_1*_FragmentSmoothing+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
+                max(0.0,lerp(diff_0*_FragmentEdgeBlendWidth+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
+                max(0.0,lerp(diff_1*_FragmentEdgeBlendWidth+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
             );
             draw = lerp(saturate(1.0-lerp(abs(diff/1.0),diff,_FragmentFill))*i.fragment_noise.xyz,0.0,blend);
             break;
@@ -124,8 +121,8 @@
             diff = (_FragmentTriangleCompression*i.fragment_noise.xyz-sides)/width;
 
             blend = min(1.0,
-                max(0.0,lerp(diff_0*_FragmentSmoothing+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
-                max(0.0,lerp(diff_1*_FragmentSmoothing+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
+                max(0.0,lerp(diff_0*_FragmentEdgeBlendWidth+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
+                max(0.0,lerp(diff_1*_FragmentEdgeBlendWidth+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
             );
             draw = lerp(saturate(1.0-lerp(abs(diff/1.0),diff,_FragmentFill))*i.fragment_noise.xyz,0.0,blend);
             break;
@@ -137,8 +134,8 @@
             diff = (_FragmentTriangleCompression/i.fragment_noise.xyz-sides)/width;
 
             blend = min(1.0,
-                max(0.0,lerp(diff_0*_FragmentSmoothing+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
-                max(0.0,lerp(diff_1*_FragmentSmoothing+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
+                max(0.0,lerp(diff_0*_FragmentEdgeBlendWidth+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
+                max(0.0,lerp(diff_1*_FragmentEdgeBlendWidth+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
             );
             draw = lerp(saturate(1.0-lerp(abs(diff/1.0),diff,_FragmentFill))*i.fragment_noise.xyz,0.0,blend);
             break;
@@ -149,8 +146,8 @@
             diff_1 = float3(diff.z-diff.x,diff.z-diff.y,diff.y-diff.z);
 
             blend = min(1.0,
-                max(0.0,lerp(diff_0*_FragmentSmoothing+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
-                max(0.0,lerp(diff_1*_FragmentSmoothing+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
+                max(0.0,lerp(diff_0*_FragmentEdgeBlendWidth+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
+                max(0.0,lerp(diff_1*_FragmentEdgeBlendWidth+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
             );
             draw = lerp(saturate(1.0-lerp(abs(diff/1.0),diff,_FragmentFill))*i.fragment_noise.xyz,0.0,blend);
             break;
@@ -161,8 +158,8 @@
             diff_1 = float3(diff.z-diff.x,diff.z-diff.y,diff.y-diff.z);
 
             blend = min(1.0,
-                max(0.0,lerp(diff_0*_FragmentSmoothing+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
-                max(0.0,lerp(diff_1*_FragmentSmoothing+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
+                max(0.0,lerp(diff_0*_FragmentEdgeBlendWidth+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
+                max(0.0,lerp(diff_1*_FragmentEdgeBlendWidth+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
             );
             draw = lerp(saturate(1.0-lerp(abs(diff/1.0),diff,_FragmentFill))*i.fragment_noise.xyz,0.0,blend);
             break;
@@ -173,8 +170,8 @@
             diff_1 = float3(diff.z-diff.x,diff.z-diff.y,diff.y-diff.z);
 
             blend = min(1.0,
-                max(0.0,lerp(diff_0*_FragmentSmoothing+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
-                max(0.0,lerp(diff_1*_FragmentSmoothing+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
+                max(0.0,lerp(diff_0*_FragmentEdgeBlendWidth+1.0,sign(diff_0.xyz),i.fragment_noise.yxx*0.5))+
+                max(0.0,lerp(diff_1*_FragmentEdgeBlendWidth+1.0,sign(diff_1.xyz),i.fragment_noise.zzy*0.5))
             );
             draw = lerp(saturate(1.0-lerp(abs(diff/1.0),diff,_FragmentFill))*i.fragment_noise.xyz,0.0,blend);
             break;
@@ -187,7 +184,7 @@
 
     float3 coloring_t = 0.0;
     [branch]if(_ColoringPartitionMode==1){
-        coloring_t = saturate(lerp(lerp(i.color_noise.xyz,i.color_noise.zzy,saturate(diff_1*_ColoringSmoothing+0.5)),i.color_noise.yxx,saturate(diff_0*_ColoringSmoothing+0.5)));
+        coloring_t = saturate(lerp(lerp(i.color_noise.xyz,i.color_noise.zzy,saturate(diff_1*_ColoringEdgeBlendWidth+0.5)),i.color_noise.yxx,saturate(diff_0*_ColoringEdgeBlendWidth+0.5)));
     }
 
     [branch]switch(_ColorSource){
@@ -196,27 +193,27 @@
             break;
         case 0:
             [branch]if(_ColoringPartitionMode==1){
-                c.rgb += sign(draw.x)*lerp(_Color0,_Color1,coloring_t.x);
-                c.rgb += sign(draw.y)*lerp(_Color0,_Color1,coloring_t.y);
-                c.rgb += sign(draw.z)*lerp(_Color0,_Color1,coloring_t.z);
+                c.rgb += sign(draw.x)*lerp(_Color0,_Color1,coloring_t);
+                c.rgb += sign(draw.y)*lerp(_Color0,_Color1,coloring_t);
+                c.rgb += sign(draw.z)*lerp(_Color0,_Color1,coloring_t);
             }else{
                 c = lerp(_Color0,_Color1,i.color_noise.r);
             }
             break;
         case 2:
             [branch]if(_ColoringPartitionMode==1){
-                c.rgb += draw.x*UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColorGradientTex, _linear_repeat,float2(mod(coloring_t.x*_ColorGradientTex_ST.x+_ColorGradientTex_ST.z,1.0)*0.994+0.004,0.5),0.0);
-                c.rgb += draw.y*UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColorGradientTex, _linear_repeat,float2(mod(coloring_t.y*_ColorGradientTex_ST.x+_ColorGradientTex_ST.z,1.0)*0.994+0.004,0.5),0.0);
-                c.rgb += draw.z*UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColorGradientTex, _linear_repeat,float2(mod(coloring_t.z*_ColorGradientTex_ST.x+_ColorGradientTex_ST.z,1.0)*0.994+0.004,0.5),0.0);
+                c.rgb += draw.x*_ColorGradientTex.SampleLevel(_linear_repeat,float2(mod(coloring_t.x*_ColorGradientTex_ST.x+_ColorGradientTex_ST.z,1.0)*0.994+0.004,0.5),0.0);
+                c.rgb += draw.y*_ColorGradientTex.SampleLevel(_linear_repeat,float2(mod(coloring_t.y*_ColorGradientTex_ST.x+_ColorGradientTex_ST.z,1.0)*0.994+0.004,0.5),0.0);
+                c.rgb += draw.z*_ColorGradientTex.SampleLevel(_linear_repeat,float2(mod(coloring_t.z*_ColorGradientTex_ST.x+_ColorGradientTex_ST.z,1.0)*0.994+0.004,0.5),0.0);
             }else{
-                c = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_ColorGradientTex, _linear_repeat,float2(mod(i.color_noise.r*_ColorGradientTex_ST.x+_ColorGradientTex_ST.z,1.0)*0.994+0.004,0.5),0.0);
+                c = _ColorGradientTex.SampleLevel(_linear_repeat,float2(mod(i.color_noise.r*_ColorGradientTex_ST.x+_ColorGradientTex_ST.z,1.0)*0.994+0.004,0.5),0.0);
             }
             break;
         case 3:
             c = i.color;
             break;
         case 4:
-            c.rgb = lerp(i.baryCentricCoords,1.0-i.baryCentricCoords,i.color_noise.r);
+            c.rgb = lerp(i.baryCentricCoords,1.0-i.baryCentricCoords,i.color_noise);
             break;
         case 5:
             float3 coloring_value = 0.0;
@@ -224,11 +221,11 @@
                 coloring_value = AudioLinkData(ALPASS_CCCOLORS+uint2(_AudioLinkThemeColorBand,0)).rgb;
             #endif
             [branch]if(_ColoringPartitionMode==1){
-                c.rgb += draw.x*lerp(coloring_value,1.0-coloring_value,coloring_t.x);
-                c.rgb += draw.y*lerp(coloring_value,1.0-coloring_value,coloring_t.y);
-                c.rgb += draw.z*lerp(coloring_value,1.0-coloring_value,coloring_t.z);
+                c.rgb += draw.x*lerp(coloring_value,1.0-coloring_value,coloring_t);
+                c.rgb += draw.y*lerp(coloring_value,1.0-coloring_value,coloring_t);
+                c.rgb += draw.z*lerp(coloring_value,1.0-coloring_value,coloring_t);
             }else{
-                c.rgb = lerp(coloring_value,1.0-coloring_value,i.color_noise.r);
+                c.rgb = lerp(coloring_value,1.0-coloring_value,i.color_noise);
             }
             break;
     }

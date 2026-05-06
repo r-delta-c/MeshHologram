@@ -1,9 +1,8 @@
-v2f vert (appdata v){
+v2f vert(appdata v){
     v2f o;
     UNITY_SETUP_INSTANCE_ID(v);
-    UNITY_INITIALIZE_OUTPUT(v2f,o);
+    REPLACE_DATA_INITIALIZE(v2f,o);
     UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
-
     o.uv = v.uv;
     o.normal = v.normal;
     float4x4 Stereo_Merge_Matrix_V = DEFINE_STEREO_MERGE_MATRIX_V;
@@ -14,9 +13,11 @@ v2f vert (appdata v){
     );
     o.scale = float4(scale.xyz,(scale.x+scale.y+scale.z)/3.0);
     o.color = v.color;
+    float4x4 matrix_m = UNITY_MATRIX_M;
+    matrix_m._m03_m13_m23 = GetAbsolutePositionWS(matrix_m._m03_m13_m23);
     [branch]if(_BillboardEnable==0){
         [branch]if(_GeometryPixelizationSpace==1) v.pos.xyz = Pixelization(v.pos.xyz, float3(1.0,1.0,1.0));
-        o.pos = mul(UNITY_MATRIX_M,v.pos);
+        o.pos = mul(matrix_m,v.pos);
         [branch]if(_GeometryPixelizationSpace==2) o.pos.xyz = Pixelization(o.pos.xyz, scale);
     }else{
         o.color.w = 1.0;
@@ -30,7 +31,7 @@ v2f vert (appdata v){
         Billboard_Matrix_M._m00_m10_m20 = Stereo_Merge_Matrix_V[0].xyz*scale.x;
         Billboard_Matrix_M._m01_m11_m21 = Stereo_Merge_Matrix_V[1].xyz*scale.y;
         Billboard_Matrix_M._m02_m12_m22 = -Stereo_Merge_Matrix_V[2].xyz*scale.z*(1.0-_Forced_Z_Scale_Zero);
-        Billboard_Matrix_M._m03_m13_m23 = UNITY_MATRIX_M._m03_m13_m23;
+        Billboard_Matrix_M._m03_m13_m23 = matrix_m._m03_m13_m23;
 
         [branch]if(_GeometryPixelizationSpace==1) v.pos.xyz = Pixelization(v.pos.xyz, float3(1.0,1.0,1.0));
         o.pos = mul(Billboard_Matrix_M,v.pos);
@@ -42,7 +43,12 @@ v2f vert (appdata v){
     NOISE_SPACE_POS_MACRO(o.geometry_pos.xyz,_GeometryNoiseSpace,_GeometryNoiseOffsetBeforeScale,_GeometryNoiseOffset0,_GeometryNoiseOffset1,_GeometryNoiseScale0,_GeometryNoiseScale1);
     NOISE_SPACE_POS_MACRO(o.orbit_pos.xyz,_OrbitNoiseSpace,_OrbitNoiseOffsetBeforeScale,_OrbitNoiseOffset0,_OrbitNoiseOffset1,_OrbitNoiseScale0,_OrbitNoiseScale1);
     NOISE_SPACE_POS_MACRO(o.orbit_rotation_pos.xyz,_OrbitRotationNoiseSpace,_OrbitRotationNoiseOffsetBeforeScale,_OrbitRotationNoiseOffset0,_OrbitRotationNoiseOffset1,_OrbitRotationNoiseScale0,_OrbitRotationNoiseScale1);
-    o.world_normal = UnityObjectToWorldNormal(v.normal);
+
+    #if defined(MESHHOLOGRAM_URP) || defined(MESHHOLOGRAM_HDRP)
+        o.world_normal = TransformObjectToWorldNormal(v.normal);
+    #else
+        o.world_normal = UnityObjectToWorldNormal(v.normal);
+    #endif
 
     o.matrix_v_0 = Stereo_Merge_Matrix_V._m00_m01_m02_m03;
     o.matrix_v_1 = Stereo_Merge_Matrix_V._m10_m11_m12_m13;

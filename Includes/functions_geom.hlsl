@@ -1,7 +1,7 @@
 [maxvertexcount(3)]
 void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f> stream){
     g2f o;
-    UNITY_INITIALIZE_OUTPUT(g2f,o);
+    REPLACE_DATA_INITIALIZE(g2f,o);
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(inp[0])
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(inp[1])
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(inp[2])
@@ -280,9 +280,9 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
     [branch]if(_GeometryRotationEnable==1){
         float3 normal_average = (inp[0].world_normal+inp[1].world_normal+inp[2].world_normal)/3.0;
         float rotation_sign = sign(_GeometryRotationInvert*2.0-1.0);
-        vertex_pos[0] = RodriguesRotation(vertex_pos[0]-vertex_center_pos,rotation_sign*geometry_rotation_value*UNITY_TWO_PI*_GeometryRotationStrength,normal_average)+vertex_center_pos;
-        vertex_pos[1] = RodriguesRotation(vertex_pos[1]-vertex_center_pos,rotation_sign*geometry_rotation_value*UNITY_TWO_PI*_GeometryRotationStrength,normal_average)+vertex_center_pos;
-        vertex_pos[2] = RodriguesRotation(vertex_pos[2]-vertex_center_pos,rotation_sign*geometry_rotation_value*UNITY_TWO_PI*_GeometryRotationStrength,normal_average)+vertex_center_pos;
+        vertex_pos[0] = RodriguesRotation(vertex_pos[0]-vertex_center_pos,rotation_sign*geometry_rotation_value*TWO_PI*_GeometryRotationStrength,normal_average)+vertex_center_pos;
+        vertex_pos[1] = RodriguesRotation(vertex_pos[1]-vertex_center_pos,rotation_sign*geometry_rotation_value*TWO_PI*_GeometryRotationStrength,normal_average)+vertex_center_pos;
+        vertex_pos[2] = RodriguesRotation(vertex_pos[2]-vertex_center_pos,rotation_sign*geometry_rotation_value*TWO_PI*_GeometryRotationStrength,normal_average)+vertex_center_pos;
     }
 
     [branch]if(_OrbitEnable==1){
@@ -342,7 +342,7 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             audiolink_vu_data = lerp(AudioLinkData(ALPASS_FILTEREDAUDIOLINK+uint2(_OrbitWaveAudioLinkVUSmoothing,_OrbitWaveAudioLinkVUBand)),AudioLinkData(ALPASS_FILTEREDVU_INTENSITY),max(0.0,_OrbitWaveAudioLinkVUBand-3.0));
             float3 orbit_wave_spectrum = MeshHAudioLinkSpectrum(orbit_anim.x,_OrbitWaveAudioLinkSpectrumMirror,_OrbitWaveAudioLinkSpectrumMode)*float3(_OrbitWaveAudioLinkSpectrumStrength.x,_OrbitWaveAudioLinkSpectrumStrength.y,_OrbitWaveAudioLinkSpectrumStrength.y);
         #endif
-        orbit_anim *= UNITY_TWO_PI;
+        orbit_anim *= TWO_PI;
 
         float3 orbit_wave_value = float3(
             (orbit_anim.x+_OrbitWavePhase.x+_Time.x*_OrbitWaveSpeed.x),
@@ -353,13 +353,13 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
         #if defined(_AUDIOLINK_ENABLE)
             [branch]if(_OrbitWaveAudioLinkSource==3){
                 float2 audiolink_orbit_wave_chronotensity = AudioLinkDecodeDataAsUInt(ALPASS_CHRONOTENSITY+uint2(_OrbitWaveAudioLinkChronoTensityMode,_OrbitWaveAudioLinkChronoTensityBand)).r/1000000.0*_OrbitWaveAudioLinkChronoTensityStrength.xy*orbit_rotation_offset_al_mask;
-                orbit_wave_value += float3(audiolink_orbit_wave_chronotensity.x,audiolink_orbit_wave_chronotensity.y,audiolink_orbit_wave_chronotensity.y)*UNITY_TWO_PI;
+                orbit_wave_value += float3(audiolink_orbit_wave_chronotensity.x,audiolink_orbit_wave_chronotensity.y,audiolink_orbit_wave_chronotensity.y)*TWO_PI;
             }
         #endif
 
         orbit_anim += _Time.x*_OrbitRotationSpeed.xyz*_OrbitRotationSpeed.w;
         orbit_anim *= lerp(1.0,orbit_rotation_offset_mask,saturate(_OrbitRotationOffsetMaskMapStrength.xyz)*saturate(_OrbitRotationOffsetMaskMapStrength.w));
-        orbit_anim += float3(_OrbitRotationAngle.x,_OrbitRotationAngle.y,_OrbitRotationAngle.z)*UNITY_TWO_PI;
+        orbit_anim += float3(_OrbitRotationAngle.x,_OrbitRotationAngle.y,_OrbitRotationAngle.z)*TWO_PI;
 
         #if defined(_AUDIOLINK_ENABLE)
         FUNC_GEOMETRY_AUDIOLINK_INIT(
@@ -372,9 +372,9 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
             _OrbitRotationOffsetAudioLinkChronoTensityStrength
         );
             [branch]if(_OrbitRotationOffsetAudioLinkSource==1){
-                orbit_anim += audiolink_vu*UNITY_TWO_PI*orbit_rotation_offset_al_mask*_OrbitRotationOffsetAudioLinkVUStrength.xyz*_OrbitRotationOffsetAudioLinkVUStrength.w;
+                orbit_anim += audiolink_vu*TWO_PI*orbit_rotation_offset_al_mask*_OrbitRotationOffsetAudioLinkVUStrength.xyz*_OrbitRotationOffsetAudioLinkVUStrength.w;
             }else if(_OrbitRotationOffsetAudioLinkSource==3){
-                orbit_anim += audiolink_chronotensity*UNITY_TWO_PI*orbit_rotation_offset_al_mask*_OrbitRotationOffsetAudioLinkChronoTensityStrength.xyz*_OrbitRotationOffsetAudioLinkChronoTensityStrength.w;
+                orbit_anim += audiolink_chronotensity*TWO_PI*orbit_rotation_offset_al_mask*_OrbitRotationOffsetAudioLinkChronoTensityStrength.xyz*_OrbitRotationOffsetAudioLinkChronoTensityStrength.w;
             }
         #endif
 
@@ -434,52 +434,26 @@ void geom(triangle v2f inp[3], uint id:SV_PRIMITIVEID, inout TriangleStream<g2f>
 
         pos[i] = mul(matrix_v[i],float4(vertex_pos[i],1.0));
         pos[i] = mul(UNITY_MATRIX_P,pos[i]);
+
+        o.pos = pos[i];
+        o.camera_distance = camera_distance[i];
+        o.baryCentricCoords = float3(i==0,i==1,i==2);
+        o.fragment_noise = fragment_stream[i];
+        o.color_noise = color_stream[i];
+        o.color = inp[i].color;
+        o.normal = inp[i].normal;
+        o.world_pos = world_pos[i];
+        o.world_normal = inp[i].world_normal;
+        o.model_scale = inp[i].scale.w;
+
+        #if defined(MESHHOLOGRAM_BUILTIN)
+            UNITY_TRANSFER_LIGHTING(o,inp[i].uv)
+        #endif
+
+        UNITY_TRANSFER_INSTANCE_ID(inp[i], o);
+        UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(inp[i], o);
+        stream.Append(o);
     }
-
-    o.pos = pos[0];
-    o.camera_distance = camera_distance[0];
-    o.baryCentricCoords = float3(1.0,0.0,0.0);
-    o.fragment_noise = fragment_stream[0];
-    o.color_noise = color_stream[0];
-    o.color = inp[0].color;
-    o.normal = inp[0].normal;
-    o.world_pos = world_pos[0];
-    o.world_normal = inp[0].world_normal;
-    o.model_scale = inp[0].scale.w;
-    UNITY_TRANSFER_LIGHTING(o,inp[0].uv)
-    UNITY_TRANSFER_INSTANCE_ID(inp[0], o);
-    UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(inp[0], o);
-    stream.Append(o);
-
-    o.pos = pos[1];
-    o.camera_distance = camera_distance[1];
-    o.baryCentricCoords = float3(0.0,1.0,0.0);
-    o.fragment_noise = fragment_stream[1];
-    o.color_noise = color_stream[1];
-    o.color = inp[1].color;
-    o.normal = inp[1].normal;
-    o.world_pos = world_pos[1];
-    o.world_normal = inp[1].world_normal;
-    o.model_scale = inp[1].scale.w;
-    UNITY_TRANSFER_LIGHTING(o,inp[1].uv)
-    UNITY_TRANSFER_INSTANCE_ID(inp[1], o);
-    UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(inp[1], o);
-    stream.Append(o);
-
-    o.pos = pos[2];
-    o.camera_distance = camera_distance[2];
-    o.baryCentricCoords = float3(0.0,0.0,1.0);
-    o.fragment_noise = fragment_stream[2];
-    o.color_noise = color_stream[2];
-    o.color = inp[2].color;
-    o.normal = inp[2].normal;
-    o.world_pos = world_pos[2];
-    o.world_normal = inp[2].world_normal;
-    o.model_scale = inp[2].scale.w;
-    UNITY_TRANSFER_LIGHTING(o,inp[2].uv)
-    UNITY_TRANSFER_INSTANCE_ID(inp[2], o);
-    UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(inp[2], o);
-    stream.Append(o);
 
     stream.RestartStrip();
 

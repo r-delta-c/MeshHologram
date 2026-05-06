@@ -33,14 +33,16 @@ struct g2f{
     float3 world_pos : TEXCOORD4;
 
     float3 baryCentricCoords : TEXCOORD5;
-    fixed4 color : TEXCOORD6;
+    half4 color : TEXCOORD6;
     float camera_distance : TEXCOORD8;
     float model_scale : TEXCOORD9;
 
     float3 normal : TEXCOORD10;
     float3 world_normal : TEXCOORD11;
 
-    UNITY_LIGHTING_COORDS(14,15)
+    #if !(defined(MESHHOLOGRAM_URP) || defined(MESHHOLOGRAM_HDRP))
+        UNITY_LIGHTING_COORDS(14,15)
+    #endif
 
     UNITY_VERTEX_INPUT_INSTANCE_ID
     UNITY_VERTEX_OUTPUT_STEREO

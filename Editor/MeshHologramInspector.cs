@@ -40,18 +40,14 @@ namespace DeltaField.Shaders.MeshHologram.Editor {
         private PreviewGraph PreviewGraph0;
         private bool InspectorInitialize = false;
 
-        private MeshHologramToggleState EnableDirectionalLightInfluenceState = 
-            new MeshHologramToggleState("_DIRECTIONALLIGHT_INFLUENCE_ENABLE","test");
-        private MeshHologramToggleState EnableAmbientInfluenceState = 
-            new MeshHologramToggleState("_AMBIENT_INFLUENCE_ENABLE","test");
-        private MeshHologramToggleState EnableAudioLinkState = 
-            new MeshHologramToggleState("_AUDIOLINK_ENABLE","test");
-        private MeshHologramToggleState EnableLightVolumesState = 
-            new MeshHologramToggleState("_LIGHTVOLUMES_ENABLE","test");
-        private STEREO_MERGE_MODE[] StereoMergeMode = new STEREO_MERGE_MODE[2];
-        private int[] NoiseLiteMode = new int[5], _NoiseLiteMode = new int[5];
-        private bool[] ResetNoiseLiteMap = new bool[5];
-        private int? ChangeNoiseLiteMode = null;
+        private MESHHOLOGRAM_KEYWORD_ENUM[] NoiseLiteModeCat = new MESHHOLOGRAM_KEYWORD_ENUM[]
+        {
+            MESHHOLOGRAM_KEYWORD_ENUM._FRAGMENT_NOISE_LITE_MODE,
+            MESHHOLOGRAM_KEYWORD_ENUM._COLORING_NOISE_LITE_MODE,
+            MESHHOLOGRAM_KEYWORD_ENUM._GEOMETRY_NOISE_LITE_MODE,
+            MESHHOLOGRAM_KEYWORD_ENUM._ORBIT_NOISE_LITE_MODE,
+            MESHHOLOGRAM_KEYWORD_ENUM._ORBIT_ROTATION_NOISE_LITE_MODE,
+        };
     }
 }
 #endif

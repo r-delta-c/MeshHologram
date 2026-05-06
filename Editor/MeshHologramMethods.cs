@@ -92,15 +92,17 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             editor.ShaderProperty(MeshHologramProps[key].var, MeshHologramProps[key].property);
         }
 
-        private void DrawKeywordToggle(ref MeshHologramToggleState state, bool isLeft = false)
+        private bool DrawKeywordToggle(MaterialKeyword keyword, bool isLeft = false)
         {
-            string label = LocalizationManager.GetLocalizeText(state.label);
-            EditorGUI.showMixedValue = state.hasMixedValue;
+            ToggleKeyword data = keyword as ToggleKeyword;
+            string label = LocalizationManager.GetLocalizeText(data.label);
+            EditorGUI.showMixedValue = data.hasMixedValue;
             EditorGUI.BeginChangeCheck();
-            if (isLeft) EditorGUILayout.ToggleLeft(label,state._value);
-            else EditorGUILayout.Toggle(label,state._value);
-            if(EditorGUI.EndChangeCheck()) state.Toggle(state._value); 
-            EditorGUI.showMixedValue = false;
+            if(isLeft) EditorGUILayout.ToggleLeft(label,data.value);
+            else EditorGUILayout.Toggle(label,data.value);
+            if(EditorGUI.EndChangeCheck()) data.apply = true;
+            EditorGUI.showMixedValue = true;
+            return data._value;
         }
 
         private void DrawLine()
@@ -258,13 +260,16 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             DrawShaderProperty(props.time_phase);
             DrawShaderProperty(props.value_scale);
             EditorGUILayout.Space(16);
-            DrawNoiseLiteModeGroupButtons((int)cat);
-            if (NoiseLiteMode[(int)cat] != 0) DrawMaskOffsetTex(props.map,props.map_st);
+            DrawNoiseLiteModeGroupButtons(cat);
+            if ((MeshHologramKeywords[NoiseLiteModeCat[(int)cat]] as EnumKeyword)._value != 0) DrawMaskOffsetTex(props.map,props.map_st);
             else DrawShaderProperty(props.seed);
         }
 
-        private void DrawNoiseLiteModeGroupButtons(int element = -1)
+        private void DrawNoiseLiteModeGroupButtons(MAIN_CATEGORY CAT = (MAIN_CATEGORY)(-1))
         {
+            int cat = (int)CAT;
+            bool changed = false;
+
             using(new EditorGUILayout.VerticalScope())
             {
                 Rect rect = EditorGUILayout.GetControlRect();
@@ -286,16 +291,20 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 string[] labels = new string[5]{"Fragment","Color","Geometry","Orbit","OrbitRotation"};
 
                 EditorGUI.LabelField(rect,"Noise Lite Mode");
-                if (element > -1 && element <= 5) DrawNoiseLiteModeRadio(element);
-                else for(int i = 0; i < 5; i++) DrawNoiseLiteModeRadio(i);
+                if(cat!=-1) DrawNoiseLiteModeRadio(MeshHologramKeywords[NoiseLiteModeCat[cat]] as EnumKeyword);
+                else for(int i = 0; i < 5; i++) DrawNoiseLiteModeRadio(MeshHologramKeywords[NoiseLiteModeCat[cat]] as EnumKeyword);
+                // if (element > -1 && element <= 5) DrawNoiseLiteModeRadio(element);
+                // else for(int i = 0; i < 5; i++) DrawNoiseLiteModeRadio(i);
 
-                void DrawNoiseLiteModeRadio(int i)
+                void DrawNoiseLiteModeRadio(EnumKeyword data)
                 {
                     rect.y += 20.0f;
                     toggle_rect.y += 20.0f;
                     EditorGUILayout.Space(20);
-                    EditorGUI.LabelField(rect,labels[i]);
-                    _NoiseLiteMode[i] = GUI.Toolbar(toggle_rect,_NoiseLiteMode[i],new string[3]{"","",""},center_radio);
+                    EditorGUI.LabelField(rect,data.label);
+                    data.value = GUI.Toolbar(toggle_rect,data.value,new string[3]{"","",""},center_radio);
+                    if(data.value!=data._value) changed = true;
+                    // _NoiseLiteMode[i] = GUI.Toolbar(toggle_rect,_NoiseLiteMode[i],new string[3]{"","",""},center_radio);
                 }
 
                 toggle_rect.x -= radio_offset;
@@ -307,109 +316,56 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                 Rect apply_button_rect = new Rect(toggle_rect);
                 apply_button_rect.x += apply_button_rect.width;
 
-                using(new EditorGUI.DisabledScope(_NoiseLiteMode.SequenceEqual(NoiseLiteMode)))
+                using(new EditorGUI.DisabledScope(!changed))
                 {
-                    if (GUI.Button(revert_button_rect, "Revert")) CheckNoiseLiteMode(element);
-                    if (GUI.Button(apply_button_rect, "Apply"))
+                    bool revert = GUI.Button(revert_button_rect, "Revert");
+                    bool apply = GUI.Button(apply_button_rect, "Apply");
+                    if (revert || apply)
                     {
-                        bool dialog_frag = false, apply_frag = false;
-                        for(int i = 0; i < 4; i++) if(_NoiseLiteMode[i] == 0 && NoiseLiteMode[i] != 0)
+                        EnumKeyword[] keywords = new EnumKeyword[NoiseLiteModeCat.Length];
+                        for(int i = 0; i < NoiseLiteModeCat.Length; i++)
                         {
-                            ResetNoiseLiteMap[i] = true;
-                            dialog_frag = true;
+                            keywords[i] = MeshHologramKeywords[NoiseLiteModeCat[i]] as EnumKeyword;
                         }
-                        if (dialog_frag)
+                        if(revert) foreach(EnumKeyword data in keywords) data.refresh = true;
+
+                        if (apply)
                         {
-                           apply_frag = EditorUtility.DisplayDialog(
-                            "tes",
-                            "tes",
-                            "OK",
-                            "Cancel"
-                            );
+                            bool dialog_frag = false, apply_frag = false;
+                            foreach(EnumKeyword data in keywords)
+                            {
+                                if(data.value == 0 && data._value != 0)
+                                {
+                                    dialog_frag = true;
+                                }
+                            }
+                            if (dialog_frag)
+                            {
+                            apply_frag = EditorUtility.DisplayDialog(
+                                "tes",
+                                "tes",
+                                "OK",
+                                "Cancel"
+                                );
+                            }
+                            else apply_frag = true;
+                            if(apply_frag) foreach(EnumKeyword data in keywords)
+                            {
+                                data.CheckApplyFrag();
+                            }
                         }
-                        else apply_frag = true;
-                        if(apply_frag) ChangeNoiseLiteMode = element;
-                    } 
+                    }
                 }
             }
         }
 
-        private void CheckNoiseLiteMode(int target_element)
+        private void CheckKeywords(bool force)
         {
-            if(target_element > -1 && target_element <= 5) GetNoiseMode(target_element,MainCatsName[target_element]);
-            else for(int i = 0; i < 5; i++) GetNoiseMode(i,MainCatsName[i]);
-            void GetNoiseMode(int element ,string key)
+            if(!force) foreach(MaterialKeyword keyword in MeshHologramKeywords.Values) keyword.RefreshState(targetMat);
+            else foreach(MaterialKeyword keyword in MeshHologramKeywords.Values) keyword.ForceRefreshState(targetMat);
+            foreach(Material m in targetMats)
             {
-                key += "NOISELITEMODE_";
-                int value;
-                if(targetMat.IsKeywordEnabled(key+"LITE0")) value = 1;
-                else if(targetMat.IsKeywordEnabled(key+"LITE1")) value = 2;
-                else value = 0;
-                NoiseLiteMode[element] = value;
-                _NoiseLiteMode[element] = value;
-            }
-        }
-        private void ApplyNoiseLiteMode(Material mat, int target_element)
-        {
-            MESHHOLOGRAM_PROP_ENUM[] prop_enums = new MESHHOLOGRAM_PROP_ENUM[5]
-            {
-                MESHHOLOGRAM_PROP_ENUM._FRAGMENT_LITE_NOISE_MAP,
-                MESHHOLOGRAM_PROP_ENUM._COLORING_LITE_NOISE_MAP,
-                MESHHOLOGRAM_PROP_ENUM._GEOMETRY_LITE_NOISE_MAP,
-                MESHHOLOGRAM_PROP_ENUM._ORBIT_LITE_NOISE_MAP,
-                MESHHOLOGRAM_PROP_ENUM._ORBIT_ROTATION_LITE_NOISE_MAP,
-            };
-
-            if(target_element > -1 && target_element <= 5) SetNoiseMode(target_element);
-            else for(int i = 0; i < 5; i++) SetNoiseMode(i);
-
-            void SetNoiseMode(int element)
-            {
-                string key = MainCatsName[element];
-
-                key += "NOISELITEMODE_";
-                switch (_NoiseLiteMode[element])
-                {
-                    case 1:
-                        mat.EnableKeyword(key+"LITE0");
-                        mat.DisableKeyword(key+"LITE1");
-                        mat.DisableKeyword(key+"NORMAL");
-                        break;
-                    case 2:
-                        mat.DisableKeyword(key+"LITE0");
-                        mat.EnableKeyword(key+"LITE1");
-                        mat.DisableKeyword(key+"NORMAL");
-                        break;
-                    default:
-                        mat.DisableKeyword(key+"LITE0");
-                        mat.DisableKeyword(key+"LITE1");
-                        mat.EnableKeyword(key+"NORMAL");
-                        break;
-                }
-                key += _NoiseLiteMode[element] switch
-                {
-                    1 => "LITE0",
-                    2 => "LITE1",
-                    _ => "NORMAL",
-                };
-                if(NoiseLiteMode[element]!=0 && _NoiseLiteMode[element]==0) MeshHologramProps[prop_enums[element]].var.textureValue = null;
-
-                mat.EnableKeyword(key);
-            }
-        }
-
-        private void CheckToggleKeyword(ref MeshHologramToggleState state)
-        {
-            state.value = targetMat.IsKeywordEnabled(state.keyword);
-            state._value = state.value;
-            state.hasMixedValue = false;
-            foreach (Material m in targetMats)
-            {
-                if (state.value != m.IsKeywordEnabled(state.keyword))
-                {
-                    state.hasMixedValue = true;
-                    return;
-                }
+                foreach(MaterialKeyword keyword in MeshHologramKeywords.Values) keyword.CheckState(m);
             }
         }
 

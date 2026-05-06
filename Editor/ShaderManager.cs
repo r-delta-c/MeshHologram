@@ -45,11 +45,14 @@ namespace DeltaField.Shaders.MeshHologram.Editor
             public string display;
             public readonly int id;
             public readonly ShaderPropertyType type;
-            public readonly float minValue = 0.0f;
-            public readonly float maxValue = 1.0f;
-            public ShaderPropertyState(MeshHologramPropMeta meta, MESHHOLOGRAM_PROP_ENUM e)
+            public ShaderPropertyState(ShaderParameterAttribute meta, MESHHOLOGRAM_PROP_ENUM e)
             {
                 string name = meta.property;
+                property = name;
+                display = name;
+                enum_value = e;
+                if(shader==null) return;
+
                 int index = shader.FindPropertyIndex(name);
                 if (name == "_dummy")
                 {
@@ -66,52 +69,123 @@ namespace DeltaField.Shaders.MeshHologram.Editor
                     id = shader.GetPropertyNameId(index);
                     type = shader.GetPropertyType(index);
                 }
-                if (type == ShaderPropertyType.Range)
-                {
-                    minValue = ShaderUtil.GetRangeLimits(shader, index, 1);
-                    maxValue = ShaderUtil.GetRangeLimits(shader, index, 2);
-                }
-                property = name;
-                display = name;
+            }
+        }
 
-                enum_value = e;
-            }
-        }
         [AttributeUsage(AttributeTargets.Field)]
-        public class MeshHologramPropMeta : Attribute
+        public class MeshHologramKeywordMeta: Attribute
         {
-            public readonly string property;
-            public MeshHologramPropMeta(string name)
+            public readonly string label;
+            public readonly string[] keywords;
+            public readonly bool isEnum = false;
+            public MeshHologramKeywordMeta(string keyword, string label)
             {
-                property = name;
+                this.label = label;
+                this.keywords = new string[]{"_",keyword};
+            }
+            public MeshHologramKeywordMeta(string[] keywords, string label)
+            {
+                this.label = label;
+                this.keywords = keywords;
+                this.isEnum = true;
             }
         }
-        public struct MeshHologramToggleState
+
+        public abstract class MaterialKeyword
+        {
+            public readonly string label;
+            public bool hasMixedValue = false;
+            public bool apply = false;
+            public bool refresh = false;
+            public MaterialKeyword(string label)
+            {
+                this.label = label;
+            }
+            public abstract void RefreshState(Material m);
+            public void ForceRefreshState(Material m)
+            {
+                refresh = true;
+                RefreshState(m);
+            }
+            public abstract void CheckState(Material m);
+            public abstract void ApplyKeyword(Material m);
+        }
+
+        public class ToggleKeyword : MaterialKeyword
         {
             public readonly string keyword;
-            public readonly string label;
-            public bool value;
-            public bool _value;
-            public bool hasMixedValue;
-            public MeshHologramToggleState(string keyword, string label, bool value = false)
+            public bool _value{ get; private set;} = false;
+            public bool value = false;
+            public ToggleKeyword(string keyword, string label) : base(label)
             {
                 this.keyword = keyword;
-                this.label = label;
-                this.value = value;
-                this._value = value;
-                this.hasMixedValue = false;
             }
-            public void Toggle(bool value)
+            public override void RefreshState(Material m)
             {
-                this._value = !value;
+                if(!refresh) return; 
+                _value = m.IsKeywordEnabled(keyword);
+                value = _value;
+                hasMixedValue = false;
+                refresh = false;
             }
-            public void ApplyToggle(Material m)
+            public override void CheckState(Material m)
             {
-                if (_value!=value)
+                if(_value!=m.IsKeywordEnabled(keyword)) hasMixedValue = true;
+            }
+            public override void ApplyKeyword(Material m)
+            {
+                if(!apply) return;
+                // if(_value) m.EnableKeyword(keyword);
+                // else m.DisableKeyword(keyword);
+                refresh = true;
+                apply = false;
+            }
+        }
+
+        public class EnumKeyword : MaterialKeyword
+        {
+            public readonly string[] keywords;
+            public int _value = 0, value = 0;
+            public EnumKeyword(string[] keywords, string label) : base(label)
+            {
+                this.keywords = keywords;
+            }
+            public override void RefreshState(Material m)
+            {
+                if(!refresh) return;
+                for(int i = 0; i < keywords.Length; i++)
                 {
-                    if(_value) m.EnableKeyword(keyword);
-                    else m.DisableKeyword(keyword);
+                    if (m.IsKeywordEnabled(keywords[i]))
+                    {
+                        _value = i;
+                        value = _value;
+                        break;
+                    }
                 }
+                hasMixedValue = false;
+                refresh = false;
+            }
+            public override void CheckState(Material m)
+            {
+                for(int i = 0; i < keywords.Length; i++)
+                {
+                    if (m.IsKeywordEnabled(keywords[i]) && _value!=i) hasMixedValue = true;
+                }
+            }
+            public override void ApplyKeyword(Material m)
+            {
+                if(!apply) return;
+                for(int i = 0; i < keywords.Length; i++)
+                {
+                    // if(i==value) m.EnableKeyword(keywords[i]);
+                    // else m.DisableKeyword(keywords[i]);
+                }
+                refresh = true;
+                apply = false;
+            }
+            public void CheckApplyFrag()
+            {
+                if(value!=_value) apply = true;
             }
         }
 

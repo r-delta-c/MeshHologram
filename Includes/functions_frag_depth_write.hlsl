@@ -1,4 +1,4 @@
-fixed4 frag(g2f i):SV_Target{
+half4 frag(g2f i):SV_Target{
     #include "Packages/com.deltafield.meshhologram/Includes/functions_frag.hlsl"
     [branch]if(_PreviewEnable==0){
         c.a = saturate((saturate(draw)*i.color.a*c.a));
